@@ -1,0 +1,121 @@
+Tiresias es software libre: GNU General Public License, versión 3 o posterior
+(GPL-3.0-or-later). Copyright (C) 2026 Héctor J. Benítez Corredera (hxebolax).
+El texto completo de la licencia está en LICENSE, junto al código fuente.
+
+Tiresias incluye o usa estos componentes de otros autores, con sus licencias.
+Gracias a todos ellos.
+
+== Incluido en la app ==
+
+eSpeak NG (síntesis de voz)
+  Copyright (C) 2005-2013 Jonathan Duddington; (C) 2013-2017 Reece H. Dunn y colaboradores.
+  GPL-3.0-or-later. Partes con licencia BSD de 2 cláusulas (getopt_long de NetBSD),
+  Apache 2.0 y la licencia de datos Unicode (UCD).
+  https://github.com/espeak-ng/espeak-ng
+
+speechPlayer (síntesis Klatt de eSpeak NG)
+  Copyright 2014 NV Access Limited. GPL-3.0-or-later.
+
+SVOX Pico (síntesis de voz y voces en español e inglés)
+  Copyright (C) 2008-2009 SVOX AG. Apache License 2.0.
+  El puente JNI sigue el de Shortcut Menu, de aaron-gh (Apache 2.0), y el motor
+  de AOSP (com_svox_picottsengine).
+
+QuickJS-ng (motor JavaScript de los complementos)
+  Copyright (c) 2017-2026 Fabrice Bellard, (c) 2017-2024 Charlie Gordon,
+  (c) 2023-2026 Ben Noordhuis y Saúl Ibarra Corretgé.
+  Licencia MIT. https://github.com/quickjs-ng/quickjs
+
+ZXing (códigos QR y de barras)
+  Copyright (C) ZXing authors. Apache License 2.0.
+  https://github.com/zxing/zxing
+
+Puente JNI de QuickJS
+  Copyright 2026 Backtalk contributors. Apache License 2.0.
+  https://github.com/trypsynth/backtalk
+
+Altavoz al apartar el móvil de la oreja (PoliticaAltavoz, AltavozEnLlamada)
+  Basado en SpeakerphonePolicy y SpeakerphoneInCallService de Backtalk.
+  Copyright 2026 Backtalk contributors. Apache License 2.0, con cambios.
+
+Icono «touch_app» (mosaico de toque directo)
+  Material Symbols, de Google. Apache License 2.0.
+  https://fonts.google.com/icons
+
+Tablas braille de liblouis (Es-Es-G0.utb, en-us-comp8-ext.utb, las demás
+  tablas informáticas de 8 puntos: ar, cs, de, en, fi, fr, he, hr, hu, it, nl,
+  no, pl, pt y ru, y sus inclusiones)
+  Copyright (C) 2012 José Enrique Fernández del Campo y Juan Carlos Buño Suárez;
+  (C) 2017 Davy Kager y otros autores de liblouis.
+  GNU Lesser General Public License, versión 2.1 o posterior (Es-Es-G0.utb:
+  versión 3 o posterior). https://liblouis.io
+  Tomadas de la copia de liblouis que distribuye TalkBack.
+
+ONNX Runtime (voces neuronales y reconocimiento de texto)
+  Copyright (c) Microsoft Corporation. Licencia MIT.
+  https://github.com/microsoft/onnxruntime
+
+LiteRT-LM (inteligencia artificial en el móvil)
+  Copyright Google LLC. Apache License 2.0.
+  https://github.com/google-ai-edge/LiteRT-LM
+
+Vosk (reconocimiento de voz)
+  Copyright Alpha Cephei Inc. Apache License 2.0.
+  https://github.com/alphacep/vosk-api
+  Usa Kaldi (Apache 2.0) y JNA (Apache 2.0 o LGPL 2.1).
+
+Gson
+  Copyright Google LLC. Apache License 2.0.
+
+Android Jetpack (AndroidX) y Material Components para Android
+  Copyright The Android Open Source Project y Google LLC. Apache License 2.0.
+
+Kotlin y kotlinx.coroutines
+  Copyright JetBrains s.r.o. y colaboradores. Apache License 2.0.
+
+JSpecify
+  Copyright The JSpecify Authors. Apache License 2.0.
+
+Nombres de los emojis y símbolos
+  Nombres cortos del Unicode CLDR (en español y en inglés, tal como los
+  reúne el cldr.dic de NVDA). Licencia Unicode (Unicode-3.0).
+
+Símbolos de NVDA
+  Los símbolos que Tiresias no tenía (y su nivel de puntuación), del
+  symbols.dic de NVDA en español y en inglés. Copyright NVDA Contributors.
+  GNU General Public License, versión 2. Van al final de simbolos.tsv,
+  entre dos marcas. https://www.nvaccess.org
+  https://cldr.unicode.org
+
+Eloquence (openevv y evvdroid)
+  El motor openevv, una reconstrucción en C de Embedded ViaVoice de IBM:
+  Copyright (c) 2026 Stanislaw Przedzinkowski, the OpenEVV SAPI5
+  contributors y Felix Steindorff, licencia MIT.
+  https://github.com/Mudb0y/openevv
+  Su envoltorio para Android, evvdroid: Copyright (c) 2026 Quin Gillespie,
+  licencia MIT. https://github.com/trypsynth/evvdroid
+  Los datos de las voces y de los idiomas están transcritos de los objetos
+  de Embedded ViaVoice de IBM («Licensed Materials - Property of IBM,
+  (C) Copyright IBM Corp. 1999, 2004»). Esos datos no tienen licencia
+  libre y nadie en estos proyectos puede darla; quién tiene hoy sus
+  derechos (IBM, Nuance, Cerence) es objeto de un pleito.
+
+== Se descargan aparte, solo si tú lo eliges (pantalla Descargas) ==
+
+Cada descarga dice su licencia antes de descargarla. Las principales:
+
+  Modelos de reconocimiento de texto PaddleOCR PP-OCRv5 (PaddlePaddle): Apache 2.0.
+  Modelo de voz en español de Vosk (Alpha Cephei): Apache 2.0.
+  Voces neuronales de Piper (rhasspy/piper-voices): cada voz la suya
+    (dominio público, CC0, CC BY, CC BY-SA, Apache 2.0, Unlicense...).
+    La voz «Lessac» solo se puede usar con fines de investigación.
+  Modelos Gemma 4 (Google, litert-community): Condiciones de uso de Gemma.
+  Complemento Tiresias Nano: Apache 2.0. Usa ML Kit GenAI y Gemini Nano de
+    Google, que vienen con el móvil y tienen sus propias condiciones.
+
+== Inspiración y referencias ==
+
+El diseño de Tiresias aprende de TalkBack (Google, Apache 2.0), de su versión
+libre talkback-foss, de Backtalk, de Appt y de los lectores para Windows
+(NVDA y Tiresias para Windows): de sus ideas y de las peticiones de sus
+usuarios. No contiene código de TalkBack (solo las tablas de liblouis de arriba).

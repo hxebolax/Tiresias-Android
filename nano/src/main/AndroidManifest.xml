@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<application
+		android:allowBackup="false"
+		android:enableOnBackInvokedCallback="true"
+		android:icon="@mipmap/ic_launcher"
+		android:label="@string/nano_nombre"
+		android:supportsRtl="true"
+		android:theme="@style/Tema.TiresiasNano">
+
+		<!-- La pregunta llega de Tiresias; la ventana responde (AICore solo atiende a la app de delante) -->
+		<activity
+			android:name=".ActividadNano"
+			android:exported="true"
+			android:excludeFromRecents="true"
+			android:label="@string/nano_titulo">
+			<intent-filter>
+				<action android:name="com.xebolax.tiresias.nano.PREGUNTAR" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<data android:mimeType="image/*" />
+			</intent-filter>
+			<intent-filter>
+				<action android:name="com.xebolax.tiresias.nano.PREGUNTAR" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+	</application>
+</manifest>

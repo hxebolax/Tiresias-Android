@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" app:title="@string/aj_seccion_navegacion">
+	<Preference app:key="ordenar_menu" app:title="@string/ordenar_menu_titulo" app:summary="@string/ordenar_menu_res" />
+	<Preference app:key="ordenar_circular" app:title="@string/ordenar_circular_titulo" app:summary="@string/ordenar_circular_res" />
+	<Preference app:key="ordenar_controles" app:title="@string/ordenar_controles_titulo" app:summary="@string/ordenar_controles_res" />
+	<SwitchPreferenceCompat app:key="deslizador_arriba_abajo" app:title="@string/aj_deslizador_arriba_abajo" app:summary="@string/aj_deslizador_arriba_abajo_res" app:defaultValue="true" />
+	<SwitchPreferenceCompat app:key="acciones_arriba_abajo" app:title="@string/aj_acciones_arriba_abajo" app:summary="@string/aj_acciones_arriba_abajo_res" app:defaultValue="true" />
+	<SwitchPreferenceCompat app:key="recordar_foco" app:title="@string/aj_recordar_foco" app:summary="@string/aj_recordar_foco_res" app:defaultValue="true" />
+	<SwitchPreferenceCompat app:key="dar_vuelta" app:title="@string/aj_dar_vuelta" app:summary="@string/aj_dar_vuelta_res" app:defaultValue="false" />
+	<com.xebolax.tiresias.accesibilidad.DeslizadorAjuste app:key="retardo_exploracion" app:title="@string/aj_retardo_exploracion" app:min="0" android:max="500" app:seekBarIncrement="25" app:defaultValue="0" />
+	<Preference app:key="microfono" app:title="@string/aj_microfono" app:summary="@string/aj_microfono_res" />
+	<Preference app:key="llamadas" app:title="@string/aj_llamadas" app:summary="@string/aj_llamadas_res" />
+	<SwitchPreferenceCompat app:key="altavoz_al_apartar" app:title="@string/aj_altavoz" app:summary="@string/aj_altavoz_res" app:defaultValue="false" />
+	<Preference app:key="altavoz_permiso" app:title="@string/aj_altavoz_copiar" />
+	<SwitchPreferenceCompat app:key="cortar_al_tocar" app:title="@string/aj_cortar_al_tocar" app:summary="@string/aj_cortar_al_tocar_res" app:defaultValue="true" />
+	<SwitchPreferenceCompat app:key="arrastre_respaldo" app:title="@string/aj_arrastre_respaldo" app:summary="@string/aj_arrastre_respaldo_res" app:defaultValue="true" />
+	<SwitchPreferenceCompat app:key="volumen_deslizadores" app:title="@string/aj_volumen_deslizadores" app:summary="@string/aj_volumen_deslizadores_res" app:defaultValue="false" />
+	<SwitchPreferenceCompat app:key="foco_ventanas_nuevas" app:title="@string/aj_foco_ventanas_nuevas" app:summary="@string/aj_foco_ventanas_nuevas_res" app:defaultValue="false" />
+	<SwitchPreferenceCompat app:key="foco_sin_esperar_titulo" app:title="@string/aj_foco_sin_esperar_titulo" app:summary="@string/aj_foco_sin_esperar_titulo_res" app:defaultValue="false" />
+	<SwitchPreferenceCompat app:key="controles_solo_web" app:title="@string/aj_controles_solo_web" app:summary="@string/aj_controles_solo_web_res" app:defaultValue="true" />
+	<ListPreference app:key="activar_al_levantar" app:title="@string/aj_activar_al_levantar" app:entries="@array/activar_al_levantar_nombres" app:entryValues="@array/activar_al_levantar_valores" app:defaultValue="no" app:useSimpleSummaryProvider="true" />
+</PreferenceScreen>

@@ -1,0 +1,15 @@
+# Finales de línea normalizados; los scripts de Windows con CRLF
+* text=auto
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Binarios: voces de Pico, datos de eSpeak NG, grabaciones de respaldo e imágenes
+*.bin binary
+*.ulaw binary
+*.png binary
+*.jks binary
+app/src/main/assets-espeak/** binary
+gradlew text eol=lf
+*.sh text eol=lf
+*.jar binary

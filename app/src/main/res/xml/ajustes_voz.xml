@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" app:title="@string/aj_seccion_voz">
+	<ListPreference app:key="motor" app:title="@string/aj_motor" app:useSimpleSummaryProvider="true" />
+	<Preference app:key="voces_control" app:title="@string/aj_voces_control" />
+	<Preference app:key="eloquence_ajustes" app:title="@string/aj_eloquence_ajustes" app:summary="@string/aj_eloquence_ajustes_res" />
+	<Preference app:key="probar_voz" app:title="@string/ui_probar_voz" />
+	<com.xebolax.tiresias.accesibilidad.DeslizadorAjuste app:key="velocidad" app:title="@string/aj_velocidad" app:min="30" android:max="600" app:seekBarIncrement="10" app:defaultValue="100" />
+	<com.xebolax.tiresias.accesibilidad.DeslizadorAjuste app:key="tono" app:title="@string/aj_tono" app:min="50" android:max="200" app:seekBarIncrement="5" app:defaultValue="100" />
+	<com.xebolax.tiresias.accesibilidad.DeslizadorAjuste app:key="volumen_voz" app:title="@string/aj_volumen_voz" app:min="10" android:max="100" app:seekBarIncrement="5" app:defaultValue="100" />
+	<SwitchPreferenceCompat app:key="atenuar" app:title="@string/aj_atenuar" app:summary="@string/aj_atenuar_res" app:defaultValue="true" />
+	<SwitchPreferenceCompat app:key="cambio_idioma" app:title="@string/aj_cambio_idioma" app:summary="@string/aj_cambio_idioma_res" app:defaultValue="true" />
+	<SwitchPreferenceCompat app:key="cambio_dialecto" app:title="@string/aj_cambio_dialecto" app:summary="@string/aj_cambio_dialecto_res" app:defaultValue="true" app:dependency="cambio_idioma" />
+	<SwitchPreferenceCompat app:key="callar_al_grabar" app:title="@string/aj_callar_grabar" app:summary="@string/aj_callar_grabar_res" app:defaultValue="true" />
+	<PreferenceCategory app:title="@string/aj_cat_sonidos">
+		<SwitchPreferenceCompat app:key="sonidos" app:title="@string/aj_sonidos" app:defaultValue="true" />
+		<com.xebolax.tiresias.accesibilidad.DeslizadorAjuste app:key="volumen_sonidos" app:title="@string/aj_volumen_sonidos" app:min="0" android:max="100" app:seekBarIncrement="5" app:defaultValue="70" />
+		<SwitchPreferenceCompat app:key="sonido_posicional" app:title="@string/aj_sonido_posicional" app:summary="@string/aj_sonido_posicional_res" app:defaultValue="false" />
+		<SwitchPreferenceCompat app:key="tic_desplazar" app:title="@string/aj_tic_desplazar" app:summary="@string/aj_tic_desplazar_res" app:defaultValue="false" />
+		<SwitchPreferenceCompat app:key="sonido_tipo" app:title="@string/aj_sonido_tipo" app:summary="@string/aj_sonido_tipo_res" app:defaultValue="false" />
+		<SwitchPreferenceCompat app:key="sonido_vertical" app:title="@string/aj_sonido_vertical" app:summary="@string/aj_sonido_vertical_res" app:defaultValue="false" />
+		<SwitchPreferenceCompat app:key="vibracion" app:title="@string/aj_vibracion" app:defaultValue="true" />
+		<com.xebolax.tiresias.accesibilidad.DeslizadorAjuste app:key="intensidad_vibracion" app:title="@string/aj_intensidad_vibracion" app:min="10" android:max="100" app:seekBarIncrement="10" app:defaultValue="60" />
+	</PreferenceCategory>
+	<SwitchPreferenceCompat app:key="trocear_largos" app:title="@string/aj_trocear_largos" app:summary="@string/aj_trocear_largos_res" app:defaultValue="true" />
+	<Preference app:key="sonidos_uno_a_uno" app:title="@string/sonidos_titulo" app:summary="@string/sonidos_res" />
+	<ListPreference app:key="salida_audio" app:title="@string/aj_salida_audio" app:entries="@array/salida_audio_nombres" app:entryValues="@array/salida_audio_valores" app:defaultValue="sistema" app:summary="@string/aj_salida_audio_res" />
+	<SwitchPreferenceCompat app:key="voz_multimedia" app:title="@string/aj_voz_multimedia" app:summary="@string/aj_voz_multimedia_res" app:defaultValue="false" />
+</PreferenceScreen>

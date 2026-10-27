@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Cadenas de los ayudantes de accesibilidad (paquete accesibilidad).
+	values/ es el idioma por defecto de la app (aquí, español); la traducción
+	inglesa está en values-en/. Si la app tiene el inglés por defecto, cambia
+	los dos archivos de carpeta (values-es/ y values/).
+	Si el proyecto ya tiene alguna de estas cadenas (cancelar, aceptar...), el
+	compilador dirá «Duplicate resources»: borra la de este archivo.
+	app_name no está aquí: la tiene ya cualquier app.
+-->
+<resources>
+	<!-- Diálogos y avisos (Utilidades.kt, Espera.kt) -->
+	<string name="aceptar">Aceptar</string>
+	<string name="cancelar">Cancelar</string>
+	<string name="cancelado">Cancelado</string>
+	<string name="espera_un_momento">Un momento, por favor…</string>
+	<string name="volver">Volver</string>
+	<string name="deshacer">Deshacer</string>
+	<string name="deshecho">Deshecho</string>
+	<string name="copiado">Copiado</string>
+
+	<!-- Menú lateral (MenuLateral.kt): el botón dice la acción; el título del panel lo anuncia TalkBack al abrir -->
+	<string name="abrir_menu">Abrir menú</string>
+	<string name="menu_lateral">Secciones y opciones</string>
+
+	<!-- Deslizadores (DeslizadorAjuste.kt, DeslizadorPosicion.kt): el valor siempre con su unidad -->
+	<string name="valor_por_ciento">%1$d por ciento</string>
+	<string name="valor_milisegundos">%1$d milisegundos</string>
+	<plurals name="valor_puntos">
+		<item quantity="one">%1$d punto</item>
+		<item quantity="many">%1$d puntos</item>
+		<item quantity="other">%1$d puntos</item>
+	</plurals>
+	<string name="posicion_reproduccion">Posición de reproducción</string>
+	<!-- «12 minutos de 45 minutos, 26 por ciento, quedan 33 minutos» -->
+	<string name="posicion_texto">%1$s de %2$s, %3$d por ciento, quedan %4$s</string>
+
+	<!-- Tiempos dichos para TalkBack (tiempoHablado) -->
+	<plurals name="horas">
+		<item quantity="one">%1$d hora</item>
+		<item quantity="many">%1$d horas</item>
+		<item quantity="other">%1$d horas</item>
+	</plurals>
+	<plurals name="minutos">
+		<item quantity="one">%1$d minuto</item>
+		<item quantity="many">%1$d minutos</item>
+		<item quantity="other">%1$d minutos</item>
+	</plurals>
+	<plurals name="segundos">
+		<item quantity="one">%1$d segundo</item>
+		<item quantity="many">%1$d segundos</item>
+		<item quantity="other">%1$d segundos</item>
+	</plurals>
+</resources>

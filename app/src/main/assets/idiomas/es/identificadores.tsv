@@ -1,0 +1,416 @@
+# Identificadores de vista en español (ver nucleo/Identificadores.kt).
+# palabra o frase en inglés <TAB> traducción <TAB> tipo: n nombre, a adjetivo o adverbio, v verbo o fijo
+# «-» en la traducción: palabra de relleno, que se quita.
+@invertir
+@union de
+
+# --- Relleno: tipos de vista y abreviaturas de programador ---
+view	-
+views	-
+btn	-
+bt	-
+button	-
+iv	-
+tv	-
+ib	-
+ibtn	-
+img	-
+imgv	-
+imageview	-
+textview	-
+imagebutton	-
+edittext	-
+et	-
+txt	-
+lbl	-
+label	-
+layout	-
+container	-
+holder	-
+wrapper	-
+frame	-
+ll	-
+rl	-
+cl	-
+fl	-
+ic	-
+icon	-
+widget	-
+item	-
+row	-
+cell	-
+entry	-
+input	-
+field	-
+textfield	-
+fab	-
+action	-
+main	-
+root	-
+content	-
+id	-
+
+# --- Frases ---
+video call	videollamada	n
+voice call	llamada de voz	n
+voice note	nota de voz	n
+voice message	mensaje de voz	n
+sign in	iniciar sesión	v
+sign out	cerrar sesión	v
+log in	iniciar sesión	v
+log out	cerrar sesión	v
+hang up	colgar	v
+more options	más opciones	n
+overflow menu	más opciones	n
+fast forward	avanzar	v
+dark mode	modo oscuro	n
+light mode	modo claro	n
+read more	leer más	v
+see all	ver todo	v
+see more	ver más	v
+show more	ver más	v
+go back	atrás	v
+navigate up	volver	v
+up button	volver	v
+check box	casilla	n
+status bar	barra de estado	n
+tool bar	barra de herramientas	n
+app bar	barra de la app	n
+bottom sheet	panel	n
+pull to refresh	actualizar	v
+swipe refresh	actualizar	v
+text input	cuadro de texto	n
+search box	buscador	n
+search bar	buscador	n
+search view	buscador	n
+qr code	código QR	n
+date picker	selector de fecha	n
+time picker	selector de hora	n
+
+# --- Nombres ---
+message	mensaje	n
+messages	mensajes	n
+msg	mensaje	n
+conversation	conversación	n
+conversations	conversaciones	n
+chat	chat	n
+chats	chats	n
+contact	contacto	n
+contacts	contactos	n
+photo	foto	n
+photos	fotos	n
+picture	foto	n
+pic	foto	n
+image	imagen	n
+images	imágenes	n
+avatar	avatar	n
+profile	perfil	n
+user	usuario	n
+users	usuarios	n
+name	nombre	n
+options	opciones	n
+settings	ajustes	n
+setting	ajuste	n
+preferences	preferencias	n
+menu	menú	n
+home	inicio	n
+volume	volumen	n
+video	vídeo	n
+videos	vídeos	n
+voice	voz	n
+audio	audio	n
+mic	micrófono	n
+microphone	micrófono	n
+camera	cámara	n
+gallery	galería	n
+attachment	adjunto	n
+attachments	adjuntos	n
+file	archivo	n
+files	archivos	n
+document	documento	n
+documents	documentos	n
+folder	carpeta	n
+emoji	emoji	n
+emojis	emojis	n
+sticker	sticker	n
+stickers	stickers	n
+gif	GIF	n
+keyboard	teclado	n
+status	estado	n
+story	historia	n
+stories	historias	n
+group	grupo	n
+groups	grupos	n
+community	comunidad	n
+communities	comunidades	n
+channel	canal	n
+channels	canales	n
+call	llamada	n
+calls	llamadas	n
+info	información	n
+information	información	n
+details	detalles	n
+detail	detalle	n
+title	título	n
+subtitle	subtítulo	n
+date	fecha	n
+time	hora	n
+count	número	n
+counter	contador	n
+badge	aviso	n
+notification	notificación	n
+notifications	notificaciones	n
+favorite	favorito	n
+favourite	favorito	n
+favorites	favoritos	n
+bookmark	marcador	n
+bookmarks	marcadores	n
+list	lista	n
+grid	cuadrícula	n
+tab	pestaña	n
+tabs	pestañas	n
+page	página	n
+link	enlace	n
+links	enlaces	n
+url	dirección	n
+email	correo	n
+mail	correo	n
+phone	teléfono	n
+number	número	n
+password	contraseña	n
+account	cuenta	n
+accounts	cuentas	n
+help	ayuda	n
+location	ubicación	n
+map	mapa	n
+code	código	n
+reaction	reacción	n
+reactions	reacciones	n
+quote	cita	n
+preview	vista previa	n
+thumbnail	miniatura	n
+thumb	miniatura	n
+cover	portada	n
+banner	cartel	n
+logo	logo	n
+header	cabecera	n
+footer	pie	n
+arrow	flecha	n
+drawer	menú lateral	n
+navigation	navegación	n
+nav	navegación	n
+speaker	altavoz	n
+flashlight	linterna	n
+brightness	brillo	n
+battery	batería	n
+clock	reloj	n
+alarm	alarma	n
+timer	temporizador	n
+calendar	calendario	n
+event	evento	n
+events	eventos	n
+note	nota	n
+notes	notas	n
+subject	asunto	n
+description	descripción	n
+price	precio	n
+cart	carrito	n
+order	pedido	n
+orders	pedidos	n
+product	producto	n
+products	productos	n
+rating	valoración	n
+review	reseña	n
+reviews	reseñas	n
+comment	comentario	n
+comments	comentarios	n
+post	publicación	n
+posts	publicaciones	n
+followers	seguidores	n
+feed	novedades	n
+news	noticias	n
+music	música	n
+song	canción	n
+songs	canciones	n
+playlist	lista de reproducción	n
+album	álbum	n
+artist	artista	n
+lyrics	letra	n
+queue	cola	n
+progress	progreso	n
+dropdown	desplegable	n
+spinner	desplegable	n
+picker	selector	n
+slider	deslizador	n
+seekbar	deslizador	n
+switch	interruptor	n
+checkbox	casilla	n
+radio	opción	n
+toolbar	barra de herramientas	n
+app	app	n
+apps	apps	n
+language	idioma	n
+theme	tema	n
+mode	modo	n
+wallpaper	fondo	n
+background	fondo	n
+contactphoto	foto de contacto	n
+text	texto	n
+caption	pie de foto	n
+media	multimedia	n
+web	web	n
+browser	navegador	n
+tip	consejo	n
+hint	pista	n
+error	error	n
+warning	aviso	n
+dialog	diálogo	n
+popup	ventana emergente	n
+panel	panel	n
+sheet	panel	n
+card	tarjeta	n
+section	sección	n
+filters	filtros	n
+results	resultados	n
+result	resultado	n
+history	historial	n
+archive	archivo	n
+archived	archivados	a
+draft	borrador	n
+drafts	borradores	n
+inbox	bandeja de entrada	n
+outbox	bandeja de salida	n
+spam	spam	n
+trash	papelera	n
+bin	papelera	n
+key	tecla	n
+keys	teclas	n
+wifi	wifi	n
+bluetooth	bluetooth	n
+flash	flash	n
+zoom	zoom	n
+qr	QR	n
+
+# --- Adjetivos y adverbios ---
+new	nuevo	a
+next	siguiente	a
+previous	anterior	a
+prev	anterior	a
+last	último	a
+first	primero	a
+back	atrás	a
+more	más	a
+less	menos	a
+up	arriba	a
+down	abajo	a
+left	izquierda	a
+right	derecha	a
+top	superior	a
+bottom	inferior	a
+dark	oscuro	a
+light	claro	a
+unread	sin leer	a
+selected	elegido	a
+current	actual	a
+recent	reciente	a
+recents	recientes	n
+all	todo	a
+done	hecho	v
+private	privado	a
+public	público	a
+online	en línea	a
+offline	sin conexión	a
+loading	cargando	v
+empty	vacío	a
+full	completo	a
+small	pequeño	a
+large	grande	a
+big	grande	a
+mini	mini	a
+expanded	desplegado	a
+collapsed	contraído	a
+
+# --- Verbos (se quedan delante, como en español: «enviar mensaje») ---
+send	enviar	v
+submit	enviar	v
+search	buscar	v
+find	buscar	v
+close	cerrar	v
+cancel	cancelar	v
+ok	aceptar	v
+accept	aceptar	v
+confirm	confirmar	v
+decline	rechazar	v
+reject	rechazar	v
+save	guardar	v
+delete	borrar	v
+remove	quitar	v
+clear	borrar	v
+add	añadir	v
+create	crear	v
+compose	escribir	v
+write	escribir	v
+edit	editar	v
+share	compartir	v
+play	reproducir	v
+pause	pausar	v
+stop	parar	v
+rewind	retroceder	v
+mute	silenciar	v
+unmute	activar sonido	v
+record	grabar	v
+attach	adjuntar	v
+open	abrir	v
+download	descargar	v
+upload	subir	v
+refresh	actualizar	v
+reload	recargar	v
+sync	sincronizar	v
+filter	filtrar	v
+sort	ordenar	v
+like	me gusta	v
+star	destacar	v
+follow	seguir	v
+unfollow	dejar de seguir	v
+reply	responder	v
+answer	responder	v
+forward	reenviar	v
+pin	fijar	v
+unpin	no fijar	v
+block	bloquear	v
+unblock	desbloquear	v
+report	denunciar	v
+mark	marcar	v
+check	marcar	v
+select	elegir	v
+expand	desplegar	v
+collapse	contraer	v
+toggle	alternar	v
+translate	traducir	v
+copy	copiar	v
+paste	pegar	v
+cut	cortar	v
+undo	deshacer	v
+redo	rehacer	v
+print	imprimir	v
+scan	escanear	v
+dismiss	descartar	v
+skip	saltar	v
+retry	reintentar	v
+continue	continuar	v
+start	empezar	v
+finish	terminar	v
+login	iniciar sesión	v
+logout	cerrar sesión	v
+hangup	colgar	v
+dial	marcar	v
+buy	comprar	v
+pay	pagar	v
+publish	publicar	v
+explore	explorar	v
+shuffle	aleatorio	v
+repeat	repetir	v
+show	mostrar	v
+hide	ocultar	v
+view all	ver todo	v
+more info	más información	n

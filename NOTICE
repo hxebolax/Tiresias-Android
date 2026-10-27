@@ -1,0 +1,57 @@
+Tiresias
+Copyright (C) 2026 Héctor J. Benítez Corredera
+
+Este producto incluye software desarrollado por terceros:
+
+* eSpeak NG, Copyright (C) 2005-2013 Jonathan Duddington, (C) 2013-2017 Reece H.
+  Dunn y colaboradores, con licencia GPL-3.0-or-later
+  (app/src/main/cpp/espeak-ng/COPYING; partes BSD-2, Apache 2.0 y UCD).
+  Incluye speechPlayer, Copyright 2014 NV Access Limited, GPL-3.0-or-later.
+
+* SVOX Pico, Copyright (C) 2008-2009 SVOX AG, del Android Open Source Project,
+  con licencia Apache License 2.0 (app/src/main/cpp/pico/NOTICE). El puente JNI
+  sigue el de Shortcut Menu (aaron-gh, Apache 2.0) y el motor de AOSP.
+
+* QuickJS-ng, Copyright (c) 2017-2026 Fabrice Bellard, (c) 2017-2024 Charlie
+  Gordon, (c) 2023-2026 Ben Noordhuis y Saúl Ibarra Corretgé, licencia MIT
+  (app/src/main/cpp/quickjs/LICENSE).
+
+* El puente JNI de QuickJS (app/src/main/cpp/quickjs_jni.c y scripts/QuickJs.kt),
+  Copyright 2026 Backtalk contributors, licencia Apache License 2.0. Tiresias
+  incluye ese código con cambios; los archivos derivados lo indican en su cabecera.
+  La política del altavoz en las llamadas (nucleo/PoliticaAltavoz.kt y
+  servicio/AltavozEnLlamada.kt) se basa en SpeakerphonePolicy y
+  SpeakerphoneInCallService de Backtalk (Apache License 2.0), con cambios.
+
+* ZXing («Zebra Crossing», Copyright (C) ZXing authors), licencia Apache License
+  2.0: los códigos QR y de barras de la pantalla y de las imágenes compartidas.
+
+* El icono «touch_app» de Material Symbols (Google, Apache License 2.0).
+
+* Tablas braille de liblouis (app/src/main/assets/braille), de José Enrique
+  Fernández del Campo, Juan Carlos Buño Suárez, Davy Kager y otros autores de
+  liblouis, con licencia LGPL-2.1-or-later (Es-Es-G0.utb, LGPL-3.0-or-later):
+  las de español e inglés y las informáticas de 8 puntos de quince idiomas más.
+
+* ONNX Runtime (Microsoft, MIT), LiteRT-LM (Google, Apache 2.0), Vosk (Alpha
+  Cephei, Apache 2.0) con JNA (Apache 2.0 o LGPL-2.1), Gson (Apache 2.0),
+  AndroidX, Material Components, Kotlin y kotlinx.coroutines (Apache 2.0),
+  JSpecify (Apache 2.0).
+
+* Nombres de los emojis y símbolos del Unicode CLDR (licencia Unicode-3.0), tal como los reúne el cldr.dic de NVDA.
+* Símbolos y niveles de puntuación del symbols.dic de NVDA (NVDA Contributors, GPL-2), al final de `simbolos.tsv` entre dos marcas.
+
+* Eloquence: el motor openevv (Copyright (c) 2026 Stanislaw Przedzinkowski, the OpenEVV SAPI5 contributors y Felix Steindorff, MIT; https://github.com/Mudb0y/openevv)
+  y el envoltorio de evvdroid (Copyright (c) 2026 Quin Gillespie, MIT; https://github.com/trypsynth/evvdroid),
+  en app/src/main/java/org/evvdroid y en lib/<procesador>/libevvjni_gz.so. Los datos de las voces que lleva
+  el motor están transcritos de Embedded ViaVoice de IBM ("Licensed Materials - Property of IBM, (C) Copyright
+  IBM Corp. 1999, 2004"): no tienen licencia libre, nadie en estos proyectos puede darla, y quién tiene hoy
+  sus derechos está en un pleito (Cerence Inc. contra Microsoft y Nuance, D. Del. 1:25-cv-00553). Incluidos a
+  petición del autor de Tiresias. No es asesoramiento legal.
+
+Los modelos y voces que se descargan aparte (PaddleOCR, Vosk, Piper, Gemma) no
+están incluidos: cada uno tiene su licencia, que la app muestra antes de
+descargarlo. La lista completa, en app/src/main/assets/licencias/TERCEROS.txt.
+
+Como incluye eSpeak NG, Tiresias en su conjunto se distribuye con la licencia
+GPL-3.0-or-later (archivo LICENSE). El complemento nano/ es Apache 2.0.

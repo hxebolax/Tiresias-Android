@@ -1,0 +1,36 @@
+# Compilación
+.gradle/
+.kotlin/
+build/
+.cxx/
+*.iml
+.idea/
+local.properties
+
+# Entorno portátil (JDK, SDK, NDK, Gradle, emulador, cachés): lo prepara compilar.bat
+entorno/
+
+# Firma de publicación: nunca en el repositorio
+firma/
+*.jks
+*.keystore
+
+# APKs y paquetes de publicación
+dist/
+*.apk
+*.aab
+
+# Material de estudio (repositorios clonados y documentación descargada)
+adjuntos/
+
+# Datos sueltos de pruebas
+docs/informes/*.json
+
+# Lo que no es del proyecto: estudio, investigaciones, informes de pruebas, copias y el asistente
+agentes/
+copias/
+CLAUDE.md
+docs/investigacion/
+docs/informes/
+docs/00_analisis_y_plan.md
+docs/modo_senior.md

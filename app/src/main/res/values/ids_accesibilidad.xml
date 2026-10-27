@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Identificadores de los ayudantes de accesibilidad. -->
+<resources>
+	<!-- Etiqueta de vista donde accionesAccesibles() guarda los ids de las acciones que puso, para quitarlas en el siguiente bind -->
+	<item name="acciones_accesibles" type="id" />
+	<!-- El cajón y su contenido: con id, el sistema conserva si estaba abierto al girar la pantalla -->
+	<item name="menu_lateral_cajon" type="id" />
+	<item name="menu_lateral_navegacion" type="id" />
+</resources>

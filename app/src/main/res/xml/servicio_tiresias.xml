@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Configuración del servicio de accesibilidad de Tiresias. Las banderas que
+	cambian (exploración táctil, gestos de varios dedos) las pone el servicio al
+	conectarse según la versión de Android y si está suspendido.
+	isAccessibilityTool: en Android 17 con la protección avanzada solo funcionan
+	los servicios que son herramientas de accesibilidad.
+-->
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+	android:accessibilityEventTypes="typeAllMask"
+	android:accessibilityFeedbackType="feedbackSpoken|feedbackAudible|feedbackHaptic"
+	android:accessibilityFlags="flagDefault|flagRequestTouchExplorationMode|flagRequestEnhancedWebAccessibility|flagReportViewIds|flagRequestFilterKeyEvents|flagRetrieveInteractiveWindows|flagEnableAccessibilityVolume|flagRequestMultiFingerGestures"
+	android:canPerformGestures="true"
+	android:canRequestFilterKeyEvents="true"
+	android:canRequestTouchExplorationMode="true"
+	android:canRetrieveWindowContent="true"
+	android:canTakeScreenshot="true"
+	android:description="@string/servicio_descripcion"
+	android:interactiveUiTimeout="0"
+	android:isAccessibilityTool="true"
+	android:notificationTimeout="0"
+	android:settingsActivity="com.xebolax.tiresias.ui.ActividadPrincipal"
+	android:summary="@string/servicio_resumen" />

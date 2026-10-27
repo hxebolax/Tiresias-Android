@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manual de Tiresias</title>
+<style>
+	:root { color-scheme: light dark; --texto: #1c1b1f; --fondo: #fffbfe; --borde: #79747e; --enlace: #4f378b; --suave: #f3edf7; }
+	@media (prefers-color-scheme: dark) { :root { --texto: #e6e1e5; --fondo: #1c1b1f; --borde: #938f99; --enlace: #d0bcff; --suave: #2b2930; } }
+	body { font-family: sans-serif; font-size: 1.05rem; line-height: 1.55; color: var(--texto); background: var(--fondo); margin: 0; padding: 16px; }
+	h1 { font-size: 1.6rem; } h2 { font-size: 1.35rem; margin-top: 2rem; } h3 { font-size: 1.15rem; }
+	a { color: var(--enlace); }
+	table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+	caption { text-align: left; font-weight: bold; padding: 0.4rem 0; }
+	th, td { border: 1px solid var(--borde); padding: 0.45rem; text-align: left; vertical-align: top; }
+	th { background: var(--suave); }
+	.aviso { border-left: 4px solid var(--enlace); padding: 0.5rem 0.8rem; background: var(--suave); }
+	kbd { font-family: inherit; font-weight: bold; }
+</style>
+</head>
+<body>
+<main>
+<h1>Manual de Tiresias</h1>
+<p>Tiresias es un lector de pantalla para Android: dice en voz alta lo que hay en la pantalla y te deja manejar el móvil con gestos, con un teclado, con una línea braille o con la voz. Funciona sin Google Play Services, sin cuentas y sin Internet; lo único que usa Internet es lo que tú pidas (descargar voces y modelos, buscar actualizaciones o complementos, o preguntar a una inteligencia artificial en la nube con tu propia clave).</p>
+<p>Este manual es el de la versión 1.0.4.</p>
+
+<nav aria-labelledby="indice">
+<h2 id="indice">Contenido</h2>
+<ol>
+	<li><a href="#empezar">Empezar</a></li>
+	<li><a href="#emergencia">Si algo va mal: la salida de emergencia</a></li>
+	<li><a href="#navegar">Explorar y navegar</a></li>
+	<li><a href="#gestos">Gestos</a></li>
+	<li><a href="#menus">Menús, búsqueda y lista de elementos</a></li>
+	<li><a href="#voz">Voz, verbosidad y pronunciación</a></li>
+	<li><a href="#escribir">Escribir, editar y copiar texto</a></li>
+	<li><a href="#notificaciones">Notificaciones y llamadas</a></li>
+	<li><a href="#teclado">Teclado físico</a></li>
+	<li><a href="#braille">Braille: teclado en pantalla y líneas braille</a></li>
+	<li><a href="#vision">Imágenes, texto, códigos QR e inteligencia artificial</a></li>
+	<li><a href="#escucha">Dictado y órdenes por voz</a></li>
+	<li><a href="#apps">Etiquetas, perfiles y complementos</a></li>
+	<li><a href="#descargas">Descargas</a></li>
+	<li><a href="#actualizaciones">Actualizaciones</a></li>
+	<li><a href="#privacidad">Privacidad</a></li>
+	<li><a href="#personalizar">Personalizar Tiresias</a></li>
+	<li><a href="#senior">Modo senior</a></li>
+	<li><a href="#problemas">Problemas frecuentes</a></li>
+</ol>
+</nav>
+
+<section aria-labelledby="empezar">
+<h2 id="empezar">1. Empezar</h2>
+<h3>Activar Tiresias</h3>
+<p>Abre los Ajustes del sistema, Accesibilidad, Tiresias, y actívalo. Android avisa de que un lector de pantalla puede ver la pantalla y actuar por ti: es lo que necesita para leerla. Al activarse, Tiresias dice «Tiresias activado».</p>
+<p>Si Android dice que el ajuste está restringido, pasa con las apps que no vienen de una tienda: abre la información de la app Tiresias, el menú Más opciones y elige «Permitir ajustes restringidos». Después vuelve a Accesibilidad.</p>
+<p>Si ya usas TalkBack, puedes tener los dos activados un momento para pasar de uno a otro, pero no los dejes juntos: se pisarían los gestos y la voz.</p>
+<h3>El asistente de primeros pasos y el tutorial</h3>
+<p>La primera vez que abres la app, el asistente revisa lo necesario: Tiresias activado, quitar el ahorro de batería (para que el sistema no lo cierre), el permiso de notificaciones y el idioma. El <strong>tutorial</strong> (en el menú lateral) te enseña los gestos practicando.</p>
+<h3>La app de Tiresias</h3>
+<p>En Inicio, el menú lateral (botón «Abrir menú», arriba a la izquierda) lleva a: Descargas, Gestos, Diccionario de pronunciación, Etiquetas, Perfiles, Complementos, Tutorial, Ajustes, este Manual y Acerca de y actualizaciones. Las demás pantallas tienen arriba a la izquierda «Volver», que lleva a la anterior (dentro de Ajustes, de una sección a Ajustes y de Ajustes a Inicio).</p>
+</section>
+
+<section aria-labelledby="emergencia">
+<h2 id="emergencia">2. Si algo va mal: la salida de emergencia</h2>
+<p class="aviso"><strong>Triple toque y mantener con cuatro dedos</strong> activa siempre el <strong>modo seguro</strong>: quita la cortina de pantalla, cierra los menús de Tiresias, vuelve a los gestos por defecto, apaga los complementos, devuelve una velocidad normal y la voz integrada (eSpeak NG) y deja el control de lectura por defecto. Ese gesto no se puede cambiar ni quitar, tampoco en el modo senior.</p>
+<p>Pulsar a la vez las dos teclas de volumen suspende Tiresias o lo reanuda. Suspendido, no lee ni recoge gestos; al encender la pantalla vuelve solo. En el modo senior, las dos teclas a la vez llevan a la pantalla de inicio (sección 18).</p>
+</section>
+
+<section aria-labelledby="navegar">
+<h2 id="navegar">3. Explorar y navegar</h2>
+<h3>Explorar tocando</h3>
+<p>Desliza un dedo por la pantalla: Tiresias dice lo que hay debajo al momento. Para activar lo que se acaba de decir, toca dos veces en cualquier sitio. Para una pulsación larga, toca dos veces y mantén.</p>
+<h3>Deslizar de elemento en elemento</h3>
+<p>Desliza a la derecha para ir al elemento siguiente y a la izquierda para el anterior. Al final de lo que se ve en una lista, Tiresias la desplaza solo y sigue por el siguiente elemento, sin saltos. Si una app no deja desplazar su lista al lector, Tiresias la arrastra con dos dedos. Al llegar al último elemento de la pantalla, vuelve al primero (con las listas otra vez arriba), y hacia atrás desde el primero va al último; se puede quitar en Ajustes, Navegación. «Al principio de la lista entera» y «Al final de la lista entera» la recorren hasta el tope (asígnales un gesto en Gestos).</p>
+<p>En un deslizador (volumen, velocidad...), deslizar arriba sube el valor y abajo lo baja. Con «Teclas de volumen en los deslizadores», también las teclas de volumen. El valor nuevo se dice una sola vez.</p>
+<p>Cada elemento se dice con su nombre, su tipo (botón, casilla, enlace...), su estado (marcado, activado, 40 por ciento...) y, en las listas, su posición («5 de 40»). Tras una pausa, la pista de uso (por ejemplo, «toca dos veces para activar»). Lo que se dice y en qué orden se cambia en Ajustes, Lectura.</p>
+<p>Los mensajes largos que acaban en «Leer más» (en WhatsApp o Telegram, por ejemplo) se abren solos al llegar a ellos y se lee el resto. Se puede quitar en Ajustes, Lectura.</p>
+<h3>El control de lectura (el selector)</h3>
+<p>Deslizar arriba o abajo mueve según el control de lectura elegido: caracteres, palabras, líneas, párrafos, encabezados, enlaces, controles, campos, botones, casillas, listas, tablas, regiones, imágenes, ventanas, cuadrícula, acciones, edición o el predeterminado (elemento a elemento); y los que cambian un ajuste: velocidad, volumen, tono, puntuación, idioma, verbosidad, voz y salida del audio. Para cambiar de control, desliza arriba y luego abajo, o abajo y luego arriba (o tres dedos arriba o abajo). Cuáles salen y en qué orden se elige en Ajustes, Navegación.</p>
+<p>Con el predeterminado, en un deslizador arriba sube el valor y abajo lo baja, y en un elemento con acciones propias (como los sonidos de Tiresias, con «Probar») arriba y abajo van diciendo sus acciones, igual que el control Acciones: el doble toque hace la elegida. Mientras no elijas ninguna, o al pasar a otro elemento, el doble toque activa como siempre. Las dos cosas se pueden quitar en Ajustes, Navegación («Arriba y abajo eligen las acciones»).</p>
+<p>Los enlaces que van dentro de un texto (en los avisos de Play Protect, «Más información» e «Instalar de todas formas»; en las condiciones de una app) no son elementos aparte: Tiresias dice «con 2 enlaces» y con arriba y abajo, o en el menú de acciones, eliges cada enlace y el doble toque lo pulsa. Con el control de lectura Enlaces vas de enlace en enlace dentro del texto y después al elemento siguiente.</p>
+<p>En las páginas web funcionan todos los controles; fuera de ellas, los que tienen sentido en esa pantalla. Al acabar el texto de un elemento por caracteres, palabras o líneas, se pasa al elemento siguiente.</p>
+<h3>Ir al elemento número…</h3>
+<p>En una lista larga, «Ir al elemento número… de la lista» te pide un número (te dice cuántos tiene, si la app lo indica) y lleva el foco a ese elemento, desplazando la lista sola hasta él. Si no estás en una lista o el número no está, te lo dice.</p>
+<h3>Vigilar un elemento</h3>
+<p>«Vigilar este elemento» se queda pendiente del elemento enfocado y, cada vez que cambia, suena un aviso y dice lo nuevo («Ha cambiado: …»), aunque tú estés en otra parte de la pantalla. Sirve para el coche que se acerca en una app de transporte, una subida o un marcador, el turno de una cola o el progreso de algo. Se vigila un elemento cada vez: la misma acción deja de vigilarlo. También se deja solo si el elemento desaparece de la pantalla o si sales de su app durante más de medio minuto.</p>
+<h3>Volver a donde estabas</h3>
+<p>Tiresias recuerda en qué elemento estabas en cada pantalla. Al volver (también con Atrás) o al cerrar un diálogo, un menú o un panel lateral, el foco vuelve a ese elemento.</p>
+<h3>Lectura continua</h3>
+<p>«Leer desde arriba» y «Leer desde aquí» leen la pantalla seguida, pasando de página en las listas. Cualquier toque la para.</p>
+<h3>Más formas de moverse</h3>
+<ul>
+	<li><strong>Acciones directas</strong>: ir al siguiente o al anterior encabezado, enlace, control, botón, campo, casilla, lista, tabla, región o imagen sin cambiar el control de lectura (asígnales un gesto en Gestos).</li>
+	<li><strong>Pantalla virtual con el texto reconocido</strong>: en una app que no se puede leer, Tiresias reconoce el texto de la pantalla y lo convierte en elementos que se recorren deslizando, en orden; el doble toque pulsa en su sitio y Atrás la quita. Necesita el reconocimiento de texto (sección 11).</li>
+	<li><strong>Ayuda de otra persona</strong>: los toques van a la app como si no hubiera lector, para que alguien maneje tu móvil; Tiresias sigue diciendo lo que se pulsa. Se quita con las dos teclas de volumen.</li>
+	<li><strong>Gestos sencillos</strong>: en Gestos, «Usar los gestos sencillos» pone lo de cada día en toques de dos y tres dedos, sin gestos en ángulo.</li>
+</ul>
+</section>
+
+<section aria-labelledby="gestos">
+<h2 id="gestos">4. Gestos</h2>
+<p>La tabla muestra tus gestos tal como los tienes ahora. El mapa por defecto es compatible con el de TalkBack, para que no tengas que aprender nada si vienes de él. Puedes cambiar cualquier gesto en la pantalla Gestos, para todas las apps o solo para una. Las acciones que no tienen gesto de fábrica (por ejemplo, vigilar un elemento, ir al elemento número, leer los códigos QR o el resumen de los avisos) se pueden poner en un gesto o en el menú de Tiresias.</p>
+<!-- TIRESIAS:GESTOS -->
+<p>Con «Pasar el siguiente gesto a la app» (doble toque y mantener con cuatro dedos) el siguiente gesto llega a la app tal cual, por ejemplo para dibujar o para un juego. «Toque directo en esta app» hace lo mismo con todos los toques de la app que tienes delante hasta que la cambies.</p>
+</section>
+
+<section aria-labelledby="menus">
+<h2 id="menus">5. Menús, búsqueda y lista de elementos</h2>
+<ul>
+	<li><strong>Menú de Tiresias</strong> (deslizar arriba y luego a la derecha, o abajo y luego a la derecha): lo que Tiresias puede hacer. Tú eliges qué opciones salen y en qué orden (Ajustes, Navegación, «Elegir el menú de Tiresias»). Al abrirlo, el foco va a su primera opción, y al pasar de la última que se ve, la lista se desplaza: no se salta ninguna. «Repetir», «Deletrear» y «Copiar lo último» son de lo dicho antes de abrirlo.</li>
+	<li><strong>Menú circular</strong>: pones un dedo, deslizas hacia una de sus ocho opciones (se dice al pasar) y se hace al levantarlo. Sus opciones también se eligen y se ordenan.</li>
+	<li><strong>Menú de acciones</strong> (toque con tres dedos): las acciones del elemento enfocado (las que pone la app: archivar, responder...), las de los complementos y las de Tiresias (etiquetar, copiar el texto, describir...).</li>
+	<li><strong>Buscar</strong>: busca un texto en la pantalla y lleva el foco a él.</li>
+	<li><strong>Lista de elementos</strong>: la pantalla entera como una lista; primero eliges qué ver (todo, encabezados, enlaces, controles, botones, campos, casillas o imágenes) y al elegir un elemento el foco va a él.</li>
+	<li><strong>Historial de lo dicho</strong> e <strong>historial de notificaciones</strong>: lo último que ha dicho Tiresias y las últimas notificaciones; al elegir una frase, se copia al portapapeles.</li>
+</ul>
+<p>Los menús de Tiresias son ventanas como cualquier otra: se navega deslizando y se cierra con Atrás. Al cerrarse, el foco vuelve a donde estaba.</p>
+</section>
+
+<section aria-labelledby="voz">
+<h2 id="voz">6. Voz, verbosidad y pronunciación</h2>
+<h3>Las voces</h3>
+<ul>
+	<li><strong>eSpeak NG</strong> (la integrada, por defecto): muy rápida, decenas de idiomas, siempre disponible. Es la que se usa si otra falla.</li>
+	<li><strong>SVOX Pico</strong>: más natural, en español y en inglés (de Estados Unidos y del Reino Unido); también integrada.</li>
+	<li><strong>Eloquence</strong>: la voz clásica de los lectores de pantalla, también integrada, con diez idiomas (inglés de EE. UU. y británico, español de España y de México, francés de Francia y de Canadá, alemán, italiano, polaco y japonés) y ocho voces (Reed, Shelley, Bobby, Rocko, Glen, Sandy, Grandma y Grandpa). Habla también antes del primer desbloqueo. No está en el APK para procesadores x86 de 32 bits.</li>
+	<li><strong>Voces neuronales Piper</strong>: muy naturales, se descargan aparte (pantalla Descargas). Funcionan en el móvil, sin Internet.</li>
+	<li><strong>Cualquier voz del sistema</strong> (la de Google, Samsung, RHVoice...). Si una voz del sistema falla tres veces seguidas, Tiresias usa la integrada un minuto y vuelve a probar.</li>
+</ul>
+<p>Si una voz falla, Tiresias sigue con eSpeak NG; si es Eloquence la que falla, además te lo dice una vez, en vez de cambiar de voz sin avisar.</p>
+<p>Tiresias es además un motor de voz del sistema: otras apps (lectores de libros, navegadores) pueden usar sus voces en Ajustes del sistema, Salida de texto a voz.</p>
+<h3>Velocidad, tono y volumen de cada voz</h3>
+<p>Cada voz tiene su propia velocidad, su tono y su volumen, como en NVDA: al cambiar de voz (con un gesto, con el control de lectura Voz o en Ajustes, Voz) se pone la suya, y Tiresias dice con qué velocidad queda. La primera vez que usas una voz, empieza con la velocidad normal (100 %). Así, una velocidad que va bien en una voz rápida no se vuelve incomprensible en otra. La voz del sistema que elijas también se recuerda para cada motor.</p>
+<p>La velocidad es la misma en todas partes: la que cambian los gestos, la de Ajustes, Voz, y la que enseñan los ajustes de Eloquence. Si tienes Ajustes abierto mientras la cambias con un gesto, el deslizador enseña el valor de verdad.</p>
+<p>En Ajustes, Voz, <strong>«Voces del control Voz»</strong> elige por qué voces pasan el control de lectura Voz y la acción «Cambiar de voz» (de fábrica, todas).</p>
+<p>También se ajustan el cambio de voz por idioma, bajar el volumen de la música mientras habla y callarse mientras otra app graba.</p>
+<h3>Ajustes de Eloquence</h3>
+<p>En Ajustes, Voz, «Ajustes de Eloquence» están la voz y cada uno de sus parámetros (voz de hombre o de mujer, tamaño de la cabeza, tono de base, entonación, aspereza, aliento y volumen), el aumento de velocidad (como en NVDA: la misma velocidad, 1,6 veces más rápida), la variante de cada idioma, las pausas, la predicción de frases, las abreviaturas, la frecuencia de muestreo y los diccionarios (los mismos archivos que se comparten para el driver de NVDA). Lo que cambies de una voz se queda en esa voz.</p>
+<p>La velocidad que se ve ahí es la de Tiresias: no hay una velocidad de Eloquence aparte. Al 100 % suena como NVDA con la velocidad 55. De fábrica, Eloquence suena como el driver IBMTTS de NVDA: voz Reed en español de España, tono 65, entonación 35, volumen 95, sin aspereza ni aliento, 11 kHz y pausas cortas.</p>
+<h3>Verbosidad, puntuación y números</h3>
+<p>Hay niveles de verbosidad (alta: todo; media: sin las pistas de uso; baja: lo justo; y personalizada, eligiendo qué se dice) y de puntuación (ninguna, algunas, la mayoría, todas). Los números se dicen como cantidades o dígito a dígito, y las mayúsculas se pueden avisar diciendo «mayúscula», subiendo el tono, con un sonido o de las dos primeras formas a la vez. Los emojis se dicen por su nombre (Tiresias conoce el de 3886 emojis), como los diga la voz o nada, según elijas en Ajustes, Lectura.</p>
+<h3>Diccionario de pronunciación</h3>
+<p>En la pantalla Diccionario de pronunciación puedes hacer que una palabra se diga de otra manera (por ejemplo, siglas o nombres propios), para todas las voces. Se puede importar un diccionario de Tiresias o de NVDA y exportarlo.</p>
+</section>
+
+<section aria-labelledby="escribir">
+<h2 id="escribir">7. Escribir, editar y copiar texto</h2>
+<p>En un campo de texto, Tiresias dice lo que escribes según el eco elegido (caracteres, palabras, los dos o nada) y lo que borras. Con el control de lectura en caracteres, palabras o líneas, deslizar arriba y abajo mueve el cursor por el texto.</p>
+<p>Tiresias dice cuántas faltas de ortografía marca el corrector del teclado en un campo, y en sus acciones puedes cambiar cada una por lo que propone o ir a ella.</p>
+<p>El <strong>menú de edición</strong> tiene copiar, cortar, pegar, seleccionar todo, deshacer, rehacer y llevar el cursor al principio o al final. El <strong>modo selección</strong> (doble toque y mantener con dos dedos) selecciona mientras mueves el cursor.</p>
+<p>Con el teclado en pantalla, explora hasta la tecla y levanta el dedo para escribirla (o toca dos veces, según los ajustes del sistema).</p>
+<h3>Copiar</h3>
+<ul>
+	<li><strong>Lo copiado por Tiresias</strong>: los últimos 20 textos que ha copiado Tiresias, para copiarlos otra vez, pegarlos en el campo u oírlos enteros. Solo están en la memoria del móvil y se olvidan al apagar la pantalla. «Añadir lo último dicho a lo copiado» suma la última frase a lo que ya había.</li>
+	<li><strong>Copiar la lista entera</strong>: todos los elementos de la lista, uno por línea, desplazándola sola de arriba abajo.</li>
+	<li><strong>Copiar solo una parte</strong> de un texto que no se puede editar: activa el modo selección, muévete por caracteres, palabras o líneas por lo que quieras copiar, quita el modo (se guarda el trozo) y repite con otros trozos si quieres; «Copiar» los copia todos juntos, uno por línea.</li>
+</ul>
+</section>
+
+<section aria-labelledby="notificaciones">
+<h2 id="notificaciones">8. Notificaciones y llamadas</h2>
+<p>Las notificaciones se leen solas con un sonido (puedes silenciar las de una app, y decidir si se leen en No molestar o durante una llamada). Las últimas quedan en el historial de notificaciones; desde Notificaciones recientes, cada una se abre, se responde, usa sus botones o se copia.</p>
+<p>El <strong>resumen de los avisos</strong> dice en una frase lo que ha llegado en las últimas 12 horas, por app y por quién lo manda, sin recorrer el historial: «Tienes 5 avisos de las últimas 12 horas. WhatsApp: 3, de Ana y Juan. Gmail: 2». No cuenta las notificaciones fijas ni las de progreso. Está también en el menú del modo senior.</p>
+<h3>Llamadas</h3>
+<p>Cuando suena una llamada, «Reproducir o pausar» (doble toque con dos dedos) la descuelga y, durante la llamada, la cuelga. Fuera de las llamadas, reproduce o pausa la música.</p>
+<ul>
+	<li><strong>Llamadas del teléfono</strong>: necesitan el permiso de llamadas (Ajustes, Navegación); descolgar funciona desde Android 8 y colgar desde Android 9.</li>
+	<li><strong>Llamadas de internet</strong> (WhatsApp, Telegram, Signal y las demás): el mismo gesto pulsa el botón «Contestar» de su notificación mientras suena y «Colgar» (o «Rechazar», si no tiene otro) durante la llamada. No necesita el permiso de llamadas.</li>
+</ul>
+<p>Durante una llamada, el altavoz se puede poner solo al apartar el móvil de la oreja, como en el iPhone (Ajustes, Navegación; ver Problemas frecuentes). El complemento «Quién llama» repite quién llama y por qué app mientras suena (sección 13).</p>
+</section>
+
+<section aria-labelledby="teclado">
+<h2 id="teclado">9. Teclado físico</h2>
+<p>Con un teclado USB o Bluetooth se maneja todo con la <strong>tecla Tiresias</strong> (en Ajustes, Teclado: Alt, Meta, Bloq Mayús o Insertar). Hay dos mapas:</p>
+<ul>
+	<li><strong>TalkBack</strong> (por defecto): el mapa de TalkBack, para quien viene de él.</li>
+	<li><strong>Tiresias para Windows</strong>: parecido al de NVDA y al de Tiresias para Windows (tecla Tiresias Insertar o Bloq Mayús).</li>
+</ul>
+<p>En las páginas web, las letras navegan como en NVDA: H encabezado, K enlace, F control, B botón, E campo, X casilla, L lista, T tabla, D región, G imagen, y los números del 1 al 6 los encabezados de ese nivel. Con Mayúsculas, hacia atrás.</p>
+<p>La <strong>ayuda de teclado</strong> (Tiresias + 1) dice qué hace cada tecla sin hacerlo.</p>
+<!-- TIRESIAS:TECLAS -->
+</section>
+
+<section aria-labelledby="braille">
+<h2 id="braille">10. Braille: teclado en pantalla y líneas braille</h2>
+<h3>El teclado braille en pantalla</h3>
+<p>Un teclado de seis puntos para escribir en braille sobre la pantalla (braille español de la ONCE, grado 1, con signo de número y de mayúscula). Actívalo una vez en Ajustes del sistema, Teclados (o en Ajustes de Tiresias, Braille, Teclado braille en pantalla); después, la acción «Teclado braille» lo pone en un campo de texto. La pantalla se divide en dos filas de tres puntos: arriba los puntos 1, 2 y 3 (de izquierda a derecha) y abajo los 4, 5 y 6. Pon a la vez los dedos de los puntos de la letra y levántalos para escribirla. Deslizar un dedo a la izquierda borra y a la derecha escribe un espacio; deslizar dos dedos hacia abajo es intro y hacia arriba vuelve al teclado anterior.</p>
+<h3>Líneas braille</h3>
+<p>Con Android 15 o posterior, Tiresias se conecta a las líneas braille que siguen la norma HID Braille (las actuales de Freedom Scientific, HumanWare, APH, Orbit, HIMS, Help Tech y otras) por USB o Bluetooth, sin controladores aparte. Al enchufar o encender la línea, Tiresias la busca y dice «Línea braille conectada» con el número de celdas.</p>
+<ul>
+	<li><strong>USB</strong>: conecta la línea. Android pregunta una vez si Tiresias puede usarla.</li>
+	<li><strong>Bluetooth</strong>: empareja la línea en los ajustes de Bluetooth del sistema y da a Tiresias el permiso de dispositivos cercanos (Ajustes, Braille, Permiso para líneas Bluetooth).</li>
+	<li>Si no se conecta sola: Ajustes, Braille, Buscar línea braille.</li>
+</ul>
+<p>En la línea se ve lo que tiene el foco, lo mismo que se dice. En un campo de texto se ve su texto, con el cursor marcado (de fábrica, con los puntos 7 y 8; en Ajustes, Braille, eliges cómo). Los mensajes (notificaciones, anuncios, el título de una ventana nueva) se ven unos segundos (Ajustes, Braille, Tiempo de los mensajes) y luego vuelve lo que había. En Ajustes, Braille, eliges también qué hace cada combinación de espacio y puntos de la línea.</p>
+<h3>Primero braille</h3>
+<p>Con la línea conectada, el modo «primero braille» calla la voz y todo se lee en la línea. Se elige en Ajustes, Braille: <strong>voz mínima</strong> (solo suenan los avisos de Tiresias y las notificaciones) o <strong>sin voz</strong>. Se enciende y se apaga con la acción «Primero braille» (en el menú de Tiresias, y en la línea con espacio + puntos 7 y 8). Sin línea no se puede activar, y si la línea se desconecta, la voz vuelve al momento: nunca te quedas sin salida. El modo seguro también la devuelve.</p>
+<p>Tablas: <strong>informático de 8 puntos</strong> (por defecto, la tabla de liblouis de cada idioma: una celda por carácter) o <strong>literario de 6 puntos</strong> (grado 1, con signo de mayúscula y de número). El complemento «Modo braille» añade un menú en la línea con notas, abrir apps escribiendo su nombre, calculadora y hora.</p>
+<!-- TIRESIAS:BRAILLE -->
+<p>Con Android 14 o anterior, las líneas braille no se pueden usar desde Tiresias (Android no da acceso a ellas a los lectores de pantalla). El teclado braille en pantalla sí funciona.</p>
+</section>
+
+<section aria-labelledby="vision">
+<h2 id="vision">11. Imágenes, texto, códigos QR e inteligencia artificial</h2>
+<p>Lo que lee la pantalla (reconocer su texto, sus códigos o describirla) necesita Android 11 o posterior, porque usa la captura de pantalla de los lectores. No se hace con el foco en un campo de contraseña.</p>
+<h3>Reconocer texto (OCR)</h3>
+<p>«Reconocer el texto del elemento» y «Reconocer el texto de la pantalla» leen el texto de lo que no lo tiene accesible: imágenes, botones dibujados, vídeos, PDF escaneados. Funciona en el móvil, sin Internet, con los modelos PaddleOCR que se descargan una vez (pantalla Descargas).</p>
+<h3>Códigos QR y de barras</h3>
+<p>«Leer los códigos QR y de barras de la pantalla» busca los códigos que se ven en la pantalla y dice lo que pone. Si hay uno, te ofrece abrirlo (si es una web, un teléfono, un correo...), copiarlo o decirlo otra vez; si hay varios, primero eliges cuál. Se hace en el móvil, sin Internet.</p>
+<h3>Leer con Tiresias</h3>
+<p>Desde cualquier app (la galería, WhatsApp, el navegador...), comparte una foto o una imagen y elige <strong>«Leer con Tiresias»</strong>: Tiresias abre la pantalla «Imagen compartida», lee los códigos QR y de barras que tenga (con botones para abrirlos o copiarlos) y su texto, que también se puede copiar. Para el texto hace falta el reconocimiento de texto de la pantalla Descargas; los códigos se leen sin él.</p>
+<h3>Describir con inteligencia artificial</h3>
+<p>«Describir el elemento con IA» describe la imagen del elemento enfocado; «Describir la pantalla con IA», la pantalla entera; y «Preguntar a la IA sobre la pantalla» te deja preguntar sobre lo que se ve. «Traducir el elemento» lo traduce con la IA. Tú eliges dónde se hace:</p>
+<ul>
+	<li><strong>En el móvil, sin Internet</strong>: el modelo Gemma 4 se descarga una vez (unos 2,5 GB; el grande, 3,7 GB). En los Pixel 10 y 11 hay versiones preparadas para su chip Tensor, más rápidas.</li>
+	<li><strong>Gemini Nano</strong>, el modelo que ya traen algunos móviles (Pixel 9 y posteriores, algunos Samsung y otros): se instala el complemento «Tiresias Nano» desde la pantalla Descargas. Necesita los servicios de Google del móvil.</li>
+	<li><strong>En la nube, con tu propia clave</strong>: Claude, OpenAI, Gemini o un servidor compatible con OpenAI. La clave se guarda cifrada en el móvil y solo se envía la imagen cuando tú lo pides.</li>
+</ul>
+<p>Mientras la IA piensa suena un aviso cada tres segundos, y si tarda más de 20 segundos te lo dice. Si la clave no vale, no queda saldo o se pasa el límite, Tiresias lo dice claramente.</p>
+<p>La IA puede equivocarse: no la uses para lo que sea delicado (medicinas, dinero) sin comprobarlo.</p>
+<h3>Personas que conoces</h3>
+<p>En Ajustes, Inteligencia artificial, puedes añadir personas con su nombre y una foto, para que la IA diga quién sale en una imagen. Las fotos se quedan en el móvil; con una IA de internet solo se mandan si lo permites.</p>
+<h3>Botones sin nombre</h3>
+<p>Cuando enfocas un botón o una imagen sin nombre, Tiresias intenta reconocerlo en el propio móvil y lo dice después: «posiblemente: Enviar». Primero lee el texto que tenga el icono (OCR) y, si lo eliges en Ajustes, Inteligencia artificial, «Reconocer los botones sin nombre», también se lo pregunta a la IA del móvil (Gemma 4 descargado). Nunca se usa la nube para esto. Lo reconocido se recuerda, y «Etiquetar el elemento» lo propone para guardarlo como etiqueta.</p>
+<h3>Descripción continua de vídeos y juegos</h3>
+<p>«Describir con IA lo que pasa (vídeo o juego)» mira la pantalla cada pocos segundos y dice solo lo que ha cambiado (si la pantalla no ha cambiado, no pregunta a la IA): sirve para vídeos sin audiodescripción y para juegos. La misma acción la para; también se para al apagar la pantalla, con el modo seguro y al llegar al límite de minutos (Ajustes, Inteligencia artificial). Con una IA en la nube hay además un límite de 120 consultas, porque cada una cuesta. No funciona con Gemini Nano.</p>
+<h3>Pedir a la IA que haga algo</h3>
+<p>«Pedir a la IA que haga algo» te deja escribir lo que quieres hacer («pulsa Jugar», «escribe hola en el mensaje», «baja hasta el final»). La IA mira la pantalla y propone una sola acción; Tiresias te dice cuál es y solo la hace si eliges «Hacerlo». Sirve para los controles a los que no se llega de otra forma, como en los juegos. Nunca escribe en campos de contraseña. No funciona con Gemini Nano.</p>
+<h3>Cortina de pantalla</h3>
+<p>Pone la pantalla en negro para que nadie la vea, mientras tú sigues usándola con Tiresias (triple toque con cuatro dedos). No impide que un vídeo o el navegador mantengan la pantalla encendida.</p>
+</section>
+
+<section aria-labelledby="escucha">
+<h2 id="escucha">12. Dictado y órdenes por voz</h2>
+<p>«Dictar» escribe lo que dices en el campo de texto. «Órdenes por voz» te deja decir lo que quieres hacer: «atrás», «inicio», «notificaciones», «leer pantalla», «qué hora es», «más rápido», «describir pantalla», «busca» y lo que buscas, y otras. Funcionan sin Internet con el modelo de voz Vosk que se descarga en la pantalla Descargas; sin él, se usa el reconocimiento de voz del sistema si lo hay. Necesitan el permiso de micrófono (Ajustes, Navegación).</p>
+</section>
+
+<section aria-labelledby="apps">
+<h2 id="apps">13. Etiquetas, perfiles y complementos</h2>
+<h3>Etiquetas</h3>
+<p>Si un botón no tiene nombre, ponle uno con «Etiquetar el elemento» (menú de acciones): Tiresias lo dirá así a partir de entonces. En la pantalla Etiquetas se cambian o se borran, y se pueden exportar (las de una app) e importar.</p>
+<h3>Perfiles</h3>
+<p>Un perfil cambia la verbosidad, la velocidad o la puntuación al entrar en una app (por ejemplo, más rápido en el correo y toda la puntuación en un editor de código).</p>
+<h3>Copia de seguridad de la configuración</h3>
+<p>En Ajustes, «Guardar una copia de la configuración» guarda en un archivo los ajustes, los gestos, las teclas, los perfiles, las etiquetas, el diccionario y los complementos. «Recuperar una copia» la pone en este móvil o en otro. Las claves de IA no van en la copia (se vuelven a poner) y las descargas se descargan otra vez.</p>
+<h3>Complementos</h3>
+<p>Los complementos son pequeños programas en JavaScript que mejoran Tiresias o apps concretas: arreglan lo que se dice, añaden órdenes (en «Órdenes de los complementos» del menú de Tiresias, que también se pueden poner en un gesto) y acciones en los elementos, o callan notificaciones repetidas. Corren aislados, con poca memoria y tiempo; si uno falla tres veces, se apaga solo, y el modo seguro los apaga todos. Pueden preguntarte algo (una lista, un sí o un no, un texto), pero no pueden pulsar ni mover nada en otras apps.</p>
+<p>Se instalan en la pantalla Complementos, desde la <strong>tienda de complementos</strong> del servidor de Tiresias o desde otras fuentes que añadas (un repositorio de GitHub, GitLab o Codeberg). Antes de instalar uno se dice en qué apps actúa y qué permisos pide. Muchos tienen sus propios ajustes: en Complementos, elige uno y «Ajustes de…». Hablan en el idioma de Tiresias.</p>
+<p>En la tienda están:</p>
+<ul>
+	<li><strong>Códigos de seguridad</strong>: encuentra los códigos de verificación de las notificaciones (también con la app callada o el móvil bloqueado, como elijas), los copia como dato sensible, los dice primero y cifra a cifra, y los borra del portapapeles pasado un tiempo. Tiene órdenes para repetir, copiar, deletrear y olvidar el último, y «Copiar el código» en un correo o mensaje abierto.</li>
+	<li><strong>Notificaciones a tu medida</strong>: cómo se dicen, sin emojis ni repeticiones, ráfagas agrupadas, descargas sin cada porcentaje, apps calladas o solo con sonido, palabras y personas importantes, horario de silencio y modo discreto, cuánto dura un audio y, en un chat, los mensajes nuevos con quién los manda. Con resumen y «repetir la última».</li>
+	<li><strong>Reloj parlante</strong>: la hora cada hora, media hora o cuarto en las horas que elijas, la fecha completa, cronómetro y temporizador.</li>
+	<li><strong>Vigilante de la batería</strong>: avisa al enchufar y desenchufar, al llegar al nivel elegido o a la carga completa, al bajar de los niveles de aviso y si se calienta.</li>
+	<li><strong>Datos del texto</strong>: copia los teléfonos, correos, enlaces, IBAN y números de pedido de cualquier texto, abre el marcador, el correo o el enlace, y cuenta palabras.</li>
+	<li><strong>Lectura limpia</strong>: enlaces por su web, números largos en grupos, sin caracteres invisibles, emojis y signos repetidos una vez, y hashtags por palabras.</li>
+	<li><strong>Modo braille</strong>: un menú en la línea braille con notas, abrir apps escribiendo su nombre, calculadora y hora.</li>
+	<li><strong>Letras decorativas</strong>: lee en letras normales los nombres y textos escritos con letras de adorno (negritas y cursivas de Unicode, en círculos, de ancho completo, versalitas o tachadas) y los copia así.</li>
+	<li><strong>Anuncios y patrocinados</strong>: dice «Anuncio» delante de las publicaciones patrocinadas, o solo esa palabra para pasarlas de largo, y calla las notificaciones de promociones.</li>
+	<li><strong>Quién llama</strong>: mientras suena una llamada del teléfono o de internet, repite quién llama y por qué app, y puede recordarte el gesto para contestar.</li>
+	<li><strong>Recordatorios</strong>: la medicación o una cita a su hora, con un sonido, repetidos hasta que los marcas como hechos.</li>
+	<li><strong>Versión de la app</strong>: el nombre, la versión y la fecha de actualización de la app de delante, para copiarlo al informar de un fallo.</li>
+	<li><strong>Cuánta luz hay</strong>: con el sensor del móvil, si está oscuro, hay poca luz, luz normal o mucha, y un detector que avisa al cambiar, para encontrar una luz encendida.</li>
+</ul>
+<p>Los complementos que tuvieras de versiones anteriores siguen funcionando aunque ya no estén en la tienda.</p>
+<p>Los complementos pueden además, sin programar nada, con reglas en su manifiesto: poner nombre, tipo, estado o pista a un elemento, ocultarlo (también con todo lo de dentro), leer una fila entera en una parada con sus botones como acciones, silenciar sus cambios o activarlo al levantar el dedo; también solo en ciertas pantallas de la app.</p>
+<h3>Otras apps que hablan con Tiresias</h3>
+<p>Algunas apps (juegos, sobre todo) pueden pedir a Tiresias que diga algo o lo escriba en la línea braille. La primera vez que una lo intenta, Tiresias te pregunta si la dejas. Lo cambias en Ajustes, «Apps que usan Tiresias».</p>
+</section>
+
+<section aria-labelledby="descargas">
+<h2 id="descargas">14. Descargas</h2>
+<p>En la pantalla Descargas está lo que no viene en la app porque ocupa mucho y no todo el mundo lo quiere: las voces neuronales, los modelos de reconocimiento de texto, el de dictado, los de inteligencia artificial y el complemento de Gemini Nano. Cada uno dice su tamaño, su licencia y si está descargado. Se descargan de su fuente oficial, se comprueba que están completos y se pueden borrar para liberar espacio.</p>
+</section>
+
+<section aria-labelledby="actualizaciones">
+<h2 id="actualizaciones">15. Actualizaciones</h2>
+<p>Tiresias se actualiza sin tiendas: busca versiones nuevas, descarga la de tu procesador, comprueba que es la publicada (tamaño y huella SHA-256) y que está firmada con la misma clave que la tuya, y Android te pide confirmar la instalación. Nunca se instala nada sin preguntarte.</p>
+<p>En Acerca de y actualizaciones puedes buscar a mano. En Ajustes, Actualizaciones, eliges si se busca sola al abrir Tiresias (como mucho cada seis horas) y <strong>de dónde se actualiza</strong>:</p>
+<ul>
+	<li><strong>Los dos: el servidor de Tiresias y, si falla, GitHub</strong> (de fábrica).</li>
+	<li><strong>El servidor de Tiresias</strong> (xebolax.synology.me).</li>
+	<li><strong>Solo GitHub</strong> (el repositorio hxebolax/Tiresias-Android).</li>
+	<li><strong>Un servidor personalizado</strong>: escribe su dirección, que empieza por https:// o http:// y tiene la misma estructura que el de Tiresias.</li>
+</ul>
+<p>Si la versión viene de GitHub porque el servidor no responde, Tiresias te lo dice. La tienda de complementos y los temas de sonidos se leen del mismo sitio (con «Solo GitHub», de GitHub) y, si no responde, de GitHub.</p>
+</section>
+
+<section aria-labelledby="privacidad">
+<h2 id="privacidad">16. Privacidad</h2>
+<p>Tiresias no guarda, no registra y no envía nada de lo que lee: solo lo dice. No tiene publicidad ni estadísticas. Solo se conecta a Internet para lo que tú pidas: descargas, actualizaciones, la tienda de complementos y la IA en la nube con tu clave (y entonces solo envía la imagen o la pregunta de ese momento).</p>
+<p>La biblioteca que usan el reconocimiento de texto y las voces neuronales (ONNX Runtime) traía una telemetría de Microsoft que arrancaba sola. Desde la versión 1.0.4 está quitada del todo.</p>
+<p>Lo copiado por Tiresias solo está en la memoria del móvil y se olvida al apagar la pantalla. Las fotos de las personas que conoces se quedan en el móvil.</p>
+</section>
+
+<section aria-labelledby="personalizar">
+<h2 id="personalizar">17. Personalizar Tiresias</h2>
+<p>Casi todo se puede elegir. Lo principal, por pantallas de Ajustes:</p>
+<ul>
+	<li><strong>Navegación:</strong> el menú de Tiresias y el menú circular (qué opciones y en qué orden), los controles de lectura (cuáles y en qué orden; los de la web, como enlaces y regiones, solo dentro de una página web, si quieres), si arriba y abajo cambian los deslizadores y eligen las acciones, si tocar la pantalla corta la voz, el foco en lo primero de cada pantalla nueva (y si corta el título sin esperar), arrastrar las listas que no se desplazan, las teclas de volumen en los deslizadores, dar la vuelta al final, activar al levantar el dedo (solo en la barra de navegación o en toda la pantalla, sin doble toque), los permisos de llamadas y de micrófono, y el altavoz al apartar el móvil de la oreja en las llamadas.</li>
+	<li><strong>Lectura:</strong> qué partes se dicen de cada elemento y en qué orden (nombre, tipo, estado, valor, posición, pista...), los encabezados de las tablas (antes o después de la fila y la columna, o nunca) y si se dicen la fila y la columna, las letras fonéticas al leer por caracteres (después de la letra o en su lugar), los emojis (por su nombre, como los diga la voz o no decirlos), abrir solos los mensajes que acaban en «Leer más» y nombrar los elementos sin nombre.</li>
+	<li><strong>Voz y sonidos:</strong> la voz, su velocidad, su tono y su volumen (cada voz los suyos), las voces del control Voz, los ajustes de Eloquence, leer los textos largos por frases (al pausar y reanudar, sigue desde la frase en la que iba), la voz por el volumen multimedia, la salida del audio de las voces incluidas (la del sistema, el altavoz o los auriculares; en las llamadas no se cambia nunca; también con el control de lectura «salida del audio»), cambiar de voz cuando la app indica el idioma de un texto (y, si quieres, también su variante, como el español de México), el sonido del foco según el tipo de control y según la altura en la pantalla, un tic por cada elemento al desplazar una lista, y los sonidos y vibraciones uno a uno, con «Probar». Cada sonido tiene su propia vibración. En «Sonidos y vibraciones uno a uno» eliges también el tema de sonidos (los de Tiresias, uno de la tienda, como «Suave» y «Madera», o uno tuyo importado en ZIP), pones un archivo propio a cada sonido (WAV, OGG o MP3) y exportas los sonidos de ahora en ZIP para compartirlos.</li>
+	<li><strong>Notificaciones y pantalla:</strong> qué se dice al encender la pantalla y al desbloquear (nada, «desbloqueado», la hora o el estado), avisar al apagarla, callar la pantalla de bloqueo (solo se dice lo que pides) y qué dice el gesto de estado y en qué orden (hora, fecha, batería, conexión, notificaciones de la última hora, «no molestar», timbre y espacio libre). Si pones Tiresias en pausa, sale una notificación con «Reanudar» (si le das el permiso de notificaciones en la pantalla de inicio).</li>
+	<li><strong>Teclado:</strong> qué teclas del teclado físico cortan la voz (siempre, solo al escribir en un campo o nunca; la tecla Control la corta siempre) y si Intro la corta, escribir al levantar el dedo en el teclado en pantalla, y el toque directo en el teclado. En una página web, las letras y las flechas van a los árboles, desplegables, listas y deslizadores, que las necesitan.</li>
+	<li><strong>Braille:</strong> primero braille; la tabla informática de 8 puntos (la del idioma de Tiresias o una de dieciséis idiomas: alemán, árabe, checo, croata, español, finés, francés, hebreo, húngaro, inglés, italiano, neerlandés, noruego, polaco, portugués y ruso); qué hace cada combinación de la línea y cómo se marca el cursor; leer un archivo BRF en la línea, línea a línea; y, en el teclado braille en pantalla, puntos en espejo o según cómo sujetas el móvil (sobre la mesa, en espejo; con la pantalla hacia fuera, normales; deslizar tres dedos hacia arriba bloquea la orientación), qué se dice al escribir, vibrar o sonar al poner cada punto. Con los puntos en espejo, también giran borrar y espacio.</li>
+	<li><strong>Inteligencia artificial:</strong> dónde se hace, las claves, el sonido mientras la IA piensa, reconocer los botones sin nombre, la descripción continua y las personas que conoces.</li>
+	<li><strong>Actualizaciones:</strong> si se buscan solas y de dónde (sección 15).</li>
+	<li><strong>Gestos y teclas</strong> (pantalla Gestos): cualquier gesto, también mantener una tecla de volumen o pulsarla tres veces; los gestos sencillos; el clic directo en una app (activar siempre con un toque de verdad, para apps que no atienden el doble toque); y reiniciar la exploración táctil.</li>
+</ul>
+<p>En los ajustes rápidos del sistema puedes añadir el mosaico «Toque directo», que lo pone en pausa y lo reanuda sin salir del juego o de la app.</p>
+<p>Cuando un control no tiene nombre, Tiresias dice el identificador que le puso el programador, traducido a tu idioma («contact_photo» se oye «foto de contacto»), o «sin nombre» si no dice nada. Lo puedes quitar en Lectura, «Nombrar los elementos sin nombre», y ponerle tu propio nombre con «Etiquetar». Un cuadro de texto que ya tiene texto se reconoce por él, sin «sin nombre».</p>
+<p>Tiresias se puede instalar en Android TV: sale en su lanzador y está preparado para el mando, aunque no se ha probado en un televisor. En un reloj con Wear OS se puede instalar el mismo APK con adb, pero no hay una versión pensada para reloj ni se ha probado en uno.</p>
+</section>
+
+<section aria-labelledby="senior">
+<h2 id="senior">18. Modo senior</h2>
+<p>Para personas mayores que empiezan o solo quieren lo de cada día, hecho a partir de un estudio sobre los mayores ciegos y el móvil. Se pone en <strong>Ajustes, Modo senior</strong>, y lo puede dejar listo un familiar. Al quitarlo, en la misma pantalla, los gestos, el menú y lo que se dice vuelven a estar como antes.</p>
+<p>Con el modo senior, Tiresias usa frases cortas y la verbosidad baja; al encender la pantalla dice la hora y al desbloquear, cómo está todo (la hora, la batería y los avisos).</p>
+<h3>Gestos</h3>
+<ul>
+	<li>Deslizar un dedo a la derecha o a la izquierda: lo siguiente o lo anterior. Al llegar al final, vuelve a empezar.</li>
+	<li>Doble toque en cualquier sitio: abrir o pulsar lo que se acaba de decir. Doble toque y mantener: pulsación larga.</li>
+	<li>Deslizar arriba: repetir. Deslizar abajo: qué se puede hacer ahí, dicho en frases cortas.</li>
+	<li>Toque con dos dedos: callar. Dos dedos arriba o abajo: desplazar.</li>
+	<li>Los demás gestos no hacen nada, para que no haya sustos. La salida de emergencia sigue igual.</li>
+</ul>
+<h3>Teclas de volumen</h3>
+<ul>
+	<li>Las dos a la vez: siempre a la pantalla de inicio, diciendo la hora.</li>
+	<li>Mantener volumen arriba: la hora, la batería y los avisos.</li>
+	<li>Mantener volumen abajo: el menú de Tiresias sencillo: el estado del móvil, repetir, leer desde arriba, qué puedo hacer aquí, el resumen de los avisos, las notificaciones, las órdenes por voz, ir al inicio y pedir ayuda.</li>
+	<li>Volumen arriba tres veces: pedir ayuda. Tiresias avisa y cuenta 5 segundos en voz alta, con un pitido en cada número; tocando la pantalla, con cualquier otra acción o pidiendo ayuda otra vez se cancela. Después llama al contacto de ayuda (o abre el teléfono con su número marcado si no tiene permiso para llamar).</li>
+	<li>Volumen abajo tres veces: órdenes por voz.</li>
+</ul>
+<h3>Opciones</h3>
+<ul>
+	<li><strong>Leer solo llamadas y mensajes</strong> (de fábrica, sí): de los avisos, solo las llamadas, los mensajes, el correo, las alarmas, los recordatorios y las citas.</li>
+	<li><strong>Un toque abre lo que se acaba de decir</strong>: para quien no domina el doble toque. Un toque corto sobre lo que ya se ha leído lo abre. Así es más fácil abrir algo sin querer.</li>
+	<li><strong>Contacto de ayuda</strong>: el nombre y el teléfono de quien ayuda. Al ponerlo, Tiresias pide el permiso de llamar.</li>
+	<li><strong>Código de los ajustes</strong>: con él, Ajustes, Gestos y Modo senior piden el código al abrirse, para que nada se cambie sin querer. Dicho bien, no se vuelve a pedir en 5 minutos.</li>
+</ul>
+</section>
+
+<section aria-labelledby="problemas">
+<h2 id="problemas">19. Problemas frecuentes</h2>
+<dl>
+	<dt>Tiresias se calla o se desactiva solo</dt>
+	<dd>Quita el ahorro de batería a Tiresias (el asistente lo hace). Algunos fabricantes cierran las apps en segundo plano: busca en los ajustes de batería de tu móvil «sin restricciones» para Tiresias.</dd>
+	<dt>No puedo activarlo: el ajuste está restringido</dt>
+	<dd>Información de la app Tiresias, Más opciones, «Permitir ajustes restringidos».</dd>
+	<dt>Play Protect avisa al instalar o al actualizar</dt>
+	<dd>Pasa con las apps que no vienen de Google Play. En el aviso, elige «Más información» y después «Instalar de todas formas» (son enlaces dentro del texto: con Tiresias, arriba y abajo los eligen y el doble toque los pulsa).</dd>
+	<dt>Los gestos no hacen lo que espero</dt>
+	<dd>Usa la salida de emergencia (triple toque y mantener con cuatro dedos) para volver a los gestos por defecto, o revisa la pantalla Gestos (puede haber cambios para esa app).</dd>
+	<dt>Al cambiar de voz, va muy rápida o muy lenta</dt>
+	<dd>Cada voz tiene su velocidad. Cámbiala con esa voz puesta (con el gesto o en Ajustes, Voz) y se quedará para ella.</dd>
+	<dt>Una voz del sistema tarda o falla</dt>
+	<dd>Tiresias usa la voz integrada si la del sistema falla. Prueba otra voz en Ajustes, Voz.</dd>
+	<dt>Los toques dejan de explorar (el dedo se queda «atascado»)</dt>
+	<dd>Usa «Reiniciar la exploración táctil» (menú de Tiresias o un gesto), o pulsa las dos teclas de volumen dos veces seguidas: Tiresias se pone en pausa y se reanuda, y la exploración vuelve.</dd>
+	<dt>No puedo contestar una llamada de WhatsApp con el gesto</dt>
+	<dd>Tiresias pulsa el botón de la notificación de la llamada: tiene que haber llegado la notificación con «Contestar». Si la app no la pone, contesta desde su pantalla.</dd>
+	<dt>El altavoz al apartar el móvil de la oreja no hace nada</dt>
+	<dd>Necesita Android 12 o posterior y un permiso que Android no da a los lectores. En Ajustes, Navegación, «Copiar la orden que da el permiso del altavoz» copia la orden de adb que lo da; escríbela una vez desde un ordenador con el móvil conectado.</dd>
+	<dt>La línea braille no se conecta</dt>
+	<dd>Necesitas Android 15 o posterior y una línea HID Braille. Por Bluetooth, emparéjala en el sistema y da el permiso de dispositivos cercanos; después, Ajustes, Braille, Buscar línea braille.</dd>
+	<dt>Quiero informar de un fallo</dt>
+	<dd>En la página del proyecto en GitHub: github.com/hxebolax/Tiresias-Android, apartado Issues. Di qué móvil y qué versión de Android tienes, en qué app pasa y qué hacías. El complemento «Versión de la app» copia el nombre y la versión de la app de delante.</dd>
+</dl>
+<p>Tiresias es software libre (licencia GPL 3 o posterior), de Héctor J. Benítez Corredera. Las licencias de lo que incluye están en Acerca de y actualizaciones.</p>
+</section>
+</main>
+</body>
+</html>

@@ -1,0 +1,536 @@
+package com.xebolax.tiresias.lectura
+
+import android.graphics.Rect
+import android.os.Bundle
+import android.os.SystemClock
+import android.view.accessibility.AccessibilityEvent
+import android.view.accessibility.AccessibilityNodeInfo
+import android.view.accessibility.AccessibilityWindowInfo
+import com.xebolax.tiresias.R
+import com.xebolax.tiresias.arbol.Nodos
+import com.xebolax.tiresias.nucleo.ControlLectura
+import com.xebolax.tiresias.nucleo.Granularidad
+import com.xebolax.tiresias.nucleo.Rol
+import com.xebolax.tiresias.nucleo.Segmentos
+import com.xebolax.tiresias.voz.Modo
+import com.xebolax.tiresias.voz.Sonido
+
+/**
+ * El movimiento por la pantalla: siguiente y anterior, primero y último, por
+ * tipo de elemento, por cuadrícula, por ventanas y por el texto.
+ *
+ * - **Orden de lectura en caché** por ventana; se rehace en segundo plano cuando
+ *   la ventana cambia, para que el siguiente deslizamiento no tenga que esperar
+ *   (Backtalk: de unos 450 a 150 ms entre deslizamientos).
+ * - **Final de la lista**: se desplaza sola y sigue por el primer elemento
+ *   nuevo; si no se puede, suena el borde (o da la vuelta, si se elige).
+ * - **Tras un desplazamiento grande** el foco va al elemento más cercano por
+ *   posición, nunca a un salto en silencio (TalkBack, pull request 39).
+ * - **Vigilante de 150 ms** para los desplazamientos que no avanzan.
+ */
+class Navegador(private val lector: Lector) {
+	private val ordenes = HashMap<Int, List<AccessibilityNodeInfo>>()
+	private var pendienteRehacer: Runnable? = null
+
+	/** Un desplazamiento pedido por la navegación que espera su evento. */
+	private class Avance(
+		val adelante: Boolean, val desde: Rect, val momento: Long,
+		/** La lista que se desplazó, la posición del elemento de partida en ella (si la app la da) y su firma. */
+		val contenedor: AccessibilityNodeInfo? = null, val filaDesde: Int? = null, val firmaFoco: String? = null,
+		/** Las firmas de lo que se veía en la lista antes de desplazarla: lo nuevo es lo que no está. */
+		val firmasAntes: Set<String> = emptySet(),
+	)
+	private var avance: Avance? = null
+
+	/** Cursor propio en el texto de un nodo que no admite moverse por granularidad. */
+	private var cursorNodo: AccessibilityNodeInfo? = null
+	private var cursor = 0
+
+	/** Mientras se recorre una lista hasta el tope, no se rehace el orden en cada página: solo al final. */
+	@Volatile var sinRehacer = false
+
+	fun invalidar(ventana: Int) {
+		ordenes.remove(ventana)
+		pendienteRehacer?.let { lector.manejador.removeCallbacks(it) }
+		if (sinRehacer) return
+		// Se rehace en cuanto la ventana se calme, antes de que el usuario deslice
+		val r = Runnable { lector.raiz()?.let { orden(it) } }
+		pendienteRehacer = r
+		lector.manejador.postDelayed(r, 80)
+	}
+
+	fun invalidarTodo() = ordenes.clear()
+
+	/** El orden de lectura de la ventana de [raiz] (de la caché si está). */
+	fun orden(raiz: AccessibilityNodeInfo): List<AccessibilityNodeInfo> {
+		val id = raiz.windowId
+		ordenes[id]?.let { return it }
+		val reglas = lector.scriptsListos && lector.scripts.hayReglas
+		val inicio = android.os.SystemClock.uptimeMillis()
+		val todos = Nodos.ordenLectura(raiz, agrupa = if (reglas) { n -> lector.scripts.regla(n)?.agrupar == true } else null)
+		if (com.xebolax.tiresias.BuildConfig.PRUEBAS) android.util.Log.d("TiresiasOrden", "${todos.size} paradas en ${android.os.SystemClock.uptimeMillis() - inicio} ms")
+		// Lo que una regla de un complemento oculta no es una parada (ni, con «todo», lo de dentro)
+		val lista = if (reglas) todos.filter { n ->
+			val r = lector.scripts.regla(n)
+			r?.ocultar != true && r?.ocultarDentro != true && !lector.scripts.ocultoDentro(n)
+		} else todos
+		ordenes[id] = lista
+		return lista
+	}
+
+	/** Prepara la frase del elemento anterior y del siguiente a [n]. */
+	fun prepararVecinos(n: AccessibilityNodeInfo) {
+		val raiz = lector.raiz() ?: return
+		val lista = orden(raiz)
+		val i = lista.indexOf(n)
+		if (i < 0) return
+		lista.getOrNull(i + 1)?.let { lector.preparar(it) }
+		lista.getOrNull(i - 1)?.let { lector.preparar(it) }
+	}
+
+	// --- Elemento a elemento --------------------------------------------------------------
+
+	fun siguiente() = mover(true)
+	fun anterior() = mover(false)
+
+	fun mover(adelante: Boolean, filtro: ((AccessibilityNodeInfo) -> Boolean)? = null): Boolean {
+		val raiz = lector.raiz() ?: return borde()
+		val lista = orden(raiz)
+		val candidatos = if (filtro != null) lista.filter(filtro) else lista
+		if (candidatos.isEmpty()) return if (filtro != null) noHay() else borde()
+		val foco = lector.foco
+		val i = indice(lista, foco)
+		val destino = if (filtro == null) {
+			val j = if (i < 0) (if (adelante) 0 else lista.lastIndex) else if (adelante) i + 1 else i - 1
+			lista.getOrNull(j)
+		} else {
+			if (i < 0) (if (adelante) candidatos.first() else candidatos.last())
+			else if (adelante) lista.drop(i + 1).firstOrNull(filtro) else lista.take(i).lastOrNull(filtro)
+		}
+		// Dentro de una lista que aún puede avanzar, si lo siguiente ya está fuera de ella (el botón
+		// Cancelar de un menú, lo que hay debajo de la lista), primero se desplaza: elemento a
+		// elemento, sin saltarse los que no se ven (como TalkBack)
+		if (destino != null && foco != null) {
+			val contenedor = Nodos.desplazable(foco)
+			val accion = if (adelante) AccessibilityNodeInfo.ACTION_SCROLL_FORWARD else AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD
+			if (contenedor != null && contenedor.actionList.any { it.id == accion } && !Nodos.dentroDe(destino, contenedor)) {
+				if (desplazarParaSeguir(adelante, foco, raiz)) return true
+			}
+		}
+		if (destino != null) {
+			lector.enfocar(destino)
+			return true
+		}
+		// Al final: se desplaza la lista y se sigue por lo nuevo
+		if (desplazarParaSeguir(adelante, foco, raiz)) return true
+		if (lector.ajustes.darVuelta) return darLaVuelta(adelante, raiz, filtro)
+		return if (filtro != null) noHay() else borde()
+	}
+
+	@Volatile private var vuelta: Runnable? = null
+
+	/**
+	 * Da la vuelta: al principio de verdad de la pantalla (o al final, hacia
+	 * atrás). Las listas que no están en ese extremo se desplazan antes hasta él,
+	 * página a página: si no, «lo primero» sería lo primero que se ve de una lista
+	 * a medias y el siguiente gesto hacia atrás la desplazaría en vez de volver.
+	 */
+	private fun darLaVuelta(adelante: Boolean, raiz: AccessibilityNodeInfo, filtro: ((AccessibilityNodeInfo) -> Boolean)?): Boolean {
+		lector.sonidos.tocar(Sonido.VUELTA)
+		val accion = if (adelante) AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD else AccessibilityNodeInfo.ACTION_SCROLL_FORWARD
+		// Hacia el principio, primero las de dentro (si se sube antes la de fuera, la de dentro deja de verse); hacia el final, al revés
+		// (y después se vuelve a mirar: la de dentro puede verse solo cuando la de fuera ha llegado abajo)
+		fun pendientes(r: AccessibilityNodeInfo) = Nodos.desplazables(r).filter { l -> l.actionList.any { it.id == accion } }.let { if (adelante) it.reversed() else it }
+		var listas = pendientes(raiz)
+		val enfocarExtremo = {
+			val r = lector.raiz() ?: raiz
+			invalidarTodo()
+			val lista = orden(r)
+			val candidatos = if (filtro != null) lista.filter(filtro) else lista
+			val destino = if (adelante) candidatos.firstOrNull() else candidatos.lastOrNull()
+			if (destino != null) lector.enfocar(destino, null) else borde()
+		}
+		if (listas.isEmpty()) {
+			enfocarExtremo()
+			return true
+		}
+		val tocado = lector.toques
+		var cual = 0
+		var paginas = 0
+		var rondas = 0
+		val paso = object : Runnable {
+			override fun run() {
+				if (vuelta !== this) return
+				// Si se toca la pantalla, se para (lo que se haga ahora manda)
+				if (lector.toques != tocado) {
+					vuelta = null
+					sinRehacer = false
+					return
+				}
+				while (paginas < MAXIMO_PAGINAS_VUELTA) {
+					if (cual >= listas.size) {
+						// Las que han aparecido al desplazar las otras
+						if (++rondas > 2) break
+						listas = (lector.raiz() ?: raiz).let { pendientes(it) }
+						cual = 0
+						if (listas.isEmpty()) break
+					}
+					val l = listas[cual]
+					runCatching { l.refresh() }
+					if (l.actionList.any { it.id == accion } && runCatching { l.performAction(accion) }.getOrDefault(false)) {
+						paginas++
+						lector.manejador.postDelayed(this, 90)
+						return
+					}
+					cual++
+				}
+				vuelta = null
+				sinRehacer = false
+				lector.manejador.postDelayed({ enfocarExtremo() }, 200)
+			}
+		}
+		vuelta = paso
+		sinRehacer = true
+		lector.manejador.post(paso)
+		return true
+	}
+
+	/** El índice de [foco] en [lista]; si ya no está (la lista cambió), el del más cercano por posición. */
+	private fun indice(lista: List<AccessibilityNodeInfo>, foco: AccessibilityNodeInfo?): Int {
+		if (foco == null) return -1
+		val i = lista.indexOf(foco)
+		if (i >= 0) return i
+		// El foco está en otra ventana (la de debajo de un menú): se empieza por el principio
+		if (lista.firstOrNull()?.windowId?.let { it != foco.windowId } == true) return -1
+		val r = Nodos.limites(foco)
+		if (r.isEmpty) return -1
+		return lista.indices.minByOrNull { k ->
+			val o = Nodos.limites(lista[k])
+			Math.abs(o.top - r.top) * 4L + Math.abs(o.left - r.left)
+		} ?: -1
+	}
+
+	/** Arrastra con dos dedos el contenido de [lista] (para ver lo siguiente, los dedos suben), sin lanzarlo. */
+	fun arrastrar(lista: AccessibilityNodeInfo, adelante: Boolean, horizontal: Boolean = false): Boolean {
+		val r = Nodos.limites(lista)
+		if (r.width() < 40 || r.height() < 40) return false
+		val cx = r.exactCenterX()
+		val cy = r.exactCenterY()
+		val largo = if (horizontal) r.width() * 0.3f else r.height() * 0.3f
+		val signo = if (adelante) -1f else 1f
+		val gesto = android.accessibilityservice.GestureDescription.Builder()
+		for (dedo in listOf(-40f, 40f)) {
+			val camino = android.graphics.Path()
+			if (horizontal) {
+				camino.moveTo(cx - signo * largo, cy + dedo)
+				camino.lineTo(cx + signo * largo, cy + dedo)
+			} else {
+				camino.moveTo(cx + dedo, cy - signo * largo)
+				camino.lineTo(cx + dedo, cy + signo * largo)
+			}
+			gesto.addStroke(android.accessibilityservice.GestureDescription.StrokeDescription(camino, 0, 450))
+		}
+		lector.sonidos.tocar(Sonido.DESPLAZAR)
+		return runCatching { lector.servicio.dispatchGesture(gesto.build(), null, null) }.getOrDefault(false)
+	}
+
+	private fun desplazarParaSeguir(adelante: Boolean, foco: AccessibilityNodeInfo?, raiz: AccessibilityNodeInfo): Boolean {
+		// Solo la lista en la que está el foco: con el foco fuera de toda lista (el título, al principio, o un
+		// botón de abajo, al final), desplazar otra lista llevaría a su mitad, no a lo siguiente
+		val lista = (if (foco != null && Nodos.vivo(foco)) Nodos.desplazable(foco) else Nodos.primerDesplazable(raiz)) ?: return false
+		val accion = if (adelante) AccessibilityNodeInfo.ACTION_SCROLL_FORWARD else AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD
+		val desde = foco?.let { Nodos.limites(it) } ?: Rect()
+		// Lo de antes de desplazar, para saber después cuál es el siguiente de verdad (una página entera de golpe
+		// no debe saltarse los que aparecen arriba): su posición en la lista y lo que se veía
+		val firmasAntes = orden(raiz).filter { Nodos.dentroDe(it, lista) }.map { firma(it) }.toSet()
+		val nuevoAvance = { Avance(adelante, desde, SystemClock.uptimeMillis(), lista, foco?.let { fila(it) }, foco?.let { firma(it) }, firmasAntes) }
+		val tieneAccion = lista.actionList.any { it.id == accion }
+		val conAccion = tieneAccion && runCatching { lista.performAction(accion) }.getOrDefault(false)
+		// La lista se desplaza por accesibilidad pero ya no puede ir hacia ahí: está en el tope (no hay que arrastrar)
+		if (!conAccion && Nodos.seDesplazaPorAccesibilidad(lista)) return false
+		// Sin la acción de accesibilidad (la app no la da): arrastre de dos dedos si se quiere
+		if (!conAccion) {
+			if (!lista.isScrollable || !lector.ajustes.arrastreRespaldo || !arrastrar(lista, adelante)) return false
+			val a = nuevoAvance()
+			avance = a
+			lector.manejador.postDelayed({ if (avance === a) seguirTrasDesplazar(a) }, 800)
+			return true
+		}
+		val a = nuevoAvance()
+		avance = a
+		// Si el evento de desplazamiento no llega (o la lista no avanza), no se espera más de 150 ms
+		lector.manejador.postDelayed({ if (avance === a) seguirTrasDesplazar(a) }, ESPERA_DESPLAZAR_MS)
+		return true
+	}
+
+	fun alDesplazar(e: AccessibilityEvent) {
+		val a = avance ?: return
+		// Se deja que la lista termine de colocarse
+		lector.manejador.postDelayed({ if (avance === a) seguirTrasDesplazar(a) }, 40)
+	}
+
+	private fun seguirTrasDesplazar(a: Avance) {
+		avance = null
+		val raiz = lector.raiz() ?: return
+		invalidarTodo()
+		val lista = orden(raiz)
+		if (lista.isEmpty()) return
+		val foco = lector.foco
+		a.contenedor?.let { runCatching { it.refresh() } }
+		val dentro = a.contenedor?.let { c -> lista.filter { Nodos.dentroDe(it, c) } }.orEmpty()
+		// 1. Por su posición en la lista, si la app la da («7 de 19»): el 8, aunque la lista haya pasado una página entera
+		val porFila = a.filaDesde?.let { desde ->
+			val conFila = dentro.mapNotNull { n -> fila(n)?.let { n to it } }
+			if (a.adelante) conFila.filter { it.second > desde }.minByOrNull { it.second }?.first
+			else conFila.filter { it.second < desde }.maxByOrNull { it.second }?.first
+		}
+		// 2. El de partida sigue ahí (y es el mismo: una lista reutiliza sus filas para otros elementos): su vecino
+		val sigueAhi = foco != null && lista.contains(foco) && a.firmaFoco != null && runCatching { foco.refresh() }.getOrDefault(false) && firma(foco) == a.firmaFoco
+		val destino = porFila ?: if (sigueAhi) {
+			val i = lista.indexOf(foco)
+			lista.getOrNull(if (a.adelante) i + 1 else i - 1)
+		} else {
+			// 3. Lo primero (o lo último) que no se veía antes; 4. si no, por la posición en la pantalla
+			val nuevos = dentro.filter { firma(it) !in a.firmasAntes }
+			(if (a.adelante) nuevos.firstOrNull() else nuevos.lastOrNull())
+				?: if (a.adelante) lista.firstOrNull { Nodos.limites(it).top > a.desde.top } ?: lista.lastOrNull()
+				else lista.lastOrNull { Nodos.limites(it).top < a.desde.top } ?: lista.firstOrNull()
+		}
+		if (destino != null && destino != foco) lector.enfocar(destino) else borde()
+	}
+
+	/** Lo que identifica a un elemento por lo que es, no por la vista que lo enseña (las listas reutilizan sus filas). */
+	private fun firma(n: AccessibilityNodeInfo): String =
+		"${n.className}|${n.viewIdResourceName}|${n.text}|${n.contentDescription}"
+
+	/** La posición de [n] en su lista (fila y columna en un número), si la app la da; null si no. */
+	fun filaDe(n: AccessibilityNodeInfo): Int? = fila(n)
+
+	/** La posición de [n] (o de la fila en la que está) en su lista o cuadrícula, si la app la da: fila y columna en un número. */
+	private fun fila(n: AccessibilityNodeInfo): Int? {
+		var p: AccessibilityNodeInfo? = n
+		repeat(4) {
+			val info = p?.collectionItemInfo
+			if (info != null) return info.rowIndex * 1000 + info.columnIndex
+			p = runCatching { p?.parent }.getOrNull() ?: return null
+		}
+		return null
+	}
+
+	fun primero(): Boolean {
+		val raiz = lector.raiz() ?: return borde()
+		val n = orden(raiz).firstOrNull() ?: return borde()
+		lector.enfocar(n)
+		return true
+	}
+
+	fun ultimo(): Boolean {
+		val raiz = lector.raiz() ?: return borde()
+		val n = orden(raiz).lastOrNull() ?: return borde()
+		lector.enfocar(n)
+		return true
+	}
+
+	private fun borde(): Boolean {
+		lector.sonidos.tocar(Sonido.BORDE)
+		lector.vibracion.vibrar(Sonido.BORDE)
+		return false
+	}
+
+	private fun noHay(): Boolean {
+		lector.sonidos.tocar(Sonido.BORDE)
+		lector.decir(lector.textos.getString(R.string.nav_no_hay, nombreControl(lector.control)), Modo.INTERRUMPIR)
+		return false
+	}
+
+	// --- Por tipo de elemento -------------------------------------------------------------
+
+	/** Siguiente o anterior elemento del tipo de [c]: en la web lo hace el navegador; en las apps, Tiresias. */
+	fun porTipo(c: ControlLectura, adelante: Boolean, nivel: Int = 0): Boolean {
+		val foco = lector.foco
+		val html = htmlDe(c, nivel)
+		if (html != null && foco != null && enWeb(foco)) {
+			val args = Bundle().apply { putString(AccessibilityNodeInfo.ACTION_ARGUMENT_HTML_ELEMENT_STRING, html) }
+			val accion = if (adelante) AccessibilityNodeInfo.ACTION_NEXT_HTML_ELEMENT else AccessibilityNodeInfo.ACTION_PREVIOUS_HTML_ELEMENT
+			if (runCatching { foco.performAction(accion, args) }.getOrDefault(false)) return true
+		}
+		val filtro: (AccessibilityNodeInfo) -> Boolean = when (c) {
+			ControlLectura.ENCABEZADOS -> { n -> Nodos.esEncabezado(n) && (nivel == 0 || Nodos.nivelEncabezado(n) == nivel) }
+			// También los textos con enlaces dentro (sus enlaces se eligen después con arriba y abajo)
+			ControlLectura.ENLACES -> { n -> Nodos.rol(n) == Rol.ENLACE || Nodos.tieneEnlacesEnTexto(n) }
+			ControlLectura.CONTROLES -> { n -> Nodos.accionable(n) }
+			ControlLectura.BOTONES -> { n -> Nodos.rol(n).let { it == Rol.BOTON || it == Rol.BOTON_IMAGEN || it == Rol.BOTON_ALTERNAR } }
+			ControlLectura.CAMPOS -> { n -> n.isEditable }
+			ControlLectura.CASILLAS -> { n -> n.isCheckable }
+			ControlLectura.LISTAS -> { n -> n.collectionInfo != null || lector.describir.coleccionDe(n)?.let { c2 -> esPrimeroDe(n, c2) } == true }
+			ControlLectura.TABLAS -> { n -> Nodos.rol(n) == Rol.TABLA || (n.collectionItemInfo != null && lector.describir.coleccionDe(n)?.collectionInfo?.columnCount ?: 0 > 1) }
+			ControlLectura.REGIONES -> { n -> Nodos.rolWeb(n) == Rol.REGION || Nodos.rolWeb(n) == Rol.NAVEGACION }
+			ControlLectura.IMAGENES -> { n -> Nodos.rol(n) == Rol.IMAGEN }
+			else -> { _ -> true }
+		}
+		return mover(adelante, filtro)
+	}
+
+	private fun esPrimeroDe(n: AccessibilityNodeInfo, coleccion: AccessibilityNodeInfo): Boolean = runCatching { coleccion.getChild(0) == n }.getOrDefault(false)
+
+	private fun htmlDe(c: ControlLectura, nivel: Int): String? = when (c) {
+		ControlLectura.ENCABEZADOS -> if (nivel in 1..6) "H$nivel" else "HEADING"
+		ControlLectura.ENLACES -> "LINK"
+		ControlLectura.CONTROLES -> "CONTROL"
+		ControlLectura.BOTONES -> "BUTTON"
+		ControlLectura.CAMPOS -> "TEXT_FIELD"
+		ControlLectura.CASILLAS -> "CHECKBOX"
+		ControlLectura.LISTAS -> "LIST"
+		ControlLectura.TABLAS -> "TABLE"
+		ControlLectura.REGIONES -> "LANDMARK"
+		ControlLectura.IMAGENES -> "GRAPHIC"
+		else -> null
+	}
+
+	/** Si [n] está dentro de una página web (Chrome, WebView): admite la navegación HTML. */
+	fun enWeb(n: AccessibilityNodeInfo): Boolean {
+		var p: AccessibilityNodeInfo? = n
+		var nivel = 0
+		while (p != null && nivel < 30) {
+			if (p.actionList.any { it.id == AccessibilityNodeInfo.ACTION_NEXT_HTML_ELEMENT }) return true
+			p = runCatching { p!!.parent }.getOrNull()
+			nivel++
+		}
+		return false
+	}
+
+	// --- Por el texto ---------------------------------------------------------------------
+
+	/**
+	 * Mueve por el texto del elemento enfocado en [g]. Si la app lo admite
+	 * (campos de texto, la web), lo hace ella y Tiresias dice lo recorrido al
+	 * llegar el evento; si no, Tiresias recorre el texto él mismo.
+	 */
+	fun porTexto(g: Granularidad, adelante: Boolean, extender: Boolean = false): Boolean {
+		val foco = lector.foco ?: return borde()
+		val bit = when (g) {
+			Granularidad.CARACTER -> AccessibilityNodeInfo.MOVEMENT_GRANULARITY_CHARACTER
+			Granularidad.PALABRA -> AccessibilityNodeInfo.MOVEMENT_GRANULARITY_WORD
+			Granularidad.LINEA -> AccessibilityNodeInfo.MOVEMENT_GRANULARITY_LINE
+			Granularidad.PARRAFO -> AccessibilityNodeInfo.MOVEMENT_GRANULARITY_PARAGRAPH
+			Granularidad.PAGINA -> AccessibilityNodeInfo.MOVEMENT_GRANULARITY_PAGE
+			Granularidad.FRASE -> 0
+		}
+		if (bit != 0 && foco.movementGranularities and bit != 0) {
+			val args = Bundle().apply {
+				putInt(AccessibilityNodeInfo.ACTION_ARGUMENT_MOVEMENT_GRANULARITY_INT, bit)
+				// Fuera de un campo no se selecciona: Tiresias apunta el trozo (EdicionTexto.apuntarTrozo)
+				putBoolean(AccessibilityNodeInfo.ACTION_ARGUMENT_EXTEND_SELECTION_BOOLEAN, extender && foco.isEditable)
+			}
+			val accion = if (adelante) AccessibilityNodeInfo.ACTION_NEXT_AT_MOVEMENT_GRANULARITY else AccessibilityNodeInfo.ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY
+			if (runCatching { foco.performAction(accion, args) }.getOrDefault(false)) return true
+			// Al principio o al final del texto: al elemento siguiente (o anterior), como TalkBack
+			return alAcabarTexto(adelante, extender)
+		}
+		// Texto que la app no deja recorrer: Tiresias lo recorre él mismo
+		val texto = lector.elemento(foco).let { if (it.editable) it.texto else it.nombre }
+		if (texto.isEmpty()) return alAcabarTexto(adelante, extender)
+		if (cursorNodo != foco) {
+			cursorNodo = foco
+			cursor = if (adelante) 0 else texto.length
+		}
+		val s = if (adelante) Segmentos.siguiente(texto, cursor, g) else Segmentos.anterior(texto, cursor, g)
+		if (s == null) return alAcabarTexto(adelante, extender)
+		cursor = if (adelante) s.fin else s.inicio
+		lector.edicion.decirSegmento(s.texto, g)
+		if (extender && !foco.isEditable) lector.edicion.apuntarTrozo(foco, texto, s.inicio, s.fin)
+		return true
+	}
+
+	/**
+	 * Se acabó el texto del elemento: se pasa al siguiente (o al anterior) y el
+	 * cursor propio empieza por su principio (o su final). Al seleccionar no se
+	 * sale del campo: suena el borde.
+	 */
+	private fun alAcabarTexto(adelante: Boolean, extender: Boolean): Boolean {
+		if (extender || lector.foco?.isEditable == true) return borde()
+		cursorNodo = null
+		return mover(adelante)
+	}
+
+	// --- Cuadrícula -------------------------------------------------------------------------
+
+	/**
+	 * Navegación por cuadrícula en filas con varios botones (Backtalk 243):
+	 * arriba y abajo van al elemento de la fila de encima o de debajo que más se
+	 * solapa en horizontal; izquierda y derecha, al de la misma fila.
+	 */
+	fun cuadricula(dx: Int, dy: Int): Boolean {
+		val raiz = lector.raiz() ?: return borde()
+		val foco = lector.foco ?: return primero()
+		val r = Nodos.limites(foco)
+		val lista = orden(raiz).filter { it != foco }
+		val candidato = lista.mapNotNull { n ->
+			val o = Nodos.limites(n)
+			if (o.isEmpty) return@mapNotNull null
+			val solapeH = minOf(r.right, o.right) - maxOf(r.left, o.left)
+			val solapeV = minOf(r.bottom, o.bottom) - maxOf(r.top, o.top)
+			val distancia = when {
+				dy > 0 -> if (o.top >= r.centerY() && solapeH > 0) o.top - r.top else null
+				dy < 0 -> if (o.bottom <= r.centerY() && solapeH > 0) r.top - o.top else null
+				dx > 0 -> if (o.left >= r.centerX() && solapeV > 0) o.left - r.left else null
+				dx < 0 -> if (o.right <= r.centerX() && solapeV > 0) r.left - o.left else null
+				else -> null
+			}
+			distancia?.let { n to it }
+		}.minByOrNull { it.second }?.first
+		if (candidato == null) return borde()
+		lector.enfocar(candidato)
+		return true
+	}
+
+	// --- Ventanas -----------------------------------------------------------------------------
+
+	/** Pasa a la ventana siguiente o anterior (barra de estado, app, teclado, diálogos...). */
+	fun ventana(adelante: Boolean): Boolean {
+		val ventanas = runCatching { lector.servicio.windows }.getOrNull().orEmpty()
+			.filter { it.type != AccessibilityWindowInfo.TYPE_ACCESSIBILITY_OVERLAY || it.root?.packageName != lector.servicio.packageName }
+		if (ventanas.isEmpty()) return borde()
+		val actual = lector.foco?.windowId ?: ventanas.firstOrNull { it.isActive }?.id
+		val i = ventanas.indexOfFirst { it.id == actual }
+		val j = if (i < 0) 0 else (i + if (adelante) 1 else -1 + ventanas.size) % ventanas.size
+		val destino = ventanas[j]
+		val raiz = destino.root ?: return borde()
+		val n = Nodos.ordenLectura(raiz).firstOrNull() ?: return borde()
+		lector.sonidos.tocar(Sonido.VENTANA)
+		destino.title?.toString()?.takeIf { it.isNotBlank() }?.let { lector.decir(it, Modo.INTERRUMPIR) }
+		lector.enfocar(n, null, Modo.ENCOLAR)
+		return true
+	}
+
+	/** Pasa al primer elemento del contenedor siguiente o anterior (la siguiente lista, la barra inferior...). */
+	fun contenedor(adelante: Boolean): Boolean {
+		val raiz = lector.raiz() ?: return borde()
+		val lista = orden(raiz)
+		val foco = lector.foco ?: return primero()
+		val i = lista.indexOf(foco)
+		if (i < 0) return primero()
+		val padre = runCatching { foco.parent }.getOrNull()
+		val indices = if (adelante) (i + 1 until lista.size) else (i - 1 downTo 0)
+		for (k in indices) {
+			val p = runCatching { lista[k].parent }.getOrNull()
+			if (p != padre) {
+				lector.enfocar(lista[k])
+				return true
+			}
+		}
+		return borde()
+	}
+
+	fun nombreControl(c: ControlLectura): String {
+		val t = lector.textos
+		val id = t.resources.getIdentifier("control_" + c.name.lowercase(), "string", t.packageName)
+		return if (id != 0) t.getString(id) else c.name.lowercase()
+	}
+
+	companion object {
+		const val ESPERA_DESPLAZAR_MS = 150L
+		/** Páginas que se desplazan como mucho al dar la vuelta (entre todas las listas). */
+		private const val MAXIMO_PAGINAS_VUELTA = 60
+	}
+}

@@ -1,0 +1,59 @@
+# View identifiers in English (see nucleo/Identificadores.kt): they are already in
+# English, so only the filler words are removed and a few short forms are spelled out.
+# word or phrase <TAB> replacement <TAB> type ; «-» as replacement: filler word, removed.
+
+view	-
+views	-
+btn	-
+bt	-
+button	-
+iv	-
+tv	-
+ib	-
+ibtn	-
+img	-
+imgv	-
+imageview	-
+textview	-
+imagebutton	-
+edittext	-
+et	-
+txt	-
+lbl	-
+label	-
+layout	-
+container	-
+holder	-
+wrapper	-
+frame	-
+ll	-
+rl	-
+cl	-
+fl	-
+ic	-
+icon	-
+widget	-
+item	-
+row	-
+cell	-
+entry	-
+input	-
+field	-
+textfield	-
+fab	-
+action	-
+main	-
+root	-
+content	-
+id	-
+
+msg	message	n
+pic	picture	n
+prev	previous	a
+nav	navigation	n
+info	information	n
+search view	search box	n
+up button	navigate up	v
+navigate up	navigate up	v
+view all	view all	v
+contactphoto	contact photo	n

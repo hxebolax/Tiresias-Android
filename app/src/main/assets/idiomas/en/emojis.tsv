@@ -1,0 +1,4180 @@
+# Emojis and symbols with their English name, from the Unicode CLDR (Unicode-3.0 license),
+# taken from NVDA's cldr.dic. Same format as simbolos.tsv.
+# Emojis have level «ninguna»: they are always spoken when «Emojis» is «By their name».
+# Other symbols that are not in simbolos.tsv have level «todas».
+# Generated: no need to edit it by hand (simbolos.tsv takes precedence).
+♪	eighth note	ninguna
+😋	face savoring food	ninguna
+🤐	zipper-mouth face	ninguna
+🤶	Mrs. Claus	ninguna
+🧑‍🦯	person with white cane	ninguna
+👨‍🦯	man with white cane	ninguna
+👩‍🦯	woman with white cane	ninguna
+🧑‍🦼	person in motorized wheelchair	ninguna
+👨‍🦼	man in motorized wheelchair	ninguna
+👩‍🦼	woman in motorized wheelchair	ninguna
+🐦‍⬛	black bird	ninguna
+🍆	eggplant	ninguna
+🫑	bell pepper	ninguna
+🫚	ginger root	ninguna
+🥫	canned food	ninguna
+🧉	mate	ninguna
+🗻	mount fuji	ninguna
+🛕	hindu temple	ninguna
+🕋	kaaba	ninguna
+🚗	automobile	ninguna
+🚘	oncoming automobile	ninguna
+🦼	motorized wheelchair	ninguna
+🛟	ring buoy	ninguna
+🛥	motor boat	ninguna
+✈	airplane	ninguna
+🛩	small airplane	ninguna
+🛫	airplane departure	ninguna
+🛬	airplane arrival	ninguna
+🛎	bellhop bell	ninguna
+⚽	soccer ball	ninguna
+🏓	ping pong	ninguna
+🛷	sled	ninguna
+🪆	nesting dolls	ninguna
+👔	necktie	ninguna
+🩴	thong sandal	ninguna
+📯	postal horn	ninguna
+🪘	long drum	ninguna
+🦯	white cane	ninguna
+🩹	adhesive bandage	ninguna
+🛗	elevator	ninguna
+🛁	bathtub	ninguna
+🪤	mouse trap	ninguna
+🚻	restroom	ninguna
+🔄	counterclockwise arrows button	ninguna
+✡	star of David	ninguna
+✝	latin cross	ninguna
+☦	orthodox cross	ninguna
+✅	check mark button	ninguna
+☑	check box with check	ninguna
+🏻	light skin tone	ninguna
+🏼	medium-light skin tone	ninguna
+🏽	medium skin tone	ninguna
+🏾	medium-dark skin tone	ninguna
+🏿	dark skin tone	ninguna
+♭	flat	ninguna
+♯	sharp	ninguna
+😀	grinning face	ninguna
+😃	grinning face with big eyes	ninguna
+😄	grinning face with smiling eyes	ninguna
+😁	beaming face with smiling eyes	ninguna
+😆	grinning squinting face	ninguna
+😅	grinning face with sweat	ninguna
+🤣	rolling on the floor laughing	ninguna
+😂	face with tears of joy	ninguna
+🙂	slightly smiling face	ninguna
+🙃	upside-down face	ninguna
+🫠	melting face	ninguna
+😉	winking face	ninguna
+😊	smiling face with smiling eyes	ninguna
+😇	smiling face with halo	ninguna
+🥰	smiling face with hearts	ninguna
+😍	smiling face with heart-eyes	ninguna
+🤩	star-struck	ninguna
+😘	face blowing a kiss	ninguna
+😗	kissing face	ninguna
+☺	smiling face	ninguna
+😚	kissing face with closed eyes	ninguna
+😙	kissing face with smiling eyes	ninguna
+🥲	smiling face with tear	ninguna
+😛	face with tongue	ninguna
+😜	winking face with tongue	ninguna
+🤪	zany face	ninguna
+😝	squinting face with tongue	ninguna
+🤑	money-mouth face	ninguna
+🤗	smiling face with open hands	ninguna
+🤭	face with hand over mouth	ninguna
+🫢	face with open eyes and hand over mouth	ninguna
+🫣	face with peeking eye	ninguna
+🤫	shushing face	ninguna
+🤔	thinking face	ninguna
+🫡	saluting face	ninguna
+🤨	face with raised eyebrow	ninguna
+😐	neutral face	ninguna
+😑	expressionless face	ninguna
+😶	face without mouth	ninguna
+🫥	dotted line face	ninguna
+😶‍🌫	face in clouds	ninguna
+😏	smirking face	ninguna
+😒	unamused face	ninguna
+🙄	face with rolling eyes	ninguna
+😬	grimacing face	ninguna
+😮‍💨	face exhaling	ninguna
+🤥	lying face	ninguna
+🫨	shaking face	ninguna
+🙂‍↔	head shaking horizontally	ninguna
+🙂‍↕	head shaking vertically	ninguna
+😌	relieved face	ninguna
+😔	pensive face	ninguna
+😪	sleepy face	ninguna
+🤤	drooling face	ninguna
+😴	sleeping face	ninguna
+🫩	face with bags under eyes	ninguna
+😷	face with medical mask	ninguna
+🤒	face with thermometer	ninguna
+🤕	face with head-bandage	ninguna
+🤢	nauseated face	ninguna
+🤮	face vomiting	ninguna
+🤧	sneezing face	ninguna
+🥵	hot face	ninguna
+🥶	cold face	ninguna
+🥴	woozy face	ninguna
+😵	face with crossed-out eyes	ninguna
+😵‍💫	face with spiral eyes	ninguna
+🤯	exploding head	ninguna
+🤠	cowboy hat face	ninguna
+🥳	partying face	ninguna
+🥸	disguised face	ninguna
+😎	smiling face with sunglasses	ninguna
+🤓	nerd face	ninguna
+🧐	face with monocle	ninguna
+😕	confused face	ninguna
+🫤	face with diagonal mouth	ninguna
+😟	worried face	ninguna
+🙁	slightly frowning face	ninguna
+☹	frowning face	ninguna
+😮	face with open mouth	ninguna
+😯	hushed face	ninguna
+😲	astonished face	ninguna
+😳	flushed face	ninguna
+🫪	distorted face	ninguna
+🥺	pleading face	ninguna
+🥹	face holding back tears	ninguna
+😦	frowning face with open mouth	ninguna
+😧	anguished face	ninguna
+😨	fearful face	ninguna
+😰	anxious face with sweat	ninguna
+😥	sad but relieved face	ninguna
+😢	crying face	ninguna
+😭	loudly crying face	ninguna
+😱	face screaming in fear	ninguna
+😖	confounded face	ninguna
+😣	persevering face	ninguna
+😞	disappointed face	ninguna
+😓	downcast face with sweat	ninguna
+😩	weary face	ninguna
+😫	tired face	ninguna
+🥱	yawning face	ninguna
+😤	face with steam from nose	ninguna
+😡	enraged face	ninguna
+😠	angry face	ninguna
+🤬	face with symbols on mouth	ninguna
+😈	smiling face with horns	ninguna
+👿	angry face with horns	ninguna
+💀	skull	ninguna
+☠	skull and crossbones	ninguna
+💩	pile of poo	ninguna
+🤡	clown face	ninguna
+👹	ogre	ninguna
+👺	goblin	ninguna
+👻	ghost	ninguna
+👽	alien	ninguna
+👾	alien monster	ninguna
+🤖	robot	ninguna
+😺	grinning cat	ninguna
+😸	grinning cat with smiling eyes	ninguna
+😹	cat with tears of joy	ninguna
+😻	smiling cat with heart-eyes	ninguna
+😼	cat with wry smile	ninguna
+😽	kissing cat	ninguna
+🙀	weary cat	ninguna
+😿	crying cat	ninguna
+😾	pouting cat	ninguna
+🙈	see-no-evil monkey	ninguna
+🙉	hear-no-evil monkey	ninguna
+🙊	speak-no-evil monkey	ninguna
+💌	love letter	ninguna
+💘	heart with arrow	ninguna
+💝	heart with ribbon	ninguna
+💖	sparkling heart	ninguna
+💗	growing heart	ninguna
+💓	beating heart	ninguna
+💞	revolving hearts	ninguna
+💕	two hearts	ninguna
+💟	heart decoration	ninguna
+❣	heart exclamation	ninguna
+💔	broken heart	ninguna
+❤‍🔥	heart on fire	ninguna
+❤‍🩹	mending heart	ninguna
+❤	red heart	ninguna
+🩷	pink heart	ninguna
+🧡	orange heart	ninguna
+💛	yellow heart	ninguna
+💚	green heart	ninguna
+💙	blue heart	ninguna
+🩵	light blue heart	ninguna
+💜	purple heart	ninguna
+🤎	brown heart	ninguna
+🖤	black heart	ninguna
+🩶	grey heart	ninguna
+🤍	white heart	ninguna
+💋	kiss mark	ninguna
+💯	hundred points	ninguna
+💢	anger symbol	ninguna
+🫯	fight cloud	ninguna
+💥	collision	ninguna
+💫	dizzy	ninguna
+💦	sweat droplets	ninguna
+💨	dashing away	ninguna
+🕳	hole	ninguna
+💬	speech balloon	ninguna
+👁‍🗨	eye in speech bubble	ninguna
+🗨	left speech bubble	ninguna
+🗯	right anger bubble	ninguna
+💭	thought balloon	ninguna
+💤	ZZZ	ninguna
+👋	waving hand	ninguna
+🤚	raised back of hand	ninguna
+🖐	hand with fingers splayed	ninguna
+✋	raised hand	ninguna
+🖖	vulcan salute	ninguna
+🫱	rightwards hand	ninguna
+🫲	leftwards hand	ninguna
+🫳	palm down hand	ninguna
+🫴	palm up hand	ninguna
+🫷	leftwards pushing hand	ninguna
+🫸	rightwards pushing hand	ninguna
+👌	OK hand	ninguna
+🤌	pinched fingers	ninguna
+🤏	pinching hand	ninguna
+✌	victory hand	ninguna
+🤞	crossed fingers	ninguna
+🫰	hand with index finger and thumb crossed	ninguna
+🤟	love-you gesture	ninguna
+🤘	sign of the horns	ninguna
+🤙	call me hand	ninguna
+👈	backhand index pointing left	ninguna
+👉	backhand index pointing right	ninguna
+👆	backhand index pointing up	ninguna
+🖕	middle finger	ninguna
+👇	backhand index pointing down	ninguna
+☝	index pointing up	ninguna
+🫵	index pointing at the viewer	ninguna
+👍	thumbs up	ninguna
+👎	thumbs down	ninguna
+✊	raised fist	ninguna
+👊	oncoming fist	ninguna
+🤛	left-facing fist	ninguna
+🤜	right-facing fist	ninguna
+👏	clapping hands	ninguna
+🙌	raising hands	ninguna
+🫶	heart hands	ninguna
+👐	open hands	ninguna
+🤲	palms up together	ninguna
+🤝	handshake	ninguna
+🙏	folded hands	ninguna
+✍	writing hand	ninguna
+💅	nail polish	ninguna
+🤳	selfie	ninguna
+💪	flexed biceps	ninguna
+🦾	mechanical arm	ninguna
+🦿	mechanical leg	ninguna
+🦵	leg	ninguna
+🦶	foot	ninguna
+👂	ear	ninguna
+🦻	ear with hearing aid	ninguna
+👃	nose	ninguna
+🧠	brain	ninguna
+🫀	anatomical heart	ninguna
+🫁	lungs	ninguna
+🦷	tooth	ninguna
+🦴	bone	ninguna
+👀	eyes	ninguna
+👁	eye	ninguna
+👅	tongue	ninguna
+👄	mouth	ninguna
+🫦	biting lip	ninguna
+👶	baby	ninguna
+🧒	child	ninguna
+👦	boy	ninguna
+👧	girl	ninguna
+🧑	person	ninguna
+👱	person blond hair	ninguna
+👨	man	ninguna
+🧔	person beard	ninguna
+🧔‍♂	man beard	ninguna
+👱‍♂	man blond hair	ninguna
+👩	woman	ninguna
+🧔‍♀	woman beard	ninguna
+👱‍♀	woman blond hair	ninguna
+🧓	older person	ninguna
+👴	old man	ninguna
+👵	old woman	ninguna
+🙍	person frowning	ninguna
+🙍‍♂	man frowning	ninguna
+🙍‍♀	woman frowning	ninguna
+🙎	person pouting	ninguna
+🙎‍♂	man pouting	ninguna
+🙎‍♀	woman pouting	ninguna
+🙅	person gesturing NO	ninguna
+🙅‍♂	man gesturing NO	ninguna
+🙅‍♀	woman gesturing NO	ninguna
+🙆	person gesturing OK	ninguna
+🙆‍♂	man gesturing OK	ninguna
+🙆‍♀	woman gesturing OK	ninguna
+💁	person tipping hand	ninguna
+💁‍♂	man tipping hand	ninguna
+💁‍♀	woman tipping hand	ninguna
+🙋	person raising hand	ninguna
+🙋‍♂	man raising hand	ninguna
+🙋‍♀	woman raising hand	ninguna
+🧏	deaf person	ninguna
+🧏‍♂	deaf man	ninguna
+🧏‍♀	deaf woman	ninguna
+🙇	person bowing	ninguna
+🙇‍♂	man bowing	ninguna
+🙇‍♀	woman bowing	ninguna
+🤦	person facepalming	ninguna
+🤦‍♂	man facepalming	ninguna
+🤦‍♀	woman facepalming	ninguna
+🤷	person shrugging	ninguna
+🤷‍♂	man shrugging	ninguna
+🤷‍♀	woman shrugging	ninguna
+🧑‍⚕	health worker	ninguna
+👨‍⚕	man health worker	ninguna
+👩‍⚕	woman health worker	ninguna
+🧑‍🎓	student	ninguna
+👨‍🎓	man student	ninguna
+👩‍🎓	woman student	ninguna
+🧑‍🏫	teacher	ninguna
+👨‍🏫	man teacher	ninguna
+👩‍🏫	woman teacher	ninguna
+🧑‍⚖	judge	ninguna
+👨‍⚖	man judge	ninguna
+👩‍⚖	woman judge	ninguna
+🧑‍🌾	farmer	ninguna
+👨‍🌾	man farmer	ninguna
+👩‍🌾	woman farmer	ninguna
+🧑‍🍳	cook	ninguna
+👨‍🍳	man cook	ninguna
+👩‍🍳	woman cook	ninguna
+🧑‍🔧	mechanic	ninguna
+👨‍🔧	man mechanic	ninguna
+👩‍🔧	woman mechanic	ninguna
+🧑‍🏭	factory worker	ninguna
+👨‍🏭	man factory worker	ninguna
+👩‍🏭	woman factory worker	ninguna
+🧑‍💼	office worker	ninguna
+👨‍💼	man office worker	ninguna
+👩‍💼	woman office worker	ninguna
+🧑‍🔬	scientist	ninguna
+👨‍🔬	man scientist	ninguna
+👩‍🔬	woman scientist	ninguna
+🧑‍💻	technologist	ninguna
+👨‍💻	man technologist	ninguna
+👩‍💻	woman technologist	ninguna
+🧑‍🎤	singer	ninguna
+👨‍🎤	man singer	ninguna
+👩‍🎤	woman singer	ninguna
+🧑‍🎨	artist	ninguna
+👨‍🎨	man artist	ninguna
+👩‍🎨	woman artist	ninguna
+🧑‍✈	pilot	ninguna
+👨‍✈	man pilot	ninguna
+👩‍✈	woman pilot	ninguna
+🧑‍🚀	astronaut	ninguna
+👨‍🚀	man astronaut	ninguna
+👩‍🚀	woman astronaut	ninguna
+🧑‍🚒	firefighter	ninguna
+👨‍🚒	man firefighter	ninguna
+👩‍🚒	woman firefighter	ninguna
+👮	police officer	ninguna
+👮‍♂	man police officer	ninguna
+👮‍♀	woman police officer	ninguna
+🕵	detective	ninguna
+🕵‍♂	man detective	ninguna
+🕵‍♀	woman detective	ninguna
+💂	guard	ninguna
+💂‍♂	man guard	ninguna
+💂‍♀	woman guard	ninguna
+🥷	ninja	ninguna
+👷	construction worker	ninguna
+👷‍♂	man construction worker	ninguna
+👷‍♀	woman construction worker	ninguna
+🫅	person with crown	ninguna
+🤴	prince	ninguna
+👸	princess	ninguna
+👳	person wearing turban	ninguna
+👳‍♂	man wearing turban	ninguna
+👳‍♀	woman wearing turban	ninguna
+👲	person with skullcap	ninguna
+🧕	woman with headscarf	ninguna
+🤵	person in tuxedo	ninguna
+🤵‍♂	man in tuxedo	ninguna
+🤵‍♀	woman in tuxedo	ninguna
+👰	person with veil	ninguna
+👰‍♂	man with veil	ninguna
+👰‍♀	woman with veil	ninguna
+🤰	pregnant woman	ninguna
+🫃	pregnant man	ninguna
+🫄	pregnant person	ninguna
+🤱	breast-feeding	ninguna
+👩‍🍼	woman feeding baby	ninguna
+👨‍🍼	man feeding baby	ninguna
+🧑‍🍼	person feeding baby	ninguna
+👼	baby angel	ninguna
+🎅	Santa Claus	ninguna
+🧑‍🎄	Mx Claus	ninguna
+🦸	superhero	ninguna
+🦸‍♂	man superhero	ninguna
+🦸‍♀	woman superhero	ninguna
+🦹	supervillain	ninguna
+🦹‍♂	man supervillain	ninguna
+🦹‍♀	woman supervillain	ninguna
+🧙	mage	ninguna
+🧙‍♂	man mage	ninguna
+🧙‍♀	woman mage	ninguna
+🧚	fairy	ninguna
+🧚‍♂	man fairy	ninguna
+🧚‍♀	woman fairy	ninguna
+🧛	vampire	ninguna
+🧛‍♂	man vampire	ninguna
+🧛‍♀	woman vampire	ninguna
+🧜	merperson	ninguna
+🧜‍♂	merman	ninguna
+🧜‍♀	mermaid	ninguna
+🧝	elf	ninguna
+🧝‍♂	man elf	ninguna
+🧝‍♀	woman elf	ninguna
+🧞	genie	ninguna
+🧞‍♂	man genie	ninguna
+🧞‍♀	woman genie	ninguna
+🧟	zombie	ninguna
+🧟‍♂	man zombie	ninguna
+🧟‍♀	woman zombie	ninguna
+🧌	troll	ninguna
+🫈	hairy creature	ninguna
+💆	person getting massage	ninguna
+💆‍♂	man getting massage	ninguna
+💆‍♀	woman getting massage	ninguna
+💇	person getting haircut	ninguna
+💇‍♂	man getting haircut	ninguna
+💇‍♀	woman getting haircut	ninguna
+🚶	person walking	ninguna
+🚶‍♂	man walking	ninguna
+🚶‍♀	woman walking	ninguna
+🧍	person standing	ninguna
+🧍‍♂	man standing	ninguna
+🧍‍♀	woman standing	ninguna
+🧎	person kneeling	ninguna
+🧎‍♂	man kneeling	ninguna
+🧎‍♀	woman kneeling	ninguna
+🧑‍🦽	person in manual wheelchair	ninguna
+👨‍🦽	man in manual wheelchair	ninguna
+👩‍🦽	woman in manual wheelchair	ninguna
+🏃	person running	ninguna
+🏃‍♂	man running	ninguna
+🏃‍♀	woman running	ninguna
+🧑‍🩰	ballet dancer	ninguna
+💃	woman dancing	ninguna
+🕺	man dancing	ninguna
+🕴	person in suit levitating	ninguna
+👯	people with bunny ears	ninguna
+👯‍♂	men with bunny ears	ninguna
+👯‍♀	women with bunny ears	ninguna
+🧖	person in steamy room	ninguna
+🧖‍♂	man in steamy room	ninguna
+🧖‍♀	woman in steamy room	ninguna
+🧗	person climbing	ninguna
+🧗‍♂	man climbing	ninguna
+🧗‍♀	woman climbing	ninguna
+🤺	person fencing	ninguna
+🏇	horse racing	ninguna
+⛷	skier	ninguna
+🏂	snowboarder	ninguna
+🏌	person golfing	ninguna
+🏌‍♂	man golfing	ninguna
+🏌‍♀	woman golfing	ninguna
+🏄	person surfing	ninguna
+🏄‍♂	man surfing	ninguna
+🏄‍♀	woman surfing	ninguna
+🚣	person rowing boat	ninguna
+🚣‍♂	man rowing boat	ninguna
+🚣‍♀	woman rowing boat	ninguna
+🏊	person swimming	ninguna
+🏊‍♂	man swimming	ninguna
+🏊‍♀	woman swimming	ninguna
+⛹	person bouncing ball	ninguna
+⛹‍♂	man bouncing ball	ninguna
+⛹‍♀	woman bouncing ball	ninguna
+🏋	person lifting weights	ninguna
+🏋‍♂	man lifting weights	ninguna
+🏋‍♀	woman lifting weights	ninguna
+🚴	person biking	ninguna
+🚴‍♂	man biking	ninguna
+🚴‍♀	woman biking	ninguna
+🚵	person mountain biking	ninguna
+🚵‍♂	man mountain biking	ninguna
+🚵‍♀	woman mountain biking	ninguna
+🤸	person cartwheeling	ninguna
+🤸‍♂	man cartwheeling	ninguna
+🤸‍♀	woman cartwheeling	ninguna
+🤼	people wrestling	ninguna
+🤼‍♂	men wrestling	ninguna
+🤼‍♀	women wrestling	ninguna
+🤽	person playing water polo	ninguna
+🤽‍♂	man playing water polo	ninguna
+🤽‍♀	woman playing water polo	ninguna
+🤾	person playing handball	ninguna
+🤾‍♂	man playing handball	ninguna
+🤾‍♀	woman playing handball	ninguna
+🤹	person juggling	ninguna
+🤹‍♂	man juggling	ninguna
+🤹‍♀	woman juggling	ninguna
+🧘	person in lotus position	ninguna
+🧘‍♂	man in lotus position	ninguna
+🧘‍♀	woman in lotus position	ninguna
+🛀	person taking bath	ninguna
+🛌	person in bed	ninguna
+🧑‍🤝‍🧑	people holding hands	ninguna
+👭	women holding hands	ninguna
+👫	woman and man holding hands	ninguna
+👬	men holding hands	ninguna
+💏	kiss	ninguna
+💑	couple with heart	ninguna
+🗣	speaking head	ninguna
+👤	bust in silhouette	ninguna
+👥	busts in silhouette	ninguna
+🫂	people hugging	ninguna
+👪	family	ninguna
+🧑‍🧑‍🧒	family adult, adult, child	ninguna
+🧑‍🧑‍🧒‍🧒	family adult, adult, child, child	ninguna
+🧑‍🧒	family adult, child	ninguna
+🧑‍🧒‍🧒	family adult, child, child	ninguna
+👣	footprints	ninguna
+🫆	fingerprint	ninguna
+🦰	red hair	ninguna
+🦱	curly hair	ninguna
+🦳	white hair	ninguna
+🦲	bald	ninguna
+🐵	monkey face	ninguna
+🐒	monkey	ninguna
+🦍	gorilla	ninguna
+🦧	orangutan	ninguna
+🐶	dog face	ninguna
+🐕	dog	ninguna
+🦮	guide dog	ninguna
+🐕‍🦺	service dog	ninguna
+🐩	poodle	ninguna
+🐺	wolf	ninguna
+🦊	fox	ninguna
+🦝	raccoon	ninguna
+🐱	cat face	ninguna
+🐈	cat	ninguna
+🐈‍⬛	black cat	ninguna
+🦁	lion	ninguna
+🐯	tiger face	ninguna
+🐅	tiger	ninguna
+🐆	leopard	ninguna
+🐴	horse face	ninguna
+🫎	moose	ninguna
+🫏	donkey	ninguna
+🐎	horse	ninguna
+🦄	unicorn	ninguna
+🦓	zebra	ninguna
+🦌	deer	ninguna
+🦬	bison	ninguna
+🐮	cow face	ninguna
+🐂	ox	ninguna
+🐃	water buffalo	ninguna
+🐄	cow	ninguna
+🐷	pig face	ninguna
+🐖	pig	ninguna
+🐗	boar	ninguna
+🐽	pig nose	ninguna
+🐏	ram	ninguna
+🐑	ewe	ninguna
+🐐	goat	ninguna
+🐪	camel	ninguna
+🐫	two-hump camel	ninguna
+🦙	llama	ninguna
+🦒	giraffe	ninguna
+🐘	elephant	ninguna
+🦣	mammoth	ninguna
+🦏	rhinoceros	ninguna
+🦛	hippopotamus	ninguna
+🐭	mouse face	ninguna
+🐁	mouse	ninguna
+🐀	rat	ninguna
+🐹	hamster	ninguna
+🐰	rabbit face	ninguna
+🐇	rabbit	ninguna
+🐿	chipmunk	ninguna
+🦫	beaver	ninguna
+🦔	hedgehog	ninguna
+🦇	bat	ninguna
+🐻	bear	ninguna
+🐻‍❄	polar bear	ninguna
+🐨	koala	ninguna
+🐼	panda	ninguna
+🦥	sloth	ninguna
+🦦	otter	ninguna
+🦨	skunk	ninguna
+🦘	kangaroo	ninguna
+🦡	badger	ninguna
+🐾	paw prints	ninguna
+🦃	turkey	ninguna
+🐔	chicken	ninguna
+🐓	rooster	ninguna
+🐣	hatching chick	ninguna
+🐤	baby chick	ninguna
+🐥	front-facing baby chick	ninguna
+🐦	bird	ninguna
+🐧	penguin	ninguna
+🕊	dove	ninguna
+🦅	eagle	ninguna
+🦆	duck	ninguna
+🦢	swan	ninguna
+🦉	owl	ninguna
+🦤	dodo	ninguna
+🪶	feather	ninguna
+🦩	flamingo	ninguna
+🦚	peacock	ninguna
+🦜	parrot	ninguna
+🪽	wing	ninguna
+🪿	goose	ninguna
+🐦‍🔥	phoenix	ninguna
+🐸	frog	ninguna
+🐊	crocodile	ninguna
+🐢	turtle	ninguna
+🦎	lizard	ninguna
+🐍	snake	ninguna
+🐲	dragon face	ninguna
+🐉	dragon	ninguna
+🦕	sauropod	ninguna
+🦖	T-Rex	ninguna
+🐳	spouting whale	ninguna
+🐋	whale	ninguna
+🐬	dolphin	ninguna
+🫍	orca	ninguna
+🦭	seal	ninguna
+🐟	fish	ninguna
+🐠	tropical fish	ninguna
+🐡	blowfish	ninguna
+🦈	shark	ninguna
+🐙	octopus	ninguna
+🐚	spiral shell	ninguna
+🪸	coral	ninguna
+🪼	jellyfish	ninguna
+🦀	crab	ninguna
+🦞	lobster	ninguna
+🦐	shrimp	ninguna
+🦑	squid	ninguna
+🦪	oyster	ninguna
+🐌	snail	ninguna
+🦋	butterfly	ninguna
+🐛	bug	ninguna
+🐜	ant	ninguna
+🐝	honeybee	ninguna
+🪲	beetle	ninguna
+🐞	lady beetle	ninguna
+🦗	cricket	ninguna
+🪳	cockroach	ninguna
+🕷	spider	ninguna
+🕸	spider web	ninguna
+🦂	scorpion	ninguna
+🦟	mosquito	ninguna
+🪰	fly	ninguna
+🪱	worm	ninguna
+🦠	microbe	ninguna
+💐	bouquet	ninguna
+🌸	cherry blossom	ninguna
+💮	white flower	ninguna
+🪷	lotus	ninguna
+🏵	rosette	ninguna
+🌹	rose	ninguna
+🥀	wilted flower	ninguna
+🌺	hibiscus	ninguna
+🌻	sunflower	ninguna
+🌼	blossom	ninguna
+🌷	tulip	ninguna
+🪻	hyacinth	ninguna
+🌱	seedling	ninguna
+🪴	potted plant	ninguna
+🌲	evergreen tree	ninguna
+🌳	deciduous tree	ninguna
+🌴	palm tree	ninguna
+🌵	cactus	ninguna
+🌾	sheaf of rice	ninguna
+🌿	herb	ninguna
+☘	shamrock	ninguna
+🍀	four leaf clover	ninguna
+🍁	maple leaf	ninguna
+🍂	fallen leaf	ninguna
+🍃	leaf fluttering in wind	ninguna
+🪹	empty nest	ninguna
+🪺	nest with eggs	ninguna
+🍄	mushroom	ninguna
+🪾	leafless tree	ninguna
+🍇	grapes	ninguna
+🍈	melon	ninguna
+🍉	watermelon	ninguna
+🍊	tangerine	ninguna
+🍋	lemon	ninguna
+🍋‍🟩	lime	ninguna
+🍌	banana	ninguna
+🍍	pineapple	ninguna
+🥭	mango	ninguna
+🍎	red apple	ninguna
+🍏	green apple	ninguna
+🍐	pear	ninguna
+🍑	peach	ninguna
+🍒	cherries	ninguna
+🍓	strawberry	ninguna
+🫐	blueberries	ninguna
+🥝	kiwi fruit	ninguna
+🍅	tomato	ninguna
+🫒	olive	ninguna
+🥥	coconut	ninguna
+🥑	avocado	ninguna
+🥔	potato	ninguna
+🥕	carrot	ninguna
+🌽	ear of corn	ninguna
+🌶	hot pepper	ninguna
+🥒	cucumber	ninguna
+🥬	leafy green	ninguna
+🥦	broccoli	ninguna
+🧄	garlic	ninguna
+🧅	onion	ninguna
+🥜	peanuts	ninguna
+🫘	beans	ninguna
+🌰	chestnut	ninguna
+🫛	pea pod	ninguna
+🍄‍🟫	brown mushroom	ninguna
+🫜	root vegetable	ninguna
+🍞	bread	ninguna
+🥐	croissant	ninguna
+🥖	baguette bread	ninguna
+🫓	flatbread	ninguna
+🥨	pretzel	ninguna
+🥯	bagel	ninguna
+🥞	pancakes	ninguna
+🧇	waffle	ninguna
+🧀	cheese wedge	ninguna
+🍖	meat on bone	ninguna
+🍗	poultry leg	ninguna
+🥩	cut of meat	ninguna
+🥓	bacon	ninguna
+🍔	hamburger	ninguna
+🍟	french fries	ninguna
+🍕	pizza	ninguna
+🌭	hot dog	ninguna
+🥪	sandwich	ninguna
+🌮	taco	ninguna
+🌯	burrito	ninguna
+🫔	tamale	ninguna
+🥙	stuffed flatbread	ninguna
+🧆	falafel	ninguna
+🥚	egg	ninguna
+🍳	cooking	ninguna
+🥘	shallow pan of food	ninguna
+🍲	pot of food	ninguna
+🫕	fondue	ninguna
+🥣	bowl with spoon	ninguna
+🥗	green salad	ninguna
+🍿	popcorn	ninguna
+🧈	butter	ninguna
+🧂	salt	ninguna
+🍱	bento box	ninguna
+🍘	rice cracker	ninguna
+🍙	rice ball	ninguna
+🍚	cooked rice	ninguna
+🍛	curry rice	ninguna
+🍜	steaming bowl	ninguna
+🍝	spaghetti	ninguna
+🍠	roasted sweet potato	ninguna
+🍢	oden	ninguna
+🍣	sushi	ninguna
+🍤	fried shrimp	ninguna
+🍥	fish cake with swirl	ninguna
+🥮	moon cake	ninguna
+🍡	dango	ninguna
+🥟	dumpling	ninguna
+🥠	fortune cookie	ninguna
+🥡	takeout box	ninguna
+🍦	soft ice cream	ninguna
+🍧	shaved ice	ninguna
+🍨	ice cream	ninguna
+🍩	doughnut	ninguna
+🍪	cookie	ninguna
+🎂	birthday cake	ninguna
+🍰	shortcake	ninguna
+🧁	cupcake	ninguna
+🥧	pie	ninguna
+🍫	chocolate bar	ninguna
+🍬	candy	ninguna
+🍭	lollipop	ninguna
+🍮	custard	ninguna
+🍯	honey pot	ninguna
+🍼	baby bottle	ninguna
+🥛	glass of milk	ninguna
+☕	hot beverage	ninguna
+🫖	teapot	ninguna
+🍵	teacup without handle	ninguna
+🍶	sake	ninguna
+🍾	bottle with popping cork	ninguna
+🍷	wine glass	ninguna
+🍸	cocktail glass	ninguna
+🍹	tropical drink	ninguna
+🍺	beer mug	ninguna
+🍻	clinking beer mugs	ninguna
+🥂	clinking glasses	ninguna
+🥃	tumbler glass	ninguna
+🫗	pouring liquid	ninguna
+🥤	cup with straw	ninguna
+🧋	bubble tea	ninguna
+🧃	beverage box	ninguna
+🧊	ice	ninguna
+🥢	chopsticks	ninguna
+🍽	fork and knife with plate	ninguna
+🍴	fork and knife	ninguna
+🥄	spoon	ninguna
+🔪	kitchen knife	ninguna
+🫙	jar	ninguna
+🏺	amphora	ninguna
+🌍	globe showing Europe-Africa	ninguna
+🌎	globe showing Americas	ninguna
+🌏	globe showing Asia-Australia	ninguna
+🌐	globe with meridians	ninguna
+🗺	world map	ninguna
+🗾	map of Japan	ninguna
+🧭	compass	ninguna
+🏔	snow-capped mountain	ninguna
+⛰	mountain	ninguna
+🛘	landslide	ninguna
+🌋	volcano	ninguna
+🏕	camping	ninguna
+🏖	beach with umbrella	ninguna
+🏜	desert	ninguna
+🏝	desert island	ninguna
+🏞	national park	ninguna
+🏟	stadium	ninguna
+🏛	classical building	ninguna
+🏗	building construction	ninguna
+🧱	brick	ninguna
+🪨	rock	ninguna
+🪵	wood	ninguna
+🛖	hut	ninguna
+🏘	houses	ninguna
+🏚	derelict house	ninguna
+🏠	house	ninguna
+🏡	house with garden	ninguna
+🏢	office building	ninguna
+🏣	Japanese post office	ninguna
+🏤	post office	ninguna
+🏥	hospital	ninguna
+🏦	bank	ninguna
+🏨	hotel	ninguna
+🏩	love hotel	ninguna
+🏪	convenience store	ninguna
+🏫	school	ninguna
+🏬	department store	ninguna
+🏭	factory	ninguna
+🏯	Japanese castle	ninguna
+🏰	castle	ninguna
+💒	wedding	ninguna
+🗼	Tokyo tower	ninguna
+🗽	Statue of Liberty	ninguna
+⛪	church	ninguna
+🕌	mosque	ninguna
+🕍	synagogue	ninguna
+⛩	shinto shrine	ninguna
+⛲	fountain	ninguna
+⛺	tent	ninguna
+🌁	foggy	ninguna
+🌃	night with stars	ninguna
+🏙	cityscape	ninguna
+🌄	sunrise over mountains	ninguna
+🌅	sunrise	ninguna
+🌆	cityscape at dusk	ninguna
+🌇	sunset	ninguna
+🌉	bridge at night	ninguna
+♨	hot springs	ninguna
+🎠	carousel horse	ninguna
+🛝	playground slide	ninguna
+🎡	ferris wheel	ninguna
+🎢	roller coaster	ninguna
+💈	barber pole	ninguna
+🎪	circus tent	ninguna
+🚂	locomotive	ninguna
+🚃	railway car	ninguna
+🚄	high-speed train	ninguna
+🚅	bullet train	ninguna
+🚆	train	ninguna
+🚇	metro	ninguna
+🚈	light rail	ninguna
+🚉	station	ninguna
+🚊	tram	ninguna
+🚝	monorail	ninguna
+🚞	mountain railway	ninguna
+🚋	tram car	ninguna
+🚌	bus	ninguna
+🚍	oncoming bus	ninguna
+🚎	trolleybus	ninguna
+🚐	minibus	ninguna
+🚑	ambulance	ninguna
+🚒	fire engine	ninguna
+🚓	police car	ninguna
+🚔	oncoming police car	ninguna
+🚕	taxi	ninguna
+🚖	oncoming taxi	ninguna
+🚙	sport utility vehicle	ninguna
+🛻	pickup truck	ninguna
+🚚	delivery truck	ninguna
+🚛	articulated lorry	ninguna
+🚜	tractor	ninguna
+🏎	racing car	ninguna
+🏍	motorcycle	ninguna
+🛵	motor scooter	ninguna
+🦽	manual wheelchair	ninguna
+🛺	auto rickshaw	ninguna
+🚲	bicycle	ninguna
+🛴	kick scooter	ninguna
+🛹	skateboard	ninguna
+🛼	roller skate	ninguna
+🚏	bus stop	ninguna
+🛣	motorway	ninguna
+🛤	railway track	ninguna
+🛢	oil drum	ninguna
+⛽	fuel pump	ninguna
+🛞	wheel	ninguna
+🚨	police car light	ninguna
+🚥	horizontal traffic light	ninguna
+🚦	vertical traffic light	ninguna
+🛑	stop sign	ninguna
+🚧	construction	ninguna
+⚓	anchor	ninguna
+⛵	sailboat	ninguna
+🛶	canoe	ninguna
+🚤	speedboat	ninguna
+🛳	passenger ship	ninguna
+⛴	ferry	ninguna
+🚢	ship	ninguna
+🪂	parachute	ninguna
+💺	seat	ninguna
+🚁	helicopter	ninguna
+🚟	suspension railway	ninguna
+🚠	mountain cableway	ninguna
+🚡	aerial tramway	ninguna
+🛰	satellite	ninguna
+🚀	rocket	ninguna
+🛸	flying saucer	ninguna
+🧳	luggage	ninguna
+🕰	mantelpiece clock	ninguna
+🕛	twelve o’clock	ninguna
+🕧	twelve-thirty	ninguna
+🕐	one o’clock	ninguna
+🕜	one-thirty	ninguna
+🕑	two o’clock	ninguna
+🕝	two-thirty	ninguna
+🕒	three o’clock	ninguna
+🕞	three-thirty	ninguna
+🕓	four o’clock	ninguna
+🕟	four-thirty	ninguna
+🕔	five o’clock	ninguna
+🕠	five-thirty	ninguna
+🕕	six o’clock	ninguna
+🕡	six-thirty	ninguna
+🕖	seven o’clock	ninguna
+🕢	seven-thirty	ninguna
+🕗	eight o’clock	ninguna
+🕣	eight-thirty	ninguna
+🕘	nine o’clock	ninguna
+🕤	nine-thirty	ninguna
+🕙	ten o’clock	ninguna
+🕥	ten-thirty	ninguna
+🕚	eleven o’clock	ninguna
+🕦	eleven-thirty	ninguna
+🌑	new moon	ninguna
+🌒	waxing crescent moon	ninguna
+🌓	first quarter moon	ninguna
+🌔	waxing gibbous moon	ninguna
+🌕	full moon	ninguna
+🌖	waning gibbous moon	ninguna
+🌗	last quarter moon	ninguna
+🌘	waning crescent moon	ninguna
+🌙	crescent moon	ninguna
+🌚	new moon face	ninguna
+🌛	first quarter moon face	ninguna
+🌜	last quarter moon face	ninguna
+🌡	thermometer	ninguna
+☀	sun	ninguna
+🌝	full moon face	ninguna
+🌞	sun with face	ninguna
+🪐	ringed planet	ninguna
+🌟	glowing star	ninguna
+🌠	shooting star	ninguna
+🌌	milky way	ninguna
+☁	cloud	ninguna
+⛅	sun behind cloud	ninguna
+⛈	cloud with lightning and rain	ninguna
+🌤	sun behind small cloud	ninguna
+🌥	sun behind large cloud	ninguna
+🌦	sun behind rain cloud	ninguna
+🌧	cloud with rain	ninguna
+🌨	cloud with snow	ninguna
+🌩	cloud with lightning	ninguna
+🌪	tornado	ninguna
+🌫	fog	ninguna
+🌬	wind face	ninguna
+🌀	cyclone	ninguna
+🌈	rainbow	ninguna
+🌂	closed umbrella	ninguna
+☂	umbrella	ninguna
+☔	umbrella with rain drops	ninguna
+⛱	umbrella on ground	ninguna
+⚡	high voltage	ninguna
+❄	snowflake	ninguna
+☃	snowman	ninguna
+⛄	snowman without snow	ninguna
+☄	comet	ninguna
+🔥	fire	ninguna
+💧	droplet	ninguna
+🌊	water wave	ninguna
+🎃	jack-o-lantern	ninguna
+🎄	Christmas tree	ninguna
+🎆	fireworks	ninguna
+🎇	sparkler	ninguna
+🧨	firecracker	ninguna
+✨	sparkles	ninguna
+🎈	balloon	ninguna
+🎉	party popper	ninguna
+🎊	confetti ball	ninguna
+🎋	tanabata tree	ninguna
+🎍	pine decoration	ninguna
+🎎	Japanese dolls	ninguna
+🎏	carp streamer	ninguna
+🎐	wind chime	ninguna
+🎑	moon viewing ceremony	ninguna
+🧧	red envelope	ninguna
+🎀	ribbon	ninguna
+🎁	wrapped gift	ninguna
+🎗	reminder ribbon	ninguna
+🎟	admission tickets	ninguna
+🎫	ticket	ninguna
+🎖	military medal	ninguna
+🏆	trophy	ninguna
+🏅	sports medal	ninguna
+🥇	1st place medal	ninguna
+🥈	2nd place medal	ninguna
+🥉	3rd place medal	ninguna
+⚾	baseball	ninguna
+🥎	softball	ninguna
+🏀	basketball	ninguna
+🏐	volleyball	ninguna
+🏈	american football	ninguna
+🏉	rugby football	ninguna
+🎾	tennis	ninguna
+🥏	flying disc	ninguna
+🎳	bowling	ninguna
+🏏	cricket game	ninguna
+🏑	field hockey	ninguna
+🏒	ice hockey	ninguna
+🥍	lacrosse	ninguna
+🏸	badminton	ninguna
+🥊	boxing glove	ninguna
+🥋	martial arts uniform	ninguna
+🥅	goal net	ninguna
+⛳	flag in hole	ninguna
+⛸	ice skate	ninguna
+🎣	fishing pole	ninguna
+🤿	diving mask	ninguna
+🎽	running shirt	ninguna
+🎿	skis	ninguna
+🥌	curling stone	ninguna
+🎯	bullseye	ninguna
+🪀	yo-yo	ninguna
+🪁	kite	ninguna
+🔫	water pistol	ninguna
+🎱	pool 8 ball	ninguna
+🔮	crystal ball	ninguna
+🪄	magic wand	ninguna
+🎮	video game	ninguna
+🕹	joystick	ninguna
+🎰	slot machine	ninguna
+🎲	game die	ninguna
+🧩	puzzle piece	ninguna
+🧸	teddy bear	ninguna
+🪅	piñata	ninguna
+🪩	mirror ball	ninguna
+♠	spade suit	ninguna
+♟	chess pawn	ninguna
+🃏	joker	ninguna
+🀄	mahjong red dragon	ninguna
+🎴	flower playing cards	ninguna
+🎭	performing arts	ninguna
+🖼	framed picture	ninguna
+🎨	artist palette	ninguna
+🧵	thread	ninguna
+🪡	sewing needle	ninguna
+🧶	yarn	ninguna
+🪢	knot	ninguna
+👓	glasses	ninguna
+🕶	sunglasses	ninguna
+🥽	goggles	ninguna
+🥼	lab coat	ninguna
+🦺	safety vest	ninguna
+👕	t-shirt	ninguna
+👖	jeans	ninguna
+🧣	scarf	ninguna
+🧤	gloves	ninguna
+🧥	coat	ninguna
+🧦	socks	ninguna
+👗	dress	ninguna
+👘	kimono	ninguna
+🥻	sari	ninguna
+🩱	one-piece swimsuit	ninguna
+🩲	briefs	ninguna
+🩳	shorts	ninguna
+👙	bikini	ninguna
+👚	woman’s clothes	ninguna
+🪭	folding hand fan	ninguna
+👛	purse	ninguna
+👜	handbag	ninguna
+👝	clutch bag	ninguna
+🛍	shopping bags	ninguna
+🎒	backpack	ninguna
+👞	man’s shoe	ninguna
+👟	running shoe	ninguna
+🥾	hiking boot	ninguna
+🥿	flat shoe	ninguna
+👠	high-heeled shoe	ninguna
+👡	woman’s sandal	ninguna
+🩰	ballet shoes	ninguna
+👢	woman’s boot	ninguna
+🪮	hair pick	ninguna
+👑	crown	ninguna
+👒	woman’s hat	ninguna
+🎩	top hat	ninguna
+🎓	graduation cap	ninguna
+🧢	billed cap	ninguna
+🪖	military helmet	ninguna
+⛑	rescue worker’s helmet	ninguna
+📿	prayer beads	ninguna
+💄	lipstick	ninguna
+💍	ring	ninguna
+💎	gem stone	ninguna
+🔇	muted speaker	ninguna
+🔈	speaker low volume	ninguna
+🔉	speaker medium volume	ninguna
+🔊	speaker high volume	ninguna
+📢	loudspeaker	ninguna
+📣	megaphone	ninguna
+🔔	bell	ninguna
+🔕	bell with slash	ninguna
+🎼	musical score	ninguna
+🎵	musical note	ninguna
+🎶	musical notes	ninguna
+🎙	studio microphone	ninguna
+🎚	level slider	ninguna
+🎛	control knobs	ninguna
+🎤	microphone	ninguna
+🎧	headphone	ninguna
+📻	radio	ninguna
+🎷	saxophone	ninguna
+🎺	trumpet	ninguna
+🪊	trombone	ninguna
+🪗	accordion	ninguna
+🎸	guitar	ninguna
+🎹	musical keyboard	ninguna
+🎻	violin	ninguna
+🪕	banjo	ninguna
+🥁	drum	ninguna
+🪇	maracas	ninguna
+🪈	flute	ninguna
+🪉	harp	ninguna
+📱	mobile phone	ninguna
+📲	mobile phone with arrow	ninguna
+☎	telephone	ninguna
+📞	telephone receiver	ninguna
+📟	pager	ninguna
+📠	fax machine	ninguna
+🔋	battery	ninguna
+🪫	low battery	ninguna
+🔌	electric plug	ninguna
+💻	laptop	ninguna
+🖥	desktop computer	ninguna
+🖨	printer	ninguna
+🖱	computer mouse	ninguna
+🖲	trackball	ninguna
+💽	computer disk	ninguna
+💾	floppy disk	ninguna
+💿	optical disk	ninguna
+📀	dvd	ninguna
+🧮	abacus	ninguna
+🎥	movie camera	ninguna
+🎞	film frames	ninguna
+📽	film projector	ninguna
+🎬	clapper board	ninguna
+📺	television	ninguna
+📷	camera	ninguna
+📸	camera with flash	ninguna
+📹	video camera	ninguna
+📼	videocassette	ninguna
+🔍	magnifying glass tilted left	ninguna
+🔎	magnifying glass tilted right	ninguna
+🕯	candle	ninguna
+💡	light bulb	ninguna
+🔦	flashlight	ninguna
+🏮	red paper lantern	ninguna
+🪔	diya lamp	ninguna
+📔	notebook with decorative cover	ninguna
+📕	closed book	ninguna
+📖	open book	ninguna
+📗	green book	ninguna
+📘	blue book	ninguna
+📙	orange book	ninguna
+📚	books	ninguna
+📓	notebook	ninguna
+📒	ledger	ninguna
+📃	page with curl	ninguna
+📜	scroll	ninguna
+📄	page facing up	ninguna
+📰	newspaper	ninguna
+🗞	rolled-up newspaper	ninguna
+📑	bookmark tabs	ninguna
+🔖	bookmark	ninguna
+🏷	label	ninguna
+🪙	coin	ninguna
+💰	money bag	ninguna
+🪎	treasure chest	ninguna
+💴	yen banknote	ninguna
+💵	dollar banknote	ninguna
+💶	euro banknote	ninguna
+💷	pound banknote	ninguna
+💸	money with wings	ninguna
+💳	credit card	ninguna
+🧾	receipt	ninguna
+💹	chart increasing with yen	ninguna
+✉	envelope	ninguna
+📧	e-mail	ninguna
+📨	incoming envelope	ninguna
+📩	envelope with arrow	ninguna
+📤	outbox tray	ninguna
+📥	inbox tray	ninguna
+📦	package	ninguna
+📫	closed mailbox with raised flag	ninguna
+📪	closed mailbox with lowered flag	ninguna
+📬	open mailbox with raised flag	ninguna
+📭	open mailbox with lowered flag	ninguna
+📮	postbox	ninguna
+🗳	ballot box with ballot	ninguna
+✏	pencil	ninguna
+✒	black nib	ninguna
+🖋	fountain pen	ninguna
+🖊	pen	ninguna
+🖌	paintbrush	ninguna
+🖍	crayon	ninguna
+📝	memo	ninguna
+💼	briefcase	ninguna
+📁	file folder	ninguna
+📂	open file folder	ninguna
+🗂	card index dividers	ninguna
+📅	calendar	ninguna
+📆	tear-off calendar	ninguna
+🗒	spiral notepad	ninguna
+🗓	spiral calendar	ninguna
+📇	card index	ninguna
+📈	chart increasing	ninguna
+📉	chart decreasing	ninguna
+📊	bar chart	ninguna
+📋	clipboard	ninguna
+📌	pushpin	ninguna
+📍	round pushpin	ninguna
+📎	paperclip	ninguna
+🖇	linked paperclips	ninguna
+📏	straight ruler	ninguna
+📐	triangular ruler	ninguna
+✂	scissors	ninguna
+🗃	card file box	ninguna
+🗄	file cabinet	ninguna
+🗑	wastebasket	ninguna
+🔒	locked	ninguna
+🔓	unlocked	ninguna
+🔏	locked with pen	ninguna
+🔐	locked with key	ninguna
+🔑	key	ninguna
+🗝	old key	ninguna
+🔨	hammer	ninguna
+🪓	axe	ninguna
+⛏	pick	ninguna
+⚒	hammer and pick	ninguna
+🛠	hammer and wrench	ninguna
+🗡	dagger	ninguna
+⚔	crossed swords	ninguna
+💣	bomb	ninguna
+🪃	boomerang	ninguna
+🏹	bow and arrow	ninguna
+🛡	shield	ninguna
+🪚	carpentry saw	ninguna
+🔧	wrench	ninguna
+🪛	screwdriver	ninguna
+🔩	nut and bolt	ninguna
+⚙	gear	ninguna
+🗜	clamp	ninguna
+⚖	balance scale	ninguna
+🔗	link	ninguna
+⛓‍💥	broken chain	ninguna
+⛓	chains	ninguna
+🪝	hook	ninguna
+🧰	toolbox	ninguna
+🧲	magnet	ninguna
+🪜	ladder	ninguna
+🪏	shovel	ninguna
+⚗	alembic	ninguna
+🧪	test tube	ninguna
+🧫	petri dish	ninguna
+🧬	dna	ninguna
+🔬	microscope	ninguna
+🔭	telescope	ninguna
+📡	satellite antenna	ninguna
+💉	syringe	ninguna
+🩸	drop of blood	ninguna
+💊	pill	ninguna
+🩼	crutch	ninguna
+🩺	stethoscope	ninguna
+🩻	x-ray	ninguna
+🚪	door	ninguna
+🪞	mirror	ninguna
+🪟	window	ninguna
+🛏	bed	ninguna
+🛋	couch and lamp	ninguna
+🪑	chair	ninguna
+🚽	toilet	ninguna
+🪠	plunger	ninguna
+🚿	shower	ninguna
+🪒	razor	ninguna
+🧴	lotion bottle	ninguna
+🧷	safety pin	ninguna
+🧹	broom	ninguna
+🧺	basket	ninguna
+🧻	roll of paper	ninguna
+🪣	bucket	ninguna
+🧼	soap	ninguna
+🫧	bubbles	ninguna
+🪥	toothbrush	ninguna
+🧽	sponge	ninguna
+🧯	fire extinguisher	ninguna
+🛒	shopping cart	ninguna
+🚬	cigarette	ninguna
+⚰	coffin	ninguna
+🪦	headstone	ninguna
+⚱	funeral urn	ninguna
+🧿	nazar amulet	ninguna
+🪬	hamsa	ninguna
+🗿	moai	ninguna
+🪧	placard	ninguna
+🪪	identification card	ninguna
+🏧	ATM sign	ninguna
+🚮	litter in bin sign	ninguna
+🚰	potable water	ninguna
+♿	wheelchair symbol	ninguna
+🚹	men’s room	ninguna
+🚺	women’s room	ninguna
+🚼	baby symbol	ninguna
+🚾	water closet	ninguna
+🛂	passport control	ninguna
+🛃	customs	ninguna
+🛄	baggage claim	ninguna
+🛅	left luggage	ninguna
+⚠	warning	ninguna
+🚸	children crossing	ninguna
+⛔	no entry	ninguna
+🚫	prohibited	ninguna
+🚳	no bicycles	ninguna
+🚭	no smoking	ninguna
+🚯	no littering	ninguna
+🚱	non-potable water	ninguna
+🚷	no pedestrians	ninguna
+📵	no mobile phones	ninguna
+🔞	no one under eighteen	ninguna
+☢	radioactive	ninguna
+☣	biohazard	ninguna
+➡	right arrow	ninguna
+🔃	clockwise vertical arrows	ninguna
+🔙	BACK arrow	ninguna
+🔚	END arrow	ninguna
+🔛	ON! arrow	ninguna
+🔜	SOON arrow	ninguna
+🔝	TOP arrow	ninguna
+🛐	place of worship	ninguna
+⚛	atom symbol	ninguna
+🕉	om	ninguna
+☸	wheel of dharma	ninguna
+☯	yin yang	ninguna
+☪	star and crescent	ninguna
+☮	peace symbol	ninguna
+🕎	menorah	ninguna
+🔯	dotted six-pointed star	ninguna
+🪯	khanda	ninguna
+♈	Aries	ninguna
+♉	Taurus	ninguna
+♊	Gemini	ninguna
+♋	Cancer	ninguna
+♌	Leo	ninguna
+♍	Virgo	ninguna
+♎	Libra	ninguna
+♏	Scorpio	ninguna
+♐	Sagittarius	ninguna
+♑	Capricorn	ninguna
+♒	Aquarius	ninguna
+♓	Pisces	ninguna
+⛎	Ophiuchus	ninguna
+🔀	shuffle tracks button	ninguna
+🔁	repeat button	ninguna
+🔂	repeat single button	ninguna
+🔼	upwards button	ninguna
+🔽	downwards button	ninguna
+🎦	cinema	ninguna
+🔅	dim button	ninguna
+🔆	bright button	ninguna
+📶	antenna bars	ninguna
+🛜	wireless	ninguna
+📳	vibration mode	ninguna
+📴	mobile phone off	ninguna
+♀	female sign	ninguna
+♂	male sign	ninguna
+⚧	transgender symbol	ninguna
+✖	multiply	ninguna
+➕	plus	ninguna
+➖	minus	ninguna
+➗	divide	ninguna
+🟰	heavy equals sign	ninguna
+♾	infinity	ninguna
+❓	red question mark	ninguna
+❔	white question mark	ninguna
+❕	white exclamation mark	ninguna
+❗	red exclamation mark	ninguna
+💱	currency exchange	ninguna
+💲	heavy dollar sign	ninguna
+⚕	medical symbol	ninguna
+♻	recycling symbol	ninguna
+⚜	fleur-de-lis	ninguna
+🔱	trident emblem	ninguna
+📛	name badge	ninguna
+🔰	Japanese symbol for beginner	ninguna
+❌	cross mark	ninguna
+❎	cross mark button	ninguna
+➰	curly loop	ninguna
+➿	double curly loop	ninguna
+✳	eight-spoked asterisk	ninguna
+✴	eight-pointed star	ninguna
+❇	sparkle	ninguna
+🫟	splatter	ninguna
+🔠	input latin uppercase	ninguna
+🔡	input latin lowercase	ninguna
+🔢	input numbers	ninguna
+🔣	input symbols	ninguna
+🔤	input latin letters	ninguna
+🅰	A button (blood type)	ninguna
+🆎	AB button (blood type)	ninguna
+🅱	B button (blood type)	ninguna
+🆑	CL button	ninguna
+🆒	COOL button	ninguna
+🆓	FREE button	ninguna
+🆔	ID button	ninguna
+🆕	NEW button	ninguna
+🆖	NG button	ninguna
+🅾	O button (blood type)	ninguna
+🆗	OK button	ninguna
+🅿	P button	ninguna
+🆘	SOS button	ninguna
+🆙	UP! button	ninguna
+🆚	VS button	ninguna
+🈁	Japanese “here” button	ninguna
+🈂	Japanese “service charge” button	ninguna
+🈷	Japanese “monthly amount” button	ninguna
+🈶	Japanese “not free of charge” button	ninguna
+🈯	Japanese “reserved” button	ninguna
+🉐	Japanese “bargain” button	ninguna
+🈹	Japanese “discount” button	ninguna
+🈚	Japanese “free of charge” button	ninguna
+🈲	Japanese “prohibited” button	ninguna
+🉑	Japanese “acceptable” button	ninguna
+🈸	Japanese “application” button	ninguna
+🈴	Japanese “passing grade” button	ninguna
+🈳	Japanese “vacancy” button	ninguna
+🈺	Japanese “open for business” button	ninguna
+🈵	Japanese “no vacancy” button	ninguna
+🔴	red circle	ninguna
+🟠	orange circle	ninguna
+🟡	yellow circle	ninguna
+🟢	green circle	ninguna
+🔵	blue circle	ninguna
+🟣	purple circle	ninguna
+🟤	brown circle	ninguna
+⚫	black circle	ninguna
+⚪	white circle	ninguna
+🟥	red square	ninguna
+🟧	orange square	ninguna
+🟨	yellow square	ninguna
+🟩	green square	ninguna
+🟦	blue square	ninguna
+🟪	purple square	ninguna
+🟫	brown square	ninguna
+🔶	large orange diamond	ninguna
+🔷	large blue diamond	ninguna
+🔸	small orange diamond	ninguna
+🔹	small blue diamond	ninguna
+🔺	red triangle pointed up	ninguna
+🔻	red triangle pointed down	ninguna
+💠	diamond with a dot	ninguna
+🔘	radio button	ninguna
+🔳	white square button	ninguna
+🔲	black square button	ninguna
+🏁	chequered flag	ninguna
+🚩	triangular flag	ninguna
+🎌	crossed flags	ninguna
+🏴	black flag	ninguna
+🏳	white flag	ninguna
+🏳‍🌈	rainbow flag	ninguna
+🏳‍⚧	transgender flag	ninguna
+🏴‍☠	pirate flag	ninguna
+🤶🏻	Mrs. Claus light skin tone	ninguna
+🤶🏼	Mrs. Claus medium-light skin tone	ninguna
+🤶🏽	Mrs. Claus medium skin tone	ninguna
+🤶🏾	Mrs. Claus medium-dark skin tone	ninguna
+🤶🏿	Mrs. Claus dark skin tone	ninguna
+🧑🏻‍🦯	person with white cane light skin tone	ninguna
+🧑🏼‍🦯	person with white cane medium-light skin tone	ninguna
+🧑🏽‍🦯	person with white cane medium skin tone	ninguna
+🧑🏾‍🦯	person with white cane medium-dark skin tone	ninguna
+🧑🏿‍🦯	person with white cane dark skin tone	ninguna
+🧑‍🦯‍➡	person with white cane facing right	ninguna
+🧑🏻‍🦯‍➡	person with white cane light skin tone, facing right	ninguna
+🧑🏼‍🦯‍➡	person with white cane medium-light skin tone, facing right	ninguna
+🧑🏽‍🦯‍➡	person with white cane medium skin tone, facing right	ninguna
+🧑🏾‍🦯‍➡	person with white cane medium-dark skin tone, facing right	ninguna
+🧑🏿‍🦯‍➡	person with white cane dark skin tone, facing right	ninguna
+👨🏻‍🦯	man with white cane light skin tone	ninguna
+👨🏼‍🦯	man with white cane medium-light skin tone	ninguna
+👨🏽‍🦯	man with white cane medium skin tone	ninguna
+👨🏾‍🦯	man with white cane medium-dark skin tone	ninguna
+👨🏿‍🦯	man with white cane dark skin tone	ninguna
+👨‍🦯‍➡	man with white cane facing right	ninguna
+👨🏻‍🦯‍➡	man with white cane light skin tone, facing right	ninguna
+👨🏼‍🦯‍➡	man with white cane medium-light skin tone, facing right	ninguna
+👨🏽‍🦯‍➡	man with white cane medium skin tone, facing right	ninguna
+👨🏾‍🦯‍➡	man with white cane medium-dark skin tone, facing right	ninguna
+👨🏿‍🦯‍➡	man with white cane dark skin tone, facing right	ninguna
+👩🏻‍🦯	woman with white cane light skin tone	ninguna
+👩🏼‍🦯	woman with white cane medium-light skin tone	ninguna
+👩🏽‍🦯	woman with white cane medium skin tone	ninguna
+👩🏾‍🦯	woman with white cane medium-dark skin tone	ninguna
+👩🏿‍🦯	woman with white cane dark skin tone	ninguna
+👩‍🦯‍➡	woman with white cane facing right	ninguna
+👩🏻‍🦯‍➡	woman with white cane light skin tone, facing right	ninguna
+👩🏼‍🦯‍➡	woman with white cane medium-light skin tone, facing right	ninguna
+👩🏽‍🦯‍➡	woman with white cane medium skin tone, facing right	ninguna
+👩🏾‍🦯‍➡	woman with white cane medium-dark skin tone, facing right	ninguna
+👩🏿‍🦯‍➡	woman with white cane dark skin tone, facing right	ninguna
+🧑🏻‍🦼	person in motorized wheelchair light skin tone	ninguna
+🧑🏼‍🦼	person in motorized wheelchair medium-light skin tone	ninguna
+🧑🏽‍🦼	person in motorized wheelchair medium skin tone	ninguna
+🧑🏾‍🦼	person in motorized wheelchair medium-dark skin tone	ninguna
+🧑🏿‍🦼	person in motorized wheelchair dark skin tone	ninguna
+🧑‍🦼‍➡	person in motorized wheelchair facing right	ninguna
+🧑🏻‍🦼‍➡	person in motorized wheelchair light skin tone, facing right	ninguna
+🧑🏼‍🦼‍➡	person in motorized wheelchair medium-light skin tone, facing right	ninguna
+🧑🏽‍🦼‍➡	person in motorized wheelchair medium skin tone, facing right	ninguna
+🧑🏾‍🦼‍➡	person in motorized wheelchair medium-dark skin tone, facing right	ninguna
+🧑🏿‍🦼‍➡	person in motorized wheelchair dark skin tone, facing right	ninguna
+👨🏻‍🦼	man in motorized wheelchair light skin tone	ninguna
+👨🏼‍🦼	man in motorized wheelchair medium-light skin tone	ninguna
+👨🏽‍🦼	man in motorized wheelchair medium skin tone	ninguna
+👨🏾‍🦼	man in motorized wheelchair medium-dark skin tone	ninguna
+👨🏿‍🦼	man in motorized wheelchair dark skin tone	ninguna
+👨‍🦼‍➡	man in motorized wheelchair facing right	ninguna
+👨🏻‍🦼‍➡	man in motorized wheelchair light skin tone, facing right	ninguna
+👨🏼‍🦼‍➡	man in motorized wheelchair medium-light skin tone, facing right	ninguna
+👨🏽‍🦼‍➡	man in motorized wheelchair medium skin tone, facing right	ninguna
+👨🏾‍🦼‍➡	man in motorized wheelchair medium-dark skin tone, facing right	ninguna
+👨🏿‍🦼‍➡	man in motorized wheelchair dark skin tone, facing right	ninguna
+👩🏻‍🦼	woman in motorized wheelchair light skin tone	ninguna
+👩🏼‍🦼	woman in motorized wheelchair medium-light skin tone	ninguna
+👩🏽‍🦼	woman in motorized wheelchair medium skin tone	ninguna
+👩🏾‍🦼	woman in motorized wheelchair medium-dark skin tone	ninguna
+👩🏿‍🦼	woman in motorized wheelchair dark skin tone	ninguna
+👩‍🦼‍➡	woman in motorized wheelchair facing right	ninguna
+👩🏻‍🦼‍➡	woman in motorized wheelchair light skin tone, facing right	ninguna
+👩🏼‍🦼‍➡	woman in motorized wheelchair medium-light skin tone, facing right	ninguna
+👩🏽‍🦼‍➡	woman in motorized wheelchair medium skin tone, facing right	ninguna
+👩🏾‍🦼‍➡	woman in motorized wheelchair medium-dark skin tone, facing right	ninguna
+👩🏿‍🦼‍➡	woman in motorized wheelchair dark skin tone, facing right	ninguna
+🇧🇱	flag St. Barthélemy	ninguna
+🇰🇳	flag St. Kitts & Nevis	ninguna
+🇱🇨	flag St. Lucia	ninguna
+🇲🇫	flag St. Martin	ninguna
+🇵🇲	flag St. Pierre & Miquelon	ninguna
+🇸🇭	flag St. Helena	ninguna
+🇺🇲	flag U.S. Outlying Islands	ninguna
+🇻🇨	flag St. Vincent & Grenadines	ninguna
+🇻🇮	flag U.S. Virgin Islands	ninguna
+👋🏻	waving hand light skin tone	ninguna
+👋🏼	waving hand medium-light skin tone	ninguna
+👋🏽	waving hand medium skin tone	ninguna
+👋🏾	waving hand medium-dark skin tone	ninguna
+👋🏿	waving hand dark skin tone	ninguna
+🤚🏻	raised back of hand light skin tone	ninguna
+🤚🏼	raised back of hand medium-light skin tone	ninguna
+🤚🏽	raised back of hand medium skin tone	ninguna
+🤚🏾	raised back of hand medium-dark skin tone	ninguna
+🤚🏿	raised back of hand dark skin tone	ninguna
+🖐🏻	hand with fingers splayed light skin tone	ninguna
+🖐🏼	hand with fingers splayed medium-light skin tone	ninguna
+🖐🏽	hand with fingers splayed medium skin tone	ninguna
+🖐🏾	hand with fingers splayed medium-dark skin tone	ninguna
+🖐🏿	hand with fingers splayed dark skin tone	ninguna
+✋🏻	raised hand light skin tone	ninguna
+✋🏼	raised hand medium-light skin tone	ninguna
+✋🏽	raised hand medium skin tone	ninguna
+✋🏾	raised hand medium-dark skin tone	ninguna
+✋🏿	raised hand dark skin tone	ninguna
+🖖🏻	vulcan salute light skin tone	ninguna
+🖖🏼	vulcan salute medium-light skin tone	ninguna
+🖖🏽	vulcan salute medium skin tone	ninguna
+🖖🏾	vulcan salute medium-dark skin tone	ninguna
+🖖🏿	vulcan salute dark skin tone	ninguna
+🫱🏻	rightwards hand light skin tone	ninguna
+🫱🏼	rightwards hand medium-light skin tone	ninguna
+🫱🏽	rightwards hand medium skin tone	ninguna
+🫱🏾	rightwards hand medium-dark skin tone	ninguna
+🫱🏿	rightwards hand dark skin tone	ninguna
+🫱🏻‍🫲🏼	handshake light skin tone, medium-light skin tone	ninguna
+🫱🏻‍🫲🏽	handshake light skin tone, medium skin tone	ninguna
+🫱🏻‍🫲🏾	handshake light skin tone, medium-dark skin tone	ninguna
+🫱🏻‍🫲🏿	handshake light skin tone, dark skin tone	ninguna
+🫱🏼‍🫲🏻	handshake medium-light skin tone, light skin tone	ninguna
+🫱🏼‍🫲🏽	handshake medium-light skin tone, medium skin tone	ninguna
+🫱🏼‍🫲🏾	handshake medium-light skin tone, medium-dark skin tone	ninguna
+🫱🏼‍🫲🏿	handshake medium-light skin tone, dark skin tone	ninguna
+🫱🏽‍🫲🏻	handshake medium skin tone, light skin tone	ninguna
+🫱🏽‍🫲🏼	handshake medium skin tone, medium-light skin tone	ninguna
+🫱🏽‍🫲🏾	handshake medium skin tone, medium-dark skin tone	ninguna
+🫱🏽‍🫲🏿	handshake medium skin tone, dark skin tone	ninguna
+🫱🏾‍🫲🏻	handshake medium-dark skin tone, light skin tone	ninguna
+🫱🏾‍🫲🏼	handshake medium-dark skin tone, medium-light skin tone	ninguna
+🫱🏾‍🫲🏽	handshake medium-dark skin tone, medium skin tone	ninguna
+🫱🏾‍🫲🏿	handshake medium-dark skin tone, dark skin tone	ninguna
+🫱🏿‍🫲🏻	handshake dark skin tone, light skin tone	ninguna
+🫱🏿‍🫲🏼	handshake dark skin tone, medium-light skin tone	ninguna
+🫱🏿‍🫲🏽	handshake dark skin tone, medium skin tone	ninguna
+🫱🏿‍🫲🏾	handshake dark skin tone, medium-dark skin tone	ninguna
+🫲🏻	leftwards hand light skin tone	ninguna
+🫲🏼	leftwards hand medium-light skin tone	ninguna
+🫲🏽	leftwards hand medium skin tone	ninguna
+🫲🏾	leftwards hand medium-dark skin tone	ninguna
+🫲🏿	leftwards hand dark skin tone	ninguna
+🫳🏻	palm down hand light skin tone	ninguna
+🫳🏼	palm down hand medium-light skin tone	ninguna
+🫳🏽	palm down hand medium skin tone	ninguna
+🫳🏾	palm down hand medium-dark skin tone	ninguna
+🫳🏿	palm down hand dark skin tone	ninguna
+🫴🏻	palm up hand light skin tone	ninguna
+🫴🏼	palm up hand medium-light skin tone	ninguna
+🫴🏽	palm up hand medium skin tone	ninguna
+🫴🏾	palm up hand medium-dark skin tone	ninguna
+🫴🏿	palm up hand dark skin tone	ninguna
+🫷🏻	leftwards pushing hand light skin tone	ninguna
+🫷🏼	leftwards pushing hand medium-light skin tone	ninguna
+🫷🏽	leftwards pushing hand medium skin tone	ninguna
+🫷🏾	leftwards pushing hand medium-dark skin tone	ninguna
+🫷🏿	leftwards pushing hand dark skin tone	ninguna
+🫸🏻	rightwards pushing hand light skin tone	ninguna
+🫸🏼	rightwards pushing hand medium-light skin tone	ninguna
+🫸🏽	rightwards pushing hand medium skin tone	ninguna
+🫸🏾	rightwards pushing hand medium-dark skin tone	ninguna
+🫸🏿	rightwards pushing hand dark skin tone	ninguna
+👌🏻	OK hand light skin tone	ninguna
+👌🏼	OK hand medium-light skin tone	ninguna
+👌🏽	OK hand medium skin tone	ninguna
+👌🏾	OK hand medium-dark skin tone	ninguna
+👌🏿	OK hand dark skin tone	ninguna
+🤌🏻	pinched fingers light skin tone	ninguna
+🤌🏼	pinched fingers medium-light skin tone	ninguna
+🤌🏽	pinched fingers medium skin tone	ninguna
+🤌🏾	pinched fingers medium-dark skin tone	ninguna
+🤌🏿	pinched fingers dark skin tone	ninguna
+🤏🏻	pinching hand light skin tone	ninguna
+🤏🏼	pinching hand medium-light skin tone	ninguna
+🤏🏽	pinching hand medium skin tone	ninguna
+🤏🏾	pinching hand medium-dark skin tone	ninguna
+🤏🏿	pinching hand dark skin tone	ninguna
+✌🏻	victory hand light skin tone	ninguna
+✌🏼	victory hand medium-light skin tone	ninguna
+✌🏽	victory hand medium skin tone	ninguna
+✌🏾	victory hand medium-dark skin tone	ninguna
+✌🏿	victory hand dark skin tone	ninguna
+🤞🏻	crossed fingers light skin tone	ninguna
+🤞🏼	crossed fingers medium-light skin tone	ninguna
+🤞🏽	crossed fingers medium skin tone	ninguna
+🤞🏾	crossed fingers medium-dark skin tone	ninguna
+🤞🏿	crossed fingers dark skin tone	ninguna
+🫰🏻	hand with index finger and thumb crossed light skin tone	ninguna
+🫰🏼	hand with index finger and thumb crossed medium-light skin tone	ninguna
+🫰🏽	hand with index finger and thumb crossed medium skin tone	ninguna
+🫰🏾	hand with index finger and thumb crossed medium-dark skin tone	ninguna
+🫰🏿	hand with index finger and thumb crossed dark skin tone	ninguna
+🤟🏻	love-you gesture light skin tone	ninguna
+🤟🏼	love-you gesture medium-light skin tone	ninguna
+🤟🏽	love-you gesture medium skin tone	ninguna
+🤟🏾	love-you gesture medium-dark skin tone	ninguna
+🤟🏿	love-you gesture dark skin tone	ninguna
+🤘🏻	sign of the horns light skin tone	ninguna
+🤘🏼	sign of the horns medium-light skin tone	ninguna
+🤘🏽	sign of the horns medium skin tone	ninguna
+🤘🏾	sign of the horns medium-dark skin tone	ninguna
+🤘🏿	sign of the horns dark skin tone	ninguna
+🤙🏻	call me hand light skin tone	ninguna
+🤙🏼	call me hand medium-light skin tone	ninguna
+🤙🏽	call me hand medium skin tone	ninguna
+🤙🏾	call me hand medium-dark skin tone	ninguna
+🤙🏿	call me hand dark skin tone	ninguna
+👈🏻	backhand index pointing left light skin tone	ninguna
+👈🏼	backhand index pointing left medium-light skin tone	ninguna
+👈🏽	backhand index pointing left medium skin tone	ninguna
+👈🏾	backhand index pointing left medium-dark skin tone	ninguna
+👈🏿	backhand index pointing left dark skin tone	ninguna
+👉🏻	backhand index pointing right light skin tone	ninguna
+👉🏼	backhand index pointing right medium-light skin tone	ninguna
+👉🏽	backhand index pointing right medium skin tone	ninguna
+👉🏾	backhand index pointing right medium-dark skin tone	ninguna
+👉🏿	backhand index pointing right dark skin tone	ninguna
+👆🏻	backhand index pointing up light skin tone	ninguna
+👆🏼	backhand index pointing up medium-light skin tone	ninguna
+👆🏽	backhand index pointing up medium skin tone	ninguna
+👆🏾	backhand index pointing up medium-dark skin tone	ninguna
+👆🏿	backhand index pointing up dark skin tone	ninguna
+🖕🏻	middle finger light skin tone	ninguna
+🖕🏼	middle finger medium-light skin tone	ninguna
+🖕🏽	middle finger medium skin tone	ninguna
+🖕🏾	middle finger medium-dark skin tone	ninguna
+🖕🏿	middle finger dark skin tone	ninguna
+👇🏻	backhand index pointing down light skin tone	ninguna
+👇🏼	backhand index pointing down medium-light skin tone	ninguna
+👇🏽	backhand index pointing down medium skin tone	ninguna
+👇🏾	backhand index pointing down medium-dark skin tone	ninguna
+👇🏿	backhand index pointing down dark skin tone	ninguna
+☝🏻	index pointing up light skin tone	ninguna
+☝🏼	index pointing up medium-light skin tone	ninguna
+☝🏽	index pointing up medium skin tone	ninguna
+☝🏾	index pointing up medium-dark skin tone	ninguna
+☝🏿	index pointing up dark skin tone	ninguna
+🫵🏻	index pointing at the viewer light skin tone	ninguna
+🫵🏼	index pointing at the viewer medium-light skin tone	ninguna
+🫵🏽	index pointing at the viewer medium skin tone	ninguna
+🫵🏾	index pointing at the viewer medium-dark skin tone	ninguna
+🫵🏿	index pointing at the viewer dark skin tone	ninguna
+👍🏻	thumbs up light skin tone	ninguna
+👍🏼	thumbs up medium-light skin tone	ninguna
+👍🏽	thumbs up medium skin tone	ninguna
+👍🏾	thumbs up medium-dark skin tone	ninguna
+👍🏿	thumbs up dark skin tone	ninguna
+👎🏻	thumbs down light skin tone	ninguna
+👎🏼	thumbs down medium-light skin tone	ninguna
+👎🏽	thumbs down medium skin tone	ninguna
+👎🏾	thumbs down medium-dark skin tone	ninguna
+👎🏿	thumbs down dark skin tone	ninguna
+✊🏻	raised fist light skin tone	ninguna
+✊🏼	raised fist medium-light skin tone	ninguna
+✊🏽	raised fist medium skin tone	ninguna
+✊🏾	raised fist medium-dark skin tone	ninguna
+✊🏿	raised fist dark skin tone	ninguna
+👊🏻	oncoming fist light skin tone	ninguna
+👊🏼	oncoming fist medium-light skin tone	ninguna
+👊🏽	oncoming fist medium skin tone	ninguna
+👊🏾	oncoming fist medium-dark skin tone	ninguna
+👊🏿	oncoming fist dark skin tone	ninguna
+🤛🏻	left-facing fist light skin tone	ninguna
+🤛🏼	left-facing fist medium-light skin tone	ninguna
+🤛🏽	left-facing fist medium skin tone	ninguna
+🤛🏾	left-facing fist medium-dark skin tone	ninguna
+🤛🏿	left-facing fist dark skin tone	ninguna
+🤜🏻	right-facing fist light skin tone	ninguna
+🤜🏼	right-facing fist medium-light skin tone	ninguna
+🤜🏽	right-facing fist medium skin tone	ninguna
+🤜🏾	right-facing fist medium-dark skin tone	ninguna
+🤜🏿	right-facing fist dark skin tone	ninguna
+👏🏻	clapping hands light skin tone	ninguna
+👏🏼	clapping hands medium-light skin tone	ninguna
+👏🏽	clapping hands medium skin tone	ninguna
+👏🏾	clapping hands medium-dark skin tone	ninguna
+👏🏿	clapping hands dark skin tone	ninguna
+🙌🏻	raising hands light skin tone	ninguna
+🙌🏼	raising hands medium-light skin tone	ninguna
+🙌🏽	raising hands medium skin tone	ninguna
+🙌🏾	raising hands medium-dark skin tone	ninguna
+🙌🏿	raising hands dark skin tone	ninguna
+🫶🏻	heart hands light skin tone	ninguna
+🫶🏼	heart hands medium-light skin tone	ninguna
+🫶🏽	heart hands medium skin tone	ninguna
+🫶🏾	heart hands medium-dark skin tone	ninguna
+🫶🏿	heart hands dark skin tone	ninguna
+👐🏻	open hands light skin tone	ninguna
+👐🏼	open hands medium-light skin tone	ninguna
+👐🏽	open hands medium skin tone	ninguna
+👐🏾	open hands medium-dark skin tone	ninguna
+👐🏿	open hands dark skin tone	ninguna
+🤲🏻	palms up together light skin tone	ninguna
+🤲🏼	palms up together medium-light skin tone	ninguna
+🤲🏽	palms up together medium skin tone	ninguna
+🤲🏾	palms up together medium-dark skin tone	ninguna
+🤲🏿	palms up together dark skin tone	ninguna
+🤝🏻	handshake light skin tone	ninguna
+🤝🏼	handshake medium-light skin tone	ninguna
+🤝🏽	handshake medium skin tone	ninguna
+🤝🏾	handshake medium-dark skin tone	ninguna
+🤝🏿	handshake dark skin tone	ninguna
+🙏🏻	folded hands light skin tone	ninguna
+🙏🏼	folded hands medium-light skin tone	ninguna
+🙏🏽	folded hands medium skin tone	ninguna
+🙏🏾	folded hands medium-dark skin tone	ninguna
+🙏🏿	folded hands dark skin tone	ninguna
+✍🏻	writing hand light skin tone	ninguna
+✍🏼	writing hand medium-light skin tone	ninguna
+✍🏽	writing hand medium skin tone	ninguna
+✍🏾	writing hand medium-dark skin tone	ninguna
+✍🏿	writing hand dark skin tone	ninguna
+💅🏻	nail polish light skin tone	ninguna
+💅🏼	nail polish medium-light skin tone	ninguna
+💅🏽	nail polish medium skin tone	ninguna
+💅🏾	nail polish medium-dark skin tone	ninguna
+💅🏿	nail polish dark skin tone	ninguna
+🤳🏻	selfie light skin tone	ninguna
+🤳🏼	selfie medium-light skin tone	ninguna
+🤳🏽	selfie medium skin tone	ninguna
+🤳🏾	selfie medium-dark skin tone	ninguna
+🤳🏿	selfie dark skin tone	ninguna
+💪🏻	flexed biceps light skin tone	ninguna
+💪🏼	flexed biceps medium-light skin tone	ninguna
+💪🏽	flexed biceps medium skin tone	ninguna
+💪🏾	flexed biceps medium-dark skin tone	ninguna
+💪🏿	flexed biceps dark skin tone	ninguna
+🦵🏻	leg light skin tone	ninguna
+🦵🏼	leg medium-light skin tone	ninguna
+🦵🏽	leg medium skin tone	ninguna
+🦵🏾	leg medium-dark skin tone	ninguna
+🦵🏿	leg dark skin tone	ninguna
+🦶🏻	foot light skin tone	ninguna
+🦶🏼	foot medium-light skin tone	ninguna
+🦶🏽	foot medium skin tone	ninguna
+🦶🏾	foot medium-dark skin tone	ninguna
+🦶🏿	foot dark skin tone	ninguna
+👂🏻	ear light skin tone	ninguna
+👂🏼	ear medium-light skin tone	ninguna
+👂🏽	ear medium skin tone	ninguna
+👂🏾	ear medium-dark skin tone	ninguna
+👂🏿	ear dark skin tone	ninguna
+🦻🏻	ear with hearing aid light skin tone	ninguna
+🦻🏼	ear with hearing aid medium-light skin tone	ninguna
+🦻🏽	ear with hearing aid medium skin tone	ninguna
+🦻🏾	ear with hearing aid medium-dark skin tone	ninguna
+🦻🏿	ear with hearing aid dark skin tone	ninguna
+👃🏻	nose light skin tone	ninguna
+👃🏼	nose medium-light skin tone	ninguna
+👃🏽	nose medium skin tone	ninguna
+👃🏾	nose medium-dark skin tone	ninguna
+👃🏿	nose dark skin tone	ninguna
+👶🏻	baby light skin tone	ninguna
+👶🏼	baby medium-light skin tone	ninguna
+👶🏽	baby medium skin tone	ninguna
+👶🏾	baby medium-dark skin tone	ninguna
+👶🏿	baby dark skin tone	ninguna
+🧒🏻	child light skin tone	ninguna
+🧒🏼	child medium-light skin tone	ninguna
+🧒🏽	child medium skin tone	ninguna
+🧒🏾	child medium-dark skin tone	ninguna
+🧒🏿	child dark skin tone	ninguna
+👦🏻	boy light skin tone	ninguna
+👦🏼	boy medium-light skin tone	ninguna
+👦🏽	boy medium skin tone	ninguna
+👦🏾	boy medium-dark skin tone	ninguna
+👦🏿	boy dark skin tone	ninguna
+👧🏻	girl light skin tone	ninguna
+👧🏼	girl medium-light skin tone	ninguna
+👧🏽	girl medium skin tone	ninguna
+👧🏾	girl medium-dark skin tone	ninguna
+👧🏿	girl dark skin tone	ninguna
+🧑🏻	person light skin tone	ninguna
+🧑🏼	person medium-light skin tone	ninguna
+🧑🏽	person medium skin tone	ninguna
+🧑🏾	person medium-dark skin tone	ninguna
+🧑🏿	person dark skin tone	ninguna
+👱🏻	person light skin tone, blond hair	ninguna
+👱🏼	person medium-light skin tone, blond hair	ninguna
+👱🏽	person medium skin tone, blond hair	ninguna
+👱🏾	person medium-dark skin tone, blond hair	ninguna
+👱🏿	person dark skin tone, blond hair	ninguna
+🧑🏻‍❤‍💋‍🧑🏼	kiss person, person, light skin tone, medium-light skin tone	ninguna
+🧑🏻‍❤‍💋‍🧑🏽	kiss person, person, light skin tone, medium skin tone	ninguna
+🧑🏻‍❤‍💋‍🧑🏾	kiss person, person, light skin tone, medium-dark skin tone	ninguna
+🧑🏻‍❤‍💋‍🧑🏿	kiss person, person, light skin tone, dark skin tone	ninguna
+🧑🏼‍❤‍💋‍🧑🏻	kiss person, person, medium-light skin tone, light skin tone	ninguna
+🧑🏼‍❤‍💋‍🧑🏽	kiss person, person, medium-light skin tone, medium skin tone	ninguna
+🧑🏼‍❤‍💋‍🧑🏾	kiss person, person, medium-light skin tone, medium-dark skin tone	ninguna
+🧑🏼‍❤‍💋‍🧑🏿	kiss person, person, medium-light skin tone, dark skin tone	ninguna
+🧑🏽‍❤‍💋‍🧑🏻	kiss person, person, medium skin tone, light skin tone	ninguna
+🧑🏽‍❤‍💋‍🧑🏼	kiss person, person, medium skin tone, medium-light skin tone	ninguna
+🧑🏽‍❤‍💋‍🧑🏾	kiss person, person, medium skin tone, medium-dark skin tone	ninguna
+🧑🏽‍❤‍💋‍🧑🏿	kiss person, person, medium skin tone, dark skin tone	ninguna
+🧑🏾‍❤‍💋‍🧑🏻	kiss person, person, medium-dark skin tone, light skin tone	ninguna
+🧑🏾‍❤‍💋‍🧑🏼	kiss person, person, medium-dark skin tone, medium-light skin tone	ninguna
+🧑🏾‍❤‍💋‍🧑🏽	kiss person, person, medium-dark skin tone, medium skin tone	ninguna
+🧑🏾‍❤‍💋‍🧑🏿	kiss person, person, medium-dark skin tone, dark skin tone	ninguna
+🧑🏿‍❤‍💋‍🧑🏻	kiss person, person, dark skin tone, light skin tone	ninguna
+🧑🏿‍❤‍💋‍🧑🏼	kiss person, person, dark skin tone, medium-light skin tone	ninguna
+🧑🏿‍❤‍💋‍🧑🏽	kiss person, person, dark skin tone, medium skin tone	ninguna
+🧑🏿‍❤‍💋‍🧑🏾	kiss person, person, dark skin tone, medium-dark skin tone	ninguna
+🧑🏻‍❤‍🧑🏼	couple with heart person, person, light skin tone, medium-light skin tone	ninguna
+🧑🏻‍❤‍🧑🏽	couple with heart person, person, light skin tone, medium skin tone	ninguna
+🧑🏻‍❤‍🧑🏾	couple with heart person, person, light skin tone, medium-dark skin tone	ninguna
+🧑🏻‍❤‍🧑🏿	couple with heart person, person, light skin tone, dark skin tone	ninguna
+🧑🏼‍❤‍🧑🏻	couple with heart person, person, medium-light skin tone, light skin tone	ninguna
+🧑🏼‍❤‍🧑🏽	couple with heart person, person, medium-light skin tone, medium skin tone	ninguna
+🧑🏼‍❤‍🧑🏾	couple with heart person, person, medium-light skin tone, medium-dark skin tone	ninguna
+🧑🏼‍❤‍🧑🏿	couple with heart person, person, medium-light skin tone, dark skin tone	ninguna
+🧑🏽‍❤‍🧑🏻	couple with heart person, person, medium skin tone, light skin tone	ninguna
+🧑🏽‍❤‍🧑🏼	couple with heart person, person, medium skin tone, medium-light skin tone	ninguna
+🧑🏽‍❤‍🧑🏾	couple with heart person, person, medium skin tone, medium-dark skin tone	ninguna
+🧑🏽‍❤‍🧑🏿	couple with heart person, person, medium skin tone, dark skin tone	ninguna
+🧑🏾‍❤‍🧑🏻	couple with heart person, person, medium-dark skin tone, light skin tone	ninguna
+🧑🏾‍❤‍🧑🏼	couple with heart person, person, medium-dark skin tone, medium-light skin tone	ninguna
+🧑🏾‍❤‍🧑🏽	couple with heart person, person, medium-dark skin tone, medium skin tone	ninguna
+🧑🏾‍❤‍🧑🏿	couple with heart person, person, medium-dark skin tone, dark skin tone	ninguna
+🧑🏿‍❤‍🧑🏻	couple with heart person, person, dark skin tone, light skin tone	ninguna
+🧑🏿‍❤‍🧑🏼	couple with heart person, person, dark skin tone, medium-light skin tone	ninguna
+🧑🏿‍❤‍🧑🏽	couple with heart person, person, dark skin tone, medium skin tone	ninguna
+🧑🏿‍❤‍🧑🏾	couple with heart person, person, dark skin tone, medium-dark skin tone	ninguna
+🧑🏻‍🫯‍🧑🏼	people wrestling light skin tone, medium-light skin tone	ninguna
+🧑🏻‍🫯‍🧑🏽	people wrestling light skin tone, medium skin tone	ninguna
+🧑🏻‍🫯‍🧑🏾	people wrestling light skin tone, medium-dark skin tone	ninguna
+🧑🏻‍🫯‍🧑🏿	people wrestling light skin tone, dark skin tone	ninguna
+🧑🏼‍🫯‍🧑🏻	people wrestling medium-light skin tone, light skin tone	ninguna
+🧑🏼‍🫯‍🧑🏽	people wrestling medium-light skin tone, medium skin tone	ninguna
+🧑🏼‍🫯‍🧑🏾	people wrestling medium-light skin tone, medium-dark skin tone	ninguna
+🧑🏼‍🫯‍🧑🏿	people wrestling medium-light skin tone, dark skin tone	ninguna
+🧑🏽‍🫯‍🧑🏻	people wrestling medium skin tone, light skin tone	ninguna
+🧑🏽‍🫯‍🧑🏼	people wrestling medium skin tone, medium-light skin tone	ninguna
+🧑🏽‍🫯‍🧑🏾	people wrestling medium skin tone, medium-dark skin tone	ninguna
+🧑🏽‍🫯‍🧑🏿	people wrestling medium skin tone, dark skin tone	ninguna
+🧑🏾‍🫯‍🧑🏻	people wrestling medium-dark skin tone, light skin tone	ninguna
+🧑🏾‍🫯‍🧑🏼	people wrestling medium-dark skin tone, medium-light skin tone	ninguna
+🧑🏾‍🫯‍🧑🏽	people wrestling medium-dark skin tone, medium skin tone	ninguna
+🧑🏾‍🫯‍🧑🏿	people wrestling medium-dark skin tone, dark skin tone	ninguna
+🧑🏿‍🫯‍🧑🏻	people wrestling dark skin tone, light skin tone	ninguna
+🧑🏿‍🫯‍🧑🏼	people wrestling dark skin tone, medium-light skin tone	ninguna
+🧑🏿‍🫯‍🧑🏽	people wrestling dark skin tone, medium skin tone	ninguna
+🧑🏿‍🫯‍🧑🏾	people wrestling dark skin tone, medium-dark skin tone	ninguna
+🧑‍🦰	person red hair	ninguna
+🧑🏻‍🦰	person light skin tone, red hair	ninguna
+🧑🏼‍🦰	person medium-light skin tone, red hair	ninguna
+🧑🏽‍🦰	person medium skin tone, red hair	ninguna
+🧑🏾‍🦰	person medium-dark skin tone, red hair	ninguna
+🧑🏿‍🦰	person dark skin tone, red hair	ninguna
+🧑‍🦱	person curly hair	ninguna
+🧑🏻‍🦱	person light skin tone, curly hair	ninguna
+🧑🏼‍🦱	person medium-light skin tone, curly hair	ninguna
+🧑🏽‍🦱	person medium skin tone, curly hair	ninguna
+🧑🏾‍🦱	person medium-dark skin tone, curly hair	ninguna
+🧑🏿‍🦱	person dark skin tone, curly hair	ninguna
+🧑‍🦳	person white hair	ninguna
+🧑🏻‍🦳	person light skin tone, white hair	ninguna
+🧑🏼‍🦳	person medium-light skin tone, white hair	ninguna
+🧑🏽‍🦳	person medium skin tone, white hair	ninguna
+🧑🏾‍🦳	person medium-dark skin tone, white hair	ninguna
+🧑🏿‍🦳	person dark skin tone, white hair	ninguna
+🧑‍🦲	person bald	ninguna
+🧑🏻‍🦲	person light skin tone, bald	ninguna
+🧑🏼‍🦲	person medium-light skin tone, bald	ninguna
+🧑🏽‍🦲	person medium skin tone, bald	ninguna
+🧑🏾‍🦲	person medium-dark skin tone, bald	ninguna
+🧑🏿‍🦲	person dark skin tone, bald	ninguna
+🧑🏻‍🐰‍🧑🏼	people with bunny ears light skin tone, medium-light skin tone	ninguna
+🧑🏻‍🐰‍🧑🏽	people with bunny ears light skin tone, medium skin tone	ninguna
+🧑🏻‍🐰‍🧑🏾	people with bunny ears light skin tone, medium-dark skin tone	ninguna
+🧑🏻‍🐰‍🧑🏿	people with bunny ears light skin tone, dark skin tone	ninguna
+🧑🏼‍🐰‍🧑🏻	people with bunny ears medium-light skin tone, light skin tone	ninguna
+🧑🏼‍🐰‍🧑🏽	people with bunny ears medium-light skin tone, medium skin tone	ninguna
+🧑🏼‍🐰‍🧑🏾	people with bunny ears medium-light skin tone, medium-dark skin tone	ninguna
+🧑🏼‍🐰‍🧑🏿	people with bunny ears medium-light skin tone, dark skin tone	ninguna
+🧑🏽‍🐰‍🧑🏻	people with bunny ears medium skin tone, light skin tone	ninguna
+🧑🏽‍🐰‍🧑🏼	people with bunny ears medium skin tone, medium-light skin tone	ninguna
+🧑🏽‍🐰‍🧑🏾	people with bunny ears medium skin tone, medium-dark skin tone	ninguna
+🧑🏽‍🐰‍🧑🏿	people with bunny ears medium skin tone, dark skin tone	ninguna
+🧑🏾‍🐰‍🧑🏻	people with bunny ears medium-dark skin tone, light skin tone	ninguna
+🧑🏾‍🐰‍🧑🏼	people with bunny ears medium-dark skin tone, medium-light skin tone	ninguna
+🧑🏾‍🐰‍🧑🏽	people with bunny ears medium-dark skin tone, medium skin tone	ninguna
+🧑🏾‍🐰‍🧑🏿	people with bunny ears medium-dark skin tone, dark skin tone	ninguna
+🧑🏿‍🐰‍🧑🏻	people with bunny ears dark skin tone, light skin tone	ninguna
+🧑🏿‍🐰‍🧑🏼	people with bunny ears dark skin tone, medium-light skin tone	ninguna
+🧑🏿‍🐰‍🧑🏽	people with bunny ears dark skin tone, medium skin tone	ninguna
+🧑🏿‍🐰‍🧑🏾	people with bunny ears dark skin tone, medium-dark skin tone	ninguna
+👨🏻	man light skin tone	ninguna
+👨🏼	man medium-light skin tone	ninguna
+👨🏽	man medium skin tone	ninguna
+👨🏾	man medium-dark skin tone	ninguna
+👨🏿	man dark skin tone	ninguna
+🧔🏻	person light skin tone, beard	ninguna
+🧔🏼	person medium-light skin tone, beard	ninguna
+🧔🏽	person medium skin tone, beard	ninguna
+🧔🏾	person medium-dark skin tone, beard	ninguna
+🧔🏿	person dark skin tone, beard	ninguna
+🧔🏻‍♂	man light skin tone, beard	ninguna
+🧔🏼‍♂	man medium-light skin tone, beard	ninguna
+🧔🏽‍♂	man medium skin tone, beard	ninguna
+🧔🏾‍♂	man medium-dark skin tone, beard	ninguna
+🧔🏿‍♂	man dark skin tone, beard	ninguna
+👱🏻‍♂	man light skin tone, blond hair	ninguna
+👱🏼‍♂	man medium-light skin tone, blond hair	ninguna
+👱🏽‍♂	man medium skin tone, blond hair	ninguna
+👱🏾‍♂	man medium-dark skin tone, blond hair	ninguna
+👱🏿‍♂	man dark skin tone, blond hair	ninguna
+👨🏻‍❤‍💋‍👨🏻	kiss man, man, light skin tone	ninguna
+👨🏻‍❤‍💋‍👨🏼	kiss man, man, light skin tone, medium-light skin tone	ninguna
+👨🏻‍❤‍💋‍👨🏽	kiss man, man, light skin tone, medium skin tone	ninguna
+👨🏻‍❤‍💋‍👨🏾	kiss man, man, light skin tone, medium-dark skin tone	ninguna
+👨🏻‍❤‍💋‍👨🏿	kiss man, man, light skin tone, dark skin tone	ninguna
+👨🏼‍❤‍💋‍👨🏻	kiss man, man, medium-light skin tone, light skin tone	ninguna
+👨🏼‍❤‍💋‍👨🏼	kiss man, man, medium-light skin tone	ninguna
+👨🏼‍❤‍💋‍👨🏽	kiss man, man, medium-light skin tone, medium skin tone	ninguna
+👨🏼‍❤‍💋‍👨🏾	kiss man, man, medium-light skin tone, medium-dark skin tone	ninguna
+👨🏼‍❤‍💋‍👨🏿	kiss man, man, medium-light skin tone, dark skin tone	ninguna
+👨🏽‍❤‍💋‍👨🏻	kiss man, man, medium skin tone, light skin tone	ninguna
+👨🏽‍❤‍💋‍👨🏼	kiss man, man, medium skin tone, medium-light skin tone	ninguna
+👨🏽‍❤‍💋‍👨🏽	kiss man, man, medium skin tone	ninguna
+👨🏽‍❤‍💋‍👨🏾	kiss man, man, medium skin tone, medium-dark skin tone	ninguna
+👨🏽‍❤‍💋‍👨🏿	kiss man, man, medium skin tone, dark skin tone	ninguna
+👨🏾‍❤‍💋‍👨🏻	kiss man, man, medium-dark skin tone, light skin tone	ninguna
+👨🏾‍❤‍💋‍👨🏼	kiss man, man, medium-dark skin tone, medium-light skin tone	ninguna
+👨🏾‍❤‍💋‍👨🏽	kiss man, man, medium-dark skin tone, medium skin tone	ninguna
+👨🏾‍❤‍💋‍👨🏾	kiss man, man, medium-dark skin tone	ninguna
+👨🏾‍❤‍💋‍👨🏿	kiss man, man, medium-dark skin tone, dark skin tone	ninguna
+👨🏿‍❤‍💋‍👨🏻	kiss man, man, dark skin tone, light skin tone	ninguna
+👨🏿‍❤‍💋‍👨🏼	kiss man, man, dark skin tone, medium-light skin tone	ninguna
+👨🏿‍❤‍💋‍👨🏽	kiss man, man, dark skin tone, medium skin tone	ninguna
+👨🏿‍❤‍💋‍👨🏾	kiss man, man, dark skin tone, medium-dark skin tone	ninguna
+👨🏿‍❤‍💋‍👨🏿	kiss man, man, dark skin tone	ninguna
+👨🏻‍❤‍👨🏻	couple with heart man, man, light skin tone	ninguna
+👨🏻‍❤‍👨🏼	couple with heart man, man, light skin tone, medium-light skin tone	ninguna
+👨🏻‍❤‍👨🏽	couple with heart man, man, light skin tone, medium skin tone	ninguna
+👨🏻‍❤‍👨🏾	couple with heart man, man, light skin tone, medium-dark skin tone	ninguna
+👨🏻‍❤‍👨🏿	couple with heart man, man, light skin tone, dark skin tone	ninguna
+👨🏼‍❤‍👨🏻	couple with heart man, man, medium-light skin tone, light skin tone	ninguna
+👨🏼‍❤‍👨🏼	couple with heart man, man, medium-light skin tone	ninguna
+👨🏼‍❤‍👨🏽	couple with heart man, man, medium-light skin tone, medium skin tone	ninguna
+👨🏼‍❤‍👨🏾	couple with heart man, man, medium-light skin tone, medium-dark skin tone	ninguna
+👨🏼‍❤‍👨🏿	couple with heart man, man, medium-light skin tone, dark skin tone	ninguna
+👨🏽‍❤‍👨🏻	couple with heart man, man, medium skin tone, light skin tone	ninguna
+👨🏽‍❤‍👨🏼	couple with heart man, man, medium skin tone, medium-light skin tone	ninguna
+👨🏽‍❤‍👨🏽	couple with heart man, man, medium skin tone	ninguna
+👨🏽‍❤‍👨🏾	couple with heart man, man, medium skin tone, medium-dark skin tone	ninguna
+👨🏽‍❤‍👨🏿	couple with heart man, man, medium skin tone, dark skin tone	ninguna
+👨🏾‍❤‍👨🏻	couple with heart man, man, medium-dark skin tone, light skin tone	ninguna
+👨🏾‍❤‍👨🏼	couple with heart man, man, medium-dark skin tone, medium-light skin tone	ninguna
+👨🏾‍❤‍👨🏽	couple with heart man, man, medium-dark skin tone, medium skin tone	ninguna
+👨🏾‍❤‍👨🏾	couple with heart man, man, medium-dark skin tone	ninguna
+👨🏾‍❤‍👨🏿	couple with heart man, man, medium-dark skin tone, dark skin tone	ninguna
+👨🏿‍❤‍👨🏻	couple with heart man, man, dark skin tone, light skin tone	ninguna
+👨🏿‍❤‍👨🏼	couple with heart man, man, dark skin tone, medium-light skin tone	ninguna
+👨🏿‍❤‍👨🏽	couple with heart man, man, dark skin tone, medium skin tone	ninguna
+👨🏿‍❤‍👨🏾	couple with heart man, man, dark skin tone, medium-dark skin tone	ninguna
+👨🏿‍❤‍👨🏿	couple with heart man, man, dark skin tone	ninguna
+👨🏻‍🫯‍👨🏼	men wrestling light skin tone, medium-light skin tone	ninguna
+👨🏻‍🫯‍👨🏽	men wrestling light skin tone, medium skin tone	ninguna
+👨🏻‍🫯‍👨🏾	men wrestling light skin tone, medium-dark skin tone	ninguna
+👨🏻‍🫯‍👨🏿	men wrestling light skin tone, dark skin tone	ninguna
+👨🏼‍🫯‍👨🏻	men wrestling medium-light skin tone, light skin tone	ninguna
+👨🏼‍🫯‍👨🏽	men wrestling medium-light skin tone, medium skin tone	ninguna
+👨🏼‍🫯‍👨🏾	men wrestling medium-light skin tone, medium-dark skin tone	ninguna
+👨🏼‍🫯‍👨🏿	men wrestling medium-light skin tone, dark skin tone	ninguna
+👨🏽‍🫯‍👨🏻	men wrestling medium skin tone, light skin tone	ninguna
+👨🏽‍🫯‍👨🏼	men wrestling medium skin tone, medium-light skin tone	ninguna
+👨🏽‍🫯‍👨🏾	men wrestling medium skin tone, medium-dark skin tone	ninguna
+👨🏽‍🫯‍👨🏿	men wrestling medium skin tone, dark skin tone	ninguna
+👨🏾‍🫯‍👨🏻	men wrestling medium-dark skin tone, light skin tone	ninguna
+👨🏾‍🫯‍👨🏼	men wrestling medium-dark skin tone, medium-light skin tone	ninguna
+👨🏾‍🫯‍👨🏽	men wrestling medium-dark skin tone, medium skin tone	ninguna
+👨🏾‍🫯‍👨🏿	men wrestling medium-dark skin tone, dark skin tone	ninguna
+👨🏿‍🫯‍👨🏻	men wrestling dark skin tone, light skin tone	ninguna
+👨🏿‍🫯‍👨🏼	men wrestling dark skin tone, medium-light skin tone	ninguna
+👨🏿‍🫯‍👨🏽	men wrestling dark skin tone, medium skin tone	ninguna
+👨🏿‍🫯‍👨🏾	men wrestling dark skin tone, medium-dark skin tone	ninguna
+👨‍🦰	man red hair	ninguna
+👨🏻‍🦰	man light skin tone, red hair	ninguna
+👨🏼‍🦰	man medium-light skin tone, red hair	ninguna
+👨🏽‍🦰	man medium skin tone, red hair	ninguna
+👨🏾‍🦰	man medium-dark skin tone, red hair	ninguna
+👨🏿‍🦰	man dark skin tone, red hair	ninguna
+👨‍🦱	man curly hair	ninguna
+👨🏻‍🦱	man light skin tone, curly hair	ninguna
+👨🏼‍🦱	man medium-light skin tone, curly hair	ninguna
+👨🏽‍🦱	man medium skin tone, curly hair	ninguna
+👨🏾‍🦱	man medium-dark skin tone, curly hair	ninguna
+👨🏿‍🦱	man dark skin tone, curly hair	ninguna
+👨‍🦳	man white hair	ninguna
+👨🏻‍🦳	man light skin tone, white hair	ninguna
+👨🏼‍🦳	man medium-light skin tone, white hair	ninguna
+👨🏽‍🦳	man medium skin tone, white hair	ninguna
+👨🏾‍🦳	man medium-dark skin tone, white hair	ninguna
+👨🏿‍🦳	man dark skin tone, white hair	ninguna
+👨‍🦲	man bald	ninguna
+👨🏻‍🦲	man light skin tone, bald	ninguna
+👨🏼‍🦲	man medium-light skin tone, bald	ninguna
+👨🏽‍🦲	man medium skin tone, bald	ninguna
+👨🏾‍🦲	man medium-dark skin tone, bald	ninguna
+👨🏿‍🦲	man dark skin tone, bald	ninguna
+👨🏻‍🐰‍👨🏼	men with bunny ears light skin tone, medium-light skin tone	ninguna
+👨🏻‍🐰‍👨🏽	men with bunny ears light skin tone, medium skin tone	ninguna
+👨🏻‍🐰‍👨🏾	men with bunny ears light skin tone, medium-dark skin tone	ninguna
+👨🏻‍🐰‍👨🏿	men with bunny ears light skin tone, dark skin tone	ninguna
+👨🏼‍🐰‍👨🏻	men with bunny ears medium-light skin tone, light skin tone	ninguna
+👨🏼‍🐰‍👨🏽	men with bunny ears medium-light skin tone, medium skin tone	ninguna
+👨🏼‍🐰‍👨🏾	men with bunny ears medium-light skin tone, medium-dark skin tone	ninguna
+👨🏼‍🐰‍👨🏿	men with bunny ears medium-light skin tone, dark skin tone	ninguna
+👨🏽‍🐰‍👨🏻	men with bunny ears medium skin tone, light skin tone	ninguna
+👨🏽‍🐰‍👨🏼	men with bunny ears medium skin tone, medium-light skin tone	ninguna
+👨🏽‍🐰‍👨🏾	men with bunny ears medium skin tone, medium-dark skin tone	ninguna
+👨🏽‍🐰‍👨🏿	men with bunny ears medium skin tone, dark skin tone	ninguna
+👨🏾‍🐰‍👨🏻	men with bunny ears medium-dark skin tone, light skin tone	ninguna
+👨🏾‍🐰‍👨🏼	men with bunny ears medium-dark skin tone, medium-light skin tone	ninguna
+👨🏾‍🐰‍👨🏽	men with bunny ears medium-dark skin tone, medium skin tone	ninguna
+👨🏾‍🐰‍👨🏿	men with bunny ears medium-dark skin tone, dark skin tone	ninguna
+👨🏿‍🐰‍👨🏻	men with bunny ears dark skin tone, light skin tone	ninguna
+👨🏿‍🐰‍👨🏼	men with bunny ears dark skin tone, medium-light skin tone	ninguna
+👨🏿‍🐰‍👨🏽	men with bunny ears dark skin tone, medium skin tone	ninguna
+👨🏿‍🐰‍👨🏾	men with bunny ears dark skin tone, medium-dark skin tone	ninguna
+👩🏻	woman light skin tone	ninguna
+👩🏼	woman medium-light skin tone	ninguna
+👩🏽	woman medium skin tone	ninguna
+👩🏾	woman medium-dark skin tone	ninguna
+👩🏿	woman dark skin tone	ninguna
+🧔🏻‍♀	woman light skin tone, beard	ninguna
+🧔🏼‍♀	woman medium-light skin tone, beard	ninguna
+🧔🏽‍♀	woman medium skin tone, beard	ninguna
+🧔🏾‍♀	woman medium-dark skin tone, beard	ninguna
+🧔🏿‍♀	woman dark skin tone, beard	ninguna
+👱🏻‍♀	woman light skin tone, blond hair	ninguna
+👱🏼‍♀	woman medium-light skin tone, blond hair	ninguna
+👱🏽‍♀	woman medium skin tone, blond hair	ninguna
+👱🏾‍♀	woman medium-dark skin tone, blond hair	ninguna
+👱🏿‍♀	woman dark skin tone, blond hair	ninguna
+👩🏻‍❤‍💋‍👨🏻	kiss woman, man, light skin tone	ninguna
+👩🏻‍❤‍💋‍👨🏼	kiss woman, man, light skin tone, medium-light skin tone	ninguna
+👩🏻‍❤‍💋‍👨🏽	kiss woman, man, light skin tone, medium skin tone	ninguna
+👩🏻‍❤‍💋‍👨🏾	kiss woman, man, light skin tone, medium-dark skin tone	ninguna
+👩🏻‍❤‍💋‍👨🏿	kiss woman, man, light skin tone, dark skin tone	ninguna
+👩🏼‍❤‍💋‍👨🏻	kiss woman, man, medium-light skin tone, light skin tone	ninguna
+👩🏼‍❤‍💋‍👨🏼	kiss woman, man, medium-light skin tone	ninguna
+👩🏼‍❤‍💋‍👨🏽	kiss woman, man, medium-light skin tone, medium skin tone	ninguna
+👩🏼‍❤‍💋‍👨🏾	kiss woman, man, medium-light skin tone, medium-dark skin tone	ninguna
+👩🏼‍❤‍💋‍👨🏿	kiss woman, man, medium-light skin tone, dark skin tone	ninguna
+👩🏽‍❤‍💋‍👨🏻	kiss woman, man, medium skin tone, light skin tone	ninguna
+👩🏽‍❤‍💋‍👨🏼	kiss woman, man, medium skin tone, medium-light skin tone	ninguna
+👩🏽‍❤‍💋‍👨🏽	kiss woman, man, medium skin tone	ninguna
+👩🏽‍❤‍💋‍👨🏾	kiss woman, man, medium skin tone, medium-dark skin tone	ninguna
+👩🏽‍❤‍💋‍👨🏿	kiss woman, man, medium skin tone, dark skin tone	ninguna
+👩🏾‍❤‍💋‍👨🏻	kiss woman, man, medium-dark skin tone, light skin tone	ninguna
+👩🏾‍❤‍💋‍👨🏼	kiss woman, man, medium-dark skin tone, medium-light skin tone	ninguna
+👩🏾‍❤‍💋‍👨🏽	kiss woman, man, medium-dark skin tone, medium skin tone	ninguna
+👩🏾‍❤‍💋‍👨🏾	kiss woman, man, medium-dark skin tone	ninguna
+👩🏾‍❤‍💋‍👨🏿	kiss woman, man, medium-dark skin tone, dark skin tone	ninguna
+👩🏿‍❤‍💋‍👨🏻	kiss woman, man, dark skin tone, light skin tone	ninguna
+👩🏿‍❤‍💋‍👨🏼	kiss woman, man, dark skin tone, medium-light skin tone	ninguna
+👩🏿‍❤‍💋‍👨🏽	kiss woman, man, dark skin tone, medium skin tone	ninguna
+👩🏿‍❤‍💋‍👨🏾	kiss woman, man, dark skin tone, medium-dark skin tone	ninguna
+👩🏿‍❤‍💋‍👨🏿	kiss woman, man, dark skin tone	ninguna
+👩🏻‍❤‍💋‍👩🏻	kiss woman, woman, light skin tone	ninguna
+👩🏻‍❤‍💋‍👩🏼	kiss woman, woman, light skin tone, medium-light skin tone	ninguna
+👩🏻‍❤‍💋‍👩🏽	kiss woman, woman, light skin tone, medium skin tone	ninguna
+👩🏻‍❤‍💋‍👩🏾	kiss woman, woman, light skin tone, medium-dark skin tone	ninguna
+👩🏻‍❤‍💋‍👩🏿	kiss woman, woman, light skin tone, dark skin tone	ninguna
+👩🏼‍❤‍💋‍👩🏻	kiss woman, woman, medium-light skin tone, light skin tone	ninguna
+👩🏼‍❤‍💋‍👩🏼	kiss woman, woman, medium-light skin tone	ninguna
+👩🏼‍❤‍💋‍👩🏽	kiss woman, woman, medium-light skin tone, medium skin tone	ninguna
+👩🏼‍❤‍💋‍👩🏾	kiss woman, woman, medium-light skin tone, medium-dark skin tone	ninguna
+👩🏼‍❤‍💋‍👩🏿	kiss woman, woman, medium-light skin tone, dark skin tone	ninguna
+👩🏽‍❤‍💋‍👩🏻	kiss woman, woman, medium skin tone, light skin tone	ninguna
+👩🏽‍❤‍💋‍👩🏼	kiss woman, woman, medium skin tone, medium-light skin tone	ninguna
+👩🏽‍❤‍💋‍👩🏽	kiss woman, woman, medium skin tone	ninguna
+👩🏽‍❤‍💋‍👩🏾	kiss woman, woman, medium skin tone, medium-dark skin tone	ninguna
+👩🏽‍❤‍💋‍👩🏿	kiss woman, woman, medium skin tone, dark skin tone	ninguna
+👩🏾‍❤‍💋‍👩🏻	kiss woman, woman, medium-dark skin tone, light skin tone	ninguna
+👩🏾‍❤‍💋‍👩🏼	kiss woman, woman, medium-dark skin tone, medium-light skin tone	ninguna
+👩🏾‍❤‍💋‍👩🏽	kiss woman, woman, medium-dark skin tone, medium skin tone	ninguna
+👩🏾‍❤‍💋‍👩🏾	kiss woman, woman, medium-dark skin tone	ninguna
+👩🏾‍❤‍💋‍👩🏿	kiss woman, woman, medium-dark skin tone, dark skin tone	ninguna
+👩🏿‍❤‍💋‍👩🏻	kiss woman, woman, dark skin tone, light skin tone	ninguna
+👩🏿‍❤‍💋‍👩🏼	kiss woman, woman, dark skin tone, medium-light skin tone	ninguna
+👩🏿‍❤‍💋‍👩🏽	kiss woman, woman, dark skin tone, medium skin tone	ninguna
+👩🏿‍❤‍💋‍👩🏾	kiss woman, woman, dark skin tone, medium-dark skin tone	ninguna
+👩🏿‍❤‍💋‍👩🏿	kiss woman, woman, dark skin tone	ninguna
+👩🏻‍❤‍👨🏻	couple with heart woman, man, light skin tone	ninguna
+👩🏻‍❤‍👨🏼	couple with heart woman, man, light skin tone, medium-light skin tone	ninguna
+👩🏻‍❤‍👨🏽	couple with heart woman, man, light skin tone, medium skin tone	ninguna
+👩🏻‍❤‍👨🏾	couple with heart woman, man, light skin tone, medium-dark skin tone	ninguna
+👩🏻‍❤‍👨🏿	couple with heart woman, man, light skin tone, dark skin tone	ninguna
+👩🏼‍❤‍👨🏻	couple with heart woman, man, medium-light skin tone, light skin tone	ninguna
+👩🏼‍❤‍👨🏼	couple with heart woman, man, medium-light skin tone	ninguna
+👩🏼‍❤‍👨🏽	couple with heart woman, man, medium-light skin tone, medium skin tone	ninguna
+👩🏼‍❤‍👨🏾	couple with heart woman, man, medium-light skin tone, medium-dark skin tone	ninguna
+👩🏼‍❤‍👨🏿	couple with heart woman, man, medium-light skin tone, dark skin tone	ninguna
+👩🏽‍❤‍👨🏻	couple with heart woman, man, medium skin tone, light skin tone	ninguna
+👩🏽‍❤‍👨🏼	couple with heart woman, man, medium skin tone, medium-light skin tone	ninguna
+👩🏽‍❤‍👨🏽	couple with heart woman, man, medium skin tone	ninguna
+👩🏽‍❤‍👨🏾	couple with heart woman, man, medium skin tone, medium-dark skin tone	ninguna
+👩🏽‍❤‍👨🏿	couple with heart woman, man, medium skin tone, dark skin tone	ninguna
+👩🏾‍❤‍👨🏻	couple with heart woman, man, medium-dark skin tone, light skin tone	ninguna
+👩🏾‍❤‍👨🏼	couple with heart woman, man, medium-dark skin tone, medium-light skin tone	ninguna
+👩🏾‍❤‍👨🏽	couple with heart woman, man, medium-dark skin tone, medium skin tone	ninguna
+👩🏾‍❤‍👨🏾	couple with heart woman, man, medium-dark skin tone	ninguna
+👩🏾‍❤‍👨🏿	couple with heart woman, man, medium-dark skin tone, dark skin tone	ninguna
+👩🏿‍❤‍👨🏻	couple with heart woman, man, dark skin tone, light skin tone	ninguna
+👩🏿‍❤‍👨🏼	couple with heart woman, man, dark skin tone, medium-light skin tone	ninguna
+👩🏿‍❤‍👨🏽	couple with heart woman, man, dark skin tone, medium skin tone	ninguna
+👩🏿‍❤‍👨🏾	couple with heart woman, man, dark skin tone, medium-dark skin tone	ninguna
+👩🏿‍❤‍👨🏿	couple with heart woman, man, dark skin tone	ninguna
+👩🏻‍❤‍👩🏻	couple with heart woman, woman, light skin tone	ninguna
+👩🏻‍❤‍👩🏼	couple with heart woman, woman, light skin tone, medium-light skin tone	ninguna
+👩🏻‍❤‍👩🏽	couple with heart woman, woman, light skin tone, medium skin tone	ninguna
+👩🏻‍❤‍👩🏾	couple with heart woman, woman, light skin tone, medium-dark skin tone	ninguna
+👩🏻‍❤‍👩🏿	couple with heart woman, woman, light skin tone, dark skin tone	ninguna
+👩🏼‍❤‍👩🏻	couple with heart woman, woman, medium-light skin tone, light skin tone	ninguna
+👩🏼‍❤‍👩🏼	couple with heart woman, woman, medium-light skin tone	ninguna
+👩🏼‍❤‍👩🏽	couple with heart woman, woman, medium-light skin tone, medium skin tone	ninguna
+👩🏼‍❤‍👩🏾	couple with heart woman, woman, medium-light skin tone, medium-dark skin tone	ninguna
+👩🏼‍❤‍👩🏿	couple with heart woman, woman, medium-light skin tone, dark skin tone	ninguna
+👩🏽‍❤‍👩🏻	couple with heart woman, woman, medium skin tone, light skin tone	ninguna
+👩🏽‍❤‍👩🏼	couple with heart woman, woman, medium skin tone, medium-light skin tone	ninguna
+👩🏽‍❤‍👩🏽	couple with heart woman, woman, medium skin tone	ninguna
+👩🏽‍❤‍👩🏾	couple with heart woman, woman, medium skin tone, medium-dark skin tone	ninguna
+👩🏽‍❤‍👩🏿	couple with heart woman, woman, medium skin tone, dark skin tone	ninguna
+👩🏾‍❤‍👩🏻	couple with heart woman, woman, medium-dark skin tone, light skin tone	ninguna
+👩🏾‍❤‍👩🏼	couple with heart woman, woman, medium-dark skin tone, medium-light skin tone	ninguna
+👩🏾‍❤‍👩🏽	couple with heart woman, woman, medium-dark skin tone, medium skin tone	ninguna
+👩🏾‍❤‍👩🏾	couple with heart woman, woman, medium-dark skin tone	ninguna
+👩🏾‍❤‍👩🏿	couple with heart woman, woman, medium-dark skin tone, dark skin tone	ninguna
+👩🏿‍❤‍👩🏻	couple with heart woman, woman, dark skin tone, light skin tone	ninguna
+👩🏿‍❤‍👩🏼	couple with heart woman, woman, dark skin tone, medium-light skin tone	ninguna
+👩🏿‍❤‍👩🏽	couple with heart woman, woman, dark skin tone, medium skin tone	ninguna
+👩🏿‍❤‍👩🏾	couple with heart woman, woman, dark skin tone, medium-dark skin tone	ninguna
+👩🏿‍❤‍👩🏿	couple with heart woman, woman, dark skin tone	ninguna
+👩🏻‍🫯‍👩🏼	women wrestling light skin tone, medium-light skin tone	ninguna
+👩🏻‍🫯‍👩🏽	women wrestling light skin tone, medium skin tone	ninguna
+👩🏻‍🫯‍👩🏾	women wrestling light skin tone, medium-dark skin tone	ninguna
+👩🏻‍🫯‍👩🏿	women wrestling light skin tone, dark skin tone	ninguna
+👩🏼‍🫯‍👩🏻	women wrestling medium-light skin tone, light skin tone	ninguna
+👩🏼‍🫯‍👩🏽	women wrestling medium-light skin tone, medium skin tone	ninguna
+👩🏼‍🫯‍👩🏾	women wrestling medium-light skin tone, medium-dark skin tone	ninguna
+👩🏼‍🫯‍👩🏿	women wrestling medium-light skin tone, dark skin tone	ninguna
+👩🏽‍🫯‍👩🏻	women wrestling medium skin tone, light skin tone	ninguna
+👩🏽‍🫯‍👩🏼	women wrestling medium skin tone, medium-light skin tone	ninguna
+👩🏽‍🫯‍👩🏾	women wrestling medium skin tone, medium-dark skin tone	ninguna
+👩🏽‍🫯‍👩🏿	women wrestling medium skin tone, dark skin tone	ninguna
+👩🏾‍🫯‍👩🏻	women wrestling medium-dark skin tone, light skin tone	ninguna
+👩🏾‍🫯‍👩🏼	women wrestling medium-dark skin tone, medium-light skin tone	ninguna
+👩🏾‍🫯‍👩🏽	women wrestling medium-dark skin tone, medium skin tone	ninguna
+👩🏾‍🫯‍👩🏿	women wrestling medium-dark skin tone, dark skin tone	ninguna
+👩🏿‍🫯‍👩🏻	women wrestling dark skin tone, light skin tone	ninguna
+👩🏿‍🫯‍👩🏼	women wrestling dark skin tone, medium-light skin tone	ninguna
+👩🏿‍🫯‍👩🏽	women wrestling dark skin tone, medium skin tone	ninguna
+👩🏿‍🫯‍👩🏾	women wrestling dark skin tone, medium-dark skin tone	ninguna
+👩‍🦰	woman red hair	ninguna
+👩🏻‍🦰	woman light skin tone, red hair	ninguna
+👩🏼‍🦰	woman medium-light skin tone, red hair	ninguna
+👩🏽‍🦰	woman medium skin tone, red hair	ninguna
+👩🏾‍🦰	woman medium-dark skin tone, red hair	ninguna
+👩🏿‍🦰	woman dark skin tone, red hair	ninguna
+👩‍🦱	woman curly hair	ninguna
+👩🏻‍🦱	woman light skin tone, curly hair	ninguna
+👩🏼‍🦱	woman medium-light skin tone, curly hair	ninguna
+👩🏽‍🦱	woman medium skin tone, curly hair	ninguna
+👩🏾‍🦱	woman medium-dark skin tone, curly hair	ninguna
+👩🏿‍🦱	woman dark skin tone, curly hair	ninguna
+👩‍🦳	woman white hair	ninguna
+👩🏻‍🦳	woman light skin tone, white hair	ninguna
+👩🏼‍🦳	woman medium-light skin tone, white hair	ninguna
+👩🏽‍🦳	woman medium skin tone, white hair	ninguna
+👩🏾‍🦳	woman medium-dark skin tone, white hair	ninguna
+👩🏿‍🦳	woman dark skin tone, white hair	ninguna
+👩‍🦲	woman bald	ninguna
+👩🏻‍🦲	woman light skin tone, bald	ninguna
+👩🏼‍🦲	woman medium-light skin tone, bald	ninguna
+👩🏽‍🦲	woman medium skin tone, bald	ninguna
+👩🏾‍🦲	woman medium-dark skin tone, bald	ninguna
+👩🏿‍🦲	woman dark skin tone, bald	ninguna
+👩🏻‍🐰‍👩🏼	women with bunny ears light skin tone, medium-light skin tone	ninguna
+👩🏻‍🐰‍👩🏽	women with bunny ears light skin tone, medium skin tone	ninguna
+👩🏻‍🐰‍👩🏾	women with bunny ears light skin tone, medium-dark skin tone	ninguna
+👩🏻‍🐰‍👩🏿	women with bunny ears light skin tone, dark skin tone	ninguna
+👩🏼‍🐰‍👩🏻	women with bunny ears medium-light skin tone, light skin tone	ninguna
+👩🏼‍🐰‍👩🏽	women with bunny ears medium-light skin tone, medium skin tone	ninguna
+👩🏼‍🐰‍👩🏾	women with bunny ears medium-light skin tone, medium-dark skin tone	ninguna
+👩🏼‍🐰‍👩🏿	women with bunny ears medium-light skin tone, dark skin tone	ninguna
+👩🏽‍🐰‍👩🏻	women with bunny ears medium skin tone, light skin tone	ninguna
+👩🏽‍🐰‍👩🏼	women with bunny ears medium skin tone, medium-light skin tone	ninguna
+👩🏽‍🐰‍👩🏾	women with bunny ears medium skin tone, medium-dark skin tone	ninguna
+👩🏽‍🐰‍👩🏿	women with bunny ears medium skin tone, dark skin tone	ninguna
+👩🏾‍🐰‍👩🏻	women with bunny ears medium-dark skin tone, light skin tone	ninguna
+👩🏾‍🐰‍👩🏼	women with bunny ears medium-dark skin tone, medium-light skin tone	ninguna
+👩🏾‍🐰‍👩🏽	women with bunny ears medium-dark skin tone, medium skin tone	ninguna
+👩🏾‍🐰‍👩🏿	women with bunny ears medium-dark skin tone, dark skin tone	ninguna
+👩🏿‍🐰‍👩🏻	women with bunny ears dark skin tone, light skin tone	ninguna
+👩🏿‍🐰‍👩🏼	women with bunny ears dark skin tone, medium-light skin tone	ninguna
+👩🏿‍🐰‍👩🏽	women with bunny ears dark skin tone, medium skin tone	ninguna
+👩🏿‍🐰‍👩🏾	women with bunny ears dark skin tone, medium-dark skin tone	ninguna
+🧓🏻	older person light skin tone	ninguna
+🧓🏼	older person medium-light skin tone	ninguna
+🧓🏽	older person medium skin tone	ninguna
+🧓🏾	older person medium-dark skin tone	ninguna
+🧓🏿	older person dark skin tone	ninguna
+👴🏻	old man light skin tone	ninguna
+👴🏼	old man medium-light skin tone	ninguna
+👴🏽	old man medium skin tone	ninguna
+👴🏾	old man medium-dark skin tone	ninguna
+👴🏿	old man dark skin tone	ninguna
+👵🏻	old woman light skin tone	ninguna
+👵🏼	old woman medium-light skin tone	ninguna
+👵🏽	old woman medium skin tone	ninguna
+👵🏾	old woman medium-dark skin tone	ninguna
+👵🏿	old woman dark skin tone	ninguna
+🙍🏻	person frowning light skin tone	ninguna
+🙍🏼	person frowning medium-light skin tone	ninguna
+🙍🏽	person frowning medium skin tone	ninguna
+🙍🏾	person frowning medium-dark skin tone	ninguna
+🙍🏿	person frowning dark skin tone	ninguna
+🙍🏻‍♂	man frowning light skin tone	ninguna
+🙍🏼‍♂	man frowning medium-light skin tone	ninguna
+🙍🏽‍♂	man frowning medium skin tone	ninguna
+🙍🏾‍♂	man frowning medium-dark skin tone	ninguna
+🙍🏿‍♂	man frowning dark skin tone	ninguna
+🙍🏻‍♀	woman frowning light skin tone	ninguna
+🙍🏼‍♀	woman frowning medium-light skin tone	ninguna
+🙍🏽‍♀	woman frowning medium skin tone	ninguna
+🙍🏾‍♀	woman frowning medium-dark skin tone	ninguna
+🙍🏿‍♀	woman frowning dark skin tone	ninguna
+🙎🏻	person pouting light skin tone	ninguna
+🙎🏼	person pouting medium-light skin tone	ninguna
+🙎🏽	person pouting medium skin tone	ninguna
+🙎🏾	person pouting medium-dark skin tone	ninguna
+🙎🏿	person pouting dark skin tone	ninguna
+🙎🏻‍♂	man pouting light skin tone	ninguna
+🙎🏼‍♂	man pouting medium-light skin tone	ninguna
+🙎🏽‍♂	man pouting medium skin tone	ninguna
+🙎🏾‍♂	man pouting medium-dark skin tone	ninguna
+🙎🏿‍♂	man pouting dark skin tone	ninguna
+🙎🏻‍♀	woman pouting light skin tone	ninguna
+🙎🏼‍♀	woman pouting medium-light skin tone	ninguna
+🙎🏽‍♀	woman pouting medium skin tone	ninguna
+🙎🏾‍♀	woman pouting medium-dark skin tone	ninguna
+🙎🏿‍♀	woman pouting dark skin tone	ninguna
+🙅🏻	person gesturing NO light skin tone	ninguna
+🙅🏼	person gesturing NO medium-light skin tone	ninguna
+🙅🏽	person gesturing NO medium skin tone	ninguna
+🙅🏾	person gesturing NO medium-dark skin tone	ninguna
+🙅🏿	person gesturing NO dark skin tone	ninguna
+🙅🏻‍♂	man gesturing NO light skin tone	ninguna
+🙅🏼‍♂	man gesturing NO medium-light skin tone	ninguna
+🙅🏽‍♂	man gesturing NO medium skin tone	ninguna
+🙅🏾‍♂	man gesturing NO medium-dark skin tone	ninguna
+🙅🏿‍♂	man gesturing NO dark skin tone	ninguna
+🙅🏻‍♀	woman gesturing NO light skin tone	ninguna
+🙅🏼‍♀	woman gesturing NO medium-light skin tone	ninguna
+🙅🏽‍♀	woman gesturing NO medium skin tone	ninguna
+🙅🏾‍♀	woman gesturing NO medium-dark skin tone	ninguna
+🙅🏿‍♀	woman gesturing NO dark skin tone	ninguna
+🙆🏻	person gesturing OK light skin tone	ninguna
+🙆🏼	person gesturing OK medium-light skin tone	ninguna
+🙆🏽	person gesturing OK medium skin tone	ninguna
+🙆🏾	person gesturing OK medium-dark skin tone	ninguna
+🙆🏿	person gesturing OK dark skin tone	ninguna
+🙆🏻‍♂	man gesturing OK light skin tone	ninguna
+🙆🏼‍♂	man gesturing OK medium-light skin tone	ninguna
+🙆🏽‍♂	man gesturing OK medium skin tone	ninguna
+🙆🏾‍♂	man gesturing OK medium-dark skin tone	ninguna
+🙆🏿‍♂	man gesturing OK dark skin tone	ninguna
+🙆🏻‍♀	woman gesturing OK light skin tone	ninguna
+🙆🏼‍♀	woman gesturing OK medium-light skin tone	ninguna
+🙆🏽‍♀	woman gesturing OK medium skin tone	ninguna
+🙆🏾‍♀	woman gesturing OK medium-dark skin tone	ninguna
+🙆🏿‍♀	woman gesturing OK dark skin tone	ninguna
+💁🏻	person tipping hand light skin tone	ninguna
+💁🏼	person tipping hand medium-light skin tone	ninguna
+💁🏽	person tipping hand medium skin tone	ninguna
+💁🏾	person tipping hand medium-dark skin tone	ninguna
+💁🏿	person tipping hand dark skin tone	ninguna
+💁🏻‍♂	man tipping hand light skin tone	ninguna
+💁🏼‍♂	man tipping hand medium-light skin tone	ninguna
+💁🏽‍♂	man tipping hand medium skin tone	ninguna
+💁🏾‍♂	man tipping hand medium-dark skin tone	ninguna
+💁🏿‍♂	man tipping hand dark skin tone	ninguna
+💁🏻‍♀	woman tipping hand light skin tone	ninguna
+💁🏼‍♀	woman tipping hand medium-light skin tone	ninguna
+💁🏽‍♀	woman tipping hand medium skin tone	ninguna
+💁🏾‍♀	woman tipping hand medium-dark skin tone	ninguna
+💁🏿‍♀	woman tipping hand dark skin tone	ninguna
+🙋🏻	person raising hand light skin tone	ninguna
+🙋🏼	person raising hand medium-light skin tone	ninguna
+🙋🏽	person raising hand medium skin tone	ninguna
+🙋🏾	person raising hand medium-dark skin tone	ninguna
+🙋🏿	person raising hand dark skin tone	ninguna
+🙋🏻‍♂	man raising hand light skin tone	ninguna
+🙋🏼‍♂	man raising hand medium-light skin tone	ninguna
+🙋🏽‍♂	man raising hand medium skin tone	ninguna
+🙋🏾‍♂	man raising hand medium-dark skin tone	ninguna
+🙋🏿‍♂	man raising hand dark skin tone	ninguna
+🙋🏻‍♀	woman raising hand light skin tone	ninguna
+🙋🏼‍♀	woman raising hand medium-light skin tone	ninguna
+🙋🏽‍♀	woman raising hand medium skin tone	ninguna
+🙋🏾‍♀	woman raising hand medium-dark skin tone	ninguna
+🙋🏿‍♀	woman raising hand dark skin tone	ninguna
+🧏🏻	deaf person light skin tone	ninguna
+🧏🏼	deaf person medium-light skin tone	ninguna
+🧏🏽	deaf person medium skin tone	ninguna
+🧏🏾	deaf person medium-dark skin tone	ninguna
+🧏🏿	deaf person dark skin tone	ninguna
+🧏🏻‍♂	deaf man light skin tone	ninguna
+🧏🏼‍♂	deaf man medium-light skin tone	ninguna
+🧏🏽‍♂	deaf man medium skin tone	ninguna
+🧏🏾‍♂	deaf man medium-dark skin tone	ninguna
+🧏🏿‍♂	deaf man dark skin tone	ninguna
+🧏🏻‍♀	deaf woman light skin tone	ninguna
+🧏🏼‍♀	deaf woman medium-light skin tone	ninguna
+🧏🏽‍♀	deaf woman medium skin tone	ninguna
+🧏🏾‍♀	deaf woman medium-dark skin tone	ninguna
+🧏🏿‍♀	deaf woman dark skin tone	ninguna
+🙇🏻	person bowing light skin tone	ninguna
+🙇🏼	person bowing medium-light skin tone	ninguna
+🙇🏽	person bowing medium skin tone	ninguna
+🙇🏾	person bowing medium-dark skin tone	ninguna
+🙇🏿	person bowing dark skin tone	ninguna
+🙇🏻‍♂	man bowing light skin tone	ninguna
+🙇🏼‍♂	man bowing medium-light skin tone	ninguna
+🙇🏽‍♂	man bowing medium skin tone	ninguna
+🙇🏾‍♂	man bowing medium-dark skin tone	ninguna
+🙇🏿‍♂	man bowing dark skin tone	ninguna
+🙇🏻‍♀	woman bowing light skin tone	ninguna
+🙇🏼‍♀	woman bowing medium-light skin tone	ninguna
+🙇🏽‍♀	woman bowing medium skin tone	ninguna
+🙇🏾‍♀	woman bowing medium-dark skin tone	ninguna
+🙇🏿‍♀	woman bowing dark skin tone	ninguna
+🤦🏻	person facepalming light skin tone	ninguna
+🤦🏼	person facepalming medium-light skin tone	ninguna
+🤦🏽	person facepalming medium skin tone	ninguna
+🤦🏾	person facepalming medium-dark skin tone	ninguna
+🤦🏿	person facepalming dark skin tone	ninguna
+🤦🏻‍♂	man facepalming light skin tone	ninguna
+🤦🏼‍♂	man facepalming medium-light skin tone	ninguna
+🤦🏽‍♂	man facepalming medium skin tone	ninguna
+🤦🏾‍♂	man facepalming medium-dark skin tone	ninguna
+🤦🏿‍♂	man facepalming dark skin tone	ninguna
+🤦🏻‍♀	woman facepalming light skin tone	ninguna
+🤦🏼‍♀	woman facepalming medium-light skin tone	ninguna
+🤦🏽‍♀	woman facepalming medium skin tone	ninguna
+🤦🏾‍♀	woman facepalming medium-dark skin tone	ninguna
+🤦🏿‍♀	woman facepalming dark skin tone	ninguna
+🤷🏻	person shrugging light skin tone	ninguna
+🤷🏼	person shrugging medium-light skin tone	ninguna
+🤷🏽	person shrugging medium skin tone	ninguna
+🤷🏾	person shrugging medium-dark skin tone	ninguna
+🤷🏿	person shrugging dark skin tone	ninguna
+🤷🏻‍♂	man shrugging light skin tone	ninguna
+🤷🏼‍♂	man shrugging medium-light skin tone	ninguna
+🤷🏽‍♂	man shrugging medium skin tone	ninguna
+🤷🏾‍♂	man shrugging medium-dark skin tone	ninguna
+🤷🏿‍♂	man shrugging dark skin tone	ninguna
+🤷🏻‍♀	woman shrugging light skin tone	ninguna
+🤷🏼‍♀	woman shrugging medium-light skin tone	ninguna
+🤷🏽‍♀	woman shrugging medium skin tone	ninguna
+🤷🏾‍♀	woman shrugging medium-dark skin tone	ninguna
+🤷🏿‍♀	woman shrugging dark skin tone	ninguna
+🧑🏻‍⚕	health worker light skin tone	ninguna
+🧑🏼‍⚕	health worker medium-light skin tone	ninguna
+🧑🏽‍⚕	health worker medium skin tone	ninguna
+🧑🏾‍⚕	health worker medium-dark skin tone	ninguna
+🧑🏿‍⚕	health worker dark skin tone	ninguna
+👨🏻‍⚕	man health worker light skin tone	ninguna
+👨🏼‍⚕	man health worker medium-light skin tone	ninguna
+👨🏽‍⚕	man health worker medium skin tone	ninguna
+👨🏾‍⚕	man health worker medium-dark skin tone	ninguna
+👨🏿‍⚕	man health worker dark skin tone	ninguna
+👩🏻‍⚕	woman health worker light skin tone	ninguna
+👩🏼‍⚕	woman health worker medium-light skin tone	ninguna
+👩🏽‍⚕	woman health worker medium skin tone	ninguna
+👩🏾‍⚕	woman health worker medium-dark skin tone	ninguna
+👩🏿‍⚕	woman health worker dark skin tone	ninguna
+🧑🏻‍🎓	student light skin tone	ninguna
+🧑🏼‍🎓	student medium-light skin tone	ninguna
+🧑🏽‍🎓	student medium skin tone	ninguna
+🧑🏾‍🎓	student medium-dark skin tone	ninguna
+🧑🏿‍🎓	student dark skin tone	ninguna
+👨🏻‍🎓	man student light skin tone	ninguna
+👨🏼‍🎓	man student medium-light skin tone	ninguna
+👨🏽‍🎓	man student medium skin tone	ninguna
+👨🏾‍🎓	man student medium-dark skin tone	ninguna
+👨🏿‍🎓	man student dark skin tone	ninguna
+👩🏻‍🎓	woman student light skin tone	ninguna
+👩🏼‍🎓	woman student medium-light skin tone	ninguna
+👩🏽‍🎓	woman student medium skin tone	ninguna
+👩🏾‍🎓	woman student medium-dark skin tone	ninguna
+👩🏿‍🎓	woman student dark skin tone	ninguna
+🧑🏻‍🏫	teacher light skin tone	ninguna
+🧑🏼‍🏫	teacher medium-light skin tone	ninguna
+🧑🏽‍🏫	teacher medium skin tone	ninguna
+🧑🏾‍🏫	teacher medium-dark skin tone	ninguna
+🧑🏿‍🏫	teacher dark skin tone	ninguna
+👨🏻‍🏫	man teacher light skin tone	ninguna
+👨🏼‍🏫	man teacher medium-light skin tone	ninguna
+👨🏽‍🏫	man teacher medium skin tone	ninguna
+👨🏾‍🏫	man teacher medium-dark skin tone	ninguna
+👨🏿‍🏫	man teacher dark skin tone	ninguna
+👩🏻‍🏫	woman teacher light skin tone	ninguna
+👩🏼‍🏫	woman teacher medium-light skin tone	ninguna
+👩🏽‍🏫	woman teacher medium skin tone	ninguna
+👩🏾‍🏫	woman teacher medium-dark skin tone	ninguna
+👩🏿‍🏫	woman teacher dark skin tone	ninguna
+🧑🏻‍⚖	judge light skin tone	ninguna
+🧑🏼‍⚖	judge medium-light skin tone	ninguna
+🧑🏽‍⚖	judge medium skin tone	ninguna
+🧑🏾‍⚖	judge medium-dark skin tone	ninguna
+🧑🏿‍⚖	judge dark skin tone	ninguna
+👨🏻‍⚖	man judge light skin tone	ninguna
+👨🏼‍⚖	man judge medium-light skin tone	ninguna
+👨🏽‍⚖	man judge medium skin tone	ninguna
+👨🏾‍⚖	man judge medium-dark skin tone	ninguna
+👨🏿‍⚖	man judge dark skin tone	ninguna
+👩🏻‍⚖	woman judge light skin tone	ninguna
+👩🏼‍⚖	woman judge medium-light skin tone	ninguna
+👩🏽‍⚖	woman judge medium skin tone	ninguna
+👩🏾‍⚖	woman judge medium-dark skin tone	ninguna
+👩🏿‍⚖	woman judge dark skin tone	ninguna
+🧑🏻‍🌾	farmer light skin tone	ninguna
+🧑🏼‍🌾	farmer medium-light skin tone	ninguna
+🧑🏽‍🌾	farmer medium skin tone	ninguna
+🧑🏾‍🌾	farmer medium-dark skin tone	ninguna
+🧑🏿‍🌾	farmer dark skin tone	ninguna
+👨🏻‍🌾	man farmer light skin tone	ninguna
+👨🏼‍🌾	man farmer medium-light skin tone	ninguna
+👨🏽‍🌾	man farmer medium skin tone	ninguna
+👨🏾‍🌾	man farmer medium-dark skin tone	ninguna
+👨🏿‍🌾	man farmer dark skin tone	ninguna
+👩🏻‍🌾	woman farmer light skin tone	ninguna
+👩🏼‍🌾	woman farmer medium-light skin tone	ninguna
+👩🏽‍🌾	woman farmer medium skin tone	ninguna
+👩🏾‍🌾	woman farmer medium-dark skin tone	ninguna
+👩🏿‍🌾	woman farmer dark skin tone	ninguna
+🧑🏻‍🍳	cook light skin tone	ninguna
+🧑🏼‍🍳	cook medium-light skin tone	ninguna
+🧑🏽‍🍳	cook medium skin tone	ninguna
+🧑🏾‍🍳	cook medium-dark skin tone	ninguna
+🧑🏿‍🍳	cook dark skin tone	ninguna
+👨🏻‍🍳	man cook light skin tone	ninguna
+👨🏼‍🍳	man cook medium-light skin tone	ninguna
+👨🏽‍🍳	man cook medium skin tone	ninguna
+👨🏾‍🍳	man cook medium-dark skin tone	ninguna
+👨🏿‍🍳	man cook dark skin tone	ninguna
+👩🏻‍🍳	woman cook light skin tone	ninguna
+👩🏼‍🍳	woman cook medium-light skin tone	ninguna
+👩🏽‍🍳	woman cook medium skin tone	ninguna
+👩🏾‍🍳	woman cook medium-dark skin tone	ninguna
+👩🏿‍🍳	woman cook dark skin tone	ninguna
+🧑🏻‍🔧	mechanic light skin tone	ninguna
+🧑🏼‍🔧	mechanic medium-light skin tone	ninguna
+🧑🏽‍🔧	mechanic medium skin tone	ninguna
+🧑🏾‍🔧	mechanic medium-dark skin tone	ninguna
+🧑🏿‍🔧	mechanic dark skin tone	ninguna
+👨🏻‍🔧	man mechanic light skin tone	ninguna
+👨🏼‍🔧	man mechanic medium-light skin tone	ninguna
+👨🏽‍🔧	man mechanic medium skin tone	ninguna
+👨🏾‍🔧	man mechanic medium-dark skin tone	ninguna
+👨🏿‍🔧	man mechanic dark skin tone	ninguna
+👩🏻‍🔧	woman mechanic light skin tone	ninguna
+👩🏼‍🔧	woman mechanic medium-light skin tone	ninguna
+👩🏽‍🔧	woman mechanic medium skin tone	ninguna
+👩🏾‍🔧	woman mechanic medium-dark skin tone	ninguna
+👩🏿‍🔧	woman mechanic dark skin tone	ninguna
+🧑🏻‍🏭	factory worker light skin tone	ninguna
+🧑🏼‍🏭	factory worker medium-light skin tone	ninguna
+🧑🏽‍🏭	factory worker medium skin tone	ninguna
+🧑🏾‍🏭	factory worker medium-dark skin tone	ninguna
+🧑🏿‍🏭	factory worker dark skin tone	ninguna
+👨🏻‍🏭	man factory worker light skin tone	ninguna
+👨🏼‍🏭	man factory worker medium-light skin tone	ninguna
+👨🏽‍🏭	man factory worker medium skin tone	ninguna
+👨🏾‍🏭	man factory worker medium-dark skin tone	ninguna
+👨🏿‍🏭	man factory worker dark skin tone	ninguna
+👩🏻‍🏭	woman factory worker light skin tone	ninguna
+👩🏼‍🏭	woman factory worker medium-light skin tone	ninguna
+👩🏽‍🏭	woman factory worker medium skin tone	ninguna
+👩🏾‍🏭	woman factory worker medium-dark skin tone	ninguna
+👩🏿‍🏭	woman factory worker dark skin tone	ninguna
+🧑🏻‍💼	office worker light skin tone	ninguna
+🧑🏼‍💼	office worker medium-light skin tone	ninguna
+🧑🏽‍💼	office worker medium skin tone	ninguna
+🧑🏾‍💼	office worker medium-dark skin tone	ninguna
+🧑🏿‍💼	office worker dark skin tone	ninguna
+👨🏻‍💼	man office worker light skin tone	ninguna
+👨🏼‍💼	man office worker medium-light skin tone	ninguna
+👨🏽‍💼	man office worker medium skin tone	ninguna
+👨🏾‍💼	man office worker medium-dark skin tone	ninguna
+👨🏿‍💼	man office worker dark skin tone	ninguna
+👩🏻‍💼	woman office worker light skin tone	ninguna
+👩🏼‍💼	woman office worker medium-light skin tone	ninguna
+👩🏽‍💼	woman office worker medium skin tone	ninguna
+👩🏾‍💼	woman office worker medium-dark skin tone	ninguna
+👩🏿‍💼	woman office worker dark skin tone	ninguna
+🧑🏻‍🔬	scientist light skin tone	ninguna
+🧑🏼‍🔬	scientist medium-light skin tone	ninguna
+🧑🏽‍🔬	scientist medium skin tone	ninguna
+🧑🏾‍🔬	scientist medium-dark skin tone	ninguna
+🧑🏿‍🔬	scientist dark skin tone	ninguna
+👨🏻‍🔬	man scientist light skin tone	ninguna
+👨🏼‍🔬	man scientist medium-light skin tone	ninguna
+👨🏽‍🔬	man scientist medium skin tone	ninguna
+👨🏾‍🔬	man scientist medium-dark skin tone	ninguna
+👨🏿‍🔬	man scientist dark skin tone	ninguna
+👩🏻‍🔬	woman scientist light skin tone	ninguna
+👩🏼‍🔬	woman scientist medium-light skin tone	ninguna
+👩🏽‍🔬	woman scientist medium skin tone	ninguna
+👩🏾‍🔬	woman scientist medium-dark skin tone	ninguna
+👩🏿‍🔬	woman scientist dark skin tone	ninguna
+🧑🏻‍💻	technologist light skin tone	ninguna
+🧑🏼‍💻	technologist medium-light skin tone	ninguna
+🧑🏽‍💻	technologist medium skin tone	ninguna
+🧑🏾‍💻	technologist medium-dark skin tone	ninguna
+🧑🏿‍💻	technologist dark skin tone	ninguna
+👨🏻‍💻	man technologist light skin tone	ninguna
+👨🏼‍💻	man technologist medium-light skin tone	ninguna
+👨🏽‍💻	man technologist medium skin tone	ninguna
+👨🏾‍💻	man technologist medium-dark skin tone	ninguna
+👨🏿‍💻	man technologist dark skin tone	ninguna
+👩🏻‍💻	woman technologist light skin tone	ninguna
+👩🏼‍💻	woman technologist medium-light skin tone	ninguna
+👩🏽‍💻	woman technologist medium skin tone	ninguna
+👩🏾‍💻	woman technologist medium-dark skin tone	ninguna
+👩🏿‍💻	woman technologist dark skin tone	ninguna
+🧑🏻‍🎤	singer light skin tone	ninguna
+🧑🏼‍🎤	singer medium-light skin tone	ninguna
+🧑🏽‍🎤	singer medium skin tone	ninguna
+🧑🏾‍🎤	singer medium-dark skin tone	ninguna
+🧑🏿‍🎤	singer dark skin tone	ninguna
+👨🏻‍🎤	man singer light skin tone	ninguna
+👨🏼‍🎤	man singer medium-light skin tone	ninguna
+👨🏽‍🎤	man singer medium skin tone	ninguna
+👨🏾‍🎤	man singer medium-dark skin tone	ninguna
+👨🏿‍🎤	man singer dark skin tone	ninguna
+👩🏻‍🎤	woman singer light skin tone	ninguna
+👩🏼‍🎤	woman singer medium-light skin tone	ninguna
+👩🏽‍🎤	woman singer medium skin tone	ninguna
+👩🏾‍🎤	woman singer medium-dark skin tone	ninguna
+👩🏿‍🎤	woman singer dark skin tone	ninguna
+🧑🏻‍🎨	artist light skin tone	ninguna
+🧑🏼‍🎨	artist medium-light skin tone	ninguna
+🧑🏽‍🎨	artist medium skin tone	ninguna
+🧑🏾‍🎨	artist medium-dark skin tone	ninguna
+🧑🏿‍🎨	artist dark skin tone	ninguna
+👨🏻‍🎨	man artist light skin tone	ninguna
+👨🏼‍🎨	man artist medium-light skin tone	ninguna
+👨🏽‍🎨	man artist medium skin tone	ninguna
+👨🏾‍🎨	man artist medium-dark skin tone	ninguna
+👨🏿‍🎨	man artist dark skin tone	ninguna
+👩🏻‍🎨	woman artist light skin tone	ninguna
+👩🏼‍🎨	woman artist medium-light skin tone	ninguna
+👩🏽‍🎨	woman artist medium skin tone	ninguna
+👩🏾‍🎨	woman artist medium-dark skin tone	ninguna
+👩🏿‍🎨	woman artist dark skin tone	ninguna
+🧑🏻‍✈	pilot light skin tone	ninguna
+🧑🏼‍✈	pilot medium-light skin tone	ninguna
+🧑🏽‍✈	pilot medium skin tone	ninguna
+🧑🏾‍✈	pilot medium-dark skin tone	ninguna
+🧑🏿‍✈	pilot dark skin tone	ninguna
+👨🏻‍✈	man pilot light skin tone	ninguna
+👨🏼‍✈	man pilot medium-light skin tone	ninguna
+👨🏽‍✈	man pilot medium skin tone	ninguna
+👨🏾‍✈	man pilot medium-dark skin tone	ninguna
+👨🏿‍✈	man pilot dark skin tone	ninguna
+👩🏻‍✈	woman pilot light skin tone	ninguna
+👩🏼‍✈	woman pilot medium-light skin tone	ninguna
+👩🏽‍✈	woman pilot medium skin tone	ninguna
+👩🏾‍✈	woman pilot medium-dark skin tone	ninguna
+👩🏿‍✈	woman pilot dark skin tone	ninguna
+🧑🏻‍🚀	astronaut light skin tone	ninguna
+🧑🏼‍🚀	astronaut medium-light skin tone	ninguna
+🧑🏽‍🚀	astronaut medium skin tone	ninguna
+🧑🏾‍🚀	astronaut medium-dark skin tone	ninguna
+🧑🏿‍🚀	astronaut dark skin tone	ninguna
+👨🏻‍🚀	man astronaut light skin tone	ninguna
+👨🏼‍🚀	man astronaut medium-light skin tone	ninguna
+👨🏽‍🚀	man astronaut medium skin tone	ninguna
+👨🏾‍🚀	man astronaut medium-dark skin tone	ninguna
+👨🏿‍🚀	man astronaut dark skin tone	ninguna
+👩🏻‍🚀	woman astronaut light skin tone	ninguna
+👩🏼‍🚀	woman astronaut medium-light skin tone	ninguna
+👩🏽‍🚀	woman astronaut medium skin tone	ninguna
+👩🏾‍🚀	woman astronaut medium-dark skin tone	ninguna
+👩🏿‍🚀	woman astronaut dark skin tone	ninguna
+🧑🏻‍🚒	firefighter light skin tone	ninguna
+🧑🏼‍🚒	firefighter medium-light skin tone	ninguna
+🧑🏽‍🚒	firefighter medium skin tone	ninguna
+🧑🏾‍🚒	firefighter medium-dark skin tone	ninguna
+🧑🏿‍🚒	firefighter dark skin tone	ninguna
+👨🏻‍🚒	man firefighter light skin tone	ninguna
+👨🏼‍🚒	man firefighter medium-light skin tone	ninguna
+👨🏽‍🚒	man firefighter medium skin tone	ninguna
+👨🏾‍🚒	man firefighter medium-dark skin tone	ninguna
+👨🏿‍🚒	man firefighter dark skin tone	ninguna
+👩🏻‍🚒	woman firefighter light skin tone	ninguna
+👩🏼‍🚒	woman firefighter medium-light skin tone	ninguna
+👩🏽‍🚒	woman firefighter medium skin tone	ninguna
+👩🏾‍🚒	woman firefighter medium-dark skin tone	ninguna
+👩🏿‍🚒	woman firefighter dark skin tone	ninguna
+👮🏻	police officer light skin tone	ninguna
+👮🏼	police officer medium-light skin tone	ninguna
+👮🏽	police officer medium skin tone	ninguna
+👮🏾	police officer medium-dark skin tone	ninguna
+👮🏿	police officer dark skin tone	ninguna
+👮🏻‍♂	man police officer light skin tone	ninguna
+👮🏼‍♂	man police officer medium-light skin tone	ninguna
+👮🏽‍♂	man police officer medium skin tone	ninguna
+👮🏾‍♂	man police officer medium-dark skin tone	ninguna
+👮🏿‍♂	man police officer dark skin tone	ninguna
+👮🏻‍♀	woman police officer light skin tone	ninguna
+👮🏼‍♀	woman police officer medium-light skin tone	ninguna
+👮🏽‍♀	woman police officer medium skin tone	ninguna
+👮🏾‍♀	woman police officer medium-dark skin tone	ninguna
+👮🏿‍♀	woman police officer dark skin tone	ninguna
+🕵🏻	detective light skin tone	ninguna
+🕵🏼	detective medium-light skin tone	ninguna
+🕵🏽	detective medium skin tone	ninguna
+🕵🏾	detective medium-dark skin tone	ninguna
+🕵🏿	detective dark skin tone	ninguna
+🕵🏻‍♂	man detective light skin tone	ninguna
+🕵🏼‍♂	man detective medium-light skin tone	ninguna
+🕵🏽‍♂	man detective medium skin tone	ninguna
+🕵🏾‍♂	man detective medium-dark skin tone	ninguna
+🕵🏿‍♂	man detective dark skin tone	ninguna
+🕵🏻‍♀	woman detective light skin tone	ninguna
+🕵🏼‍♀	woman detective medium-light skin tone	ninguna
+🕵🏽‍♀	woman detective medium skin tone	ninguna
+🕵🏾‍♀	woman detective medium-dark skin tone	ninguna
+🕵🏿‍♀	woman detective dark skin tone	ninguna
+💂🏻	guard light skin tone	ninguna
+💂🏼	guard medium-light skin tone	ninguna
+💂🏽	guard medium skin tone	ninguna
+💂🏾	guard medium-dark skin tone	ninguna
+💂🏿	guard dark skin tone	ninguna
+💂🏻‍♂	man guard light skin tone	ninguna
+💂🏼‍♂	man guard medium-light skin tone	ninguna
+💂🏽‍♂	man guard medium skin tone	ninguna
+💂🏾‍♂	man guard medium-dark skin tone	ninguna
+💂🏿‍♂	man guard dark skin tone	ninguna
+💂🏻‍♀	woman guard light skin tone	ninguna
+💂🏼‍♀	woman guard medium-light skin tone	ninguna
+💂🏽‍♀	woman guard medium skin tone	ninguna
+💂🏾‍♀	woman guard medium-dark skin tone	ninguna
+💂🏿‍♀	woman guard dark skin tone	ninguna
+🥷🏻	ninja light skin tone	ninguna
+🥷🏼	ninja medium-light skin tone	ninguna
+🥷🏽	ninja medium skin tone	ninguna
+🥷🏾	ninja medium-dark skin tone	ninguna
+🥷🏿	ninja dark skin tone	ninguna
+👷🏻	construction worker light skin tone	ninguna
+👷🏼	construction worker medium-light skin tone	ninguna
+👷🏽	construction worker medium skin tone	ninguna
+👷🏾	construction worker medium-dark skin tone	ninguna
+👷🏿	construction worker dark skin tone	ninguna
+👷🏻‍♂	man construction worker light skin tone	ninguna
+👷🏼‍♂	man construction worker medium-light skin tone	ninguna
+👷🏽‍♂	man construction worker medium skin tone	ninguna
+👷🏾‍♂	man construction worker medium-dark skin tone	ninguna
+👷🏿‍♂	man construction worker dark skin tone	ninguna
+👷🏻‍♀	woman construction worker light skin tone	ninguna
+👷🏼‍♀	woman construction worker medium-light skin tone	ninguna
+👷🏽‍♀	woman construction worker medium skin tone	ninguna
+👷🏾‍♀	woman construction worker medium-dark skin tone	ninguna
+👷🏿‍♀	woman construction worker dark skin tone	ninguna
+🫅🏻	person with crown light skin tone	ninguna
+🫅🏼	person with crown medium-light skin tone	ninguna
+🫅🏽	person with crown medium skin tone	ninguna
+🫅🏾	person with crown medium-dark skin tone	ninguna
+🫅🏿	person with crown dark skin tone	ninguna
+🤴🏻	prince light skin tone	ninguna
+🤴🏼	prince medium-light skin tone	ninguna
+🤴🏽	prince medium skin tone	ninguna
+🤴🏾	prince medium-dark skin tone	ninguna
+🤴🏿	prince dark skin tone	ninguna
+👸🏻	princess light skin tone	ninguna
+👸🏼	princess medium-light skin tone	ninguna
+👸🏽	princess medium skin tone	ninguna
+👸🏾	princess medium-dark skin tone	ninguna
+👸🏿	princess dark skin tone	ninguna
+👳🏻	person wearing turban light skin tone	ninguna
+👳🏼	person wearing turban medium-light skin tone	ninguna
+👳🏽	person wearing turban medium skin tone	ninguna
+👳🏾	person wearing turban medium-dark skin tone	ninguna
+👳🏿	person wearing turban dark skin tone	ninguna
+👳🏻‍♂	man wearing turban light skin tone	ninguna
+👳🏼‍♂	man wearing turban medium-light skin tone	ninguna
+👳🏽‍♂	man wearing turban medium skin tone	ninguna
+👳🏾‍♂	man wearing turban medium-dark skin tone	ninguna
+👳🏿‍♂	man wearing turban dark skin tone	ninguna
+👳🏻‍♀	woman wearing turban light skin tone	ninguna
+👳🏼‍♀	woman wearing turban medium-light skin tone	ninguna
+👳🏽‍♀	woman wearing turban medium skin tone	ninguna
+👳🏾‍♀	woman wearing turban medium-dark skin tone	ninguna
+👳🏿‍♀	woman wearing turban dark skin tone	ninguna
+👲🏻	person with skullcap light skin tone	ninguna
+👲🏼	person with skullcap medium-light skin tone	ninguna
+👲🏽	person with skullcap medium skin tone	ninguna
+👲🏾	person with skullcap medium-dark skin tone	ninguna
+👲🏿	person with skullcap dark skin tone	ninguna
+🧕🏻	woman with headscarf light skin tone	ninguna
+🧕🏼	woman with headscarf medium-light skin tone	ninguna
+🧕🏽	woman with headscarf medium skin tone	ninguna
+🧕🏾	woman with headscarf medium-dark skin tone	ninguna
+🧕🏿	woman with headscarf dark skin tone	ninguna
+🤵🏻	person in tuxedo light skin tone	ninguna
+🤵🏼	person in tuxedo medium-light skin tone	ninguna
+🤵🏽	person in tuxedo medium skin tone	ninguna
+🤵🏾	person in tuxedo medium-dark skin tone	ninguna
+🤵🏿	person in tuxedo dark skin tone	ninguna
+🤵🏻‍♂	man in tuxedo light skin tone	ninguna
+🤵🏼‍♂	man in tuxedo medium-light skin tone	ninguna
+🤵🏽‍♂	man in tuxedo medium skin tone	ninguna
+🤵🏾‍♂	man in tuxedo medium-dark skin tone	ninguna
+🤵🏿‍♂	man in tuxedo dark skin tone	ninguna
+🤵🏻‍♀	woman in tuxedo light skin tone	ninguna
+🤵🏼‍♀	woman in tuxedo medium-light skin tone	ninguna
+🤵🏽‍♀	woman in tuxedo medium skin tone	ninguna
+🤵🏾‍♀	woman in tuxedo medium-dark skin tone	ninguna
+🤵🏿‍♀	woman in tuxedo dark skin tone	ninguna
+👰🏻	person with veil light skin tone	ninguna
+👰🏼	person with veil medium-light skin tone	ninguna
+👰🏽	person with veil medium skin tone	ninguna
+👰🏾	person with veil medium-dark skin tone	ninguna
+👰🏿	person with veil dark skin tone	ninguna
+👰🏻‍♂	man with veil light skin tone	ninguna
+👰🏼‍♂	man with veil medium-light skin tone	ninguna
+👰🏽‍♂	man with veil medium skin tone	ninguna
+👰🏾‍♂	man with veil medium-dark skin tone	ninguna
+👰🏿‍♂	man with veil dark skin tone	ninguna
+👰🏻‍♀	woman with veil light skin tone	ninguna
+👰🏼‍♀	woman with veil medium-light skin tone	ninguna
+👰🏽‍♀	woman with veil medium skin tone	ninguna
+👰🏾‍♀	woman with veil medium-dark skin tone	ninguna
+👰🏿‍♀	woman with veil dark skin tone	ninguna
+🤰🏻	pregnant woman light skin tone	ninguna
+🤰🏼	pregnant woman medium-light skin tone	ninguna
+🤰🏽	pregnant woman medium skin tone	ninguna
+🤰🏾	pregnant woman medium-dark skin tone	ninguna
+🤰🏿	pregnant woman dark skin tone	ninguna
+🫃🏻	pregnant man light skin tone	ninguna
+🫃🏼	pregnant man medium-light skin tone	ninguna
+🫃🏽	pregnant man medium skin tone	ninguna
+🫃🏾	pregnant man medium-dark skin tone	ninguna
+🫃🏿	pregnant man dark skin tone	ninguna
+🫄🏻	pregnant person light skin tone	ninguna
+🫄🏼	pregnant person medium-light skin tone	ninguna
+🫄🏽	pregnant person medium skin tone	ninguna
+🫄🏾	pregnant person medium-dark skin tone	ninguna
+🫄🏿	pregnant person dark skin tone	ninguna
+🤱🏻	breast-feeding light skin tone	ninguna
+🤱🏼	breast-feeding medium-light skin tone	ninguna
+🤱🏽	breast-feeding medium skin tone	ninguna
+🤱🏾	breast-feeding medium-dark skin tone	ninguna
+🤱🏿	breast-feeding dark skin tone	ninguna
+👩🏻‍🍼	woman feeding baby light skin tone	ninguna
+👩🏼‍🍼	woman feeding baby medium-light skin tone	ninguna
+👩🏽‍🍼	woman feeding baby medium skin tone	ninguna
+👩🏾‍🍼	woman feeding baby medium-dark skin tone	ninguna
+👩🏿‍🍼	woman feeding baby dark skin tone	ninguna
+👨🏻‍🍼	man feeding baby light skin tone	ninguna
+👨🏼‍🍼	man feeding baby medium-light skin tone	ninguna
+👨🏽‍🍼	man feeding baby medium skin tone	ninguna
+👨🏾‍🍼	man feeding baby medium-dark skin tone	ninguna
+👨🏿‍🍼	man feeding baby dark skin tone	ninguna
+🧑🏻‍🍼	person feeding baby light skin tone	ninguna
+🧑🏼‍🍼	person feeding baby medium-light skin tone	ninguna
+🧑🏽‍🍼	person feeding baby medium skin tone	ninguna
+🧑🏾‍🍼	person feeding baby medium-dark skin tone	ninguna
+🧑🏿‍🍼	person feeding baby dark skin tone	ninguna
+👼🏻	baby angel light skin tone	ninguna
+👼🏼	baby angel medium-light skin tone	ninguna
+👼🏽	baby angel medium skin tone	ninguna
+👼🏾	baby angel medium-dark skin tone	ninguna
+👼🏿	baby angel dark skin tone	ninguna
+🎅🏻	Santa Claus light skin tone	ninguna
+🎅🏼	Santa Claus medium-light skin tone	ninguna
+🎅🏽	Santa Claus medium skin tone	ninguna
+🎅🏾	Santa Claus medium-dark skin tone	ninguna
+🎅🏿	Santa Claus dark skin tone	ninguna
+🧑🏻‍🎄	Mx Claus light skin tone	ninguna
+🧑🏼‍🎄	Mx Claus medium-light skin tone	ninguna
+🧑🏽‍🎄	Mx Claus medium skin tone	ninguna
+🧑🏾‍🎄	Mx Claus medium-dark skin tone	ninguna
+🧑🏿‍🎄	Mx Claus dark skin tone	ninguna
+🦸🏻	superhero light skin tone	ninguna
+🦸🏼	superhero medium-light skin tone	ninguna
+🦸🏽	superhero medium skin tone	ninguna
+🦸🏾	superhero medium-dark skin tone	ninguna
+🦸🏿	superhero dark skin tone	ninguna
+🦸🏻‍♂	man superhero light skin tone	ninguna
+🦸🏼‍♂	man superhero medium-light skin tone	ninguna
+🦸🏽‍♂	man superhero medium skin tone	ninguna
+🦸🏾‍♂	man superhero medium-dark skin tone	ninguna
+🦸🏿‍♂	man superhero dark skin tone	ninguna
+🦸🏻‍♀	woman superhero light skin tone	ninguna
+🦸🏼‍♀	woman superhero medium-light skin tone	ninguna
+🦸🏽‍♀	woman superhero medium skin tone	ninguna
+🦸🏾‍♀	woman superhero medium-dark skin tone	ninguna
+🦸🏿‍♀	woman superhero dark skin tone	ninguna
+🦹🏻	supervillain light skin tone	ninguna
+🦹🏼	supervillain medium-light skin tone	ninguna
+🦹🏽	supervillain medium skin tone	ninguna
+🦹🏾	supervillain medium-dark skin tone	ninguna
+🦹🏿	supervillain dark skin tone	ninguna
+🦹🏻‍♂	man supervillain light skin tone	ninguna
+🦹🏼‍♂	man supervillain medium-light skin tone	ninguna
+🦹🏽‍♂	man supervillain medium skin tone	ninguna
+🦹🏾‍♂	man supervillain medium-dark skin tone	ninguna
+🦹🏿‍♂	man supervillain dark skin tone	ninguna
+🦹🏻‍♀	woman supervillain light skin tone	ninguna
+🦹🏼‍♀	woman supervillain medium-light skin tone	ninguna
+🦹🏽‍♀	woman supervillain medium skin tone	ninguna
+🦹🏾‍♀	woman supervillain medium-dark skin tone	ninguna
+🦹🏿‍♀	woman supervillain dark skin tone	ninguna
+🧙🏻	mage light skin tone	ninguna
+🧙🏼	mage medium-light skin tone	ninguna
+🧙🏽	mage medium skin tone	ninguna
+🧙🏾	mage medium-dark skin tone	ninguna
+🧙🏿	mage dark skin tone	ninguna
+🧙🏻‍♂	man mage light skin tone	ninguna
+🧙🏼‍♂	man mage medium-light skin tone	ninguna
+🧙🏽‍♂	man mage medium skin tone	ninguna
+🧙🏾‍♂	man mage medium-dark skin tone	ninguna
+🧙🏿‍♂	man mage dark skin tone	ninguna
+🧙🏻‍♀	woman mage light skin tone	ninguna
+🧙🏼‍♀	woman mage medium-light skin tone	ninguna
+🧙🏽‍♀	woman mage medium skin tone	ninguna
+🧙🏾‍♀	woman mage medium-dark skin tone	ninguna
+🧙🏿‍♀	woman mage dark skin tone	ninguna
+🧚🏻	fairy light skin tone	ninguna
+🧚🏼	fairy medium-light skin tone	ninguna
+🧚🏽	fairy medium skin tone	ninguna
+🧚🏾	fairy medium-dark skin tone	ninguna
+🧚🏿	fairy dark skin tone	ninguna
+🧚🏻‍♂	man fairy light skin tone	ninguna
+🧚🏼‍♂	man fairy medium-light skin tone	ninguna
+🧚🏽‍♂	man fairy medium skin tone	ninguna
+🧚🏾‍♂	man fairy medium-dark skin tone	ninguna
+🧚🏿‍♂	man fairy dark skin tone	ninguna
+🧚🏻‍♀	woman fairy light skin tone	ninguna
+🧚🏼‍♀	woman fairy medium-light skin tone	ninguna
+🧚🏽‍♀	woman fairy medium skin tone	ninguna
+🧚🏾‍♀	woman fairy medium-dark skin tone	ninguna
+🧚🏿‍♀	woman fairy dark skin tone	ninguna
+🧛🏻	vampire light skin tone	ninguna
+🧛🏼	vampire medium-light skin tone	ninguna
+🧛🏽	vampire medium skin tone	ninguna
+🧛🏾	vampire medium-dark skin tone	ninguna
+🧛🏿	vampire dark skin tone	ninguna
+🧛🏻‍♂	man vampire light skin tone	ninguna
+🧛🏼‍♂	man vampire medium-light skin tone	ninguna
+🧛🏽‍♂	man vampire medium skin tone	ninguna
+🧛🏾‍♂	man vampire medium-dark skin tone	ninguna
+🧛🏿‍♂	man vampire dark skin tone	ninguna
+🧛🏻‍♀	woman vampire light skin tone	ninguna
+🧛🏼‍♀	woman vampire medium-light skin tone	ninguna
+🧛🏽‍♀	woman vampire medium skin tone	ninguna
+🧛🏾‍♀	woman vampire medium-dark skin tone	ninguna
+🧛🏿‍♀	woman vampire dark skin tone	ninguna
+🧜🏻	merperson light skin tone	ninguna
+🧜🏼	merperson medium-light skin tone	ninguna
+🧜🏽	merperson medium skin tone	ninguna
+🧜🏾	merperson medium-dark skin tone	ninguna
+🧜🏿	merperson dark skin tone	ninguna
+🧜🏻‍♂	merman light skin tone	ninguna
+🧜🏼‍♂	merman medium-light skin tone	ninguna
+🧜🏽‍♂	merman medium skin tone	ninguna
+🧜🏾‍♂	merman medium-dark skin tone	ninguna
+🧜🏿‍♂	merman dark skin tone	ninguna
+🧜🏻‍♀	mermaid light skin tone	ninguna
+🧜🏼‍♀	mermaid medium-light skin tone	ninguna
+🧜🏽‍♀	mermaid medium skin tone	ninguna
+🧜🏾‍♀	mermaid medium-dark skin tone	ninguna
+🧜🏿‍♀	mermaid dark skin tone	ninguna
+🧝🏻	elf light skin tone	ninguna
+🧝🏼	elf medium-light skin tone	ninguna
+🧝🏽	elf medium skin tone	ninguna
+🧝🏾	elf medium-dark skin tone	ninguna
+🧝🏿	elf dark skin tone	ninguna
+🧝🏻‍♂	man elf light skin tone	ninguna
+🧝🏼‍♂	man elf medium-light skin tone	ninguna
+🧝🏽‍♂	man elf medium skin tone	ninguna
+🧝🏾‍♂	man elf medium-dark skin tone	ninguna
+🧝🏿‍♂	man elf dark skin tone	ninguna
+🧝🏻‍♀	woman elf light skin tone	ninguna
+🧝🏼‍♀	woman elf medium-light skin tone	ninguna
+🧝🏽‍♀	woman elf medium skin tone	ninguna
+🧝🏾‍♀	woman elf medium-dark skin tone	ninguna
+🧝🏿‍♀	woman elf dark skin tone	ninguna
+💆🏻	person getting massage light skin tone	ninguna
+💆🏼	person getting massage medium-light skin tone	ninguna
+💆🏽	person getting massage medium skin tone	ninguna
+💆🏾	person getting massage medium-dark skin tone	ninguna
+💆🏿	person getting massage dark skin tone	ninguna
+💆🏻‍♂	man getting massage light skin tone	ninguna
+💆🏼‍♂	man getting massage medium-light skin tone	ninguna
+💆🏽‍♂	man getting massage medium skin tone	ninguna
+💆🏾‍♂	man getting massage medium-dark skin tone	ninguna
+💆🏿‍♂	man getting massage dark skin tone	ninguna
+💆🏻‍♀	woman getting massage light skin tone	ninguna
+💆🏼‍♀	woman getting massage medium-light skin tone	ninguna
+💆🏽‍♀	woman getting massage medium skin tone	ninguna
+💆🏾‍♀	woman getting massage medium-dark skin tone	ninguna
+💆🏿‍♀	woman getting massage dark skin tone	ninguna
+💇🏻	person getting haircut light skin tone	ninguna
+💇🏼	person getting haircut medium-light skin tone	ninguna
+💇🏽	person getting haircut medium skin tone	ninguna
+💇🏾	person getting haircut medium-dark skin tone	ninguna
+💇🏿	person getting haircut dark skin tone	ninguna
+💇🏻‍♂	man getting haircut light skin tone	ninguna
+💇🏼‍♂	man getting haircut medium-light skin tone	ninguna
+💇🏽‍♂	man getting haircut medium skin tone	ninguna
+💇🏾‍♂	man getting haircut medium-dark skin tone	ninguna
+💇🏿‍♂	man getting haircut dark skin tone	ninguna
+💇🏻‍♀	woman getting haircut light skin tone	ninguna
+💇🏼‍♀	woman getting haircut medium-light skin tone	ninguna
+💇🏽‍♀	woman getting haircut medium skin tone	ninguna
+💇🏾‍♀	woman getting haircut medium-dark skin tone	ninguna
+💇🏿‍♀	woman getting haircut dark skin tone	ninguna
+🚶🏻	person walking light skin tone	ninguna
+🚶🏼	person walking medium-light skin tone	ninguna
+🚶🏽	person walking medium skin tone	ninguna
+🚶🏾	person walking medium-dark skin tone	ninguna
+🚶🏿	person walking dark skin tone	ninguna
+🚶🏻‍♂	man walking light skin tone	ninguna
+🚶🏼‍♂	man walking medium-light skin tone	ninguna
+🚶🏽‍♂	man walking medium skin tone	ninguna
+🚶🏾‍♂	man walking medium-dark skin tone	ninguna
+🚶🏿‍♂	man walking dark skin tone	ninguna
+🚶🏻‍♀	woman walking light skin tone	ninguna
+🚶🏼‍♀	woman walking medium-light skin tone	ninguna
+🚶🏽‍♀	woman walking medium skin tone	ninguna
+🚶🏾‍♀	woman walking medium-dark skin tone	ninguna
+🚶🏿‍♀	woman walking dark skin tone	ninguna
+🚶‍➡	person walking facing right	ninguna
+🚶🏻‍➡	person walking light skin tone, facing right	ninguna
+🚶🏼‍➡	person walking medium-light skin tone, facing right	ninguna
+🚶🏽‍➡	person walking medium skin tone, facing right	ninguna
+🚶🏾‍➡	person walking medium-dark skin tone, facing right	ninguna
+🚶🏿‍➡	person walking dark skin tone, facing right	ninguna
+🚶‍♀‍➡	woman walking facing right	ninguna
+🚶🏻‍♀‍➡	woman walking light skin tone, facing right	ninguna
+🚶🏼‍♀‍➡	woman walking medium-light skin tone, facing right	ninguna
+🚶🏽‍♀‍➡	woman walking medium skin tone, facing right	ninguna
+🚶🏾‍♀‍➡	woman walking medium-dark skin tone, facing right	ninguna
+🚶🏿‍♀‍➡	woman walking dark skin tone, facing right	ninguna
+🚶‍♂‍➡	man walking facing right	ninguna
+🚶🏻‍♂‍➡	man walking light skin tone, facing right	ninguna
+🚶🏼‍♂‍➡	man walking medium-light skin tone, facing right	ninguna
+🚶🏽‍♂‍➡	man walking medium skin tone, facing right	ninguna
+🚶🏾‍♂‍➡	man walking medium-dark skin tone, facing right	ninguna
+🚶🏿‍♂‍➡	man walking dark skin tone, facing right	ninguna
+🧍🏻	person standing light skin tone	ninguna
+🧍🏼	person standing medium-light skin tone	ninguna
+🧍🏽	person standing medium skin tone	ninguna
+🧍🏾	person standing medium-dark skin tone	ninguna
+🧍🏿	person standing dark skin tone	ninguna
+🧍🏻‍♂	man standing light skin tone	ninguna
+🧍🏼‍♂	man standing medium-light skin tone	ninguna
+🧍🏽‍♂	man standing medium skin tone	ninguna
+🧍🏾‍♂	man standing medium-dark skin tone	ninguna
+🧍🏿‍♂	man standing dark skin tone	ninguna
+🧍🏻‍♀	woman standing light skin tone	ninguna
+🧍🏼‍♀	woman standing medium-light skin tone	ninguna
+🧍🏽‍♀	woman standing medium skin tone	ninguna
+🧍🏾‍♀	woman standing medium-dark skin tone	ninguna
+🧍🏿‍♀	woman standing dark skin tone	ninguna
+🧎🏻	person kneeling light skin tone	ninguna
+🧎🏼	person kneeling medium-light skin tone	ninguna
+🧎🏽	person kneeling medium skin tone	ninguna
+🧎🏾	person kneeling medium-dark skin tone	ninguna
+🧎🏿	person kneeling dark skin tone	ninguna
+🧎🏻‍♂	man kneeling light skin tone	ninguna
+🧎🏼‍♂	man kneeling medium-light skin tone	ninguna
+🧎🏽‍♂	man kneeling medium skin tone	ninguna
+🧎🏾‍♂	man kneeling medium-dark skin tone	ninguna
+🧎🏿‍♂	man kneeling dark skin tone	ninguna
+🧎🏻‍♀	woman kneeling light skin tone	ninguna
+🧎🏼‍♀	woman kneeling medium-light skin tone	ninguna
+🧎🏽‍♀	woman kneeling medium skin tone	ninguna
+🧎🏾‍♀	woman kneeling medium-dark skin tone	ninguna
+🧎🏿‍♀	woman kneeling dark skin tone	ninguna
+🧎‍➡	person kneeling facing right	ninguna
+🧎🏻‍➡	person kneeling light skin tone, facing right	ninguna
+🧎🏼‍➡	person kneeling medium-light skin tone, facing right	ninguna
+🧎🏽‍➡	person kneeling medium skin tone, facing right	ninguna
+🧎🏾‍➡	person kneeling medium-dark skin tone, facing right	ninguna
+🧎🏿‍➡	person kneeling dark skin tone, facing right	ninguna
+🧎‍♀‍➡	woman kneeling facing right	ninguna
+🧎🏻‍♀‍➡	woman kneeling light skin tone, facing right	ninguna
+🧎🏼‍♀‍➡	woman kneeling medium-light skin tone, facing right	ninguna
+🧎🏽‍♀‍➡	woman kneeling medium skin tone, facing right	ninguna
+🧎🏾‍♀‍➡	woman kneeling medium-dark skin tone, facing right	ninguna
+🧎🏿‍♀‍➡	woman kneeling dark skin tone, facing right	ninguna
+🧎‍♂‍➡	man kneeling facing right	ninguna
+🧎🏻‍♂‍➡	man kneeling light skin tone, facing right	ninguna
+🧎🏼‍♂‍➡	man kneeling medium-light skin tone, facing right	ninguna
+🧎🏽‍♂‍➡	man kneeling medium skin tone, facing right	ninguna
+🧎🏾‍♂‍➡	man kneeling medium-dark skin tone, facing right	ninguna
+🧎🏿‍♂‍➡	man kneeling dark skin tone, facing right	ninguna
+🧑🏻‍🦽	person in manual wheelchair light skin tone	ninguna
+🧑🏼‍🦽	person in manual wheelchair medium-light skin tone	ninguna
+🧑🏽‍🦽	person in manual wheelchair medium skin tone	ninguna
+🧑🏾‍🦽	person in manual wheelchair medium-dark skin tone	ninguna
+🧑🏿‍🦽	person in manual wheelchair dark skin tone	ninguna
+🧑‍🦽‍➡	person in manual wheelchair facing right	ninguna
+🧑🏻‍🦽‍➡	person in manual wheelchair light skin tone, facing right	ninguna
+🧑🏼‍🦽‍➡	person in manual wheelchair medium-light skin tone, facing right	ninguna
+🧑🏽‍🦽‍➡	person in manual wheelchair medium skin tone, facing right	ninguna
+🧑🏾‍🦽‍➡	person in manual wheelchair medium-dark skin tone, facing right	ninguna
+🧑🏿‍🦽‍➡	person in manual wheelchair dark skin tone, facing right	ninguna
+👨🏻‍🦽	man in manual wheelchair light skin tone	ninguna
+👨🏼‍🦽	man in manual wheelchair medium-light skin tone	ninguna
+👨🏽‍🦽	man in manual wheelchair medium skin tone	ninguna
+👨🏾‍🦽	man in manual wheelchair medium-dark skin tone	ninguna
+👨🏿‍🦽	man in manual wheelchair dark skin tone	ninguna
+👨‍🦽‍➡	man in manual wheelchair facing right	ninguna
+👨🏻‍🦽‍➡	man in manual wheelchair light skin tone, facing right	ninguna
+👨🏼‍🦽‍➡	man in manual wheelchair medium-light skin tone, facing right	ninguna
+👨🏽‍🦽‍➡	man in manual wheelchair medium skin tone, facing right	ninguna
+👨🏾‍🦽‍➡	man in manual wheelchair medium-dark skin tone, facing right	ninguna
+👨🏿‍🦽‍➡	man in manual wheelchair dark skin tone, facing right	ninguna
+👩🏻‍🦽	woman in manual wheelchair light skin tone	ninguna
+👩🏼‍🦽	woman in manual wheelchair medium-light skin tone	ninguna
+👩🏽‍🦽	woman in manual wheelchair medium skin tone	ninguna
+👩🏾‍🦽	woman in manual wheelchair medium-dark skin tone	ninguna
+👩🏿‍🦽	woman in manual wheelchair dark skin tone	ninguna
+👩‍🦽‍➡	woman in manual wheelchair facing right	ninguna
+👩🏻‍🦽‍➡	woman in manual wheelchair light skin tone, facing right	ninguna
+👩🏼‍🦽‍➡	woman in manual wheelchair medium-light skin tone, facing right	ninguna
+👩🏽‍🦽‍➡	woman in manual wheelchair medium skin tone, facing right	ninguna
+👩🏾‍🦽‍➡	woman in manual wheelchair medium-dark skin tone, facing right	ninguna
+👩🏿‍🦽‍➡	woman in manual wheelchair dark skin tone, facing right	ninguna
+🏃🏻	person running light skin tone	ninguna
+🏃🏼	person running medium-light skin tone	ninguna
+🏃🏽	person running medium skin tone	ninguna
+🏃🏾	person running medium-dark skin tone	ninguna
+🏃🏿	person running dark skin tone	ninguna
+🏃🏻‍♂	man running light skin tone	ninguna
+🏃🏼‍♂	man running medium-light skin tone	ninguna
+🏃🏽‍♂	man running medium skin tone	ninguna
+🏃🏾‍♂	man running medium-dark skin tone	ninguna
+🏃🏿‍♂	man running dark skin tone	ninguna
+🏃🏻‍♀	woman running light skin tone	ninguna
+🏃🏼‍♀	woman running medium-light skin tone	ninguna
+🏃🏽‍♀	woman running medium skin tone	ninguna
+🏃🏾‍♀	woman running medium-dark skin tone	ninguna
+🏃🏿‍♀	woman running dark skin tone	ninguna
+🏃‍➡	person running facing right	ninguna
+🏃🏻‍➡	person running light skin tone, facing right	ninguna
+🏃🏼‍➡	person running medium-light skin tone, facing right	ninguna
+🏃🏽‍➡	person running medium skin tone, facing right	ninguna
+🏃🏾‍➡	person running medium-dark skin tone, facing right	ninguna
+🏃🏿‍➡	person running dark skin tone, facing right	ninguna
+🏃‍♀‍➡	woman running facing right	ninguna
+🏃🏻‍♀‍➡	woman running light skin tone, facing right	ninguna
+🏃🏼‍♀‍➡	woman running medium-light skin tone, facing right	ninguna
+🏃🏽‍♀‍➡	woman running medium skin tone, facing right	ninguna
+🏃🏾‍♀‍➡	woman running medium-dark skin tone, facing right	ninguna
+🏃🏿‍♀‍➡	woman running dark skin tone, facing right	ninguna
+🏃‍♂‍➡	man running facing right	ninguna
+🏃🏻‍♂‍➡	man running light skin tone, facing right	ninguna
+🏃🏼‍♂‍➡	man running medium-light skin tone, facing right	ninguna
+🏃🏽‍♂‍➡	man running medium skin tone, facing right	ninguna
+🏃🏾‍♂‍➡	man running medium-dark skin tone, facing right	ninguna
+🏃🏿‍♂‍➡	man running dark skin tone, facing right	ninguna
+🧑🏻‍🩰	ballet dancer light skin tone	ninguna
+🧑🏼‍🩰	ballet dancer medium-light skin tone	ninguna
+🧑🏽‍🩰	ballet dancer medium skin tone	ninguna
+🧑🏾‍🩰	ballet dancer medium-dark skin tone	ninguna
+🧑🏿‍🩰	ballet dancer dark skin tone	ninguna
+💃🏻	woman dancing light skin tone	ninguna
+💃🏼	woman dancing medium-light skin tone	ninguna
+💃🏽	woman dancing medium skin tone	ninguna
+💃🏾	woman dancing medium-dark skin tone	ninguna
+💃🏿	woman dancing dark skin tone	ninguna
+🕺🏻	man dancing light skin tone	ninguna
+🕺🏼	man dancing medium-light skin tone	ninguna
+🕺🏽	man dancing medium skin tone	ninguna
+🕺🏾	man dancing medium-dark skin tone	ninguna
+🕺🏿	man dancing dark skin tone	ninguna
+🕴🏻	person in suit levitating light skin tone	ninguna
+🕴🏼	person in suit levitating medium-light skin tone	ninguna
+🕴🏽	person in suit levitating medium skin tone	ninguna
+🕴🏾	person in suit levitating medium-dark skin tone	ninguna
+🕴🏿	person in suit levitating dark skin tone	ninguna
+👯🏻	people with bunny ears light skin tone	ninguna
+👯🏼	people with bunny ears medium-light skin tone	ninguna
+👯🏽	people with bunny ears medium skin tone	ninguna
+👯🏾	people with bunny ears medium-dark skin tone	ninguna
+👯🏿	people with bunny ears dark skin tone	ninguna
+👯🏻‍♂	men with bunny ears light skin tone	ninguna
+👯🏼‍♂	men with bunny ears medium-light skin tone	ninguna
+👯🏽‍♂	men with bunny ears medium skin tone	ninguna
+👯🏾‍♂	men with bunny ears medium-dark skin tone	ninguna
+👯🏿‍♂	men with bunny ears dark skin tone	ninguna
+👯🏻‍♀	women with bunny ears light skin tone	ninguna
+👯🏼‍♀	women with bunny ears medium-light skin tone	ninguna
+👯🏽‍♀	women with bunny ears medium skin tone	ninguna
+👯🏾‍♀	women with bunny ears medium-dark skin tone	ninguna
+👯🏿‍♀	women with bunny ears dark skin tone	ninguna
+🧖🏻	person in steamy room light skin tone	ninguna
+🧖🏼	person in steamy room medium-light skin tone	ninguna
+🧖🏽	person in steamy room medium skin tone	ninguna
+🧖🏾	person in steamy room medium-dark skin tone	ninguna
+🧖🏿	person in steamy room dark skin tone	ninguna
+🧖🏻‍♂	man in steamy room light skin tone	ninguna
+🧖🏼‍♂	man in steamy room medium-light skin tone	ninguna
+🧖🏽‍♂	man in steamy room medium skin tone	ninguna
+🧖🏾‍♂	man in steamy room medium-dark skin tone	ninguna
+🧖🏿‍♂	man in steamy room dark skin tone	ninguna
+🧖🏻‍♀	woman in steamy room light skin tone	ninguna
+🧖🏼‍♀	woman in steamy room medium-light skin tone	ninguna
+🧖🏽‍♀	woman in steamy room medium skin tone	ninguna
+🧖🏾‍♀	woman in steamy room medium-dark skin tone	ninguna
+🧖🏿‍♀	woman in steamy room dark skin tone	ninguna
+🧗🏻	person climbing light skin tone	ninguna
+🧗🏼	person climbing medium-light skin tone	ninguna
+🧗🏽	person climbing medium skin tone	ninguna
+🧗🏾	person climbing medium-dark skin tone	ninguna
+🧗🏿	person climbing dark skin tone	ninguna
+🧗🏻‍♂	man climbing light skin tone	ninguna
+🧗🏼‍♂	man climbing medium-light skin tone	ninguna
+🧗🏽‍♂	man climbing medium skin tone	ninguna
+🧗🏾‍♂	man climbing medium-dark skin tone	ninguna
+🧗🏿‍♂	man climbing dark skin tone	ninguna
+🧗🏻‍♀	woman climbing light skin tone	ninguna
+🧗🏼‍♀	woman climbing medium-light skin tone	ninguna
+🧗🏽‍♀	woman climbing medium skin tone	ninguna
+🧗🏾‍♀	woman climbing medium-dark skin tone	ninguna
+🧗🏿‍♀	woman climbing dark skin tone	ninguna
+🏇🏻	horse racing light skin tone	ninguna
+🏇🏼	horse racing medium-light skin tone	ninguna
+🏇🏽	horse racing medium skin tone	ninguna
+🏇🏾	horse racing medium-dark skin tone	ninguna
+🏇🏿	horse racing dark skin tone	ninguna
+🏂🏻	snowboarder light skin tone	ninguna
+🏂🏼	snowboarder medium-light skin tone	ninguna
+🏂🏽	snowboarder medium skin tone	ninguna
+🏂🏾	snowboarder medium-dark skin tone	ninguna
+🏂🏿	snowboarder dark skin tone	ninguna
+🏌🏻	person golfing light skin tone	ninguna
+🏌🏼	person golfing medium-light skin tone	ninguna
+🏌🏽	person golfing medium skin tone	ninguna
+🏌🏾	person golfing medium-dark skin tone	ninguna
+🏌🏿	person golfing dark skin tone	ninguna
+🏌🏻‍♂	man golfing light skin tone	ninguna
+🏌🏼‍♂	man golfing medium-light skin tone	ninguna
+🏌🏽‍♂	man golfing medium skin tone	ninguna
+🏌🏾‍♂	man golfing medium-dark skin tone	ninguna
+🏌🏿‍♂	man golfing dark skin tone	ninguna
+🏌🏻‍♀	woman golfing light skin tone	ninguna
+🏌🏼‍♀	woman golfing medium-light skin tone	ninguna
+🏌🏽‍♀	woman golfing medium skin tone	ninguna
+🏌🏾‍♀	woman golfing medium-dark skin tone	ninguna
+🏌🏿‍♀	woman golfing dark skin tone	ninguna
+🏄🏻	person surfing light skin tone	ninguna
+🏄🏼	person surfing medium-light skin tone	ninguna
+🏄🏽	person surfing medium skin tone	ninguna
+🏄🏾	person surfing medium-dark skin tone	ninguna
+🏄🏿	person surfing dark skin tone	ninguna
+🏄🏻‍♂	man surfing light skin tone	ninguna
+🏄🏼‍♂	man surfing medium-light skin tone	ninguna
+🏄🏽‍♂	man surfing medium skin tone	ninguna
+🏄🏾‍♂	man surfing medium-dark skin tone	ninguna
+🏄🏿‍♂	man surfing dark skin tone	ninguna
+🏄🏻‍♀	woman surfing light skin tone	ninguna
+🏄🏼‍♀	woman surfing medium-light skin tone	ninguna
+🏄🏽‍♀	woman surfing medium skin tone	ninguna
+🏄🏾‍♀	woman surfing medium-dark skin tone	ninguna
+🏄🏿‍♀	woman surfing dark skin tone	ninguna
+🚣🏻	person rowing boat light skin tone	ninguna
+🚣🏼	person rowing boat medium-light skin tone	ninguna
+🚣🏽	person rowing boat medium skin tone	ninguna
+🚣🏾	person rowing boat medium-dark skin tone	ninguna
+🚣🏿	person rowing boat dark skin tone	ninguna
+🚣🏻‍♂	man rowing boat light skin tone	ninguna
+🚣🏼‍♂	man rowing boat medium-light skin tone	ninguna
+🚣🏽‍♂	man rowing boat medium skin tone	ninguna
+🚣🏾‍♂	man rowing boat medium-dark skin tone	ninguna
+🚣🏿‍♂	man rowing boat dark skin tone	ninguna
+🚣🏻‍♀	woman rowing boat light skin tone	ninguna
+🚣🏼‍♀	woman rowing boat medium-light skin tone	ninguna
+🚣🏽‍♀	woman rowing boat medium skin tone	ninguna
+🚣🏾‍♀	woman rowing boat medium-dark skin tone	ninguna
+🚣🏿‍♀	woman rowing boat dark skin tone	ninguna
+🏊🏻	person swimming light skin tone	ninguna
+🏊🏼	person swimming medium-light skin tone	ninguna
+🏊🏽	person swimming medium skin tone	ninguna
+🏊🏾	person swimming medium-dark skin tone	ninguna
+🏊🏿	person swimming dark skin tone	ninguna
+🏊🏻‍♂	man swimming light skin tone	ninguna
+🏊🏼‍♂	man swimming medium-light skin tone	ninguna
+🏊🏽‍♂	man swimming medium skin tone	ninguna
+🏊🏾‍♂	man swimming medium-dark skin tone	ninguna
+🏊🏿‍♂	man swimming dark skin tone	ninguna
+🏊🏻‍♀	woman swimming light skin tone	ninguna
+🏊🏼‍♀	woman swimming medium-light skin tone	ninguna
+🏊🏽‍♀	woman swimming medium skin tone	ninguna
+🏊🏾‍♀	woman swimming medium-dark skin tone	ninguna
+🏊🏿‍♀	woman swimming dark skin tone	ninguna
+⛹🏻	person bouncing ball light skin tone	ninguna
+⛹🏼	person bouncing ball medium-light skin tone	ninguna
+⛹🏽	person bouncing ball medium skin tone	ninguna
+⛹🏾	person bouncing ball medium-dark skin tone	ninguna
+⛹🏿	person bouncing ball dark skin tone	ninguna
+⛹🏻‍♂	man bouncing ball light skin tone	ninguna
+⛹🏼‍♂	man bouncing ball medium-light skin tone	ninguna
+⛹🏽‍♂	man bouncing ball medium skin tone	ninguna
+⛹🏾‍♂	man bouncing ball medium-dark skin tone	ninguna
+⛹🏿‍♂	man bouncing ball dark skin tone	ninguna
+⛹🏻‍♀	woman bouncing ball light skin tone	ninguna
+⛹🏼‍♀	woman bouncing ball medium-light skin tone	ninguna
+⛹🏽‍♀	woman bouncing ball medium skin tone	ninguna
+⛹🏾‍♀	woman bouncing ball medium-dark skin tone	ninguna
+⛹🏿‍♀	woman bouncing ball dark skin tone	ninguna
+🏋🏻	person lifting weights light skin tone	ninguna
+🏋🏼	person lifting weights medium-light skin tone	ninguna
+🏋🏽	person lifting weights medium skin tone	ninguna
+🏋🏾	person lifting weights medium-dark skin tone	ninguna
+🏋🏿	person lifting weights dark skin tone	ninguna
+🏋🏻‍♂	man lifting weights light skin tone	ninguna
+🏋🏼‍♂	man lifting weights medium-light skin tone	ninguna
+🏋🏽‍♂	man lifting weights medium skin tone	ninguna
+🏋🏾‍♂	man lifting weights medium-dark skin tone	ninguna
+🏋🏿‍♂	man lifting weights dark skin tone	ninguna
+🏋🏻‍♀	woman lifting weights light skin tone	ninguna
+🏋🏼‍♀	woman lifting weights medium-light skin tone	ninguna
+🏋🏽‍♀	woman lifting weights medium skin tone	ninguna
+🏋🏾‍♀	woman lifting weights medium-dark skin tone	ninguna
+🏋🏿‍♀	woman lifting weights dark skin tone	ninguna
+🚴🏻	person biking light skin tone	ninguna
+🚴🏼	person biking medium-light skin tone	ninguna
+🚴🏽	person biking medium skin tone	ninguna
+🚴🏾	person biking medium-dark skin tone	ninguna
+🚴🏿	person biking dark skin tone	ninguna
+🚴🏻‍♂	man biking light skin tone	ninguna
+🚴🏼‍♂	man biking medium-light skin tone	ninguna
+🚴🏽‍♂	man biking medium skin tone	ninguna
+🚴🏾‍♂	man biking medium-dark skin tone	ninguna
+🚴🏿‍♂	man biking dark skin tone	ninguna
+🚴🏻‍♀	woman biking light skin tone	ninguna
+🚴🏼‍♀	woman biking medium-light skin tone	ninguna
+🚴🏽‍♀	woman biking medium skin tone	ninguna
+🚴🏾‍♀	woman biking medium-dark skin tone	ninguna
+🚴🏿‍♀	woman biking dark skin tone	ninguna
+🚵🏻	person mountain biking light skin tone	ninguna
+🚵🏼	person mountain biking medium-light skin tone	ninguna
+🚵🏽	person mountain biking medium skin tone	ninguna
+🚵🏾	person mountain biking medium-dark skin tone	ninguna
+🚵🏿	person mountain biking dark skin tone	ninguna
+🚵🏻‍♂	man mountain biking light skin tone	ninguna
+🚵🏼‍♂	man mountain biking medium-light skin tone	ninguna
+🚵🏽‍♂	man mountain biking medium skin tone	ninguna
+🚵🏾‍♂	man mountain biking medium-dark skin tone	ninguna
+🚵🏿‍♂	man mountain biking dark skin tone	ninguna
+🚵🏻‍♀	woman mountain biking light skin tone	ninguna
+🚵🏼‍♀	woman mountain biking medium-light skin tone	ninguna
+🚵🏽‍♀	woman mountain biking medium skin tone	ninguna
+🚵🏾‍♀	woman mountain biking medium-dark skin tone	ninguna
+🚵🏿‍♀	woman mountain biking dark skin tone	ninguna
+🤸🏻	person cartwheeling light skin tone	ninguna
+🤸🏼	person cartwheeling medium-light skin tone	ninguna
+🤸🏽	person cartwheeling medium skin tone	ninguna
+🤸🏾	person cartwheeling medium-dark skin tone	ninguna
+🤸🏿	person cartwheeling dark skin tone	ninguna
+🤸🏻‍♂	man cartwheeling light skin tone	ninguna
+🤸🏼‍♂	man cartwheeling medium-light skin tone	ninguna
+🤸🏽‍♂	man cartwheeling medium skin tone	ninguna
+🤸🏾‍♂	man cartwheeling medium-dark skin tone	ninguna
+🤸🏿‍♂	man cartwheeling dark skin tone	ninguna
+🤸🏻‍♀	woman cartwheeling light skin tone	ninguna
+🤸🏼‍♀	woman cartwheeling medium-light skin tone	ninguna
+🤸🏽‍♀	woman cartwheeling medium skin tone	ninguna
+🤸🏾‍♀	woman cartwheeling medium-dark skin tone	ninguna
+🤸🏿‍♀	woman cartwheeling dark skin tone	ninguna
+🤼🏻	people wrestling light skin tone	ninguna
+🤼🏼	people wrestling medium-light skin tone	ninguna
+🤼🏽	people wrestling medium skin tone	ninguna
+🤼🏾	people wrestling medium-dark skin tone	ninguna
+🤼🏿	people wrestling dark skin tone	ninguna
+🤼🏻‍♂	men wrestling light skin tone	ninguna
+🤼🏼‍♂	men wrestling medium-light skin tone	ninguna
+🤼🏽‍♂	men wrestling medium skin tone	ninguna
+🤼🏾‍♂	men wrestling medium-dark skin tone	ninguna
+🤼🏿‍♂	men wrestling dark skin tone	ninguna
+🤼🏻‍♀	women wrestling light skin tone	ninguna
+🤼🏼‍♀	women wrestling medium-light skin tone	ninguna
+🤼🏽‍♀	women wrestling medium skin tone	ninguna
+🤼🏾‍♀	women wrestling medium-dark skin tone	ninguna
+🤼🏿‍♀	women wrestling dark skin tone	ninguna
+🤽🏻	person playing water polo light skin tone	ninguna
+🤽🏼	person playing water polo medium-light skin tone	ninguna
+🤽🏽	person playing water polo medium skin tone	ninguna
+🤽🏾	person playing water polo medium-dark skin tone	ninguna
+🤽🏿	person playing water polo dark skin tone	ninguna
+🤽🏻‍♂	man playing water polo light skin tone	ninguna
+🤽🏼‍♂	man playing water polo medium-light skin tone	ninguna
+🤽🏽‍♂	man playing water polo medium skin tone	ninguna
+🤽🏾‍♂	man playing water polo medium-dark skin tone	ninguna
+🤽🏿‍♂	man playing water polo dark skin tone	ninguna
+🤽🏻‍♀	woman playing water polo light skin tone	ninguna
+🤽🏼‍♀	woman playing water polo medium-light skin tone	ninguna
+🤽🏽‍♀	woman playing water polo medium skin tone	ninguna
+🤽🏾‍♀	woman playing water polo medium-dark skin tone	ninguna
+🤽🏿‍♀	woman playing water polo dark skin tone	ninguna
+🤾🏻	person playing handball light skin tone	ninguna
+🤾🏼	person playing handball medium-light skin tone	ninguna
+🤾🏽	person playing handball medium skin tone	ninguna
+🤾🏾	person playing handball medium-dark skin tone	ninguna
+🤾🏿	person playing handball dark skin tone	ninguna
+🤾🏻‍♂	man playing handball light skin tone	ninguna
+🤾🏼‍♂	man playing handball medium-light skin tone	ninguna
+🤾🏽‍♂	man playing handball medium skin tone	ninguna
+🤾🏾‍♂	man playing handball medium-dark skin tone	ninguna
+🤾🏿‍♂	man playing handball dark skin tone	ninguna
+🤾🏻‍♀	woman playing handball light skin tone	ninguna
+🤾🏼‍♀	woman playing handball medium-light skin tone	ninguna
+🤾🏽‍♀	woman playing handball medium skin tone	ninguna
+🤾🏾‍♀	woman playing handball medium-dark skin tone	ninguna
+🤾🏿‍♀	woman playing handball dark skin tone	ninguna
+🤹🏻	person juggling light skin tone	ninguna
+🤹🏼	person juggling medium-light skin tone	ninguna
+🤹🏽	person juggling medium skin tone	ninguna
+🤹🏾	person juggling medium-dark skin tone	ninguna
+🤹🏿	person juggling dark skin tone	ninguna
+🤹🏻‍♂	man juggling light skin tone	ninguna
+🤹🏼‍♂	man juggling medium-light skin tone	ninguna
+🤹🏽‍♂	man juggling medium skin tone	ninguna
+🤹🏾‍♂	man juggling medium-dark skin tone	ninguna
+🤹🏿‍♂	man juggling dark skin tone	ninguna
+🤹🏻‍♀	woman juggling light skin tone	ninguna
+🤹🏼‍♀	woman juggling medium-light skin tone	ninguna
+🤹🏽‍♀	woman juggling medium skin tone	ninguna
+🤹🏾‍♀	woman juggling medium-dark skin tone	ninguna
+🤹🏿‍♀	woman juggling dark skin tone	ninguna
+🧘🏻	person in lotus position light skin tone	ninguna
+🧘🏼	person in lotus position medium-light skin tone	ninguna
+🧘🏽	person in lotus position medium skin tone	ninguna
+🧘🏾	person in lotus position medium-dark skin tone	ninguna
+🧘🏿	person in lotus position dark skin tone	ninguna
+🧘🏻‍♂	man in lotus position light skin tone	ninguna
+🧘🏼‍♂	man in lotus position medium-light skin tone	ninguna
+🧘🏽‍♂	man in lotus position medium skin tone	ninguna
+🧘🏾‍♂	man in lotus position medium-dark skin tone	ninguna
+🧘🏿‍♂	man in lotus position dark skin tone	ninguna
+🧘🏻‍♀	woman in lotus position light skin tone	ninguna
+🧘🏼‍♀	woman in lotus position medium-light skin tone	ninguna
+🧘🏽‍♀	woman in lotus position medium skin tone	ninguna
+🧘🏾‍♀	woman in lotus position medium-dark skin tone	ninguna
+🧘🏿‍♀	woman in lotus position dark skin tone	ninguna
+🛀🏻	person taking bath light skin tone	ninguna
+🛀🏼	person taking bath medium-light skin tone	ninguna
+🛀🏽	person taking bath medium skin tone	ninguna
+🛀🏾	person taking bath medium-dark skin tone	ninguna
+🛀🏿	person taking bath dark skin tone	ninguna
+🛌🏻	person in bed light skin tone	ninguna
+🛌🏼	person in bed medium-light skin tone	ninguna
+🛌🏽	person in bed medium skin tone	ninguna
+🛌🏾	person in bed medium-dark skin tone	ninguna
+🛌🏿	person in bed dark skin tone	ninguna
+🧑🏻‍🤝‍🧑🏻	people holding hands light skin tone	ninguna
+🧑🏻‍🤝‍🧑🏼	people holding hands light skin tone, medium-light skin tone	ninguna
+🧑🏻‍🤝‍🧑🏽	people holding hands light skin tone, medium skin tone	ninguna
+🧑🏻‍🤝‍🧑🏾	people holding hands light skin tone, medium-dark skin tone	ninguna
+🧑🏻‍🤝‍🧑🏿	people holding hands light skin tone, dark skin tone	ninguna
+🧑🏼‍🤝‍🧑🏻	people holding hands medium-light skin tone, light skin tone	ninguna
+🧑🏼‍🤝‍🧑🏼	people holding hands medium-light skin tone	ninguna
+🧑🏼‍🤝‍🧑🏽	people holding hands medium-light skin tone, medium skin tone	ninguna
+🧑🏼‍🤝‍🧑🏾	people holding hands medium-light skin tone, medium-dark skin tone	ninguna
+🧑🏼‍🤝‍🧑🏿	people holding hands medium-light skin tone, dark skin tone	ninguna
+🧑🏽‍🤝‍🧑🏻	people holding hands medium skin tone, light skin tone	ninguna
+🧑🏽‍🤝‍🧑🏼	people holding hands medium skin tone, medium-light skin tone	ninguna
+🧑🏽‍🤝‍🧑🏽	people holding hands medium skin tone	ninguna
+🧑🏽‍🤝‍🧑🏾	people holding hands medium skin tone, medium-dark skin tone	ninguna
+🧑🏽‍🤝‍🧑🏿	people holding hands medium skin tone, dark skin tone	ninguna
+🧑🏾‍🤝‍🧑🏻	people holding hands medium-dark skin tone, light skin tone	ninguna
+🧑🏾‍🤝‍🧑🏼	people holding hands medium-dark skin tone, medium-light skin tone	ninguna
+🧑🏾‍🤝‍🧑🏽	people holding hands medium-dark skin tone, medium skin tone	ninguna
+🧑🏾‍🤝‍🧑🏾	people holding hands medium-dark skin tone	ninguna
+🧑🏾‍🤝‍🧑🏿	people holding hands medium-dark skin tone, dark skin tone	ninguna
+🧑🏿‍🤝‍🧑🏻	people holding hands dark skin tone, light skin tone	ninguna
+🧑🏿‍🤝‍🧑🏼	people holding hands dark skin tone, medium-light skin tone	ninguna
+🧑🏿‍🤝‍🧑🏽	people holding hands dark skin tone, medium skin tone	ninguna
+🧑🏿‍🤝‍🧑🏾	people holding hands dark skin tone, medium-dark skin tone	ninguna
+🧑🏿‍🤝‍🧑🏿	people holding hands dark skin tone	ninguna
+👭🏻	women holding hands light skin tone	ninguna
+👩🏻‍🤝‍👩🏼	women holding hands light skin tone, medium-light skin tone	ninguna
+👩🏻‍🤝‍👩🏽	women holding hands light skin tone, medium skin tone	ninguna
+👩🏻‍🤝‍👩🏾	women holding hands light skin tone, medium-dark skin tone	ninguna
+👩🏻‍🤝‍👩🏿	women holding hands light skin tone, dark skin tone	ninguna
+👩🏼‍🤝‍👩🏻	women holding hands medium-light skin tone, light skin tone	ninguna
+👭🏼	women holding hands medium-light skin tone	ninguna
+👩🏼‍🤝‍👩🏽	women holding hands medium-light skin tone, medium skin tone	ninguna
+👩🏼‍🤝‍👩🏾	women holding hands medium-light skin tone, medium-dark skin tone	ninguna
+👩🏼‍🤝‍👩🏿	women holding hands medium-light skin tone, dark skin tone	ninguna
+👩🏽‍🤝‍👩🏻	women holding hands medium skin tone, light skin tone	ninguna
+👩🏽‍🤝‍👩🏼	women holding hands medium skin tone, medium-light skin tone	ninguna
+👭🏽	women holding hands medium skin tone	ninguna
+👩🏽‍🤝‍👩🏾	women holding hands medium skin tone, medium-dark skin tone	ninguna
+👩🏽‍🤝‍👩🏿	women holding hands medium skin tone, dark skin tone	ninguna
+👩🏾‍🤝‍👩🏻	women holding hands medium-dark skin tone, light skin tone	ninguna
+👩🏾‍🤝‍👩🏼	women holding hands medium-dark skin tone, medium-light skin tone	ninguna
+👩🏾‍🤝‍👩🏽	women holding hands medium-dark skin tone, medium skin tone	ninguna
+👭🏾	women holding hands medium-dark skin tone	ninguna
+👩🏾‍🤝‍👩🏿	women holding hands medium-dark skin tone, dark skin tone	ninguna
+👩🏿‍🤝‍👩🏻	women holding hands dark skin tone, light skin tone	ninguna
+👩🏿‍🤝‍👩🏼	women holding hands dark skin tone, medium-light skin tone	ninguna
+👩🏿‍🤝‍👩🏽	women holding hands dark skin tone, medium skin tone	ninguna
+👩🏿‍🤝‍👩🏾	women holding hands dark skin tone, medium-dark skin tone	ninguna
+👭🏿	women holding hands dark skin tone	ninguna
+👫🏻	woman and man holding hands light skin tone	ninguna
+👩🏻‍🤝‍👨🏼	woman and man holding hands light skin tone, medium-light skin tone	ninguna
+👩🏻‍🤝‍👨🏽	woman and man holding hands light skin tone, medium skin tone	ninguna
+👩🏻‍🤝‍👨🏾	woman and man holding hands light skin tone, medium-dark skin tone	ninguna
+👩🏻‍🤝‍👨🏿	woman and man holding hands light skin tone, dark skin tone	ninguna
+👩🏼‍🤝‍👨🏻	woman and man holding hands medium-light skin tone, light skin tone	ninguna
+👫🏼	woman and man holding hands medium-light skin tone	ninguna
+👩🏼‍🤝‍👨🏽	woman and man holding hands medium-light skin tone, medium skin tone	ninguna
+👩🏼‍🤝‍👨🏾	woman and man holding hands medium-light skin tone, medium-dark skin tone	ninguna
+👩🏼‍🤝‍👨🏿	woman and man holding hands medium-light skin tone, dark skin tone	ninguna
+👩🏽‍🤝‍👨🏻	woman and man holding hands medium skin tone, light skin tone	ninguna
+👩🏽‍🤝‍👨🏼	woman and man holding hands medium skin tone, medium-light skin tone	ninguna
+👫🏽	woman and man holding hands medium skin tone	ninguna
+👩🏽‍🤝‍👨🏾	woman and man holding hands medium skin tone, medium-dark skin tone	ninguna
+👩🏽‍🤝‍👨🏿	woman and man holding hands medium skin tone, dark skin tone	ninguna
+👩🏾‍🤝‍👨🏻	woman and man holding hands medium-dark skin tone, light skin tone	ninguna
+👩🏾‍🤝‍👨🏼	woman and man holding hands medium-dark skin tone, medium-light skin tone	ninguna
+👩🏾‍🤝‍👨🏽	woman and man holding hands medium-dark skin tone, medium skin tone	ninguna
+👫🏾	woman and man holding hands medium-dark skin tone	ninguna
+👩🏾‍🤝‍👨🏿	woman and man holding hands medium-dark skin tone, dark skin tone	ninguna
+👩🏿‍🤝‍👨🏻	woman and man holding hands dark skin tone, light skin tone	ninguna
+👩🏿‍🤝‍👨🏼	woman and man holding hands dark skin tone, medium-light skin tone	ninguna
+👩🏿‍🤝‍👨🏽	woman and man holding hands dark skin tone, medium skin tone	ninguna
+👩🏿‍🤝‍👨🏾	woman and man holding hands dark skin tone, medium-dark skin tone	ninguna
+👫🏿	woman and man holding hands dark skin tone	ninguna
+👬🏻	men holding hands light skin tone	ninguna
+👨🏻‍🤝‍👨🏼	men holding hands light skin tone, medium-light skin tone	ninguna
+👨🏻‍🤝‍👨🏽	men holding hands light skin tone, medium skin tone	ninguna
+👨🏻‍🤝‍👨🏾	men holding hands light skin tone, medium-dark skin tone	ninguna
+👨🏻‍🤝‍👨🏿	men holding hands light skin tone, dark skin tone	ninguna
+👨🏼‍🤝‍👨🏻	men holding hands medium-light skin tone, light skin tone	ninguna
+👬🏼	men holding hands medium-light skin tone	ninguna
+👨🏼‍🤝‍👨🏽	men holding hands medium-light skin tone, medium skin tone	ninguna
+👨🏼‍🤝‍👨🏾	men holding hands medium-light skin tone, medium-dark skin tone	ninguna
+👨🏼‍🤝‍👨🏿	men holding hands medium-light skin tone, dark skin tone	ninguna
+👨🏽‍🤝‍👨🏻	men holding hands medium skin tone, light skin tone	ninguna
+👨🏽‍🤝‍👨🏼	men holding hands medium skin tone, medium-light skin tone	ninguna
+👬🏽	men holding hands medium skin tone	ninguna
+👨🏽‍🤝‍👨🏾	men holding hands medium skin tone, medium-dark skin tone	ninguna
+👨🏽‍🤝‍👨🏿	men holding hands medium skin tone, dark skin tone	ninguna
+👨🏾‍🤝‍👨🏻	men holding hands medium-dark skin tone, light skin tone	ninguna
+👨🏾‍🤝‍👨🏼	men holding hands medium-dark skin tone, medium-light skin tone	ninguna
+👨🏾‍🤝‍👨🏽	men holding hands medium-dark skin tone, medium skin tone	ninguna
+👬🏾	men holding hands medium-dark skin tone	ninguna
+👨🏾‍🤝‍👨🏿	men holding hands medium-dark skin tone, dark skin tone	ninguna
+👨🏿‍🤝‍👨🏻	men holding hands dark skin tone, light skin tone	ninguna
+👨🏿‍🤝‍👨🏼	men holding hands dark skin tone, medium-light skin tone	ninguna
+👨🏿‍🤝‍👨🏽	men holding hands dark skin tone, medium skin tone	ninguna
+👨🏿‍🤝‍👨🏾	men holding hands dark skin tone, medium-dark skin tone	ninguna
+👬🏿	men holding hands dark skin tone	ninguna
+💏🏻	kiss light skin tone	ninguna
+💏🏼	kiss medium-light skin tone	ninguna
+💏🏽	kiss medium skin tone	ninguna
+💏🏾	kiss medium-dark skin tone	ninguna
+💏🏿	kiss dark skin tone	ninguna
+👩‍❤‍💋‍👨	kiss woman, man	ninguna
+👨‍❤‍💋‍👨	kiss man, man	ninguna
+👩‍❤‍💋‍👩	kiss woman, woman	ninguna
+💑🏻	couple with heart light skin tone	ninguna
+💑🏼	couple with heart medium-light skin tone	ninguna
+💑🏽	couple with heart medium skin tone	ninguna
+💑🏾	couple with heart medium-dark skin tone	ninguna
+💑🏿	couple with heart dark skin tone	ninguna
+👩‍❤‍👨	couple with heart woman, man	ninguna
+👨‍❤‍👨	couple with heart man, man	ninguna
+👩‍❤‍👩	couple with heart woman, woman	ninguna
+👨‍👩‍👦	family man, woman, boy	ninguna
+👨‍👩‍👧	family man, woman, girl	ninguna
+👨‍👩‍👧‍👦	family man, woman, girl, boy	ninguna
+👨‍👩‍👦‍👦	family man, woman, boy, boy	ninguna
+👨‍👩‍👧‍👧	family man, woman, girl, girl	ninguna
+👨‍👨‍👦	family man, man, boy	ninguna
+👨‍👨‍👧	family man, man, girl	ninguna
+👨‍👨‍👧‍👦	family man, man, girl, boy	ninguna
+👨‍👨‍👦‍👦	family man, man, boy, boy	ninguna
+👨‍👨‍👧‍👧	family man, man, girl, girl	ninguna
+👩‍👩‍👦	family woman, woman, boy	ninguna
+👩‍👩‍👧	family woman, woman, girl	ninguna
+👩‍👩‍👧‍👦	family woman, woman, girl, boy	ninguna
+👩‍👩‍👦‍👦	family woman, woman, boy, boy	ninguna
+👩‍👩‍👧‍👧	family woman, woman, girl, girl	ninguna
+👨‍👦	family man, boy	ninguna
+👨‍👦‍👦	family man, boy, boy	ninguna
+👨‍👧	family man, girl	ninguna
+👨‍👧‍👦	family man, girl, boy	ninguna
+👨‍👧‍👧	family man, girl, girl	ninguna
+👩‍👦	family woman, boy	ninguna
+👩‍👦‍👦	family woman, boy, boy	ninguna
+👩‍👧	family woman, girl	ninguna
+👩‍👧‍👦	family woman, girl, boy	ninguna
+👩‍👧‍👧	family woman, girl, girl	ninguna
+🔟	keycap 10	ninguna
+🇦🇨	flag Ascension Island	ninguna
+🇦🇩	flag Andorra	ninguna
+🇦🇪	flag United Arab Emirates	ninguna
+🇦🇫	flag Afghanistan	ninguna
+🇦🇬	flag Antigua & Barbuda	ninguna
+🇦🇮	flag Anguilla	ninguna
+🇦🇱	flag Albania	ninguna
+🇦🇲	flag Armenia	ninguna
+🇦🇴	flag Angola	ninguna
+🇦🇶	flag Antarctica	ninguna
+🇦🇷	flag Argentina	ninguna
+🇦🇸	flag American Samoa	ninguna
+🇦🇹	flag Austria	ninguna
+🇦🇺	flag Australia	ninguna
+🇦🇼	flag Aruba	ninguna
+🇦🇽	flag Åland Islands	ninguna
+🇦🇿	flag Azerbaijan	ninguna
+🇧🇦	flag Bosnia & Herzegovina	ninguna
+🇧🇧	flag Barbados	ninguna
+🇧🇩	flag Bangladesh	ninguna
+🇧🇪	flag Belgium	ninguna
+🇧🇫	flag Burkina Faso	ninguna
+🇧🇬	flag Bulgaria	ninguna
+🇧🇭	flag Bahrain	ninguna
+🇧🇮	flag Burundi	ninguna
+🇧🇯	flag Benin	ninguna
+🇧🇲	flag Bermuda	ninguna
+🇧🇳	flag Brunei	ninguna
+🇧🇴	flag Bolivia	ninguna
+🇧🇶	flag Caribbean Netherlands	ninguna
+🇧🇷	flag Brazil	ninguna
+🇧🇸	flag Bahamas	ninguna
+🇧🇹	flag Bhutan	ninguna
+🇧🇻	flag Bouvet Island	ninguna
+🇧🇼	flag Botswana	ninguna
+🇧🇾	flag Belarus	ninguna
+🇧🇿	flag Belize	ninguna
+🇨🇦	flag Canada	ninguna
+🇨🇨	flag Cocos (Keeling) Islands	ninguna
+🇨🇩	flag Congo - Kinshasa	ninguna
+🇨🇫	flag Central African Republic	ninguna
+🇨🇬	flag Congo - Brazzaville	ninguna
+🇨🇭	flag Switzerland	ninguna
+🇨🇮	flag Côte d’Ivoire	ninguna
+🇨🇰	flag Cook Islands	ninguna
+🇨🇱	flag Chile	ninguna
+🇨🇲	flag Cameroon	ninguna
+🇨🇳	flag China	ninguna
+🇨🇴	flag Colombia	ninguna
+🇨🇵	flag Clipperton Island	ninguna
+🇨🇶	flag Sark	ninguna
+🇨🇷	flag Costa Rica	ninguna
+🇨🇺	flag Cuba	ninguna
+🇨🇻	flag Cape Verde	ninguna
+🇨🇼	flag Curaçao	ninguna
+🇨🇽	flag Christmas Island	ninguna
+🇨🇾	flag Cyprus	ninguna
+🇨🇿	flag Czechia	ninguna
+🇩🇪	flag Germany	ninguna
+🇩🇬	flag Diego Garcia	ninguna
+🇩🇯	flag Djibouti	ninguna
+🇩🇰	flag Denmark	ninguna
+🇩🇲	flag Dominica	ninguna
+🇩🇴	flag Dominican Republic	ninguna
+🇩🇿	flag Algeria	ninguna
+🇪🇦	flag Ceuta & Melilla	ninguna
+🇪🇨	flag Ecuador	ninguna
+🇪🇪	flag Estonia	ninguna
+🇪🇬	flag Egypt	ninguna
+🇪🇭	flag Western Sahara	ninguna
+🇪🇷	flag Eritrea	ninguna
+🇪🇸	flag Spain	ninguna
+🇪🇹	flag Ethiopia	ninguna
+🇪🇺	flag European Union	ninguna
+🇫🇮	flag Finland	ninguna
+🇫🇯	flag Fiji	ninguna
+🇫🇰	flag Falkland Islands	ninguna
+🇫🇲	flag Micronesia	ninguna
+🇫🇴	flag Faroe Islands	ninguna
+🇫🇷	flag France	ninguna
+🇬🇦	flag Gabon	ninguna
+🇬🇧	flag United Kingdom	ninguna
+🇬🇩	flag Grenada	ninguna
+🇬🇪	flag Georgia	ninguna
+🇬🇫	flag French Guiana	ninguna
+🇬🇬	flag Guernsey	ninguna
+🇬🇭	flag Ghana	ninguna
+🇬🇮	flag Gibraltar	ninguna
+🇬🇱	flag Greenland	ninguna
+🇬🇲	flag Gambia	ninguna
+🇬🇳	flag Guinea	ninguna
+🇬🇵	flag Guadeloupe	ninguna
+🇬🇶	flag Equatorial Guinea	ninguna
+🇬🇷	flag Greece	ninguna
+🇬🇸	flag South Georgia & South Sandwich Islands	ninguna
+🇬🇹	flag Guatemala	ninguna
+🇬🇺	flag Guam	ninguna
+🇬🇼	flag Guinea-Bissau	ninguna
+🇬🇾	flag Guyana	ninguna
+🇭🇰	flag Hong Kong SAR China	ninguna
+🇭🇲	flag Heard & McDonald Islands	ninguna
+🇭🇳	flag Honduras	ninguna
+🇭🇷	flag Croatia	ninguna
+🇭🇹	flag Haiti	ninguna
+🇭🇺	flag Hungary	ninguna
+🇮🇨	flag Canary Islands	ninguna
+🇮🇩	flag Indonesia	ninguna
+🇮🇪	flag Ireland	ninguna
+🇮🇱	flag Israel	ninguna
+🇮🇲	flag Isle of Man	ninguna
+🇮🇳	flag India	ninguna
+🇮🇴	flag British Indian Ocean Territory	ninguna
+🇮🇶	flag Iraq	ninguna
+🇮🇷	flag Iran	ninguna
+🇮🇸	flag Iceland	ninguna
+🇮🇹	flag Italy	ninguna
+🇯🇪	flag Jersey	ninguna
+🇯🇲	flag Jamaica	ninguna
+🇯🇴	flag Jordan	ninguna
+🇯🇵	flag Japan	ninguna
+🇰🇪	flag Kenya	ninguna
+🇰🇬	flag Kyrgyzstan	ninguna
+🇰🇭	flag Cambodia	ninguna
+🇰🇮	flag Kiribati	ninguna
+🇰🇲	flag Comoros	ninguna
+🇰🇵	flag North Korea	ninguna
+🇰🇷	flag South Korea	ninguna
+🇰🇼	flag Kuwait	ninguna
+🇰🇾	flag Cayman Islands	ninguna
+🇰🇿	flag Kazakhstan	ninguna
+🇱🇦	flag Laos	ninguna
+🇱🇧	flag Lebanon	ninguna
+🇱🇮	flag Liechtenstein	ninguna
+🇱🇰	flag Sri Lanka	ninguna
+🇱🇷	flag Liberia	ninguna
+🇱🇸	flag Lesotho	ninguna
+🇱🇹	flag Lithuania	ninguna
+🇱🇺	flag Luxembourg	ninguna
+🇱🇻	flag Latvia	ninguna
+🇱🇾	flag Libya	ninguna
+🇲🇦	flag Morocco	ninguna
+🇲🇨	flag Monaco	ninguna
+🇲🇩	flag Moldova	ninguna
+🇲🇪	flag Montenegro	ninguna
+🇲🇬	flag Madagascar	ninguna
+🇲🇭	flag Marshall Islands	ninguna
+🇲🇰	flag North Macedonia	ninguna
+🇲🇱	flag Mali	ninguna
+🇲🇲	flag Myanmar (Burma)	ninguna
+🇲🇳	flag Mongolia	ninguna
+🇲🇴	flag Macao SAR China	ninguna
+🇲🇵	flag Northern Mariana Islands	ninguna
+🇲🇶	flag Martinique	ninguna
+🇲🇷	flag Mauritania	ninguna
+🇲🇸	flag Montserrat	ninguna
+🇲🇹	flag Malta	ninguna
+🇲🇺	flag Mauritius	ninguna
+🇲🇻	flag Maldives	ninguna
+🇲🇼	flag Malawi	ninguna
+🇲🇽	flag Mexico	ninguna
+🇲🇾	flag Malaysia	ninguna
+🇲🇿	flag Mozambique	ninguna
+🇳🇦	flag Namibia	ninguna
+🇳🇨	flag New Caledonia	ninguna
+🇳🇪	flag Niger	ninguna
+🇳🇫	flag Norfolk Island	ninguna
+🇳🇬	flag Nigeria	ninguna
+🇳🇮	flag Nicaragua	ninguna
+🇳🇱	flag Netherlands	ninguna
+🇳🇴	flag Norway	ninguna
+🇳🇵	flag Nepal	ninguna
+🇳🇷	flag Nauru	ninguna
+🇳🇺	flag Niue	ninguna
+🇳🇿	flag New Zealand	ninguna
+🇴🇲	flag Oman	ninguna
+🇵🇦	flag Panama	ninguna
+🇵🇪	flag Peru	ninguna
+🇵🇫	flag French Polynesia	ninguna
+🇵🇬	flag Papua New Guinea	ninguna
+🇵🇭	flag Philippines	ninguna
+🇵🇰	flag Pakistan	ninguna
+🇵🇱	flag Poland	ninguna
+🇵🇳	flag Pitcairn Islands	ninguna
+🇵🇷	flag Puerto Rico	ninguna
+🇵🇸	flag Palestinian Territories	ninguna
+🇵🇹	flag Portugal	ninguna
+🇵🇼	flag Palau	ninguna
+🇵🇾	flag Paraguay	ninguna
+🇶🇦	flag Qatar	ninguna
+🇷🇪	flag Réunion	ninguna
+🇷🇴	flag Romania	ninguna
+🇷🇸	flag Serbia	ninguna
+🇷🇺	flag Russia	ninguna
+🇷🇼	flag Rwanda	ninguna
+🇸🇦	flag Saudi Arabia	ninguna
+🇸🇧	flag Solomon Islands	ninguna
+🇸🇨	flag Seychelles	ninguna
+🇸🇩	flag Sudan	ninguna
+🇸🇪	flag Sweden	ninguna
+🇸🇬	flag Singapore	ninguna
+🇸🇮	flag Slovenia	ninguna
+🇸🇯	flag Svalbard & Jan Mayen	ninguna
+🇸🇰	flag Slovakia	ninguna
+🇸🇱	flag Sierra Leone	ninguna
+🇸🇲	flag San Marino	ninguna
+🇸🇳	flag Senegal	ninguna
+🇸🇴	flag Somalia	ninguna
+🇸🇷	flag Suriname	ninguna
+🇸🇸	flag South Sudan	ninguna
+🇸🇹	flag São Tomé & Príncipe	ninguna
+🇸🇻	flag El Salvador	ninguna
+🇸🇽	flag Sint Maarten	ninguna
+🇸🇾	flag Syria	ninguna
+🇸🇿	flag Eswatini	ninguna
+🇹🇦	flag Tristan da Cunha	ninguna
+🇹🇨	flag Turks & Caicos Islands	ninguna
+🇹🇩	flag Chad	ninguna
+🇹🇫	flag French Southern Territories	ninguna
+🇹🇬	flag Togo	ninguna
+🇹🇭	flag Thailand	ninguna
+🇹🇯	flag Tajikistan	ninguna
+🇹🇰	flag Tokelau	ninguna
+🇹🇱	flag Timor-Leste	ninguna
+🇹🇲	flag Turkmenistan	ninguna
+🇹🇳	flag Tunisia	ninguna
+🇹🇴	flag Tonga	ninguna
+🇹🇷	flag Türkiye	ninguna
+🇹🇹	flag Trinidad & Tobago	ninguna
+🇹🇻	flag Tuvalu	ninguna
+🇹🇼	flag Taiwan	ninguna
+🇹🇿	flag Tanzania	ninguna
+🇺🇦	flag Ukraine	ninguna
+🇺🇬	flag Uganda	ninguna
+🇺🇳	flag United Nations	ninguna
+🇺🇸	flag United States	ninguna
+🇺🇾	flag Uruguay	ninguna
+🇺🇿	flag Uzbekistan	ninguna
+🇻🇦	flag Vatican City	ninguna
+🇻🇪	flag Venezuela	ninguna
+🇻🇬	flag British Virgin Islands	ninguna
+🇻🇳	flag Vietnam	ninguna
+🇻🇺	flag Vanuatu	ninguna
+🇼🇫	flag Wallis & Futuna	ninguna
+🇼🇸	flag Samoa	ninguna
+🇽🇰	flag Kosovo	ninguna
+🇾🇪	flag Yemen	ninguna
+🇾🇹	flag Mayotte	ninguna
+🇿🇦	flag South Africa	ninguna
+🇿🇲	flag Zambia	ninguna
+🇿🇼	flag Zimbabwe	ninguna
+🏴󠁧󠁢󠁥󠁮󠁧󠁿	flag England	ninguna
+🏴󠁧󠁢󠁳󠁣󠁴󠁿	flag Scotland	ninguna
+🏴󠁧󠁢󠁷󠁬󠁳󠁿	flag Wales	ninguna
+。	ideographic period	todas
+【	open black lens bracket	todas
+】	close black lens bracket	todas
+〖	open hollow lens bracket	todas
+〗	close hollow lens bracket	todas
+↚	leftwards arrow stroke	todas
+↛	rightwards arrow stroke	todas
+↞	leftwards two headed arrow	todas
+↟	upwards two headed arrow	todas
+↠	rightwards two headed arrow	todas
+↡	downwards two headed arrow	todas
+↢	leftwards arrow tail	todas
+↣	rightwards arrow tail	todas
+↨	up down arrow with base	todas
+↫	leftwards arrow loop	todas
+↬	rightwards arrow loop	todas
+↭	left right wave arrow	todas
+↰	upwards arrow tip leftwards	todas
+↱	upwards arrow tip rightwards	todas
+↲	downwards arrow tip leftwards	todas
+↳	downwards arrow tip rightwards	todas
+↴	rightwards arrow corner downwards	todas
+↵	downwards arrow corner leftwards	todas
+↶	anticlockwise top semicircle arrow	todas
+↷	clockwise top semicircle arrow	todas
+↸	north west arrow long bar	todas
+↺	anticlockwise open circle arrow	todas
+↻	clockwise open circle arrow	todas
+↼	leftwards harpoon barb upwards	todas
+↽	leftwards harpoon barb downwards	todas
+↾	upwards harpoon barb rightwards	todas
+↿	upwards harpoon barb leftwards	todas
+⇀	rightwards harpoon barb upwards	todas
+⇁	rightwards harpoon barb downwards	todas
+⇂	downwards harpoon barb rightwards	todas
+⇃	downwards harpoon barb leftwards	todas
+⇍	leftwards double arrow stroke	todas
+⇔	left right double arrow	todas
+⇎	left right double arrow stroke	todas
+⇖	north west double arrow	todas
+⇗	north east double arrow	todas
+⇘	south east double arrow	todas
+⇙	south west double arrow	todas
+⇞	upwards arrow double stroke	todas
+⇟	downwards arrow double stroke	todas
+⇤	leftwards arrow bar	todas
+⇥	rightwards arrow bar	todas
+⇵	downwards arrow leftwards upwards arrow	todas
+≳	greater-than equivalent	todas
+⋭	does not contain as normal subgroup equal	todas
+⊶	original	todas
+⋰	up right diagonal ellipsis	todas
+⋱	down right diagonal ellipsis	todas
+▦	square orthogonal crosshatch fill	todas
+▧	square upper left lower right fill	todas
+▨	square upper right lower left fill	todas
+▩	square diagonal crosshatch fill	todas
+◐	circle left half filled	todas
+◑	circle right half filled	todas
+◒	circle lower half filled	todas
+◓	circle upper half filled	todas
+◔	circle upper right quadrant filled	todas
+◕	circle all but upper left quadrant filled	todas
+◜	upper left quadrant circular arc	todas
+◝	upper right quadrant circular arc	todas
+◞	lower right quadrant circular arc	todas
+◟	lower left quadrant circular arc	todas
+◢	filled lower right triangle	todas
+◣	filled lower left triangle	todas
+◤	filled upper left triangle	todas
+◥	filled upper right triangle	todas
+◳	hollow square upper right quadrant	todas
+◷	hollow circle with upper right quadrant	todas
+◿	lower right triangle	todas
+⨧	plus subscript two	todas
+⩣	logical or double underbar	todas
+⩽	less-than slanted equal	todas
+⪍	less-than above similar equal	todas
+⪚	double-line equal greater-than	todas
+↮	left right arrow stroke	todas
+₣	french franc	todas
+₰	german penny	todas
+₽	ruble	todas
+‾	overline	todas
+―	horizontal bar	todas
+・	katakana middle dot	todas
+‽	interrobang	todas
+〈	open angle bracket	todas
+〉	close angle bracket	todas
+《	open double angle bracket	todas
+》	close double angle bracket	todas
+「	open corner bracket	todas
+」	close corner bracket	todas
+『	open hollow corner bracket	todas
+』	close hollow corner bracket	todas
+〔	open tortoise shell bracket	todas
+〕	close tortoise shell bracket	todas
+‧	hyphenation point	todas
+‸	caret	todas
+※	reference mark	todas
+⁂	asterism	todas
+℗	sound recording copyright	todas
+↜	leftwards wave arrow	todas
+↝	rightwards wave arrow	todas
+↤	leftwards arrow from bar	todas
+↥	upwards arrow from bar	todas
+↦	rightwards arrow from bar	todas
+↧	downwards arrow from bar	todas
+↯	downwards zigzag arrow	todas
+↹	leftwards over rightwards arrow bars	todas
+⇅	up-pointing and down-pointing arrows	todas
+⇆	left-pointing over right-pointing arrows	todas
+⇇	leftwards paired arrows	todas
+⇈	upwards paired arrows	todas
+⇉	rightwards paired arrows	todas
+⇊	downwards paired arrows	todas
+⇋	leftwards harpoon over rightwards harpoon	todas
+⇌	rightwards harpoon over leftwards harpoon	todas
+⇑	upwards double arrow	todas
+⇓	downwards double arrow	todas
+⇚	leftwards triple arrow	todas
+⇛	rightwards triple arrow	todas
+⇜	leftwards squiggle arrow	todas
+⇝	rightwards squiggle arrow	todas
+⇠	leftwards dashed arrow	todas
+⇡	upwards dashed arrow	todas
+⇢	rightwards dashed arrow	todas
+⇣	downwards dashed arrow	todas
+⇦	leftwards hollow arrow	todas
+⇧	upwards hollow arrow	todas
+⇩	downwards hollow arrow	todas
+⇪	upwards hollow arrow from bar	todas
+∆	increment	todas
+∗	asterisk operator	todas
+∽	reversed tilde	todas
+∾	inverted lazy s	todas
+≒	approximately equal the image	todas
+≖	ring in equal	todas
+⊗	circled times	todas
+⊘	circled division slash	todas
+⊙	circled dot operator	todas
+⊚	circled ring operator	todas
+⊛	circled asterisk operator	todas
+⊞	squared plus	todas
+⊟	squared minus	todas
+⊮	does not force	todas
+⊰	precedes under relation	todas
+⊱	succeeds under relation	todas
+⊹	hermitian conjugate matrix	todas
+⊿	right triangle	todas
+⋁	n-ary logical or	todas
+⋂	n-ary intersection	todas
+⋃	n-ary union	todas
+⋆	star operator	todas
+⋈	natural join	todas
+⋒	double intersection	todas
+⋘	very much less-than	todas
+⋙	very much greater-than	todas
+⋮	vertical ellipsis	todas
+⋯	midline horizontal ellipsis	todas
+▢	hollow square with rounded corners	todas
+▣	hollow square containing filled square	todas
+▤	square with horizontal fill	todas
+▥	square with vertical fill	todas
+▬	filled rectangle	todas
+▮	filled vertical rectangle	todas
+▰	filled parallelogram	todas
+▲	filled up-pointing triangle	todas
+▴	filled up-pointing small triangle	todas
+▵	hollow up-pointing small triangle	todas
+▷	hollow right-pointing triangle	todas
+▸	filled right-pointing small triangle	todas
+▹	hollow right-pointing small triangle	todas
+►	filled right-pointing pointer	todas
+▻	hollow right-pointing pointer	todas
+▼	filled down-pointing triangle	todas
+▽	hollow down-pointing triangle	todas
+▾	filled down-pointing small triangle	todas
+▿	hollow down-pointing small triangle	todas
+◁	hollow left-pointing triangle	todas
+◂	filled left-pointing small triangle	todas
+◃	hollow left-pointing small triangle	todas
+◄	filled left-pointing pointer	todas
+◅	hollow left-pointing pointer	todas
+◇	hollow diamond	todas
+◈	hollow diamond containing filled diamond	todas
+◉	hollow circle containing filled circle	todas
+◊	lozenge	todas
+◌	dotted circle	todas
+◍	circle with vertical fill	todas
+◎	concentric circles	todas
+◖	left half filled circle	todas
+◗	right half filled circle	todas
+◘	inverse bullet	todas
+◙	filled square containing hollow circle	todas
+◠	upper half circle	todas
+◡	lower half circle	todas
+◯	large hollow circle	todas
+⨼	interior product	todas
+⪺	succeeds above not almost equal	todas
+⌛	hourglass done	todas
+⏳	hourglass not done	todas
+⌚	watch	todas
+⏰	alarm clock	todas
+⏱	stopwatch	todas
+⏲	timer clock	todas
+⭐	star	todas
+⌨	keyboard	todas
+⬆	up arrow	todas
+↗	up-right arrow	todas
+↘	down-right arrow	todas
+⬇	down arrow	todas
+↙	down-left arrow	todas
+⬅	left arrow	todas
+↖	up-left arrow	todas
+↕	up-down arrow	todas
+↔	left-right arrow	todas
+↩	right arrow curving left	todas
+↪	left arrow curving right	todas
+⤴	right arrow curving up	todas
+⤵	right arrow curving down	todas
+▶	play button	todas
+⏩	fast-forward button	todas
+⏭	next track button	todas
+⏯	play or pause button	todas
+◀	reverse button	todas
+⏪	fast reverse button	todas
+⏮	last track button	todas
+⏫	fast up button	todas
+⏬	fast down button	todas
+⏸	pause button	todas
+⏹	stop button	todas
+⏺	record button	todas
+⏏	eject button	todas
+‼	double exclamation mark	todas
+⁉	exclamation question mark	todas
+〰	wavy dash	todas
+⭕	hollow red circle	todas
+〽	part alternation mark	todas
+Ⓜ	circled M	todas
+㊗	Japanese “congratulations” button	todas
+㊙	Japanese “secret” button	todas
+⬛	black large square	todas
+⬜	white large square	todas
+◼	black medium square	todas
+◻	white medium square	todas
+◽	white medium-small square	todas
+▫	white small square	todas
+₢	cruzeiro	todas
+₤	lira	todas
+₥	mill	todas
+₩	won	todas
+₱	peso	todas
+₳	austral	todas
+₶	livre tournois	todas
+₷	spesmilo	todas
+₿	bitcoin	todas
+0⃣	keycap 0	todas
+1⃣	keycap 1	todas
+2⃣	keycap 2	todas
+3⃣	keycap 3	todas
+4⃣	keycap 4	todas
+5⃣	keycap 5	todas
+6⃣	keycap 6	todas
+7⃣	keycap 7	todas
+8⃣	keycap 8	todas
+9⃣	keycap 9	todas
+₨	rupee	todas
+﷼	rial	todas
+*⃣	keycap *	todas
+֏	Armenian Dram	todas
+؋	Afghan Afghani	todas
+৳	Bangladeshi Taka	todas
+฿	Thai Baht	todas
+៛	Cambodian Riel	todas
+₡	Costa Rican Colón	todas
+₦	Nigerian Naira	todas
+₪	Israeli New Shekel	todas
+₫	Vietnamese Dong	todas
+₭	Laotian Kip	todas
+₮	Mongolian Tugrik	todas
+₲	Paraguayan Guarani	todas
+₴	Ukrainian Hryvnia	todas
+₵	Ghanaian Cedi	todas
+₸	Kazakhstani Tenge	todas
+₺	Turkish Lira	todas
+₼	Azerbaijani Manat	todas
+₾	Georgian Lari	todas
+₧	Spanish Peseta	todas

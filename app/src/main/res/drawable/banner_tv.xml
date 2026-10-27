@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Cartel de Tiresias en el lanzador de Android TV (320 × 180): seis puntos braille sobre el color del tema -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+	android:width="320dp"
+	android:height="180dp"
+	android:viewportWidth="320"
+	android:viewportHeight="180">
+	<path android:fillColor="#FF1B3A5C" android:pathData="M0,0h320v180h-320z" />
+	<path android:fillColor="#FFFFFFFF" android:pathData="M116,50a14,14 0,1 1,28 0a14,14 0,1 1,-28 0z" />
+	<path android:fillColor="#FFFFFFFF" android:pathData="M116,90a14,14 0,1 1,28 0a14,14 0,1 1,-28 0z" />
+	<path android:fillColor="#FFFFFFFF" android:pathData="M116,130a14,14 0,1 1,28 0a14,14 0,1 1,-28 0z" />
+	<path android:fillColor="#FFFFFFFF" android:pathData="M176,50a14,14 0,1 1,28 0a14,14 0,1 1,-28 0z" />
+	<path android:fillColor="#FFFFFFFF" android:pathData="M176,90a14,14 0,1 1,28 0a14,14 0,1 1,-28 0z" />
+	<path android:fillColor="#FFFFFFFF" android:pathData="M176,130a14,14 0,1 1,28 0a14,14 0,1 1,-28 0z" />
+</vector>

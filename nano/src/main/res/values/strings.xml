@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="nano_nombre">Tiresias IA del móvil</string>
+	<string name="nano_titulo">Gemini Nano</string>
+	<string name="nano_explicacion">Este complemento deja a Tiresias usar Gemini Nano, la inteligencia artificial que traen el propio móvil (Pixel 9 y posteriores, Galaxy S25 y posteriores y otros recientes). Todo se procesa en el móvil, sin Internet. No hace falta abrirlo: Tiresias lo usa cuando eliges «La del móvil» en Ajustes, Inteligencia artificial.</string>
+	<string name="nano_disponible">Gemini Nano está listo en este móvil.</string>
+	<string name="nano_descargable">Este móvil tiene Gemini Nano; el sistema lo descargará la primera vez que se use.</string>
+	<string name="nano_no_disponible">Este móvil no tiene Gemini Nano (o el gestor de arranque está desbloqueado).</string>
+	<string name="nano_pensando">Pensando…</string>
+	<string name="nano_bajando">El sistema está descargando Gemini Nano. Puede tardar unos minutos…</string>
+	<string name="nano_respuesta">Respuesta:</string>
+	<string name="nano_sin_respuesta">Gemini Nano no ha respondido nada</string>
+	<string name="nano_error">Gemini Nano ha fallado: %1$s</string>
+	<string name="nano_copiar">Copiar la respuesta</string>
+	<string name="nano_copiado">Respuesta copiada</string>
+	<string name="nano_cerrar">Cerrar</string>
+</resources>

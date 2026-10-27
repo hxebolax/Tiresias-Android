@@ -1,0 +1,4181 @@
+# Emojis y símbolos con su nombre en español, del Unicode CLDR (licencia Unicode-3.0),
+# tomados del cldr.dic de NVDA. Mismo formato que simbolos.tsv.
+# Los emojis van con nivel «ninguna»: se dicen siempre que «Emojis» esté en «Por su nombre».
+# Los demás símbolos que no están en simbolos.tsv, con nivel «todas».
+# Generado con herramientas: no hace falta editarlo a mano (lo de simbolos.tsv manda).
+🏻	tono de piel claro	ninguna
+🏼	tono de piel claro medio	ninguna
+🏽	tono de piel medio	ninguna
+🏾	tono de piel oscuro medio	ninguna
+🏿	tono de piel oscuro	ninguna
+♪	corchea	ninguna
+♭	bemol	ninguna
+♯	sostenido	ninguna
+😀	cara sonriendo	ninguna
+😃	cara sonriendo con ojos grandes	ninguna
+😄	cara sonriendo con ojos sonrientes	ninguna
+😁	cara radiante con ojos sonrientes	ninguna
+😆	cara sonriendo con los ojos cerrados	ninguna
+😅	cara sonriendo con sudor frío	ninguna
+🤣	cara revolviéndose de la risa	ninguna
+😂	cara llorando de risa	ninguna
+🙂	cara sonriendo ligeramente	ninguna
+🙃	cara al revés	ninguna
+🫠	cara derritiéndose	ninguna
+😉	cara guiñando el ojo	ninguna
+😊	cara feliz con ojos sonrientes	ninguna
+😇	cara sonriendo con aureola	ninguna
+🥰	cara sonriendo con corazones	ninguna
+😍	cara sonriendo con ojos de corazón	ninguna
+🤩	cara sonriendo con estrellas	ninguna
+😘	cara lanzando un beso	ninguna
+😗	cara besando	ninguna
+☺	cara sonriente	ninguna
+😚	cara besando con los ojos cerrados	ninguna
+😙	cara besando con ojos sonrientes	ninguna
+🥲	cara sonriente con lágrima	ninguna
+😋	cara saboreando comida	ninguna
+😛	cara sacando la lengua	ninguna
+😜	cara sacando la lengua y guiñando un ojo	ninguna
+🤪	cara de loco	ninguna
+😝	cara con ojos cerrados y lengua fuera	ninguna
+🤑	cara con lengua de dinero	ninguna
+🤗	cara con manos abrazando	ninguna
+🤭	cara con mano sobre la boca	ninguna
+🫢	cara con ojos abiertos y boca tapada	ninguna
+🫣	cara tapada con ojo espiando	ninguna
+🤫	cara pidiendo silencio	ninguna
+🤔	cara pensativa	ninguna
+🫡	cara saludando	ninguna
+🤐	cara con la boca cerrada con cremallera	ninguna
+🤨	cara con ceja alzada	ninguna
+😐	cara neutral	ninguna
+😑	cara sin expresión	ninguna
+😶	cara sin boca	ninguna
+🫥	cara con línea de puntos	ninguna
+😶‍🌫	cara entre las nubes	ninguna
+😏	cara sonriendo con superioridad	ninguna
+😒	cara de desaprobación	ninguna
+🙄	cara con ojos en blanco	ninguna
+😬	cara haciendo una mueca	ninguna
+😮‍💨	cara exhalando	ninguna
+🤥	cara de mentiroso	ninguna
+🫨	cara temblorosa	ninguna
+🙂‍↔	cabeza negando	ninguna
+🙂‍↕	cabeza asintiendo	ninguna
+😌	cara de alivio	ninguna
+😔	cara desanimada	ninguna
+😪	cara de sueño	ninguna
+🤤	cara babeando	ninguna
+😴	cara durmiendo	ninguna
+🫩	cara con ojeras	ninguna
+😷	cara con mascarilla médica	ninguna
+🤒	cara con termómetro	ninguna
+🤕	cara con la cabeza vendada	ninguna
+🤢	cara de náuseas	ninguna
+🤮	cara vomitando	ninguna
+🤧	cara estornudando	ninguna
+🥵	cara con calor	ninguna
+🥶	cara con frío	ninguna
+🥴	cara de grogui	ninguna
+😵	cara mareada	ninguna
+😵‍💫	cara con ojos en espiral	ninguna
+🤯	cabeza explotando	ninguna
+🤠	cara con sombrero de vaquero	ninguna
+🥳	cara de fiesta	ninguna
+🥸	cara disfrazada	ninguna
+😎	cara sonriendo con gafas de sol	ninguna
+🤓	cara de empollón	ninguna
+🧐	cara con monóculo	ninguna
+😕	cara de confusión	ninguna
+🫤	cara con boca diagonal	ninguna
+😟	cara preocupada	ninguna
+🙁	cara con el ceño ligeramente fruncido	ninguna
+☹	cara con el ceño fruncido	ninguna
+😮	cara con la boca abierta	ninguna
+😯	cara estupefacta	ninguna
+😲	cara asombrada	ninguna
+😳	cara sonrojada	ninguna
+🫪	cara deformada	ninguna
+🥺	cara suplicante	ninguna
+🥹	cara aguantándose las lágrimas	ninguna
+😦	cara con el ceño fruncido y la boca abierta	ninguna
+😧	cara angustiada	ninguna
+😨	cara asustada	ninguna
+😰	cara con ansiedad y sudor	ninguna
+😥	cara triste pero aliviada	ninguna
+😢	cara llorando	ninguna
+😭	cara llorando fuerte	ninguna
+😱	cara gritando de miedo	ninguna
+😖	cara de frustración	ninguna
+😣	cara desesperada	ninguna
+😞	cara decepcionada	ninguna
+😓	cara con sudor frío	ninguna
+😩	cara agotada	ninguna
+😫	cara cansada	ninguna
+🥱	cara de bostezo	ninguna
+😤	cara resoplando	ninguna
+😡	cara cabreada	ninguna
+😠	cara enfadada	ninguna
+🤬	cara con símbolos en la boca	ninguna
+😈	cara sonriendo con cuernos	ninguna
+👿	cara enfadada con cuernos	ninguna
+💀	calavera	ninguna
+☠	calavera y huesos cruzados	ninguna
+💩	caca con ojos	ninguna
+🤡	cara de payaso	ninguna
+👹	demonio japonés oni	ninguna
+👺	demonio japonés tengu	ninguna
+👻	fantasma	ninguna
+👽	alienígena	ninguna
+👾	monstruo alienígena	ninguna
+🤖	robot	ninguna
+😺	gato sonriendo	ninguna
+😸	gato sonriendo con ojos sonrientes	ninguna
+😹	gato llorando de risa	ninguna
+😻	gato sonriendo con ojos de corazón	ninguna
+😼	gato haciendo una mueca	ninguna
+😽	gato besando	ninguna
+🙀	gato asustado	ninguna
+😿	gato llorando	ninguna
+😾	gato enfadado	ninguna
+🙈	mono con los ojos tapados	ninguna
+🙉	mono con los oídos tapados	ninguna
+🙊	mono con la boca tapada	ninguna
+💌	carta de amor	ninguna
+💘	corazón con flecha	ninguna
+💝	corazón con lazo	ninguna
+💖	corazón brillante	ninguna
+💗	corazón creciente	ninguna
+💓	corazón latiendo	ninguna
+💞	corazones giratorios	ninguna
+💕	dos corazones	ninguna
+💟	adorno de corazón	ninguna
+❣	exclamación de corazón	ninguna
+💔	corazón roto	ninguna
+❤‍🔥	corazón en llamas	ninguna
+❤‍🩹	corazón vendado	ninguna
+❤	corazón rojo	ninguna
+🩷	corazón rosa	ninguna
+🧡	corazón naranja	ninguna
+💛	corazón amarillo	ninguna
+💚	corazón verde	ninguna
+💙	corazón azul	ninguna
+🩵	corazón azul claro	ninguna
+💜	corazón morado	ninguna
+🤎	corazón marrón	ninguna
+🖤	corazón negro	ninguna
+🩶	corazón gris	ninguna
+🤍	corazón blanco	ninguna
+💋	marca de beso	ninguna
+💯	cien puntos	ninguna
+💢	símbolo de enfado	ninguna
+🫯	nube de pelea	ninguna
+💥	colisión	ninguna
+💫	símbolo de mareo	ninguna
+💦	gotas de sudor	ninguna
+💨	salir corriendo	ninguna
+🕳	agujero	ninguna
+💬	bocadillo de diálogo	ninguna
+👁‍🗨	ojo en bocadillo de texto	ninguna
+🗨	bocadillo de diálogo por la izquierda	ninguna
+🗯	bocadillo de enfado por la derecha	ninguna
+💭	bocadillo de pensamiento	ninguna
+💤	símbolo de sueño	ninguna
+👋	mano saludando	ninguna
+🤚	dorso de la mano	ninguna
+🖐	mano abierta	ninguna
+✋	mano levantada	ninguna
+🖖	saludo vulcano	ninguna
+🫱	mano hacia la derecha	ninguna
+🫲	mano hacia la izquierda	ninguna
+🫳	mano con la palma hacia abajo	ninguna
+🫴	mano con la palma hacia arriba	ninguna
+🫷	mano empujando hacia la izquierda	ninguna
+🫸	mano empujando hacia la derecha	ninguna
+👌	señal de aprobación con la mano	ninguna
+🤌	dedos juntos apuntando hacia arriba	ninguna
+🤏	mano pellizcando	ninguna
+✌	mano con señal de victoria	ninguna
+🤞	dedos cruzados	ninguna
+🫰	mano con dedo índice y pulgar cruzados	ninguna
+🤟	gesto de te quiero	ninguna
+🤘	mano haciendo el signo de cuernos	ninguna
+🤙	mano haciendo el gesto de llamar	ninguna
+👈	dorso de mano con índice a la izquierda	ninguna
+👉	dorso de mano con índice a la derecha	ninguna
+👆	dorso de mano con índice hacia arriba	ninguna
+🖕	dedo corazón hacia arriba	ninguna
+👇	dorso de mano con índice hacia abajo	ninguna
+☝	dedo índice hacia arriba	ninguna
+🫵	dedo índice apuntándote a ti	ninguna
+👍	pulgar hacia arriba	ninguna
+👎	pulgar hacia abajo	ninguna
+✊	puño en alto	ninguna
+👊	puño cerrado	ninguna
+🤛	puño hacia la izquierda	ninguna
+🤜	puño hacia la derecha	ninguna
+👏	manos aplaudiendo	ninguna
+🙌	manos levantadas celebrando	ninguna
+🫶	manos formando un corazón	ninguna
+👐	manos abiertas	ninguna
+🤲	palmas hacia arriba juntas	ninguna
+🤝	apretón de manos	ninguna
+🙏	manos en oración	ninguna
+✍	mano escribiendo	ninguna
+💅	pintarse las uñas	ninguna
+🤳	selfi	ninguna
+💪	bíceps flexionado	ninguna
+🦾	brazo mecánico	ninguna
+🦿	pierna mecánica	ninguna
+🦵	pierna	ninguna
+🦶	pie	ninguna
+👂	oreja	ninguna
+🦻	oreja con audífono	ninguna
+👃	nariz	ninguna
+🧠	cerebro	ninguna
+🫀	corazón humano	ninguna
+🫁	pulmones	ninguna
+🦷	diente	ninguna
+🦴	hueso	ninguna
+👀	ojos	ninguna
+👁	ojo	ninguna
+👅	lengua	ninguna
+👄	boca	ninguna
+🫦	labio mordido	ninguna
+👶	bebé	ninguna
+🧒	infante	ninguna
+👦	niño	ninguna
+👧	niña	ninguna
+🧑	persona adulta	ninguna
+👱	persona adulta rubia	ninguna
+👨	hombre	ninguna
+🧔	persona con barba	ninguna
+🧔‍♂	hombre barba	ninguna
+👱‍♂	hombre rubio	ninguna
+👩	mujer	ninguna
+🧔‍♀	mujer barba	ninguna
+👱‍♀	mujer rubia	ninguna
+🧓	persona mayor	ninguna
+👴	anciano	ninguna
+👵	anciana	ninguna
+🙍	persona frunciendo el ceño	ninguna
+🙍‍♂	hombre frunciendo el ceño	ninguna
+🙍‍♀	mujer frunciendo el ceño	ninguna
+🙎	persona haciendo pucheros	ninguna
+🙎‍♂	hombre haciendo pucheros	ninguna
+🙎‍♀	mujer haciendo pucheros	ninguna
+🙅	persona haciendo el gesto de "no"	ninguna
+🙅‍♂	hombre haciendo el gesto de "no"	ninguna
+🙅‍♀	mujer haciendo el gesto de "no"	ninguna
+🙆	persona haciendo el gesto de "de acuerdo"	ninguna
+🙆‍♂	hombre haciendo el gesto de "de acuerdo"	ninguna
+🙆‍♀	mujer haciendo el gesto de "de acuerdo"	ninguna
+💁	persona de mostrador de información	ninguna
+💁‍♂	empleado de mostrador de información	ninguna
+💁‍♀	empleada de mostrador de información	ninguna
+🙋	persona con la mano levantada	ninguna
+🙋‍♂	hombre con la mano levantada	ninguna
+🙋‍♀	mujer con la mano levantada	ninguna
+🧏	persona sorda	ninguna
+🧏‍♂	hombre sordo	ninguna
+🧏‍♀	mujer sorda	ninguna
+🙇	persona haciendo una reverencia	ninguna
+🙇‍♂	hombre haciendo una reverencia	ninguna
+🙇‍♀	mujer haciendo una reverencia	ninguna
+🤦	persona con la mano en la frente	ninguna
+🤦‍♂	hombre con la mano en la frente	ninguna
+🤦‍♀	mujer con la mano en la frente	ninguna
+🤷	persona encogida de hombros	ninguna
+🤷‍♂	hombre encogido de hombros	ninguna
+🤷‍♀	mujer encogida de hombros	ninguna
+🧑‍⚕	profesional sanitario	ninguna
+👨‍⚕	profesional sanitario hombre	ninguna
+👩‍⚕	profesional sanitario mujer	ninguna
+🧑‍🎓	estudiante	ninguna
+👨‍🎓	estudiante hombre	ninguna
+👩‍🎓	estudiante mujer	ninguna
+🧑‍🏫	docente	ninguna
+👨‍🏫	docente hombre	ninguna
+👩‍🏫	docente mujer	ninguna
+🧑‍⚖	fiscal	ninguna
+👨‍⚖	fiscal hombre	ninguna
+👩‍⚖	fiscal mujer	ninguna
+🧑‍🌾	profesional de la agricultura	ninguna
+👨‍🌾	profesional de la agricultura hombre	ninguna
+👩‍🌾	profesional de la agricultura mujer	ninguna
+🧑‍🍳	chef	ninguna
+👨‍🍳	chef hombre	ninguna
+👩‍🍳	chef mujer	ninguna
+🧑‍🔧	profesional de la mecánica	ninguna
+👨‍🔧	profesional de la mecánica hombre	ninguna
+👩‍🔧	profesional de la mecánica mujer	ninguna
+🧑‍🏭	profesional industrial	ninguna
+👨‍🏭	profesional industrial hombre	ninguna
+👩‍🏭	profesional industrial mujer	ninguna
+🧑‍💼	oficinista	ninguna
+👨‍💼	oficinista hombre	ninguna
+👩‍💼	oficinista mujer	ninguna
+🧑‍🔬	profesional de la ciencia	ninguna
+👨‍🔬	profesional de la ciencia hombre	ninguna
+👩‍🔬	profesional de la ciencia mujer	ninguna
+🧑‍💻	profesional de la tecnología	ninguna
+👨‍💻	profesional de la tecnología hombre	ninguna
+👩‍💻	profesional de la tecnología mujer	ninguna
+🧑‍🎤	cantante	ninguna
+👨‍🎤	cantante hombre	ninguna
+👩‍🎤	cantante mujer	ninguna
+🧑‍🎨	artista	ninguna
+👨‍🎨	artista hombre	ninguna
+👩‍🎨	artista mujer	ninguna
+🧑‍✈	piloto	ninguna
+👨‍✈	piloto hombre	ninguna
+👩‍✈	piloto mujer	ninguna
+🧑‍🚀	astronauta	ninguna
+👨‍🚀	astronauta hombre	ninguna
+👩‍🚀	astronauta mujer	ninguna
+🧑‍🚒	bombero	ninguna
+👨‍🚒	bombero hombre	ninguna
+👩‍🚒	bombera	ninguna
+👮	agente de policía	ninguna
+👮‍♂	agente de policía hombre	ninguna
+👮‍♀	agente de policía mujer	ninguna
+🕵	detective	ninguna
+🕵‍♂	detective hombre	ninguna
+🕵‍♀	detective mujer	ninguna
+💂	guardia	ninguna
+💂‍♂	guardia hombre	ninguna
+💂‍♀	guardia mujer	ninguna
+🥷	ninja	ninguna
+👷	profesional de la construcción	ninguna
+👷‍♂	profesional de la construcción hombre	ninguna
+👷‍♀	profesional de la construcción mujer	ninguna
+🫅	persona con corona	ninguna
+🤴	príncipe	ninguna
+👸	princesa	ninguna
+👳	persona con turbante	ninguna
+👳‍♂	hombre con turbante	ninguna
+👳‍♀	mujer con turbante	ninguna
+👲	persona con gorro chino	ninguna
+🧕	mujer con hiyab	ninguna
+🤵	persona con esmoquin	ninguna
+🤵‍♂	hombre con esmoquin	ninguna
+🤵‍♀	mujer con esmoquin	ninguna
+👰	persona con velo	ninguna
+👰‍♂	hombre con velo	ninguna
+👰‍♀	mujer con velo	ninguna
+🤰	mujer embarazada	ninguna
+🫃	hombre embarazado	ninguna
+🫄	persona embarazada	ninguna
+🤱	lactancia materna	ninguna
+👩‍🍼	mujer alimentando a bebé	ninguna
+👨‍🍼	hombre alimentando a bebé	ninguna
+🧑‍🍼	persona alimentando a bebé	ninguna
+👼	bebé ángel	ninguna
+🎅	Papá Noel	ninguna
+🤶	Mamá Noel	ninguna
+🧑‍🎄	Noel	ninguna
+🦸	personaje de superhéroe	ninguna
+🦸‍♂	superhéroe	ninguna
+🦸‍♀	superheroína	ninguna
+🦹	personaje de supervillano	ninguna
+🦹‍♂	supervillano	ninguna
+🦹‍♀	supervillana	ninguna
+🧙	persona maga	ninguna
+🧙‍♂	mago	ninguna
+🧙‍♀	maga	ninguna
+🧚	hada	ninguna
+🧚‍♂	hada hombre	ninguna
+🧚‍♀	hada mujer	ninguna
+🧛	vampiro	ninguna
+🧛‍♂	vampiro hombre	ninguna
+🧛‍♀	vampiresa	ninguna
+🧜	persona sirena	ninguna
+🧜‍♂	sirena hombre	ninguna
+🧜‍♀	sirena	ninguna
+🧝	elfo	ninguna
+🧝‍♂	elfo hombre	ninguna
+🧝‍♀	elfa	ninguna
+🧞	genio	ninguna
+🧞‍♂	genio hombre	ninguna
+🧞‍♀	genio mujer	ninguna
+🧟	zombi	ninguna
+🧟‍♂	zombi hombre	ninguna
+🧟‍♀	zombi mujer	ninguna
+🧌	trol	ninguna
+🫈	criatura peluda	ninguna
+💆	persona recibiendo masaje	ninguna
+💆‍♂	hombre recibiendo masaje	ninguna
+💆‍♀	mujer recibiendo masaje	ninguna
+💇	persona cortándose el pelo	ninguna
+💇‍♂	hombre cortándose el pelo	ninguna
+💇‍♀	mujer cortándose el pelo	ninguna
+🚶	persona caminando	ninguna
+🚶‍♂	hombre caminando	ninguna
+🚶‍♀	mujer caminando	ninguna
+🧍	persona de pie	ninguna
+🧍‍♂	hombre de pie	ninguna
+🧍‍♀	mujer de pie	ninguna
+🧎	persona de rodillas	ninguna
+🧎‍♂	hombre de rodillas	ninguna
+🧎‍♀	mujer de rodillas	ninguna
+🧑‍🦯	persona con bastón	ninguna
+👨‍🦯	hombre con bastón	ninguna
+👩‍🦯	mujer con bastón	ninguna
+🧑‍🦼	persona en silla de ruedas eléctrica	ninguna
+👨‍🦼	hombre en silla de ruedas eléctrica	ninguna
+👩‍🦼	mujer en silla de ruedas eléctrica	ninguna
+🧑‍🦽	persona en silla de ruedas manual	ninguna
+👨‍🦽	hombre en silla de ruedas manual	ninguna
+👩‍🦽	mujer en silla de ruedas manual	ninguna
+🏃	persona corriendo	ninguna
+🏃‍♂	hombre corriendo	ninguna
+🏃‍♀	mujer corriendo	ninguna
+🧑‍🩰	bailarina de ballet	ninguna
+💃	mujer bailando	ninguna
+🕺	hombre bailando	ninguna
+🕴	persona trajeada levitando	ninguna
+👯	personas con orejas de conejo	ninguna
+👯‍♂	hombres con orejas de conejo	ninguna
+👯‍♀	mujeres con orejas de conejo	ninguna
+🧖	persona en una sauna	ninguna
+🧖‍♂	hombre en una sauna	ninguna
+🧖‍♀	mujer en una sauna	ninguna
+🧗	persona escalando	ninguna
+🧗‍♂	hombre escalando	ninguna
+🧗‍♀	mujer escalando	ninguna
+🤺	persona haciendo esgrima	ninguna
+🏇	carrera de caballos	ninguna
+⛷	persona esquiando	ninguna
+🏂	practicante de snowboard	ninguna
+🏌	persona jugando al golf	ninguna
+🏌‍♂	hombre jugando al golf	ninguna
+🏌‍♀	mujer jugando al golf	ninguna
+🏄	persona haciendo surf	ninguna
+🏄‍♂	hombre haciendo surf	ninguna
+🏄‍♀	mujer haciendo surf	ninguna
+🚣	persona remando en un bote	ninguna
+🚣‍♂	hombre remando en un bote	ninguna
+🚣‍♀	mujer remando en un bote	ninguna
+🏊	persona nadando	ninguna
+🏊‍♂	hombre nadando	ninguna
+🏊‍♀	mujer nadando	ninguna
+⛹	persona botando un balón	ninguna
+⛹‍♂	hombre botando un balón	ninguna
+⛹‍♀	mujer botando un balón	ninguna
+🏋	persona levantando pesas	ninguna
+🏋‍♂	hombre levantando pesas	ninguna
+🏋‍♀	mujer levantando pesas	ninguna
+🚴	persona en bicicleta	ninguna
+🚴‍♂	hombre en bicicleta	ninguna
+🚴‍♀	mujer en bicicleta	ninguna
+🚵	persona en bicicleta de montaña	ninguna
+🚵‍♂	hombre en bicicleta de montaña	ninguna
+🚵‍♀	mujer en bicicleta de montaña	ninguna
+🤸	persona haciendo voltereta lateral	ninguna
+🤸‍♂	hombre dando una voltereta lateral	ninguna
+🤸‍♀	mujer dando una voltereta lateral	ninguna
+🤼	personas luchando	ninguna
+🤼‍♂	hombres luchando	ninguna
+🤼‍♀	mujeres luchando	ninguna
+🤽	persona jugando al waterpolo	ninguna
+🤽‍♂	hombre jugando al waterpolo	ninguna
+🤽‍♀	mujer jugando al waterpolo	ninguna
+🤾	persona jugando al balonmano	ninguna
+🤾‍♂	hombre jugando al balonmano	ninguna
+🤾‍♀	mujer jugando al balonmano	ninguna
+🤹	persona haciendo malabares	ninguna
+🤹‍♂	hombre haciendo malabares	ninguna
+🤹‍♀	mujer haciendo malabares	ninguna
+🧘	persona en posición de loto	ninguna
+🧘‍♂	hombre en posición de loto	ninguna
+🧘‍♀	mujer en posición de loto	ninguna
+🛀	persona en la bañera	ninguna
+🛌	persona en la cama	ninguna
+🧑‍🤝‍🧑	dos personas de la mano	ninguna
+👭	mujeres de la mano	ninguna
+👫	mujer y hombre de la mano	ninguna
+👬	hombres de la mano	ninguna
+💏	beso	ninguna
+💑	pareja enamorada	ninguna
+🗣	cabeza parlante	ninguna
+👤	silueta de busto	ninguna
+👥	dos siluetas de bustos	ninguna
+🫂	personas abrazándose	ninguna
+👪	familia	ninguna
+🧑‍🧑‍🧒	familia adulto, adulto, niño	ninguna
+🧑‍🧑‍🧒‍🧒	familia adulto, adulto, niño, niño	ninguna
+🧑‍🧒	familia adulto, niño	ninguna
+🧑‍🧒‍🧒	familia adulto, niño, niño	ninguna
+👣	huellas de pies	ninguna
+🫆	huella dactilar	ninguna
+🦰	pelo pelirrojo	ninguna
+🦱	pelo rizado	ninguna
+🦳	pelo blanco	ninguna
+🦲	sin pelo	ninguna
+🐵	cara de mono	ninguna
+🐒	mono	ninguna
+🦍	gorila	ninguna
+🦧	orangután	ninguna
+🐶	cara de perro	ninguna
+🐕	perro	ninguna
+🦮	perro guía	ninguna
+🐕‍🦺	perro de servicio	ninguna
+🐩	caniche	ninguna
+🐺	lobo	ninguna
+🦊	zorro	ninguna
+🦝	mapache	ninguna
+🐱	cara de gato	ninguna
+🐈	gato	ninguna
+🐈‍⬛	gato negro	ninguna
+🦁	león	ninguna
+🐯	cara de tigre	ninguna
+🐅	tigre	ninguna
+🐆	leopardo	ninguna
+🐴	cara de caballo	ninguna
+🫎	alce	ninguna
+🫏	burro	ninguna
+🐎	caballo	ninguna
+🦄	unicornio	ninguna
+🦓	cebra	ninguna
+🦌	ciervo	ninguna
+🦬	bisonte	ninguna
+🐮	cara de vaca	ninguna
+🐂	buey	ninguna
+🐃	búfalo de agua	ninguna
+🐄	vaca	ninguna
+🐷	cara de cerdo	ninguna
+🐖	cerdo	ninguna
+🐗	jabalí	ninguna
+🐽	nariz de cerdo	ninguna
+🐏	carnero	ninguna
+🐑	oveja	ninguna
+🐐	cabra	ninguna
+🐪	dromedario	ninguna
+🐫	camello	ninguna
+🦙	llama	ninguna
+🦒	jirafa	ninguna
+🐘	elefante	ninguna
+🦣	mamut	ninguna
+🦏	rinoceronte	ninguna
+🦛	hipopótamo	ninguna
+🐭	cara de ratón	ninguna
+🐁	ratón	ninguna
+🐀	rata	ninguna
+🐹	hámster	ninguna
+🐰	cara de conejo	ninguna
+🐇	conejo	ninguna
+🐿	ardilla	ninguna
+🦫	castor	ninguna
+🦔	erizo	ninguna
+🦇	murciélago	ninguna
+🐻	oso	ninguna
+🐻‍❄	oso polar	ninguna
+🐨	koala	ninguna
+🐼	panda	ninguna
+🦥	perezoso	ninguna
+🦦	nutria	ninguna
+🦨	mofeta	ninguna
+🦘	canguro	ninguna
+🦡	tejón	ninguna
+🐾	huellas de pezuñas	ninguna
+🦃	pavo	ninguna
+🐔	gallina	ninguna
+🐓	gallo	ninguna
+🐣	pollito rompiendo el cascarón	ninguna
+🐤	pollito	ninguna
+🐥	pollito de frente	ninguna
+🐦	pájaro	ninguna
+🐧	pingüino	ninguna
+🕊	paloma	ninguna
+🦅	águila	ninguna
+🦆	pato	ninguna
+🦢	cisne	ninguna
+🦉	búho	ninguna
+🦤	dodo	ninguna
+🪶	pluma	ninguna
+🦩	flamenco	ninguna
+🦚	pavo real	ninguna
+🦜	loro	ninguna
+🪽	ala	ninguna
+🐦‍⬛	pájaro negro	ninguna
+🪿	oca	ninguna
+🐦‍🔥	fénix	ninguna
+🐸	rana	ninguna
+🐊	cocodrilo	ninguna
+🐢	tortuga	ninguna
+🦎	lagarto	ninguna
+🐍	serpiente	ninguna
+🐲	cara de dragón	ninguna
+🐉	dragón	ninguna
+🦕	saurópodo	ninguna
+🦖	t-rex	ninguna
+🐳	ballena soltando un chorro	ninguna
+🐋	ballena	ninguna
+🐬	delfín	ninguna
+🫍	orca	ninguna
+🦭	foca	ninguna
+🐟	pez	ninguna
+🐠	pez tropical	ninguna
+🐡	pez globo	ninguna
+🦈	tiburón	ninguna
+🐙	pulpo	ninguna
+🐚	caracola	ninguna
+🪸	coral	ninguna
+🪼	medusa	ninguna
+🦀	cangrejo	ninguna
+🦞	bogavante	ninguna
+🦐	gamba	ninguna
+🦑	calamar	ninguna
+🦪	ostra	ninguna
+🐌	caracol	ninguna
+🦋	mariposa	ninguna
+🐛	bicho	ninguna
+🐜	hormiga	ninguna
+🐝	abeja	ninguna
+🪲	escarabajo	ninguna
+🐞	mariquita	ninguna
+🦗	grillo	ninguna
+🪳	cucaracha	ninguna
+🕷	araña	ninguna
+🕸	tela de araña	ninguna
+🦂	escorpión	ninguna
+🦟	mosquito	ninguna
+🪰	mosca	ninguna
+🪱	gusano	ninguna
+🦠	microbio	ninguna
+💐	ramo de flores	ninguna
+🌸	flor de cerezo	ninguna
+💮	flor blanca	ninguna
+🪷	loto	ninguna
+🏵	roseta	ninguna
+🌹	rosa	ninguna
+🥀	flor marchita	ninguna
+🌺	flor de hibisco	ninguna
+🌻	girasol	ninguna
+🌼	flor	ninguna
+🌷	tulipán	ninguna
+🪻	campanilla	ninguna
+🌱	planta joven	ninguna
+🪴	planta de maceta	ninguna
+🌲	árbol de hoja perenne	ninguna
+🌳	árbol de hoja caduca	ninguna
+🌴	palmera	ninguna
+🌵	cactus	ninguna
+🌾	espiga de arroz	ninguna
+🌿	hierba	ninguna
+☘	trébol	ninguna
+🍀	trébol de cuatro hojas	ninguna
+🍁	hoja de arce	ninguna
+🍂	hojas caídas	ninguna
+🍃	hojas revoloteando al viento	ninguna
+🪹	nido vacío	ninguna
+🪺	nido con huevos	ninguna
+🍄	champiñón	ninguna
+🪾	árbol sin hojas	ninguna
+🍇	uvas	ninguna
+🍈	melón	ninguna
+🍉	sandía	ninguna
+🍊	mandarina	ninguna
+🍋	limón	ninguna
+🍋‍🟩	lima	ninguna
+🍌	plátano	ninguna
+🍍	piña	ninguna
+🥭	mango	ninguna
+🍎	manzana roja	ninguna
+🍏	manzana verde	ninguna
+🍐	pera	ninguna
+🍑	melocotón	ninguna
+🍒	cerezas	ninguna
+🍓	fresa	ninguna
+🫐	arándanos	ninguna
+🥝	kiwi	ninguna
+🍅	tomate	ninguna
+🫒	aceituna	ninguna
+🥥	coco	ninguna
+🥑	aguacate	ninguna
+🍆	berenjena	ninguna
+🥔	patata	ninguna
+🥕	zanahoria	ninguna
+🌽	espiga de maíz	ninguna
+🌶	chile picante	ninguna
+🫑	pimiento	ninguna
+🥒	pepino	ninguna
+🥬	verdura de hoja verde	ninguna
+🥦	brócoli	ninguna
+🧄	ajo	ninguna
+🧅	cebolla	ninguna
+🥜	cacahuetes	ninguna
+🫘	alubias	ninguna
+🌰	castaña	ninguna
+🫚	raíz de jengibre	ninguna
+🫛	vaina	ninguna
+🍄‍🟫	champiñón marrón	ninguna
+🫜	túberculo comestible	ninguna
+🍞	pan de molde	ninguna
+🥐	cruasán	ninguna
+🥖	baguete	ninguna
+🫓	pan sin levadura	ninguna
+🥨	bretzel	ninguna
+🥯	bagel	ninguna
+🥞	tortitas	ninguna
+🧇	gofre	ninguna
+🧀	cuña de queso	ninguna
+🍖	carne con hueso	ninguna
+🍗	muslo de pollo	ninguna
+🥩	corte de carne	ninguna
+🥓	beicon	ninguna
+🍔	hamburguesa	ninguna
+🍟	patatas fritas	ninguna
+🍕	pizza	ninguna
+🌭	perrito caliente	ninguna
+🥪	sándwich	ninguna
+🌮	taco	ninguna
+🌯	burrito	ninguna
+🫔	tamal	ninguna
+🥙	pan relleno	ninguna
+🧆	falafel	ninguna
+🥚	huevo	ninguna
+🍳	cocinar	ninguna
+🥘	paella	ninguna
+🍲	olla de comida	ninguna
+🫕	fondue	ninguna
+🥣	cuenco con cuchara	ninguna
+🥗	ensalada	ninguna
+🍿	palomitas	ninguna
+🧈	mantequilla	ninguna
+🧂	sal	ninguna
+🥫	comida enlatada	ninguna
+🍱	caja de bento	ninguna
+🍘	galleta de arroz	ninguna
+🍙	bola de arroz	ninguna
+🍚	arroz cocido	ninguna
+🍛	arroz con curry	ninguna
+🍜	tazón de fideos	ninguna
+🍝	espagueti	ninguna
+🍠	patata asada	ninguna
+🍢	brocheta	ninguna
+🍣	sushi	ninguna
+🍤	gamba frita	ninguna
+🍥	pastel de pescado japonés	ninguna
+🥮	pastel de luna	ninguna
+🍡	dango	ninguna
+🥟	dumpling	ninguna
+🥠	galleta de la fortuna	ninguna
+🥡	caja para llevar	ninguna
+🍦	cucurucho de helado	ninguna
+🍧	granizado hawaiano	ninguna
+🍨	helado	ninguna
+🍩	dónut	ninguna
+🍪	galleta	ninguna
+🎂	tarta de cumpleaños	ninguna
+🍰	trozo de tarta	ninguna
+🧁	magdalena	ninguna
+🥧	pastel	ninguna
+🍫	tableta de chocolate	ninguna
+🍬	caramelo	ninguna
+🍭	piruleta	ninguna
+🍮	flan	ninguna
+🍯	tarro de miel	ninguna
+🍼	biberón	ninguna
+🥛	vaso de leche	ninguna
+☕	bebida caliente	ninguna
+🫖	tetera	ninguna
+🍵	tazón de té	ninguna
+🍶	sake	ninguna
+🍾	botella descorchada	ninguna
+🍷	copa de vino	ninguna
+🍸	copa de cóctel	ninguna
+🍹	bebida tropical	ninguna
+🍺	jarra de cerveza	ninguna
+🍻	jarras de cerveza brindando	ninguna
+🥂	copas brindando	ninguna
+🥃	vaso de whisky	ninguna
+🫗	líquido derramándose	ninguna
+🥤	vaso con pajita	ninguna
+🧋	té de burbujas	ninguna
+🧃	tetrabrik	ninguna
+🧉	mate	ninguna
+🧊	cubito de hielo	ninguna
+🥢	palillos	ninguna
+🍽	cuchillo y tenedor con un plato	ninguna
+🍴	tenedor y cuchillo	ninguna
+🥄	cuchara	ninguna
+🔪	cuchillo de cocina	ninguna
+🫙	tarro	ninguna
+🏺	ánfora	ninguna
+🌍	globo terráqueo mostrando Europa y África	ninguna
+🌎	globo terráqueo mostrando América	ninguna
+🌏	globo terráqueo mostrando Asia y Australia	ninguna
+🌐	globo terráqueo con meridianos	ninguna
+🗺	mapa mundial	ninguna
+🗾	mapa de Japón	ninguna
+🧭	brújula	ninguna
+🏔	montaña con nieve	ninguna
+⛰	montaña	ninguna
+🛘	desprendimiento	ninguna
+🌋	volcán	ninguna
+🗻	monte Fuji	ninguna
+🏕	camping	ninguna
+🏖	playa y sombrilla	ninguna
+🏜	desierto	ninguna
+🏝	isla desierta	ninguna
+🏞	parque nacional	ninguna
+🏟	estadio	ninguna
+🏛	edificio clásico	ninguna
+🏗	construcción	ninguna
+🧱	ladrillo	ninguna
+🪨	piedra	ninguna
+🪵	madera	ninguna
+🛖	cabaña	ninguna
+🏘	casas	ninguna
+🏚	casa abandonada	ninguna
+🏠	casa	ninguna
+🏡	casa con jardín	ninguna
+🏢	edificio de oficinas	ninguna
+🏣	oficina de correos japonesa	ninguna
+🏤	oficina de correos europea	ninguna
+🏥	hospital	ninguna
+🏦	banco	ninguna
+🏨	hotel	ninguna
+🏩	hotel del amor	ninguna
+🏪	tienda 24 horas	ninguna
+🏫	colegio	ninguna
+🏬	grandes almacenes	ninguna
+🏭	fábrica	ninguna
+🏯	castillo japonés	ninguna
+🏰	castillo europeo	ninguna
+💒	iglesia celebrando boda	ninguna
+🗼	Torre de Tokio	ninguna
+🗽	Estatua de la Libertad	ninguna
+⛪	iglesia	ninguna
+🕌	mezquita	ninguna
+🛕	templo hindú	ninguna
+🕍	sinagoga	ninguna
+⛩	santuario sintoísta	ninguna
+🕋	Kaaba	ninguna
+⛲	fuente	ninguna
+⛺	tienda de campaña	ninguna
+🌁	bruma	ninguna
+🌃	noche estrellada	ninguna
+🏙	paisaje urbano	ninguna
+🌄	amanecer sobre montañas	ninguna
+🌅	amanecer	ninguna
+🌆	ciudad al atardecer	ninguna
+🌇	puesta del sol	ninguna
+🌉	puente de noche	ninguna
+♨	aguas termales	ninguna
+🎠	caballo de tiovivo	ninguna
+🛝	tobogán	ninguna
+🎡	noria de feria	ninguna
+🎢	montaña rusa	ninguna
+💈	poste de barbero	ninguna
+🎪	carpa de circo	ninguna
+🚂	locomotora de vapor	ninguna
+🚃	vagón	ninguna
+🚄	tren de alta velocidad	ninguna
+🚅	tren bala	ninguna
+🚆	tren	ninguna
+🚇	metro	ninguna
+🚈	tren ligero	ninguna
+🚉	estación de tren	ninguna
+🚊	tranvía	ninguna
+🚝	monorraíl	ninguna
+🚞	ferrocarril de montaña	ninguna
+🚋	vagón de tranvía	ninguna
+🚌	autobús	ninguna
+🚍	autobús próximo	ninguna
+🚎	trolebús	ninguna
+🚐	minibús	ninguna
+🚑	ambulancia	ninguna
+🚒	coche de bomberos	ninguna
+🚓	coche de policía	ninguna
+🚔	coche de policía próximo	ninguna
+🚕	taxi	ninguna
+🚖	taxi próximo	ninguna
+🚗	coche	ninguna
+🚘	coche próximo	ninguna
+🚙	vehículo deportivo utilitario	ninguna
+🛻	camioneta	ninguna
+🚚	camión de reparto	ninguna
+🚛	camión articulado	ninguna
+🚜	tractor	ninguna
+🏎	coche de carreras	ninguna
+🏍	moto	ninguna
+🛵	scooter	ninguna
+🦽	silla de ruedas manual	ninguna
+🦼	silla de ruedas eléctrica	ninguna
+🛺	mototaxi	ninguna
+🚲	bicicleta	ninguna
+🛴	patinete	ninguna
+🛹	monopatín	ninguna
+🛼	patines	ninguna
+🚏	parada de autobús	ninguna
+🛣	autopista	ninguna
+🛤	vía de tren	ninguna
+🛢	barril de petróleo	ninguna
+⛽	surtidor de gasolina	ninguna
+🛞	rueda	ninguna
+🚨	luces de policía	ninguna
+🚥	semáforo horizontal	ninguna
+🚦	semáforo	ninguna
+🛑	señal de stop	ninguna
+🚧	obras	ninguna
+⚓	ancla	ninguna
+🛟	salvavidas	ninguna
+⛵	velero	ninguna
+🛶	canoa	ninguna
+🚤	lancha motora	ninguna
+🛳	barco de pasajeros	ninguna
+⛴	ferri	ninguna
+🛥	barco a motor	ninguna
+🚢	barco	ninguna
+✈	avión	ninguna
+🛩	avioneta	ninguna
+🛫	avión despegando	ninguna
+🛬	avión aterrizando	ninguna
+🪂	paracaídas	ninguna
+💺	asiento de transporte	ninguna
+🚁	helicóptero	ninguna
+🚟	ferrocarril de suspensión	ninguna
+🚠	teleférico de montaña	ninguna
+🚡	teleférico	ninguna
+🛰	satélite	ninguna
+🚀	cohete	ninguna
+🛸	platillo volante	ninguna
+🛎	timbre de hotel	ninguna
+🧳	equipaje	ninguna
+🕰	reloj de sobremesa	ninguna
+🕛	12 en punto	ninguna
+🕧	doce y media	ninguna
+🕐	1 en punto	ninguna
+🕜	una y media	ninguna
+🕑	2 en punto	ninguna
+🕝	dos y media	ninguna
+🕒	3 en punto	ninguna
+🕞	tres y media	ninguna
+🕓	4 en punto	ninguna
+🕟	cuatro y media	ninguna
+🕔	5 en punto	ninguna
+🕠	cinco y media	ninguna
+🕕	6 en punto	ninguna
+🕡	seis y media	ninguna
+🕖	7 en punto	ninguna
+🕢	siete y media	ninguna
+🕗	8 en punto	ninguna
+🕣	ocho y media	ninguna
+🕘	9 en punto	ninguna
+🕤	nueve y media	ninguna
+🕙	10 en punto	ninguna
+🕥	diez y media	ninguna
+🕚	11 en punto	ninguna
+🕦	once y media	ninguna
+🌑	luna nueva	ninguna
+🌒	luna creciente	ninguna
+🌓	luna en cuarto creciente	ninguna
+🌔	luna gibosa creciente	ninguna
+🌕	luna llena	ninguna
+🌖	luna gibosa menguante	ninguna
+🌗	luna en cuarto menguante	ninguna
+🌘	luna menguante	ninguna
+🌙	luna	ninguna
+🌚	luna nueva con cara	ninguna
+🌛	luna de cuarto creciente con cara	ninguna
+🌜	luna de cuarto menguante con cara	ninguna
+🌡	termómetro	ninguna
+☀	sol	ninguna
+🌝	luna llena con cara	ninguna
+🌞	sol con cara	ninguna
+🪐	planeta con anillos	ninguna
+🌟	estrella brillante	ninguna
+🌠	estrella fugaz	ninguna
+🌌	Vía Láctea	ninguna
+☁	nube	ninguna
+⛅	sol detrás de una nube	ninguna
+⛈	nube con rayo y lluvia	ninguna
+🌤	sol detrás de una nube pequeña	ninguna
+🌥	sol detrás de una nube grande	ninguna
+🌦	sol detrás de una nube con lluvia	ninguna
+🌧	nube con lluvia	ninguna
+🌨	nube con nieve	ninguna
+🌩	nube con rayo	ninguna
+🌪	tornado	ninguna
+🌫	niebla	ninguna
+🌬	cara de viento	ninguna
+🌀	ciclón	ninguna
+🌈	arcoíris	ninguna
+🌂	paraguas cerrado	ninguna
+☂	paraguas	ninguna
+☔	paraguas con gotas de lluvia	ninguna
+⛱	sombrilla en la arena	ninguna
+⚡	alto voltaje	ninguna
+❄	copo de nieve	ninguna
+☃	muñeco de nieve con nieve	ninguna
+⛄	muñeco de nieve	ninguna
+☄	meteorito	ninguna
+🔥	fuego	ninguna
+💧	gota	ninguna
+🌊	ola de mar	ninguna
+🎃	calabaza de Halloween	ninguna
+🎄	árbol de Navidad	ninguna
+🎆	fuegos artificiales	ninguna
+🎇	bengala	ninguna
+🧨	petardo	ninguna
+✨	chispas	ninguna
+🎈	globo	ninguna
+🎉	cañón de confeti	ninguna
+🎊	bola de confeti	ninguna
+🎋	árbol de tanabata	ninguna
+🎍	decoración de pino	ninguna
+🎎	muñecas japonesas	ninguna
+🎏	banderín de carpas	ninguna
+🎐	campanilla de viento	ninguna
+🎑	ceremonia de contemplación de la luna	ninguna
+🧧	sobre rojo	ninguna
+🎀	lazo	ninguna
+🎁	regalo	ninguna
+🎗	lazo conmemorativo	ninguna
+🎟	entradas	ninguna
+🎫	tique	ninguna
+🎖	medalla militar	ninguna
+🏆	trofeo	ninguna
+🏅	medalla deportiva	ninguna
+🥇	medalla de oro	ninguna
+🥈	medalla de plata	ninguna
+🥉	medalla de bronce	ninguna
+⚽	balón de fútbol	ninguna
+⚾	béisbol	ninguna
+🥎	pelota de softball	ninguna
+🏀	balón de baloncesto	ninguna
+🏐	pelota de voleibol	ninguna
+🏈	balón de fútbol americano	ninguna
+🏉	balón de rugby	ninguna
+🎾	pelota de tenis	ninguna
+🥏	disco volador	ninguna
+🎳	bolos	ninguna
+🏏	críquet	ninguna
+🏑	hockey sobre hierba	ninguna
+🏒	hockey sobre hielo	ninguna
+🥍	lacrosse	ninguna
+🏓	tenis de mesa	ninguna
+🏸	bádminton	ninguna
+🥊	guante de boxeo	ninguna
+🥋	uniforme de artes marciales	ninguna
+🥅	portería	ninguna
+⛳	banderín en hoyo	ninguna
+⛸	patín de hielo	ninguna
+🎣	caña de pescar	ninguna
+🤿	máscara de buceo	ninguna
+🎽	camiseta sin mangas	ninguna
+🎿	esquís	ninguna
+🛷	trineo	ninguna
+🥌	piedra de curling	ninguna
+🎯	diana	ninguna
+🪀	yoyó	ninguna
+🪁	cometa	ninguna
+🔫	pistola de agua	ninguna
+🎱	bola negra de billar	ninguna
+🔮	bola de cristal	ninguna
+🪄	varita mágica	ninguna
+🎮	mando de videoconsola	ninguna
+🕹	joystick	ninguna
+🎰	máquina tragaperras	ninguna
+🎲	dado	ninguna
+🧩	pieza de puzle	ninguna
+🧸	osito de peluche	ninguna
+🪅	piñata	ninguna
+🪩	bola de espejos	ninguna
+🪆	muñeca rusa	ninguna
+♠	palo de picas	ninguna
+♟	peón de ajedrez	ninguna
+🃏	comodín	ninguna
+🀄	dragón rojo de mahjong	ninguna
+🎴	cartas de flores	ninguna
+🎭	máscaras de teatro	ninguna
+🖼	cuadro enmarcado	ninguna
+🎨	paleta de pintor	ninguna
+🧵	hilo	ninguna
+🪡	aguja de coser	ninguna
+🧶	ovillo	ninguna
+🪢	nudo	ninguna
+👓	gafas	ninguna
+🕶	gafas de sol	ninguna
+🥽	gafas de protección	ninguna
+🥼	bata de laboratorio	ninguna
+🦺	chaleco de seguridad	ninguna
+👔	corbata	ninguna
+👕	camiseta	ninguna
+👖	vaqueros	ninguna
+🧣	bufanda	ninguna
+🧤	guantes	ninguna
+🧥	abrigo	ninguna
+🧦	calcetines	ninguna
+👗	vestido	ninguna
+👘	kimono	ninguna
+🥻	sari	ninguna
+🩱	traje de baño de una pieza	ninguna
+🩲	ropa interior	ninguna
+🩳	pantalones cortos	ninguna
+👙	bikini	ninguna
+👚	ropa de mujer	ninguna
+🪭	abanico abierto	ninguna
+👛	monedero	ninguna
+👜	bolso	ninguna
+👝	bolso de mano	ninguna
+🛍	bolsas de compras	ninguna
+🎒	mochila escolar	ninguna
+🩴	chancla	ninguna
+👞	zapato de hombre	ninguna
+👟	zapatilla deportiva	ninguna
+🥾	bota de senderismo	ninguna
+🥿	bailarina	ninguna
+👠	zapato de tacón	ninguna
+👡	sandalia de mujer	ninguna
+🩰	zapatillas de ballet	ninguna
+👢	bota de mujer	ninguna
+🪮	peineta	ninguna
+👑	corona	ninguna
+👒	sombrero de mujer	ninguna
+🎩	sombrero de copa	ninguna
+🎓	birrete	ninguna
+🧢	gorra con visera	ninguna
+🪖	casco militar	ninguna
+⛑	casco con una cruz blanca	ninguna
+📿	rosario	ninguna
+💄	pintalabios	ninguna
+💍	anillo	ninguna
+💎	piedra preciosa	ninguna
+🔇	altavoz silenciado	ninguna
+🔈	altavoz a volumen bajo	ninguna
+🔉	altavoz a volumen medio	ninguna
+🔊	altavoz a volumen alto	ninguna
+📢	altavoz de mano	ninguna
+📣	megáfono	ninguna
+📯	corneta de posta	ninguna
+🔔	campana	ninguna
+🔕	campana con signo de cancelación	ninguna
+🎼	pentagrama	ninguna
+🎵	nota musical	ninguna
+🎶	notas musicales	ninguna
+🎙	micrófono de estudio	ninguna
+🎚	control de volumen	ninguna
+🎛	ruedas de control	ninguna
+🎤	micrófono	ninguna
+🎧	auricular	ninguna
+📻	radio	ninguna
+🎷	saxofón	ninguna
+🎺	trompeta	ninguna
+🪊	trombón	ninguna
+🪗	acordeón	ninguna
+🎸	guitarra	ninguna
+🎹	teclado musical	ninguna
+🎻	violín	ninguna
+🪕	banjo	ninguna
+🥁	tambor	ninguna
+🪘	tamboril	ninguna
+🪇	maracas	ninguna
+🪈	flauta	ninguna
+🪉	arpa	ninguna
+📱	teléfono móvil	ninguna
+📲	móvil con una flecha	ninguna
+☎	teléfono	ninguna
+📞	auricular de teléfono	ninguna
+📟	busca	ninguna
+📠	máquina de fax	ninguna
+🔋	pila	ninguna
+🪫	batería baja	ninguna
+🔌	enchufe eléctrico	ninguna
+💻	ordenador portátil	ninguna
+🖥	ordenador de sobremesa	ninguna
+🖨	impresora	ninguna
+🖱	ratón de ordenador	ninguna
+🖲	bola de desplazamiento	ninguna
+💽	minidisc	ninguna
+💾	disquete	ninguna
+💿	disco óptico	ninguna
+📀	disco DVD	ninguna
+🧮	ábaco	ninguna
+🎥	cámara de cine	ninguna
+🎞	fotograma de película	ninguna
+📽	proyector de cine	ninguna
+🎬	claqueta	ninguna
+📺	televisión	ninguna
+📷	cámara de fotos	ninguna
+📸	cámara con flash	ninguna
+📹	videocámara	ninguna
+📼	cinta de vídeo	ninguna
+🔍	lupa orientada hacia la izquierda	ninguna
+🔎	lupa orientada hacia la derecha	ninguna
+🕯	vela	ninguna
+💡	bombilla	ninguna
+🔦	linterna	ninguna
+🏮	lámpara japonesa	ninguna
+🪔	lámpara de aceite	ninguna
+📔	cuaderno con tapa decorativa	ninguna
+📕	libro cerrado	ninguna
+📖	libro abierto	ninguna
+📗	libro verde	ninguna
+📘	libro azul	ninguna
+📙	libro naranja	ninguna
+📚	libros	ninguna
+📓	cuaderno	ninguna
+📒	libro de contabilidad	ninguna
+📃	página doblada	ninguna
+📜	pergamino	ninguna
+📄	página hacia arriba	ninguna
+📰	periódico	ninguna
+🗞	periódico enrollado	ninguna
+📑	marcadores	ninguna
+🔖	marcapáginas	ninguna
+🏷	etiqueta	ninguna
+🪙	moneda	ninguna
+💰	bolsa de dinero	ninguna
+🪎	cofre de tesoro	ninguna
+💴	billete de yen	ninguna
+💵	billete de dólar	ninguna
+💶	billete de euro	ninguna
+💷	billete de libra	ninguna
+💸	billete con alas	ninguna
+💳	tarjeta de crédito	ninguna
+🧾	recibo	ninguna
+💹	mercado al alza	ninguna
+✉	sobre	ninguna
+📧	correo electrónico	ninguna
+📨	sobre entrante	ninguna
+📩	sobre con flecha	ninguna
+📤	bandeja de salida	ninguna
+📥	bandeja de entrada	ninguna
+📦	paquete	ninguna
+📫	buzón cerrado con la bandera levantada	ninguna
+📪	buzón cerrado con la bandera bajada	ninguna
+📬	buzón abierto con la bandera levantada	ninguna
+📭	buzón abierto con la bandera bajada	ninguna
+📮	buzón	ninguna
+🗳	urna con papeleta	ninguna
+✏	lápiz	ninguna
+✒	pluma negra	ninguna
+🖋	estilográfica	ninguna
+🖊	bolígrafo	ninguna
+🖌	pincel	ninguna
+🖍	lápiz de cera	ninguna
+📝	cuaderno de notas	ninguna
+💼	maletín	ninguna
+📁	carpeta de archivos	ninguna
+📂	carpeta de archivos abierta	ninguna
+🗂	separador de fichas	ninguna
+📅	calendario	ninguna
+📆	calendario recortable	ninguna
+🗒	bloc de notas de espiral	ninguna
+🗓	calendario de espiral	ninguna
+📇	organizador de fichas	ninguna
+📈	gráfica de evolución ascendente	ninguna
+📉	gráfica de evolución descendente	ninguna
+📊	gráfico de barras	ninguna
+📋	portapapeles	ninguna
+📌	chincheta	ninguna
+📍	chincheta redonda	ninguna
+📎	clip	ninguna
+🖇	clips unidos	ninguna
+📏	regla	ninguna
+📐	escuadra	ninguna
+✂	tijeras	ninguna
+🗃	archivador de tarjetas	ninguna
+🗄	archivador	ninguna
+🗑	papelera	ninguna
+🔒	candado cerrado	ninguna
+🔓	candado abierto	ninguna
+🔏	candado con pluma estilográfica	ninguna
+🔐	candado cerrado y llave	ninguna
+🔑	llave	ninguna
+🗝	llave antigua	ninguna
+🔨	martillo	ninguna
+🪓	hacha	ninguna
+⛏	pico	ninguna
+⚒	martillo y pico	ninguna
+🛠	martillo y llave inglesa	ninguna
+🗡	puñal	ninguna
+⚔	espadas cruzadas	ninguna
+💣	bomba	ninguna
+🪃	bumerán	ninguna
+🏹	arco y flecha	ninguna
+🛡	escudo	ninguna
+🪚	sierra de carpintería	ninguna
+🔧	llave inglesa	ninguna
+🪛	destornillador	ninguna
+🔩	tornillo y tuerca	ninguna
+⚙	engranaje	ninguna
+🗜	tornillo de banco	ninguna
+⚖	balanza	ninguna
+🦯	bastón	ninguna
+🔗	eslabón	ninguna
+⛓‍💥	cadena rota	ninguna
+⛓	cadenas	ninguna
+🪝	gancho	ninguna
+🧰	caja de herramientas	ninguna
+🧲	imán	ninguna
+🪜	escalera	ninguna
+🪏	pala	ninguna
+⚗	alambique	ninguna
+🧪	tubo de ensayo	ninguna
+🧫	placa de petri	ninguna
+🧬	adn	ninguna
+🔬	microscopio	ninguna
+🔭	telescopio	ninguna
+📡	antena de satélite	ninguna
+💉	jeringuilla	ninguna
+🩸	gota de sangre	ninguna
+💊	píldora	ninguna
+🩹	tirita	ninguna
+🩼	muleta	ninguna
+🩺	estetoscopio	ninguna
+🩻	radiografía	ninguna
+🚪	puerta	ninguna
+🛗	ascensor	ninguna
+🪞	espejo	ninguna
+🪟	ventana	ninguna
+🛏	cama	ninguna
+🛋	sofá y lámpara	ninguna
+🪑	silla	ninguna
+🚽	inodoro	ninguna
+🪠	desatascador	ninguna
+🚿	ducha	ninguna
+🛁	bañera	ninguna
+🪤	trampa de ratones	ninguna
+🪒	cuchilla de afeitar	ninguna
+🧴	bote de crema	ninguna
+🧷	imperdible	ninguna
+🧹	escoba	ninguna
+🧺	cesta	ninguna
+🧻	rollo de papel	ninguna
+🪣	cubo	ninguna
+🧼	jabón	ninguna
+🫧	burbujas	ninguna
+🪥	cepillo de dientes	ninguna
+🧽	esponja	ninguna
+🧯	extintor	ninguna
+🛒	carrito de la compra	ninguna
+🚬	cigarrillo	ninguna
+⚰	ataúd	ninguna
+🪦	lápida	ninguna
+⚱	urna funeraria	ninguna
+🧿	ojo turco	ninguna
+🪬	hamsa	ninguna
+🗿	estatua moái	ninguna
+🪧	letrero	ninguna
+🪪	carné de identidad	ninguna
+🏧	señal de cajero automático	ninguna
+🚮	señal de usar papelera	ninguna
+🚰	agua potable	ninguna
+♿	símbolo de silla de ruedas	ninguna
+🚹	aseo para hombres	ninguna
+🚺	señal de aseo para mujeres	ninguna
+🚻	señal de aseos	ninguna
+🚼	señal de bebé	ninguna
+🚾	aseos	ninguna
+🛂	control de pasaportes	ninguna
+🛃	aduana	ninguna
+🛄	recogida de equipajes	ninguna
+🛅	consigna	ninguna
+⚠	advertencia	ninguna
+🚸	niños cruzando	ninguna
+⛔	dirección prohibida	ninguna
+🚫	prohibido	ninguna
+🚳	bicicletas prohibidas	ninguna
+🚭	prohibido fumar	ninguna
+🚯	prohibido tirar basura	ninguna
+🚱	agua no potable	ninguna
+🚷	prohibido el paso de peatones	ninguna
+📵	prohibido el uso de móviles	ninguna
+🔞	prohibido para menos de 18 años	ninguna
+☢	radiactivo	ninguna
+☣	riesgo biológico	ninguna
+➡	flecha hacia la derecha	ninguna
+🔃	flechas verticales en sentido horario	ninguna
+🔄	flechas en sentido antihorario	ninguna
+🔙	flecha BACK	ninguna
+🔚	flecha END	ninguna
+🔛	flecha ON!	ninguna
+🔜	flecha SOON	ninguna
+🔝	flecha TOP	ninguna
+🛐	lugar de culto	ninguna
+⚛	símbolo de átomo	ninguna
+🕉	om	ninguna
+✡	estrella de David	ninguna
+☸	rueda del dharma	ninguna
+☯	yin yang	ninguna
+✝	cruz latina	ninguna
+☦	cruz ortodoxa	ninguna
+☪	media luna y estrella	ninguna
+☮	símbolo de la paz	ninguna
+🕎	menorá	ninguna
+🔯	estrella de seis puntas	ninguna
+🪯	khanda	ninguna
+♈	Aries	ninguna
+♉	Tauro	ninguna
+♊	Géminis	ninguna
+♋	Cáncer	ninguna
+♌	Leo	ninguna
+♍	Virgo	ninguna
+♎	Libra	ninguna
+♏	Escorpio	ninguna
+♐	Sagitario	ninguna
+♑	Capricornio	ninguna
+♒	Acuario	ninguna
+♓	Piscis	ninguna
+⛎	Ofiuco	ninguna
+🔀	reproducción aleatoria	ninguna
+🔁	repetir	ninguna
+🔂	repetir una vez	ninguna
+🔼	triángulo hacia arriba	ninguna
+🔽	triángulo hacia abajo	ninguna
+🎦	cine	ninguna
+🔅	brillo bajo	ninguna
+🔆	brillo alto	ninguna
+📶	barras de cobertura	ninguna
+🛜	wifi	ninguna
+📳	modo vibración	ninguna
+📴	teléfono móvil apagado	ninguna
+♀	signo femenino	ninguna
+♂	signo masculino	ninguna
+⚧	símbolo de transgénero	ninguna
+✖	multiplicación	ninguna
+➕	más	ninguna
+➖	menos	ninguna
+➗	división	ninguna
+🟰	signo igual grueso	ninguna
+♾	infinito	ninguna
+❓	interrogación roja	ninguna
+❔	interrogación blanca	ninguna
+❕	exclamación blanca	ninguna
+❗	exclamación roja	ninguna
+💱	cambio de divisas	ninguna
+💲	símbolo de dólar	ninguna
+⚕	símbolo de medicina	ninguna
+♻	símbolo de reciclaje	ninguna
+⚜	flor de lis	ninguna
+🔱	emblema de tridente	ninguna
+📛	etiqueta identificativa	ninguna
+🔰	símbolo japonés para principiante	ninguna
+✅	botón de marca de verificación	ninguna
+☑	casilla con marca de verificación	ninguna
+❌	marca de cruz	ninguna
+❎	botón con marca de cruz	ninguna
+➰	bucle	ninguna
+➿	bucle doble	ninguna
+✳	asterisco de ocho puntas	ninguna
+✴	estrella de ocho puntas	ninguna
+❇	chispa	ninguna
+🫟	salpicadura	ninguna
+🔠	letras latinas mayúsculas	ninguna
+🔡	letras latinas minúsculas	ninguna
+🔢	números	ninguna
+🔣	símbolos	ninguna
+🔤	alfabeto latino	ninguna
+🅰	grupo sanguíneo A	ninguna
+🆎	grupo sanguíneo AB	ninguna
+🅱	grupo sanguíneo B	ninguna
+🆑	borrar	ninguna
+🆒	botón COOL	ninguna
+🆓	botón FREE	ninguna
+🆔	símbolo de identificación	ninguna
+🆕	botón NEW	ninguna
+🆖	botón NG	ninguna
+🅾	grupo sanguíneo tipo O	ninguna
+🆗	botón OK	ninguna
+🅿	aparcamiento	ninguna
+🆘	símbolo de socorro	ninguna
+🆙	botón UP!	ninguna
+🆚	botón VS	ninguna
+🈁	ideograma japonés para "aquí"	ninguna
+🈂	ideograma japonés para "de cortesía"	ninguna
+🈷	ideograma japonés para "cantidad mensual"	ninguna
+🈶	ideograma japonés para "de pago"	ninguna
+🈯	ideograma japonés para "reservado"	ninguna
+🉐	ideograma japonés para "ganga"	ninguna
+🈹	ideograma japonés para "descuento"	ninguna
+🈚	ideograma japonés para "gratis"	ninguna
+🈲	ideograma japonés para "prohibido"	ninguna
+🉑	ideograma japonés para "aceptable"	ninguna
+🈸	ideograma japonés para "aplicación"	ninguna
+🈴	ideograma japonés para "aprobado"	ninguna
+🈳	ideograma japonés para "vacante"	ninguna
+🈺	ideograma japonés para "abierto"	ninguna
+🈵	ideograma japonés para "completo"	ninguna
+🔴	círculo rojo	ninguna
+🟠	círculo naranja	ninguna
+🟡	círculo amarillo	ninguna
+🟢	círculo verde	ninguna
+🔵	círculo azul	ninguna
+🟣	círculo morado	ninguna
+🟤	círculo marrón	ninguna
+⚫	círculo negro	ninguna
+⚪	círculo blanco	ninguna
+🟥	cuadrado rojo	ninguna
+🟧	cuadrado naranja	ninguna
+🟨	cuadrado amarillo	ninguna
+🟩	cuadrado verde	ninguna
+🟦	cuadrado azul	ninguna
+🟪	cuadrado morado	ninguna
+🟫	cuadrado marrón	ninguna
+🔶	rombo naranja grande	ninguna
+🔷	rombo azul grande	ninguna
+🔸	rombo naranja pequeño	ninguna
+🔹	rombo azul pequeño	ninguna
+🔺	triángulo rojo hacia arriba	ninguna
+🔻	triángulo rojo hacia abajo	ninguna
+💠	rombo con pétalo	ninguna
+🔘	botón de opción	ninguna
+🔳	botón cuadrado con borde blanco	ninguna
+🔲	botón cuadrado con borde negro	ninguna
+🏁	bandera de cuadros	ninguna
+🚩	bandera triangular	ninguna
+🎌	banderas cruzadas	ninguna
+🏴	bandera negra	ninguna
+🏳	bandera blanca	ninguna
+🏳‍🌈	bandera del arcoíris	ninguna
+🏳‍⚧	bandera transgénero	ninguna
+🏴‍☠	bandera pirata	ninguna
+👋🏻	mano saludando tono de piel claro	ninguna
+👋🏼	mano saludando tono de piel claro medio	ninguna
+👋🏽	mano saludando tono de piel medio	ninguna
+👋🏾	mano saludando tono de piel oscuro medio	ninguna
+👋🏿	mano saludando tono de piel oscuro	ninguna
+🤚🏻	dorso de la mano tono de piel claro	ninguna
+🤚🏼	dorso de la mano tono de piel claro medio	ninguna
+🤚🏽	dorso de la mano tono de piel medio	ninguna
+🤚🏾	dorso de la mano tono de piel oscuro medio	ninguna
+🤚🏿	dorso de la mano tono de piel oscuro	ninguna
+🖐🏻	mano abierta tono de piel claro	ninguna
+🖐🏼	mano abierta tono de piel claro medio	ninguna
+🖐🏽	mano abierta tono de piel medio	ninguna
+🖐🏾	mano abierta tono de piel oscuro medio	ninguna
+🖐🏿	mano abierta tono de piel oscuro	ninguna
+✋🏻	mano levantada tono de piel claro	ninguna
+✋🏼	mano levantada tono de piel claro medio	ninguna
+✋🏽	mano levantada tono de piel medio	ninguna
+✋🏾	mano levantada tono de piel oscuro medio	ninguna
+✋🏿	mano levantada tono de piel oscuro	ninguna
+🖖🏻	saludo vulcano tono de piel claro	ninguna
+🖖🏼	saludo vulcano tono de piel claro medio	ninguna
+🖖🏽	saludo vulcano tono de piel medio	ninguna
+🖖🏾	saludo vulcano tono de piel oscuro medio	ninguna
+🖖🏿	saludo vulcano tono de piel oscuro	ninguna
+🫱🏻	mano hacia la derecha tono de piel claro	ninguna
+🫱🏼	mano hacia la derecha tono de piel claro medio	ninguna
+🫱🏽	mano hacia la derecha tono de piel medio	ninguna
+🫱🏾	mano hacia la derecha tono de piel oscuro medio	ninguna
+🫱🏿	mano hacia la derecha tono de piel oscuro	ninguna
+🫱🏻‍🫲🏼	apretón de manos tono de piel claro y tono de piel claro medio	ninguna
+🫱🏻‍🫲🏽	apretón de manos tono de piel claro y tono de piel medio	ninguna
+🫱🏻‍🫲🏾	apretón de manos tono de piel claro y tono de piel oscuro medio	ninguna
+🫱🏻‍🫲🏿	apretón de manos tono de piel claro y tono de piel oscuro	ninguna
+🫱🏼‍🫲🏻	apretón de manos tono de piel claro medio y tono de piel claro	ninguna
+🫱🏼‍🫲🏽	apretón de manos tono de piel claro medio y tono de piel medio	ninguna
+🫱🏼‍🫲🏾	apretón de manos tono de piel claro medio y tono de piel oscuro medio	ninguna
+🫱🏼‍🫲🏿	apretón de manos tono de piel claro medio y tono de piel oscuro	ninguna
+🫱🏽‍🫲🏻	apretón de manos tono de piel medio y tono de piel claro	ninguna
+🫱🏽‍🫲🏼	apretón de manos tono de piel medio y tono de piel claro medio	ninguna
+🫱🏽‍🫲🏾	apretón de manos tono de piel medio y tono de piel oscuro medio	ninguna
+🫱🏽‍🫲🏿	apretón de manos tono de piel medio y tono de piel oscuro	ninguna
+🫱🏾‍🫲🏻	apretón de manos tono de piel oscuro medio y tono de piel claro	ninguna
+🫱🏾‍🫲🏼	apretón de manos tono de piel oscuro medio y tono de piel claro medio	ninguna
+🫱🏾‍🫲🏽	apretón de manos tono de piel oscuro medio y tono de piel medio	ninguna
+🫱🏾‍🫲🏿	apretón de manos tono de piel oscuro medio y tono de piel oscuro	ninguna
+🫱🏿‍🫲🏻	apretón de manos tono de piel oscuro y tono de piel claro	ninguna
+🫱🏿‍🫲🏼	apretón de manos tono de piel oscuro y tono de piel claro medio	ninguna
+🫱🏿‍🫲🏽	apretón de manos tono de piel oscuro y tono de piel medio	ninguna
+🫱🏿‍🫲🏾	apretón de manos tono de piel oscuro y tono de piel oscuro medio	ninguna
+🫲🏻	mano hacia la izquierda tono de piel claro	ninguna
+🫲🏼	mano hacia la izquierda tono de piel claro medio	ninguna
+🫲🏽	mano hacia la izquierda tono de piel medio	ninguna
+🫲🏾	mano hacia la izquierda tono de piel oscuro medio	ninguna
+🫲🏿	mano hacia la izquierda tono de piel oscuro	ninguna
+🫳🏻	mano con la palma hacia abajo tono de piel claro	ninguna
+🫳🏼	mano con la palma hacia abajo tono de piel claro medio	ninguna
+🫳🏽	mano con la palma hacia abajo tono de piel medio	ninguna
+🫳🏾	mano con la palma hacia abajo tono de piel oscuro medio	ninguna
+🫳🏿	mano con la palma hacia abajo tono de piel oscuro	ninguna
+🫴🏻	mano con la palma hacia arriba tono de piel claro	ninguna
+🫴🏼	mano con la palma hacia arriba tono de piel claro medio	ninguna
+🫴🏽	mano con la palma hacia arriba tono de piel medio	ninguna
+🫴🏾	mano con la palma hacia arriba tono de piel oscuro medio	ninguna
+🫴🏿	mano con la palma hacia arriba tono de piel oscuro	ninguna
+🫷🏻	mano empujando hacia la izquierda tono de piel claro	ninguna
+🫷🏼	mano empujando hacia la izquierda tono de piel claro medio	ninguna
+🫷🏽	mano empujando hacia la izquierda tono de piel medio	ninguna
+🫷🏾	mano empujando hacia la izquierda tono de piel oscuro medio	ninguna
+🫷🏿	mano empujando hacia la izquierda tono de piel oscuro	ninguna
+🫸🏻	mano empujando hacia la derecha tono de piel claro	ninguna
+🫸🏼	mano empujando hacia la derecha tono de piel claro medio	ninguna
+🫸🏽	mano empujando hacia la derecha tono de piel medio	ninguna
+🫸🏾	mano empujando hacia la derecha tono de piel oscuro medio	ninguna
+🫸🏿	mano empujando hacia la derecha tono de piel oscuro	ninguna
+👌🏻	señal de aprobación con la mano tono de piel claro	ninguna
+👌🏼	señal de aprobación con la mano tono de piel claro medio	ninguna
+👌🏽	señal de aprobación con la mano tono de piel medio	ninguna
+👌🏾	señal de aprobación con la mano tono de piel oscuro medio	ninguna
+👌🏿	señal de aprobación con la mano tono de piel oscuro	ninguna
+🤌🏻	dedos juntos apuntando hacia arriba tono de piel claro	ninguna
+🤌🏼	dedos juntos apuntando hacia arriba tono de piel claro medio	ninguna
+🤌🏽	dedos juntos apuntando hacia arriba tono de piel medio	ninguna
+🤌🏾	dedos juntos apuntando hacia arriba tono de piel oscuro medio	ninguna
+🤌🏿	dedos juntos apuntando hacia arriba tono de piel oscuro	ninguna
+🤏🏻	mano pellizcando tono de piel claro	ninguna
+🤏🏼	mano pellizcando tono de piel claro medio	ninguna
+🤏🏽	mano pellizcando tono de piel medio	ninguna
+🤏🏾	mano pellizcando tono de piel oscuro medio	ninguna
+🤏🏿	mano pellizcando tono de piel oscuro	ninguna
+✌🏻	mano con señal de victoria tono de piel claro	ninguna
+✌🏼	mano con señal de victoria tono de piel claro medio	ninguna
+✌🏽	mano con señal de victoria tono de piel medio	ninguna
+✌🏾	mano con señal de victoria tono de piel oscuro medio	ninguna
+✌🏿	mano con señal de victoria tono de piel oscuro	ninguna
+🤞🏻	dedos cruzados tono de piel claro	ninguna
+🤞🏼	dedos cruzados tono de piel claro medio	ninguna
+🤞🏽	dedos cruzados tono de piel medio	ninguna
+🤞🏾	dedos cruzados tono de piel oscuro medio	ninguna
+🤞🏿	dedos cruzados tono de piel oscuro	ninguna
+🫰🏻	mano con dedo índice y pulgar cruzados tono de piel claro	ninguna
+🫰🏼	mano con dedo índice y pulgar cruzados tono de piel claro medio	ninguna
+🫰🏽	mano con dedo índice y pulgar cruzados tono de piel medio	ninguna
+🫰🏾	mano con dedo índice y pulgar cruzados tono de piel oscuro medio	ninguna
+🫰🏿	mano con dedo índice y pulgar cruzados tono de piel oscuro	ninguna
+🤟🏻	gesto de te quiero tono de piel claro	ninguna
+🤟🏼	gesto de te quiero tono de piel claro medio	ninguna
+🤟🏽	gesto de te quiero tono de piel medio	ninguna
+🤟🏾	gesto de te quiero tono de piel oscuro medio	ninguna
+🤟🏿	gesto de te quiero tono de piel oscuro	ninguna
+🤘🏻	mano haciendo el signo de cuernos tono de piel claro	ninguna
+🤘🏼	mano haciendo el signo de cuernos tono de piel claro medio	ninguna
+🤘🏽	mano haciendo el signo de cuernos tono de piel medio	ninguna
+🤘🏾	mano haciendo el signo de cuernos tono de piel oscuro medio	ninguna
+🤘🏿	mano haciendo el signo de cuernos tono de piel oscuro	ninguna
+🤙🏻	mano haciendo el gesto de llamar tono de piel claro	ninguna
+🤙🏼	mano haciendo el gesto de llamar tono de piel claro medio	ninguna
+🤙🏽	mano haciendo el gesto de llamar tono de piel medio	ninguna
+🤙🏾	mano haciendo el gesto de llamar tono de piel oscuro medio	ninguna
+🤙🏿	mano haciendo el gesto de llamar tono de piel oscuro	ninguna
+👈🏻	dorso de mano con índice a la izquierda tono de piel claro	ninguna
+👈🏼	dorso de mano con índice a la izquierda tono de piel claro medio	ninguna
+👈🏽	dorso de mano con índice a la izquierda tono de piel medio	ninguna
+👈🏾	dorso de mano con índice a la izquierda tono de piel oscuro medio	ninguna
+👈🏿	dorso de mano con índice a la izquierda tono de piel oscuro	ninguna
+👉🏻	dorso de mano con índice a la derecha tono de piel claro	ninguna
+👉🏼	dorso de mano con índice a la derecha tono de piel claro medio	ninguna
+👉🏽	dorso de mano con índice a la derecha tono de piel medio	ninguna
+👉🏾	dorso de mano con índice a la derecha tono de piel oscuro medio	ninguna
+👉🏿	dorso de mano con índice a la derecha tono de piel oscuro	ninguna
+👆🏻	dorso de mano con índice hacia arriba tono de piel claro	ninguna
+👆🏼	dorso de mano con índice hacia arriba tono de piel claro medio	ninguna
+👆🏽	dorso de mano con índice hacia arriba tono de piel medio	ninguna
+👆🏾	dorso de mano con índice hacia arriba tono de piel oscuro medio	ninguna
+👆🏿	dorso de mano con índice hacia arriba tono de piel oscuro	ninguna
+🖕🏻	dedo corazón hacia arriba tono de piel claro	ninguna
+🖕🏼	dedo corazón hacia arriba tono de piel claro medio	ninguna
+🖕🏽	dedo corazón hacia arriba tono de piel medio	ninguna
+🖕🏾	dedo corazón hacia arriba tono de piel oscuro medio	ninguna
+🖕🏿	dedo corazón hacia arriba tono de piel oscuro	ninguna
+👇🏻	dorso de mano con índice hacia abajo tono de piel claro	ninguna
+👇🏼	dorso de mano con índice hacia abajo tono de piel claro medio	ninguna
+👇🏽	dorso de mano con índice hacia abajo tono de piel medio	ninguna
+👇🏾	dorso de mano con índice hacia abajo tono de piel oscuro medio	ninguna
+👇🏿	dorso de mano con índice hacia abajo tono de piel oscuro	ninguna
+☝🏻	dedo índice hacia arriba tono de piel claro	ninguna
+☝🏼	dedo índice hacia arriba tono de piel claro medio	ninguna
+☝🏽	dedo índice hacia arriba tono de piel medio	ninguna
+☝🏾	dedo índice hacia arriba tono de piel oscuro medio	ninguna
+☝🏿	dedo índice hacia arriba tono de piel oscuro	ninguna
+🫵🏻	dedo índice apuntándote a ti tono de piel claro	ninguna
+🫵🏼	dedo índice apuntándote a ti tono de piel claro medio	ninguna
+🫵🏽	dedo índice apuntándote a ti tono de piel medio	ninguna
+🫵🏾	dedo índice apuntándote a ti tono de piel oscuro medio	ninguna
+🫵🏿	dedo índice apuntándote a ti tono de piel oscuro	ninguna
+👍🏻	pulgar hacia arriba tono de piel claro	ninguna
+👍🏼	pulgar hacia arriba tono de piel claro medio	ninguna
+👍🏽	pulgar hacia arriba tono de piel medio	ninguna
+👍🏾	pulgar hacia arriba tono de piel oscuro medio	ninguna
+👍🏿	pulgar hacia arriba tono de piel oscuro	ninguna
+👎🏻	pulgar hacia abajo tono de piel claro	ninguna
+👎🏼	pulgar hacia abajo tono de piel claro medio	ninguna
+👎🏽	pulgar hacia abajo tono de piel medio	ninguna
+👎🏾	pulgar hacia abajo tono de piel oscuro medio	ninguna
+👎🏿	pulgar hacia abajo tono de piel oscuro	ninguna
+✊🏻	puño en alto tono de piel claro	ninguna
+✊🏼	puño en alto tono de piel claro medio	ninguna
+✊🏽	puño en alto tono de piel medio	ninguna
+✊🏾	puño en alto tono de piel oscuro medio	ninguna
+✊🏿	puño en alto tono de piel oscuro	ninguna
+👊🏻	puño cerrado tono de piel claro	ninguna
+👊🏼	puño cerrado tono de piel claro medio	ninguna
+👊🏽	puño cerrado tono de piel medio	ninguna
+👊🏾	puño cerrado tono de piel oscuro medio	ninguna
+👊🏿	puño cerrado tono de piel oscuro	ninguna
+🤛🏻	puño hacia la izquierda tono de piel claro	ninguna
+🤛🏼	puño hacia la izquierda tono de piel claro medio	ninguna
+🤛🏽	puño hacia la izquierda tono de piel medio	ninguna
+🤛🏾	puño hacia la izquierda tono de piel oscuro medio	ninguna
+🤛🏿	puño hacia la izquierda tono de piel oscuro	ninguna
+🤜🏻	puño hacia la derecha tono de piel claro	ninguna
+🤜🏼	puño hacia la derecha tono de piel claro medio	ninguna
+🤜🏽	puño hacia la derecha tono de piel medio	ninguna
+🤜🏾	puño hacia la derecha tono de piel oscuro medio	ninguna
+🤜🏿	puño hacia la derecha tono de piel oscuro	ninguna
+👏🏻	manos aplaudiendo tono de piel claro	ninguna
+👏🏼	manos aplaudiendo tono de piel claro medio	ninguna
+👏🏽	manos aplaudiendo tono de piel medio	ninguna
+👏🏾	manos aplaudiendo tono de piel oscuro medio	ninguna
+👏🏿	manos aplaudiendo tono de piel oscuro	ninguna
+🙌🏻	manos levantadas celebrando tono de piel claro	ninguna
+🙌🏼	manos levantadas celebrando tono de piel claro medio	ninguna
+🙌🏽	manos levantadas celebrando tono de piel medio	ninguna
+🙌🏾	manos levantadas celebrando tono de piel oscuro medio	ninguna
+🙌🏿	manos levantadas celebrando tono de piel oscuro	ninguna
+🫶🏻	manos formando un corazón tono de piel claro	ninguna
+🫶🏼	manos formando un corazón tono de piel claro medio	ninguna
+🫶🏽	manos formando un corazón tono de piel medio	ninguna
+🫶🏾	manos formando un corazón tono de piel oscuro medio	ninguna
+🫶🏿	manos formando un corazón tono de piel oscuro	ninguna
+👐🏻	manos abiertas tono de piel claro	ninguna
+👐🏼	manos abiertas tono de piel claro medio	ninguna
+👐🏽	manos abiertas tono de piel medio	ninguna
+👐🏾	manos abiertas tono de piel oscuro medio	ninguna
+👐🏿	manos abiertas tono de piel oscuro	ninguna
+🤲🏻	palmas hacia arriba juntas tono de piel claro	ninguna
+🤲🏼	palmas hacia arriba juntas tono de piel claro medio	ninguna
+🤲🏽	palmas hacia arriba juntas tono de piel medio	ninguna
+🤲🏾	palmas hacia arriba juntas tono de piel oscuro medio	ninguna
+🤲🏿	palmas hacia arriba juntas tono de piel oscuro	ninguna
+🤝🏻	apretón de manos tono de piel claro	ninguna
+🤝🏼	apretón de manos tono de piel claro medio	ninguna
+🤝🏽	apretón de manos tono de piel medio	ninguna
+🤝🏾	apretón de manos tono de piel oscuro medio	ninguna
+🤝🏿	apretón de manos tono de piel oscuro	ninguna
+🙏🏻	manos en oración tono de piel claro	ninguna
+🙏🏼	manos en oración tono de piel claro medio	ninguna
+🙏🏽	manos en oración tono de piel medio	ninguna
+🙏🏾	manos en oración tono de piel oscuro medio	ninguna
+🙏🏿	manos en oración tono de piel oscuro	ninguna
+✍🏻	mano escribiendo tono de piel claro	ninguna
+✍🏼	mano escribiendo tono de piel claro medio	ninguna
+✍🏽	mano escribiendo tono de piel medio	ninguna
+✍🏾	mano escribiendo tono de piel oscuro medio	ninguna
+✍🏿	mano escribiendo tono de piel oscuro	ninguna
+💅🏻	pintarse las uñas tono de piel claro	ninguna
+💅🏼	pintarse las uñas tono de piel claro medio	ninguna
+💅🏽	pintarse las uñas tono de piel medio	ninguna
+💅🏾	pintarse las uñas tono de piel oscuro medio	ninguna
+💅🏿	pintarse las uñas tono de piel oscuro	ninguna
+🤳🏻	selfi tono de piel claro	ninguna
+🤳🏼	selfi tono de piel claro medio	ninguna
+🤳🏽	selfi tono de piel medio	ninguna
+🤳🏾	selfi tono de piel oscuro medio	ninguna
+🤳🏿	selfi tono de piel oscuro	ninguna
+💪🏻	bíceps flexionado tono de piel claro	ninguna
+💪🏼	bíceps flexionado tono de piel claro medio	ninguna
+💪🏽	bíceps flexionado tono de piel medio	ninguna
+💪🏾	bíceps flexionado tono de piel oscuro medio	ninguna
+💪🏿	bíceps flexionado tono de piel oscuro	ninguna
+🦵🏻	pierna tono de piel claro	ninguna
+🦵🏼	pierna tono de piel claro medio	ninguna
+🦵🏽	pierna tono de piel medio	ninguna
+🦵🏾	pierna tono de piel oscuro medio	ninguna
+🦵🏿	pierna tono de piel oscuro	ninguna
+🦶🏻	pie tono de piel claro	ninguna
+🦶🏼	pie tono de piel claro medio	ninguna
+🦶🏽	pie tono de piel medio	ninguna
+🦶🏾	pie tono de piel oscuro medio	ninguna
+🦶🏿	pie tono de piel oscuro	ninguna
+👂🏻	oreja tono de piel claro	ninguna
+👂🏼	oreja tono de piel claro medio	ninguna
+👂🏽	oreja tono de piel medio	ninguna
+👂🏾	oreja tono de piel oscuro medio	ninguna
+👂🏿	oreja tono de piel oscuro	ninguna
+🦻🏻	oreja con audífono tono de piel claro	ninguna
+🦻🏼	oreja con audífono tono de piel claro medio	ninguna
+🦻🏽	oreja con audífono tono de piel medio	ninguna
+🦻🏾	oreja con audífono tono de piel oscuro medio	ninguna
+🦻🏿	oreja con audífono tono de piel oscuro	ninguna
+👃🏻	nariz tono de piel claro	ninguna
+👃🏼	nariz tono de piel claro medio	ninguna
+👃🏽	nariz tono de piel medio	ninguna
+👃🏾	nariz tono de piel oscuro medio	ninguna
+👃🏿	nariz tono de piel oscuro	ninguna
+👶🏻	bebé tono de piel claro	ninguna
+👶🏼	bebé tono de piel claro medio	ninguna
+👶🏽	bebé tono de piel medio	ninguna
+👶🏾	bebé tono de piel oscuro medio	ninguna
+👶🏿	bebé tono de piel oscuro	ninguna
+🧒🏻	infante tono de piel claro	ninguna
+🧒🏼	infante tono de piel claro medio	ninguna
+🧒🏽	infante tono de piel medio	ninguna
+🧒🏾	infante tono de piel oscuro medio	ninguna
+🧒🏿	infante tono de piel oscuro	ninguna
+👦🏻	niño tono de piel claro	ninguna
+👦🏼	niño tono de piel claro medio	ninguna
+👦🏽	niño tono de piel medio	ninguna
+👦🏾	niño tono de piel oscuro medio	ninguna
+👦🏿	niño tono de piel oscuro	ninguna
+👧🏻	niña tono de piel claro	ninguna
+👧🏼	niña tono de piel claro medio	ninguna
+👧🏽	niña tono de piel medio	ninguna
+👧🏾	niña tono de piel oscuro medio	ninguna
+👧🏿	niña tono de piel oscuro	ninguna
+🧑🏻	persona adulta tono de piel claro	ninguna
+🧑🏼	persona adulta tono de piel claro medio	ninguna
+🧑🏽	persona adulta tono de piel medio	ninguna
+🧑🏾	persona adulta tono de piel oscuro medio	ninguna
+🧑🏿	persona adulta tono de piel oscuro	ninguna
+👱🏻	persona adulta rubia tono de piel claro	ninguna
+👱🏼	persona adulta rubia tono de piel claro medio	ninguna
+👱🏽	persona adulta rubia tono de piel medio	ninguna
+👱🏾	persona adulta rubia tono de piel oscuro medio	ninguna
+👱🏿	persona adulta rubia tono de piel oscuro	ninguna
+🧑🏻‍❤‍💋‍🧑🏼	beso persona adulta, persona adulta, tono de piel claro, tono de piel claro medio	ninguna
+🧑🏻‍❤‍💋‍🧑🏽	beso persona adulta, persona adulta, tono de piel claro, tono de piel medio	ninguna
+🧑🏻‍❤‍💋‍🧑🏾	beso persona adulta, persona adulta, tono de piel claro, tono de piel oscuro medio	ninguna
+🧑🏻‍❤‍💋‍🧑🏿	beso persona adulta, persona adulta, tono de piel claro, tono de piel oscuro	ninguna
+🧑🏼‍❤‍💋‍🧑🏻	beso persona adulta, persona adulta, tono de piel claro medio, tono de piel claro	ninguna
+🧑🏼‍❤‍💋‍🧑🏽	beso persona adulta, persona adulta, tono de piel claro medio, tono de piel medio	ninguna
+🧑🏼‍❤‍💋‍🧑🏾	beso persona adulta, persona adulta, tono de piel claro medio, tono de piel oscuro medio	ninguna
+🧑🏼‍❤‍💋‍🧑🏿	beso persona adulta, persona adulta, tono de piel claro medio, tono de piel oscuro	ninguna
+🧑🏽‍❤‍💋‍🧑🏻	beso persona adulta, persona adulta, tono de piel medio, tono de piel claro	ninguna
+🧑🏽‍❤‍💋‍🧑🏼	beso persona adulta, persona adulta, tono de piel medio, tono de piel claro medio	ninguna
+🧑🏽‍❤‍💋‍🧑🏾	beso persona adulta, persona adulta, tono de piel medio, tono de piel oscuro medio	ninguna
+🧑🏽‍❤‍💋‍🧑🏿	beso persona adulta, persona adulta, tono de piel medio, tono de piel oscuro	ninguna
+🧑🏾‍❤‍💋‍🧑🏻	beso persona adulta, persona adulta, tono de piel oscuro medio, tono de piel claro	ninguna
+🧑🏾‍❤‍💋‍🧑🏼	beso persona adulta, persona adulta, tono de piel oscuro medio, tono de piel claro medio	ninguna
+🧑🏾‍❤‍💋‍🧑🏽	beso persona adulta, persona adulta, tono de piel oscuro medio, tono de piel medio	ninguna
+🧑🏾‍❤‍💋‍🧑🏿	beso persona adulta, persona adulta, tono de piel oscuro medio, tono de piel oscuro	ninguna
+🧑🏿‍❤‍💋‍🧑🏻	beso persona adulta, persona adulta, tono de piel oscuro, tono de piel claro	ninguna
+🧑🏿‍❤‍💋‍🧑🏼	beso persona adulta, persona adulta, tono de piel oscuro, tono de piel claro medio	ninguna
+🧑🏿‍❤‍💋‍🧑🏽	beso persona adulta, persona adulta, tono de piel oscuro, tono de piel medio	ninguna
+🧑🏿‍❤‍💋‍🧑🏾	beso persona adulta, persona adulta, tono de piel oscuro, tono de piel oscuro medio	ninguna
+🧑🏻‍❤‍🧑🏼	pareja enamorada persona adulta, persona adulta, tono de piel claro, tono de piel claro medio	ninguna
+🧑🏻‍❤‍🧑🏽	pareja enamorada persona adulta, persona adulta, tono de piel claro, tono de piel medio	ninguna
+🧑🏻‍❤‍🧑🏾	pareja enamorada persona adulta, persona adulta, tono de piel claro, tono de piel oscuro medio	ninguna
+🧑🏻‍❤‍🧑🏿	pareja enamorada persona adulta, persona adulta, tono de piel claro, tono de piel oscuro	ninguna
+🧑🏼‍❤‍🧑🏻	pareja enamorada persona adulta, persona adulta, tono de piel claro medio, tono de piel claro	ninguna
+🧑🏼‍❤‍🧑🏽	pareja enamorada persona adulta, persona adulta, tono de piel claro medio, tono de piel medio	ninguna
+🧑🏼‍❤‍🧑🏾	pareja enamorada persona adulta, persona adulta, tono de piel claro medio, tono de piel oscuro medio	ninguna
+🧑🏼‍❤‍🧑🏿	pareja enamorada persona adulta, persona adulta, tono de piel claro medio, tono de piel oscuro	ninguna
+🧑🏽‍❤‍🧑🏻	pareja enamorada persona adulta, persona adulta, tono de piel medio, tono de piel claro	ninguna
+🧑🏽‍❤‍🧑🏼	pareja enamorada persona adulta, persona adulta, tono de piel medio, tono de piel claro medio	ninguna
+🧑🏽‍❤‍🧑🏾	pareja enamorada persona adulta, persona adulta, tono de piel medio, tono de piel oscuro medio	ninguna
+🧑🏽‍❤‍🧑🏿	pareja enamorada persona adulta, persona adulta, tono de piel medio, tono de piel oscuro	ninguna
+🧑🏾‍❤‍🧑🏻	pareja enamorada persona adulta, persona adulta, tono de piel oscuro medio, tono de piel claro	ninguna
+🧑🏾‍❤‍🧑🏼	pareja enamorada persona adulta, persona adulta, tono de piel oscuro medio, tono de piel claro medio	ninguna
+🧑🏾‍❤‍🧑🏽	pareja enamorada persona adulta, persona adulta, tono de piel oscuro medio, tono de piel medio	ninguna
+🧑🏾‍❤‍🧑🏿	pareja enamorada persona adulta, persona adulta, tono de piel oscuro medio, tono de piel oscuro	ninguna
+🧑🏿‍❤‍🧑🏻	pareja enamorada persona adulta, persona adulta, tono de piel oscuro, tono de piel claro	ninguna
+🧑🏿‍❤‍🧑🏼	pareja enamorada persona adulta, persona adulta, tono de piel oscuro, tono de piel claro medio	ninguna
+🧑🏿‍❤‍🧑🏽	pareja enamorada persona adulta, persona adulta, tono de piel oscuro, tono de piel medio	ninguna
+🧑🏿‍❤‍🧑🏾	pareja enamorada persona adulta, persona adulta, tono de piel oscuro, tono de piel oscuro medio	ninguna
+🧑🏻‍🫯‍🧑🏼	personas luchando tono de piel claro y tono de piel claro medio	ninguna
+🧑🏻‍🫯‍🧑🏽	personas luchando tono de piel claro y tono de piel medio	ninguna
+🧑🏻‍🫯‍🧑🏾	personas luchando tono de piel claro y tono de piel oscuro medio	ninguna
+🧑🏻‍🫯‍🧑🏿	personas luchando tono de piel claro y tono de piel oscuro	ninguna
+🧑🏼‍🫯‍🧑🏻	personas luchando tono de piel claro medio y tono de piel claro	ninguna
+🧑🏼‍🫯‍🧑🏽	personas luchando tono de piel claro medio y tono de piel medio	ninguna
+🧑🏼‍🫯‍🧑🏾	personas luchando tono de piel claro medio y tono de piel oscuro medio	ninguna
+🧑🏼‍🫯‍🧑🏿	personas luchando tono de piel claro medio y tono de piel oscuro	ninguna
+🧑🏽‍🫯‍🧑🏻	personas luchando tono de piel medio y tono de piel claro	ninguna
+🧑🏽‍🫯‍🧑🏼	personas luchando tono de piel medio y tono de piel claro medio	ninguna
+🧑🏽‍🫯‍🧑🏾	personas luchando tono de piel medio y tono de piel oscuro medio	ninguna
+🧑🏽‍🫯‍🧑🏿	personas luchando tono de piel medio y tono de piel oscuro	ninguna
+🧑🏾‍🫯‍🧑🏻	personas luchando tono de piel oscuro medio y tono de piel claro	ninguna
+🧑🏾‍🫯‍🧑🏼	personas luchando tono de piel oscuro medio y tono de piel claro medio	ninguna
+🧑🏾‍🫯‍🧑🏽	personas luchando tono de piel oscuro medio y tono de piel medio	ninguna
+🧑🏾‍🫯‍🧑🏿	personas luchando tono de piel oscuro medio y tono de piel oscuro	ninguna
+🧑🏿‍🫯‍🧑🏻	personas luchando tono de piel oscuro y tono de piel claro	ninguna
+🧑🏿‍🫯‍🧑🏼	personas luchando tono de piel oscuro y tono de piel claro medio	ninguna
+🧑🏿‍🫯‍🧑🏽	personas luchando tono de piel oscuro y tono de piel medio	ninguna
+🧑🏿‍🫯‍🧑🏾	personas luchando tono de piel oscuro y tono de piel oscuro medio	ninguna
+🧑‍🦰	persona adulta pelo pelirrojo	ninguna
+🧑🏻‍🦰	persona adulta tono de piel claro y pelo pelirrojo	ninguna
+🧑🏼‍🦰	persona adulta tono de piel claro medio y pelo pelirrojo	ninguna
+🧑🏽‍🦰	persona adulta tono de piel medio y pelo pelirrojo	ninguna
+🧑🏾‍🦰	persona adulta tono de piel oscuro medio y pelo pelirrojo	ninguna
+🧑🏿‍🦰	persona adulta tono de piel oscuro y pelo pelirrojo	ninguna
+🧑‍🦱	persona adulta pelo rizado	ninguna
+🧑🏻‍🦱	persona adulta tono de piel claro y pelo rizado	ninguna
+🧑🏼‍🦱	persona adulta tono de piel claro medio y pelo rizado	ninguna
+🧑🏽‍🦱	persona adulta tono de piel medio y pelo rizado	ninguna
+🧑🏾‍🦱	persona adulta tono de piel oscuro medio y pelo rizado	ninguna
+🧑🏿‍🦱	persona adulta tono de piel oscuro y pelo rizado	ninguna
+🧑‍🦳	persona adulta pelo blanco	ninguna
+🧑🏻‍🦳	persona adulta tono de piel claro y pelo blanco	ninguna
+🧑🏼‍🦳	persona adulta tono de piel claro medio y pelo blanco	ninguna
+🧑🏽‍🦳	persona adulta tono de piel medio y pelo blanco	ninguna
+🧑🏾‍🦳	persona adulta tono de piel oscuro medio y pelo blanco	ninguna
+🧑🏿‍🦳	persona adulta tono de piel oscuro y pelo blanco	ninguna
+🧑‍🦲	persona adulta sin pelo	ninguna
+🧑🏻‍🦲	persona adulta tono de piel claro y sin pelo	ninguna
+🧑🏼‍🦲	persona adulta tono de piel claro medio y sin pelo	ninguna
+🧑🏽‍🦲	persona adulta tono de piel medio y sin pelo	ninguna
+🧑🏾‍🦲	persona adulta tono de piel oscuro medio y sin pelo	ninguna
+🧑🏿‍🦲	persona adulta tono de piel oscuro y sin pelo	ninguna
+🧑🏻‍🐰‍🧑🏼	personas con orejas de conejo tono de piel claro y tono de piel claro medio	ninguna
+🧑🏻‍🐰‍🧑🏽	personas con orejas de conejo tono de piel claro y tono de piel medio	ninguna
+🧑🏻‍🐰‍🧑🏾	personas con orejas de conejo tono de piel claro y tono de piel oscuro medio	ninguna
+🧑🏻‍🐰‍🧑🏿	personas con orejas de conejo tono de piel claro y tono de piel oscuro	ninguna
+🧑🏼‍🐰‍🧑🏻	personas con orejas de conejo tono de piel claro medio y tono de piel claro	ninguna
+🧑🏼‍🐰‍🧑🏽	personas con orejas de conejo tono de piel claro medio y tono de piel medio	ninguna
+🧑🏼‍🐰‍🧑🏾	personas con orejas de conejo tono de piel claro medio y tono de piel oscuro medio	ninguna
+🧑🏼‍🐰‍🧑🏿	personas con orejas de conejo tono de piel claro medio y tono de piel oscuro	ninguna
+🧑🏽‍🐰‍🧑🏻	personas con orejas de conejo tono de piel medio y tono de piel claro	ninguna
+🧑🏽‍🐰‍🧑🏼	personas con orejas de conejo tono de piel medio y tono de piel claro medio	ninguna
+🧑🏽‍🐰‍🧑🏾	personas con orejas de conejo tono de piel medio y tono de piel oscuro medio	ninguna
+🧑🏽‍🐰‍🧑🏿	personas con orejas de conejo tono de piel medio y tono de piel oscuro	ninguna
+🧑🏾‍🐰‍🧑🏻	personas con orejas de conejo tono de piel oscuro medio y tono de piel claro	ninguna
+🧑🏾‍🐰‍🧑🏼	personas con orejas de conejo tono de piel oscuro medio y tono de piel claro medio	ninguna
+🧑🏾‍🐰‍🧑🏽	personas con orejas de conejo tono de piel oscuro medio y tono de piel medio	ninguna
+🧑🏾‍🐰‍🧑🏿	personas con orejas de conejo tono de piel oscuro medio y tono de piel oscuro	ninguna
+🧑🏿‍🐰‍🧑🏻	personas con orejas de conejo tono de piel oscuro y tono de piel claro	ninguna
+🧑🏿‍🐰‍🧑🏼	personas con orejas de conejo tono de piel oscuro y tono de piel claro medio	ninguna
+🧑🏿‍🐰‍🧑🏽	personas con orejas de conejo tono de piel oscuro y tono de piel medio	ninguna
+🧑🏿‍🐰‍🧑🏾	personas con orejas de conejo tono de piel oscuro y tono de piel oscuro medio	ninguna
+👨🏻	hombre tono de piel claro	ninguna
+👨🏼	hombre tono de piel claro medio	ninguna
+👨🏽	hombre tono de piel medio	ninguna
+👨🏾	hombre tono de piel oscuro medio	ninguna
+👨🏿	hombre tono de piel oscuro	ninguna
+🧔🏻	persona con barba tono de piel claro	ninguna
+🧔🏼	persona con barba tono de piel claro medio	ninguna
+🧔🏽	persona con barba tono de piel medio	ninguna
+🧔🏾	persona con barba tono de piel oscuro medio	ninguna
+🧔🏿	persona con barba tono de piel oscuro	ninguna
+🧔🏻‍♂	hombre tono de piel claro y barba	ninguna
+🧔🏼‍♂	hombre tono de piel claro medio y barba	ninguna
+🧔🏽‍♂	hombre tono de piel medio y barba	ninguna
+🧔🏾‍♂	hombre tono de piel oscuro medio y barba	ninguna
+🧔🏿‍♂	hombre tono de piel oscuro y barba	ninguna
+👱🏻‍♂	hombre rubio tono de piel claro	ninguna
+👱🏼‍♂	hombre rubio tono de piel claro medio	ninguna
+👱🏽‍♂	hombre rubio tono de piel medio	ninguna
+👱🏾‍♂	hombre rubio tono de piel oscuro medio	ninguna
+👱🏿‍♂	hombre rubio tono de piel oscuro	ninguna
+👨🏻‍❤‍💋‍👨🏻	beso hombre, hombre, tono de piel claro	ninguna
+👨🏻‍❤‍💋‍👨🏼	beso hombre, hombre, tono de piel claro, tono de piel claro medio	ninguna
+👨🏻‍❤‍💋‍👨🏽	beso hombre, hombre, tono de piel claro, tono de piel medio	ninguna
+👨🏻‍❤‍💋‍👨🏾	beso hombre, hombre, tono de piel claro, tono de piel oscuro medio	ninguna
+👨🏻‍❤‍💋‍👨🏿	beso hombre, hombre, tono de piel claro, tono de piel oscuro	ninguna
+👨🏼‍❤‍💋‍👨🏻	beso hombre, hombre, tono de piel claro medio, tono de piel claro	ninguna
+👨🏼‍❤‍💋‍👨🏼	beso hombre, hombre, tono de piel claro medio	ninguna
+👨🏼‍❤‍💋‍👨🏽	beso hombre, hombre, tono de piel claro medio, tono de piel medio	ninguna
+👨🏼‍❤‍💋‍👨🏾	beso hombre, hombre, tono de piel claro medio, tono de piel oscuro medio	ninguna
+👨🏼‍❤‍💋‍👨🏿	beso hombre, hombre, tono de piel claro medio, tono de piel oscuro	ninguna
+👨🏽‍❤‍💋‍👨🏻	beso hombre, hombre, tono de piel medio, tono de piel claro	ninguna
+👨🏽‍❤‍💋‍👨🏼	beso hombre, hombre, tono de piel medio, tono de piel claro medio	ninguna
+👨🏽‍❤‍💋‍👨🏽	beso hombre, hombre, tono de piel medio	ninguna
+👨🏽‍❤‍💋‍👨🏾	beso hombre, hombre, tono de piel medio, tono de piel oscuro medio	ninguna
+👨🏽‍❤‍💋‍👨🏿	beso hombre, hombre, tono de piel medio, tono de piel oscuro	ninguna
+👨🏾‍❤‍💋‍👨🏻	beso hombre, hombre, tono de piel oscuro medio, tono de piel claro	ninguna
+👨🏾‍❤‍💋‍👨🏼	beso hombre, hombre, tono de piel oscuro medio, tono de piel claro medio	ninguna
+👨🏾‍❤‍💋‍👨🏽	beso hombre, hombre, tono de piel oscuro medio, tono de piel medio	ninguna
+👨🏾‍❤‍💋‍👨🏾	beso hombre, hombre, tono de piel oscuro medio	ninguna
+👨🏾‍❤‍💋‍👨🏿	beso hombre, hombre, tono de piel oscuro medio, tono de piel oscuro	ninguna
+👨🏿‍❤‍💋‍👨🏻	beso hombre, hombre, tono de piel oscuro, tono de piel claro	ninguna
+👨🏿‍❤‍💋‍👨🏼	beso hombre, hombre, tono de piel oscuro, tono de piel claro medio	ninguna
+👨🏿‍❤‍💋‍👨🏽	beso hombre, hombre, tono de piel oscuro, tono de piel medio	ninguna
+👨🏿‍❤‍💋‍👨🏾	beso hombre, hombre, tono de piel oscuro, tono de piel oscuro medio	ninguna
+👨🏿‍❤‍💋‍👨🏿	beso hombre, hombre, tono de piel oscuro	ninguna
+👨🏻‍❤‍👨🏻	pareja enamorada hombre, hombre, tono de piel claro	ninguna
+👨🏻‍❤‍👨🏼	pareja enamorada hombre, hombre, tono de piel claro, tono de piel claro medio	ninguna
+👨🏻‍❤‍👨🏽	pareja enamorada hombre, hombre, tono de piel claro, tono de piel medio	ninguna
+👨🏻‍❤‍👨🏾	pareja enamorada hombre, hombre, tono de piel claro, tono de piel oscuro medio	ninguna
+👨🏻‍❤‍👨🏿	pareja enamorada hombre, hombre, tono de piel claro, tono de piel oscuro	ninguna
+👨🏼‍❤‍👨🏻	pareja enamorada hombre, hombre, tono de piel claro medio, tono de piel claro	ninguna
+👨🏼‍❤‍👨🏼	pareja enamorada hombre, hombre, tono de piel claro medio	ninguna
+👨🏼‍❤‍👨🏽	pareja enamorada hombre, hombre, tono de piel claro medio, tono de piel medio	ninguna
+👨🏼‍❤‍👨🏾	pareja enamorada hombre, hombre, tono de piel claro medio, tono de piel oscuro medio	ninguna
+👨🏼‍❤‍👨🏿	pareja enamorada hombre, hombre, tono de piel claro medio, tono de piel oscuro	ninguna
+👨🏽‍❤‍👨🏻	pareja enamorada hombre, hombre, tono de piel medio, tono de piel claro	ninguna
+👨🏽‍❤‍👨🏼	pareja enamorada hombre, hombre, tono de piel medio, tono de piel claro medio	ninguna
+👨🏽‍❤‍👨🏽	pareja enamorada hombre, hombre, tono de piel medio	ninguna
+👨🏽‍❤‍👨🏾	pareja enamorada hombre, hombre, tono de piel medio, tono de piel oscuro medio	ninguna
+👨🏽‍❤‍👨🏿	pareja enamorada hombre, hombre, tono de piel medio, tono de piel oscuro	ninguna
+👨🏾‍❤‍👨🏻	pareja enamorada hombre, hombre, tono de piel oscuro medio, tono de piel claro	ninguna
+👨🏾‍❤‍👨🏼	pareja enamorada hombre, hombre, tono de piel oscuro medio, tono de piel claro medio	ninguna
+👨🏾‍❤‍👨🏽	pareja enamorada hombre, hombre, tono de piel oscuro medio, tono de piel medio	ninguna
+👨🏾‍❤‍👨🏾	pareja enamorada hombre, hombre, tono de piel oscuro medio	ninguna
+👨🏾‍❤‍👨🏿	pareja enamorada hombre, hombre, tono de piel oscuro medio, tono de piel oscuro	ninguna
+👨🏿‍❤‍👨🏻	pareja enamorada hombre, hombre, tono de piel oscuro, tono de piel claro	ninguna
+👨🏿‍❤‍👨🏼	pareja enamorada hombre, hombre, tono de piel oscuro, tono de piel claro medio	ninguna
+👨🏿‍❤‍👨🏽	pareja enamorada hombre, hombre, tono de piel oscuro, tono de piel medio	ninguna
+👨🏿‍❤‍👨🏾	pareja enamorada hombre, hombre, tono de piel oscuro, tono de piel oscuro medio	ninguna
+👨🏿‍❤‍👨🏿	pareja enamorada hombre, hombre, tono de piel oscuro	ninguna
+👨🏻‍🫯‍👨🏼	hombres luchando tono de piel claro y tono de piel claro medio	ninguna
+👨🏻‍🫯‍👨🏽	hombres luchando tono de piel claro y tono de piel medio	ninguna
+👨🏻‍🫯‍👨🏾	hombres luchando tono de piel claro y tono de piel oscuro medio	ninguna
+👨🏻‍🫯‍👨🏿	hombres luchando tono de piel claro y tono de piel oscuro	ninguna
+👨🏼‍🫯‍👨🏻	hombres luchando tono de piel claro medio y tono de piel claro	ninguna
+👨🏼‍🫯‍👨🏽	hombres luchando tono de piel claro medio y tono de piel medio	ninguna
+👨🏼‍🫯‍👨🏾	hombres luchando tono de piel claro medio y tono de piel oscuro medio	ninguna
+👨🏼‍🫯‍👨🏿	hombres luchando tono de piel claro medio y tono de piel oscuro	ninguna
+👨🏽‍🫯‍👨🏻	hombres luchando tono de piel medio y tono de piel claro	ninguna
+👨🏽‍🫯‍👨🏼	hombres luchando tono de piel medio y tono de piel claro medio	ninguna
+👨🏽‍🫯‍👨🏾	hombres luchando tono de piel medio y tono de piel oscuro medio	ninguna
+👨🏽‍🫯‍👨🏿	hombres luchando tono de piel medio y tono de piel oscuro	ninguna
+👨🏾‍🫯‍👨🏻	hombres luchando tono de piel oscuro medio y tono de piel claro	ninguna
+👨🏾‍🫯‍👨🏼	hombres luchando tono de piel oscuro medio y tono de piel claro medio	ninguna
+👨🏾‍🫯‍👨🏽	hombres luchando tono de piel oscuro medio y tono de piel medio	ninguna
+👨🏾‍🫯‍👨🏿	hombres luchando tono de piel oscuro medio y tono de piel oscuro	ninguna
+👨🏿‍🫯‍👨🏻	hombres luchando tono de piel oscuro y tono de piel claro	ninguna
+👨🏿‍🫯‍👨🏼	hombres luchando tono de piel oscuro y tono de piel claro medio	ninguna
+👨🏿‍🫯‍👨🏽	hombres luchando tono de piel oscuro y tono de piel medio	ninguna
+👨🏿‍🫯‍👨🏾	hombres luchando tono de piel oscuro y tono de piel oscuro medio	ninguna
+👨‍🦰	hombre pelo pelirrojo	ninguna
+👨🏻‍🦰	hombre tono de piel claro y pelo pelirrojo	ninguna
+👨🏼‍🦰	hombre tono de piel claro medio y pelo pelirrojo	ninguna
+👨🏽‍🦰	hombre tono de piel medio y pelo pelirrojo	ninguna
+👨🏾‍🦰	hombre tono de piel oscuro medio y pelo pelirrojo	ninguna
+👨🏿‍🦰	hombre tono de piel oscuro y pelo pelirrojo	ninguna
+👨‍🦱	hombre pelo rizado	ninguna
+👨🏻‍🦱	hombre tono de piel claro y pelo rizado	ninguna
+👨🏼‍🦱	hombre tono de piel claro medio y pelo rizado	ninguna
+👨🏽‍🦱	hombre tono de piel medio y pelo rizado	ninguna
+👨🏾‍🦱	hombre tono de piel oscuro medio y pelo rizado	ninguna
+👨🏿‍🦱	hombre tono de piel oscuro y pelo rizado	ninguna
+👨‍🦳	hombre pelo blanco	ninguna
+👨🏻‍🦳	hombre tono de piel claro y pelo blanco	ninguna
+👨🏼‍🦳	hombre tono de piel claro medio y pelo blanco	ninguna
+👨🏽‍🦳	hombre tono de piel medio y pelo blanco	ninguna
+👨🏾‍🦳	hombre tono de piel oscuro medio y pelo blanco	ninguna
+👨🏿‍🦳	hombre tono de piel oscuro y pelo blanco	ninguna
+👨‍🦲	hombre sin pelo	ninguna
+👨🏻‍🦲	hombre tono de piel claro y sin pelo	ninguna
+👨🏼‍🦲	hombre tono de piel claro medio y sin pelo	ninguna
+👨🏽‍🦲	hombre tono de piel medio y sin pelo	ninguna
+👨🏾‍🦲	hombre tono de piel oscuro medio y sin pelo	ninguna
+👨🏿‍🦲	hombre tono de piel oscuro y sin pelo	ninguna
+👨🏻‍🐰‍👨🏼	hombres con orejas de conejo tono de piel claro y tono de piel claro medio	ninguna
+👨🏻‍🐰‍👨🏽	hombres con orejas de conejo tono de piel claro y tono de piel medio	ninguna
+👨🏻‍🐰‍👨🏾	hombres con orejas de conejo tono de piel claro y tono de piel oscuro medio	ninguna
+👨🏻‍🐰‍👨🏿	hombres con orejas de conejo tono de piel claro y tono de piel oscuro	ninguna
+👨🏼‍🐰‍👨🏻	hombres con orejas de conejo tono de piel claro medio y tono de piel claro	ninguna
+👨🏼‍🐰‍👨🏽	hombres con orejas de conejo tono de piel claro medio y tono de piel medio	ninguna
+👨🏼‍🐰‍👨🏾	hombres con orejas de conejo tono de piel claro medio y tono de piel oscuro medio	ninguna
+👨🏼‍🐰‍👨🏿	hombres con orejas de conejo tono de piel claro medio y tono de piel oscuro	ninguna
+👨🏽‍🐰‍👨🏻	hombres con orejas de conejo tono de piel medio y tono de piel claro	ninguna
+👨🏽‍🐰‍👨🏼	hombres con orejas de conejo tono de piel medio y tono de piel claro medio	ninguna
+👨🏽‍🐰‍👨🏾	hombres con orejas de conejo tono de piel medio y tono de piel oscuro medio	ninguna
+👨🏽‍🐰‍👨🏿	hombres con orejas de conejo tono de piel medio y tono de piel oscuro	ninguna
+👨🏾‍🐰‍👨🏻	hombres con orejas de conejo tono de piel oscuro medio y tono de piel claro	ninguna
+👨🏾‍🐰‍👨🏼	hombres con orejas de conejo tono de piel oscuro medio y tono de piel claro medio	ninguna
+👨🏾‍🐰‍👨🏽	hombres con orejas de conejo tono de piel oscuro medio y tono de piel medio	ninguna
+👨🏾‍🐰‍👨🏿	hombres con orejas de conejo tono de piel oscuro medio y tono de piel oscuro	ninguna
+👨🏿‍🐰‍👨🏻	hombres con orejas de conejo tono de piel oscuro y tono de piel claro	ninguna
+👨🏿‍🐰‍👨🏼	hombres con orejas de conejo tono de piel oscuro y tono de piel claro medio	ninguna
+👨🏿‍🐰‍👨🏽	hombres con orejas de conejo tono de piel oscuro y tono de piel medio	ninguna
+👨🏿‍🐰‍👨🏾	hombres con orejas de conejo tono de piel oscuro y tono de piel oscuro medio	ninguna
+👩🏻	mujer tono de piel claro	ninguna
+👩🏼	mujer tono de piel claro medio	ninguna
+👩🏽	mujer tono de piel medio	ninguna
+👩🏾	mujer tono de piel oscuro medio	ninguna
+👩🏿	mujer tono de piel oscuro	ninguna
+🧔🏻‍♀	mujer tono de piel claro y barba	ninguna
+🧔🏼‍♀	mujer tono de piel claro medio y barba	ninguna
+🧔🏽‍♀	mujer tono de piel medio y barba	ninguna
+🧔🏾‍♀	mujer tono de piel oscuro medio y barba	ninguna
+🧔🏿‍♀	mujer tono de piel oscuro y barba	ninguna
+👱🏻‍♀	mujer rubia tono de piel claro	ninguna
+👱🏼‍♀	mujer rubia tono de piel claro medio	ninguna
+👱🏽‍♀	mujer rubia tono de piel medio	ninguna
+👱🏾‍♀	mujer rubia tono de piel oscuro medio	ninguna
+👱🏿‍♀	mujer rubia tono de piel oscuro	ninguna
+👩🏻‍❤‍💋‍👨🏻	beso mujer, hombre, tono de piel claro	ninguna
+👩🏻‍❤‍💋‍👨🏼	beso mujer, hombre, tono de piel claro, tono de piel claro medio	ninguna
+👩🏻‍❤‍💋‍👨🏽	beso mujer, hombre, tono de piel claro, tono de piel medio	ninguna
+👩🏻‍❤‍💋‍👨🏾	beso mujer, hombre, tono de piel claro, tono de piel oscuro medio	ninguna
+👩🏻‍❤‍💋‍👨🏿	beso mujer, hombre, tono de piel claro, tono de piel oscuro	ninguna
+👩🏼‍❤‍💋‍👨🏻	beso mujer, hombre, tono de piel claro medio, tono de piel claro	ninguna
+👩🏼‍❤‍💋‍👨🏼	beso mujer, hombre, tono de piel claro medio	ninguna
+👩🏼‍❤‍💋‍👨🏽	beso mujer, hombre, tono de piel claro medio, tono de piel medio	ninguna
+👩🏼‍❤‍💋‍👨🏾	beso mujer, hombre, tono de piel claro medio, tono de piel oscuro medio	ninguna
+👩🏼‍❤‍💋‍👨🏿	beso mujer, hombre, tono de piel claro medio, tono de piel oscuro	ninguna
+👩🏽‍❤‍💋‍👨🏻	beso mujer, hombre, tono de piel medio, tono de piel claro	ninguna
+👩🏽‍❤‍💋‍👨🏼	beso mujer, hombre, tono de piel medio, tono de piel claro medio	ninguna
+👩🏽‍❤‍💋‍👨🏽	beso mujer, hombre, tono de piel medio	ninguna
+👩🏽‍❤‍💋‍👨🏾	beso mujer, hombre, tono de piel medio, tono de piel oscuro medio	ninguna
+👩🏽‍❤‍💋‍👨🏿	beso mujer, hombre, tono de piel medio, tono de piel oscuro	ninguna
+👩🏾‍❤‍💋‍👨🏻	beso mujer, hombre, tono de piel oscuro medio, tono de piel claro	ninguna
+👩🏾‍❤‍💋‍👨🏼	beso mujer, hombre, tono de piel oscuro medio, tono de piel claro medio	ninguna
+👩🏾‍❤‍💋‍👨🏽	beso mujer, hombre, tono de piel oscuro medio, tono de piel medio	ninguna
+👩🏾‍❤‍💋‍👨🏾	beso mujer, hombre, tono de piel oscuro medio	ninguna
+👩🏾‍❤‍💋‍👨🏿	beso mujer, hombre, tono de piel oscuro medio, tono de piel oscuro	ninguna
+👩🏿‍❤‍💋‍👨🏻	beso mujer, hombre, tono de piel oscuro, tono de piel claro	ninguna
+👩🏿‍❤‍💋‍👨🏼	beso mujer, hombre, tono de piel oscuro, tono de piel claro medio	ninguna
+👩🏿‍❤‍💋‍👨🏽	beso mujer, hombre, tono de piel oscuro, tono de piel medio	ninguna
+👩🏿‍❤‍💋‍👨🏾	beso mujer, hombre, tono de piel oscuro, tono de piel oscuro medio	ninguna
+👩🏿‍❤‍💋‍👨🏿	beso mujer, hombre, tono de piel oscuro	ninguna
+👩🏻‍❤‍💋‍👩🏻	beso mujer, mujer, tono de piel claro	ninguna
+👩🏻‍❤‍💋‍👩🏼	beso mujer, mujer, tono de piel claro, tono de piel claro medio	ninguna
+👩🏻‍❤‍💋‍👩🏽	beso mujer, mujer, tono de piel claro, tono de piel medio	ninguna
+👩🏻‍❤‍💋‍👩🏾	beso mujer, mujer, tono de piel claro, tono de piel oscuro medio	ninguna
+👩🏻‍❤‍💋‍👩🏿	beso mujer, mujer, tono de piel claro, tono de piel oscuro	ninguna
+👩🏼‍❤‍💋‍👩🏻	beso mujer, mujer, tono de piel claro medio, tono de piel claro	ninguna
+👩🏼‍❤‍💋‍👩🏼	beso mujer, mujer, tono de piel claro medio	ninguna
+👩🏼‍❤‍💋‍👩🏽	beso mujer, mujer, tono de piel claro medio, tono de piel medio	ninguna
+👩🏼‍❤‍💋‍👩🏾	beso mujer, mujer, tono de piel claro medio, tono de piel oscuro medio	ninguna
+👩🏼‍❤‍💋‍👩🏿	beso mujer, mujer, tono de piel claro medio, tono de piel oscuro	ninguna
+👩🏽‍❤‍💋‍👩🏻	beso mujer, mujer, tono de piel medio, tono de piel claro	ninguna
+👩🏽‍❤‍💋‍👩🏼	beso mujer, mujer, tono de piel medio, tono de piel claro medio	ninguna
+👩🏽‍❤‍💋‍👩🏽	beso mujer, mujer, tono de piel medio	ninguna
+👩🏽‍❤‍💋‍👩🏾	beso mujer, mujer, tono de piel medio, tono de piel oscuro medio	ninguna
+👩🏽‍❤‍💋‍👩🏿	beso mujer, mujer, tono de piel medio, tono de piel oscuro	ninguna
+👩🏾‍❤‍💋‍👩🏻	beso mujer, mujer, tono de piel oscuro medio, tono de piel claro	ninguna
+👩🏾‍❤‍💋‍👩🏼	beso mujer, mujer, tono de piel oscuro medio, tono de piel claro medio	ninguna
+👩🏾‍❤‍💋‍👩🏽	beso mujer, mujer, tono de piel oscuro medio, tono de piel medio	ninguna
+👩🏾‍❤‍💋‍👩🏾	beso mujer, mujer, tono de piel oscuro medio	ninguna
+👩🏾‍❤‍💋‍👩🏿	beso mujer, mujer, tono de piel oscuro medio, tono de piel oscuro	ninguna
+👩🏿‍❤‍💋‍👩🏻	beso mujer, mujer, tono de piel oscuro, tono de piel claro	ninguna
+👩🏿‍❤‍💋‍👩🏼	beso mujer, mujer, tono de piel oscuro, tono de piel claro medio	ninguna
+👩🏿‍❤‍💋‍👩🏽	beso mujer, mujer, tono de piel oscuro, tono de piel medio	ninguna
+👩🏿‍❤‍💋‍👩🏾	beso mujer, mujer, tono de piel oscuro, tono de piel oscuro medio	ninguna
+👩🏿‍❤‍💋‍👩🏿	beso mujer, mujer, tono de piel oscuro	ninguna
+👩🏻‍❤‍👨🏻	pareja enamorada mujer, hombre, tono de piel claro	ninguna
+👩🏻‍❤‍👨🏼	pareja enamorada mujer, hombre, tono de piel claro, tono de piel claro medio	ninguna
+👩🏻‍❤‍👨🏽	pareja enamorada mujer, hombre, tono de piel claro, tono de piel medio	ninguna
+👩🏻‍❤‍👨🏾	pareja enamorada mujer, hombre, tono de piel claro, tono de piel oscuro medio	ninguna
+👩🏻‍❤‍👨🏿	pareja enamorada mujer, hombre, tono de piel claro, tono de piel oscuro	ninguna
+👩🏼‍❤‍👨🏻	pareja enamorada mujer, hombre, tono de piel claro medio, tono de piel claro	ninguna
+👩🏼‍❤‍👨🏼	pareja enamorada mujer, hombre, tono de piel claro medio	ninguna
+👩🏼‍❤‍👨🏽	pareja enamorada mujer, hombre, tono de piel claro medio, tono de piel medio	ninguna
+👩🏼‍❤‍👨🏾	pareja enamorada mujer, hombre, tono de piel claro medio, tono de piel oscuro medio	ninguna
+👩🏼‍❤‍👨🏿	pareja enamorada mujer, hombre, tono de piel claro medio, tono de piel oscuro	ninguna
+👩🏽‍❤‍👨🏻	pareja enamorada mujer, hombre, tono de piel medio, tono de piel claro	ninguna
+👩🏽‍❤‍👨🏼	pareja enamorada mujer, hombre, tono de piel medio, tono de piel claro medio	ninguna
+👩🏽‍❤‍👨🏽	pareja enamorada mujer, hombre, tono de piel medio	ninguna
+👩🏽‍❤‍👨🏾	pareja enamorada mujer, hombre, tono de piel medio, tono de piel oscuro medio	ninguna
+👩🏽‍❤‍👨🏿	pareja enamorada mujer, hombre, tono de piel medio, tono de piel oscuro	ninguna
+👩🏾‍❤‍👨🏻	pareja enamorada mujer, hombre, tono de piel oscuro medio, tono de piel claro	ninguna
+👩🏾‍❤‍👨🏼	pareja enamorada mujer, hombre, tono de piel oscuro medio, tono de piel claro medio	ninguna
+👩🏾‍❤‍👨🏽	pareja enamorada mujer, hombre, tono de piel oscuro medio, tono de piel medio	ninguna
+👩🏾‍❤‍👨🏾	pareja enamorada mujer, hombre, tono de piel oscuro medio	ninguna
+👩🏾‍❤‍👨🏿	pareja enamorada mujer, hombre, tono de piel oscuro medio, tono de piel oscuro	ninguna
+👩🏿‍❤‍👨🏻	pareja enamorada mujer, hombre, tono de piel oscuro, tono de piel claro	ninguna
+👩🏿‍❤‍👨🏼	pareja enamorada mujer, hombre, tono de piel oscuro, tono de piel claro medio	ninguna
+👩🏿‍❤‍👨🏽	pareja enamorada mujer, hombre, tono de piel oscuro, tono de piel medio	ninguna
+👩🏿‍❤‍👨🏾	pareja enamorada mujer, hombre, tono de piel oscuro, tono de piel oscuro medio	ninguna
+👩🏿‍❤‍👨🏿	pareja enamorada mujer, hombre, tono de piel oscuro	ninguna
+👩🏻‍❤‍👩🏻	pareja enamorada mujer, mujer, tono de piel claro	ninguna
+👩🏻‍❤‍👩🏼	pareja enamorada mujer, mujer, tono de piel claro, tono de piel claro medio	ninguna
+👩🏻‍❤‍👩🏽	pareja enamorada mujer, mujer, tono de piel claro, tono de piel medio	ninguna
+👩🏻‍❤‍👩🏾	pareja enamorada mujer, mujer, tono de piel claro, tono de piel oscuro medio	ninguna
+👩🏻‍❤‍👩🏿	pareja enamorada mujer, mujer, tono de piel claro, tono de piel oscuro	ninguna
+👩🏼‍❤‍👩🏻	pareja enamorada mujer, mujer, tono de piel claro medio, tono de piel claro	ninguna
+👩🏼‍❤‍👩🏼	pareja enamorada mujer, mujer, tono de piel claro medio	ninguna
+👩🏼‍❤‍👩🏽	pareja enamorada mujer, mujer, tono de piel claro medio, tono de piel medio	ninguna
+👩🏼‍❤‍👩🏾	pareja enamorada mujer, mujer, tono de piel claro medio, tono de piel oscuro medio	ninguna
+👩🏼‍❤‍👩🏿	pareja enamorada mujer, mujer, tono de piel claro medio, tono de piel oscuro	ninguna
+👩🏽‍❤‍👩🏻	pareja enamorada mujer, mujer, tono de piel medio, tono de piel claro	ninguna
+👩🏽‍❤‍👩🏼	pareja enamorada mujer, mujer, tono de piel medio, tono de piel claro medio	ninguna
+👩🏽‍❤‍👩🏽	pareja enamorada mujer, mujer, tono de piel medio	ninguna
+👩🏽‍❤‍👩🏾	pareja enamorada mujer, mujer, tono de piel medio, tono de piel oscuro medio	ninguna
+👩🏽‍❤‍👩🏿	pareja enamorada mujer, mujer, tono de piel medio, tono de piel oscuro	ninguna
+👩🏾‍❤‍👩🏻	pareja enamorada mujer, mujer, tono de piel oscuro medio, tono de piel claro	ninguna
+👩🏾‍❤‍👩🏼	pareja enamorada mujer, mujer, tono de piel oscuro medio, tono de piel claro medio	ninguna
+👩🏾‍❤‍👩🏽	pareja enamorada mujer, mujer, tono de piel oscuro medio, tono de piel medio	ninguna
+👩🏾‍❤‍👩🏾	pareja enamorada mujer, mujer, tono de piel oscuro medio	ninguna
+👩🏾‍❤‍👩🏿	pareja enamorada mujer, mujer, tono de piel oscuro medio, tono de piel oscuro	ninguna
+👩🏿‍❤‍👩🏻	pareja enamorada mujer, mujer, tono de piel oscuro, tono de piel claro	ninguna
+👩🏿‍❤‍👩🏼	pareja enamorada mujer, mujer, tono de piel oscuro, tono de piel claro medio	ninguna
+👩🏿‍❤‍👩🏽	pareja enamorada mujer, mujer, tono de piel oscuro, tono de piel medio	ninguna
+👩🏿‍❤‍👩🏾	pareja enamorada mujer, mujer, tono de piel oscuro, tono de piel oscuro medio	ninguna
+👩🏿‍❤‍👩🏿	pareja enamorada mujer, mujer, tono de piel oscuro	ninguna
+👩🏻‍🫯‍👩🏼	mujeres luchando tono de piel claro y tono de piel claro medio	ninguna
+👩🏻‍🫯‍👩🏽	mujeres luchando tono de piel claro y tono de piel medio	ninguna
+👩🏻‍🫯‍👩🏾	mujeres luchando tono de piel claro y tono de piel oscuro medio	ninguna
+👩🏻‍🫯‍👩🏿	mujeres luchando tono de piel claro y tono de piel oscuro	ninguna
+👩🏼‍🫯‍👩🏻	mujeres luchando tono de piel claro medio y tono de piel claro	ninguna
+👩🏼‍🫯‍👩🏽	mujeres luchando tono de piel claro medio y tono de piel medio	ninguna
+👩🏼‍🫯‍👩🏾	mujeres luchando tono de piel claro medio y tono de piel oscuro medio	ninguna
+👩🏼‍🫯‍👩🏿	mujeres luchando tono de piel claro medio y tono de piel oscuro	ninguna
+👩🏽‍🫯‍👩🏻	mujeres luchando tono de piel medio y tono de piel claro	ninguna
+👩🏽‍🫯‍👩🏼	mujeres luchando tono de piel medio y tono de piel claro medio	ninguna
+👩🏽‍🫯‍👩🏾	mujeres luchando tono de piel medio y tono de piel oscuro medio	ninguna
+👩🏽‍🫯‍👩🏿	mujeres luchando tono de piel medio y tono de piel oscuro	ninguna
+👩🏾‍🫯‍👩🏻	mujeres luchando tono de piel oscuro medio y tono de piel claro	ninguna
+👩🏾‍🫯‍👩🏼	mujeres luchando tono de piel oscuro medio y tono de piel claro medio	ninguna
+👩🏾‍🫯‍👩🏽	mujeres luchando tono de piel oscuro medio y tono de piel medio	ninguna
+👩🏾‍🫯‍👩🏿	mujeres luchando tono de piel oscuro medio y tono de piel oscuro	ninguna
+👩🏿‍🫯‍👩🏻	mujeres luchando tono de piel oscuro y tono de piel claro	ninguna
+👩🏿‍🫯‍👩🏼	mujeres luchando tono de piel oscuro y tono de piel claro medio	ninguna
+👩🏿‍🫯‍👩🏽	mujeres luchando tono de piel oscuro y tono de piel medio	ninguna
+👩🏿‍🫯‍👩🏾	mujeres luchando tono de piel oscuro y tono de piel oscuro medio	ninguna
+👩‍🦰	mujer pelo pelirrojo	ninguna
+👩🏻‍🦰	mujer tono de piel claro y pelo pelirrojo	ninguna
+👩🏼‍🦰	mujer tono de piel claro medio y pelo pelirrojo	ninguna
+👩🏽‍🦰	mujer tono de piel medio y pelo pelirrojo	ninguna
+👩🏾‍🦰	mujer tono de piel oscuro medio y pelo pelirrojo	ninguna
+👩🏿‍🦰	mujer tono de piel oscuro y pelo pelirrojo	ninguna
+👩‍🦱	mujer pelo rizado	ninguna
+👩🏻‍🦱	mujer tono de piel claro y pelo rizado	ninguna
+👩🏼‍🦱	mujer tono de piel claro medio y pelo rizado	ninguna
+👩🏽‍🦱	mujer tono de piel medio y pelo rizado	ninguna
+👩🏾‍🦱	mujer tono de piel oscuro medio y pelo rizado	ninguna
+👩🏿‍🦱	mujer tono de piel oscuro y pelo rizado	ninguna
+👩‍🦳	mujer pelo blanco	ninguna
+👩🏻‍🦳	mujer tono de piel claro y pelo blanco	ninguna
+👩🏼‍🦳	mujer tono de piel claro medio y pelo blanco	ninguna
+👩🏽‍🦳	mujer tono de piel medio y pelo blanco	ninguna
+👩🏾‍🦳	mujer tono de piel oscuro medio y pelo blanco	ninguna
+👩🏿‍🦳	mujer tono de piel oscuro y pelo blanco	ninguna
+👩‍🦲	mujer sin pelo	ninguna
+👩🏻‍🦲	mujer tono de piel claro y sin pelo	ninguna
+👩🏼‍🦲	mujer tono de piel claro medio y sin pelo	ninguna
+👩🏽‍🦲	mujer tono de piel medio y sin pelo	ninguna
+👩🏾‍🦲	mujer tono de piel oscuro medio y sin pelo	ninguna
+👩🏿‍🦲	mujer tono de piel oscuro y sin pelo	ninguna
+👩🏻‍🐰‍👩🏼	mujeres con orejas de conejo tono de piel claro y tono de piel claro medio	ninguna
+👩🏻‍🐰‍👩🏽	mujeres con orejas de conejo tono de piel claro y tono de piel medio	ninguna
+👩🏻‍🐰‍👩🏾	mujeres con orejas de conejo tono de piel claro y tono de piel oscuro medio	ninguna
+👩🏻‍🐰‍👩🏿	mujeres con orejas de conejo tono de piel claro y tono de piel oscuro	ninguna
+👩🏼‍🐰‍👩🏻	mujeres con orejas de conejo tono de piel claro medio y tono de piel claro	ninguna
+👩🏼‍🐰‍👩🏽	mujeres con orejas de conejo tono de piel claro medio y tono de piel medio	ninguna
+👩🏼‍🐰‍👩🏾	mujeres con orejas de conejo tono de piel claro medio y tono de piel oscuro medio	ninguna
+👩🏼‍🐰‍👩🏿	mujeres con orejas de conejo tono de piel claro medio y tono de piel oscuro	ninguna
+👩🏽‍🐰‍👩🏻	mujeres con orejas de conejo tono de piel medio y tono de piel claro	ninguna
+👩🏽‍🐰‍👩🏼	mujeres con orejas de conejo tono de piel medio y tono de piel claro medio	ninguna
+👩🏽‍🐰‍👩🏾	mujeres con orejas de conejo tono de piel medio y tono de piel oscuro medio	ninguna
+👩🏽‍🐰‍👩🏿	mujeres con orejas de conejo tono de piel medio y tono de piel oscuro	ninguna
+👩🏾‍🐰‍👩🏻	mujeres con orejas de conejo tono de piel oscuro medio y tono de piel claro	ninguna
+👩🏾‍🐰‍👩🏼	mujeres con orejas de conejo tono de piel oscuro medio y tono de piel claro medio	ninguna
+👩🏾‍🐰‍👩🏽	mujeres con orejas de conejo tono de piel oscuro medio y tono de piel medio	ninguna
+👩🏾‍🐰‍👩🏿	mujeres con orejas de conejo tono de piel oscuro medio y tono de piel oscuro	ninguna
+👩🏿‍🐰‍👩🏻	mujeres con orejas de conejo tono de piel oscuro y tono de piel claro	ninguna
+👩🏿‍🐰‍👩🏼	mujeres con orejas de conejo tono de piel oscuro y tono de piel claro medio	ninguna
+👩🏿‍🐰‍👩🏽	mujeres con orejas de conejo tono de piel oscuro y tono de piel medio	ninguna
+👩🏿‍🐰‍👩🏾	mujeres con orejas de conejo tono de piel oscuro y tono de piel oscuro medio	ninguna
+🧓🏻	persona mayor tono de piel claro	ninguna
+🧓🏼	persona mayor tono de piel claro medio	ninguna
+🧓🏽	persona mayor tono de piel medio	ninguna
+🧓🏾	persona mayor tono de piel oscuro medio	ninguna
+🧓🏿	persona mayor tono de piel oscuro	ninguna
+👴🏻	anciano tono de piel claro	ninguna
+👴🏼	anciano tono de piel claro medio	ninguna
+👴🏽	anciano tono de piel medio	ninguna
+👴🏾	anciano tono de piel oscuro medio	ninguna
+👴🏿	anciano tono de piel oscuro	ninguna
+👵🏻	anciana tono de piel claro	ninguna
+👵🏼	anciana tono de piel claro medio	ninguna
+👵🏽	anciana tono de piel medio	ninguna
+👵🏾	anciana tono de piel oscuro medio	ninguna
+👵🏿	anciana tono de piel oscuro	ninguna
+🙍🏻	persona frunciendo el ceño tono de piel claro	ninguna
+🙍🏼	persona frunciendo el ceño tono de piel claro medio	ninguna
+🙍🏽	persona frunciendo el ceño tono de piel medio	ninguna
+🙍🏾	persona frunciendo el ceño tono de piel oscuro medio	ninguna
+🙍🏿	persona frunciendo el ceño tono de piel oscuro	ninguna
+🙍🏻‍♂	hombre frunciendo el ceño tono de piel claro	ninguna
+🙍🏼‍♂	hombre frunciendo el ceño tono de piel claro medio	ninguna
+🙍🏽‍♂	hombre frunciendo el ceño tono de piel medio	ninguna
+🙍🏾‍♂	hombre frunciendo el ceño tono de piel oscuro medio	ninguna
+🙍🏿‍♂	hombre frunciendo el ceño tono de piel oscuro	ninguna
+🙍🏻‍♀	mujer frunciendo el ceño tono de piel claro	ninguna
+🙍🏼‍♀	mujer frunciendo el ceño tono de piel claro medio	ninguna
+🙍🏽‍♀	mujer frunciendo el ceño tono de piel medio	ninguna
+🙍🏾‍♀	mujer frunciendo el ceño tono de piel oscuro medio	ninguna
+🙍🏿‍♀	mujer frunciendo el ceño tono de piel oscuro	ninguna
+🙎🏻	persona haciendo pucheros tono de piel claro	ninguna
+🙎🏼	persona haciendo pucheros tono de piel claro medio	ninguna
+🙎🏽	persona haciendo pucheros tono de piel medio	ninguna
+🙎🏾	persona haciendo pucheros tono de piel oscuro medio	ninguna
+🙎🏿	persona haciendo pucheros tono de piel oscuro	ninguna
+🙎🏻‍♂	hombre haciendo pucheros tono de piel claro	ninguna
+🙎🏼‍♂	hombre haciendo pucheros tono de piel claro medio	ninguna
+🙎🏽‍♂	hombre haciendo pucheros tono de piel medio	ninguna
+🙎🏾‍♂	hombre haciendo pucheros tono de piel oscuro medio	ninguna
+🙎🏿‍♂	hombre haciendo pucheros tono de piel oscuro	ninguna
+🙎🏻‍♀	mujer haciendo pucheros tono de piel claro	ninguna
+🙎🏼‍♀	mujer haciendo pucheros tono de piel claro medio	ninguna
+🙎🏽‍♀	mujer haciendo pucheros tono de piel medio	ninguna
+🙎🏾‍♀	mujer haciendo pucheros tono de piel oscuro medio	ninguna
+🙎🏿‍♀	mujer haciendo pucheros tono de piel oscuro	ninguna
+🙅🏻	persona haciendo el gesto de "no" tono de piel claro	ninguna
+🙅🏼	persona haciendo el gesto de "no" tono de piel claro medio	ninguna
+🙅🏽	persona haciendo el gesto de "no" tono de piel medio	ninguna
+🙅🏾	persona haciendo el gesto de "no" tono de piel oscuro medio	ninguna
+🙅🏿	persona haciendo el gesto de "no" tono de piel oscuro	ninguna
+🙅🏻‍♂	hombre haciendo el gesto de "no" tono de piel claro	ninguna
+🙅🏼‍♂	hombre haciendo el gesto de "no" tono de piel claro medio	ninguna
+🙅🏽‍♂	hombre haciendo el gesto de "no" tono de piel medio	ninguna
+🙅🏾‍♂	hombre haciendo el gesto de "no" tono de piel oscuro medio	ninguna
+🙅🏿‍♂	hombre haciendo el gesto de "no" tono de piel oscuro	ninguna
+🙅🏻‍♀	mujer haciendo el gesto de "no" tono de piel claro	ninguna
+🙅🏼‍♀	mujer haciendo el gesto de "no" tono de piel claro medio	ninguna
+🙅🏽‍♀	mujer haciendo el gesto de "no" tono de piel medio	ninguna
+🙅🏾‍♀	mujer haciendo el gesto de "no" tono de piel oscuro medio	ninguna
+🙅🏿‍♀	mujer haciendo el gesto de "no" tono de piel oscuro	ninguna
+🙆🏻	persona haciendo el gesto de "de acuerdo" tono de piel claro	ninguna
+🙆🏼	persona haciendo el gesto de "de acuerdo" tono de piel claro medio	ninguna
+🙆🏽	persona haciendo el gesto de "de acuerdo" tono de piel medio	ninguna
+🙆🏾	persona haciendo el gesto de "de acuerdo" tono de piel oscuro medio	ninguna
+🙆🏿	persona haciendo el gesto de "de acuerdo" tono de piel oscuro	ninguna
+🙆🏻‍♂	hombre haciendo el gesto de "de acuerdo" tono de piel claro	ninguna
+🙆🏼‍♂	hombre haciendo el gesto de "de acuerdo" tono de piel claro medio	ninguna
+🙆🏽‍♂	hombre haciendo el gesto de "de acuerdo" tono de piel medio	ninguna
+🙆🏾‍♂	hombre haciendo el gesto de "de acuerdo" tono de piel oscuro medio	ninguna
+🙆🏿‍♂	hombre haciendo el gesto de "de acuerdo" tono de piel oscuro	ninguna
+🙆🏻‍♀	mujer haciendo el gesto de "de acuerdo" tono de piel claro	ninguna
+🙆🏼‍♀	mujer haciendo el gesto de "de acuerdo" tono de piel claro medio	ninguna
+🙆🏽‍♀	mujer haciendo el gesto de "de acuerdo" tono de piel medio	ninguna
+🙆🏾‍♀	mujer haciendo el gesto de "de acuerdo" tono de piel oscuro medio	ninguna
+🙆🏿‍♀	mujer haciendo el gesto de "de acuerdo" tono de piel oscuro	ninguna
+💁🏻	persona de mostrador de información tono de piel claro	ninguna
+💁🏼	persona de mostrador de información tono de piel claro medio	ninguna
+💁🏽	persona de mostrador de información tono de piel medio	ninguna
+💁🏾	persona de mostrador de información tono de piel oscuro medio	ninguna
+💁🏿	persona de mostrador de información tono de piel oscuro	ninguna
+💁🏻‍♂	empleado de mostrador de información tono de piel claro	ninguna
+💁🏼‍♂	empleado de mostrador de información tono de piel claro medio	ninguna
+💁🏽‍♂	empleado de mostrador de información tono de piel medio	ninguna
+💁🏾‍♂	empleado de mostrador de información tono de piel oscuro medio	ninguna
+💁🏿‍♂	empleado de mostrador de información tono de piel oscuro	ninguna
+💁🏻‍♀	empleada de mostrador de información tono de piel claro	ninguna
+💁🏼‍♀	empleada de mostrador de información tono de piel claro medio	ninguna
+💁🏽‍♀	empleada de mostrador de información tono de piel medio	ninguna
+💁🏾‍♀	empleada de mostrador de información tono de piel oscuro medio	ninguna
+💁🏿‍♀	empleada de mostrador de información tono de piel oscuro	ninguna
+🙋🏻	persona con la mano levantada tono de piel claro	ninguna
+🙋🏼	persona con la mano levantada tono de piel claro medio	ninguna
+🙋🏽	persona con la mano levantada tono de piel medio	ninguna
+🙋🏾	persona con la mano levantada tono de piel oscuro medio	ninguna
+🙋🏿	persona con la mano levantada tono de piel oscuro	ninguna
+🙋🏻‍♂	hombre con la mano levantada tono de piel claro	ninguna
+🙋🏼‍♂	hombre con la mano levantada tono de piel claro medio	ninguna
+🙋🏽‍♂	hombre con la mano levantada tono de piel medio	ninguna
+🙋🏾‍♂	hombre con la mano levantada tono de piel oscuro medio	ninguna
+🙋🏿‍♂	hombre con la mano levantada tono de piel oscuro	ninguna
+🙋🏻‍♀	mujer con la mano levantada tono de piel claro	ninguna
+🙋🏼‍♀	mujer con la mano levantada tono de piel claro medio	ninguna
+🙋🏽‍♀	mujer con la mano levantada tono de piel medio	ninguna
+🙋🏾‍♀	mujer con la mano levantada tono de piel oscuro medio	ninguna
+🙋🏿‍♀	mujer con la mano levantada tono de piel oscuro	ninguna
+🧏🏻	persona sorda tono de piel claro	ninguna
+🧏🏼	persona sorda tono de piel claro medio	ninguna
+🧏🏽	persona sorda tono de piel medio	ninguna
+🧏🏾	persona sorda tono de piel oscuro medio	ninguna
+🧏🏿	persona sorda tono de piel oscuro	ninguna
+🧏🏻‍♂	hombre sordo tono de piel claro	ninguna
+🧏🏼‍♂	hombre sordo tono de piel claro medio	ninguna
+🧏🏽‍♂	hombre sordo tono de piel medio	ninguna
+🧏🏾‍♂	hombre sordo tono de piel oscuro medio	ninguna
+🧏🏿‍♂	hombre sordo tono de piel oscuro	ninguna
+🧏🏻‍♀	mujer sorda tono de piel claro	ninguna
+🧏🏼‍♀	mujer sorda tono de piel claro medio	ninguna
+🧏🏽‍♀	mujer sorda tono de piel medio	ninguna
+🧏🏾‍♀	mujer sorda tono de piel oscuro medio	ninguna
+🧏🏿‍♀	mujer sorda tono de piel oscuro	ninguna
+🙇🏻	persona haciendo una reverencia tono de piel claro	ninguna
+🙇🏼	persona haciendo una reverencia tono de piel claro medio	ninguna
+🙇🏽	persona haciendo una reverencia tono de piel medio	ninguna
+🙇🏾	persona haciendo una reverencia tono de piel oscuro medio	ninguna
+🙇🏿	persona haciendo una reverencia tono de piel oscuro	ninguna
+🙇🏻‍♂	hombre haciendo una reverencia tono de piel claro	ninguna
+🙇🏼‍♂	hombre haciendo una reverencia tono de piel claro medio	ninguna
+🙇🏽‍♂	hombre haciendo una reverencia tono de piel medio	ninguna
+🙇🏾‍♂	hombre haciendo una reverencia tono de piel oscuro medio	ninguna
+🙇🏿‍♂	hombre haciendo una reverencia tono de piel oscuro	ninguna
+🙇🏻‍♀	mujer haciendo una reverencia tono de piel claro	ninguna
+🙇🏼‍♀	mujer haciendo una reverencia tono de piel claro medio	ninguna
+🙇🏽‍♀	mujer haciendo una reverencia tono de piel medio	ninguna
+🙇🏾‍♀	mujer haciendo una reverencia tono de piel oscuro medio	ninguna
+🙇🏿‍♀	mujer haciendo una reverencia tono de piel oscuro	ninguna
+🤦🏻	persona con la mano en la frente tono de piel claro	ninguna
+🤦🏼	persona con la mano en la frente tono de piel claro medio	ninguna
+🤦🏽	persona con la mano en la frente tono de piel medio	ninguna
+🤦🏾	persona con la mano en la frente tono de piel oscuro medio	ninguna
+🤦🏿	persona con la mano en la frente tono de piel oscuro	ninguna
+🤦🏻‍♂	hombre con la mano en la frente tono de piel claro	ninguna
+🤦🏼‍♂	hombre con la mano en la frente tono de piel claro medio	ninguna
+🤦🏽‍♂	hombre con la mano en la frente tono de piel medio	ninguna
+🤦🏾‍♂	hombre con la mano en la frente tono de piel oscuro medio	ninguna
+🤦🏿‍♂	hombre con la mano en la frente tono de piel oscuro	ninguna
+🤦🏻‍♀	mujer con la mano en la frente tono de piel claro	ninguna
+🤦🏼‍♀	mujer con la mano en la frente tono de piel claro medio	ninguna
+🤦🏽‍♀	mujer con la mano en la frente tono de piel medio	ninguna
+🤦🏾‍♀	mujer con la mano en la frente tono de piel oscuro medio	ninguna
+🤦🏿‍♀	mujer con la mano en la frente tono de piel oscuro	ninguna
+🤷🏻	persona encogida de hombros tono de piel claro	ninguna
+🤷🏼	persona encogida de hombros tono de piel claro medio	ninguna
+🤷🏽	persona encogida de hombros tono de piel medio	ninguna
+🤷🏾	persona encogida de hombros tono de piel oscuro medio	ninguna
+🤷🏿	persona encogida de hombros tono de piel oscuro	ninguna
+🤷🏻‍♂	hombre encogido de hombros tono de piel claro	ninguna
+🤷🏼‍♂	hombre encogido de hombros tono de piel claro medio	ninguna
+🤷🏽‍♂	hombre encogido de hombros tono de piel medio	ninguna
+🤷🏾‍♂	hombre encogido de hombros tono de piel oscuro medio	ninguna
+🤷🏿‍♂	hombre encogido de hombros tono de piel oscuro	ninguna
+🤷🏻‍♀	mujer encogida de hombros tono de piel claro	ninguna
+🤷🏼‍♀	mujer encogida de hombros tono de piel claro medio	ninguna
+🤷🏽‍♀	mujer encogida de hombros tono de piel medio	ninguna
+🤷🏾‍♀	mujer encogida de hombros tono de piel oscuro medio	ninguna
+🤷🏿‍♀	mujer encogida de hombros tono de piel oscuro	ninguna
+🧑🏻‍⚕	profesional sanitario tono de piel claro	ninguna
+🧑🏼‍⚕	profesional sanitario tono de piel claro medio	ninguna
+🧑🏽‍⚕	profesional sanitario tono de piel medio	ninguna
+🧑🏾‍⚕	profesional sanitario tono de piel oscuro medio	ninguna
+🧑🏿‍⚕	profesional sanitario tono de piel oscuro	ninguna
+👨🏻‍⚕	profesional sanitario hombre tono de piel claro	ninguna
+👨🏼‍⚕	profesional sanitario hombre tono de piel claro medio	ninguna
+👨🏽‍⚕	profesional sanitario hombre tono de piel medio	ninguna
+👨🏾‍⚕	profesional sanitario hombre tono de piel oscuro medio	ninguna
+👨🏿‍⚕	profesional sanitario hombre tono de piel oscuro	ninguna
+👩🏻‍⚕	profesional sanitario mujer tono de piel claro	ninguna
+👩🏼‍⚕	profesional sanitario mujer tono de piel claro medio	ninguna
+👩🏽‍⚕	profesional sanitario mujer tono de piel medio	ninguna
+👩🏾‍⚕	profesional sanitario mujer tono de piel oscuro medio	ninguna
+👩🏿‍⚕	profesional sanitario mujer tono de piel oscuro	ninguna
+🧑🏻‍🎓	estudiante tono de piel claro	ninguna
+🧑🏼‍🎓	estudiante tono de piel claro medio	ninguna
+🧑🏽‍🎓	estudiante tono de piel medio	ninguna
+🧑🏾‍🎓	estudiante tono de piel oscuro medio	ninguna
+🧑🏿‍🎓	estudiante tono de piel oscuro	ninguna
+👨🏻‍🎓	estudiante hombre tono de piel claro	ninguna
+👨🏼‍🎓	estudiante hombre tono de piel claro medio	ninguna
+👨🏽‍🎓	estudiante hombre tono de piel medio	ninguna
+👨🏾‍🎓	estudiante hombre tono de piel oscuro medio	ninguna
+👨🏿‍🎓	estudiante hombre tono de piel oscuro	ninguna
+👩🏻‍🎓	estudiante mujer tono de piel claro	ninguna
+👩🏼‍🎓	estudiante mujer tono de piel claro medio	ninguna
+👩🏽‍🎓	estudiante mujer tono de piel medio	ninguna
+👩🏾‍🎓	estudiante mujer tono de piel oscuro medio	ninguna
+👩🏿‍🎓	estudiante mujer tono de piel oscuro	ninguna
+🧑🏻‍🏫	docente tono de piel claro	ninguna
+🧑🏼‍🏫	docente tono de piel claro medio	ninguna
+🧑🏽‍🏫	docente tono de piel medio	ninguna
+🧑🏾‍🏫	docente tono de piel oscuro medio	ninguna
+🧑🏿‍🏫	docente tono de piel oscuro	ninguna
+👨🏻‍🏫	docente hombre tono de piel claro	ninguna
+👨🏼‍🏫	docente hombre tono de piel claro medio	ninguna
+👨🏽‍🏫	docente hombre tono de piel medio	ninguna
+👨🏾‍🏫	docente hombre tono de piel oscuro medio	ninguna
+👨🏿‍🏫	docente hombre tono de piel oscuro	ninguna
+👩🏻‍🏫	docente mujer tono de piel claro	ninguna
+👩🏼‍🏫	docente mujer tono de piel claro medio	ninguna
+👩🏽‍🏫	docente mujer tono de piel medio	ninguna
+👩🏾‍🏫	docente mujer tono de piel oscuro medio	ninguna
+👩🏿‍🏫	docente mujer tono de piel oscuro	ninguna
+🧑🏻‍⚖	fiscal tono de piel claro	ninguna
+🧑🏼‍⚖	fiscal tono de piel claro medio	ninguna
+🧑🏽‍⚖	fiscal tono de piel medio	ninguna
+🧑🏾‍⚖	fiscal tono de piel oscuro medio	ninguna
+🧑🏿‍⚖	fiscal tono de piel oscuro	ninguna
+👨🏻‍⚖	fiscal hombre tono de piel claro	ninguna
+👨🏼‍⚖	fiscal hombre tono de piel claro medio	ninguna
+👨🏽‍⚖	fiscal hombre tono de piel medio	ninguna
+👨🏾‍⚖	fiscal hombre tono de piel oscuro medio	ninguna
+👨🏿‍⚖	fiscal hombre tono de piel oscuro	ninguna
+👩🏻‍⚖	fiscal mujer tono de piel claro	ninguna
+👩🏼‍⚖	fiscal mujer tono de piel claro medio	ninguna
+👩🏽‍⚖	fiscal mujer tono de piel medio	ninguna
+👩🏾‍⚖	fiscal mujer tono de piel oscuro medio	ninguna
+👩🏿‍⚖	fiscal mujer tono de piel oscuro	ninguna
+🧑🏻‍🌾	profesional de la agricultura tono de piel claro	ninguna
+🧑🏼‍🌾	profesional de la agricultura tono de piel claro medio	ninguna
+🧑🏽‍🌾	profesional de la agricultura tono de piel medio	ninguna
+🧑🏾‍🌾	profesional de la agricultura tono de piel oscuro medio	ninguna
+🧑🏿‍🌾	profesional de la agricultura tono de piel oscuro	ninguna
+👨🏻‍🌾	profesional de la agricultura hombre tono de piel claro	ninguna
+👨🏼‍🌾	profesional de la agricultura hombre tono de piel claro medio	ninguna
+👨🏽‍🌾	profesional de la agricultura hombre tono de piel medio	ninguna
+👨🏾‍🌾	profesional de la agricultura hombre tono de piel oscuro medio	ninguna
+👨🏿‍🌾	profesional de la agricultura hombre tono de piel oscuro	ninguna
+👩🏻‍🌾	profesional de la agricultura mujer tono de piel claro	ninguna
+👩🏼‍🌾	profesional de la agricultura mujer tono de piel claro medio	ninguna
+👩🏽‍🌾	profesional de la agricultura mujer tono de piel medio	ninguna
+👩🏾‍🌾	profesional de la agricultura mujer tono de piel oscuro medio	ninguna
+👩🏿‍🌾	profesional de la agricultura mujer tono de piel oscuro	ninguna
+🧑🏻‍🍳	chef tono de piel claro	ninguna
+🧑🏼‍🍳	chef tono de piel claro medio	ninguna
+🧑🏽‍🍳	chef tono de piel medio	ninguna
+🧑🏾‍🍳	chef tono de piel oscuro medio	ninguna
+🧑🏿‍🍳	chef tono de piel oscuro	ninguna
+👨🏻‍🍳	chef hombre tono de piel claro	ninguna
+👨🏼‍🍳	chef hombre tono de piel claro medio	ninguna
+👨🏽‍🍳	chef hombre tono de piel medio	ninguna
+👨🏾‍🍳	chef hombre tono de piel oscuro medio	ninguna
+👨🏿‍🍳	chef hombre tono de piel oscuro	ninguna
+👩🏻‍🍳	chef mujer tono de piel claro	ninguna
+👩🏼‍🍳	chef mujer tono de piel claro medio	ninguna
+👩🏽‍🍳	chef mujer tono de piel medio	ninguna
+👩🏾‍🍳	chef mujer tono de piel oscuro medio	ninguna
+👩🏿‍🍳	chef mujer tono de piel oscuro	ninguna
+🧑🏻‍🔧	profesional de la mecánica tono de piel claro	ninguna
+🧑🏼‍🔧	profesional de la mecánica tono de piel claro medio	ninguna
+🧑🏽‍🔧	profesional de la mecánica tono de piel medio	ninguna
+🧑🏾‍🔧	profesional de la mecánica tono de piel oscuro medio	ninguna
+🧑🏿‍🔧	profesional de la mecánica tono de piel oscuro	ninguna
+👨🏻‍🔧	profesional de la mecánica hombre tono de piel claro	ninguna
+👨🏼‍🔧	profesional de la mecánica hombre tono de piel claro medio	ninguna
+👨🏽‍🔧	profesional de la mecánica hombre tono de piel medio	ninguna
+👨🏾‍🔧	profesional de la mecánica hombre tono de piel oscuro medio	ninguna
+👨🏿‍🔧	profesional de la mecánica hombre tono de piel oscuro	ninguna
+👩🏻‍🔧	profesional de la mecánica mujer tono de piel claro	ninguna
+👩🏼‍🔧	profesional de la mecánica mujer tono de piel claro medio	ninguna
+👩🏽‍🔧	profesional de la mecánica mujer tono de piel medio	ninguna
+👩🏾‍🔧	profesional de la mecánica mujer tono de piel oscuro medio	ninguna
+👩🏿‍🔧	profesional de la mecánica mujer tono de piel oscuro	ninguna
+🧑🏻‍🏭	profesional industrial tono de piel claro	ninguna
+🧑🏼‍🏭	profesional industrial tono de piel claro medio	ninguna
+🧑🏽‍🏭	profesional industrial tono de piel medio	ninguna
+🧑🏾‍🏭	profesional industrial tono de piel oscuro medio	ninguna
+🧑🏿‍🏭	profesional industrial tono de piel oscuro	ninguna
+👨🏻‍🏭	profesional industrial hombre tono de piel claro	ninguna
+👨🏼‍🏭	profesional industrial hombre tono de piel claro medio	ninguna
+👨🏽‍🏭	profesional industrial hombre tono de piel medio	ninguna
+👨🏾‍🏭	profesional industrial hombre tono de piel oscuro medio	ninguna
+👨🏿‍🏭	profesional industrial hombre tono de piel oscuro	ninguna
+👩🏻‍🏭	profesional industrial mujer tono de piel claro	ninguna
+👩🏼‍🏭	profesional industrial mujer tono de piel claro medio	ninguna
+👩🏽‍🏭	profesional industrial mujer tono de piel medio	ninguna
+👩🏾‍🏭	profesional industrial mujer tono de piel oscuro medio	ninguna
+👩🏿‍🏭	profesional industrial mujer tono de piel oscuro	ninguna
+🧑🏻‍💼	oficinista tono de piel claro	ninguna
+🧑🏼‍💼	oficinista tono de piel claro medio	ninguna
+🧑🏽‍💼	oficinista tono de piel medio	ninguna
+🧑🏾‍💼	oficinista tono de piel oscuro medio	ninguna
+🧑🏿‍💼	oficinista tono de piel oscuro	ninguna
+👨🏻‍💼	oficinista hombre tono de piel claro	ninguna
+👨🏼‍💼	oficinista hombre tono de piel claro medio	ninguna
+👨🏽‍💼	oficinista hombre tono de piel medio	ninguna
+👨🏾‍💼	oficinista hombre tono de piel oscuro medio	ninguna
+👨🏿‍💼	oficinista hombre tono de piel oscuro	ninguna
+👩🏻‍💼	oficinista mujer tono de piel claro	ninguna
+👩🏼‍💼	oficinista mujer tono de piel claro medio	ninguna
+👩🏽‍💼	oficinista mujer tono de piel medio	ninguna
+👩🏾‍💼	oficinista mujer tono de piel oscuro medio	ninguna
+👩🏿‍💼	oficinista mujer tono de piel oscuro	ninguna
+🧑🏻‍🔬	profesional de la ciencia tono de piel claro	ninguna
+🧑🏼‍🔬	profesional de la ciencia tono de piel claro medio	ninguna
+🧑🏽‍🔬	profesional de la ciencia tono de piel medio	ninguna
+🧑🏾‍🔬	profesional de la ciencia tono de piel oscuro medio	ninguna
+🧑🏿‍🔬	profesional de la ciencia tono de piel oscuro	ninguna
+👨🏻‍🔬	profesional de la ciencia hombre tono de piel claro	ninguna
+👨🏼‍🔬	profesional de la ciencia hombre tono de piel claro medio	ninguna
+👨🏽‍🔬	profesional de la ciencia hombre tono de piel medio	ninguna
+👨🏾‍🔬	profesional de la ciencia hombre tono de piel oscuro medio	ninguna
+👨🏿‍🔬	profesional de la ciencia hombre tono de piel oscuro	ninguna
+👩🏻‍🔬	profesional de la ciencia mujer tono de piel claro	ninguna
+👩🏼‍🔬	profesional de la ciencia mujer tono de piel claro medio	ninguna
+👩🏽‍🔬	profesional de la ciencia mujer tono de piel medio	ninguna
+👩🏾‍🔬	profesional de la ciencia mujer tono de piel oscuro medio	ninguna
+👩🏿‍🔬	profesional de la ciencia mujer tono de piel oscuro	ninguna
+🧑🏻‍💻	profesional de la tecnología tono de piel claro	ninguna
+🧑🏼‍💻	profesional de la tecnología tono de piel claro medio	ninguna
+🧑🏽‍💻	profesional de la tecnología tono de piel medio	ninguna
+🧑🏾‍💻	profesional de la tecnología tono de piel oscuro medio	ninguna
+🧑🏿‍💻	profesional de la tecnología tono de piel oscuro	ninguna
+👨🏻‍💻	profesional de la tecnología hombre tono de piel claro	ninguna
+👨🏼‍💻	profesional de la tecnología hombre tono de piel claro medio	ninguna
+👨🏽‍💻	profesional de la tecnología hombre tono de piel medio	ninguna
+👨🏾‍💻	profesional de la tecnología hombre tono de piel oscuro medio	ninguna
+👨🏿‍💻	profesional de la tecnología hombre tono de piel oscuro	ninguna
+👩🏻‍💻	profesional de la tecnología mujer tono de piel claro	ninguna
+👩🏼‍💻	profesional de la tecnología mujer tono de piel claro medio	ninguna
+👩🏽‍💻	profesional de la tecnología mujer tono de piel medio	ninguna
+👩🏾‍💻	profesional de la tecnología mujer tono de piel oscuro medio	ninguna
+👩🏿‍💻	profesional de la tecnología mujer tono de piel oscuro	ninguna
+🧑🏻‍🎤	cantante tono de piel claro	ninguna
+🧑🏼‍🎤	cantante tono de piel claro medio	ninguna
+🧑🏽‍🎤	cantante tono de piel medio	ninguna
+🧑🏾‍🎤	cantante tono de piel oscuro medio	ninguna
+🧑🏿‍🎤	cantante tono de piel oscuro	ninguna
+👨🏻‍🎤	cantante hombre tono de piel claro	ninguna
+👨🏼‍🎤	cantante hombre tono de piel claro medio	ninguna
+👨🏽‍🎤	cantante hombre tono de piel medio	ninguna
+👨🏾‍🎤	cantante hombre tono de piel oscuro medio	ninguna
+👨🏿‍🎤	cantante hombre tono de piel oscuro	ninguna
+👩🏻‍🎤	cantante mujer tono de piel claro	ninguna
+👩🏼‍🎤	cantante mujer tono de piel claro medio	ninguna
+👩🏽‍🎤	cantante mujer tono de piel medio	ninguna
+👩🏾‍🎤	cantante mujer tono de piel oscuro medio	ninguna
+👩🏿‍🎤	cantante mujer tono de piel oscuro	ninguna
+🧑🏻‍🎨	artista tono de piel claro	ninguna
+🧑🏼‍🎨	artista tono de piel claro medio	ninguna
+🧑🏽‍🎨	artista tono de piel medio	ninguna
+🧑🏾‍🎨	artista tono de piel oscuro medio	ninguna
+🧑🏿‍🎨	artista tono de piel oscuro	ninguna
+👨🏻‍🎨	artista hombre tono de piel claro	ninguna
+👨🏼‍🎨	artista hombre tono de piel claro medio	ninguna
+👨🏽‍🎨	artista hombre tono de piel medio	ninguna
+👨🏾‍🎨	artista hombre tono de piel oscuro medio	ninguna
+👨🏿‍🎨	artista hombre tono de piel oscuro	ninguna
+👩🏻‍🎨	artista mujer tono de piel claro	ninguna
+👩🏼‍🎨	artista mujer tono de piel claro medio	ninguna
+👩🏽‍🎨	artista mujer tono de piel medio	ninguna
+👩🏾‍🎨	artista mujer tono de piel oscuro medio	ninguna
+👩🏿‍🎨	artista mujer tono de piel oscuro	ninguna
+🧑🏻‍✈	piloto tono de piel claro	ninguna
+🧑🏼‍✈	piloto tono de piel claro medio	ninguna
+🧑🏽‍✈	piloto tono de piel medio	ninguna
+🧑🏾‍✈	piloto tono de piel oscuro medio	ninguna
+🧑🏿‍✈	piloto tono de piel oscuro	ninguna
+👨🏻‍✈	piloto hombre tono de piel claro	ninguna
+👨🏼‍✈	piloto hombre tono de piel claro medio	ninguna
+👨🏽‍✈	piloto hombre tono de piel medio	ninguna
+👨🏾‍✈	piloto hombre tono de piel oscuro medio	ninguna
+👨🏿‍✈	piloto hombre tono de piel oscuro	ninguna
+👩🏻‍✈	piloto mujer tono de piel claro	ninguna
+👩🏼‍✈	piloto mujer tono de piel claro medio	ninguna
+👩🏽‍✈	piloto mujer tono de piel medio	ninguna
+👩🏾‍✈	piloto mujer tono de piel oscuro medio	ninguna
+👩🏿‍✈	piloto mujer tono de piel oscuro	ninguna
+🧑🏻‍🚀	astronauta tono de piel claro	ninguna
+🧑🏼‍🚀	astronauta tono de piel claro medio	ninguna
+🧑🏽‍🚀	astronauta tono de piel medio	ninguna
+🧑🏾‍🚀	astronauta tono de piel oscuro medio	ninguna
+🧑🏿‍🚀	astronauta tono de piel oscuro	ninguna
+👨🏻‍🚀	astronauta hombre tono de piel claro	ninguna
+👨🏼‍🚀	astronauta hombre tono de piel claro medio	ninguna
+👨🏽‍🚀	astronauta hombre tono de piel medio	ninguna
+👨🏾‍🚀	astronauta hombre tono de piel oscuro medio	ninguna
+👨🏿‍🚀	astronauta hombre tono de piel oscuro	ninguna
+👩🏻‍🚀	astronauta mujer tono de piel claro	ninguna
+👩🏼‍🚀	astronauta mujer tono de piel claro medio	ninguna
+👩🏽‍🚀	astronauta mujer tono de piel medio	ninguna
+👩🏾‍🚀	astronauta mujer tono de piel oscuro medio	ninguna
+👩🏿‍🚀	astronauta mujer tono de piel oscuro	ninguna
+🧑🏻‍🚒	bombero tono de piel claro	ninguna
+🧑🏼‍🚒	bombero tono de piel claro medio	ninguna
+🧑🏽‍🚒	bombero tono de piel medio	ninguna
+🧑🏾‍🚒	bombero tono de piel oscuro medio	ninguna
+🧑🏿‍🚒	bombero tono de piel oscuro	ninguna
+👨🏻‍🚒	bombero hombre tono de piel claro	ninguna
+👨🏼‍🚒	bombero hombre tono de piel claro medio	ninguna
+👨🏽‍🚒	bombero hombre tono de piel medio	ninguna
+👨🏾‍🚒	bombero hombre tono de piel oscuro medio	ninguna
+👨🏿‍🚒	bombero hombre tono de piel oscuro	ninguna
+👩🏻‍🚒	bombera tono de piel claro	ninguna
+👩🏼‍🚒	bombera tono de piel claro medio	ninguna
+👩🏽‍🚒	bombera tono de piel medio	ninguna
+👩🏾‍🚒	bombera tono de piel oscuro medio	ninguna
+👩🏿‍🚒	bombera tono de piel oscuro	ninguna
+👮🏻	agente de policía tono de piel claro	ninguna
+👮🏼	agente de policía tono de piel claro medio	ninguna
+👮🏽	agente de policía tono de piel medio	ninguna
+👮🏾	agente de policía tono de piel oscuro medio	ninguna
+👮🏿	agente de policía tono de piel oscuro	ninguna
+👮🏻‍♂	agente de policía hombre tono de piel claro	ninguna
+👮🏼‍♂	agente de policía hombre tono de piel claro medio	ninguna
+👮🏽‍♂	agente de policía hombre tono de piel medio	ninguna
+👮🏾‍♂	agente de policía hombre tono de piel oscuro medio	ninguna
+👮🏿‍♂	agente de policía hombre tono de piel oscuro	ninguna
+👮🏻‍♀	agente de policía mujer tono de piel claro	ninguna
+👮🏼‍♀	agente de policía mujer tono de piel claro medio	ninguna
+👮🏽‍♀	agente de policía mujer tono de piel medio	ninguna
+👮🏾‍♀	agente de policía mujer tono de piel oscuro medio	ninguna
+👮🏿‍♀	agente de policía mujer tono de piel oscuro	ninguna
+🕵🏻	detective tono de piel claro	ninguna
+🕵🏼	detective tono de piel claro medio	ninguna
+🕵🏽	detective tono de piel medio	ninguna
+🕵🏾	detective tono de piel oscuro medio	ninguna
+🕵🏿	detective tono de piel oscuro	ninguna
+🕵🏻‍♂	detective hombre tono de piel claro	ninguna
+🕵🏼‍♂	detective hombre tono de piel claro medio	ninguna
+🕵🏽‍♂	detective hombre tono de piel medio	ninguna
+🕵🏾‍♂	detective hombre tono de piel oscuro medio	ninguna
+🕵🏿‍♂	detective hombre tono de piel oscuro	ninguna
+🕵🏻‍♀	detective mujer tono de piel claro	ninguna
+🕵🏼‍♀	detective mujer tono de piel claro medio	ninguna
+🕵🏽‍♀	detective mujer tono de piel medio	ninguna
+🕵🏾‍♀	detective mujer tono de piel oscuro medio	ninguna
+🕵🏿‍♀	detective mujer tono de piel oscuro	ninguna
+💂🏻	guardia tono de piel claro	ninguna
+💂🏼	guardia tono de piel claro medio	ninguna
+💂🏽	guardia tono de piel medio	ninguna
+💂🏾	guardia tono de piel oscuro medio	ninguna
+💂🏿	guardia tono de piel oscuro	ninguna
+💂🏻‍♂	guardia hombre tono de piel claro	ninguna
+💂🏼‍♂	guardia hombre tono de piel claro medio	ninguna
+💂🏽‍♂	guardia hombre tono de piel medio	ninguna
+💂🏾‍♂	guardia hombre tono de piel oscuro medio	ninguna
+💂🏿‍♂	guardia hombre tono de piel oscuro	ninguna
+💂🏻‍♀	guardia mujer tono de piel claro	ninguna
+💂🏼‍♀	guardia mujer tono de piel claro medio	ninguna
+💂🏽‍♀	guardia mujer tono de piel medio	ninguna
+💂🏾‍♀	guardia mujer tono de piel oscuro medio	ninguna
+💂🏿‍♀	guardia mujer tono de piel oscuro	ninguna
+🥷🏻	ninja tono de piel claro	ninguna
+🥷🏼	ninja tono de piel claro medio	ninguna
+🥷🏽	ninja tono de piel medio	ninguna
+🥷🏾	ninja tono de piel oscuro medio	ninguna
+🥷🏿	ninja tono de piel oscuro	ninguna
+👷🏻	profesional de la construcción tono de piel claro	ninguna
+👷🏼	profesional de la construcción tono de piel claro medio	ninguna
+👷🏽	profesional de la construcción tono de piel medio	ninguna
+👷🏾	profesional de la construcción tono de piel oscuro medio	ninguna
+👷🏿	profesional de la construcción tono de piel oscuro	ninguna
+👷🏻‍♂	profesional de la construcción hombre tono de piel claro	ninguna
+👷🏼‍♂	profesional de la construcción hombre tono de piel claro medio	ninguna
+👷🏽‍♂	profesional de la construcción hombre tono de piel medio	ninguna
+👷🏾‍♂	profesional de la construcción hombre tono de piel oscuro medio	ninguna
+👷🏿‍♂	profesional de la construcción hombre tono de piel oscuro	ninguna
+👷🏻‍♀	profesional de la construcción mujer tono de piel claro	ninguna
+👷🏼‍♀	profesional de la construcción mujer tono de piel claro medio	ninguna
+👷🏽‍♀	profesional de la construcción mujer tono de piel medio	ninguna
+👷🏾‍♀	profesional de la construcción mujer tono de piel oscuro medio	ninguna
+👷🏿‍♀	profesional de la construcción mujer tono de piel oscuro	ninguna
+🫅🏻	persona con corona tono de piel claro	ninguna
+🫅🏼	persona con corona tono de piel claro medio	ninguna
+🫅🏽	persona con corona tono de piel medio	ninguna
+🫅🏾	persona con corona tono de piel oscuro medio	ninguna
+🫅🏿	persona con corona tono de piel oscuro	ninguna
+🤴🏻	príncipe tono de piel claro	ninguna
+🤴🏼	príncipe tono de piel claro medio	ninguna
+🤴🏽	príncipe tono de piel medio	ninguna
+🤴🏾	príncipe tono de piel oscuro medio	ninguna
+🤴🏿	príncipe tono de piel oscuro	ninguna
+👸🏻	princesa tono de piel claro	ninguna
+👸🏼	princesa tono de piel claro medio	ninguna
+👸🏽	princesa tono de piel medio	ninguna
+👸🏾	princesa tono de piel oscuro medio	ninguna
+👸🏿	princesa tono de piel oscuro	ninguna
+👳🏻	persona con turbante tono de piel claro	ninguna
+👳🏼	persona con turbante tono de piel claro medio	ninguna
+👳🏽	persona con turbante tono de piel medio	ninguna
+👳🏾	persona con turbante tono de piel oscuro medio	ninguna
+👳🏿	persona con turbante tono de piel oscuro	ninguna
+👳🏻‍♂	hombre con turbante tono de piel claro	ninguna
+👳🏼‍♂	hombre con turbante tono de piel claro medio	ninguna
+👳🏽‍♂	hombre con turbante tono de piel medio	ninguna
+👳🏾‍♂	hombre con turbante tono de piel oscuro medio	ninguna
+👳🏿‍♂	hombre con turbante tono de piel oscuro	ninguna
+👳🏻‍♀	mujer con turbante tono de piel claro	ninguna
+👳🏼‍♀	mujer con turbante tono de piel claro medio	ninguna
+👳🏽‍♀	mujer con turbante tono de piel medio	ninguna
+👳🏾‍♀	mujer con turbante tono de piel oscuro medio	ninguna
+👳🏿‍♀	mujer con turbante tono de piel oscuro	ninguna
+👲🏻	persona con gorro chino tono de piel claro	ninguna
+👲🏼	persona con gorro chino tono de piel claro medio	ninguna
+👲🏽	persona con gorro chino tono de piel medio	ninguna
+👲🏾	persona con gorro chino tono de piel oscuro medio	ninguna
+👲🏿	persona con gorro chino tono de piel oscuro	ninguna
+🧕🏻	mujer con hiyab tono de piel claro	ninguna
+🧕🏼	mujer con hiyab tono de piel claro medio	ninguna
+🧕🏽	mujer con hiyab tono de piel medio	ninguna
+🧕🏾	mujer con hiyab tono de piel oscuro medio	ninguna
+🧕🏿	mujer con hiyab tono de piel oscuro	ninguna
+🤵🏻	persona con esmoquin tono de piel claro	ninguna
+🤵🏼	persona con esmoquin tono de piel claro medio	ninguna
+🤵🏽	persona con esmoquin tono de piel medio	ninguna
+🤵🏾	persona con esmoquin tono de piel oscuro medio	ninguna
+🤵🏿	persona con esmoquin tono de piel oscuro	ninguna
+🤵🏻‍♂	hombre con esmoquin tono de piel claro	ninguna
+🤵🏼‍♂	hombre con esmoquin tono de piel claro medio	ninguna
+🤵🏽‍♂	hombre con esmoquin tono de piel medio	ninguna
+🤵🏾‍♂	hombre con esmoquin tono de piel oscuro medio	ninguna
+🤵🏿‍♂	hombre con esmoquin tono de piel oscuro	ninguna
+🤵🏻‍♀	mujer con esmoquin tono de piel claro	ninguna
+🤵🏼‍♀	mujer con esmoquin tono de piel claro medio	ninguna
+🤵🏽‍♀	mujer con esmoquin tono de piel medio	ninguna
+🤵🏾‍♀	mujer con esmoquin tono de piel oscuro medio	ninguna
+🤵🏿‍♀	mujer con esmoquin tono de piel oscuro	ninguna
+👰🏻	persona con velo tono de piel claro	ninguna
+👰🏼	persona con velo tono de piel claro medio	ninguna
+👰🏽	persona con velo tono de piel medio	ninguna
+👰🏾	persona con velo tono de piel oscuro medio	ninguna
+👰🏿	persona con velo tono de piel oscuro	ninguna
+👰🏻‍♂	hombre con velo tono de piel claro	ninguna
+👰🏼‍♂	hombre con velo tono de piel claro medio	ninguna
+👰🏽‍♂	hombre con velo tono de piel medio	ninguna
+👰🏾‍♂	hombre con velo tono de piel oscuro medio	ninguna
+👰🏿‍♂	hombre con velo tono de piel oscuro	ninguna
+👰🏻‍♀	mujer con velo tono de piel claro	ninguna
+👰🏼‍♀	mujer con velo tono de piel claro medio	ninguna
+👰🏽‍♀	mujer con velo tono de piel medio	ninguna
+👰🏾‍♀	mujer con velo tono de piel oscuro medio	ninguna
+👰🏿‍♀	mujer con velo tono de piel oscuro	ninguna
+🤰🏻	mujer embarazada tono de piel claro	ninguna
+🤰🏼	mujer embarazada tono de piel claro medio	ninguna
+🤰🏽	mujer embarazada tono de piel medio	ninguna
+🤰🏾	mujer embarazada tono de piel oscuro medio	ninguna
+🤰🏿	mujer embarazada tono de piel oscuro	ninguna
+🫃🏻	hombre embarazado tono de piel claro	ninguna
+🫃🏼	hombre embarazado tono de piel claro medio	ninguna
+🫃🏽	hombre embarazado tono de piel medio	ninguna
+🫃🏾	hombre embarazado tono de piel oscuro medio	ninguna
+🫃🏿	hombre embarazado tono de piel oscuro	ninguna
+🫄🏻	persona embarazada tono de piel claro	ninguna
+🫄🏼	persona embarazada tono de piel claro medio	ninguna
+🫄🏽	persona embarazada tono de piel medio	ninguna
+🫄🏾	persona embarazada tono de piel oscuro medio	ninguna
+🫄🏿	persona embarazada tono de piel oscuro	ninguna
+🤱🏻	lactancia materna tono de piel claro	ninguna
+🤱🏼	lactancia materna tono de piel claro medio	ninguna
+🤱🏽	lactancia materna tono de piel medio	ninguna
+🤱🏾	lactancia materna tono de piel oscuro medio	ninguna
+🤱🏿	lactancia materna tono de piel oscuro	ninguna
+👩🏻‍🍼	mujer alimentando a bebé tono de piel claro	ninguna
+👩🏼‍🍼	mujer alimentando a bebé tono de piel claro medio	ninguna
+👩🏽‍🍼	mujer alimentando a bebé tono de piel medio	ninguna
+👩🏾‍🍼	mujer alimentando a bebé tono de piel oscuro medio	ninguna
+👩🏿‍🍼	mujer alimentando a bebé tono de piel oscuro	ninguna
+👨🏻‍🍼	hombre alimentando a bebé tono de piel claro	ninguna
+👨🏼‍🍼	hombre alimentando a bebé tono de piel claro medio	ninguna
+👨🏽‍🍼	hombre alimentando a bebé tono de piel medio	ninguna
+👨🏾‍🍼	hombre alimentando a bebé tono de piel oscuro medio	ninguna
+👨🏿‍🍼	hombre alimentando a bebé tono de piel oscuro	ninguna
+🧑🏻‍🍼	persona alimentando a bebé tono de piel claro	ninguna
+🧑🏼‍🍼	persona alimentando a bebé tono de piel claro medio	ninguna
+🧑🏽‍🍼	persona alimentando a bebé tono de piel medio	ninguna
+🧑🏾‍🍼	persona alimentando a bebé tono de piel oscuro medio	ninguna
+🧑🏿‍🍼	persona alimentando a bebé tono de piel oscuro	ninguna
+👼🏻	bebé ángel tono de piel claro	ninguna
+👼🏼	bebé ángel tono de piel claro medio	ninguna
+👼🏽	bebé ángel tono de piel medio	ninguna
+👼🏾	bebé ángel tono de piel oscuro medio	ninguna
+👼🏿	bebé ángel tono de piel oscuro	ninguna
+🎅🏻	Papá Noel tono de piel claro	ninguna
+🎅🏼	Papá Noel tono de piel claro medio	ninguna
+🎅🏽	Papá Noel tono de piel medio	ninguna
+🎅🏾	Papá Noel tono de piel oscuro medio	ninguna
+🎅🏿	Papá Noel tono de piel oscuro	ninguna
+🤶🏻	Mamá Noel tono de piel claro	ninguna
+🤶🏼	Mamá Noel tono de piel claro medio	ninguna
+🤶🏽	Mamá Noel tono de piel medio	ninguna
+🤶🏾	Mamá Noel tono de piel oscuro medio	ninguna
+🤶🏿	Mamá Noel tono de piel oscuro	ninguna
+🧑🏻‍🎄	Noel tono de piel claro	ninguna
+🧑🏼‍🎄	Noel tono de piel claro medio	ninguna
+🧑🏽‍🎄	Noel tono de piel medio	ninguna
+🧑🏾‍🎄	Noel tono de piel oscuro medio	ninguna
+🧑🏿‍🎄	Noel tono de piel oscuro	ninguna
+🦸🏻	personaje de superhéroe tono de piel claro	ninguna
+🦸🏼	personaje de superhéroe tono de piel claro medio	ninguna
+🦸🏽	personaje de superhéroe tono de piel medio	ninguna
+🦸🏾	personaje de superhéroe tono de piel oscuro medio	ninguna
+🦸🏿	personaje de superhéroe tono de piel oscuro	ninguna
+🦸🏻‍♂	superhéroe tono de piel claro	ninguna
+🦸🏼‍♂	superhéroe tono de piel claro medio	ninguna
+🦸🏽‍♂	superhéroe tono de piel medio	ninguna
+🦸🏾‍♂	superhéroe tono de piel oscuro medio	ninguna
+🦸🏿‍♂	superhéroe tono de piel oscuro	ninguna
+🦸🏻‍♀	superheroína tono de piel claro	ninguna
+🦸🏼‍♀	superheroína tono de piel claro medio	ninguna
+🦸🏽‍♀	superheroína tono de piel medio	ninguna
+🦸🏾‍♀	superheroína tono de piel oscuro medio	ninguna
+🦸🏿‍♀	superheroína tono de piel oscuro	ninguna
+🦹🏻	personaje de supervillano tono de piel claro	ninguna
+🦹🏼	personaje de supervillano tono de piel claro medio	ninguna
+🦹🏽	personaje de supervillano tono de piel medio	ninguna
+🦹🏾	personaje de supervillano tono de piel oscuro medio	ninguna
+🦹🏿	personaje de supervillano tono de piel oscuro	ninguna
+🦹🏻‍♂	supervillano tono de piel claro	ninguna
+🦹🏼‍♂	supervillano tono de piel claro medio	ninguna
+🦹🏽‍♂	supervillano tono de piel medio	ninguna
+🦹🏾‍♂	supervillano tono de piel oscuro medio	ninguna
+🦹🏿‍♂	supervillano tono de piel oscuro	ninguna
+🦹🏻‍♀	supervillana tono de piel claro	ninguna
+🦹🏼‍♀	supervillana tono de piel claro medio	ninguna
+🦹🏽‍♀	supervillana tono de piel medio	ninguna
+🦹🏾‍♀	supervillana tono de piel oscuro medio	ninguna
+🦹🏿‍♀	supervillana tono de piel oscuro	ninguna
+🧙🏻	persona maga tono de piel claro	ninguna
+🧙🏼	persona maga tono de piel claro medio	ninguna
+🧙🏽	persona maga tono de piel medio	ninguna
+🧙🏾	persona maga tono de piel oscuro medio	ninguna
+🧙🏿	persona maga tono de piel oscuro	ninguna
+🧙🏻‍♂	mago tono de piel claro	ninguna
+🧙🏼‍♂	mago tono de piel claro medio	ninguna
+🧙🏽‍♂	mago tono de piel medio	ninguna
+🧙🏾‍♂	mago tono de piel oscuro medio	ninguna
+🧙🏿‍♂	mago tono de piel oscuro	ninguna
+🧙🏻‍♀	maga tono de piel claro	ninguna
+🧙🏼‍♀	maga tono de piel claro medio	ninguna
+🧙🏽‍♀	maga tono de piel medio	ninguna
+🧙🏾‍♀	maga tono de piel oscuro medio	ninguna
+🧙🏿‍♀	maga tono de piel oscuro	ninguna
+🧚🏻	hada tono de piel claro	ninguna
+🧚🏼	hada tono de piel claro medio	ninguna
+🧚🏽	hada tono de piel medio	ninguna
+🧚🏾	hada tono de piel oscuro medio	ninguna
+🧚🏿	hada tono de piel oscuro	ninguna
+🧚🏻‍♂	hada hombre tono de piel claro	ninguna
+🧚🏼‍♂	hada hombre tono de piel claro medio	ninguna
+🧚🏽‍♂	hada hombre tono de piel medio	ninguna
+🧚🏾‍♂	hada hombre tono de piel oscuro medio	ninguna
+🧚🏿‍♂	hada hombre tono de piel oscuro	ninguna
+🧚🏻‍♀	hada mujer tono de piel claro	ninguna
+🧚🏼‍♀	hada mujer tono de piel claro medio	ninguna
+🧚🏽‍♀	hada mujer tono de piel medio	ninguna
+🧚🏾‍♀	hada mujer tono de piel oscuro medio	ninguna
+🧚🏿‍♀	hada mujer tono de piel oscuro	ninguna
+🧛🏻	vampiro tono de piel claro	ninguna
+🧛🏼	vampiro tono de piel claro medio	ninguna
+🧛🏽	vampiro tono de piel medio	ninguna
+🧛🏾	vampiro tono de piel oscuro medio	ninguna
+🧛🏿	vampiro tono de piel oscuro	ninguna
+🧛🏻‍♂	vampiro hombre tono de piel claro	ninguna
+🧛🏼‍♂	vampiro hombre tono de piel claro medio	ninguna
+🧛🏽‍♂	vampiro hombre tono de piel medio	ninguna
+🧛🏾‍♂	vampiro hombre tono de piel oscuro medio	ninguna
+🧛🏿‍♂	vampiro hombre tono de piel oscuro	ninguna
+🧛🏻‍♀	vampiresa tono de piel claro	ninguna
+🧛🏼‍♀	vampiresa tono de piel claro medio	ninguna
+🧛🏽‍♀	vampiresa tono de piel medio	ninguna
+🧛🏾‍♀	vampiresa tono de piel oscuro medio	ninguna
+🧛🏿‍♀	vampiresa tono de piel oscuro	ninguna
+🧜🏻	persona sirena tono de piel claro	ninguna
+🧜🏼	persona sirena tono de piel claro medio	ninguna
+🧜🏽	persona sirena tono de piel medio	ninguna
+🧜🏾	persona sirena tono de piel oscuro medio	ninguna
+🧜🏿	persona sirena tono de piel oscuro	ninguna
+🧜🏻‍♂	sirena hombre tono de piel claro	ninguna
+🧜🏼‍♂	sirena hombre tono de piel claro medio	ninguna
+🧜🏽‍♂	sirena hombre tono de piel medio	ninguna
+🧜🏾‍♂	sirena hombre tono de piel oscuro medio	ninguna
+🧜🏿‍♂	sirena hombre tono de piel oscuro	ninguna
+🧜🏻‍♀	sirena tono de piel claro	ninguna
+🧜🏼‍♀	sirena tono de piel claro medio	ninguna
+🧜🏽‍♀	sirena tono de piel medio	ninguna
+🧜🏾‍♀	sirena tono de piel oscuro medio	ninguna
+🧜🏿‍♀	sirena tono de piel oscuro	ninguna
+🧝🏻	elfo tono de piel claro	ninguna
+🧝🏼	elfo tono de piel claro medio	ninguna
+🧝🏽	elfo tono de piel medio	ninguna
+🧝🏾	elfo tono de piel oscuro medio	ninguna
+🧝🏿	elfo tono de piel oscuro	ninguna
+🧝🏻‍♂	elfo hombre tono de piel claro	ninguna
+🧝🏼‍♂	elfo hombre tono de piel claro medio	ninguna
+🧝🏽‍♂	elfo hombre tono de piel medio	ninguna
+🧝🏾‍♂	elfo hombre tono de piel oscuro medio	ninguna
+🧝🏿‍♂	elfo hombre tono de piel oscuro	ninguna
+🧝🏻‍♀	elfa tono de piel claro	ninguna
+🧝🏼‍♀	elfa tono de piel claro medio	ninguna
+🧝🏽‍♀	elfa tono de piel medio	ninguna
+🧝🏾‍♀	elfa tono de piel oscuro medio	ninguna
+🧝🏿‍♀	elfa tono de piel oscuro	ninguna
+💆🏻	persona recibiendo masaje tono de piel claro	ninguna
+💆🏼	persona recibiendo masaje tono de piel claro medio	ninguna
+💆🏽	persona recibiendo masaje tono de piel medio	ninguna
+💆🏾	persona recibiendo masaje tono de piel oscuro medio	ninguna
+💆🏿	persona recibiendo masaje tono de piel oscuro	ninguna
+💆🏻‍♂	hombre recibiendo masaje tono de piel claro	ninguna
+💆🏼‍♂	hombre recibiendo masaje tono de piel claro medio	ninguna
+💆🏽‍♂	hombre recibiendo masaje tono de piel medio	ninguna
+💆🏾‍♂	hombre recibiendo masaje tono de piel oscuro medio	ninguna
+💆🏿‍♂	hombre recibiendo masaje tono de piel oscuro	ninguna
+💆🏻‍♀	mujer recibiendo masaje tono de piel claro	ninguna
+💆🏼‍♀	mujer recibiendo masaje tono de piel claro medio	ninguna
+💆🏽‍♀	mujer recibiendo masaje tono de piel medio	ninguna
+💆🏾‍♀	mujer recibiendo masaje tono de piel oscuro medio	ninguna
+💆🏿‍♀	mujer recibiendo masaje tono de piel oscuro	ninguna
+💇🏻	persona cortándose el pelo tono de piel claro	ninguna
+💇🏼	persona cortándose el pelo tono de piel claro medio	ninguna
+💇🏽	persona cortándose el pelo tono de piel medio	ninguna
+💇🏾	persona cortándose el pelo tono de piel oscuro medio	ninguna
+💇🏿	persona cortándose el pelo tono de piel oscuro	ninguna
+💇🏻‍♂	hombre cortándose el pelo tono de piel claro	ninguna
+💇🏼‍♂	hombre cortándose el pelo tono de piel claro medio	ninguna
+💇🏽‍♂	hombre cortándose el pelo tono de piel medio	ninguna
+💇🏾‍♂	hombre cortándose el pelo tono de piel oscuro medio	ninguna
+💇🏿‍♂	hombre cortándose el pelo tono de piel oscuro	ninguna
+💇🏻‍♀	mujer cortándose el pelo tono de piel claro	ninguna
+💇🏼‍♀	mujer cortándose el pelo tono de piel claro medio	ninguna
+💇🏽‍♀	mujer cortándose el pelo tono de piel medio	ninguna
+💇🏾‍♀	mujer cortándose el pelo tono de piel oscuro medio	ninguna
+💇🏿‍♀	mujer cortándose el pelo tono de piel oscuro	ninguna
+🚶🏻	persona caminando tono de piel claro	ninguna
+🚶🏼	persona caminando tono de piel claro medio	ninguna
+🚶🏽	persona caminando tono de piel medio	ninguna
+🚶🏾	persona caminando tono de piel oscuro medio	ninguna
+🚶🏿	persona caminando tono de piel oscuro	ninguna
+🚶🏻‍♂	hombre caminando tono de piel claro	ninguna
+🚶🏼‍♂	hombre caminando tono de piel claro medio	ninguna
+🚶🏽‍♂	hombre caminando tono de piel medio	ninguna
+🚶🏾‍♂	hombre caminando tono de piel oscuro medio	ninguna
+🚶🏿‍♂	hombre caminando tono de piel oscuro	ninguna
+🚶🏻‍♀	mujer caminando tono de piel claro	ninguna
+🚶🏼‍♀	mujer caminando tono de piel claro medio	ninguna
+🚶🏽‍♀	mujer caminando tono de piel medio	ninguna
+🚶🏾‍♀	mujer caminando tono de piel oscuro medio	ninguna
+🚶🏿‍♀	mujer caminando tono de piel oscuro	ninguna
+🚶‍➡	persona caminando hacia la derecha	ninguna
+🚶🏻‍➡	persona caminando tono de piel claro y hacia la derecha	ninguna
+🚶🏼‍➡	persona caminando tono de piel claro medio y hacia la derecha	ninguna
+🚶🏽‍➡	persona caminando tono de piel medio y hacia la derecha	ninguna
+🚶🏾‍➡	persona caminando tono de piel oscuro medio y hacia la derecha	ninguna
+🚶🏿‍➡	persona caminando tono de piel oscuro y hacia la derecha	ninguna
+🚶‍♀‍➡	mujer caminando hacia la derecha	ninguna
+🚶🏻‍♀‍➡	mujer caminando tono de piel claro y hacia la derecha	ninguna
+🚶🏼‍♀‍➡	mujer caminando tono de piel claro medio y hacia la derecha	ninguna
+🚶🏽‍♀‍➡	mujer caminando tono de piel medio y hacia la derecha	ninguna
+🚶🏾‍♀‍➡	mujer caminando tono de piel oscuro medio y hacia la derecha	ninguna
+🚶🏿‍♀‍➡	mujer caminando tono de piel oscuro y hacia la derecha	ninguna
+🚶‍♂‍➡	hombre caminando hacia la derecha	ninguna
+🚶🏻‍♂‍➡	hombre caminando tono de piel claro y hacia la derecha	ninguna
+🚶🏼‍♂‍➡	hombre caminando tono de piel claro medio y hacia la derecha	ninguna
+🚶🏽‍♂‍➡	hombre caminando tono de piel medio y hacia la derecha	ninguna
+🚶🏾‍♂‍➡	hombre caminando tono de piel oscuro medio y hacia la derecha	ninguna
+🚶🏿‍♂‍➡	hombre caminando tono de piel oscuro y hacia la derecha	ninguna
+🧍🏻	persona de pie tono de piel claro	ninguna
+🧍🏼	persona de pie tono de piel claro medio	ninguna
+🧍🏽	persona de pie tono de piel medio	ninguna
+🧍🏾	persona de pie tono de piel oscuro medio	ninguna
+🧍🏿	persona de pie tono de piel oscuro	ninguna
+🧍🏻‍♂	hombre de pie tono de piel claro	ninguna
+🧍🏼‍♂	hombre de pie tono de piel claro medio	ninguna
+🧍🏽‍♂	hombre de pie tono de piel medio	ninguna
+🧍🏾‍♂	hombre de pie tono de piel oscuro medio	ninguna
+🧍🏿‍♂	hombre de pie tono de piel oscuro	ninguna
+🧍🏻‍♀	mujer de pie tono de piel claro	ninguna
+🧍🏼‍♀	mujer de pie tono de piel claro medio	ninguna
+🧍🏽‍♀	mujer de pie tono de piel medio	ninguna
+🧍🏾‍♀	mujer de pie tono de piel oscuro medio	ninguna
+🧍🏿‍♀	mujer de pie tono de piel oscuro	ninguna
+🧎🏻	persona de rodillas tono de piel claro	ninguna
+🧎🏼	persona de rodillas tono de piel claro medio	ninguna
+🧎🏽	persona de rodillas tono de piel medio	ninguna
+🧎🏾	persona de rodillas tono de piel oscuro medio	ninguna
+🧎🏿	persona de rodillas tono de piel oscuro	ninguna
+🧎🏻‍♂	hombre de rodillas tono de piel claro	ninguna
+🧎🏼‍♂	hombre de rodillas tono de piel claro medio	ninguna
+🧎🏽‍♂	hombre de rodillas tono de piel medio	ninguna
+🧎🏾‍♂	hombre de rodillas tono de piel oscuro medio	ninguna
+🧎🏿‍♂	hombre de rodillas tono de piel oscuro	ninguna
+🧎🏻‍♀	mujer de rodillas tono de piel claro	ninguna
+🧎🏼‍♀	mujer de rodillas tono de piel claro medio	ninguna
+🧎🏽‍♀	mujer de rodillas tono de piel medio	ninguna
+🧎🏾‍♀	mujer de rodillas tono de piel oscuro medio	ninguna
+🧎🏿‍♀	mujer de rodillas tono de piel oscuro	ninguna
+🧎‍➡	persona de rodillas hacia la derecha	ninguna
+🧎🏻‍➡	persona de rodillas tono de piel claro y hacia la derecha	ninguna
+🧎🏼‍➡	persona de rodillas tono de piel claro medio y hacia la derecha	ninguna
+🧎🏽‍➡	persona de rodillas tono de piel medio y hacia la derecha	ninguna
+🧎🏾‍➡	persona de rodillas tono de piel oscuro medio y hacia la derecha	ninguna
+🧎🏿‍➡	persona de rodillas tono de piel oscuro y hacia la derecha	ninguna
+🧎‍♀‍➡	mujer de rodillas hacia la derecha	ninguna
+🧎🏻‍♀‍➡	mujer de rodillas tono de piel claro y hacia la derecha	ninguna
+🧎🏼‍♀‍➡	mujer de rodillas tono de piel claro medio y hacia la derecha	ninguna
+🧎🏽‍♀‍➡	mujer de rodillas tono de piel medio y hacia la derecha	ninguna
+🧎🏾‍♀‍➡	mujer de rodillas tono de piel oscuro medio y hacia la derecha	ninguna
+🧎🏿‍♀‍➡	mujer de rodillas tono de piel oscuro y hacia la derecha	ninguna
+🧎‍♂‍➡	hombre de rodillas hacia la derecha	ninguna
+🧎🏻‍♂‍➡	hombre de rodillas tono de piel claro y hacia la derecha	ninguna
+🧎🏼‍♂‍➡	hombre de rodillas tono de piel claro medio y hacia la derecha	ninguna
+🧎🏽‍♂‍➡	hombre de rodillas tono de piel medio y hacia la derecha	ninguna
+🧎🏾‍♂‍➡	hombre de rodillas tono de piel oscuro medio y hacia la derecha	ninguna
+🧎🏿‍♂‍➡	hombre de rodillas tono de piel oscuro y hacia la derecha	ninguna
+🧑🏻‍🦯	persona con bastón tono de piel claro	ninguna
+🧑🏼‍🦯	persona con bastón tono de piel claro medio	ninguna
+🧑🏽‍🦯	persona con bastón tono de piel medio	ninguna
+🧑🏾‍🦯	persona con bastón tono de piel oscuro medio	ninguna
+🧑🏿‍🦯	persona con bastón tono de piel oscuro	ninguna
+🧑‍🦯‍➡	persona con bastón hacia la derecha	ninguna
+🧑🏻‍🦯‍➡	persona con bastón tono de piel claro y hacia la derecha	ninguna
+🧑🏼‍🦯‍➡	persona con bastón tono de piel claro medio y hacia la derecha	ninguna
+🧑🏽‍🦯‍➡	persona con bastón tono de piel medio y hacia la derecha	ninguna
+🧑🏾‍🦯‍➡	persona con bastón tono de piel oscuro medio y hacia la derecha	ninguna
+🧑🏿‍🦯‍➡	persona con bastón tono de piel oscuro y hacia la derecha	ninguna
+👨🏻‍🦯	hombre con bastón tono de piel claro	ninguna
+👨🏼‍🦯	hombre con bastón tono de piel claro medio	ninguna
+👨🏽‍🦯	hombre con bastón tono de piel medio	ninguna
+👨🏾‍🦯	hombre con bastón tono de piel oscuro medio	ninguna
+👨🏿‍🦯	hombre con bastón tono de piel oscuro	ninguna
+👨‍🦯‍➡	hombre con bastón hacia la derecha	ninguna
+👨🏻‍🦯‍➡	hombre con bastón tono de piel claro y hacia la derecha	ninguna
+👨🏼‍🦯‍➡	hombre con bastón tono de piel claro medio y hacia la derecha	ninguna
+👨🏽‍🦯‍➡	hombre con bastón tono de piel medio y hacia la derecha	ninguna
+👨🏾‍🦯‍➡	hombre con bastón tono de piel oscuro medio y hacia la derecha	ninguna
+👨🏿‍🦯‍➡	hombre con bastón tono de piel oscuro y hacia la derecha	ninguna
+👩🏻‍🦯	mujer con bastón tono de piel claro	ninguna
+👩🏼‍🦯	mujer con bastón tono de piel claro medio	ninguna
+👩🏽‍🦯	mujer con bastón tono de piel medio	ninguna
+👩🏾‍🦯	mujer con bastón tono de piel oscuro medio	ninguna
+👩🏿‍🦯	mujer con bastón tono de piel oscuro	ninguna
+👩‍🦯‍➡	mujer con bastón hacia la derecha	ninguna
+👩🏻‍🦯‍➡	mujer con bastón tono de piel claro y hacia la derecha	ninguna
+👩🏼‍🦯‍➡	mujer con bastón tono de piel claro medio y hacia la derecha	ninguna
+👩🏽‍🦯‍➡	mujer con bastón tono de piel medio y hacia la derecha	ninguna
+👩🏾‍🦯‍➡	mujer con bastón tono de piel oscuro medio y hacia la derecha	ninguna
+👩🏿‍🦯‍➡	mujer con bastón tono de piel oscuro y hacia la derecha	ninguna
+🧑🏻‍🦼	persona en silla de ruedas eléctrica tono de piel claro	ninguna
+🧑🏼‍🦼	persona en silla de ruedas eléctrica tono de piel claro medio	ninguna
+🧑🏽‍🦼	persona en silla de ruedas eléctrica tono de piel medio	ninguna
+🧑🏾‍🦼	persona en silla de ruedas eléctrica tono de piel oscuro medio	ninguna
+🧑🏿‍🦼	persona en silla de ruedas eléctrica tono de piel oscuro	ninguna
+🧑‍🦼‍➡	persona en silla de ruedas eléctrica hacia la derecha	ninguna
+🧑🏻‍🦼‍➡	persona en silla de ruedas eléctrica tono de piel claro y hacia la derecha	ninguna
+🧑🏼‍🦼‍➡	persona en silla de ruedas eléctrica tono de piel claro medio y hacia la derecha	ninguna
+🧑🏽‍🦼‍➡	persona en silla de ruedas eléctrica tono de piel medio y hacia la derecha	ninguna
+🧑🏾‍🦼‍➡	persona en silla de ruedas eléctrica tono de piel oscuro medio y hacia la derecha	ninguna
+🧑🏿‍🦼‍➡	persona en silla de ruedas eléctrica tono de piel oscuro y hacia la derecha	ninguna
+👨🏻‍🦼	hombre en silla de ruedas eléctrica tono de piel claro	ninguna
+👨🏼‍🦼	hombre en silla de ruedas eléctrica tono de piel claro medio	ninguna
+👨🏽‍🦼	hombre en silla de ruedas eléctrica tono de piel medio	ninguna
+👨🏾‍🦼	hombre en silla de ruedas eléctrica tono de piel oscuro medio	ninguna
+👨🏿‍🦼	hombre en silla de ruedas eléctrica tono de piel oscuro	ninguna
+👨‍🦼‍➡	hombre en silla de ruedas eléctrica hacia la derecha	ninguna
+👨🏻‍🦼‍➡	hombre en silla de ruedas eléctrica tono de piel claro y hacia la derecha	ninguna
+👨🏼‍🦼‍➡	hombre en silla de ruedas eléctrica tono de piel claro medio y hacia la derecha	ninguna
+👨🏽‍🦼‍➡	hombre en silla de ruedas eléctrica tono de piel medio y hacia la derecha	ninguna
+👨🏾‍🦼‍➡	hombre en silla de ruedas eléctrica tono de piel oscuro medio y hacia la derecha	ninguna
+👨🏿‍🦼‍➡	hombre en silla de ruedas eléctrica tono de piel oscuro y hacia la derecha	ninguna
+👩🏻‍🦼	mujer en silla de ruedas eléctrica tono de piel claro	ninguna
+👩🏼‍🦼	mujer en silla de ruedas eléctrica tono de piel claro medio	ninguna
+👩🏽‍🦼	mujer en silla de ruedas eléctrica tono de piel medio	ninguna
+👩🏾‍🦼	mujer en silla de ruedas eléctrica tono de piel oscuro medio	ninguna
+👩🏿‍🦼	mujer en silla de ruedas eléctrica tono de piel oscuro	ninguna
+👩‍🦼‍➡	mujer en silla de ruedas eléctrica hacia la derecha	ninguna
+👩🏻‍🦼‍➡	mujer en silla de ruedas eléctrica tono de piel claro y hacia la derecha	ninguna
+👩🏼‍🦼‍➡	mujer en silla de ruedas eléctrica tono de piel claro medio y hacia la derecha	ninguna
+👩🏽‍🦼‍➡	mujer en silla de ruedas eléctrica tono de piel medio y hacia la derecha	ninguna
+👩🏾‍🦼‍➡	mujer en silla de ruedas eléctrica tono de piel oscuro medio y hacia la derecha	ninguna
+👩🏿‍🦼‍➡	mujer en silla de ruedas eléctrica tono de piel oscuro y hacia la derecha	ninguna
+🧑🏻‍🦽	persona en silla de ruedas manual tono de piel claro	ninguna
+🧑🏼‍🦽	persona en silla de ruedas manual tono de piel claro medio	ninguna
+🧑🏽‍🦽	persona en silla de ruedas manual tono de piel medio	ninguna
+🧑🏾‍🦽	persona en silla de ruedas manual tono de piel oscuro medio	ninguna
+🧑🏿‍🦽	persona en silla de ruedas manual tono de piel oscuro	ninguna
+🧑‍🦽‍➡	persona en silla de ruedas manual hacia la derecha	ninguna
+🧑🏻‍🦽‍➡	persona en silla de ruedas manual tono de piel claro y hacia la derecha	ninguna
+🧑🏼‍🦽‍➡	persona en silla de ruedas manual tono de piel claro medio y hacia la derecha	ninguna
+🧑🏽‍🦽‍➡	persona en silla de ruedas manual tono de piel medio y hacia la derecha	ninguna
+🧑🏾‍🦽‍➡	persona en silla de ruedas manual tono de piel oscuro medio y hacia la derecha	ninguna
+🧑🏿‍🦽‍➡	persona en silla de ruedas manual tono de piel oscuro y hacia la derecha	ninguna
+👨🏻‍🦽	hombre en silla de ruedas manual tono de piel claro	ninguna
+👨🏼‍🦽	hombre en silla de ruedas manual tono de piel claro medio	ninguna
+👨🏽‍🦽	hombre en silla de ruedas manual tono de piel medio	ninguna
+👨🏾‍🦽	hombre en silla de ruedas manual tono de piel oscuro medio	ninguna
+👨🏿‍🦽	hombre en silla de ruedas manual tono de piel oscuro	ninguna
+👨‍🦽‍➡	hombre en silla de ruedas manual hacia la derecha	ninguna
+👨🏻‍🦽‍➡	hombre en silla de ruedas manual tono de piel claro y hacia la derecha	ninguna
+👨🏼‍🦽‍➡	hombre en silla de ruedas manual tono de piel claro medio y hacia la derecha	ninguna
+👨🏽‍🦽‍➡	hombre en silla de ruedas manual tono de piel medio y hacia la derecha	ninguna
+👨🏾‍🦽‍➡	hombre en silla de ruedas manual tono de piel oscuro medio y hacia la derecha	ninguna
+👨🏿‍🦽‍➡	hombre en silla de ruedas manual tono de piel oscuro y hacia la derecha	ninguna
+👩🏻‍🦽	mujer en silla de ruedas manual tono de piel claro	ninguna
+👩🏼‍🦽	mujer en silla de ruedas manual tono de piel claro medio	ninguna
+👩🏽‍🦽	mujer en silla de ruedas manual tono de piel medio	ninguna
+👩🏾‍🦽	mujer en silla de ruedas manual tono de piel oscuro medio	ninguna
+👩🏿‍🦽	mujer en silla de ruedas manual tono de piel oscuro	ninguna
+👩‍🦽‍➡	mujer en silla de ruedas manual hacia la derecha	ninguna
+👩🏻‍🦽‍➡	mujer en silla de ruedas manual tono de piel claro y hacia la derecha	ninguna
+👩🏼‍🦽‍➡	mujer en silla de ruedas manual tono de piel claro medio y hacia la derecha	ninguna
+👩🏽‍🦽‍➡	mujer en silla de ruedas manual tono de piel medio y hacia la derecha	ninguna
+👩🏾‍🦽‍➡	mujer en silla de ruedas manual tono de piel oscuro medio y hacia la derecha	ninguna
+👩🏿‍🦽‍➡	mujer en silla de ruedas manual tono de piel oscuro y hacia la derecha	ninguna
+🏃🏻	persona corriendo tono de piel claro	ninguna
+🏃🏼	persona corriendo tono de piel claro medio	ninguna
+🏃🏽	persona corriendo tono de piel medio	ninguna
+🏃🏾	persona corriendo tono de piel oscuro medio	ninguna
+🏃🏿	persona corriendo tono de piel oscuro	ninguna
+🏃🏻‍♂	hombre corriendo tono de piel claro	ninguna
+🏃🏼‍♂	hombre corriendo tono de piel claro medio	ninguna
+🏃🏽‍♂	hombre corriendo tono de piel medio	ninguna
+🏃🏾‍♂	hombre corriendo tono de piel oscuro medio	ninguna
+🏃🏿‍♂	hombre corriendo tono de piel oscuro	ninguna
+🏃🏻‍♀	mujer corriendo tono de piel claro	ninguna
+🏃🏼‍♀	mujer corriendo tono de piel claro medio	ninguna
+🏃🏽‍♀	mujer corriendo tono de piel medio	ninguna
+🏃🏾‍♀	mujer corriendo tono de piel oscuro medio	ninguna
+🏃🏿‍♀	mujer corriendo tono de piel oscuro	ninguna
+🏃‍➡	persona corriendo hacia la derecha	ninguna
+🏃🏻‍➡	persona corriendo tono de piel claro y hacia la derecha	ninguna
+🏃🏼‍➡	persona corriendo tono de piel claro medio y hacia la derecha	ninguna
+🏃🏽‍➡	persona corriendo tono de piel medio y hacia la derecha	ninguna
+🏃🏾‍➡	persona corriendo tono de piel oscuro medio y hacia la derecha	ninguna
+🏃🏿‍➡	persona corriendo tono de piel oscuro y hacia la derecha	ninguna
+🏃‍♀‍➡	mujer corriendo hacia la derecha	ninguna
+🏃🏻‍♀‍➡	mujer corriendo tono de piel claro y hacia la derecha	ninguna
+🏃🏼‍♀‍➡	mujer corriendo tono de piel claro medio y hacia la derecha	ninguna
+🏃🏽‍♀‍➡	mujer corriendo tono de piel medio y hacia la derecha	ninguna
+🏃🏾‍♀‍➡	mujer corriendo tono de piel oscuro medio y hacia la derecha	ninguna
+🏃🏿‍♀‍➡	mujer corriendo tono de piel oscuro y hacia la derecha	ninguna
+🏃‍♂‍➡	hombre corriendo hacia la derecha	ninguna
+🏃🏻‍♂‍➡	hombre corriendo tono de piel claro y hacia la derecha	ninguna
+🏃🏼‍♂‍➡	hombre corriendo tono de piel claro medio y hacia la derecha	ninguna
+🏃🏽‍♂‍➡	hombre corriendo tono de piel medio y hacia la derecha	ninguna
+🏃🏾‍♂‍➡	hombre corriendo tono de piel oscuro medio y hacia la derecha	ninguna
+🏃🏿‍♂‍➡	hombre corriendo tono de piel oscuro y hacia la derecha	ninguna
+🧑🏻‍🩰	bailarina de ballet tono de piel claro	ninguna
+🧑🏼‍🩰	bailarina de ballet tono de piel claro medio	ninguna
+🧑🏽‍🩰	bailarina de ballet tono de piel medio	ninguna
+🧑🏾‍🩰	bailarina de ballet tono de piel oscuro medio	ninguna
+🧑🏿‍🩰	bailarina de ballet tono de piel oscuro	ninguna
+💃🏻	mujer bailando tono de piel claro	ninguna
+💃🏼	mujer bailando tono de piel claro medio	ninguna
+💃🏽	mujer bailando tono de piel medio	ninguna
+💃🏾	mujer bailando tono de piel oscuro medio	ninguna
+💃🏿	mujer bailando tono de piel oscuro	ninguna
+🕺🏻	hombre bailando tono de piel claro	ninguna
+🕺🏼	hombre bailando tono de piel claro medio	ninguna
+🕺🏽	hombre bailando tono de piel medio	ninguna
+🕺🏾	hombre bailando tono de piel oscuro medio	ninguna
+🕺🏿	hombre bailando tono de piel oscuro	ninguna
+🕴🏻	persona trajeada levitando tono de piel claro	ninguna
+🕴🏼	persona trajeada levitando tono de piel claro medio	ninguna
+🕴🏽	persona trajeada levitando tono de piel medio	ninguna
+🕴🏾	persona trajeada levitando tono de piel oscuro medio	ninguna
+🕴🏿	persona trajeada levitando tono de piel oscuro	ninguna
+👯🏻	personas con orejas de conejo tono de piel claro	ninguna
+👯🏼	personas con orejas de conejo tono de piel claro medio	ninguna
+👯🏽	personas con orejas de conejo tono de piel medio	ninguna
+👯🏾	personas con orejas de conejo tono de piel oscuro medio	ninguna
+👯🏿	personas con orejas de conejo tono de piel oscuro	ninguna
+👯🏻‍♂	hombres con orejas de conejo tono de piel claro	ninguna
+👯🏼‍♂	hombres con orejas de conejo tono de piel claro medio	ninguna
+👯🏽‍♂	hombres con orejas de conejo tono de piel medio	ninguna
+👯🏾‍♂	hombres con orejas de conejo tono de piel oscuro medio	ninguna
+👯🏿‍♂	hombres con orejas de conejo tono de piel oscuro	ninguna
+👯🏻‍♀	mujeres con orejas de conejo tono de piel claro	ninguna
+👯🏼‍♀	mujeres con orejas de conejo tono de piel claro medio	ninguna
+👯🏽‍♀	mujeres con orejas de conejo tono de piel medio	ninguna
+👯🏾‍♀	mujeres con orejas de conejo tono de piel oscuro medio	ninguna
+👯🏿‍♀	mujeres con orejas de conejo tono de piel oscuro	ninguna
+🧖🏻	persona en una sauna tono de piel claro	ninguna
+🧖🏼	persona en una sauna tono de piel claro medio	ninguna
+🧖🏽	persona en una sauna tono de piel medio	ninguna
+🧖🏾	persona en una sauna tono de piel oscuro medio	ninguna
+🧖🏿	persona en una sauna tono de piel oscuro	ninguna
+🧖🏻‍♂	hombre en una sauna tono de piel claro	ninguna
+🧖🏼‍♂	hombre en una sauna tono de piel claro medio	ninguna
+🧖🏽‍♂	hombre en una sauna tono de piel medio	ninguna
+🧖🏾‍♂	hombre en una sauna tono de piel oscuro medio	ninguna
+🧖🏿‍♂	hombre en una sauna tono de piel oscuro	ninguna
+🧖🏻‍♀	mujer en una sauna tono de piel claro	ninguna
+🧖🏼‍♀	mujer en una sauna tono de piel claro medio	ninguna
+🧖🏽‍♀	mujer en una sauna tono de piel medio	ninguna
+🧖🏾‍♀	mujer en una sauna tono de piel oscuro medio	ninguna
+🧖🏿‍♀	mujer en una sauna tono de piel oscuro	ninguna
+🧗🏻	persona escalando tono de piel claro	ninguna
+🧗🏼	persona escalando tono de piel claro medio	ninguna
+🧗🏽	persona escalando tono de piel medio	ninguna
+🧗🏾	persona escalando tono de piel oscuro medio	ninguna
+🧗🏿	persona escalando tono de piel oscuro	ninguna
+🧗🏻‍♂	hombre escalando tono de piel claro	ninguna
+🧗🏼‍♂	hombre escalando tono de piel claro medio	ninguna
+🧗🏽‍♂	hombre escalando tono de piel medio	ninguna
+🧗🏾‍♂	hombre escalando tono de piel oscuro medio	ninguna
+🧗🏿‍♂	hombre escalando tono de piel oscuro	ninguna
+🧗🏻‍♀	mujer escalando tono de piel claro	ninguna
+🧗🏼‍♀	mujer escalando tono de piel claro medio	ninguna
+🧗🏽‍♀	mujer escalando tono de piel medio	ninguna
+🧗🏾‍♀	mujer escalando tono de piel oscuro medio	ninguna
+🧗🏿‍♀	mujer escalando tono de piel oscuro	ninguna
+🏇🏻	carrera de caballos tono de piel claro	ninguna
+🏇🏼	carrera de caballos tono de piel claro medio	ninguna
+🏇🏽	carrera de caballos tono de piel medio	ninguna
+🏇🏾	carrera de caballos tono de piel oscuro medio	ninguna
+🏇🏿	carrera de caballos tono de piel oscuro	ninguna
+🏂🏻	practicante de snowboard tono de piel claro	ninguna
+🏂🏼	practicante de snowboard tono de piel claro medio	ninguna
+🏂🏽	practicante de snowboard tono de piel medio	ninguna
+🏂🏾	practicante de snowboard tono de piel oscuro medio	ninguna
+🏂🏿	practicante de snowboard tono de piel oscuro	ninguna
+🏌🏻	persona jugando al golf tono de piel claro	ninguna
+🏌🏼	persona jugando al golf tono de piel claro medio	ninguna
+🏌🏽	persona jugando al golf tono de piel medio	ninguna
+🏌🏾	persona jugando al golf tono de piel oscuro medio	ninguna
+🏌🏿	persona jugando al golf tono de piel oscuro	ninguna
+🏌🏻‍♂	hombre jugando al golf tono de piel claro	ninguna
+🏌🏼‍♂	hombre jugando al golf tono de piel claro medio	ninguna
+🏌🏽‍♂	hombre jugando al golf tono de piel medio	ninguna
+🏌🏾‍♂	hombre jugando al golf tono de piel oscuro medio	ninguna
+🏌🏿‍♂	hombre jugando al golf tono de piel oscuro	ninguna
+🏌🏻‍♀	mujer jugando al golf tono de piel claro	ninguna
+🏌🏼‍♀	mujer jugando al golf tono de piel claro medio	ninguna
+🏌🏽‍♀	mujer jugando al golf tono de piel medio	ninguna
+🏌🏾‍♀	mujer jugando al golf tono de piel oscuro medio	ninguna
+🏌🏿‍♀	mujer jugando al golf tono de piel oscuro	ninguna
+🏄🏻	persona haciendo surf tono de piel claro	ninguna
+🏄🏼	persona haciendo surf tono de piel claro medio	ninguna
+🏄🏽	persona haciendo surf tono de piel medio	ninguna
+🏄🏾	persona haciendo surf tono de piel oscuro medio	ninguna
+🏄🏿	persona haciendo surf tono de piel oscuro	ninguna
+🏄🏻‍♂	hombre haciendo surf tono de piel claro	ninguna
+🏄🏼‍♂	hombre haciendo surf tono de piel claro medio	ninguna
+🏄🏽‍♂	hombre haciendo surf tono de piel medio	ninguna
+🏄🏾‍♂	hombre haciendo surf tono de piel oscuro medio	ninguna
+🏄🏿‍♂	hombre haciendo surf tono de piel oscuro	ninguna
+🏄🏻‍♀	mujer haciendo surf tono de piel claro	ninguna
+🏄🏼‍♀	mujer haciendo surf tono de piel claro medio	ninguna
+🏄🏽‍♀	mujer haciendo surf tono de piel medio	ninguna
+🏄🏾‍♀	mujer haciendo surf tono de piel oscuro medio	ninguna
+🏄🏿‍♀	mujer haciendo surf tono de piel oscuro	ninguna
+🚣🏻	persona remando en un bote tono de piel claro	ninguna
+🚣🏼	persona remando en un bote tono de piel claro medio	ninguna
+🚣🏽	persona remando en un bote tono de piel medio	ninguna
+🚣🏾	persona remando en un bote tono de piel oscuro medio	ninguna
+🚣🏿	persona remando en un bote tono de piel oscuro	ninguna
+🚣🏻‍♂	hombre remando en un bote tono de piel claro	ninguna
+🚣🏼‍♂	hombre remando en un bote tono de piel claro medio	ninguna
+🚣🏽‍♂	hombre remando en un bote tono de piel medio	ninguna
+🚣🏾‍♂	hombre remando en un bote tono de piel oscuro medio	ninguna
+🚣🏿‍♂	hombre remando en un bote tono de piel oscuro	ninguna
+🚣🏻‍♀	mujer remando en un bote tono de piel claro	ninguna
+🚣🏼‍♀	mujer remando en un bote tono de piel claro medio	ninguna
+🚣🏽‍♀	mujer remando en un bote tono de piel medio	ninguna
+🚣🏾‍♀	mujer remando en un bote tono de piel oscuro medio	ninguna
+🚣🏿‍♀	mujer remando en un bote tono de piel oscuro	ninguna
+🏊🏻	persona nadando tono de piel claro	ninguna
+🏊🏼	persona nadando tono de piel claro medio	ninguna
+🏊🏽	persona nadando tono de piel medio	ninguna
+🏊🏾	persona nadando tono de piel oscuro medio	ninguna
+🏊🏿	persona nadando tono de piel oscuro	ninguna
+🏊🏻‍♂	hombre nadando tono de piel claro	ninguna
+🏊🏼‍♂	hombre nadando tono de piel claro medio	ninguna
+🏊🏽‍♂	hombre nadando tono de piel medio	ninguna
+🏊🏾‍♂	hombre nadando tono de piel oscuro medio	ninguna
+🏊🏿‍♂	hombre nadando tono de piel oscuro	ninguna
+🏊🏻‍♀	mujer nadando tono de piel claro	ninguna
+🏊🏼‍♀	mujer nadando tono de piel claro medio	ninguna
+🏊🏽‍♀	mujer nadando tono de piel medio	ninguna
+🏊🏾‍♀	mujer nadando tono de piel oscuro medio	ninguna
+🏊🏿‍♀	mujer nadando tono de piel oscuro	ninguna
+⛹🏻	persona botando un balón tono de piel claro	ninguna
+⛹🏼	persona botando un balón tono de piel claro medio	ninguna
+⛹🏽	persona botando un balón tono de piel medio	ninguna
+⛹🏾	persona botando un balón tono de piel oscuro medio	ninguna
+⛹🏿	persona botando un balón tono de piel oscuro	ninguna
+⛹🏻‍♂	hombre botando un balón tono de piel claro	ninguna
+⛹🏼‍♂	hombre botando un balón tono de piel claro medio	ninguna
+⛹🏽‍♂	hombre botando un balón tono de piel medio	ninguna
+⛹🏾‍♂	hombre botando un balón tono de piel oscuro medio	ninguna
+⛹🏿‍♂	hombre botando un balón tono de piel oscuro	ninguna
+⛹🏻‍♀	mujer botando un balón tono de piel claro	ninguna
+⛹🏼‍♀	mujer botando un balón tono de piel claro medio	ninguna
+⛹🏽‍♀	mujer botando un balón tono de piel medio	ninguna
+⛹🏾‍♀	mujer botando un balón tono de piel oscuro medio	ninguna
+⛹🏿‍♀	mujer botando un balón tono de piel oscuro	ninguna
+🏋🏻	persona levantando pesas tono de piel claro	ninguna
+🏋🏼	persona levantando pesas tono de piel claro medio	ninguna
+🏋🏽	persona levantando pesas tono de piel medio	ninguna
+🏋🏾	persona levantando pesas tono de piel oscuro medio	ninguna
+🏋🏿	persona levantando pesas tono de piel oscuro	ninguna
+🏋🏻‍♂	hombre levantando pesas tono de piel claro	ninguna
+🏋🏼‍♂	hombre levantando pesas tono de piel claro medio	ninguna
+🏋🏽‍♂	hombre levantando pesas tono de piel medio	ninguna
+🏋🏾‍♂	hombre levantando pesas tono de piel oscuro medio	ninguna
+🏋🏿‍♂	hombre levantando pesas tono de piel oscuro	ninguna
+🏋🏻‍♀	mujer levantando pesas tono de piel claro	ninguna
+🏋🏼‍♀	mujer levantando pesas tono de piel claro medio	ninguna
+🏋🏽‍♀	mujer levantando pesas tono de piel medio	ninguna
+🏋🏾‍♀	mujer levantando pesas tono de piel oscuro medio	ninguna
+🏋🏿‍♀	mujer levantando pesas tono de piel oscuro	ninguna
+🚴🏻	persona en bicicleta tono de piel claro	ninguna
+🚴🏼	persona en bicicleta tono de piel claro medio	ninguna
+🚴🏽	persona en bicicleta tono de piel medio	ninguna
+🚴🏾	persona en bicicleta tono de piel oscuro medio	ninguna
+🚴🏿	persona en bicicleta tono de piel oscuro	ninguna
+🚴🏻‍♂	hombre en bicicleta tono de piel claro	ninguna
+🚴🏼‍♂	hombre en bicicleta tono de piel claro medio	ninguna
+🚴🏽‍♂	hombre en bicicleta tono de piel medio	ninguna
+🚴🏾‍♂	hombre en bicicleta tono de piel oscuro medio	ninguna
+🚴🏿‍♂	hombre en bicicleta tono de piel oscuro	ninguna
+🚴🏻‍♀	mujer en bicicleta tono de piel claro	ninguna
+🚴🏼‍♀	mujer en bicicleta tono de piel claro medio	ninguna
+🚴🏽‍♀	mujer en bicicleta tono de piel medio	ninguna
+🚴🏾‍♀	mujer en bicicleta tono de piel oscuro medio	ninguna
+🚴🏿‍♀	mujer en bicicleta tono de piel oscuro	ninguna
+🚵🏻	persona en bicicleta de montaña tono de piel claro	ninguna
+🚵🏼	persona en bicicleta de montaña tono de piel claro medio	ninguna
+🚵🏽	persona en bicicleta de montaña tono de piel medio	ninguna
+🚵🏾	persona en bicicleta de montaña tono de piel oscuro medio	ninguna
+🚵🏿	persona en bicicleta de montaña tono de piel oscuro	ninguna
+🚵🏻‍♂	hombre en bicicleta de montaña tono de piel claro	ninguna
+🚵🏼‍♂	hombre en bicicleta de montaña tono de piel claro medio	ninguna
+🚵🏽‍♂	hombre en bicicleta de montaña tono de piel medio	ninguna
+🚵🏾‍♂	hombre en bicicleta de montaña tono de piel oscuro medio	ninguna
+🚵🏿‍♂	hombre en bicicleta de montaña tono de piel oscuro	ninguna
+🚵🏻‍♀	mujer en bicicleta de montaña tono de piel claro	ninguna
+🚵🏼‍♀	mujer en bicicleta de montaña tono de piel claro medio	ninguna
+🚵🏽‍♀	mujer en bicicleta de montaña tono de piel medio	ninguna
+🚵🏾‍♀	mujer en bicicleta de montaña tono de piel oscuro medio	ninguna
+🚵🏿‍♀	mujer en bicicleta de montaña tono de piel oscuro	ninguna
+🤸🏻	persona haciendo voltereta lateral tono de piel claro	ninguna
+🤸🏼	persona haciendo voltereta lateral tono de piel claro medio	ninguna
+🤸🏽	persona haciendo voltereta lateral tono de piel medio	ninguna
+🤸🏾	persona haciendo voltereta lateral tono de piel oscuro medio	ninguna
+🤸🏿	persona haciendo voltereta lateral tono de piel oscuro	ninguna
+🤸🏻‍♂	hombre dando una voltereta lateral tono de piel claro	ninguna
+🤸🏼‍♂	hombre dando una voltereta lateral tono de piel claro medio	ninguna
+🤸🏽‍♂	hombre dando una voltereta lateral tono de piel medio	ninguna
+🤸🏾‍♂	hombre dando una voltereta lateral tono de piel oscuro medio	ninguna
+🤸🏿‍♂	hombre dando una voltereta lateral tono de piel oscuro	ninguna
+🤸🏻‍♀	mujer dando una voltereta lateral tono de piel claro	ninguna
+🤸🏼‍♀	mujer dando una voltereta lateral tono de piel claro medio	ninguna
+🤸🏽‍♀	mujer dando una voltereta lateral tono de piel medio	ninguna
+🤸🏾‍♀	mujer dando una voltereta lateral tono de piel oscuro medio	ninguna
+🤸🏿‍♀	mujer dando una voltereta lateral tono de piel oscuro	ninguna
+🤼🏻	personas luchando tono de piel claro	ninguna
+🤼🏼	personas luchando tono de piel claro medio	ninguna
+🤼🏽	personas luchando tono de piel medio	ninguna
+🤼🏾	personas luchando tono de piel oscuro medio	ninguna
+🤼🏿	personas luchando tono de piel oscuro	ninguna
+🤼🏻‍♂	hombres luchando tono de piel claro	ninguna
+🤼🏼‍♂	hombres luchando tono de piel claro medio	ninguna
+🤼🏽‍♂	hombres luchando tono de piel medio	ninguna
+🤼🏾‍♂	hombres luchando tono de piel oscuro medio	ninguna
+🤼🏿‍♂	hombres luchando tono de piel oscuro	ninguna
+🤼🏻‍♀	mujeres luchando tono de piel claro	ninguna
+🤼🏼‍♀	mujeres luchando tono de piel claro medio	ninguna
+🤼🏽‍♀	mujeres luchando tono de piel medio	ninguna
+🤼🏾‍♀	mujeres luchando tono de piel oscuro medio	ninguna
+🤼🏿‍♀	mujeres luchando tono de piel oscuro	ninguna
+🤽🏻	persona jugando al waterpolo tono de piel claro	ninguna
+🤽🏼	persona jugando al waterpolo tono de piel claro medio	ninguna
+🤽🏽	persona jugando al waterpolo tono de piel medio	ninguna
+🤽🏾	persona jugando al waterpolo tono de piel oscuro medio	ninguna
+🤽🏿	persona jugando al waterpolo tono de piel oscuro	ninguna
+🤽🏻‍♂	hombre jugando al waterpolo tono de piel claro	ninguna
+🤽🏼‍♂	hombre jugando al waterpolo tono de piel claro medio	ninguna
+🤽🏽‍♂	hombre jugando al waterpolo tono de piel medio	ninguna
+🤽🏾‍♂	hombre jugando al waterpolo tono de piel oscuro medio	ninguna
+🤽🏿‍♂	hombre jugando al waterpolo tono de piel oscuro	ninguna
+🤽🏻‍♀	mujer jugando al waterpolo tono de piel claro	ninguna
+🤽🏼‍♀	mujer jugando al waterpolo tono de piel claro medio	ninguna
+🤽🏽‍♀	mujer jugando al waterpolo tono de piel medio	ninguna
+🤽🏾‍♀	mujer jugando al waterpolo tono de piel oscuro medio	ninguna
+🤽🏿‍♀	mujer jugando al waterpolo tono de piel oscuro	ninguna
+🤾🏻	persona jugando al balonmano tono de piel claro	ninguna
+🤾🏼	persona jugando al balonmano tono de piel claro medio	ninguna
+🤾🏽	persona jugando al balonmano tono de piel medio	ninguna
+🤾🏾	persona jugando al balonmano tono de piel oscuro medio	ninguna
+🤾🏿	persona jugando al balonmano tono de piel oscuro	ninguna
+🤾🏻‍♂	hombre jugando al balonmano tono de piel claro	ninguna
+🤾🏼‍♂	hombre jugando al balonmano tono de piel claro medio	ninguna
+🤾🏽‍♂	hombre jugando al balonmano tono de piel medio	ninguna
+🤾🏾‍♂	hombre jugando al balonmano tono de piel oscuro medio	ninguna
+🤾🏿‍♂	hombre jugando al balonmano tono de piel oscuro	ninguna
+🤾🏻‍♀	mujer jugando al balonmano tono de piel claro	ninguna
+🤾🏼‍♀	mujer jugando al balonmano tono de piel claro medio	ninguna
+🤾🏽‍♀	mujer jugando al balonmano tono de piel medio	ninguna
+🤾🏾‍♀	mujer jugando al balonmano tono de piel oscuro medio	ninguna
+🤾🏿‍♀	mujer jugando al balonmano tono de piel oscuro	ninguna
+🤹🏻	persona haciendo malabares tono de piel claro	ninguna
+🤹🏼	persona haciendo malabares tono de piel claro medio	ninguna
+🤹🏽	persona haciendo malabares tono de piel medio	ninguna
+🤹🏾	persona haciendo malabares tono de piel oscuro medio	ninguna
+🤹🏿	persona haciendo malabares tono de piel oscuro	ninguna
+🤹🏻‍♂	hombre haciendo malabares tono de piel claro	ninguna
+🤹🏼‍♂	hombre haciendo malabares tono de piel claro medio	ninguna
+🤹🏽‍♂	hombre haciendo malabares tono de piel medio	ninguna
+🤹🏾‍♂	hombre haciendo malabares tono de piel oscuro medio	ninguna
+🤹🏿‍♂	hombre haciendo malabares tono de piel oscuro	ninguna
+🤹🏻‍♀	mujer haciendo malabares tono de piel claro	ninguna
+🤹🏼‍♀	mujer haciendo malabares tono de piel claro medio	ninguna
+🤹🏽‍♀	mujer haciendo malabares tono de piel medio	ninguna
+🤹🏾‍♀	mujer haciendo malabares tono de piel oscuro medio	ninguna
+🤹🏿‍♀	mujer haciendo malabares tono de piel oscuro	ninguna
+🧘🏻	persona en posición de loto tono de piel claro	ninguna
+🧘🏼	persona en posición de loto tono de piel claro medio	ninguna
+🧘🏽	persona en posición de loto tono de piel medio	ninguna
+🧘🏾	persona en posición de loto tono de piel oscuro medio	ninguna
+🧘🏿	persona en posición de loto tono de piel oscuro	ninguna
+🧘🏻‍♂	hombre en posición de loto tono de piel claro	ninguna
+🧘🏼‍♂	hombre en posición de loto tono de piel claro medio	ninguna
+🧘🏽‍♂	hombre en posición de loto tono de piel medio	ninguna
+🧘🏾‍♂	hombre en posición de loto tono de piel oscuro medio	ninguna
+🧘🏿‍♂	hombre en posición de loto tono de piel oscuro	ninguna
+🧘🏻‍♀	mujer en posición de loto tono de piel claro	ninguna
+🧘🏼‍♀	mujer en posición de loto tono de piel claro medio	ninguna
+🧘🏽‍♀	mujer en posición de loto tono de piel medio	ninguna
+🧘🏾‍♀	mujer en posición de loto tono de piel oscuro medio	ninguna
+🧘🏿‍♀	mujer en posición de loto tono de piel oscuro	ninguna
+🛀🏻	persona en la bañera tono de piel claro	ninguna
+🛀🏼	persona en la bañera tono de piel claro medio	ninguna
+🛀🏽	persona en la bañera tono de piel medio	ninguna
+🛀🏾	persona en la bañera tono de piel oscuro medio	ninguna
+🛀🏿	persona en la bañera tono de piel oscuro	ninguna
+🛌🏻	persona en la cama tono de piel claro	ninguna
+🛌🏼	persona en la cama tono de piel claro medio	ninguna
+🛌🏽	persona en la cama tono de piel medio	ninguna
+🛌🏾	persona en la cama tono de piel oscuro medio	ninguna
+🛌🏿	persona en la cama tono de piel oscuro	ninguna
+🧑🏻‍🤝‍🧑🏻	dos personas de la mano tono de piel claro	ninguna
+🧑🏻‍🤝‍🧑🏼	dos personas de la mano tono de piel claro y tono de piel claro medio	ninguna
+🧑🏻‍🤝‍🧑🏽	dos personas de la mano tono de piel claro y tono de piel medio	ninguna
+🧑🏻‍🤝‍🧑🏾	dos personas de la mano tono de piel claro y tono de piel oscuro medio	ninguna
+🧑🏻‍🤝‍🧑🏿	dos personas de la mano tono de piel claro y tono de piel oscuro	ninguna
+🧑🏼‍🤝‍🧑🏻	dos personas de la mano tono de piel claro medio y tono de piel claro	ninguna
+🧑🏼‍🤝‍🧑🏼	dos personas de la mano tono de piel claro medio	ninguna
+🧑🏼‍🤝‍🧑🏽	dos personas de la mano tono de piel claro medio y tono de piel medio	ninguna
+🧑🏼‍🤝‍🧑🏾	dos personas de la mano tono de piel claro medio y tono de piel oscuro medio	ninguna
+🧑🏼‍🤝‍🧑🏿	dos personas de la mano tono de piel claro medio y tono de piel oscuro	ninguna
+🧑🏽‍🤝‍🧑🏻	dos personas de la mano tono de piel medio y tono de piel claro	ninguna
+🧑🏽‍🤝‍🧑🏼	dos personas de la mano tono de piel medio y tono de piel claro medio	ninguna
+🧑🏽‍🤝‍🧑🏽	dos personas de la mano tono de piel medio	ninguna
+🧑🏽‍🤝‍🧑🏾	dos personas de la mano tono de piel medio y tono de piel oscuro medio	ninguna
+🧑🏽‍🤝‍🧑🏿	dos personas de la mano tono de piel medio y tono de piel oscuro	ninguna
+🧑🏾‍🤝‍🧑🏻	dos personas de la mano tono de piel oscuro medio y tono de piel claro	ninguna
+🧑🏾‍🤝‍🧑🏼	dos personas de la mano tono de piel oscuro medio y tono de piel claro medio	ninguna
+🧑🏾‍🤝‍🧑🏽	dos personas de la mano tono de piel oscuro medio y tono de piel medio	ninguna
+🧑🏾‍🤝‍🧑🏾	dos personas de la mano tono de piel oscuro medio	ninguna
+🧑🏾‍🤝‍🧑🏿	dos personas de la mano tono de piel oscuro medio y tono de piel oscuro	ninguna
+🧑🏿‍🤝‍🧑🏻	dos personas de la mano tono de piel oscuro y tono de piel claro	ninguna
+🧑🏿‍🤝‍🧑🏼	dos personas de la mano tono de piel oscuro y tono de piel claro medio	ninguna
+🧑🏿‍🤝‍🧑🏽	dos personas de la mano tono de piel oscuro y tono de piel medio	ninguna
+🧑🏿‍🤝‍🧑🏾	dos personas de la mano tono de piel oscuro y tono de piel oscuro medio	ninguna
+🧑🏿‍🤝‍🧑🏿	dos personas de la mano tono de piel oscuro	ninguna
+👭🏻	mujeres de la mano tono de piel claro	ninguna
+👩🏻‍🤝‍👩🏼	mujeres de la mano tono de piel claro y tono de piel claro medio	ninguna
+👩🏻‍🤝‍👩🏽	mujeres de la mano tono de piel claro y tono de piel medio	ninguna
+👩🏻‍🤝‍👩🏾	mujeres de la mano tono de piel claro y tono de piel oscuro medio	ninguna
+👩🏻‍🤝‍👩🏿	mujeres de la mano tono de piel claro y tono de piel oscuro	ninguna
+👩🏼‍🤝‍👩🏻	mujeres de la mano tono de piel claro medio y tono de piel claro	ninguna
+👭🏼	mujeres de la mano tono de piel claro medio	ninguna
+👩🏼‍🤝‍👩🏽	mujeres de la mano tono de piel claro medio y tono de piel medio	ninguna
+👩🏼‍🤝‍👩🏾	mujeres de la mano tono de piel claro medio y tono de piel oscuro medio	ninguna
+👩🏼‍🤝‍👩🏿	mujeres de la mano tono de piel claro medio y tono de piel oscuro	ninguna
+👩🏽‍🤝‍👩🏻	mujeres de la mano tono de piel medio y tono de piel claro	ninguna
+👩🏽‍🤝‍👩🏼	mujeres de la mano tono de piel medio y tono de piel claro medio	ninguna
+👭🏽	mujeres de la mano tono de piel medio	ninguna
+👩🏽‍🤝‍👩🏾	mujeres de la mano tono de piel medio y tono de piel oscuro medio	ninguna
+👩🏽‍🤝‍👩🏿	mujeres de la mano tono de piel medio y tono de piel oscuro	ninguna
+👩🏾‍🤝‍👩🏻	mujeres de la mano tono de piel oscuro medio y tono de piel claro	ninguna
+👩🏾‍🤝‍👩🏼	mujeres de la mano tono de piel oscuro medio y tono de piel claro medio	ninguna
+👩🏾‍🤝‍👩🏽	mujeres de la mano tono de piel oscuro medio y tono de piel medio	ninguna
+👭🏾	mujeres de la mano tono de piel oscuro medio	ninguna
+👩🏾‍🤝‍👩🏿	mujeres de la mano tono de piel oscuro medio y tono de piel oscuro	ninguna
+👩🏿‍🤝‍👩🏻	mujeres de la mano tono de piel oscuro y tono de piel claro	ninguna
+👩🏿‍🤝‍👩🏼	mujeres de la mano tono de piel oscuro y tono de piel claro medio	ninguna
+👩🏿‍🤝‍👩🏽	mujeres de la mano tono de piel oscuro y tono de piel medio	ninguna
+👩🏿‍🤝‍👩🏾	mujeres de la mano tono de piel oscuro y tono de piel oscuro medio	ninguna
+👭🏿	mujeres de la mano tono de piel oscuro	ninguna
+👫🏻	mujer y hombre de la mano tono de piel claro	ninguna
+👩🏻‍🤝‍👨🏼	mujer y hombre de la mano tono de piel claro y tono de piel claro medio	ninguna
+👩🏻‍🤝‍👨🏽	mujer y hombre de la mano tono de piel claro y tono de piel medio	ninguna
+👩🏻‍🤝‍👨🏾	mujer y hombre de la mano tono de piel claro y tono de piel oscuro medio	ninguna
+👩🏻‍🤝‍👨🏿	mujer y hombre de la mano tono de piel claro y tono de piel oscuro	ninguna
+👩🏼‍🤝‍👨🏻	mujer y hombre de la mano tono de piel claro medio y tono de piel claro	ninguna
+👫🏼	mujer y hombre de la mano tono de piel claro medio	ninguna
+👩🏼‍🤝‍👨🏽	mujer y hombre de la mano tono de piel claro medio y tono de piel medio	ninguna
+👩🏼‍🤝‍👨🏾	mujer y hombre de la mano tono de piel claro medio y tono de piel oscuro medio	ninguna
+👩🏼‍🤝‍👨🏿	mujer y hombre de la mano tono de piel claro medio y tono de piel oscuro	ninguna
+👩🏽‍🤝‍👨🏻	mujer y hombre de la mano tono de piel medio y tono de piel claro	ninguna
+👩🏽‍🤝‍👨🏼	mujer y hombre de la mano tono de piel medio y tono de piel claro medio	ninguna
+👫🏽	mujer y hombre de la mano tono de piel medio	ninguna
+👩🏽‍🤝‍👨🏾	mujer y hombre de la mano tono de piel medio y tono de piel oscuro medio	ninguna
+👩🏽‍🤝‍👨🏿	mujer y hombre de la mano tono de piel medio y tono de piel oscuro	ninguna
+👩🏾‍🤝‍👨🏻	mujer y hombre de la mano tono de piel oscuro medio y tono de piel claro	ninguna
+👩🏾‍🤝‍👨🏼	mujer y hombre de la mano tono de piel oscuro medio y tono de piel claro medio	ninguna
+👩🏾‍🤝‍👨🏽	mujer y hombre de la mano tono de piel oscuro medio y tono de piel medio	ninguna
+👫🏾	mujer y hombre de la mano tono de piel oscuro medio	ninguna
+👩🏾‍🤝‍👨🏿	mujer y hombre de la mano tono de piel oscuro medio y tono de piel oscuro	ninguna
+👩🏿‍🤝‍👨🏻	mujer y hombre de la mano tono de piel oscuro y tono de piel claro	ninguna
+👩🏿‍🤝‍👨🏼	mujer y hombre de la mano tono de piel oscuro y tono de piel claro medio	ninguna
+👩🏿‍🤝‍👨🏽	mujer y hombre de la mano tono de piel oscuro y tono de piel medio	ninguna
+👩🏿‍🤝‍👨🏾	mujer y hombre de la mano tono de piel oscuro y tono de piel oscuro medio	ninguna
+👫🏿	mujer y hombre de la mano tono de piel oscuro	ninguna
+👬🏻	hombres de la mano tono de piel claro	ninguna
+👨🏻‍🤝‍👨🏼	hombres de la mano tono de piel claro y tono de piel claro medio	ninguna
+👨🏻‍🤝‍👨🏽	hombres de la mano tono de piel claro y tono de piel medio	ninguna
+👨🏻‍🤝‍👨🏾	hombres de la mano tono de piel claro y tono de piel oscuro medio	ninguna
+👨🏻‍🤝‍👨🏿	hombres de la mano tono de piel claro y tono de piel oscuro	ninguna
+👨🏼‍🤝‍👨🏻	hombres de la mano tono de piel claro medio y tono de piel claro	ninguna
+👬🏼	hombres de la mano tono de piel claro medio	ninguna
+👨🏼‍🤝‍👨🏽	hombres de la mano tono de piel claro medio y tono de piel medio	ninguna
+👨🏼‍🤝‍👨🏾	hombres de la mano tono de piel claro medio y tono de piel oscuro medio	ninguna
+👨🏼‍🤝‍👨🏿	hombres de la mano tono de piel claro medio y tono de piel oscuro	ninguna
+👨🏽‍🤝‍👨🏻	hombres de la mano tono de piel medio y tono de piel claro	ninguna
+👨🏽‍🤝‍👨🏼	hombres de la mano tono de piel medio y tono de piel claro medio	ninguna
+👬🏽	hombres de la mano tono de piel medio	ninguna
+👨🏽‍🤝‍👨🏾	hombres de la mano tono de piel medio y tono de piel oscuro medio	ninguna
+👨🏽‍🤝‍👨🏿	hombres de la mano tono de piel medio y tono de piel oscuro	ninguna
+👨🏾‍🤝‍👨🏻	hombres de la mano tono de piel oscuro medio y tono de piel claro	ninguna
+👨🏾‍🤝‍👨🏼	hombres de la mano tono de piel oscuro medio y tono de piel claro medio	ninguna
+👨🏾‍🤝‍👨🏽	hombres de la mano tono de piel oscuro medio y tono de piel medio	ninguna
+👬🏾	hombres de la mano tono de piel oscuro medio	ninguna
+👨🏾‍🤝‍👨🏿	hombres de la mano tono de piel oscuro medio y tono de piel oscuro	ninguna
+👨🏿‍🤝‍👨🏻	hombres de la mano tono de piel oscuro y tono de piel claro	ninguna
+👨🏿‍🤝‍👨🏼	hombres de la mano tono de piel oscuro y tono de piel claro medio	ninguna
+👨🏿‍🤝‍👨🏽	hombres de la mano tono de piel oscuro y tono de piel medio	ninguna
+👨🏿‍🤝‍👨🏾	hombres de la mano tono de piel oscuro y tono de piel oscuro medio	ninguna
+👬🏿	hombres de la mano tono de piel oscuro	ninguna
+💏🏻	beso tono de piel claro	ninguna
+💏🏼	beso tono de piel claro medio	ninguna
+💏🏽	beso tono de piel medio	ninguna
+💏🏾	beso tono de piel oscuro medio	ninguna
+💏🏿	beso tono de piel oscuro	ninguna
+👩‍❤‍💋‍👨	beso mujer y hombre	ninguna
+👨‍❤‍💋‍👨	beso hombre y hombre	ninguna
+👩‍❤‍💋‍👩	beso mujer y mujer	ninguna
+💑🏻	pareja enamorada tono de piel claro	ninguna
+💑🏼	pareja enamorada tono de piel claro medio	ninguna
+💑🏽	pareja enamorada tono de piel medio	ninguna
+💑🏾	pareja enamorada tono de piel oscuro medio	ninguna
+💑🏿	pareja enamorada tono de piel oscuro	ninguna
+👩‍❤‍👨	pareja enamorada mujer y hombre	ninguna
+👨‍❤‍👨	pareja enamorada hombre y hombre	ninguna
+👩‍❤‍👩	pareja enamorada mujer y mujer	ninguna
+👨‍👩‍👦	familia hombre, mujer, niño	ninguna
+👨‍👩‍👧	familia hombre, mujer, niña	ninguna
+👨‍👩‍👧‍👦	familia hombre, mujer, niña, niño	ninguna
+👨‍👩‍👦‍👦	familia hombre, mujer, niño, niño	ninguna
+👨‍👩‍👧‍👧	familia hombre, mujer, niña, niña	ninguna
+👨‍👨‍👦	familia hombre, hombre, niño	ninguna
+👨‍👨‍👧	familia hombre, hombre, niña	ninguna
+👨‍👨‍👧‍👦	familia hombre, hombre, niña, niño	ninguna
+👨‍👨‍👦‍👦	familia hombre, hombre, niño, niño	ninguna
+👨‍👨‍👧‍👧	familia hombre, hombre, niña, niña	ninguna
+👩‍👩‍👦	familia mujer, mujer, niño	ninguna
+👩‍👩‍👧	familia mujer, mujer, niña	ninguna
+👩‍👩‍👧‍👦	familia mujer, mujer, niña, niño	ninguna
+👩‍👩‍👦‍👦	familia mujer, mujer, niño, niño	ninguna
+👩‍👩‍👧‍👧	familia mujer, mujer, niña, niña	ninguna
+👨‍👦	familia hombre y niño	ninguna
+👨‍👦‍👦	familia hombre, niño, niño	ninguna
+👨‍👧	familia hombre y niña	ninguna
+👨‍👧‍👦	familia hombre, niña, niño	ninguna
+👨‍👧‍👧	familia hombre, niña, niña	ninguna
+👩‍👦	familia mujer y niño	ninguna
+👩‍👦‍👦	familia mujer, niño, niño	ninguna
+👩‍👧	familia mujer y niña	ninguna
+👩‍👧‍👦	familia mujer, niña, niño	ninguna
+👩‍👧‍👧	familia mujer, niña, niña	ninguna
+🔟	Teclas 10	ninguna
+🇦🇨	Bandera Isla de la Ascensión	ninguna
+🇦🇩	Bandera Andorra	ninguna
+🇦🇪	Bandera Emiratos Árabes Unidos	ninguna
+🇦🇫	Bandera Afganistán	ninguna
+🇦🇬	Bandera Antigua y Barbuda	ninguna
+🇦🇮	Bandera Anguila	ninguna
+🇦🇱	Bandera Albania	ninguna
+🇦🇲	Bandera Armenia	ninguna
+🇦🇴	Bandera Angola	ninguna
+🇦🇶	Bandera Antártida	ninguna
+🇦🇷	Bandera Argentina	ninguna
+🇦🇸	Bandera Samoa Americana	ninguna
+🇦🇹	Bandera Austria	ninguna
+🇦🇺	Bandera Australia	ninguna
+🇦🇼	Bandera Aruba	ninguna
+🇦🇽	Bandera Islas Aland	ninguna
+🇦🇿	Bandera Azerbaiyán	ninguna
+🇧🇦	Bandera Bosnia y Herzegovina	ninguna
+🇧🇧	Bandera Barbados	ninguna
+🇧🇩	Bandera Bangladés	ninguna
+🇧🇪	Bandera Bélgica	ninguna
+🇧🇫	Bandera Burkina Faso	ninguna
+🇧🇬	Bandera Bulgaria	ninguna
+🇧🇭	Bandera Baréin	ninguna
+🇧🇮	Bandera Burundi	ninguna
+🇧🇯	Bandera Benín	ninguna
+🇧🇱	Bandera San Bartolomé	ninguna
+🇧🇲	Bandera Bermudas	ninguna
+🇧🇳	Bandera Brunéi	ninguna
+🇧🇴	Bandera Bolivia	ninguna
+🇧🇶	Bandera Caribe neerlandés	ninguna
+🇧🇷	Bandera Brasil	ninguna
+🇧🇸	Bandera Bahamas	ninguna
+🇧🇹	Bandera Bután	ninguna
+🇧🇻	Bandera Isla Bouvet	ninguna
+🇧🇼	Bandera Botsuana	ninguna
+🇧🇾	Bandera Bielorrusia	ninguna
+🇧🇿	Bandera Belice	ninguna
+🇨🇦	Bandera Canadá	ninguna
+🇨🇨	Bandera Islas Cocos	ninguna
+🇨🇩	Bandera República Democrática del Congo	ninguna
+🇨🇫	Bandera República Centroafricana	ninguna
+🇨🇬	Bandera Congo	ninguna
+🇨🇭	Bandera Suiza	ninguna
+🇨🇮	Bandera Côte d’Ivoire	ninguna
+🇨🇰	Bandera Islas Cook	ninguna
+🇨🇱	Bandera Chile	ninguna
+🇨🇲	Bandera Camerún	ninguna
+🇨🇳	Bandera China	ninguna
+🇨🇴	Bandera Colombia	ninguna
+🇨🇵	Bandera Isla Clipperton	ninguna
+🇨🇶	Bandera Sark	ninguna
+🇨🇷	Bandera Costa Rica	ninguna
+🇨🇺	Bandera Cuba	ninguna
+🇨🇻	Bandera Cabo Verde	ninguna
+🇨🇼	Bandera Curazao	ninguna
+🇨🇽	Bandera Isla de Navidad	ninguna
+🇨🇾	Bandera Chipre	ninguna
+🇨🇿	Bandera Chequia	ninguna
+🇩🇪	Bandera Alemania	ninguna
+🇩🇬	Bandera Diego García	ninguna
+🇩🇯	Bandera Yibuti	ninguna
+🇩🇰	Bandera Dinamarca	ninguna
+🇩🇲	Bandera Dominica	ninguna
+🇩🇴	Bandera República Dominicana	ninguna
+🇩🇿	Bandera Argelia	ninguna
+🇪🇦	Bandera Ceuta y Melilla	ninguna
+🇪🇨	Bandera Ecuador	ninguna
+🇪🇪	Bandera Estonia	ninguna
+🇪🇬	Bandera Egipto	ninguna
+🇪🇭	Bandera Sáhara Occidental	ninguna
+🇪🇷	Bandera Eritrea	ninguna
+🇪🇸	Bandera España	ninguna
+🇪🇹	Bandera Etiopía	ninguna
+🇪🇺	Bandera Unión Europea	ninguna
+🇫🇮	Bandera Finlandia	ninguna
+🇫🇯	Bandera Fiyi	ninguna
+🇫🇰	Bandera Islas Malvinas	ninguna
+🇫🇲	Bandera Micronesia	ninguna
+🇫🇴	Bandera Islas Feroe	ninguna
+🇫🇷	Bandera Francia	ninguna
+🇬🇦	Bandera Gabón	ninguna
+🇬🇧	Bandera Reino Unido	ninguna
+🇬🇩	Bandera Granada	ninguna
+🇬🇪	Bandera Georgia	ninguna
+🇬🇫	Bandera Guayana Francesa	ninguna
+🇬🇬	Bandera Guernesey	ninguna
+🇬🇭	Bandera Ghana	ninguna
+🇬🇮	Bandera Gibraltar	ninguna
+🇬🇱	Bandera Groenlandia	ninguna
+🇬🇲	Bandera Gambia	ninguna
+🇬🇳	Bandera Guinea	ninguna
+🇬🇵	Bandera Guadalupe	ninguna
+🇬🇶	Bandera Guinea Ecuatorial	ninguna
+🇬🇷	Bandera Grecia	ninguna
+🇬🇸	Bandera Islas Georgia del Sur y Sandwich del Sur	ninguna
+🇬🇹	Bandera Guatemala	ninguna
+🇬🇺	Bandera Guam	ninguna
+🇬🇼	Bandera Guinea-Bisáu	ninguna
+🇬🇾	Bandera Guyana	ninguna
+🇭🇰	Bandera RAE de Hong Kong (China)	ninguna
+🇭🇲	Bandera Islas Heard y McDonald	ninguna
+🇭🇳	Bandera Honduras	ninguna
+🇭🇷	Bandera Croacia	ninguna
+🇭🇹	Bandera Haití	ninguna
+🇭🇺	Bandera Hungría	ninguna
+🇮🇨	Bandera Canarias	ninguna
+🇮🇩	Bandera Indonesia	ninguna
+🇮🇪	Bandera Irlanda	ninguna
+🇮🇱	Bandera Israel	ninguna
+🇮🇲	Bandera Isla de Man	ninguna
+🇮🇳	Bandera India	ninguna
+🇮🇴	Bandera Territorio Británico del Océano Índico	ninguna
+🇮🇶	Bandera Irak	ninguna
+🇮🇷	Bandera Irán	ninguna
+🇮🇸	Bandera Islandia	ninguna
+🇮🇹	Bandera Italia	ninguna
+🇯🇪	Bandera Jersey	ninguna
+🇯🇲	Bandera Jamaica	ninguna
+🇯🇴	Bandera Jordania	ninguna
+🇯🇵	Bandera Japón	ninguna
+🇰🇪	Bandera Kenia	ninguna
+🇰🇬	Bandera Kirguistán	ninguna
+🇰🇭	Bandera Camboya	ninguna
+🇰🇮	Bandera Kiribati	ninguna
+🇰🇲	Bandera Comoras	ninguna
+🇰🇳	Bandera San Cristóbal y Nieves	ninguna
+🇰🇵	Bandera Corea del Norte	ninguna
+🇰🇷	Bandera Corea del Sur	ninguna
+🇰🇼	Bandera Kuwait	ninguna
+🇰🇾	Bandera Islas Caimán	ninguna
+🇰🇿	Bandera Kazajistán	ninguna
+🇱🇦	Bandera Laos	ninguna
+🇱🇧	Bandera Líbano	ninguna
+🇱🇨	Bandera Santa Lucía	ninguna
+🇱🇮	Bandera Liechtenstein	ninguna
+🇱🇰	Bandera Sri Lanka	ninguna
+🇱🇷	Bandera Liberia	ninguna
+🇱🇸	Bandera Lesoto	ninguna
+🇱🇹	Bandera Lituania	ninguna
+🇱🇺	Bandera Luxemburgo	ninguna
+🇱🇻	Bandera Letonia	ninguna
+🇱🇾	Bandera Libia	ninguna
+🇲🇦	Bandera Marruecos	ninguna
+🇲🇨	Bandera Mónaco	ninguna
+🇲🇩	Bandera Moldavia	ninguna
+🇲🇪	Bandera Montenegro	ninguna
+🇲🇫	Bandera San Martín	ninguna
+🇲🇬	Bandera Madagascar	ninguna
+🇲🇭	Bandera Islas Marshall	ninguna
+🇲🇰	Bandera Macedonia del Norte	ninguna
+🇲🇱	Bandera Mali	ninguna
+🇲🇲	Bandera Myanmar (Birmania)	ninguna
+🇲🇳	Bandera Mongolia	ninguna
+🇲🇴	Bandera RAE de Macao (China)	ninguna
+🇲🇵	Bandera Islas Marianas del Norte	ninguna
+🇲🇶	Bandera Martinica	ninguna
+🇲🇷	Bandera Mauritania	ninguna
+🇲🇸	Bandera Montserrat	ninguna
+🇲🇹	Bandera Malta	ninguna
+🇲🇺	Bandera Mauricio	ninguna
+🇲🇻	Bandera Maldivas	ninguna
+🇲🇼	Bandera Malaui	ninguna
+🇲🇽	Bandera México	ninguna
+🇲🇾	Bandera Malasia	ninguna
+🇲🇿	Bandera Mozambique	ninguna
+🇳🇦	Bandera Namibia	ninguna
+🇳🇨	Bandera Nueva Caledonia	ninguna
+🇳🇪	Bandera Níger	ninguna
+🇳🇫	Bandera Isla Norfolk	ninguna
+🇳🇬	Bandera Nigeria	ninguna
+🇳🇮	Bandera Nicaragua	ninguna
+🇳🇱	Bandera Países Bajos	ninguna
+🇳🇴	Bandera Noruega	ninguna
+🇳🇵	Bandera Nepal	ninguna
+🇳🇷	Bandera Nauru	ninguna
+🇳🇺	Bandera Niue	ninguna
+🇳🇿	Bandera Nueva Zelanda	ninguna
+🇴🇲	Bandera Omán	ninguna
+🇵🇦	Bandera Panamá	ninguna
+🇵🇪	Bandera Perú	ninguna
+🇵🇫	Bandera Polinesia Francesa	ninguna
+🇵🇬	Bandera Papúa Nueva Guinea	ninguna
+🇵🇭	Bandera Filipinas	ninguna
+🇵🇰	Bandera Pakistán	ninguna
+🇵🇱	Bandera Polonia	ninguna
+🇵🇲	Bandera San Pedro y Miquelón	ninguna
+🇵🇳	Bandera Islas Pitcairn	ninguna
+🇵🇷	Bandera Puerto Rico	ninguna
+🇵🇸	Bandera Territorios Palestinos	ninguna
+🇵🇹	Bandera Portugal	ninguna
+🇵🇼	Bandera Palaos	ninguna
+🇵🇾	Bandera Paraguay	ninguna
+🇶🇦	Bandera Catar	ninguna
+🇷🇪	Bandera Reunión	ninguna
+🇷🇴	Bandera Rumanía	ninguna
+🇷🇸	Bandera Serbia	ninguna
+🇷🇺	Bandera Rusia	ninguna
+🇷🇼	Bandera Ruanda	ninguna
+🇸🇦	Bandera Arabia Saudí	ninguna
+🇸🇧	Bandera Islas Salomón	ninguna
+🇸🇨	Bandera Seychelles	ninguna
+🇸🇩	Bandera Sudán	ninguna
+🇸🇪	Bandera Suecia	ninguna
+🇸🇬	Bandera Singapur	ninguna
+🇸🇭	Bandera Santa Elena	ninguna
+🇸🇮	Bandera Eslovenia	ninguna
+🇸🇯	Bandera Svalbard y Jan Mayen	ninguna
+🇸🇰	Bandera Eslovaquia	ninguna
+🇸🇱	Bandera Sierra Leona	ninguna
+🇸🇲	Bandera San Marino	ninguna
+🇸🇳	Bandera Senegal	ninguna
+🇸🇴	Bandera Somalia	ninguna
+🇸🇷	Bandera Surinam	ninguna
+🇸🇸	Bandera Sudán del Sur	ninguna
+🇸🇹	Bandera Santo Tomé y Príncipe	ninguna
+🇸🇻	Bandera El Salvador	ninguna
+🇸🇽	Bandera Sint Maarten	ninguna
+🇸🇾	Bandera Siria	ninguna
+🇸🇿	Bandera Esuatini	ninguna
+🇹🇦	Bandera Tristán de Acuña	ninguna
+🇹🇨	Bandera Islas Turcas y Caicos	ninguna
+🇹🇩	Bandera Chad	ninguna
+🇹🇫	Bandera Territorios Australes Franceses	ninguna
+🇹🇬	Bandera Togo	ninguna
+🇹🇭	Bandera Tailandia	ninguna
+🇹🇯	Bandera Tayikistán	ninguna
+🇹🇰	Bandera Tokelau	ninguna
+🇹🇱	Bandera Timor-Leste	ninguna
+🇹🇲	Bandera Turkmenistán	ninguna
+🇹🇳	Bandera Túnez	ninguna
+🇹🇴	Bandera Tonga	ninguna
+🇹🇷	Bandera Turquía	ninguna
+🇹🇹	Bandera Trinidad y Tobago	ninguna
+🇹🇻	Bandera Tuvalu	ninguna
+🇹🇼	Bandera Taiwán	ninguna
+🇹🇿	Bandera Tanzania	ninguna
+🇺🇦	Bandera Ucrania	ninguna
+🇺🇬	Bandera Uganda	ninguna
+🇺🇲	Bandera Islas menores alejadas de EE. UU.	ninguna
+🇺🇳	Bandera Naciones Unidas	ninguna
+🇺🇸	Bandera Estados Unidos	ninguna
+🇺🇾	Bandera Uruguay	ninguna
+🇺🇿	Bandera Uzbekistán	ninguna
+🇻🇦	Bandera Ciudad del Vaticano	ninguna
+🇻🇨	Bandera San Vicente y las Granadinas	ninguna
+🇻🇪	Bandera Venezuela	ninguna
+🇻🇬	Bandera Islas Vírgenes Británicas	ninguna
+🇻🇮	Bandera Islas Vírgenes de EE. UU.	ninguna
+🇻🇳	Bandera Vietnam	ninguna
+🇻🇺	Bandera Vanuatu	ninguna
+🇼🇫	Bandera Wallis y Futuna	ninguna
+🇼🇸	Bandera Samoa	ninguna
+🇽🇰	Bandera Kosovo	ninguna
+🇾🇪	Bandera Yemen	ninguna
+🇾🇹	Bandera Mayotte	ninguna
+🇿🇦	Bandera Sudáfrica	ninguna
+🇿🇲	Bandera Zambia	ninguna
+🇿🇼	Bandera Zimbabue	ninguna
+🏴󠁧󠁢󠁥󠁮󠁧󠁿	Bandera Inglaterra	ninguna
+🏴󠁧󠁢󠁳󠁣󠁴󠁿	Bandera Escocia	ninguna
+🏴󠁧󠁢󠁷󠁬󠁳󠁿	Bandera Gales	ninguna
+‾	línea superpuesta	todas
+‐	guion	todas
+―	barra horizontal	todas
+・	punto medio katakana	todas
+‽	exclarrogativo	todas
+。	punto ideográfico	todas
+〈	corchete angular de apertura	todas
+〉	corchete angular de cierre	todas
+《	corchete angular doble de apertura	todas
+》	corchete angular doble de cierre	todas
+「	corchete esquinado de apertura	todas
+」	corchete esquinado de cierre	todas
+『	corchete esquinado de apertura hueco	todas
+』	corchete esquinado de cierre hueco	todas
+【	corchete lenticular de apertura	todas
+】	corchete lenticular de cierre	todas
+〔	corchete caparazón tortuga de apertura	todas
+〕	corchete caparazón tortuga de cierre	todas
+〖	corchete lenticular de apertura hueco	todas
+〗	corchete lenticular de cierre hueco	todas
+‧	punto de unión con guion	todas
+‸	intercalación	todas
+※	marca de referencia	todas
+⁂	asterismo	todas
+℗	copyright de grabación de sonido	todas
+↚	flecha hacia la izquierda tachada	todas
+↛	flecha hacia la derecha tachada	todas
+↜	flecha de onda hacia la izquierda	todas
+↝	flecha de onda hacia la derecha	todas
+↞	flecha de doble punta hacia la izquierda	todas
+↟	flecha de doble punta hacia arriba	todas
+↠	flecha de doble punta hacia la derecha	todas
+↡	flecha de doble punta hacia abajo	todas
+↢	flecha hacia la izquierda con cola	todas
+↣	flecha hacia la derecha con cola	todas
+↤	flecha hacia la izquierda desde barra	todas
+↥	flecha hacia arriba desde barra	todas
+↦	flecha hacia la derecha desde barra	todas
+↧	flecha hacia abajo desde barra	todas
+↨	flecha arriba abajo con base	todas
+↫	flecha hacia la izquierda con bucle	todas
+↬	flecha hacia la derecha con bucle	todas
+↭	flecha de onda hacia la izquierda y la derecha	todas
+↯	flecha en zigzag hacia abajo	todas
+↰	flecha hacia arriba con punta hacia la izquierda	todas
+↱	flecha hacia arriba con punta hacia la derecha	todas
+↲	flecha hacia abajo con punta hacia la izquierda	todas
+↳	flecha hacia abajo con punta hacia la derecha	todas
+↴	flecha hacia la derecha con ángulo hacia abajo	todas
+↵	flecha hacia abajo con ángulo hacia la izquierda	todas
+↶	flecha en semicírculo superior hacia la izquierda	todas
+↷	flecha en semicírculo superior hacia la derecha	todas
+↸	flecha hacia el noroeste con barra larga	todas
+↹	flecha hacia la izquierda con barra sobre flecha hacia la derecha con barra	todas
+↺	círculo abierto con flecha en sentido antihorario	todas
+↻	círculo abierto con flecha en sentido horario	todas
+↼	arpón hacia la izquierda con la punta hacia arriba	todas
+↽	arpón hacia la izquierda con la punta hacia abajo	todas
+↾	arpón hacia arriba con la punta hacia la derecha	todas
+↿	arpón hacia arriba con la punta hacia la izquierda	todas
+⇀	arpón hacia la derecha con la punta hacia arriba	todas
+⇁	arpón hacia la derecha con la punta hacia abajo	todas
+⇂	arpón hacia abajo con la punta hacia la derecha	todas
+⇃	arpón hacia abajo con la punta hacia la izquierda	todas
+⇅	flechas apuntando arriba y abajo	todas
+⇆	flechas apuntando izquierda sobre derecha	todas
+⇇	pareja de flechas hacia la izquierda	todas
+⇈	pareja de flechas hacia arriba	todas
+⇉	pareja de flechas hacia la derecha	todas
+⇊	pareja de flechas hacia abajo	todas
+⇋	arpón hacia la izquierda sobre arpón hacia la derecha	todas
+⇌	arpón hacia la derecha sobre arpón hacia la izquierda	todas
+⇍	flecha doble hacia la izquierda tachada	todas
+⇑	flecha doble hacia arriba	todas
+⇓	flecha doble hacia abajo	todas
+⇔	flecha doble hacia la izquierda y la derecha	todas
+⇎	flecha doble hacia la izquierda y la derecha tachada	todas
+⇖	flecha doble hacia el noroeste	todas
+⇗	flecha doble hacia el nordeste	todas
+⇘	flecha doble hacia sudeste	todas
+⇙	flecha doble hacia el sudoeste	todas
+⇚	flecha triple hacia la izquierda	todas
+⇛	flecha triple hacia la derecha	todas
+⇜	flecha ondulada hacia la izquierda	todas
+⇝	flecha ondulada hacia la derecha	todas
+⇞	flecha hacia arriba con doble tachado	todas
+⇟	flecha hacia abajo con doble tachado	todas
+⇠	flecha discontinua hacia la izquierda	todas
+⇡	flecha discontinua hacia arriba	todas
+⇢	flecha discontinua hacia la derecha	todas
+⇣	flecha discontinua hacia abajo	todas
+⇤	flecha hacia la izquierda con barra	todas
+⇥	flecha hacia la derecha con barra	todas
+⇦	flecha hueca hacia la izquierda	todas
+⇧	flecha hueca hacia arriba	todas
+⇩	flecha hueca hacia abajo	todas
+⇪	flecha hueca hacia arriba desde barra	todas
+⇵	flecha hacia abajo a la izquierda de flecha hacia arriba	todas
+∆	incremento	todas
+∗	operador de asterisco	todas
+∽	virgulilla inversa	todas
+∾	s invertida horizontal	todas
+≒	aproximadamente igual o la imagen de	todas
+≖	anillo en igual a	todas
+≳	equivalente mayor que	todas
+⊗	por dentro de círculo	todas
+⊘	barra de división dentro de círculo	todas
+⊙	operador de punto dentro de círculo	todas
+⊚	operador de anillo dentro de círculo	todas
+⊛	operador de asterisco dentro de círculo	todas
+⊞	más dentro de cuadrado	todas
+⊟	menos dentro de cuadrado	todas
+⊮	no fuerza	todas
+⊰	precede en relación	todas
+⊱	sucede en relación	todas
+⋭	no contiene como subgrupo normal o igual a	todas
+⊶	original	todas
+⊹	matriz conjugada hermitiana	todas
+⊿	triángulo rectángulo	todas
+⋁	o lógica n-aria	todas
+⋂	intersección n-aria	todas
+⋃	unión n-aria	todas
+⋆	operador de estrella	todas
+⋈	unión natural	todas
+⋒	doble intersección	todas
+⋘	mucho mucho menor que	todas
+⋙	mucho mucho mayor que	todas
+⋮	puntos suspensivos verticales	todas
+⋯	puntos suspensivos horizontales	todas
+⋰	puntos suspensivos diagonales hacia arriba a la derecha	todas
+⋱	puntos suspensivos diagonales hacia abajo a la derecha	todas
+▢	cuadrado hueco con esquinas redondeadas	todas
+▣	cuadrado hueco con cuadrado relleno dentro	todas
+▤	cuadrado con relleno de rayas horizontales	todas
+▥	cuadrado con relleno de rayas verticales	todas
+▦	cuadrado con relleno de cuadrícula ortogonal	todas
+▧	cuadrado con relleno de rayas desde arriba a la izquierda hasta abajo a la derecha	todas
+▨	cuadrado con relleno de rayas desde arriba a la derecha hasta abajo a la izquierda	todas
+▩	cuadrado con relleno de cuadrícula en diagonal	todas
+▬	rectángulo relleno	todas
+▮	rectángulo vertical relleno	todas
+▰	paralelogramo relleno	todas
+▲	triángulo relleno apuntando hacia arriba	todas
+▴	triángulo pequeño relleno que apunta hacia arriba	todas
+▵	triángulo pequeño hueco que apunta hacia arriba	todas
+▷	triángulo hueco que apunta hacia la derecha	todas
+▸	triángulo pequeño relleno que apunta hacia la derecha	todas
+▹	triángulo pequeño hueco que apunta hacia la derecha	todas
+►	puntero relleno que apunta hacia la derecha	todas
+▻	puntero hueco que apunta hacia la derecha	todas
+▼	triángulo relleno apuntando hacia abajo	todas
+▽	triángulo hueco que apunta hacia abajo	todas
+▾	triángulo relleno pequeño que apunta hacia abajo	todas
+▿	triángulo hueco pequeño que apunta hacia abajo	todas
+◁	triángulo hueco que apunta hacia la izquierda	todas
+◂	triángulo relleno pequeño que apunta hacia la izquierda	todas
+◃	triángulo hueco pequeño que apunta hacia la izquierda	todas
+◄	puntero relleno que apunta hacia la izquierda	todas
+◅	puntero hueco que apunta hacia la izquierda	todas
+◇	rombo hueco	todas
+◈	rombo hueco con rombo relleno dentro	todas
+◉	círculo hueco con círculo relleno dentro	todas
+◊	rombo	todas
+◌	círculo punteado	todas
+◍	círculo con relleno vertical	todas
+◎	círculos concéntricos	todas
+◐	círculo con la mitad izquierda rellena	todas
+◑	círculo con la mitad derecha rellena	todas
+◒	círculo con la mitad inferior rellena	todas
+◓	círculo con la mitad superior rellena	todas
+◔	círculo con el cuadrante superior derecho relleno	todas
+◕	círculo relleno excepto el cuadrante superior izquierdo	todas
+◖	semicírculo izquierdo relleno	todas
+◗	semicírculo derecho relleno	todas
+◘	bolo inverso	todas
+◙	cuadrado relleno con círculo hueco dentro	todas
+◜	arco de cuadrante superior izquierdo de círculo	todas
+◝	arco de cuadrante superior derecho de círculo	todas
+◞	arco de cuadrante inferior derecho de círculo	todas
+◟	arco de cuadrante inferior izquierdo de círculo	todas
+◠	semicírculo superior	todas
+◡	semicírculo inferior	todas
+◢	triángulo inferior derecho relleno	todas
+◣	triángulo inferior izquierdo relleno	todas
+◤	triángulo superior izquierdo relleno	todas
+◥	triángulo superior derecho relleno	todas
+◯	círculo hueco grande	todas
+◳	cuadrante superior derecho en cuadrado hueco	todas
+◷	cuadrante superior derecho en círculo hueco	todas
+◿	triángulo inferior derecho	todas
+⨧	más subíndice dos	todas
+⨼	producto interior	todas
+⩣	lógica o doble barra inferior	todas
+⩽	menor que o igual con barra inclinada	todas
+⪍	menor que sobre igual o similar	todas
+⪚	doble línea sobre mayor que	todas
+⪺	sucede sobre signo de no casi igual	todas
+⌛	reloj de arena sin tiempo	todas
+⏳	reloj de arena con tiempo	todas
+⌚	reloj	todas
+⏰	reloj despertador	todas
+⏱	cronómetro	todas
+⏲	temporizador	todas
+⭐	estrella	todas
+⌨	teclado	todas
+⬆	flecha hacia arriba	todas
+↗	flecha hacia la esquina superior derecha	todas
+↘	flecha hacia la esquina inferior derecha	todas
+⬇	flecha hacia abajo	todas
+↙	flecha hacia la esquina inferior izquierda	todas
+⬅	flecha hacia la izquierda	todas
+↖	flecha hacia la esquina superior izquierda	todas
+↕	flecha arriba y abajo	todas
+↔	flecha izquierda y derecha	todas
+↮	flecha hacia la izquierda y la derecha tachada	todas
+↩	flecha derecha curvándose a la izquierda	todas
+↪	flecha izquierda curvándose a la derecha	todas
+⤴	flecha derecha curvándose hacia arriba	todas
+⤵	flecha derecha curvándose hacia abajo	todas
+▶	reproducir	todas
+⏩	avance rápido	todas
+⏭	pista siguiente	todas
+⏯	reproducir o pausa	todas
+◀	retroceso	todas
+⏪	retroceso rápido	todas
+⏮	pista anterior	todas
+⏫	triángulo doble hacia arriba	todas
+⏬	triángulo doble hacia abajo	todas
+⏸	pausa	todas
+⏹	detener	todas
+⏺	grabar	todas
+⏏	expulsar	todas
+‼	exclamación doble	todas
+⁉	exclamación e interrogación	todas
+〰	guion ondulado	todas
+⭕	círculo rojo hueco	todas
+〽	marca de alternancia	todas
+Ⓜ	m en círculo	todas
+㊗	ideograma japonés para "enhorabuena"	todas
+㊙	ideograma japonés para "secreto"	todas
+⬛	cuadrado negro grande	todas
+⬜	cuadrado blanco grande	todas
+◼	cuadrado negro mediano	todas
+◻	cuadrado blanco mediano	todas
+◽	cuadrado blanco mediano-pequeño	todas
+▫	cuadrado blanco pequeño	todas
+₢	cruceiro	todas
+₣	franco francés	todas
+₤	lira	todas
+₥	milésimo	todas
+₩	won	todas
+₰	penique alemán	todas
+₱	peso	todas
+₳	austral	todas
+₶	libra tornesa	todas
+₷	spesmilo	todas
+₽	rublo	todas
+₿	bitcóin	todas
+0⃣	tecla 0	todas
+1⃣	tecla 1	todas
+2⃣	tecla 2	todas
+3⃣	tecla 3	todas
+4⃣	tecla 4	todas
+5⃣	tecla 5	todas
+6⃣	tecla 6	todas
+7⃣	tecla 7	todas
+8⃣	tecla 8	todas
+9⃣	tecla 9	todas
+₨	rupia	todas
+﷼	rial	todas
+*⃣	Teclas *	todas
+֏	dram armenio	todas
+؋	afgani afgano	todas
+৳	taka bangladesí	todas
+฿	bat tailandés	todas
+៛	riel camboyano	todas
+₡	colón costarricense	todas
+₦	naira nigeriano	todas
+₪	nuevo séquel israelí	todas
+₫	dong vietnamita	todas
+₭	kip laosiano	todas
+₮	tugrik mongol	todas
+₲	guaraní paraguayo	todas
+₴	grivna ucraniana	todas
+₵	cedi ghanés	todas
+₸	tengue kazajo	todas
+₺	lira turca	todas
+₼	manat azerbaiyano	todas
+₾	lari georgiano	todas
+₧	peseta española	todas

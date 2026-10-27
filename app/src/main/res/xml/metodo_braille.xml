@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- El teclado braille de Tiresias como método de entrada del sistema. -->
+<input-method xmlns:android="http://schemas.android.com/apk/res/android"
+	android:settingsActivity="com.xebolax.tiresias.ui.ActividadAjustes"
+	android:isDefault="false">
+	<subtype
+		android:imeSubtypeLocale="es_ES"
+		android:imeSubtypeMode="keyboard"
+		android:label="@string/braille_teclado_nombre" />
+</input-method>

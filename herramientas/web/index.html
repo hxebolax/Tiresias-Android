@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tiresias: lector de pantalla para Android</title>
+<meta name="description" content="Tiresias, lector de pantalla libre para Android en español: descargas, cómo instalarlo, novedades y privacidad.">
+<style>
+html { font-size: 112.5%; }
+body { background: #000; color: #fff; font-family: Roboto, "Segoe UI", Verdana, Arial, sans-serif; line-height: 1.6; margin: 0 auto; max-width: 50em; padding: 0 1em 2em; }
+a { color: #ffe066; }
+a:focus, a:hover { outline: 3px solid #fff; outline-offset: 2px; }
+h1 { font-size: 2.2em; margin: 0.6em 0 0.2em; }
+h2 { border-bottom: 2px solid #666; margin-top: 1.6em; }
+h3 { margin-bottom: 0.2em; }
+code { word-break: break-all; font-size: 0.9em; }
+ul, ol { padding-left: 1.3em; }
+li { margin-bottom: 0.6em; }
+.saltar { position: absolute; left: -999em; }
+.saltar:focus { position: static; }
+footer { border-top: 1px solid #666; margin-top: 2em; padding-top: 1em; text-align: center; }
+</style>
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header>
+<h1>Tiresias</h1>
+<p>Lector de pantalla libre para Android, en español. Sin Google Play Services, rápido y sin enviar nunca lo que hay en tu pantalla.</p>
+<nav aria-label="Secciones"><ul>
+<li><a href="#descargas">Descargas</a></li>
+<li><a href="#instalar">Cómo instalarlo</a></li>
+<li><a href="#play-protect">El aviso de Play Protect</a></li>
+<li><a href="#novedades">Novedades</a></li>
+<li><a href="#privacidad">Privacidad y seguridad</a></li>
+<li><a href="#requisitos">Requisitos</a></li>
+</ul></nav>
+</header>
+<main id="contenido">
+
+<h2 id="descargas">Descargas: versión {{VERSION}}</h2>
+<p>Publicada el {{FECHA}}. Elige la de tu móvil; si no lo sabes, casi todos los móviles de los últimos años son de 64 bits (ARM64).</p>
+<ul>
+{{DESCARGAS}}
+</ul>
+<p>Una vez instalado, Tiresias se actualiza solo desde este mismo servidor (Ajustes de Tiresias, Actualizaciones).</p>
+
+<h2 id="instalar">Cómo instalarlo</h2>
+<ol>
+<li>Descarga el APK de tu móvil y ábrelo. Android pedirá permiso para instalar apps desde el navegador o el gestor de archivos: concédelo solo para esta instalación.</li>
+<li>Si sale el aviso de Play Protect, sigue <a href="#play-protect">los pasos de abajo</a>.</li>
+<li>Abre Tiresias: su asistente te guía para activarlo. En Android 13 o posterior, al ser una app instalada a mano, Android pide además permitir los «ajustes restringidos» (en Ajustes, Aplicaciones, Tiresias, el menú de arriba a la derecha). El asistente te lleva hasta ahí.</li>
+<li>Si algo va mal: mantén pulsadas a la vez las dos teclas de volumen para ponerlo en pausa (vuelve al encender la pantalla), o desactívalo en Ajustes, Accesibilidad. Tres toques y mantener con cuatro dedos es el modo seguro: apaga todos los complementos al momento.</li>
+</ol>
+
+<h2 id="play-protect">El aviso de Play Protect</h2>
+<p>Tiresias no está en Google Play, así que Play Protect puede decir que no reconoce al desarrollador. Para instalarlo de todas formas:</p>
+<ol>
+<li>En el aviso, pulsa «Más» (o «Más detalles»).</li>
+<li>Debajo del texto que explica el riesgo hay dos enlaces dentro de la misma frase: «Más información» e «Instalar de todas formas». Pulsa «Instalar de todas formas».</li>
+<li>Con Tiresias 1.0.2 o posterior, esos enlaces se eligen deslizando arriba o abajo sobre el texto (Tiresias dice «con 2 enlaces») y se pulsan con un doble toque. Con TalkBack, en su menú, «Enlaces».</li>
+</ol>
+<p>Para comprobar que el APK es el de verdad, su certificado de firma tiene esta huella SHA-256:</p>
+<p><code>{{HUELLA}}</code></p>
+
+<h2 id="novedades">Novedades de la {{VERSION}}</h2>
+{{NOVEDADES}}
+
+<h2 id="privacidad">Privacidad y seguridad</h2>
+<ul>
+<li>Tiresias nunca registra, guarda ni envía el texto de tu pantalla. Lo que copia o recuerda (lo último dicho, los códigos de seguridad) vive solo en la memoria del móvil y se olvida al bloquearlo.</li>
+<li>No usa Google Play Services ni librerías de publicidad o de estadísticas. Las voces incluidas (eSpeak NG y Pico) funcionan sin conexión.</li>
+<li>La descripción con inteligencia artificial puede ser en el propio móvil; solo se manda una imagen a una IA de internet si tú lo eliges, con tu propia clave.</li>
+<li>Algunas apps de bancos bloquean los lectores de pantalla que no conocen. Si te pasa, dínoslo: Tiresias se declara como herramienta de accesibilidad, que es lo que piden esas apps.</li>
+</ul>
+
+<h2 id="requisitos">Requisitos</h2>
+<ul>
+<li>Android 7.0 o posterior. Las líneas braille por USB o Bluetooth necesitan Android 15 o posterior.</li>
+<li>Probado en el emulador de Android 17 con la batería de pruebas automáticas de cada versión. Sin probar aún en Android TV ni con una línea braille física.</li>
+</ul>
+</main>
+<footer>
+<p>Tiresias, lector de pantalla libre (GPL 3). Hermano de <a href="https://xebolax.synology.me/Tiresias/">Tiresias para Windows</a>.</p>
+</footer>
+</body>
+</html>

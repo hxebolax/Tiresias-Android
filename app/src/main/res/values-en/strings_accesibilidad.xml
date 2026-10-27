@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- English translation of values/strings_accesibilidad.xml. -->
+<resources>
+	<string name="aceptar">OK</string>
+	<string name="cancelar">Cancel</string>
+	<string name="cancelado">Cancelled</string>
+	<string name="espera_un_momento">One moment, please…</string>
+	<string name="volver">Back</string>
+	<string name="deshacer">Undo</string>
+	<string name="deshecho">Undone</string>
+	<string name="copiado">Copied</string>
+
+	<string name="abrir_menu">Open menu</string>
+	<string name="menu_lateral">Sections and options</string>
+
+	<string name="valor_por_ciento">%1$d percent</string>
+	<string name="valor_milisegundos">%1$d milliseconds</string>
+	<plurals name="valor_puntos">
+		<item quantity="one">%1$d point</item>
+		<item quantity="other">%1$d points</item>
+	</plurals>
+	<string name="posicion_reproduccion">Playback position</string>
+	<string name="posicion_texto">%1$s of %2$s, %3$d percent, %4$s left</string>
+
+	<plurals name="horas">
+		<item quantity="one">%1$d hour</item>
+		<item quantity="other">%1$d hours</item>
+	</plurals>
+	<plurals name="minutos">
+		<item quantity="one">%1$d minute</item>
+		<item quantity="other">%1$d minutes</item>
+	</plurals>
+	<plurals name="segundos">
+		<item quantity="one">%1$d second</item>
+		<item quantity="other">%1$d seconds</item>
+	</plurals>
+</resources>

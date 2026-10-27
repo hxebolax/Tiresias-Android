@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Lo que dice Tiresias de cada elemento: roles, estados y plantillas. Cada
+	frase del núcleo es la cadena f_<nombre> (Frase en nucleo/Plantillas.kt) y
+	cada plural p_<nombre> (FrasePlural). Para traducir Tiresias, traduce este
+	archivo entero: una prueba comprueba que no falta ninguna.
+	Las plantillas son frases completas con marcadores (%1$s, %1$d): nunca
+	se construyen uniendo trozos.
+-->
+<resources>
+	<!-- Roles -->
+	<string name="f_rol_boton">botón</string>
+	<string name="f_rol_boton_alternar">botón de alternar</string>
+	<string name="f_rol_casilla">casilla</string>
+	<string name="f_rol_interruptor">interruptor</string>
+	<string name="f_rol_opcion">opción</string>
+	<string name="f_rol_campo_texto">campo de texto</string>
+	<string name="f_rol_campo_contrasena">campo de contraseña</string>
+	<string name="f_rol_deslizador">deslizador</string>
+	<string name="f_rol_barra_progreso">barra de progreso</string>
+	<string name="f_rol_desplegable">desplegable</string>
+	<string name="f_rol_lista">lista</string>
+	<string name="f_rol_cuadricula">cuadrícula</string>
+	<string name="f_rol_tabla">tabla</string>
+	<string name="f_rol_pestana">pestaña</string>
+	<string name="f_rol_lista_pestanas">pestañas</string>
+	<string name="f_rol_paginador">páginas</string>
+	<string name="f_rol_enlace">enlace</string>
+	<string name="f_rol_imagen">imagen</string>
+	<string name="f_rol_menu">menú</string>
+	<string name="f_rol_elemento_menu">opción de menú</string>
+	<string name="f_rol_barra_herramientas">barra de herramientas</string>
+	<string name="f_rol_dialogo">diálogo</string>
+	<string name="f_rol_alerta">alerta</string>
+	<string name="f_rol_desplazable">zona desplazable</string>
+	<string name="f_rol_web">página web</string>
+	<string name="f_rol_selector_fecha">selector de fecha</string>
+	<string name="f_rol_selector_hora">selector de hora</string>
+	<string name="f_rol_selector_numero">selector de número</string>
+	<string name="f_rol_chip">chip</string>
+	<string name="f_rol_video">vídeo</string>
+	<string name="f_rol_mapa">mapa</string>
+	<string name="f_rol_tecla">tecla</string>
+	<string name="f_rol_calendario">calendario</string>
+	<string name="f_rol_editor_valor">editor de valor</string>
+	<string name="f_rol_region">región</string>
+	<string name="f_rol_navegacion">navegación</string>
+	<string name="f_rol_estado">estado</string>
+
+	<!-- Estados -->
+	<string name="f_marcado">marcado</string>
+	<string name="f_no_marcado">no marcado</string>
+	<string name="f_parcial">parcialmente marcado</string>
+	<string name="f_activado">activado</string>
+	<string name="f_desactivado">desactivado</string>
+	<string name="f_seleccionado">seleccionado</string>
+	<string name="f_no_disponible">no disponible</string>
+	<string name="f_expandido">expandido</string>
+	<string name="f_contraido">contraído</string>
+	<string name="f_expandido_parcial">parcialmente expandido</string>
+	<string name="f_obligatorio">obligatorio</string>
+	<string name="f_enlace_visitado">visitado</string>
+	<string name="f_editando">editando</string>
+	<string name="f_pulsado">pulsado</string>
+	<string name="f_no_pulsado">no pulsado</string>
+	<string name="f_cargando">cargando</string>
+
+	<!-- Plantillas -->
+	<string name="f_error">error: %1$s</string>
+	<string name="f_encabezado">encabezado</string>
+	<string name="f_encabezado_nivel">encabezado de nivel %1$d</string>
+	<string name="f_posicion">%1$d de %2$d</string>
+	<string name="f_fila_columna">fila %1$d, columna %2$d</string>
+	<string name="f_por_ciento">%1$d por ciento</string>
+	<string name="f_valor_de_rango">%1$s, entre %2$s y %3$s</string>
+	<string name="f_sin_nombre">sin nombre</string>
+	<string name="f_sin_nombre_id">%1$s, sin nombre</string>
+	<string name="f_tiene_acciones">con acciones</string>
+	<string name="f_panel">%1$s</string>
+	<string name="f_vacio">vacío</string>
+	<string name="f_espacio">%1$s, con espacios</string>
+
+	<!-- Pistas de uso -->
+	<string name="f_pista_pulsar">Toca dos veces para activar.</string>
+	<string name="f_pista_mantener">Toca dos veces y mantén para pulsación larga.</string>
+	<string name="f_pista_alternar">Toca dos veces para cambiar.</string>
+	<string name="f_pista_editar">Toca dos veces para escribir.</string>
+	<string name="f_pista_deslizador">Desliza arriba o abajo con el selector en Predeterminado, o usa el menú de acciones, para cambiar el valor.</string>
+	<string name="f_pista_expandir">Toca dos veces para expandir.</string>
+	<string name="f_pista_contraer">Toca dos veces para contraer.</string>
+	<string name="f_pista_acciones">Abre el menú de acciones para ver sus acciones.</string>
+	<string name="f_pista_acciones_gesto">%1$s para ver sus acciones.</string>
+	<string name="f_pista_levantar">Levanta el dedo para activar.</string>
+	<string name="f_pista_acciones_arriba_abajo">Desliza arriba o abajo para elegir una acción y toca dos veces para hacerla.</string>
+
+	<!-- Plurales del núcleo -->
+	<plurals name="p_lista_elementos">
+		<item quantity="one">lista con %1$d elemento</item>
+		<item quantity="many">lista con %1$d elementos</item>
+		<item quantity="other">lista con %1$d elementos</item>
+	</plurals>
+	<plurals name="p_cuadricula_filas">
+		<item quantity="one">cuadrícula con %1$d fila</item>
+		<item quantity="many">cuadrícula con %1$d filas</item>
+		<item quantity="other">cuadrícula con %1$d filas</item>
+	</plurals>
+	<plurals name="p_columnas">
+		<item quantity="one">%1$d columna</item>
+		<item quantity="many">%1$d columnas</item>
+		<item quantity="other">%1$d columnas</item>
+	</plurals>
+	<plurals name="p_repetido">
+		<item quantity="one">%1$s</item>
+		<item quantity="many">%1$s repetido %2$d veces</item>
+		<item quantity="other">%1$s repetido %2$d veces</item>
+	</plurals>
+	<plurals name="p_faltas">
+		<item quantity="one">%1$d falta de ortografía</item>
+		<item quantity="many">%1$d faltas de ortografía</item>
+		<item quantity="other">%1$d faltas de ortografía</item>
+	</plurals>
+	<plurals name="p_enlaces">
+		<item quantity="one">con %1$d enlace</item>
+		<item quantity="many">con %1$d enlaces</item>
+		<item quantity="other">con %1$d enlaces</item>
+	</plurals>
+	<plurals name="p_caracteres">
+		<item quantity="one">%1$d carácter</item>
+		<item quantity="many">%1$d caracteres</item>
+		<item quantity="other">%1$d caracteres</item>
+	</plurals>
+
+	<!-- Lectura de pantallas -->
+	<string name="lect_pantalla_bloqueo">Pantalla de bloqueo</string>
+	<string name="lect_dialogo">Diálogo</string>
+	<string name="lect_teclado">Teclado en pantalla</string>
+	<string name="lect_sin_titulo">Sin título</string>
+	<string name="nav_no_hay">No hay más %1$s</string>
+	<string name="aviso_notificacion">Notificación de %1$s: %2$s</string>
+
+	<!-- Edición de texto -->
+	<string name="edicion_punto">punto</string>
+	<string name="edicion_borrado">borrado %1$s</string>
+	<string name="edicion_seleccionado">seleccionado: %1$s</string>
+	<string name="edicion_linea_vacia">línea vacía</string>
+	<string name="edicion_copiado_texto">Copiado: %1$s</string>
+	<string name="edicion_cortado">Cortado</string>
+	<string name="edicion_pegado">Pegado</string>
+	<string name="edicion_todo_seleccionado">Todo seleccionado</string>
+	<string name="edicion_principio">Principio del texto</string>
+	<string name="edicion_final">Final del texto</string>
+	<string name="edicion_portapapeles_vacio">El portapapeles está vacío</string>
+	<string name="edicion_modo_seleccion_si">Modo selección activado: al moverte por el texto, se selecciona</string>
+	<string name="edicion_modo_seleccion_no">Modo selección desactivado</string>
+	<string name="edicion_trozo_guardado">Trozo guardado: %1$s. «Copiar» copia todos los guardados</string>
+	<plurals name="edicion_trozos_copiados">
+		<item quantity="one">Copiado %1$d trozo</item>
+		<item quantity="many">Copiados %1$d trozos</item>
+		<item quantity="other">Copiados %1$d trozos</item>
+	</plurals>
+
+	<!-- Voz -->
+	<string name="voz_mayuscula">mayúscula %1$s</string>
+	<string name="voz_espacio">espacio</string>
+	<string name="voz_motor_fallo">La voz %1$s no responde: Tiresias habla con su propia voz.</string>
+	<string name="voz_apagada">Voz desactivada. Para volver a oírla, toca tres veces con dos dedos y mantén.</string>
+	<string name="voz_encendida">Voz activada</string>
+	<string name="senior_inicio">Inicio. Son las %1$s.</string>
+	<string name="senior_nada_delante">No hay nada delante. Desliza a la derecha para ir a lo siguiente.</string>
+	<string name="senior_estas_en">Estás en %1$s</string>
+	<string name="senior_escribir">Para escribir, toca dos veces y saldrá el teclado</string>
+	<string name="senior_cambiar">Para cambiarlo, toca dos veces</string>
+	<string name="senior_activar">Para abrirlo, toca dos veces</string>
+	<string name="senior_mantener">Para más opciones, toca dos veces y deja el dedo en la pantalla</string>
+	<string name="senior_moverse">Desliza a la derecha o a la izquierda para moverte; las dos teclas de volumen a la vez te llevan al inicio</string>
+	<string name="senior_sos_aviso">Voy a llamar a %1$s para pedir ayuda. Toca la pantalla para cancelar.</string>
+	<string name="senior_sos_llamando">Llamando a %1$s</string>
+	<string name="senior_sos_cancelado">Llamada de ayuda cancelada</string>
+	<string name="senior_sos_sin_contacto">No hay contacto de ayuda. Se pone en Ajustes, Modo senior.</string>
+	<string name="senior_sos_sin_telefono">No hay ninguna app de teléfono para llamar.</string>
+	<string name="vigilar_puesto">Vigilando: %1$s. Te aviso cuando cambie.</string>
+	<string name="vigilar_nada">No hay nada que vigilar</string>
+	<string name="vigilar_quitado">Ya no se vigila</string>
+	<string name="vigilar_cambio">Ha cambiado: %1$s</string>
+	<string name="vigilar_fuera">Has salido de la app: ya no se vigila</string>
+	<string name="vigilar_desaparecido">Lo que vigilabas ya no está en la pantalla</string>
+	<string name="posicion_titulo">Ir al elemento número</string>
+	<string name="posicion_pista">Número del elemento</string>
+	<string name="posicion_pista_de">Número del elemento, de 1 a %1$d</string>
+	<string name="posicion_sin_lista">No estás en una lista</string>
+	<string name="posicion_mal">Ese número no está en la lista</string>
+	<string name="posicion_no_llega">No se pudo llegar a ese elemento</string>
+	<plurals name="resumen_avisos">
+		<item quantity="one">Tienes %1$d aviso de las últimas %2$d horas</item>
+		<item quantity="other">Tienes %1$d avisos de las últimas %2$d horas</item>
+	</plurals>
+	<string name="resumen_ninguno">No tienes avisos de las últimas %1$d horas</string>
+	<string name="resumen_app">%1$s: %2$d</string>
+	<string name="resumen_app_de">%1$s: %2$d, de %3$s</string>
+	<string name="resumen_y">" y "</string>
+	<string name="qr_buscando">Buscando códigos</string>
+	<string name="qr_ninguno">No hay ningún código QR ni de barras en la pantalla</string>
+	<string name="qr_error">No se pudieron leer los códigos</string>
+	<plurals name="qr_varios">
+		<item quantity="one">%1$d código</item>
+		<item quantity="other">%1$d códigos</item>
+	</plurals>
+	<string name="qr_tipo_qr">Código QR</string>
+	<string name="qr_tipo_barras">Código de barras</string>
+	<string name="qr_leido">%1$s: %2$s</string>
+	<string name="qr_titulo">%1$s leído</string>
+	<string name="qr_abrir">Abrirlo</string>
+	<string name="qr_copiar">Copiarlo</string>
+	<string name="qr_decir">Decirlo otra vez</string>
+	<string name="qr_copiado">Código copiado</string>
+	<string name="qr_sin_app">No hay ninguna app para abrirlo</string>
+</resources>

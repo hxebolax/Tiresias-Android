@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- «Voces de Tiresias» como motor de voz del sistema: sus ajustes en «Síntesis de voz». -->
+<tts-engine xmlns:android="http://schemas.android.com/apk/res/android"
+	android:settingsActivity="com.xebolax.tiresias.ui.ActividadAjustes" />

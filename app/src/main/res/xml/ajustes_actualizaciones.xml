@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto" app:title="@string/aj_seccion_actualizaciones">
+	<SwitchPreferenceCompat app:key="buscar_actualizaciones" app:title="@string/aj_buscar_act" app:summary="@string/aj_buscar_act_res" app:defaultValue="true" />
+	<ListPreference app:key="origen_actualizaciones" app:title="@string/aj_origen" app:entries="@array/origen_nombres" app:entryValues="@array/origen_valores" app:defaultValue="automatico" app:useSimpleSummaryProvider="true" />
+	<EditTextPreference app:key="url_actualizaciones" app:title="@string/aj_url_servidor" app:useSimpleSummaryProvider="true" />
+</PreferenceScreen>

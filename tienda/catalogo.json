@@ -1,0 +1,267 @@
+{
+    "formato":  1,
+    "complementos":  [
+                         {
+                             "id":  "anuncios",
+                             "nombre":  "Anuncios y patrocinados",
+                             "version":  "1.0",
+                             "autor":  "Héctor J. Benítez Corredera",
+                             "descripcion":  "Dice «Anuncio» delante de las publicaciones patrocinadas y de la publicidad, o las resume en una palabra para pasarlas de largo, y calla las notificaciones de promociones.",
+                             "nombre_en":  "Ads and sponsored posts",
+                             "descripcion_en":  "Says “Ad” before sponsored posts and advertising, or sums them up in one word so you can skip them, and silences promotional notifications.",
+                             "apps":  [
+                                          "*"
+                                      ],
+                             "permisos":  [
+                                              "voz"
+                                          ],
+                             "archivo":  "anuncios.js",
+                             "sha256":  "eaecf51e87b22d5137e552eda81e074b18533be63d7f99997856d83de40fa63f",
+                             "tamano":  4615
+                         },
+                         {
+                             "id":  "codigos-de-verificacion",
+                             "nombre":  "Códigos de seguridad",
+                             "version":  "2.0",
+                             "autor":  "Héctor J. Benítez Corredera",
+                             "descripcion":  "Encuentra los códigos de verificación de las notificaciones, los copia como dato sensible, los dice primero y cifra a cifra, y los borra del portapapeles pasado un tiempo. Órdenes para repetir, copiar y deletrear el último.",
+                             "nombre_en":  "Security codes",
+                             "descripcion_en":  "Finds verification codes in notifications, copies them as sensitive data, says them first digit by digit and clears them from the clipboard after a while. Commands to repeat, copy and spell the last one.",
+                             "apps":  [
+                                          "*"
+                                      ],
+                             "permisos":  [
+                                              "voz",
+                                              "portapapeles",
+                                              "braille"
+                                          ],
+                             "archivo":  "codigos-de-verificacion.js",
+                             "sha256":  "45d96de007905bacac63936ad98975c4ce7f8054d853230d8c7f795116836e54",
+                             "tamano":  19563
+                         },
+                         {
+                             "id":  "datos-del-texto",
+                             "nombre":  "Datos del texto",
+                             "version":  "1.0",
+                             "autor":  "Héctor J. Benítez Corredera",
+                             "descripcion":  "Copia los teléfonos, correos, enlaces, IBAN y números de pedido de un texto desde sus acciones, y abre el marcador, el correo o el enlace. Órdenes para copiar el texto del elemento y contar sus palabras.",
+                             "nombre_en":  "Text data",
+                             "descripcion_en":  "Copies phone numbers, emails, links, IBANs and order numbers from a text through its actions, and opens the dialer, email or link. Commands to copy the item\u0027s text and count its words.",
+                             "apps":  [
+                                          "*"
+                                      ],
+                             "permisos":  [
+                                              "voz",
+                                              "portapapeles",
+                                              "abrir"
+                                          ],
+                             "archivo":  "datos-del-texto.js",
+                             "sha256":  "fa014ef70012c9b51f7ad7b736c1c7d0bc2f434b75239bf57cf511da9a51a555",
+                             "tamano":  9143
+                         },
+                         {
+                             "id":  "lectura-limpia",
+                             "nombre":  "Lectura limpia",
+                             "version":  "1.0",
+                             "autor":  "Héctor J. Benítez Corredera",
+                             "descripcion":  "Enlaces por su web, números largos en grupos, sin caracteres invisibles, emojis y signos repetidos una vez, y hashtags por palabras. En todas las apps o solo en las que elijas.",
+                             "nombre_en":  "Clean reading",
+                             "descripcion_en":  "Links by their site, long numbers in groups, no invisible characters, repeated emojis and signs once, and hashtags word by word. In all apps or only the ones you choose.",
+                             "apps":  [
+                                          "*"
+                                      ],
+                             "permisos":  [
+
+                                          ],
+                             "archivo":  "lectura-limpia.js",
+                             "sha256":  "35ec2dd3feb9cd348061b3b8ca87bbaa1d65c94304d7abf3584e82fff98b7a7a",
+                             "tamano":  6605
+                         },
+                         {
+                             "id":  "letras-decorativas",
+                             "nombre":  "Letras decorativas",
+                             "version":  "1.0",
+                             "autor":  "Héctor J. Benítez Corredera",
+                             "descripcion":  "Lee en letras normales los nombres y textos escritos con letras de adorno (negritas y cursivas de Unicode, en círculos, de ancho completo, versalitas o tachadas), y los copia así.",
+                             "nombre_en":  "Fancy letters",
+                             "descripcion_en":  "Reads names and texts written with decorative Unicode letters (bold and italic, circled, full width, small caps or struck through) as normal letters, and copies them that way.",
+                             "apps":  [
+                                          "*"
+                                      ],
+                             "permisos":  [
+                                              "voz",
+                                              "portapapeles"
+                                          ],
+                             "archivo":  "letras-decorativas.js",
+                             "sha256":  "bc0ee3b047784a2d60a928d820ce0d0722d2f9f3525dcd356af21cfe608cf3c9",
+                             "tamano":  5869
+                         },
+                         {
+                             "id":  "llamadas",
+                             "nombre":  "Quién llama",
+                             "version":  "1.0",
+                             "autor":  "Héctor J. Benítez Corredera",
+                             "descripcion":  "Mientras suena una llamada del teléfono o de WhatsApp, Telegram, Signal y otras, repite quién llama y por qué app, y puede recordar el gesto para contestar.",
+                             "nombre_en":  "Who is calling",
+                             "descripcion_en":  "While a call from the phone or from WhatsApp, Telegram, Signal and others is ringing, it repeats who is calling and from which app, and can remind you of the answer gesture.",
+                             "apps":  [
+                                          "*"
+                                      ],
+                             "permisos":  [
+                                              "voz"
+                                          ],
+                             "archivo":  "llamadas.js",
+                             "sha256":  "d5bfeec75c14728e6b053f062494d79cc52cb78ddf84bba197fe59a5ea15da95",
+                             "tamano":  4371
+                         },
+                         {
+                             "id":  "luz",
+                             "nombre":  "Cuánta luz hay",
+                             "version":  "1.0",
+                             "autor":  "Héctor J. Benítez Corredera",
+                             "descripcion":  "Dice con el sensor del móvil si está oscuro, hay poca luz, luz normal o mucha, y tiene un detector que avisa al cambiar, para encontrar una luz encendida.",
+                             "nombre_en":  "How much light",
+                             "descripcion_en":  "Uses the phone sensor to say whether it is dark or there is little, normal or a lot of light, with a detector that announces changes, to find a light that is on.",
+                             "apps":  [
+                                          "*"
+                                      ],
+                             "permisos":  [
+                                              "voz"
+                                          ],
+                             "archivo":  "luz.js",
+                             "sha256":  "ac4a43bb52193266ff2db7a1c14d6cc1e11d0232a801e02aabcbe20994b1511c",
+                             "tamano":  4155
+                         },
+                         {
+                             "id":  "modo-braille",
+                             "nombre":  "Modo braille",
+                             "version":  "1.0",
+                             "autor":  "Héctor J. Benítez Corredera",
+                             "descripcion":  "Un menú en la línea braille para hacer cosas sin la pantalla: notas, abrir apps escribiendo su nombre, calculadora y hora, todo con el teclado de la línea.",
+                             "nombre_en":  "Braille mode",
+                             "descripcion_en":  "A menu on the braille display to do things without the screen: notes, opening apps by typing their name, a calculator and the time, all from the display\u0027s keyboard.",
+                             "apps":  [
+                                          "*"
+                                      ],
+                             "permisos":  [
+                                              "voz",
+                                              "braille",
+                                              "abrir"
+                                          ],
+                             "archivo":  "modo-braille.js",
+                             "sha256":  "a4545cfa646800173a4c317c725cdeae0b6d3a284ef98f0e985fd6a3b34bd287",
+                             "tamano":  14357
+                         },
+                         {
+                             "id":  "notificaciones-a-medida",
+                             "nombre":  "Notificaciones a tu medida",
+                             "version":  "1.1",
+                             "autor":  "Héctor J. Benítez Corredera",
+                             "descripcion":  "Cómo se dicen las notificaciones, sin emojis ni repeticiones, ráfagas agrupadas, descargas sin cada porcentaje, apps calladas, palabras importantes, horario de silencio y modo discreto. Con órdenes para repetir la última y para el resumen.",
+                             "nombre_en":  "Notifications your way",
+                             "descripcion_en":  "How notifications are spoken, without emojis or repeats, grouped bursts, downloads without every percentage, muted apps, important words, quiet hours and discreet mode. With commands to repeat the last one and for a summary.",
+                             "apps":  [
+                                          "*"
+                                      ],
+                             "permisos":  [
+                                              "voz"
+                                          ],
+                             "archivo":  "notificaciones-a-medida.js",
+                             "sha256":  "c5bf1703b7c326159881755f2dbe17c7cf28f2d154aaf2acad37fe2db0d3de90",
+                             "tamano":  15909
+                         },
+                         {
+                             "id":  "recordatorios",
+                             "nombre":  "Recordatorios",
+                             "version":  "1.0",
+                             "autor":  "Héctor J. Benítez Corredera",
+                             "descripcion":  "Recordatorios del día (la medicación, una cita): a su hora los dice con un sonido y los repite hasta que se marcan como hechos.",
+                             "nombre_en":  "Reminders",
+                             "descripcion_en":  "Daily reminders (medication, an appointment): at their time they are spoken with a sound and repeated until marked as done.",
+                             "apps":  [
+                                          "*"
+                                      ],
+                             "permisos":  [
+                                              "voz"
+                                          ],
+                             "archivo":  "recordatorios.js",
+                             "sha256":  "88aafdb79e5a9e7d57a0b9ce77fe97e539e4d43c19a0d697b211f78e56af34ec",
+                             "tamano":  8914
+                         },
+                         {
+                             "id":  "reloj-parlante",
+                             "nombre":  "Reloj parlante",
+                             "version":  "1.0",
+                             "autor":  "Héctor J. Benítez Corredera",
+                             "descripcion":  "Dice la hora cada hora, media hora o cuarto en las horas que elijas, y tiene órdenes para la hora, la fecha completa, un cronómetro y un temporizador.",
+                             "nombre_en":  "Talking clock",
+                             "descripcion_en":  "Speaks the time every hour, half hour or quarter during the hours you choose, with commands for the time, the full date, a stopwatch and a timer.",
+                             "apps":  [
+                                          "*"
+                                      ],
+                             "permisos":  [
+                                              "voz"
+                                          ],
+                             "archivo":  "reloj-parlante.js",
+                             "sha256":  "b75112e45d00d21c54e4494609f6fe635422eecfa898338994fa27697ec24436",
+                             "tamano":  13658
+                         },
+                         {
+                             "id":  "version-de-la-app",
+                             "nombre":  "Versión de la app",
+                             "version":  "1.0",
+                             "autor":  "Héctor J. Benítez Corredera",
+                             "descripcion":  "Dice el nombre, la versión y la fecha de la última actualización de la app de delante, y lo puede copiar para informar de un fallo.",
+                             "nombre_en":  "App version",
+                             "descripcion_en":  "Says the name, version and last update date of the app in front, and can copy it to report a problem.",
+                             "apps":  [
+                                          "*"
+                                      ],
+                             "permisos":  [
+                                              "voz",
+                                              "portapapeles"
+                                          ],
+                             "archivo":  "version-de-la-app.js",
+                             "sha256":  "9fb671d96815212bb65db83d95cc75d044cdfb041bc52a7376e8169c83f838e1",
+                             "tamano":  3675
+                         },
+                         {
+                             "id":  "vigilante-de-bateria",
+                             "nombre":  "Vigilante de la batería",
+                             "version":  "1.0",
+                             "autor":  "Héctor J. Benítez Corredera",
+                             "descripcion":  "Avisa al enchufar y desenchufar el cargador, al llegar al nivel elegido o a la carga completa, al bajar de los niveles de aviso y si la batería se calienta. Con una orden para el estado de la batería.",
+                             "nombre_en":  "Battery watcher",
+                             "descripcion_en":  "Announces when the charger is plugged in or unplugged, when the chosen level or a full charge is reached, when it drops below the warning levels and if the battery gets hot. With a command for the battery status.",
+                             "apps":  [
+                                          "*"
+                                      ],
+                             "permisos":  [
+                                              "voz"
+                                          ],
+                             "archivo":  "vigilante-de-bateria.js",
+                             "sha256":  "2d23948be7135f817ff9037eded300fa44ddc2b82f2b8599c492f9721a53c635",
+                             "tamano":  6280
+                         }
+                     ],
+    "temas":  [
+                  {
+                      "id":  "madera",
+                      "nombre":  "Madera",
+                      "descripcion":  "Golpes cortos como de caja china: se oyen bien sin tapar la voz.",
+                      "autor":  "Tiresias",
+                      "archivo":  "madera.zip",
+                      "sha256":  "78d862b8d63c6ad0322d9003072a074fd8e4060f6a5c8d2b9e3e7ddfa2d9013a",
+                      "tamano":  40897
+                  },
+                  {
+                      "id":  "suave",
+                      "nombre":  "Suave",
+                      "descripcion":  "Tonos más graves y redondos, para quien encuentra agudos los de Tiresias.",
+                      "autor":  "Tiresias",
+                      "archivo":  "suave.zip",
+                      "sha256":  "c9ee488daa51176b1b3a85f166370068fff05912b53acea477beea01fdf78d21",
+                      "tamano":  100557
+                  }
+              ]
+}

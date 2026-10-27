@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto" app:title="@string/aj_seccion_notificaciones">
+	<SwitchPreferenceCompat app:key="leer_notificaciones" app:title="@string/aj_leer_notificaciones" app:summary="@string/aj_leer_notificaciones_res" app:defaultValue="true" />
+	<SwitchPreferenceCompat app:key="notificaciones_no_molestar" app:title="@string/aj_notif_no_molestar" app:defaultValue="false" />
+	<SwitchPreferenceCompat app:key="notificaciones_en_llamada" app:title="@string/aj_notif_llamada" app:defaultValue="false" />
+	<Preference app:key="apps_silenciadas_info" app:title="@string/aj_apps_silenciadas" app:summary="@string/aj_apps_silenciadas_res" app:selectable="false" />
+	<ListPreference app:key="al_encender" app:title="@string/aj_al_encender" app:entries="@array/al_encender_nombres" app:entryValues="@array/al_encender_valores" app:defaultValue="nada" app:useSimpleSummaryProvider="true" />
+	<ListPreference app:key="al_desbloquear" app:title="@string/aj_al_desbloquear" app:entries="@array/al_desbloquear_nombres" app:entryValues="@array/al_desbloquear_valores" app:defaultValue="nada" app:useSimpleSummaryProvider="true" />
+	<SwitchPreferenceCompat app:key="callar_bloqueo" app:title="@string/aj_callar_bloqueo" app:summary="@string/aj_callar_bloqueo_res" app:defaultValue="false" />
+	<Preference app:key="ordenar_estado" app:title="@string/ordenar_estado_titulo" app:summary="@string/ordenar_estado_res" />
+	<SwitchPreferenceCompat app:key="al_apagar" app:title="@string/aj_al_apagar" app:summary="@string/aj_al_apagar_res" app:defaultValue="false" />
+</PreferenceScreen>

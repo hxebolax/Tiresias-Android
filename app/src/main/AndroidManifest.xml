@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<!-- Actualizaciones, recursos descargables e IA con la clave del usuario (solo cuando se piden) -->
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<!-- Instalar las actualizaciones de Tiresias y del complemento de Gemini Nano (siempre lo confirma el usuario) -->
+	<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+	<!-- Pedir que Android no cierre el lector para ahorrar batería (lo confirma el usuario) -->
+	<uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<!-- Órdenes por voz y dictado (opcional; se pide en Ajustes) -->
+	<uses-permission android:name="android.permission.RECORD_AUDIO" />
+	<!-- Responder y colgar llamadas con un gesto (opcional; se pide en Ajustes) -->
+	<uses-permission android:name="android.permission.ANSWER_PHONE_CALLS" />
+	<!-- Modo senior: llamar al contacto de ayuda (SOS); sin el permiso se abre el marcador con el número -->
+	<uses-permission android:name="android.permission.CALL_PHONE" />
+	<!-- Avisos de las descargas de modelos (Android 13+) -->
+	<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+	<!-- Líneas braille por Bluetooth (Android 15+, BrailleDisplayController): solo si el usuario lo concede -->
+	<uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+	<!-- Pasar la llamada al altavoz al apartar el móvil de la oreja: Android no la da a los lectores; el usuario la da con adb -->
+	<uses-permission android:name="android.permission.MANAGE_ONGOING_CALLS" tools:ignore="ProtectedPermissions" />
+	<!-- USB y Bluetooth son opcionales: Tiresias se instala en cualquier móvil -->
+	<uses-feature android:name="android.hardware.usb.host" android:required="false" />
+	<uses-feature android:name="android.hardware.bluetooth" android:required="false" />
+	<!-- Y también en televisores (con mando) y tabletas sin teléfono ni micrófono -->
+	<uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+	<uses-feature android:name="android.software.leanback" android:required="false" />
+	<uses-feature android:name="android.hardware.telephony" android:required="false" />
+	<uses-feature android:name="android.hardware.microphone" android:required="false" />
+	<uses-feature android:name="android.hardware.sensor.proximity" android:required="false" />
+
+	<!-- Visibilidad de paquetes (Android 11+): motores de voz, el complemento de Gemini Nano, AICore y las apps para abrir por voz -->
+	<queries>
+		<intent>
+			<action android:name="android.intent.action.TTS_SERVICE" />
+		</intent>
+		<intent>
+			<action android:name="android.intent.action.MAIN" />
+			<category android:name="android.intent.category.LAUNCHER" />
+		</intent>
+		<intent>
+			<action android:name="android.speech.RecognitionService" />
+		</intent>
+		<package android:name="com.xebolax.tiresias.nano" />
+		<package android:name="com.google.android.aicore" />
+	</queries>
+
+	<application
+		android:name=".TiresiasApp"
+		android:allowBackup="false"
+		android:enableOnBackInvokedCallback="true"
+		android:banner="@drawable/banner_tv"
+		android:icon="@mipmap/ic_launcher"
+		android:label="@string/app_name"
+		android:supportsRtl="true"
+		android:theme="@style/Tema.Tiresias"
+		tools:targetApi="33">
+		<!-- ONNX Runtime arranca solo su telemetría (con un identificador del dispositivo): fuera. Tiresias no envía nada -->
+		<provider
+			android:name="ai.onnxruntime.TelemetryInitializer"
+			android:authorities="${applicationId}.onnxruntime_telemetry_initializer"
+			tools:node="remove" />
+
+		<activity
+			android:name=".ui.ActividadPrincipal"
+			android:exported="true">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+				<!-- En el lanzador de Android TV -->
+				<category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+			</intent-filter>
+		</activity>
+		<activity android:name=".ui.ActividadOrdenar" android:exported="false" />
+		<activity android:name=".ui.ActividadSonidos" android:exported="false" />
+		<activity android:name=".ui.ActividadPersonas" android:exported="false" />
+		<activity android:name=".ui.ActividadAjustes" android:exported="true" android:label="@string/ui_ajustes" />
+		<activity android:name=".ui.ActividadTutorial" android:exported="false" android:label="@string/ui_tutorial" />
+		<activity android:name=".ui.ActividadAsistente" android:exported="false" android:label="@string/ui_asistente" />
+		<activity android:name=".ui.ActividadRecursos" android:exported="false" android:label="@string/ui_recursos" />
+		<activity android:name=".ui.ActividadGestos" android:exported="false" android:label="@string/ui_gestos" />
+		<activity android:name=".ui.ActividadDiccionario" android:exported="false" android:label="@string/ui_diccionario" />
+		<activity android:name=".ui.ActividadEtiquetas" android:exported="false" android:label="@string/ui_etiquetas" />
+		<activity android:name=".ui.ActividadPerfiles" android:exported="false" android:label="@string/ui_perfiles" />
+		<activity android:name=".ui.ActividadComplementos" android:exported="false" android:label="@string/ui_complementos" />
+		<activity android:name=".ui.ActividadAjustesComplemento" android:exported="false" />
+		<activity android:name=".ui.ActividadTeclasBraille" android:exported="false" />
+		<activity android:name=".ui.ActividadEloquence" android:exported="false" />
+		<activity android:name=".ui.ActividadModoSenior" android:exported="false" />
+		<!-- «Leer con Tiresias»: una imagen compartida desde otra app (sus códigos QR y su texto) -->
+		<activity android:name=".ui.ActividadImagen" android:exported="true" android:label="@string/imagen_compartir">
+			<intent-filter>
+				<action android:name="android.intent.action.SEND" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<data android:mimeType="image/*" />
+			</intent-filter>
+		</activity>
+		<activity android:name=".ui.ActividadManual" android:exported="false" android:label="@string/ui_manual" />
+		<activity android:name=".ui.ActividadAcerca" android:exported="false" android:label="@string/ui_acerca" />
+
+		<!--
+			El lector de pantalla. De arranque directo: habla en la pantalla de
+			bloqueo justo después de reiniciar (PIN con voz).
+		-->
+		<service
+			android:name=".servicio.ServicioTiresias"
+			android:directBootAware="true"
+			android:exported="true"
+			android:label="@string/servicio_nombre"
+			android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+			<intent-filter>
+				<action android:name="android.accessibilityservice.AccessibilityService" />
+			</intent-filter>
+			<meta-data
+				android:name="android.accessibilityservice"
+				android:resource="@xml/servicio_tiresias" />
+		</service>
+
+		<!-- «Voces de Tiresias» como motor de voz del sistema (eSpeak NG y Pico), también antes de desbloquear -->
+		<service
+			android:name=".tts.ServicioTtsTiresias"
+			android:directBootAware="true"
+			android:exported="true"
+			android:label="@string/tts_nombre">
+			<intent-filter>
+				<action android:name="android.intent.action.TTS_SERVICE" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+			<meta-data
+				android:name="android.speech.tts"
+				android:resource="@xml/motor_tts" />
+		</service>
+		<activity
+			android:name=".tts.ActividadDatosVoz"
+			android:exported="true"
+			android:theme="@android:style/Theme.NoDisplay">
+			<intent-filter>
+				<action android:name="android.speech.tts.engine.CHECK_TTS_DATA" />
+				<action android:name="android.speech.tts.engine.INSTALL_TTS_DATA" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+
+		<!-- Teclado braille en pantalla -->
+		<service
+			android:name=".braille.TecladoBraille"
+			android:exported="true"
+			android:label="@string/braille_teclado_nombre"
+			android:permission="android.permission.BIND_INPUT_METHOD">
+			<intent-filter>
+				<action android:name="android.view.InputMethod" />
+			</intent-filter>
+			<meta-data
+				android:name="android.view.im"
+				android:resource="@xml/metodo_braille" />
+		</service>
+
+		<!-- La IA descargada, en su propio proceso: si se queda sin memoria, el lector sigue hablando -->
+		<!-- API para otras apps (docs/api.md): exportado a propósito; cada app necesita el permiso del usuario -->
+		<service
+			android:name=".api.ServicioApi"
+			android:exported="true"
+			tools:ignore="ExportedService">
+			<intent-filter>
+				<action android:name="com.xebolax.tiresias.API" />
+			</intent-filter>
+		</service>
+
+		<service
+			android:name=".ia.ServicioIALocal"
+			android:exported="false"
+			android:process=":ia" />
+
+		<receiver android:name=".actualizaciones.ResultadoInstalacionReceiver" android:exported="false" />
+
+		<provider
+			android:name="androidx.core.content.FileProvider"
+			android:authorities="${applicationId}.archivos"
+			android:exported="false"
+			android:grantUriPermissions="true">
+			<meta-data
+				android:name="android.support.FILE_PROVIDER_PATHS"
+				android:resource="@xml/rutas_archivos" />
+		</provider>
+		<!-- Altavoz al apartar el móvil de la oreja: Android lo enlaza durante las llamadas solo con el permiso dado por adb -->
+		<service
+			android:name=".servicio.AltavozEnLlamada"
+			android:directBootAware="true"
+			android:exported="true"
+			android:permission="android.permission.BIND_INCALL_SERVICE">
+			<meta-data android:name="android.telecom.IN_CALL_SERVICE_UI" android:value="false" />
+			<intent-filter>
+				<action android:name="android.telecom.InCallService" />
+			</intent-filter>
+		</service>
+		<!-- Ajustes rápidos: pausar y reanudar el toque directo de las apps -->
+		<service
+			android:name=".servicio.MosaicoToqueDirecto"
+			android:exported="true"
+			android:icon="@drawable/ic_toque_directo"
+			android:label="@string/mosaico_toque_directo"
+			android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+			<intent-filter>
+				<action android:name="android.service.quicksettings.action.QS_TILE" />
+			</intent-filter>
+		</service>
+	</application>
+</manifest>

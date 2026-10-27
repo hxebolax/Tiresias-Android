@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ajustes: una entrada por sección (cada una, su pantalla y su archivo). -->
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+	<Preference app:key="modo_senior" app:title="@string/aj_modo_senior" app:summary="@string/aj_modo_senior_res" />
+	<Preference app:key="seccion_voz" app:title="@string/aj_seccion_voz" app:summary="@string/aj_seccion_voz_res" app:fragment="com.xebolax.tiresias.ui.ActividadAjustes$Seccion" />
+	<Preference app:key="seccion_lectura" app:title="@string/aj_seccion_lectura" app:summary="@string/aj_seccion_lectura_res" app:fragment="com.xebolax.tiresias.ui.ActividadAjustes$Seccion" />
+	<Preference app:key="seccion_navegacion" app:title="@string/aj_seccion_navegacion" app:summary="@string/aj_seccion_navegacion_res" app:fragment="com.xebolax.tiresias.ui.ActividadAjustes$Seccion" />
+	<Preference app:key="seccion_teclado" app:title="@string/aj_seccion_teclado" app:summary="@string/aj_seccion_teclado_res" app:fragment="com.xebolax.tiresias.ui.ActividadAjustes$Seccion" />
+	<Preference app:key="seccion_braille" app:title="@string/aj_seccion_braille" app:summary="@string/aj_seccion_braille_res" app:fragment="com.xebolax.tiresias.ui.ActividadAjustes$Seccion" />
+	<Preference app:key="seccion_notificaciones" app:title="@string/aj_seccion_notificaciones" app:summary="@string/aj_seccion_notificaciones_res" app:fragment="com.xebolax.tiresias.ui.ActividadAjustes$Seccion" />
+	<Preference app:key="seccion_ia" app:title="@string/aj_seccion_ia" app:summary="@string/aj_seccion_ia_res" app:fragment="com.xebolax.tiresias.ui.ActividadAjustes$Seccion" />
+	<Preference app:key="seccion_actualizaciones" app:title="@string/aj_seccion_actualizaciones" app:summary="@string/aj_seccion_actualizaciones_res" app:fragment="com.xebolax.tiresias.ui.ActividadAjustes$Seccion" />
+	<Preference app:key="api_apps" app:title="@string/aj_api" app:summary="@string/aj_api_res" />
+	<Preference app:key="copia_guardar" app:title="@string/aj_copia_guardar" app:summary="@string/aj_copia_guardar_res" />
+	<Preference app:key="copia_recuperar" app:title="@string/aj_copia_recuperar" app:summary="@string/aj_copia_recuperar_res" />
+	<ListPreference app:key="idioma" app:title="@string/aj_idioma" app:entries="@array/idiomas_nombres" app:entryValues="@array/idiomas_valores" app:defaultValue="" app:useSimpleSummaryProvider="true" />
+</PreferenceScreen>

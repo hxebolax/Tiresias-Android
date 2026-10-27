@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Lo que Tiresias comparte con otras apps: capturas para el complemento de IA, el registro y las copias de seguridad. -->
+<paths>
+	<cache-path name="vision" path="vision/" />
+	<cache-path name="compartir" path="compartir/" />
+</paths>

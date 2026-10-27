@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" app:title="@string/aj_seccion_ia">
+	<SwitchPreferenceCompat app:key="sonido_espera" app:title="@string/aj_sonido_espera" app:summary="@string/aj_sonido_espera_res" app:defaultValue="true" />
+	<SwitchPreferenceCompat app:key="aviso_espera" app:title="@string/aj_aviso_espera" app:summary="@string/aj_aviso_espera_res" app:defaultValue="true" />
+	<Preference app:key="personas" app:title="@string/personas_titulo" app:summary="@string/personas_res" />
+	<SwitchPreferenceCompat app:key="reconocer_personas" app:title="@string/aj_reconocer_personas" app:summary="@string/aj_reconocer_personas_res" app:defaultValue="true" />
+	<SwitchPreferenceCompat app:key="personas_nube" app:title="@string/aj_personas_nube" app:summary="@string/aj_personas_nube_res" app:defaultValue="false" app:dependency="reconocer_personas" />
+	<ListPreference app:key="iconos" app:title="@string/aj_iconos" app:entries="@array/iconos_nombres" app:entryValues="@array/iconos_valores" app:defaultValue="ocr" app:useSimpleSummaryProvider="true" />
+	<ListPreference app:key="ia_proveedor" app:title="@string/aj_ia_proveedor" app:entries="@array/ia_nombres" app:entryValues="@array/ia_valores" app:useSimpleSummaryProvider="true" />
+	<Preference app:key="ia_info" app:title="@string/aj_ia_info" app:summary="@string/aj_ia_info_res" app:selectable="false" />
+	<SwitchPreferenceCompat app:key="ia_local_gpu" app:title="@string/aj_ia_gpu" app:summary="@string/aj_ia_gpu_res" app:defaultValue="false" />
+	<PreferenceCategory app:title="@string/aj_cat_ia_internet">
+		<EditTextPreference app:key="ia_clave_claude" app:title="@string/aj_clave_claude" />
+		<EditTextPreference app:key="ia_modelo_claude" app:title="@string/aj_modelo_claude" app:useSimpleSummaryProvider="true" />
+		<EditTextPreference app:key="ia_clave_openai" app:title="@string/aj_clave_openai" />
+		<EditTextPreference app:key="ia_modelo_openai" app:title="@string/aj_modelo_openai" app:useSimpleSummaryProvider="true" />
+		<EditTextPreference app:key="ia_clave_gemini" app:title="@string/aj_clave_gemini" />
+		<EditTextPreference app:key="ia_modelo_gemini" app:title="@string/aj_modelo_gemini" app:useSimpleSummaryProvider="true" />
+		<EditTextPreference app:key="ia_url_compatible" app:title="@string/aj_url_compatible" app:summary="@string/aj_url_compatible_res" />
+		<EditTextPreference app:key="ia_clave_compatible" app:title="@string/aj_clave_compatible" />
+		<EditTextPreference app:key="ia_modelo_compatible" app:title="@string/aj_modelo_compatible" app:useSimpleSummaryProvider="true" />
+	</PreferenceCategory>
+	<com.xebolax.tiresias.accesibilidad.DeslizadorAjuste app:key="continua_intervalo" app:title="@string/aj_continua_intervalo" app:min="3" android:max="120" app:defaultValue="10" />
+	<com.xebolax.tiresias.accesibilidad.DeslizadorAjuste app:key="continua_minutos" app:title="@string/aj_continua_minutos" app:min="1" android:max="120" app:defaultValue="10" />
+</PreferenceScreen>

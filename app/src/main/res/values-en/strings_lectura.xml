@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	English translation of values/strings_lectura.xml: what Tiresias says about
+	each item (roles, states and templates). Templates are full sentences with
+	placeholders (%1$s, %1$d); they are never built by joining pieces.
+-->
+<resources>
+	<!-- Roles -->
+	<string name="f_rol_boton">button</string>
+	<string name="f_rol_boton_alternar">toggle button</string>
+	<string name="f_rol_casilla">checkbox</string>
+	<string name="f_rol_interruptor">switch</string>
+	<string name="f_rol_opcion">radio button</string>
+	<string name="f_rol_campo_texto">edit box</string>
+	<string name="f_rol_campo_contrasena">password field</string>
+	<string name="f_rol_deslizador">slider</string>
+	<string name="f_rol_barra_progreso">progress bar</string>
+	<string name="f_rol_desplegable">drop-down list</string>
+	<string name="f_rol_lista">list</string>
+	<string name="f_rol_cuadricula">grid</string>
+	<string name="f_rol_tabla">table</string>
+	<string name="f_rol_pestana">tab</string>
+	<string name="f_rol_lista_pestanas">tabs</string>
+	<string name="f_rol_paginador">pages</string>
+	<string name="f_rol_enlace">link</string>
+	<string name="f_rol_imagen">image</string>
+	<string name="f_rol_menu">menu</string>
+	<string name="f_rol_elemento_menu">menu item</string>
+	<string name="f_rol_barra_herramientas">toolbar</string>
+	<string name="f_rol_dialogo">dialog</string>
+	<string name="f_rol_alerta">alert</string>
+	<string name="f_rol_desplazable">scrollable area</string>
+	<string name="f_rol_web">web page</string>
+	<string name="f_rol_selector_fecha">date picker</string>
+	<string name="f_rol_selector_hora">time picker</string>
+	<string name="f_rol_selector_numero">number picker</string>
+	<string name="f_rol_chip">chip</string>
+	<string name="f_rol_video">video</string>
+	<string name="f_rol_mapa">map</string>
+	<string name="f_rol_tecla">key</string>
+	<string name="f_rol_calendario">calendar</string>
+	<string name="f_rol_editor_valor">value editor</string>
+	<string name="f_rol_region">region</string>
+	<string name="f_rol_navegacion">navigation</string>
+	<string name="f_rol_estado">status</string>
+
+	<!-- States -->
+	<string name="f_marcado">checked</string>
+	<string name="f_no_marcado">not checked</string>
+	<string name="f_parcial">partially checked</string>
+	<string name="f_activado">on</string>
+	<string name="f_desactivado">off</string>
+	<string name="f_seleccionado">selected</string>
+	<string name="f_no_disponible">disabled</string>
+	<string name="f_expandido">expanded</string>
+	<string name="f_contraido">collapsed</string>
+	<string name="f_expandido_parcial">partially expanded</string>
+	<string name="f_obligatorio">required</string>
+	<string name="f_enlace_visitado">visited</string>
+	<string name="f_editando">editing</string>
+	<string name="f_pulsado">pressed</string>
+	<string name="f_no_pulsado">not pressed</string>
+	<string name="f_cargando">loading</string>
+
+	<!-- Templates -->
+	<string name="f_error">error: %1$s</string>
+	<string name="f_encabezado">heading</string>
+	<string name="f_encabezado_nivel">heading level %1$d</string>
+	<string name="f_posicion">%1$d of %2$d</string>
+	<string name="f_fila_columna">row %1$d, column %2$d</string>
+	<string name="f_por_ciento">%1$d percent</string>
+	<string name="f_valor_de_rango">%1$s, between %2$s and %3$s</string>
+	<string name="f_sin_nombre">unlabeled</string>
+	<string name="f_sin_nombre_id">%1$s, unlabeled</string>
+	<string name="f_tiene_acciones">actions available</string>
+	<string name="f_panel">%1$s</string>
+	<string name="f_vacio">empty</string>
+	<string name="f_espacio">%1$s, with spaces</string>
+
+	<!-- Usage hints -->
+	<string name="f_pista_pulsar">Double-tap to activate.</string>
+	<string name="f_pista_mantener">Double-tap and hold to long press.</string>
+	<string name="f_pista_alternar">Double-tap to toggle.</string>
+	<string name="f_pista_editar">Double-tap to edit text.</string>
+	<string name="f_pista_deslizador">Swipe up or down with the reading control on Default, or use the actions menu, to change the value.</string>
+	<string name="f_pista_expandir">Double-tap to expand.</string>
+	<string name="f_pista_contraer">Double-tap to collapse.</string>
+	<string name="f_pista_acciones_gesto">%1$s to see its actions.</string>
+	<string name="f_pista_levantar">Lift your finger to activate.</string>
+	<string name="f_pista_acciones_arriba_abajo">Swipe up or down to choose an action and double-tap to do it.</string>
+	<string name="f_pista_acciones">Open the actions menu to see its actions.</string>
+
+	<!-- Core plurals -->
+	<plurals name="p_lista_elementos">
+		<item quantity="one">list, %1$d item</item>
+		<item quantity="other">list, %1$d items</item>
+	</plurals>
+	<plurals name="p_cuadricula_filas">
+		<item quantity="one">grid, %1$d row</item>
+		<item quantity="other">grid, %1$d rows</item>
+	</plurals>
+	<plurals name="p_columnas">
+		<item quantity="one">%1$d column</item>
+		<item quantity="other">%1$d columns</item>
+	</plurals>
+	<plurals name="p_repetido">
+		<item quantity="one">%1$s</item>
+		<item quantity="other">%1$s repeated %2$d times</item>
+	</plurals>
+	<plurals name="p_faltas">
+		<item quantity="one">%1$d spelling mistake</item>
+		<item quantity="other">%1$d spelling mistakes</item>
+	</plurals>
+	<plurals name="p_enlaces">
+		<item quantity="one">with %1$d link</item>
+		<item quantity="other">with %1$d links</item>
+	</plurals>
+	<plurals name="p_caracteres">
+		<item quantity="one">%1$d character</item>
+		<item quantity="other">%1$d characters</item>
+	</plurals>
+
+	<!-- Screen reading -->
+	<string name="lect_pantalla_bloqueo">Lock screen</string>
+	<string name="lect_dialogo">Dialog</string>
+	<string name="lect_teclado">On-screen keyboard</string>
+	<string name="lect_sin_titulo">Untitled</string>
+	<string name="nav_no_hay">No more %1$s</string>
+	<string name="aviso_notificacion">Notification from %1$s: %2$s</string>
+
+	<!-- Text editing -->
+	<string name="edicion_punto">dot</string>
+	<string name="edicion_borrado">%1$s deleted</string>
+	<string name="edicion_seleccionado">selected: %1$s</string>
+	<string name="edicion_linea_vacia">blank line</string>
+	<string name="edicion_copiado_texto">Copied: %1$s</string>
+	<string name="edicion_cortado">Cut</string>
+	<string name="edicion_pegado">Pasted</string>
+	<string name="edicion_todo_seleccionado">All selected</string>
+	<string name="edicion_principio">Start of text</string>
+	<string name="edicion_final">End of text</string>
+	<string name="edicion_portapapeles_vacio">The clipboard is empty</string>
+	<string name="edicion_modo_seleccion_si">Selection mode on: moving through the text selects it</string>
+	<string name="edicion_modo_seleccion_no">Selection mode off</string>
+	<string name="edicion_trozo_guardado">Piece saved: %1$s. “Copy” copies all the saved ones</string>
+	<plurals name="edicion_trozos_copiados">
+		<item quantity="one">Copied %1$d piece</item>
+		<item quantity="other">Copied %1$d pieces</item>
+	</plurals>
+
+	<!-- Voice -->
+	<string name="voz_mayuscula">cap %1$s</string>
+	<string name="voz_espacio">space</string>
+	<string name="voz_motor_fallo">The voice %1$s isn\'t responding: Tiresias is using its own voice.</string>
+	<string name="voz_apagada">Speech off. To hear it again, two-finger triple-tap and hold.</string>
+	<string name="voz_encendida">Speech on</string>
+	<string name="senior_inicio">Home. It is %1$s.</string>
+	<string name="senior_nada_delante">There is nothing in front. Swipe right to go to the next item.</string>
+	<string name="senior_estas_en">You are on %1$s</string>
+	<string name="senior_escribir">To type, double tap and the keyboard will appear</string>
+	<string name="senior_cambiar">To change it, double tap</string>
+	<string name="senior_activar">To open it, double tap</string>
+	<string name="senior_mantener">For more options, double tap and keep your finger on the screen</string>
+	<string name="senior_moverse">Swipe right or left to move; both volume keys together take you Home</string>
+	<string name="senior_sos_aviso">I am going to call %1$s for help. Touch the screen to cancel.</string>
+	<string name="senior_sos_llamando">Calling %1$s</string>
+	<string name="senior_sos_cancelado">Help call cancelled</string>
+	<string name="senior_sos_sin_contacto">There is no help contact. Set it in Settings, Senior mode.</string>
+	<string name="senior_sos_sin_telefono">There is no phone app to call with.</string>
+	<string name="vigilar_puesto">Watching: %1$s. I will tell you when it changes.</string>
+	<string name="vigilar_nada">There is nothing to watch</string>
+	<string name="vigilar_quitado">No longer watching</string>
+	<string name="vigilar_cambio">Changed: %1$s</string>
+	<string name="vigilar_fuera">You left the app: no longer watching</string>
+	<string name="vigilar_desaparecido">What you were watching is no longer on the screen</string>
+	<string name="posicion_titulo">Go to item number</string>
+	<string name="posicion_pista">Item number</string>
+	<string name="posicion_pista_de">Item number, from 1 to %1$d</string>
+	<string name="posicion_sin_lista">You are not in a list</string>
+	<string name="posicion_mal">That number is not in the list</string>
+	<string name="posicion_no_llega">Could not reach that item</string>
+	<plurals name="resumen_avisos">
+		<item quantity="one">You have %1$d notification from the last %2$d hours</item>
+		<item quantity="other">You have %1$d notifications from the last %2$d hours</item>
+	</plurals>
+	<string name="resumen_ninguno">You have no notifications from the last %1$d hours</string>
+	<string name="resumen_app">%1$s: %2$d</string>
+	<string name="resumen_app_de">%1$s: %2$d, from %3$s</string>
+	<string name="resumen_y">" and "</string>
+	<string name="qr_buscando">Looking for codes</string>
+	<string name="qr_ninguno">There is no QR code or barcode on the screen</string>
+	<string name="qr_error">The codes could not be read</string>
+	<plurals name="qr_varios">
+		<item quantity="one">%1$d code</item>
+		<item quantity="other">%1$d codes</item>
+	</plurals>
+	<string name="qr_tipo_qr">QR code</string>
+	<string name="qr_tipo_barras">Barcode</string>
+	<string name="qr_leido">%1$s: %2$s</string>
+	<string name="qr_titulo">%1$s read</string>
+	<string name="qr_abrir">Open it</string>
+	<string name="qr_copiar">Copy it</string>
+	<string name="qr_decir">Say it again</string>
+	<string name="qr_copiado">Code copied</string>
+	<string name="qr_sin_app">There is no app to open it</string>
+</resources>

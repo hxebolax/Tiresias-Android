@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Menú lateral (cajón de navegación de Material 3). Arriba, los destinos;
+	tras el divisor, lo general. Ajustes se abre solo desde aquí.
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<group android:id="@+id/grupo_destinos">
+		<item android:id="@+id/lateral_inicio" android:icon="@drawable/ic_inicio" android:title="@string/ui_inicio" />
+		<item android:id="@+id/lateral_recursos" android:icon="@drawable/ic_asistente" android:title="@string/ui_recursos" />
+		<item android:id="@+id/lateral_gestos" android:icon="@drawable/ic_asistente" android:title="@string/ui_gestos" />
+		<item android:id="@+id/lateral_diccionario" android:icon="@drawable/ic_manual" android:title="@string/ui_diccionario" />
+		<item android:id="@+id/lateral_etiquetas" android:icon="@drawable/ic_manual" android:title="@string/ui_etiquetas" />
+		<item android:id="@+id/lateral_perfiles" android:icon="@drawable/ic_ajustes" android:title="@string/ui_perfiles" />
+		<item android:id="@+id/lateral_complementos" android:icon="@drawable/ic_asistente" android:title="@string/ui_complementos" />
+		<item android:id="@+id/lateral_tutorial" android:icon="@drawable/ic_asistente" android:title="@string/ui_tutorial" />
+	</group>
+	<group android:id="@+id/grupo_general">
+		<item android:id="@+id/lateral_ajustes" android:icon="@drawable/ic_ajustes" android:title="@string/ui_ajustes" />
+		<item android:id="@+id/lateral_manual" android:icon="@drawable/ic_manual" android:title="@string/ui_manual" />
+		<item android:id="@+id/lateral_acerca" android:icon="@drawable/ic_info" android:title="@string/ui_acerca" />
+	</group>
+</menu>

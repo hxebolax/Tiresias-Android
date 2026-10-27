@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="nano_nombre">Tiresias on-device AI</string>
+	<string name="nano_titulo">Gemini Nano</string>
+	<string name="nano_explicacion">This add-on lets Tiresias use Gemini Nano, the artificial intelligence built into the phone itself (Pixel 9 and later, Galaxy S25 and later and other recent phones). Everything is processed on the phone, without Internet. You do not need to open it: Tiresias uses it when you choose «The phone\'s» in Settings, Artificial intelligence.</string>
+	<string name="nano_disponible">Gemini Nano is ready on this phone.</string>
+	<string name="nano_descargable">This phone has Gemini Nano; the system will download it the first time it is used.</string>
+	<string name="nano_no_disponible">This phone does not have Gemini Nano (or the bootloader is unlocked).</string>
+	<string name="nano_pensando">Thinking…</string>
+	<string name="nano_bajando">The system is downloading Gemini Nano. It may take a few minutes…</string>
+	<string name="nano_respuesta">Answer:</string>
+	<string name="nano_sin_respuesta">Gemini Nano gave no answer</string>
+	<string name="nano_error">Gemini Nano failed: %1$s</string>
+	<string name="nano_copiar">Copy the answer</string>
+	<string name="nano_copiado">Answer copied</string>
+	<string name="nano_cerrar">Close</string>
+</resources>

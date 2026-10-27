@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- English translation of values/strings_ajustes.xml. Value arrays (*_valores) are not translated and live only in values/. -->
+<resources>
+	<string name="aj_idioma">Tiresias language</string>
+	<string name="aj_seccion_voz">Speech, sounds and vibration</string>
+	<string name="aj_seccion_voz_res">Speech engine, rate, pitch, volume, sounds</string>
+	<string name="aj_seccion_lectura">Reading and verbosity</string>
+	<string name="aj_seccion_lectura_res">What is said about each item, punctuation, numbers, keyboard echo</string>
+	<string name="aj_seccion_navegacion">Navigation and gestures</string>
+	<string name="aj_seccion_navegacion_res">Focus, end of lists, gesture recognition, microphone</string>
+	<string name="aj_seccion_teclado">Physical keyboard</string>
+	<string name="aj_seccion_teclado_res">Keymap and Tiresias key</string>
+	<string name="aj_seccion_notificaciones">Notifications</string>
+	<string name="aj_seccion_notificaciones_res">When notifications are read automatically</string>
+	<string name="aj_seccion_ia">Artificial intelligence</string>
+	<string name="aj_seccion_ia_res">Describe images and the screen: on the phone or with your key</string>
+	<string name="aj_seccion_actualizaciones">Updates</string>
+	<string name="aj_seccion_actualizaciones_res">Where Tiresias gets its updates</string>
+
+	<string name="aj_motor">Voice</string>
+	<string name="aj_voces_control">Voices of the Voice control</string>
+	<string name="aj_voces_control_todas">All voices</string>
+	<string name="aj_motor_espeak">eSpeak NG (built in, fastest)</string>
+	<string name="aj_motor_pico">Pico (built in)</string>
+	<string name="aj_motor_neuronal">%1$s (downloaded neural voice)</string>
+	<string name="aj_motor_sistema">%1$s (system)</string>
+	<string name="aj_probar_sin_servicio">Turn on Tiresias to test the voice with these settings</string>
+	<string name="aj_velocidad">Speech rate</string>
+	<string name="aj_tono">Speech pitch</string>
+	<string name="aj_volumen_voz">Speech volume</string>
+	<string name="aj_atenuar">Lower other audio while speaking</string>
+	<string name="aj_atenuar_res">Music and videos get quieter while Tiresias speaks, without stopping</string>
+	<string name="aj_cambio_idioma">Switch language to match the text</string>
+	<string name="aj_cambio_idioma_res">When the app indicates the language of a text</string>
+	<string name="aj_callar_grabar">Don\'t speak over recordings</string>
+	<string name="aj_callar_grabar_res">While another app is recording with the microphone, only what you ask for as you move is spoken</string>
+	<string name="aj_cat_sonidos">Sounds and vibration</string>
+	<string name="aj_sonidos">Sounds</string>
+	<string name="aj_volumen_sonidos">Sound volume</string>
+	<string name="aj_sonido_posicional">Positional sound</string>
+	<string name="aj_sonido_posicional_res">Sounds play on the left or right depending on where the item is</string>
+	<string name="aj_vibracion">Vibration</string>
+	<string name="aj_intensidad_vibracion">Vibration strength</string>
+
+	<string name="aj_verbosidad">Verbosity</string>
+	<string name="aj_orden">Speaking order</string>
+	<string name="aj_solo_personalizada">With custom verbosity</string>
+	<string name="aj_decir_rol">Speak item type</string>
+	<string name="aj_decir_estado">Speak state</string>
+	<string name="aj_decir_posicion">Speak position in lists</string>
+	<string name="aj_decir_pistas">Speak usage hints</string>
+	<string name="aj_espera_pistas">Delay before usage hints</string>
+	<string name="aj_decir_acciones">Announce items with actions</string>
+	<string name="aj_decir_acciones_res">A sound and “actions available” when the item has its own actions</string>
+	<string name="aj_decir_identificador">Name unlabeled items</string>
+	<string name="aj_decir_identificador_res">Say the identifier the app gives them instead of “unlabeled”</string>
+	<string name="aj_decir_panel">Speak pane titles</string>
+	<string name="aj_cat_texto">Text</string>
+	<string name="aj_puntuacion">Punctuation</string>
+	<string name="aj_numeros">Numbers</string>
+	<string name="aj_mayusculas">Capitals when reading by character</string>
+	<string name="aj_emojis">Emojis</string>
+	<string-array name="emojis_nombres">
+		<item>By their name (smiling face)</item>
+		<item>As the voice says them</item>
+		<item>Do not say them</item>
+	</string-array>
+	<string name="aj_eco">Keyboard echo</string>
+
+	<string name="aj_recordar_foco">Return to where I was</string>
+	<string name="aj_recordar_foco_res">When you return to a screen (also with Back), focus goes back to the item you were on</string>
+	<string name="aj_dar_vuelta">Wrap around at the end</string>
+	<string name="aj_dar_vuelta_res">After the last item, continue from the first one (with a sound)</string>
+	<string name="aj_retardo_exploracion">Delay when exploring by touch</string>
+	<string name="aj_microfono">Microphone permission</string>
+	<string name="aj_microfono_res">For voice commands and dictation</string>
+	<string name="aj_microfono_si">Microphone allowed</string>
+	<string name="aj_microfono_no">Voice commands and dictation don\'t work without the microphone</string>
+
+	<string name="aj_llamadas">Answer and hang up with a gesture</string>
+	<string name="aj_llamadas_res">With the play and pause gesture (two-finger double-tap): answers when ringing and hangs up during a call</string>
+	<string name="aj_llamadas_si">You can now answer and hang up with the gesture</string>
+	<string name="aj_llamadas_no">Without the permission, the gesture does not answer or hang up calls</string>
+	<string name="aj_estilo_teclado">Keymap</string>
+	<string name="aj_tecla_tiresias">Tiresias key</string>
+
+	<string name="aj_leer_notificaciones">Read notifications when they arrive</string>
+	<string name="aj_leer_notificaciones_res">If off, they are kept in Recent notifications in the Tiresias menu</string>
+	<string name="aj_notif_no_molestar">Also read them in Do Not Disturb</string>
+	<string name="aj_notif_llamada">Also read them during a call</string>
+	<string name="aj_apps_silenciadas">Mute an app\'s notifications</string>
+	<string name="aj_apps_silenciadas_res">In Profiles, per app</string>
+
+	<string name="aj_ia_proveedor">Artificial intelligence to use</string>
+	<string name="aj_ia_info">Where it is processed</string>
+	<string name="aj_ia_info_res">Downloaded and on-device: everything stays on the phone. With your key: the image or text is sent to that service, and you are asked the first time.</string>
+	<string name="aj_ia_gpu">Use the GPU with the downloaded AI</string>
+	<string name="aj_ia_gpu_res">Faster on many phones; if it fails, the CPU is used</string>
+	<string name="aj_cat_ia_internet">Online with your key</string>
+	<string name="aj_clave_claude">Claude key (Anthropic)</string>
+	<string name="aj_modelo_claude">Claude model (empty: the recommended one)</string>
+	<string name="aj_clave_openai">OpenAI key</string>
+	<string name="aj_modelo_openai">OpenAI model (empty: the recommended one)</string>
+	<string name="aj_clave_gemini">Gemini key (Google)</string>
+	<string name="aj_modelo_gemini">Gemini model (empty: the recommended one)</string>
+	<string name="aj_url_compatible">OpenAI-compatible server</string>
+	<string name="aj_url_compatible_res">For example, Ollama or LM Studio on your computer: http://192.168.1.10:11434/v1</string>
+	<string name="aj_clave_compatible">Server key (if required)</string>
+	<string name="aj_modelo_compatible">Server model</string>
+	<string name="aj_clave_puesta">Saved (encrypted on the phone)</string>
+	<string name="aj_clave_no">No key</string>
+
+	<string name="aj_buscar_act">Check for updates when opening Tiresias</string>
+	<string name="aj_buscar_act_res">At most every six hours, and nothing is ever installed without asking you</string>
+	<string name="aj_origen">Update source</string>
+	<string name="aj_origen_servidor">The Tiresias server</string>
+	<string name="aj_origen_personalizado">A custom server</string>
+	<string name="aj_url_servidor">Server address</string>
+	<string name="aj_servidor_no_valido">The address must start with https:// or http://</string>
+
+	<string-array name="idiomas_nombres">
+		<item>System default</item>
+		<item>Español</item>
+		<item>English</item>
+	</string-array>
+	<string-array name="verbosidad_nombres">
+		<item>high</item>
+		<item>medium</item>
+		<item>low</item>
+	</string-array>
+	<string-array name="verbosidad_todas">
+		<item>High: everything</item>
+		<item>Medium: no usage hints</item>
+		<item>Low: the essentials</item>
+		<item>Custom</item>
+	</string-array>
+	<string-array name="orden_nombres">
+		<item>Name, value, type and state</item>
+		<item>State first</item>
+		<item>Type first</item>
+		<item>Free (choose the parts and their order)</item>
+	</string-array>
+	<string-array name="puntuacion_nombres">
+		<item>none</item>
+		<item>some</item>
+		<item>most</item>
+		<item>all</item>
+	</string-array>
+	<string-array name="numeros_nombres">
+		<item>As numbers (1234: one thousand two hundred thirty-four)</item>
+		<item>Digit by digit (1 2 3 4)</item>
+	</string-array>
+	<string-array name="mayusculas_nombres">
+		<item>Don\'t announce</item>
+		<item>Say “cap”</item>
+		<item>Raise pitch</item>
+		<item>Play a sound</item>
+		<item>Say “cap” and raise pitch</item>
+	</string-array>
+	<string-array name="eco_nombres">
+		<item>Characters</item>
+		<item>Words</item>
+		<item>Characters and words</item>
+		<item>None</item>
+	</string-array>
+	<string-array name="estilo_nombres">
+		<item>Like TalkBack</item>
+		<item>Like Tiresias for Windows and NVDA</item>
+	</string-array>
+	<string-array name="tecla_nombres">
+		<item>Alt</item>
+		<item>Meta (Search or Windows)</item>
+		<item>Caps Lock</item>
+		<item>Insert</item>
+	</string-array>
+	<string-array name="ia_nombres">
+		<item>Automatic (first available)</item>
+		<item>Downloaded in Tiresias (offline)</item>
+		<item>On-device: Gemini Nano (Pixel and compatible phones)</item>
+		<item>Claude, with your key</item>
+		<item>OpenAI, with your key</item>
+		<item>Gemini, with your key</item>
+		<item>OpenAI-compatible server</item>
+		<item>None</item>
+	</string-array>
+	<string-array name="origen_nombres">
+		<item>The Tiresias server</item>
+		<item>Both: the Tiresias server and, if it fails, GitHub</item>
+		<item>GitHub only</item>
+		<item>A custom server</item>
+	</string-array>
+	<string name="aj_seccion_braille">Braille</string>
+	<string name="aj_seccion_braille_res">Braille displays, braille table and on-screen braille keyboard</string>
+	<string name="aj_braille_linea">Use braille displays</string>
+	<string name="aj_braille_linea_res">Over USB or Bluetooth, on Android 15 or later. Tiresias connects by itself when you plug in or turn on the display.</string>
+	<string name="aj_braille_buscar">Find braille display</string>
+	<string name="aj_braille_buscar_res">Looks through USB devices and paired Bluetooth devices and connects to the display</string>
+	<string name="aj_braille_bluetooth">Permission for Bluetooth displays</string>
+	<string name="aj_braille_bluetooth_res">Nearby devices: needed to connect a display paired over Bluetooth</string>
+	<string name="aj_braille_bluetooth_si">Nearby devices permission granted</string>
+	<string name="aj_braille_bluetooth_no">Without the nearby devices permission, Bluetooth displays cannot be used. USB ones can.</string>
+	<string name="aj_braille_tabla">Braille table</string>
+	<string name="aj_braille_mensajes">How long messages stay on the display</string>
+	<string name="aj_braille_teclado">On-screen braille keyboard</string>
+	<string name="aj_braille_teclado_res">Opens the system keyboard settings to turn on the Tiresias braille keyboard</string>
+	<string-array name="braille_tabla_nombres">
+		<item>8-dot computer braille</item>
+		<item>6-dot literary braille (grade 1)</item>
+	</string-array>
+	<string name="aj_copia_guardar">Save a copy of the settings</string>
+	<string name="aj_copia_guardar_res">Settings, gestures, keys, profiles, labels, dictionary and add-ons, in a file. AI keys are not saved.</string>
+	<string name="aj_copia_recuperar">Restore a copy</string>
+	<string name="aj_copia_recuperar_res">Applies the settings from a file saved earlier, on this phone or another one</string>
+	<string name="aj_copia_confirmar">The current settings will be replaced by the ones in the copy. AI keys and downloads do not change. Restore the copy?</string>
+	<string name="aj_copia_guardada">Settings copy saved</string>
+	<string name="aj_copia_recuperada">Settings restored</string>
+	<string name="aj_copia_no_valida">That file is not a Tiresias settings copy</string>
+	<string name="aj_braille_primero">Braille first (with the display connected)</string>
+	<string-array name="braille_primero_nombres">
+		<item>No: speech as usual</item>
+		<item>Minimal speech: only alerts and notifications</item>
+		<item>No speech: everything on the display</item>
+	</string-array>
+	<string name="aj_iconos">Recognize unlabeled buttons</string>
+	<string-array name="iconos_nombres">
+		<item>No</item>
+		<item>With the text in the icon (OCR)</item>
+		<item>With OCR and the on-device AI</item>
+	</string-array>
+	<string name="aj_continua_intervalo">Continuous description: how often the screen is checked</string>
+	<string name="aj_continua_minutos">Continuous description: maximum minutes</string>
+	<string name="aj_api">Apps that use Tiresias</string>
+	<string name="aj_api_res">The apps you let speak through Tiresias or write on the braille display. Tap to change it.</string>
+	<string name="aj_api_ninguna">No app has asked to use Tiresias</string>
+	<string name="aj_api_si">%1$s: allowed</string>
+	<string name="aj_api_no">%1$s: not allowed</string>
+	<string name="aj_api_quitar">Remove the permission of %1$s</string>
+	<string name="aj_api_dar">Give permission to %1$s</string>
+	<string name="aj_modelo_recomendado">The recommended one</string>
+	<string name="aj_deslizador_arriba_abajo">Up and down adjust sliders</string>
+	<string name="aj_deslizador_arriba_abajo_res">On a slider (volume, rate...), swiping up raises the value and down lowers it</string>
+	<string name="aj_acciones_arriba_abajo">Up and down choose actions</string>
+	<string name="aj_acciones_arriba_abajo_res">On an item with its own actions (such as Play or Delete), swiping up or down reads them and double-tapping does the chosen one, as with the Actions control. Until one is chosen, double-tapping activates as usual</string>
+	<string name="aj_motor_eloquence">Eloquence (included: ten languages and eight voices)</string>
+	<string name="aj_eloquence_ajustes">Eloquence settings</string>
+	<string name="aj_eloquence_ajustes_res">The voice and its parameters, each language\'s variant, pauses and dictionaries</string>
+	<string name="elo_titulo">Eloquence settings</string>
+	<string name="elo_explicacion">Eloquence is the classic screen reader voice, fast and clear even at high speed: US and British English, Castilian and Mexican Spanish, French and Canadian French, German, Italian, Polish and Japanese, with eight voices. Speed and pitch are the ones in Settings, Voice. What you change in a voice stays with that voice. Its voice data is IBM\'s (Embedded ViaVoice), through openevv and evvdroid.</string>
+	<string name="elo_usar">Use Eloquence as the Tiresias voice</string>
+	<string name="elo_puesta">Eloquence set as the Tiresias voice</string>
+	<string name="elo_voz">Voice</string>
+	<string name="elo_velocidad">Rate</string>
+	<string name="elo_velocidad_res">The same as in Settings, Voice, and the one the gestures change. Each engine has its own: the Eloquence rate does not change the other voices. At one hundred percent it sounds like NVDA at rate 55.</string>
+	<string name="elo_aumento">Rate boost</string>
+	<string name="elo_aumento_res">As in NVDA: the same rate, 1.6 times faster</string>
+	<string name="elo_genero">Male or female voice</string>
+	<string name="elo_cabeza">Head size</string>
+	<string name="elo_tono_base">Base pitch</string>
+	<string name="elo_entonacion">Inflection</string>
+	<string name="elo_aspereza">Roughness</string>
+	<string name="elo_aliento">Breathiness</string>
+	<string name="elo_volumen">Voice volume</string>
+	<string name="elo_de_fabrica">the voice\'s own</string>
+	<string name="elo_hombre">male</string>
+	<string name="elo_mujer">female</string>
+	<string name="elo_restablecer_voz">Reset %1$s to its defaults</string>
+	<string name="elo_restablecer_pregunta">Reset the voice %1$s to its defaults? What you changed is lost.</string>
+	<string name="elo_idiomas">Languages</string>
+	<string name="elo_espanol">Spanish</string>
+	<string name="elo_ingles">English</string>
+	<string name="elo_frances">French</string>
+	<string name="elo_auto">As the text says</string>
+	<string name="elo_espana">Castilian</string>
+	<string name="elo_mexico">Mexican</string>
+	<string name="elo_eeuu">US</string>
+	<string name="elo_reino_unido">British</string>
+	<string name="elo_francia">French</string>
+	<string name="elo_canada">Canadian</string>
+	<string name="elo_lectura">How it reads</string>
+	<string name="elo_pausas">Pauses</string>
+	<string name="elo_pausas_todas">Shorter at punctuation and at the end (for a screen reader)</string>
+	<string name="elo_pausas_final">Shorter only at the end</string>
+	<string name="elo_pausas_motor">Eloquence\'s own, untouched</string>
+	<string name="elo_prediccion">Phrase prediction</string>
+	<string name="elo_prediccion_res">Prose intonation: good for reading books, worse with the short pieces of a screen</string>
+	<string name="elo_abreviaturas">Expand abbreviations</string>
+	<string name="elo_abreviaturas_res">Abbreviations Eloquence knows are spoken in full</string>
+	<string name="elo_muestreo">Sample rate</string>
+	<string name="elo_muestreo_res">11,025 hertz is the usual Eloquence sound; higher is brighter.</string>
+	<string name="elo_hercios">%1$d hertz</string>
+	<string name="elo_diccionarios">Dictionaries</string>
+	<string name="elo_diccionarios_res">Text files with a word, a tab and how it is said (another word or an Eloquence pronunciation), like the ones shared for the NVDA driver.</string>
+	<string name="elo_dic_principal">Main dictionary</string>
+	<string name="elo_dic_raices">Root dictionary</string>
+	<string name="elo_dic_abreviaturas">Abbreviation dictionary</string>
+	<string name="elo_dic_entradas">%1$d entries</string>
+	<string name="elo_dic_ninguno">none</string>
+	<string name="elo_dic_elegir">Choose a file</string>
+	<string name="elo_dic_quitar">Remove the dictionary</string>
+	<string name="elo_dic_quitado">Dictionary removed</string>
+	<string name="elo_dic_puesto">Dictionary set: %1$d entries</string>
+	<string name="elo_dic_mal">The dictionary could not be read.</string>
+	<string name="aj_leer_mas_solo">Open “Read more” by itself</string>
+	<string name="aj_leer_mas_solo_res">On a long message ending in “Read more” (WhatsApp, Telegram), it is pressed when you reach it and the rest is read</string>
+	<string name="aj_braille_acordes">Braille display commands</string>
+	<string name="aj_braille_acordes_res">What each combination of space and dots does</string>
+	<string name="aj_braille_cursor">Cursor on the braille display</string>
+	<string name="aj_cortar_al_tocar">Touching the screen stops speech</string>
+	<string name="aj_cortar_al_tocar_res">If you turn it off, speech goes on when you touch the screen and only stops when you move to another item</string>
+	<string name="aj_trocear_largos">Read long texts sentence by sentence</string>
+	<string name="aj_trocear_largos_res">So pausing and resuming speech carries on from the sentence it was on</string>
+	<string name="aj_arrastre_respaldo">Drag lists that do not scroll</string>
+	<string name="aj_arrastre_respaldo_res">If an app does not let the reader scroll its list, Tiresias drags it with two fingers</string>
+	<string name="aj_foneticas">Phonetic letters when reading by characters</string>
+	<string-array name="foneticas_nombres">
+		<item>No</item>
+		<item>After the letter (b, Bravo)</item>
+		<item>Instead of the letter (Bravo)</item>
+	</string-array>
+	<string name="aj_al_encender">When the screen turns on, say</string>
+	<string-array name="al_encender_nombres">
+		<item>Nothing</item>
+		<item>The time</item>
+		<item>The time, date and battery</item>
+	</string-array>
+	<string name="aj_al_apagar">Announce when the screen turns off</string>
+	<string name="aj_al_apagar_res">A sound and “screen off”</string>
+	<string name="aj_volumen_deslizadores">Volume keys on sliders</string>
+	<string name="aj_volumen_deslizadores_res">With a slider focused, the volume keys raise and lower its value</string>
+	<string name="aj_escribir_al_levantar">Type when lifting your finger</string>
+	<string name="aj_escribir_al_levantar_res">On the on-screen keyboard, explore to the key and lift your finger to type it, with no double tap</string>
+	<string name="aj_sonido_espera">Sound while the AI is thinking</string>
+	<string name="aj_sonido_espera_res">A soft sound every three seconds until the answer arrives (also when recognizing text)</string>
+	<string name="aj_aviso_espera">Say when the AI is slow</string>
+	<string name="aj_aviso_espera_res">If 20 seconds pass with no answer, Tiresias says it is still thinking</string>
+	<string name="aj_foco_ventanas_nuevas">Focus the first item of each new screen</string>
+	<string name="aj_foco_ventanas_nuevas_res">When a screen opens, after its title, Tiresias goes to its first item (without waiting for you to swipe)</string>
+	<string name="aj_voz_multimedia">Speech on the media volume</string>
+	<string name="aj_voz_multimedia_res">Speech and sounds use the music volume instead of the accessibility one. Applies when Tiresias is turned on again.</string>
+	<string name="aj_toque_directo_teclado">Direct touch on the on-screen keyboard</string>
+	<string name="aj_toque_directo_teclado_res">You type by touching the keys, as without a screen reader (for fast typists or another app\'s braille keyboard)</string>
+	<string name="aj_braille_espejo">Mirrored dots</string>
+	<string name="aj_braille_espejo_res">For holding the phone with the screen towards you: dot 1 is on the right</string>
+	<string name="aj_braille_sensor">Dots according to how you hold the phone</string>
+	<string name="aj_braille_sensor_res">On the table (screen towards you), mirrored; upright with the screen facing away, normal. Overrides “Mirrored dots”</string>
+	<string name="aj_braille_eco">When typing in braille, say</string>
+	<string-array name="braille_cursor_nombres">
+		<item>Dots 7 and 8</item>
+		<item>Dot 8 only</item>
+		<item>Dot 7 only</item>
+		<item>Not marked</item>
+	</string-array>
+	<string-array name="braille_eco_nombres">
+		<item>Each letter</item>
+		<item>Each word when finished</item>
+		<item>Nothing</item>
+	</string-array>
+	<string name="aj_braille_vibrar_puntos">Vibrate on each dot</string>
+	<string name="aj_encabezados_tabla">Table headers</string>
+	<string name="aj_encabezados_tabla_res">For each cell, say its row and column headers</string>
+	<string name="aj_cambio_dialecto">Also the language variant</string>
+	<string name="aj_cambio_dialecto_res">Mexican Spanish, British English… If you turn it off, only the language changes and its usual voice is used</string>
+	<string name="aj_controles_solo_web">Web controls only on the web</string>
+	<string name="aj_controles_solo_web_res">Links and regions appear among the reading controls only inside a web page</string>
+	<string name="aj_foco_sin_esperar_titulo">Without waiting for the title</string>
+	<string name="aj_foco_sin_esperar_titulo_res">On a new screen, the first item is spoken at once, cutting the title (the window sound tells you)</string>
+	<string name="aj_activar_al_levantar">Activate when lifting your finger</string>
+	<string-array name="activar_al_levantar_nombres">
+		<item>No (double tap)</item>
+		<item>Only on the navigation bar (Back, Home, Recents)</item>
+		<item>On the whole screen</item>
+	</string-array>
+	<string name="aj_al_desbloquear">When unlocking, say</string>
+	<string-array name="al_desbloquear_nombres">
+		<item>Nothing</item>
+		<item>“Unlocked”</item>
+		<item>The time</item>
+		<item>The status (what you chose in “Choose what the status says”)</item>
+	</string-array>
+	<string name="aj_callar_bloqueo">Silence the lock screen</string>
+	<string name="aj_callar_bloqueo_res">While the phone is locked, no notifications or announcements: only what you ask for. Notifications are kept in Recent notifications</string>
+	<string name="aj_sonido_tipo">Sound according to the control type</string>
+	<string name="aj_sonido_tipo_res">The focus sound changes pitch: higher on headings and links, lower on fields and text</string>
+	<string name="aj_sonido_vertical">Sound according to height</string>
+	<string name="aj_sonido_vertical_res">The focus sound is higher at the top of the screen and lower at the bottom</string>
+	<string name="aj_braille_sonar_puntos">Click on each dot</string>
+	<string name="aj_braille_sonar_puntos_res">On the on-screen braille keyboard, a short click with each finger</string>
+	<string name="aj_altavoz">Speaker when away from your ear</string>
+	<string name="aj_altavoz_res">During a call, switches to the speaker when you take the phone away from your ear and back to the earpiece when you hold it up, like on the iPhone. Bluetooth and headphones are left alone</string>
+	<string name="aj_altavoz_sin_permiso">A permission Android does not give to screen readers is missing: see the option below</string>
+	<string name="aj_altavoz_copiar">Copy the command that grants the speaker permission</string>
+	<string name="aj_altavoz_permiso">Connect the phone to a computer and type this command once (tapping here copies it): %1$s</string>
+	<string name="aj_altavoz_copiado">Command copied to the clipboard</string>
+	<string name="aj_braille_tabla_informatica">8-dot computer braille table</string>
+	<string name="aj_braille_tabla_auto">The one for the Tiresias language</string>
+	<string name="aj_braille_tabla_fila">%1$s (%2$s)</string>
+	<string name="aj_braille_brf">Read a BRF file on the display</string>
+	<string name="aj_braille_brf_res">A book or document in braille ASCII: read it line by line with the panning keys; Back closes it</string>
+	<string name="aj_braille_brf_abierto">Open on the braille display</string>
+	<string name="aj_braille_brf_sin_linea">To read a BRF, connect a braille display first</string>
+	<string name="aj_braille_brf_mal">The file could not be read (4 MB at most)</string>
+	<string name="aj_reconocer_personas">Recognise the people you know</string>
+	<string name="aj_reconocer_personas_res">When describing, the AI names the people in “People you know” if it sees them</string>
+	<string name="aj_personas_nube">Also with the internet AI</string>
+	<string name="aj_personas_nube_res">Sends their photos to the internet AI with each description. Otherwise, they are only recognised with the phone AI</string>
+	<string name="aj_tic_desplazar">A tick for each item when scrolling</string>
+	<string name="aj_tic_desplazar_res">When a list scrolls, a tick plays for each item that goes by, instead of the scroll sound</string>
+	<string name="aj_encabezados_tabla_lugar">Where headers go</string>
+	<string-array name="encabezados_lugar_nombres">
+		<item>Before the row and column</item>
+		<item>After the row and column</item>
+	</string-array>
+	<string name="aj_decir_fila_columna">Say the row and column</string>
+	<string name="aj_decir_fila_columna_res">In tables, “row 2, column 3”</string>
+	<string name="aj_teclas_cortan">Keys stop speech</string>
+	<string-array name="teclas_cortan_nombres">
+		<item>Always</item>
+		<item>Only when typing in a text field</item>
+		<item>Never (only the Control key)</item>
+	</string-array>
+	<string name="aj_intro_corta">Enter stops speech</string>
+	<string name="aj_intro_corta_res">If you turn it off, pressing Enter lets you keep hearing what was being said</string>
+	<string name="aj_salida_audio">Audio output</string>
+	<string name="aj_salida_audio_res">For the included voices (eSpeak NG, Pico and the neural ones). The others play wherever their engine decides, and it never changes during calls.</string>
+	<string-array name="salida_audio_nombres">
+		<item>The system one</item>
+		<item>The phone speaker</item>
+		<item>The headphones, if some are connected</item>
+	</string-array>
+	<string name="aj_modo_senior">Senior mode</string>
+	<string name="aj_modo_senior_res">Simple Tiresias for older people: few gestures, the volume keys and calling for help</string>
+	<string name="senior_titulo">Senior mode</string>
+	<string name="senior_explicacion">Senior mode keeps Tiresias to the basics, for people who are starting out or only want the everyday things: few and easy gestures, the important things on the volume keys, short phrases and a help call. When you turn it off, everything is as it was before.</string>
+	<string name="senior_poner">Senior mode</string>
+	<string name="senior_poner_res">Changes the gestures, the Tiresias menu and what is spoken. It can be turned off at any time.</string>
+	<string name="senior_puesto">Senior mode on</string>
+	<string name="senior_quitado">Senior mode off: everything is as it was before</string>
+	<string name="senior_como">How to use it</string>
+	<string name="senior_como_1">Swipe one finger right or left to go from one thing to another. At the end, it starts again.</string>
+	<string name="senior_como_2">Double tap anywhere to open or press what was just spoken.</string>
+	<string name="senior_como_3">Swipe up to hear it again and down to know what you can do there.</string>
+	<string name="senior_como_4">Both volume keys together: to the Home screen, always. Hold volume up: the time, the battery and the notifications. Hold volume down: the Tiresias menu.</string>
+	<string name="senior_como_5">Volume up three times: call the help contact, with a few seconds to cancel by touching the screen. Volume down three times: tell it what you want.</string>
+	<string name="senior_como_6">Tap with two fingers to stop the speech.</string>
+	<string name="senior_opciones">Options</string>
+	<string name="senior_solo_mensajes">Read only calls and messages</string>
+	<string name="senior_solo_mensajes_res">Of the notifications, only calls, messages, email, alarms, reminders and events are read.</string>
+	<string name="senior_toque_activa">One tap opens what was just spoken</string>
+	<string name="senior_toque_activa_res">For people who find double tap hard: tapping once on what was just read opens it. It is easier to open something by mistake.</string>
+	<string name="senior_contacto">Help contact: %1$s</string>
+	<string name="senior_contacto_ninguno">not set</string>
+	<string name="senior_contacto_nombre_numero">%1$s, %2$s</string>
+	<string name="senior_contacto_nombre">Name of the helper</string>
+	<string name="senior_contacto_nombre_pista">For example, John</string>
+	<string name="senior_contacto_numero">Phone of the helper</string>
+	<string name="senior_contacto_numero_pista">Phone number; empty to remove it</string>
+	<string name="senior_contacto_puesto">Help contact set</string>
+	<string name="senior_contacto_quitado">Help contact removed</string>
+	<string name="senior_llamar_si">Tiresias will be able to call directly when asking for help</string>
+	<string name="senior_llamar_no">Without the permission, asking for help opens the phone with the number dialled and you have to press Call</string>
+	<string name="senior_codigo">Settings code: %1$s</string>
+	<string name="senior_codigo_si">set</string>
+	<string name="senior_codigo_no">no code</string>
+	<string name="senior_codigo_poner">Settings code</string>
+	<string name="senior_codigo_pista">At least 4 digits; empty to remove it</string>
+	<string name="senior_codigo_corto">The code must have at least 4 digits</string>
+	<string name="senior_codigo_puesto">Code set: it will be asked for when opening the settings</string>
+	<string name="senior_codigo_quitado">Code removed</string>
+	<string name="senior_codigo_pedir">Settings code</string>
+	<string name="senior_codigo_pedir_pista">Code</string>
+	<string name="senior_codigo_mal">That is not the code</string>
+</resources>

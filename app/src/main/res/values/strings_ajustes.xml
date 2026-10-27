@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ajustes. Las listas de valores (arrays *_valores) no se traducen: solo los nombres. -->
+<resources>
+	<string name="aj_idioma">Idioma de Tiresias</string>
+	<string name="aj_seccion_voz">Voz, sonidos y vibración</string>
+	<string name="aj_seccion_voz_res">Motor de voz, velocidad, tono, volumen, sonidos</string>
+	<string name="aj_seccion_lectura">Lectura y verbosidad</string>
+	<string name="aj_seccion_lectura_res">Qué se dice de cada elemento, puntuación, números, eco del teclado</string>
+	<string name="aj_seccion_navegacion">Navegación y gestos</string>
+	<string name="aj_seccion_navegacion_res">Foco, final de las listas, reconocimiento de gestos, micrófono</string>
+	<string name="aj_seccion_teclado">Teclado físico</string>
+	<string name="aj_seccion_teclado_res">Mapa de teclas y tecla Tiresias</string>
+	<string name="aj_seccion_notificaciones">Notificaciones</string>
+	<string name="aj_seccion_notificaciones_res">Cuándo se leen solas las notificaciones</string>
+	<string name="aj_seccion_ia">Inteligencia artificial</string>
+	<string name="aj_seccion_ia_res">Describir imágenes y la pantalla: en el móvil o con tu clave</string>
+	<string name="aj_seccion_actualizaciones">Actualizaciones</string>
+	<string name="aj_seccion_actualizaciones_res">De dónde se actualiza Tiresias</string>
+
+	<string name="aj_motor">Voz</string>
+	<string name="aj_voces_control">Voces del control Voz</string>
+	<string name="aj_voces_control_todas">Todas las voces</string>
+	<string name="aj_motor_espeak">eSpeak NG (incluida, la más rápida)</string>
+	<string name="aj_motor_pico">Pico (incluida)</string>
+	<string name="aj_motor_sistema">%1$s (del sistema)</string>
+	<string name="aj_motor_neuronal">%1$s (voz neuronal descargada)</string>
+	<string name="aj_probar_sin_servicio">Activa Tiresias para probar la voz con estos ajustes</string>
+	<string name="aj_velocidad">Velocidad de la voz</string>
+	<string name="aj_tono">Tono de la voz</string>
+	<string name="aj_volumen_voz">Volumen de la voz</string>
+	<string name="aj_atenuar">Bajar el resto del audio al hablar</string>
+	<string name="aj_atenuar_res">La música y los vídeos bajan mientras habla Tiresias, sin pararse</string>
+	<string name="aj_cambio_idioma">Cambiar de idioma según el texto</string>
+	<string name="aj_cambio_idioma_res">Cuando la app indica el idioma de un texto</string>
+	<string name="aj_callar_grabar">No hablar encima de las grabaciones</string>
+	<string name="aj_callar_grabar_res">Mientras otra app graba con el micrófono, solo se dice lo que tú pides al moverte</string>
+	<string name="aj_cat_sonidos">Sonidos y vibración</string>
+	<string name="aj_sonidos">Sonidos</string>
+	<string name="aj_volumen_sonidos">Volumen de los sonidos</string>
+	<string name="aj_sonido_posicional">Sonido según la posición</string>
+	<string name="aj_sonido_posicional_res">El sonido suena a la izquierda o a la derecha según dónde está el elemento</string>
+	<string name="aj_vibracion">Vibración</string>
+	<string name="aj_intensidad_vibracion">Intensidad de la vibración</string>
+
+	<string name="aj_verbosidad">Verbosidad</string>
+	<string name="aj_orden">Orden de lo que se dice</string>
+	<string name="aj_solo_personalizada">Con la verbosidad personalizada</string>
+	<string name="aj_decir_rol">Decir el tipo de elemento</string>
+	<string name="aj_decir_estado">Decir el estado</string>
+	<string name="aj_decir_posicion">Decir la posición en las listas</string>
+	<string name="aj_decir_pistas">Decir cómo se usa cada elemento</string>
+	<string name="aj_espera_pistas">Espera antes de decir cómo se usa</string>
+	<string name="aj_decir_acciones">Avisar de los elementos con acciones</string>
+	<string name="aj_decir_acciones_res">Un sonido y «con acciones» cuando el elemento tiene acciones propias</string>
+	<string name="aj_decir_identificador">Nombrar los elementos sin nombre</string>
+	<string name="aj_decir_identificador_res">Decir el identificador que les da la app en vez de «sin nombre»</string>
+	<string name="aj_decir_panel">Decir el título de los paneles</string>
+	<string name="aj_cat_texto">Texto</string>
+	<string name="aj_puntuacion">Puntuación</string>
+	<string name="aj_numeros">Números</string>
+	<string name="aj_mayusculas">Mayúsculas al leer por caracteres</string>
+	<string name="aj_emojis">Emojis</string>
+	<string-array name="emojis_nombres">
+		<item>Por su nombre (cara sonriente)</item>
+		<item>Como los diga la voz</item>
+		<item>No decirlos</item>
+	</string-array>
+	<string-array name="emojis_valores" translatable="false">
+		<item>NOMBRE</item>
+		<item>MOTOR</item>
+		<item>QUITAR</item>
+	</string-array>
+	<string name="aj_eco">Eco del teclado</string>
+
+	<string name="aj_recordar_foco">Volver a donde estaba</string>
+	<string name="aj_recordar_foco_res">Al volver a una pantalla (también con Atrás), el foco vuelve al elemento en el que estabas</string>
+	<string name="aj_dar_vuelta">Dar la vuelta al final</string>
+	<string name="aj_dar_vuelta_res">Al llegar al último elemento, seguir por el primero (con un sonido)</string>
+	<string name="aj_retardo_exploracion">Espera al explorar con el dedo</string>
+	<string name="aj_microfono">Permiso del micrófono</string>
+	<string name="aj_microfono_res">Para las órdenes por voz y el dictado</string>
+	<string name="aj_microfono_si">Micrófono permitido</string>
+	<string name="aj_microfono_no">Sin el micrófono no funcionan las órdenes por voz ni el dictado</string>
+
+	<string name="aj_llamadas">Responder y colgar con un gesto</string>
+	<string name="aj_llamadas_res">Con el gesto de reproducir y pausar (doble toque con dos dedos): responde si suena y cuelga durante la llamada</string>
+	<string name="aj_llamadas_si">Ya puedes responder y colgar con el gesto</string>
+	<string name="aj_llamadas_no">Sin el permiso, el gesto no responde ni cuelga llamadas</string>
+	<string name="aj_estilo_teclado">Mapa de teclas</string>
+	<string name="aj_tecla_tiresias">Tecla Tiresias</string>
+
+	<string name="aj_leer_notificaciones">Leer las notificaciones al llegar</string>
+	<string name="aj_leer_notificaciones_res">Si no, se guardan en Notificaciones recientes del menú de Tiresias</string>
+	<string name="aj_notif_no_molestar">Leerlas también en No molestar</string>
+	<string name="aj_notif_llamada">Leerlas también durante una llamada</string>
+	<string name="aj_apps_silenciadas">Silenciar las notificaciones de una app</string>
+	<string name="aj_apps_silenciadas_res">En Perfiles, por app</string>
+
+	<string name="aj_ia_proveedor">Inteligencia artificial que se usa</string>
+	<string name="aj_ia_info">Dónde se procesa</string>
+	<string name="aj_ia_info_res">Descargada y del móvil: todo queda en el móvil. Con tu clave: la imagen o el texto se envían a ese servicio, y la primera vez se te pregunta.</string>
+	<string name="aj_ia_gpu">Usar la tarjeta gráfica con la IA descargada</string>
+	<string name="aj_ia_gpu_res">Más rápida en muchos móviles; si falla, se usa el procesador</string>
+	<string name="aj_cat_ia_internet">En Internet con tu clave</string>
+	<string name="aj_clave_claude">Clave de Claude (Anthropic)</string>
+	<string name="aj_modelo_claude">Modelo de Claude (vacío: el recomendado)</string>
+	<string name="aj_clave_openai">Clave de OpenAI</string>
+	<string name="aj_modelo_openai">Modelo de OpenAI (vacío: el recomendado)</string>
+	<string name="aj_clave_gemini">Clave de Gemini (Google)</string>
+	<string name="aj_modelo_gemini">Modelo de Gemini (vacío: el recomendado)</string>
+	<string name="aj_url_compatible">Servidor compatible con OpenAI</string>
+	<string name="aj_url_compatible_res">Por ejemplo, Ollama o LM Studio en tu ordenador: http://192.168.1.10:11434/v1</string>
+	<string name="aj_clave_compatible">Clave del servidor (si la pide)</string>
+	<string name="aj_modelo_compatible">Modelo del servidor</string>
+	<string name="aj_clave_puesta">Guardada (cifrada en el móvil)</string>
+	<string name="aj_clave_no">Sin clave</string>
+
+	<string name="aj_buscar_act">Buscar actualizaciones al abrir Tiresias</string>
+	<string name="aj_buscar_act_res">Como mucho cada seis horas, y nunca se instala nada sin preguntarte</string>
+	<string name="aj_origen">De dónde se actualiza</string>
+	<string name="aj_origen_servidor">El servidor de Tiresias</string>
+	<string name="aj_origen_personalizado">Un servidor personalizado</string>
+	<string name="aj_url_servidor">Dirección del servidor</string>
+	<string name="aj_servidor_no_valido">La dirección tiene que empezar por https:// o http://</string>
+
+	<string-array name="idiomas_nombres">
+		<item>El del sistema</item>
+		<item>Español</item>
+		<item>English</item>
+	</string-array>
+	<string-array name="idiomas_valores" translatable="false">
+		<item />
+		<item>es</item>
+		<item>en</item>
+	</string-array>
+	<string-array name="verbosidad_nombres">
+		<item>alta</item>
+		<item>media</item>
+		<item>baja</item>
+	</string-array>
+	<string-array name="verbosidad_todas">
+		<item>Alta: todo</item>
+		<item>Media: sin pistas de uso</item>
+		<item>Baja: lo justo</item>
+		<item>Personalizada</item>
+	</string-array>
+	<string-array name="verbosidad_valores" translatable="false">
+		<item>ALTA</item>
+		<item>MEDIA</item>
+		<item>BAJA</item>
+		<item>PERSONALIZADA</item>
+	</string-array>
+	<string-array name="orden_nombres">
+		<item>Nombre, valor, tipo y estado</item>
+		<item>Estado primero</item>
+		<item>Tipo primero</item>
+		<item>Libre (elige las partes y su orden)</item>
+	</string-array>
+	<string-array name="orden_valores" translatable="false">
+		<item>normal</item>
+		<item>estado</item>
+		<item>rol</item>
+		<item>libre</item>
+	</string-array>
+	<string-array name="puntuacion_nombres">
+		<item>ninguna</item>
+		<item>algunas</item>
+		<item>la mayoría</item>
+		<item>todas</item>
+	</string-array>
+	<string-array name="puntuacion_valores" translatable="false">
+		<item>NINGUNA</item>
+		<item>ALGUNAS</item>
+		<item>MAYORIA</item>
+		<item>TODAS</item>
+	</string-array>
+	<string-array name="numeros_nombres">
+		<item>Como cifras (1234: mil doscientos treinta y cuatro)</item>
+		<item>Dígito a dígito (1 2 3 4)</item>
+	</string-array>
+	<string-array name="numeros_valores" translatable="false">
+		<item>CIFRAS</item>
+		<item>DIGITOS</item>
+	</string-array>
+	<string-array name="mayusculas_nombres">
+		<item>No avisar</item>
+		<item>Decir «mayúscula»</item>
+		<item>Subir el tono</item>
+		<item>Un sonido</item>
+		<item>Decir «mayúscula» y subir el tono</item>
+	</string-array>
+	<string-array name="mayusculas_valores" translatable="false">
+		<item>NADA</item>
+		<item>PALABRA</item>
+		<item>TONO</item>
+		<item>SONIDO</item>
+		<item>PALABRA_Y_TONO</item>
+	</string-array>
+	<string-array name="eco_nombres">
+		<item>Caracteres</item>
+		<item>Palabras</item>
+		<item>Caracteres y palabras</item>
+		<item>Nada</item>
+	</string-array>
+	<string-array name="eco_valores" translatable="false">
+		<item>caracteres</item>
+		<item>palabras</item>
+		<item>ambos</item>
+		<item>nada</item>
+	</string-array>
+	<string-array name="estilo_nombres">
+		<item>Como TalkBack</item>
+		<item>Como Tiresias para Windows y NVDA</item>
+	</string-array>
+	<string-array name="estilo_valores" translatable="false">
+		<item>TALKBACK</item>
+		<item>TIRESIAS_WINDOWS</item>
+	</string-array>
+	<string-array name="tecla_nombres">
+		<item>Alt</item>
+		<item>Meta (Buscar o Windows)</item>
+		<item>Bloq Mayús</item>
+		<item>Insertar</item>
+	</string-array>
+	<string-array name="tecla_valores" translatable="false">
+		<item>alt</item>
+		<item>meta</item>
+		<item>bloqmayus</item>
+		<item>insertar</item>
+	</string-array>
+	<string-array name="ia_nombres">
+		<item>Automática (la primera disponible)</item>
+		<item>Descargada en Tiresias (sin Internet)</item>
+		<item>La del móvil: Gemini Nano (Pixel y compatibles)</item>
+		<item>Claude, con tu clave</item>
+		<item>OpenAI, con tu clave</item>
+		<item>Gemini, con tu clave</item>
+		<item>Servidor compatible con OpenAI</item>
+		<item>Ninguna</item>
+	</string-array>
+	<string-array name="ia_valores" translatable="false">
+		<item>automatico</item>
+		<item>descargado</item>
+		<item>movil</item>
+		<item>claude</item>
+		<item>openai</item>
+		<item>gemini</item>
+		<item>compatible</item>
+		<item>ninguno</item>
+	</string-array>
+	<string-array name="origen_nombres">
+		<item>El servidor de Tiresias</item>
+		<item>Los dos: el servidor de Tiresias y, si falla, GitHub</item>
+		<item>Solo GitHub</item>
+		<item>Un servidor personalizado</item>
+	</string-array>
+	<string-array name="origen_valores" translatable="false">
+		<item>servidor</item>
+		<item>automatico</item>
+		<item>github</item>
+		<item>personalizado</item>
+	</string-array>
+	<string name="aj_seccion_braille">Braille</string>
+	<string name="aj_seccion_braille_res">Líneas braille, tabla braille y teclado braille en pantalla</string>
+	<string name="aj_braille_linea">Usar líneas braille</string>
+	<string name="aj_braille_linea_res">Por USB o Bluetooth, con Android 15 o posterior. Tiresias se conecta solo al enchufar o encender la línea.</string>
+	<string name="aj_braille_buscar">Buscar línea braille</string>
+	<string name="aj_braille_buscar_res">Busca entre lo conectado por USB y lo emparejado por Bluetooth y se conecta a la línea</string>
+	<string name="aj_braille_bluetooth">Permiso para líneas Bluetooth</string>
+	<string name="aj_braille_bluetooth_res">Dispositivos cercanos: hace falta para conectar una línea emparejada por Bluetooth</string>
+	<string name="aj_braille_bluetooth_si">Permiso de dispositivos cercanos concedido</string>
+	<string name="aj_braille_bluetooth_no">Sin el permiso de dispositivos cercanos, las líneas Bluetooth no se pueden usar. Las de USB sí.</string>
+	<string name="aj_braille_tabla">Tabla braille</string>
+	<string name="aj_braille_mensajes">Tiempo de los mensajes en la línea</string>
+	<string name="aj_braille_teclado">Teclado braille en pantalla</string>
+	<string name="aj_braille_teclado_res">Abre los ajustes de teclados del sistema para activar el teclado braille de Tiresias</string>
+	<string-array name="braille_tabla_nombres">
+		<item>Informático de 8 puntos</item>
+		<item>Literario de 6 puntos (grado 1)</item>
+	</string-array>
+	<string-array name="braille_tabla_valores" translatable="false">
+		<item>informatico</item>
+		<item>literario</item>
+	</string-array>
+	<string name="aj_copia_guardar">Guardar una copia de la configuración</string>
+	<string name="aj_copia_guardar_res">Ajustes, gestos, teclas, perfiles, etiquetas, diccionario y complementos, en un archivo. Las claves de IA no se guardan.</string>
+	<string name="aj_copia_recuperar">Recuperar una copia</string>
+	<string name="aj_copia_recuperar_res">Pone la configuración de un archivo guardado antes, en este móvil o en otro</string>
+	<string name="aj_copia_confirmar">La configuración de ahora se sustituirá por la de la copia. Las claves de IA y las descargas no cambian. ¿Recuperar la copia?</string>
+	<string name="aj_copia_guardada">Copia de la configuración guardada</string>
+	<string name="aj_copia_recuperada">Configuración recuperada</string>
+	<string name="aj_copia_no_valida">Ese archivo no es una copia de la configuración de Tiresias</string>
+	<string name="aj_braille_primero">Primero braille (con la línea conectada)</string>
+	<string-array name="braille_primero_nombres">
+		<item>No: la voz habla como siempre</item>
+		<item>Voz mínima: solo avisos y notificaciones</item>
+		<item>Sin voz: todo en la línea</item>
+	</string-array>
+	<string-array name="braille_primero_valores" translatable="false">
+		<item>no</item>
+		<item>minima</item>
+		<item>sin_voz</item>
+	</string-array>
+	<string name="aj_iconos">Reconocer los botones sin nombre</string>
+	<string-array name="iconos_nombres">
+		<item>No</item>
+		<item>Con el texto del icono (OCR)</item>
+		<item>Con el OCR y la IA del móvil</item>
+	</string-array>
+	<string-array name="iconos_valores" translatable="false">
+		<item>no</item>
+		<item>ocr</item>
+		<item>ia</item>
+	</string-array>
+	<string name="aj_continua_intervalo">Descripción continua: cada cuánto se mira la pantalla</string>
+	<string name="aj_continua_minutos">Descripción continua: minutos como mucho</string>
+	<string name="aj_api">Apps que usan Tiresias</string>
+	<string name="aj_api_res">Las apps a las que dejaste hablar con Tiresias o escribir en la línea braille. Toca para cambiarlo.</string>
+	<string name="aj_api_ninguna">Ninguna app ha pedido usar Tiresias</string>
+	<string name="aj_api_si">%1$s: permitida</string>
+	<string name="aj_api_no">%1$s: no permitida</string>
+	<string name="aj_api_quitar">Quitar el permiso a %1$s</string>
+	<string name="aj_api_dar">Dar permiso a %1$s</string>
+	<string name="aj_modelo_recomendado">El recomendado</string>
+	<string name="aj_deslizador_arriba_abajo">Arriba y abajo cambian los deslizadores</string>
+	<string name="aj_deslizador_arriba_abajo_res">En un deslizador (volumen, velocidad...), deslizar arriba sube el valor y abajo lo baja</string>
+	<string name="aj_acciones_arriba_abajo">Arriba y abajo eligen las acciones</string>
+	<string name="aj_acciones_arriba_abajo_res">En un elemento con acciones propias (como Probar o Borrar), deslizar arriba o abajo las va diciendo y el doble toque hace la elegida, como con el control Acciones. Mientras no se elija ninguna, el doble toque activa como siempre</string>
+	<string name="aj_motor_eloquence">Eloquence (incluida: diez idiomas y ocho voces)</string>
+	<string name="aj_eloquence_ajustes">Ajustes de Eloquence</string>
+	<string name="aj_eloquence_ajustes_res">La voz y sus parámetros, la variante de cada idioma, las pausas y los diccionarios</string>
+	<string name="elo_titulo">Ajustes de Eloquence</string>
+	<string name="elo_explicacion">Eloquence es la voz clásica de los lectores de pantalla, rápida y clara también a mucha velocidad: inglés de EE. UU. y británico, español de España y de México, francés de Francia y de Canadá, alemán, italiano, polaco y japonés, con ocho voces. La velocidad y el tono son los de Ajustes, Voz. Lo que cambies de una voz se queda en esa voz. Sus datos de voz son de IBM (Embedded ViaVoice), a través de openevv y evvdroid.</string>
+	<string name="elo_usar">Usar Eloquence como voz de Tiresias</string>
+	<string name="elo_puesta">Eloquence puesta como voz de Tiresias</string>
+	<string name="elo_voz">Voz</string>
+	<string name="elo_velocidad">Velocidad</string>
+	<string name="elo_velocidad_res">La misma que en Ajustes, Voz, y la que cambian los gestos. Cada motor tiene la suya: la de Eloquence no cambia la de las otras voces. Al cien por cien suena como NVDA con la velocidad 55.</string>
+	<string name="elo_aumento">Aumento de velocidad</string>
+	<string name="elo_aumento_res">Como en NVDA: la misma velocidad, 1,6 veces más rápida</string>
+	<string name="elo_genero">Voz de hombre o de mujer</string>
+	<string name="elo_cabeza">Tamaño de la cabeza</string>
+	<string name="elo_tono_base">Tono de base</string>
+	<string name="elo_entonacion">Entonación</string>
+	<string name="elo_aspereza">Aspereza</string>
+	<string name="elo_aliento">Aliento</string>
+	<string name="elo_volumen">Volumen de la voz</string>
+	<string name="elo_de_fabrica">el de la voz</string>
+	<string name="elo_hombre">de hombre</string>
+	<string name="elo_mujer">de mujer</string>
+	<string name="elo_restablecer_voz">Dejar %1$s como viene</string>
+	<string name="elo_restablecer_pregunta">¿Dejar la voz %1$s como viene de fábrica? Se pierde lo que le hayas cambiado.</string>
+	<string name="elo_idiomas">Idiomas</string>
+	<string name="elo_espanol">Español</string>
+	<string name="elo_ingles">Inglés</string>
+	<string name="elo_frances">Francés</string>
+	<string name="elo_auto">Según el texto</string>
+	<string name="elo_espana">De España</string>
+	<string name="elo_mexico">De México</string>
+	<string name="elo_eeuu">De EE. UU.</string>
+	<string name="elo_reino_unido">Británico</string>
+	<string name="elo_francia">De Francia</string>
+	<string name="elo_canada">De Canadá</string>
+	<string name="elo_lectura">Cómo lee</string>
+	<string name="elo_pausas">Pausas</string>
+	<string name="elo_pausas_todas">Más cortas en la puntuación y al final (para el lector)</string>
+	<string name="elo_pausas_final">Más corta solo al final</string>
+	<string name="elo_pausas_motor">Las de Eloquence, sin tocar</string>
+	<string name="elo_prediccion">Predicción de frases</string>
+	<string name="elo_prediccion_res">La entonación de la prosa: va bien al leer libros, peor con los trozos cortos de la pantalla</string>
+	<string name="elo_abreviaturas">Desarrollar las abreviaturas</string>
+	<string name="elo_abreviaturas_res">Las abreviaturas que conoce Eloquence se dicen enteras</string>
+	<string name="elo_muestreo">Frecuencia de muestreo</string>
+	<string name="elo_muestreo_res">11 025 hercios es el sonido de siempre de Eloquence; más alta, más brillante.</string>
+	<string name="elo_hercios">%1$d hercios</string>
+	<string name="elo_diccionarios">Diccionarios</string>
+	<string name="elo_diccionarios_res">Archivos de texto con una palabra, un tabulador y cómo se dice (otra palabra o la pronunciación de Eloquence), como los que se comparten para el driver de NVDA.</string>
+	<string name="elo_dic_principal">Diccionario principal</string>
+	<string name="elo_dic_raices">Diccionario de raíces</string>
+	<string name="elo_dic_abreviaturas">Diccionario de abreviaturas</string>
+	<string name="elo_dic_entradas">%1$d entradas</string>
+	<string name="elo_dic_ninguno">ninguno</string>
+	<string name="elo_dic_elegir">Elegir un archivo</string>
+	<string name="elo_dic_quitar">Quitar el diccionario</string>
+	<string name="elo_dic_quitado">Diccionario quitado</string>
+	<string name="elo_dic_puesto">Diccionario puesto: %1$d entradas</string>
+	<string name="elo_dic_mal">No se pudo leer el diccionario.</string>
+	<string name="aj_leer_mas_solo">Abrir solo «Leer más»</string>
+	<string name="aj_leer_mas_solo_res">En un mensaje largo que acaba en «Leer más» (WhatsApp, Telegram), al llegar a él se pulsa solo y se lee el resto</string>
+	<string name="aj_braille_acordes">Combinaciones de la línea braille</string>
+	<string name="aj_braille_acordes_res">Qué hace cada combinación de espacio y puntos</string>
+	<string name="aj_braille_cursor">Cursor en la línea braille</string>
+	<string name="aj_cortar_al_tocar">Tocar la pantalla corta la voz</string>
+	<string name="aj_cortar_al_tocar_res">Si lo quitas, la voz sigue hablando al tocar la pantalla y solo se corta al pasar a otro elemento</string>
+	<string name="aj_trocear_largos">Leer los textos largos por frases</string>
+	<string name="aj_trocear_largos_res">Así, al pausar y reanudar la voz, sigue desde la frase en la que iba</string>
+	<string name="aj_arrastre_respaldo">Arrastrar las listas que no se desplazan</string>
+	<string name="aj_arrastre_respaldo_res">Si una app no deja desplazar su lista al lector, Tiresias la arrastra con dos dedos</string>
+	<string name="aj_foneticas">Letras fonéticas al leer por caracteres</string>
+	<string-array name="foneticas_nombres">
+		<item>No</item>
+		<item>Después de la letra (b, Barcelona)</item>
+		<item>En vez de la letra (Barcelona)</item>
+	</string-array>
+	<string-array name="foneticas_valores" translatable="false">
+		<item>no</item>
+		<item>despues</item>
+		<item>en_vez</item>
+	</string-array>
+	<string name="aj_al_encender">Al encender la pantalla, decir</string>
+	<string-array name="al_encender_nombres">
+		<item>Nada</item>
+		<item>La hora</item>
+		<item>La hora, la fecha y la batería</item>
+	</string-array>
+	<string-array name="al_encender_valores" translatable="false">
+		<item>nada</item>
+		<item>hora</item>
+		<item>estado</item>
+	</string-array>
+	<string name="aj_al_apagar">Avisar al apagar la pantalla</string>
+	<string name="aj_al_apagar_res">Un sonido y «pantalla apagada»</string>
+	<string name="aj_volumen_deslizadores">Teclas de volumen en los deslizadores</string>
+	<string name="aj_volumen_deslizadores_res">Con un deslizador enfocado, las teclas de volumen suben y bajan su valor</string>
+	<string name="aj_escribir_al_levantar">Escribir al levantar el dedo</string>
+	<string name="aj_escribir_al_levantar_res">En el teclado en pantalla, explora hasta la tecla y levanta el dedo para escribirla, sin doble toque</string>
+	<string name="aj_sonido_espera">Sonido mientras la IA piensa</string>
+	<string name="aj_sonido_espera_res">Un sonido suave cada tres segundos hasta que llega la respuesta (también al reconocer texto)</string>
+	<string name="aj_aviso_espera">Avisar si la IA tarda</string>
+	<string name="aj_aviso_espera_res">Si pasan 20 segundos sin respuesta, se dice que sigue pensando</string>
+	<string name="aj_foco_ventanas_nuevas">Foco en lo primero de cada pantalla nueva</string>
+	<string name="aj_foco_ventanas_nuevas_res">Al abrir una pantalla, tras su título, Tiresias va a su primer elemento (sin esperar a que deslices)</string>
+	<string name="aj_voz_multimedia">Voz por el volumen multimedia</string>
+	<string name="aj_voz_multimedia_res">La voz y los sonidos usan el volumen de la música en vez del de accesibilidad. Se aplica al volver a activar Tiresias.</string>
+	<string name="aj_toque_directo_teclado">Toque directo en el teclado en pantalla</string>
+	<string name="aj_toque_directo_teclado_res">Se escribe tocando las teclas, como sin lector (para quien escribe rápido de memoria o con un teclado braille de otra app)</string>
+	<string name="aj_braille_espejo">Puntos en espejo</string>
+	<string name="aj_braille_espejo_res">Para sujetar el móvil con la pantalla hacia ti: el punto 1 queda a la derecha</string>
+	<string name="aj_braille_sensor">Puntos según cómo sujetas el móvil</string>
+	<string name="aj_braille_sensor_res">Sobre la mesa (pantalla hacia ti), en espejo; de pie con la pantalla hacia fuera, normales. Manda sobre «Puntos en espejo»</string>
+	<string name="aj_braille_eco">Al escribir en braille, decir</string>
+	<string-array name="braille_cursor_nombres">
+		<item>Puntos 7 y 8</item>
+		<item>Solo el punto 8</item>
+		<item>Solo el punto 7</item>
+		<item>Sin marcar</item>
+	</string-array>
+	<string-array name="braille_cursor_valores" translatable="false">
+		<item>78</item>
+		<item>8</item>
+		<item>7</item>
+		<item>no</item>
+	</string-array>
+	<string-array name="braille_eco_nombres">
+		<item>Cada letra</item>
+		<item>Cada palabra al terminarla</item>
+		<item>Nada</item>
+	</string-array>
+	<string-array name="braille_eco_valores" translatable="false">
+		<item>letras</item>
+		<item>palabras</item>
+		<item>nada</item>
+	</string-array>
+	<string name="aj_braille_vibrar_puntos">Vibrar al poner cada punto</string>
+	<string name="aj_encabezados_tabla">Encabezados de las tablas</string>
+	<string name="aj_encabezados_tabla_res">En cada celda, decir el encabezado de su fila y de su columna</string>
+	<string name="aj_cambio_dialecto">También la variante del idioma</string>
+	<string name="aj_cambio_dialecto_res">Español de México, inglés británico… Si lo quitas, solo cambia el idioma y se usa su voz de siempre</string>
+	<string name="aj_controles_solo_web">Controles de la web solo en la web</string>
+	<string name="aj_controles_solo_web_res">Enlaces y regiones salen entre los controles de lectura solo dentro de una página web</string>
+	<string name="aj_foco_sin_esperar_titulo">Sin esperar al título</string>
+	<string name="aj_foco_sin_esperar_titulo_res">En una pantalla nueva, el primer elemento se dice enseguida, cortando el título (el sonido de ventana avisa)</string>
+	<string name="aj_activar_al_levantar">Activar al levantar el dedo</string>
+	<string-array name="activar_al_levantar_nombres">
+		<item>No (doble toque)</item>
+		<item>Solo en la barra de navegación (Atrás, Inicio, Recientes)</item>
+		<item>En toda la pantalla</item>
+	</string-array>
+	<string-array name="activar_al_levantar_valores" translatable="false">
+		<item>no</item>
+		<item>barra</item>
+		<item>pantalla</item>
+	</string-array>
+	<string name="aj_al_desbloquear">Al desbloquear, decir</string>
+	<string-array name="al_desbloquear_nombres">
+		<item>Nada</item>
+		<item>«Desbloqueado»</item>
+		<item>La hora</item>
+		<item>El estado (lo elegido en «Elegir lo que dice el estado»)</item>
+	</string-array>
+	<string-array name="al_desbloquear_valores" translatable="false">
+		<item>nada</item>
+		<item>desbloqueado</item>
+		<item>hora</item>
+		<item>estado</item>
+	</string-array>
+	<string name="aj_callar_bloqueo">Callar la pantalla de bloqueo</string>
+	<string name="aj_callar_bloqueo_res">Con el móvil bloqueado, ni notificaciones ni avisos: solo lo que tú pides. Las notificaciones se guardan en Notificaciones recientes</string>
+	<string name="aj_sonido_tipo">Sonido según el tipo de control</string>
+	<string name="aj_sonido_tipo_res">El sonido del foco cambia de tono: más agudo en encabezados y enlaces, más grave en campos y texto</string>
+	<string name="aj_sonido_vertical">Sonido según la altura</string>
+	<string name="aj_sonido_vertical_res">El sonido del foco es más agudo arriba de la pantalla y más grave abajo</string>
+	<string name="aj_braille_sonar_puntos">Clic al poner cada punto</string>
+	<string name="aj_braille_sonar_puntos_res">En el teclado braille en pantalla, un clic corto con cada dedo</string>
+	<string name="aj_altavoz">Altavoz al apartar el móvil de la oreja</string>
+	<string name="aj_altavoz_res">En una llamada, pasa al altavoz al apartar el móvil de la oreja y vuelve al auricular al acercarlo, como en el iPhone. No toca el Bluetooth ni los auriculares</string>
+	<string name="aj_altavoz_sin_permiso">Falta un permiso que Android no da a los lectores de pantalla: mira la opción de debajo</string>
+	<string name="aj_altavoz_copiar">Copiar la orden que da el permiso del altavoz</string>
+	<string name="aj_altavoz_permiso">Conecta el móvil a un ordenador y escribe esta orden una vez (al tocar aquí se copia): %1$s</string>
+	<string name="aj_altavoz_copiado">Orden copiada al portapapeles</string>
+	<string name="aj_braille_tabla_informatica">Tabla informática de 8 puntos</string>
+	<string name="aj_braille_tabla_auto">La del idioma de Tiresias</string>
+	<string name="aj_braille_tabla_fila">%1$s (%2$s)</string>
+	<string name="aj_braille_brf">Leer un archivo BRF en la línea</string>
+	<string name="aj_braille_brf_res">Un libro o un documento en braille ASCII: se lee línea a línea con las teclas de desplazar; Atrás lo cierra</string>
+	<string name="aj_braille_brf_abierto">Abierto en la línea braille</string>
+	<string name="aj_braille_brf_sin_linea">Para leer un BRF, conecta antes una línea braille</string>
+	<string name="aj_braille_brf_mal">No se pudo leer el archivo (como mucho 4 MB)</string>
+	<string name="aj_reconocer_personas">Reconocer a las personas que conoces</string>
+	<string name="aj_reconocer_personas_res">Al describir, la IA nombra a las personas de «Personas que conoces» si las ve</string>
+	<string name="aj_personas_nube">También con la IA de internet</string>
+	<string name="aj_personas_nube_res">Manda sus fotos a la IA de internet con cada descripción. Si no, solo se reconocen con la IA del móvil</string>
+	<string name="aj_tic_desplazar">Un tic por cada elemento al desplazar</string>
+	<string name="aj_tic_desplazar_res">Al desplazar una lista, suena un tic por cada elemento que pasa, en vez del sonido de desplazar</string>
+	<string name="aj_encabezados_tabla_lugar">Dónde van los encabezados</string>
+	<string-array name="encabezados_lugar_nombres">
+		<item>Antes de la fila y la columna</item>
+		<item>Después de la fila y la columna</item>
+	</string-array>
+	<string-array name="encabezados_lugar_valores" translatable="false">
+		<item>antes</item>
+		<item>despues</item>
+	</string-array>
+	<string name="aj_decir_fila_columna">Decir la fila y la columna</string>
+	<string name="aj_decir_fila_columna_res">En las tablas, «fila 2, columna 3»</string>
+	<string name="aj_teclas_cortan">Las teclas cortan la voz</string>
+	<string-array name="teclas_cortan_nombres">
+		<item>Siempre</item>
+		<item>Solo al escribir en un campo de texto</item>
+		<item>Nunca (solo la tecla Control)</item>
+	</string-array>
+	<string-array name="teclas_cortan_valores" translatable="false">
+		<item>siempre</item>
+		<item>campos</item>
+		<item>nunca</item>
+	</string-array>
+	<string name="aj_intro_corta">Intro corta la voz</string>
+	<string name="aj_intro_corta_res">Si lo quitas, al pulsar Intro sigues oyendo lo que se estaba diciendo</string>
+	<string name="aj_salida_audio">Salida del audio</string>
+	<string name="aj_salida_audio_res">Para las voces incluidas (eSpeak NG, Pico y las neuronales). Las demás suenan por donde decida su motor, y en las llamadas no se cambia nunca.</string>
+	<string-array name="salida_audio_nombres">
+		<item>La del sistema</item>
+		<item>El altavoz del móvil</item>
+		<item>Los auriculares, si hay unos conectados</item>
+	</string-array>
+	<string-array name="salida_audio_valores" translatable="false">
+		<item>sistema</item>
+		<item>altavoz</item>
+		<item>auriculares</item>
+	</string-array>
+	<string name="aj_modo_senior">Modo senior</string>
+	<string name="aj_modo_senior_res">Tiresias sencillo para personas mayores: pocos gestos, las teclas de volumen y pedir ayuda</string>
+	<string name="senior_titulo">Modo senior</string>
+	<string name="senior_explicacion">El modo senior deja Tiresias en lo básico, para quien está empezando o solo quiere lo de cada día: pocos gestos y fáciles, lo importante con las teclas de volumen, frases cortas y una llamada de ayuda. Al quitarlo, todo vuelve a estar como antes.</string>
+	<string name="senior_poner">Modo senior</string>
+	<string name="senior_poner_res">Cambia los gestos, el menú de Tiresias y lo que se dice. Se puede quitar cuando se quiera.</string>
+	<string name="senior_puesto">Modo senior puesto</string>
+	<string name="senior_quitado">Modo senior quitado: todo está como antes</string>
+	<string name="senior_como">Cómo se maneja</string>
+	<string name="senior_como_1">Desliza un dedo a la derecha o a la izquierda para pasar de una cosa a otra. Al llegar al final, vuelve a empezar.</string>
+	<string name="senior_como_2">Toca dos veces en cualquier sitio para abrir o pulsar lo que se acaba de decir.</string>
+	<string name="senior_como_3">Desliza hacia arriba para que lo repita y hacia abajo para saber qué puedes hacer ahí.</string>
+	<string name="senior_como_4">Las dos teclas de volumen a la vez: a la pantalla de inicio, siempre. Mantener volumen arriba: la hora, la batería y los avisos. Mantener volumen abajo: el menú de Tiresias.</string>
+	<string name="senior_como_5">Volumen arriba tres veces: pedir ayuda al contacto, con unos segundos para cancelar tocando la pantalla. Volumen abajo tres veces: decirle lo que quieres.</string>
+	<string name="senior_como_6">Toca con dos dedos para que se calle.</string>
+	<string name="senior_opciones">Opciones</string>
+	<string name="senior_solo_mensajes">Leer solo llamadas y mensajes</string>
+	<string name="senior_solo_mensajes_res">De los avisos, solo se leen las llamadas, los mensajes, el correo, las alarmas, los recordatorios y las citas.</string>
+	<string name="senior_toque_activa">Un toque abre lo que se acaba de decir</string>
+	<string name="senior_toque_activa_res">Para quien no domina el doble toque: tocar una vez sobre lo que se acaba de leer lo abre. Es más fácil abrir algo sin querer.</string>
+	<string name="senior_contacto">Contacto de ayuda: %1$s</string>
+	<string name="senior_contacto_ninguno">sin poner</string>
+	<string name="senior_contacto_nombre_numero">%1$s, %2$s</string>
+	<string name="senior_contacto_nombre">Nombre de quien ayuda</string>
+	<string name="senior_contacto_nombre_pista">Por ejemplo, Juan</string>
+	<string name="senior_contacto_numero">Teléfono de quien ayuda</string>
+	<string name="senior_contacto_numero_pista">Número de teléfono; vacío para quitarlo</string>
+	<string name="senior_contacto_puesto">Contacto de ayuda puesto</string>
+	<string name="senior_contacto_quitado">Contacto de ayuda quitado</string>
+	<string name="senior_llamar_si">Tiresias podrá llamar directamente al pedir ayuda</string>
+	<string name="senior_llamar_no">Sin el permiso, al pedir ayuda se abrirá el teléfono con el número marcado y habrá que pulsar Llamar</string>
+	<string name="senior_codigo">Código de los ajustes: %1$s</string>
+	<string name="senior_codigo_si">puesto</string>
+	<string name="senior_codigo_no">sin código</string>
+	<string name="senior_codigo_poner">Código de los ajustes</string>
+	<string name="senior_codigo_pista">Al menos 4 cifras; vacío para quitarlo</string>
+	<string name="senior_codigo_corto">El código tiene que tener al menos 4 cifras</string>
+	<string name="senior_codigo_puesto">Código puesto: se pedirá al abrir los ajustes</string>
+	<string name="senior_codigo_quitado">Código quitado</string>
+	<string name="senior_codigo_pedir">Código de los ajustes</string>
+	<string name="senior_codigo_pedir_pista">Código</string>
+	<string name="senior_codigo_mal">Ese no es el código</string>
+</resources>

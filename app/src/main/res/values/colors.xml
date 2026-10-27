@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Colores de Tiresias (añil, de noche): contraste de 4,5:1 como mínimo en texto. Los oscuros, en values-night. -->
+<resources>
+	<color name="primario">#3A4AA8</color>
+	<color name="sobre_primario">#FFFFFF</color>
+	<color name="primario_contenedor">#DEE0FF</color>
+	<color name="sobre_primario_contenedor">#00105C</color>
+	<color name="secundario">#5B5D72</color>
+	<color name="fondo">#FEFBFF</color>
+	<color name="sobre_fondo">#1B1B1F</color>
+	<color name="superficie_variante">#E3E1EC</color>
+	<color name="sobre_superficie_variante">#46464F</color>
+	<color name="estado_bien">#1B5E20</color>
+	<color name="estado_aviso">#8A4B00</color>
+	<color name="estado_mal">#B3261E</color>
+	<color name="icono_fondo">#1A237E</color>
+</resources>

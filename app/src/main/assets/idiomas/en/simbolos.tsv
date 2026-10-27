@@ -1,0 +1,567 @@
+# Tiresias symbols in English: symbol<TAB>name<TAB>level[<TAB>mantener] (same format as es/simbolos.tsv)
+...	ellipsis	algunas	mantener
+…	ellipsis	algunas	mantener
+.	dot	mayoria	mantener
+,	comma	mayoria	mantener
+;	semicolon	mayoria	mantener
+:	colon	mayoria	mantener
+¿	inverted question mark	mayoria
+?	question mark	mayoria	mantener
+¡	inverted exclamation mark	mayoria
+!	exclamation mark	mayoria	mantener
+"	quote	mayoria
+“	left quote	mayoria
+”	right quote	mayoria
+«	left double angle quote	mayoria
+»	right double angle quote	mayoria
+'	apostrophe	todas
+‘	left single quote	todas
+’	apostrophe	todas
+(	left paren	mayoria
+)	right paren	mayoria
+[	left bracket	mayoria
+]	right bracket	mayoria
+{	left brace	mayoria
+}	right brace	mayoria
+-	dash	mayoria
+–	en dash	mayoria
+—	em dash	mayoria
+_	underscore	mayoria
+/	slash	algunas
+|	bar	mayoria
+@	at	algunas
+$	dollar	algunas
+€	euros	algunas
+£	pounds	algunas
+¥	yen	algunas
+%	percent	algunas
+‰	per mille	algunas
+&	and	algunas
+*	star	algunas
++	plus	algunas
+=	equals	algunas
+<	less than	algunas
+>	greater than	algunas
+^	caret	mayoria
+~	tilde	mayoria
+`	grave	todas
+´	acute	todas
+¨	diaeresis	todas
+°	degrees	algunas
+º	masculine ordinal	algunas
+ª	feminine ordinal	algunas
+§	section	algunas
+¶	pilcrow	algunas
+©	copyright	algunas
+®	registered	algunas
+™	trademark	algunas
+•	bullet	algunas
+·	middle dot	mayoria
+×	times	algunas
+÷	divided by	algunas
+±	plus or minus	algunas
+≈	almost equal to	algunas
+≠	not equal to	algunas
+≤	less than or equal to	algunas
+≥	greater than or equal to	algunas
+√	square root	algunas
+∞	infinity	algunas
+½	one half	algunas
+¼	one quarter	algunas
+¾	three quarters	algunas
+←	left arrow	algunas
+→	right arrow	algunas
+↑	up arrow	algunas
+↓	down arrow	algunas
+✓	check mark	algunas
+✔	check mark	algunas
+✗	cross	algunas
+★	star	algunas
+☆	white star	algunas
+♥	heart	algunas
+\s	space	caracter
+\\	backslash	algunas
+\t	tab	caracter
+
+# --- Desde aquí, generado del symbols.dic de NVDA (GPL-2, NVDA Contributors) ---
+！	fullwidth exclamation mark	todas
+¢	cents	todas
+₹	rupee	algunas
+ƒ	florin	todas
+¤	currency sign	todas
+、	ideographic comma	todas	mantener
+،	arabic comma	todas	mantener
+．	fullwidth full stop	algunas
+：	fullwidth colon	mayoria
+؛	arabic semicolon	mayoria
+；	fullwidth semicolon	mayoria
+؟	arabic question mark	todas
+？	fullwidth question mark	todas
+¦	broken bar	mayoria
+‚	single low quote	mayoria
+„	double low quote	mayoria
+′	prime	algunas
+″	double prime	algunas
+‴	triple prime	algunas
+‐	hyphen	mayoria	mantener
+­	soft hyphen	mayoria
+⁃	hyphen bullet	ninguna
+●	circle	mayoria
+○	white circle	mayoria
+¯	macron	mayoria
+¸	cedilla	mayoria
+‎	left to right mark	caracter
+‏	right to left mark	caracter
+■	black square	algunas
+▪	black square	algunas
+◾	black square	algunas
+□	white square	algunas
+◦	white bullet	algunas
+⇨	right white arrow	algunas
+➔	right-pointing arrow	algunas
+➢	right arrowhead	algunas
+❖	black diamond minus white X	algunas
+♣	black club	algunas
+♦	black diamond	algunas
+◆	black diamond	algunas
+µ	micro	algunas
+⁰	superscript 0	algunas
+¹	superscript 1	algunas
+²	superscript 2	algunas
+³	superscript 3	algunas
+⁴	superscript 4	algunas
+⁵	superscript 5	algunas
+⁶	superscript 6	algunas
+⁷	superscript 7	algunas
+⁸	superscript 8	algunas
+⁹	superscript 9	algunas
+⁺	superscript plus	algunas
+⁼	superscript equals	algunas
+⁽	superscript left paren	algunas
+⁾	superscript right paren	algunas
+ⁿ	superscript n	algunas
+₀	subscript 0	algunas
+₁	subscript 1	algunas
+₂	subscript 2	algunas
+₃	subscript 3	algunas
+₄	subscript 4	algunas
+₅	subscript 5	algunas
+₆	subscript 6	algunas
+₇	subscript 7	algunas
+₈	subscript 8	algunas
+₉	subscript 9	algunas
+₊	subscript plus	algunas
+₋	subscript minus	algunas
+₌	subscript equals	algunas
+₍	subscript left paren	algunas
+₎	subscript right paren	algunas
+℠	ServiceMark	algunas
+🡺	right arrow	algunas
+†	dagger	algunas
+‡	double dagger	algunas
+‣	triangular bullet	ninguna
+⊕	circled plus	ninguna
+⊖	circled minus	ninguna
+⇄	right arrow over left arrow	ninguna
+⇒	double right arrow	ninguna
+−	minus	algunas
+⋅	times	algunas
+⨯	times	ninguna
+∕	divided by	algunas
+⁄	divided by	algunas
+∓	minus or plus	algunas
+∖	set minus	ninguna
+⊍	set union	ninguna
+𝒫	power set of the set	ninguna
+𝔓	power set of the set	ninguna
+℘	power set of the set	ninguna
+∁	complement of the set	ninguna
+∅	empty set	ninguna
+⊂	subset of	ninguna
+⊄	not a subset of	ninguna
+⊃	superset of	ninguna
+⊅	not a superset of	ninguna
+⊆	subset of or equal to	ninguna
+⊈	neither a subset of nor equal to	ninguna
+⊇	superset of or equal to	ninguna
+⊉	neither a superset of nor equal to	ninguna
+⊌	multiset	ninguna
+≃	asymptotically equal to	ninguna
+≄	not asymptotically equal to	ninguna
+≅	approximately equal to	ninguna
+≆	approximately but not actually equal to	ninguna
+≌	all equal to	ninguna
+≍	equivalent to	ninguna
+≭	not equivalent to	ninguna
+≎	geometrically equivalent to	ninguna
+≑	geometrically equal to	ninguna
+≚	equiangular to	ninguna
+≬	between	ninguna
+≡	identical to	ninguna
+≣	strictly identical to	ninguna
+≢	not identical to	ninguna
+∼	similar to	ninguna
+≙	estimates	ninguna
+≟	questioned equal to	ninguna
+≦	less- than or equal to	ninguna
+≪	much smaller than	ninguna
+≧	greater-than or equal to	ninguna
+≫	much bigger than	ninguna
+≶	less than or greater than	ninguna
+≷	greater than or less than	ninguna
+≮	not less than	ninguna
+≯	not greater than	ninguna
+⁻	inverse	algunas
+∘	ring Operator	ninguna
+∂	partial derivative	ninguna
+∇	gradient of	ninguna
+⃗	vector between	ninguna
+△	triangle	ninguna
+▭	rectangle	ninguna
+∟	right angle	ninguna
+∠	angle	ninguna
+∥	parallel to	ninguna
+∦	not parallel to	ninguna
+⊥	perpendicular to	ninguna
+⟂	ortogonal to	ninguna
+‖	norm of vector	ninguna
+̂	hat	ninguna
+∿	sine wave	ninguna
+∡	measured Angle	ninguna
+∢	spherical Angle	ninguna
+∀	for all	ninguna
+∃	there exists	ninguna
+∄	there does not exist	ninguna
+⇏	does not imply	ninguna
+⇐	is implied by	ninguna
+∈	element of	ninguna
+∉	not an element of	ninguna
+∊	small element of	ninguna
+∋	contains as member	ninguna
+∌	does not contain as member	ninguna
+∍	small contains as member	ninguna
+∎	end of proof	ninguna
+∏	n-ary product	ninguna
+∐	n-ary coproduct	ninguna
+∑	n-ary summation	ninguna
+∛	cube root	ninguna
+∜	fourth root	ninguna
+∝	proportional to	ninguna
+∧	and	ninguna
+∨	or	ninguna
+¬	not	ninguna
+∩	intersection	ninguna
+∪	union	ninguna
+∫	integral	ninguna
+∬	double Integral	ninguna
+∭	triple Integral	ninguna
+∮	contour Integral	ninguna
+∯	surface Integral	ninguna
+∰	volume Integral	ninguna
+∱	clockwise Integral	ninguna
+∲	clockwise contour Integral	ninguna
+∳	anticlockwise Contour Integral	ninguna
+∴	therefore	ninguna
+∵	because	ninguna
+∶	ratio	ninguna
+∷	proportion	ninguna
+∹	excess	ninguna
+∺	geometric proportion	ninguna
+≀	wreath product	ninguna
+≏	difference between	ninguna
+≐	approaches the limit	ninguna
+∙	bullet Operator	ninguna
+∣	divides	ninguna
+∤	does not divide	ninguna
+≔	colon equals	ninguna
+≕	equals colon	ninguna
+≺	precedes	ninguna
+≻	succeeds	ninguna
+⊀	does not precede	ninguna
+⊁	does not succeed	ninguna
+⅐	one seventh	ninguna
+⅑	one ninth	ninguna
+⅒	one tenth	ninguna
+⅓	one third	ninguna
+⅔	two thirds	ninguna
+⅕	one fifth	ninguna
+⅖	two fifths	ninguna
+⅗	three fifths	ninguna
+⅘	four fifths	ninguna
+⅙	one sixth	ninguna
+⅚	five sixths	ninguna
+⅛	one eighth	ninguna
+⅜	three eights	ninguna
+⅝	five eighths	ninguna
+⅞	seven eighths	ninguna
+𝔸	algebraic numbers	ninguna
+ℂ	complex numbers	ninguna
+ℑ	imaginary part of complex number	ninguna
+ℍ	quaternions	ninguna
+ℕ	natural numbers	ninguna
+𝕁	nonnegative (whole) numbers	ninguna
+ℚ	rational numbers	ninguna
+ℝ	real numbers	ninguna
+ℜ	real part of complex number	ninguna
+ℤ	integers	ninguna
+ℵ	aleph number	ninguna
+ℶ	beth number	ninguna
+⌘	mac Command key	ninguna
+⌥	mac Option key	ninguna
+⠀	space	todas
+⠁	braille 1	todas
+⠂	braille 2	todas
+⠃	braille 1 2	todas
+⠄	braille 3	todas
+⠅	braille 1 3	todas
+⠆	braille 2 3	todas
+⠇	braille 1 2 3	todas
+⠈	braille 4	todas
+⠉	braille 1 4	todas
+⠊	braille 2 4	todas
+⠋	braille 1 2 4	todas
+⠌	braille 3 4	todas
+⠍	braille 1 3 4	todas
+⠎	braille 2 3 4	todas
+⠏	braille 1 2 3 4	todas
+⠐	braille 5	todas
+⠑	braille 1 5	todas
+⠒	braille 2 5	todas
+⠓	braille 1 2 5	todas
+⠔	braille 3 5	todas
+⠕	braille 1 3 5	todas
+⠖	braille 2 3 5	todas
+⠗	braille 1 2 3 5	todas
+⠘	braille 4 5	todas
+⠙	braille 1 4 5	todas
+⠚	braille 2 4 5	todas
+⠛	braille 1 2 4 5	todas
+⠜	braille 3 4 5	todas
+⠝	braille 1 3 4 5	todas
+⠞	braille 2 3 4 5	todas
+⠟	braille 1 2 3 4 5	todas
+⠠	braille 6	todas
+⠡	braille 1 6	todas
+⠢	braille 2 6	todas
+⠣	braille 1 2 6	todas
+⠤	braille 3 6	todas
+⠥	braille 1 3 6	todas
+⠦	braille 2 3 6	todas
+⠧	braille 1 2 3 6	todas
+⠨	braille 4 6	todas
+⠩	braille 1 4 6	todas
+⠪	braille 2 4 6	todas
+⠫	braille 1 2 4 6	todas
+⠬	braille 3 4 6	todas
+⠭	braille 1 3 4 6	todas
+⠮	braille 2 3 4 6	todas
+⠯	braille 1 2 3 4 6	todas
+⠰	braille 5 6	todas
+⠱	braille 1 5 6	todas
+⠲	braille 2 5 6	todas
+⠳	braille 1 2 5 6	todas
+⠴	braille 3 5 6	todas
+⠵	braille 1 3 5 6	todas
+⠶	braille 2 3 5 6	todas
+⠷	braille 1 2 3 5 6	todas
+⠸	braille 4 5 6	todas
+⠹	braille 1 4 5 6	todas
+⠺	braille 2 4 5 6	todas
+⠻	braille 1 2 4 5 6	todas
+⠼	braille 3 4 5 6	todas
+⠽	braille 1 3 4 5 6	todas
+⠾	braille 2 3 4 5 6	todas
+⠿	braille 1 2 3 4 5 6	todas
+⡀	braille 7	todas
+⡁	braille 1 7	todas
+⡂	braille 2 7	todas
+⡃	braille 1 2 7	todas
+⡄	braille 3 7	todas
+⡅	braille 1 3 7	todas
+⡆	braille 2 3 7	todas
+⡇	braille 1 2 3 7	todas
+⡈	braille 4 7	todas
+⡉	braille 1 4 7	todas
+⡊	braille 2 4 7	todas
+⡋	braille 1 2 4 7	todas
+⡌	braille 3 4 7	todas
+⡍	braille 1 3 4 7	todas
+⡎	braille 2 3 4 7	todas
+⡏	braille 1 2 3 4 7	todas
+⡐	braille 5 7	todas
+⡑	braille 1 5 7	todas
+⡒	braille 2 5 7	todas
+⡓	braille 1 2 5 7	todas
+⡔	braille 3 5 7	todas
+⡕	braille 1 3 5 7	todas
+⡖	braille 2 3 5 7	todas
+⡗	braille 1 2 3 5 7	todas
+⡘	braille 4 5 7	todas
+⡙	braille 1 4 5 7	todas
+⡚	braille 2 4 5 7	todas
+⡛	braille 1 2 4 5 7	todas
+⡜	braille 3 4 5 7	todas
+⡝	braille 1 3 4 5 7	todas
+⡞	braille 2 3 4 5 7	todas
+⡟	braille 1 2 3 4 5 7	todas
+⡠	braille 6 7	todas
+⡡	braille 1 6 7	todas
+⡢	braille 2 6 7	todas
+⡣	braille 1 2 6 7	todas
+⡤	braille 3 6 7	todas
+⡥	braille 1 3 6 7	todas
+⡦	braille 2 3 6 7	todas
+⡧	braille 1 2 3 6 7	todas
+⡨	braille 4 6 7	todas
+⡩	braille 1 4 6 7	todas
+⡪	braille 2 4 6 7	todas
+⡫	braille 1 2 4 6 7	todas
+⡬	braille 3 4 6 7	todas
+⡭	braille 1 3 4 6 7	todas
+⡮	braille 2 3 4 6 7	todas
+⡯	braille 1 2 3 4 6 7	todas
+⡰	braille 5 6 7	todas
+⡱	braille 1 5 6 7	todas
+⡲	braille 2 5 6 7	todas
+⡳	braille 1 2 5 6 7	todas
+⡴	braille 3 5 6 7	todas
+⡵	braille 1 3 5 6 7	todas
+⡶	braille 2 3 5 6 7	todas
+⡷	braille 1 2 3 5 6 7	todas
+⡸	braille 1 2 3 7	todas
+⡹	braille 1 4 5 6 7	todas
+⡺	braille 2 4 5 6 7	todas
+⡻	braille 1 2 4 5 6 7	todas
+⡼	braille 3 4 5 6 7	todas
+⡽	braille 1 3 4 5 6 7	todas
+⡾	braille 2 3 4 5 6 7	todas
+⡿	braille 1 2 3 4 5 6 7	todas
+⢀	braille 8	todas
+⢁	braille 1 8	todas
+⢂	braille 2 8	todas
+⢃	braille 1 2 8	todas
+⢄	braille 3 8	todas
+⢅	braille 1 3 8	todas
+⢆	braille 2 3 8	todas
+⢇	braille 1 2 3 8	todas
+⢈	braille 4 8	todas
+⢉	braille 1 4 8	todas
+⢊	braille 2 4 8	todas
+⢋	braille 1 2 4 8	todas
+⢌	braille 3 4 8	todas
+⢍	braille 1 3 4 8	todas
+⢎	braille 2 3 4 8	todas
+⢏	braille 1 2 3 4 8	todas
+⢐	braille 5 8	todas
+⢑	braille 1 5 8	todas
+⢒	braille 2 5 8	todas
+⢓	braille 1 2 5 8	todas
+⢔	braille 3 5 8	todas
+⢕	braille 1 3 5 8	todas
+⢖	braille 2 3 5 8	todas
+⢗	braille 1 2 3 5 8	todas
+⢘	braille 4 5 8	todas
+⢙	braille 1 4 5 8	todas
+⢚	braille 2 4 5 8	todas
+⢛	braille 1 2 4 5 8	todas
+⢜	braille 3 4 5 8	todas
+⢝	braille 1 3 4 5 8	todas
+⢞	braille 2 3 4 5 8	todas
+⢟	braille 1 2 3 4 5 8	todas
+⢠	braille 6 8	todas
+⢡	braille 1 6 8	todas
+⢢	braille 2 6 8	todas
+⢣	braille 1 2 6 8	todas
+⢤	braille 3 6 8	todas
+⢥	braille 1 3 6 8	todas
+⢦	braille 2 3 6 8	todas
+⢧	braille 1 2 3 6 8	todas
+⢨	braille 4 6 8	todas
+⢩	braille 1 4 6 8	todas
+⢪	braille 2 4 6 8	todas
+⢫	braille 1 2 4 6 8	todas
+⢬	braille 3 4 6 8	todas
+⢭	braille 1 3 4 6 8	todas
+⢮	braille 2 3 4 6 8	todas
+⢯	braille 1 2 3 4 6 8	todas
+⢰	braille 5 6 8	todas
+⢱	braille 1 5 6 8	todas
+⢲	braille 2 5 6 8	todas
+⢳	braille 1 2 5 6 8	todas
+⢴	braille 3 5 6 8	todas
+⢵	braille 1 3 5 6 8	todas
+⢶	braille 2 3 5 6 8	todas
+⢷	braille 1 2 3 5 6 8	todas
+⢸	braille 1 2 3 8	todas
+⢹	braille 1 4 5 6 8	todas
+⢺	braille 2 4 5 6 8	todas
+⢻	braille 1 2 4 5 6 8	todas
+⢼	braille 3 4 5 6 8	todas
+⢽	braille 1 3 4 5 6 8	todas
+⢾	braille 2 3 4 5 6 8	todas
+⢿	braille 1 2 3 4 5 6 8	todas
+⣀	braille 7 8	todas
+⣁	braille 1 7 8	todas
+⣂	braille 2 7 8	todas
+⣃	braille 1 2 7 8	todas
+⣄	braille 3 7 8	todas
+⣅	braille 1 3 7 8	todas
+⣆	braille 2 3 7 8	todas
+⣇	braille 1 2 3 7 8	todas
+⣈	braille 4 7 8	todas
+⣉	braille 1 4 7 8	todas
+⣊	braille 2 4 7 8	todas
+⣋	braille 1 2 4 7 8	todas
+⣌	braille 3 4 7 8	todas
+⣍	braille 1 3 4 7 8	todas
+⣎	braille 2 3 4 7 8	todas
+⣏	braille 1 2 3 4 7 8	todas
+⣐	braille 5 7 8	todas
+⣑	braille 1 5 7 8	todas
+⣒	braille 2 5 7 8	todas
+⣓	braille 1 2 5 7 8	todas
+⣔	braille 3 5 7 8	todas
+⣕	braille 1 3 5 7 8	todas
+⣖	braille 2 3 5 7 8	todas
+⣗	braille 1 2 3 5 7 8	todas
+⣘	braille 4 5 7 8	todas
+⣙	braille 1 4 5 7 8	todas
+⣚	braille 2 4 5 7 8	todas
+⣛	braille 1 2 4 5 7 8	todas
+⣜	braille 3 4 5 7 8	todas
+⣝	braille 1 3 4 5 7 8	todas
+⣞	braille 2 3 4 5 7 8	todas
+⣟	braille 1 2 3 4 5 7 8	todas
+⣠	braille 6 7 8	todas
+⣡	braille 1 6 7 8	todas
+⣢	braille 2 6 7 8	todas
+⣣	braille 1 2 6 7 8	todas
+⣤	braille 3 6 7 8	todas
+⣥	braille 1 3 6 7 8	todas
+⣦	braille 2 3 6 7 8	todas
+⣧	braille 1 2 3 6 7 8	todas
+⣨	braille 4 6 7 8	todas
+⣩	braille 1 4 6 7 8	todas
+⣪	braille 2 4 6 7 8	todas
+⣫	braille 1 2 4 6 7 8	todas
+⣬	braille 3 4 6 7 8	todas
+⣭	braille 1 3 4 6 7 8	todas
+⣮	braille 2 3 4 6 7 8	todas
+⣯	braille 1 2 3 4 6 7 8	todas
+⣰	braille 5 6 7 8	todas
+⣱	braille 1 5 6 7 8	todas
+⣲	braille 2 5 6 7 8	todas
+⣳	braille 1 2 5 6 7 8	todas
+⣴	braille 3 5 6 7 8	todas
+⣵	braille 1 3 5 6 7 8	todas
+⣶	braille 2 3 5 6 7 8	todas
+⣷	braille 1 2 3 5 6 7 8	todas
+⣸	braille 1 2 3 7 8	todas
+⣹	braille 1 4 5 6 7 8	todas
+⣺	braille 2 4 5 6 7 8	todas
+⣻	braille 1 2 4 5 6 7 8	todas
+⣼	braille 3 4 5 6 7 8	todas
+⣽	braille 1 3 4 5 6 7 8	todas
+⣾	braille 2 3 4 5 6 7 8	todas
+⣿	braille 1 2 3 4 5 6 7 8	todas
+# --- Fin de lo generado de NVDA ---

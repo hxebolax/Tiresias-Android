@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" app:title="@string/aj_seccion_lectura">
+	<ListPreference app:key="nivel_verbosidad" app:title="@string/aj_verbosidad" app:entries="@array/verbosidad_todas" app:entryValues="@array/verbosidad_valores" app:defaultValue="ALTA" app:useSimpleSummaryProvider="true" />
+	<ListPreference app:key="orden" app:title="@string/aj_orden" app:entries="@array/orden_nombres" app:entryValues="@array/orden_valores" app:defaultValue="normal" app:useSimpleSummaryProvider="true" />
+	<SwitchPreferenceCompat app:key="decir_rol" app:title="@string/aj_decir_rol" app:summary="@string/aj_solo_personalizada" app:defaultValue="true" />
+	<SwitchPreferenceCompat app:key="decir_estado" app:title="@string/aj_decir_estado" app:summary="@string/aj_solo_personalizada" app:defaultValue="true" />
+	<SwitchPreferenceCompat app:key="decir_posicion" app:title="@string/aj_decir_posicion" app:summary="@string/aj_solo_personalizada" app:defaultValue="true" />
+	<SwitchPreferenceCompat app:key="decir_pistas" app:title="@string/aj_decir_pistas" app:summary="@string/aj_solo_personalizada" app:defaultValue="true" />
+	<com.xebolax.tiresias.accesibilidad.DeslizadorAjuste app:key="espera_pistas" app:title="@string/aj_espera_pistas" app:min="200" android:max="5000" app:seekBarIncrement="100" app:defaultValue="1200" />
+	<SwitchPreferenceCompat app:key="decir_acciones" app:title="@string/aj_decir_acciones" app:summary="@string/aj_decir_acciones_res" app:defaultValue="true" />
+	<SwitchPreferenceCompat app:key="decir_identificador" app:title="@string/aj_decir_identificador" app:summary="@string/aj_decir_identificador_res" app:defaultValue="true" />
+	<SwitchPreferenceCompat app:key="decir_panel" app:title="@string/aj_decir_panel" app:summary="@string/aj_solo_personalizada" app:defaultValue="true" />
+	<PreferenceCategory app:title="@string/aj_cat_texto">
+		<ListPreference app:key="puntuacion" app:title="@string/aj_puntuacion" app:entries="@array/puntuacion_nombres" app:entryValues="@array/puntuacion_valores" app:defaultValue="ALGUNAS" app:useSimpleSummaryProvider="true" />
+		<ListPreference app:key="numeros" app:title="@string/aj_numeros" app:entries="@array/numeros_nombres" app:entryValues="@array/numeros_valores" app:defaultValue="CIFRAS" app:useSimpleSummaryProvider="true" />
+		<ListPreference app:key="mayusculas" app:title="@string/aj_mayusculas" app:entries="@array/mayusculas_nombres" app:entryValues="@array/mayusculas_valores" app:defaultValue="TONO" app:useSimpleSummaryProvider="true" />
+		<ListPreference app:key="modo_emojis" app:title="@string/aj_emojis" app:entries="@array/emojis_nombres" app:entryValues="@array/emojis_valores" app:defaultValue="NOMBRE" app:useSimpleSummaryProvider="true" />
+		<ListPreference app:key="eco_teclado" app:title="@string/aj_eco" app:entries="@array/eco_nombres" app:entryValues="@array/eco_valores" app:defaultValue="caracteres" app:useSimpleSummaryProvider="true" />
+	</PreferenceCategory>
+	<ListPreference app:key="foneticas" app:title="@string/aj_foneticas" app:entries="@array/foneticas_nombres" app:entryValues="@array/foneticas_valores" app:defaultValue="no" app:useSimpleSummaryProvider="true" />
+	<Preference app:key="ordenar_partes" app:title="@string/ordenar_partes_titulo" app:summary="@string/ordenar_partes_res" />
+	<SwitchPreferenceCompat app:key="encabezados_tabla" app:title="@string/aj_encabezados_tabla" app:summary="@string/aj_encabezados_tabla_res" app:defaultValue="true" />
+	<ListPreference app:key="encabezados_tabla_lugar" app:title="@string/aj_encabezados_tabla_lugar" app:entries="@array/encabezados_lugar_nombres" app:entryValues="@array/encabezados_lugar_valores" app:defaultValue="antes" app:useSimpleSummaryProvider="true" app:dependency="encabezados_tabla" />
+	<SwitchPreferenceCompat app:key="decir_fila_columna" app:title="@string/aj_decir_fila_columna" app:summary="@string/aj_decir_fila_columna_res" app:defaultValue="true" />
+	<SwitchPreferenceCompat app:key="leer_mas_solo" app:title="@string/aj_leer_mas_solo" app:summary="@string/aj_leer_mas_solo_res" app:defaultValue="true" />
+</PreferenceScreen>

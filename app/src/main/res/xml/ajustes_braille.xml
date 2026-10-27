@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Braille: líneas braille HID (Android 15+), tabla y teclado braille en pantalla. -->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" app:title="@string/aj_seccion_braille">
+	<SwitchPreferenceCompat app:key="braille_linea" app:title="@string/aj_braille_linea" app:summary="@string/aj_braille_linea_res" app:defaultValue="true" />
+	<Preference app:key="braille_buscar" app:title="@string/aj_braille_buscar" app:summary="@string/aj_braille_buscar_res" />
+	<Preference app:key="braille_bluetooth" app:title="@string/aj_braille_bluetooth" app:summary="@string/aj_braille_bluetooth_res" />
+	<ListPreference app:key="braille_primero" app:title="@string/aj_braille_primero" app:entries="@array/braille_primero_nombres" app:entryValues="@array/braille_primero_valores" app:defaultValue="no" app:useSimpleSummaryProvider="true" />
+	<ListPreference app:key="braille_tabla" app:title="@string/aj_braille_tabla" app:entries="@array/braille_tabla_nombres" app:entryValues="@array/braille_tabla_valores" app:defaultValue="informatico" app:useSimpleSummaryProvider="true" />
+	<ListPreference app:key="braille_tabla_informatica" app:title="@string/aj_braille_tabla_informatica" app:defaultValue="" app:useSimpleSummaryProvider="true" />
+	<Preference app:key="braille_brf" app:title="@string/aj_braille_brf" app:summary="@string/aj_braille_brf_res" />
+	<Preference app:key="braille_acordes" app:title="@string/aj_braille_acordes" app:summary="@string/aj_braille_acordes_res" />
+	<ListPreference app:key="braille_cursor" app:title="@string/aj_braille_cursor" app:entries="@array/braille_cursor_nombres" app:entryValues="@array/braille_cursor_valores" app:defaultValue="78" app:useSimpleSummaryProvider="true" />
+	<com.xebolax.tiresias.accesibilidad.DeslizadorAjuste app:key="braille_mensajes" app:title="@string/aj_braille_mensajes" app:min="1000" android:max="20000" app:seekBarIncrement="500" app:defaultValue="4000" />
+	<Preference app:key="braille_teclado" app:title="@string/aj_braille_teclado" app:summary="@string/aj_braille_teclado_res" />
+	<SwitchPreferenceCompat app:key="braille_espejo" app:title="@string/aj_braille_espejo" app:summary="@string/aj_braille_espejo_res" app:defaultValue="false" />
+	<SwitchPreferenceCompat app:key="braille_sonar_puntos" app:title="@string/aj_braille_sonar_puntos" app:summary="@string/aj_braille_sonar_puntos_res" app:defaultValue="false" />
+	<SwitchPreferenceCompat app:key="braille_sensor" app:title="@string/aj_braille_sensor" app:summary="@string/aj_braille_sensor_res" app:defaultValue="false" />
+	<ListPreference app:key="braille_eco" app:title="@string/aj_braille_eco" app:entries="@array/braille_eco_nombres" app:entryValues="@array/braille_eco_valores" app:defaultValue="letras" app:useSimpleSummaryProvider="true" />
+	<SwitchPreferenceCompat app:key="braille_vibrar_puntos" app:title="@string/aj_braille_vibrar_puntos" app:defaultValue="false" />
+</PreferenceScreen>
