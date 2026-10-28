@@ -35,11 +35,18 @@ object AsistenteIA {
 
 	class Mensaje(val deUsuario: Boolean, val texto: String)
 
-	class ErrorIA(mensaje: String) : Exception(mensaje)
+	/** Un fallo dicho claro; [codigo], el de HTTP si lo hubo (0 si no). */
+	class ErrorIA(mensaje: String, val codigo: Int = 0) : Exception(mensaje)
 
 	const val MODELO_CLAUDE = "claude-haiku-5-5"
 	const val MODELO_OPENAI = "gpt-5-mini"
-	const val MODELO_GEMINI = "gemini-flash-latest"
+	/**
+	 * Un modelo concreto, no un alias: «gemini-flash-latest» apuntó a un modelo que
+	 * daba 503 casi siempre con las claves gratuitas, y quien lo sufría creía que su
+	 * clave estaba mal (Backtalk 298). Si el elegido falla, se prueban los de [GEMINI_RESERVA].
+	 */
+	const val MODELO_GEMINI = "gemini-2.5-flash"
+	private val GEMINI_RESERVA = listOf("gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-flash-latest")
 
 	/** El proveedor que se usará, o null si no hay ninguno. «Automático» elige el primero disponible. */
 	fun elegir(c: Context): Proveedor? {
@@ -191,8 +198,22 @@ object AsistenteIA {
 		val cuerpo = JSONObject()
 			.put("system_instruction", JSONObject().put("parts", JSONArray().put(JSONObject().put("text", sistema))))
 			.put("contents", contenidos)
-		val url = "https://generativelanguage.googleapis.com/v1beta/models/${modelo.ifBlank { MODELO_GEMINI }}:generateContent"
-		val r = enviar(c, url, mapOf("x-goog-api-key" to clave), cuerpo, t.getString(R.string.ia_gemini))
+		// El elegido y, si el servicio falla (5xx) o no lo encuentra (404), los de reserva
+		val modelos = (listOf(modelo.ifBlank { MODELO_GEMINI }) + GEMINI_RESERVA).distinct()
+		var fallo: ErrorIA? = null
+		var r: JSONObject? = null
+		for (m in modelos) {
+			val url = "https://generativelanguage.googleapis.com/v1beta/models/$m:generateContent"
+			try {
+				r = enviar(c, url, mapOf("x-goog-api-key" to clave), cuerpo, t.getString(R.string.ia_gemini))
+				break
+			} catch (e: ErrorIA) {
+				if (e.codigo != 404 && e.codigo !in 500..599) throw e
+				Registro.w(ETIQUETA, "El modelo $m de Gemini no contesta (${e.codigo}): se prueba otro", e)
+				fallo = e
+			}
+		}
+		if (r == null) throw ErrorIA(t.getString(R.string.ia_error_modelo, t.getString(R.string.ia_gemini)), fallo?.codigo ?: 0)
 		val partes = r.optJSONArray("candidates")?.optJSONObject(0)?.optJSONObject("content")?.optJSONArray("parts") ?: return ""
 		return (0 until partes.length()).joinToString("") { partes.optJSONObject(it)?.optString("text").orEmpty() }
 	}
@@ -223,7 +244,7 @@ object AsistenteIA {
 					429 -> t.getString(R.string.ia_error_limite, servicio)
 					in 500..599 -> t.getString(R.string.ia_error_caido, servicio)
 					else -> t.getString(R.string.ia_error_servicio, codigo, detalle)
-				})
+				}, codigo)
 			}
 			return JSONObject(texto)
 		} catch (e: ErrorIA) {

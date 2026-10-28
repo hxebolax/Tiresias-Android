@@ -4,7 +4,7 @@
 
 Tiresias dice en voz alta lo que hay en la pantalla y deja manejar el móvil con gestos, con un teclado, con una línea braille o con la voz. Está hecho para personas ciegas o con baja visión, a partir de lo que piden los usuarios de TalkBack y de los demás lectores para Android y de los fallos que tienen. Es el hermano del [Tiresias para Windows](https://xebolax.synology.me/Tiresias/) del mismo autor.
 
-- **Versión actual:** 1.0.4 ([novedades](NOVEDADES.txt)).
+- **Versión actual:** 1.0.5 ([novedades](NOVEDADES.txt)).
 - **Descarga:** [última versión en GitHub](https://github.com/hxebolax/Tiresias-Android/releases/latest) o en la [web de Tiresias](https://xebolax.synology.me/Tiresias-Android).
 - **Manual de uso:** dentro de la app (menú lateral, Manual de uso) y en [español](app/src/main/assets/manual-es.html) o [inglés](app/src/main/assets/manual-en.html).
 - **Fallos y sugerencias:** [Issues de GitHub](https://github.com/hxebolax/Tiresias-Android/issues).
@@ -43,30 +43,38 @@ Tiresias dice en voz alta lo que hay en la pantalla y deja manejar el móvil con
 - Listas que se desplazan solas sin saltarse ningún elemento, ir al principio o al final de la lista entera e **ir al elemento número…** de una lista.
 - **Vigilar un elemento**: Tiresias avisa con un sonido cada vez que cambia (el coche que se acerca, un marcador, el turno de una cola), aunque estés en otra parte de la pantalla.
 - Lectura continua, búsqueda, lista de elementos e historial de lo dicho.
-- El foco vuelve a su sitio al volver a una pantalla y al cerrar diálogos, menús y paneles.
+- El foco vuelve a su sitio al volver a una pantalla y al cerrar diálogos, menús y paneles; va donde la app pide al abrir una pantalla y, si la app rehace el elemento enfocado, sigue en el más parecido.
+- **Marcas de posición** en cada pantalla para volver a un elemento, y leer la fila o la columna entera de una tabla.
+- **Poner un valor** exacto en un deslizador, en vez de ir paso a paso.
 - Los enlaces dentro de un texto (como los del aviso de Play Protect) se eligen y se pulsan uno a uno.
 - Pantalla virtual con el texto reconocido, para las apps que no se pueden leer, y «Ayuda de otra persona», para que alguien maneje tu móvil mientras Tiresias sigue hablando.
+- Si la exploración táctil se atasca (el dedo «pegado» de los Samsung con One UI 8.5), Tiresias lo nota y la reinicia solo.
 
 ### Gestos y teclas
 
 - Gestos por defecto compatibles con los de TalkBack, que se pueden cambiar para todas las apps o solo para una.
 - Gestos sencillos de dos y tres dedos, menú circular y activar al levantar el dedo.
 - Teclas de volumen: mantener o pulsar tres veces hace lo que asignes.
+- Música sin salir de donde estás: canción siguiente y anterior con una acción o con el control de lectura «Música».
 - Teclado físico con dos mapas, el de TalkBack y uno al estilo de NVDA y de Tiresias para Windows, con navegación por letras en las webs y ayuda de teclado.
 
 ### Voz y motores incluidos
 
 - **eSpeak NG**, **SVOX Pico** y **Eloquence** van dentro de la app y funcionan sin Internet.
-- **Eloquence**, la voz clásica de los lectores de pantalla: diez idiomas (inglés de EE. UU. y británico, español de España y de México, francés de Francia y de Canadá, alemán, italiano, polaco y japonés) y sus ocho voces, con todos sus ajustes como en NVDA. De fábrica suena como el driver IBMTTS de NVDA. Se basa en [evvdroid](https://github.com/trypsynth/evvdroid) y en [openevv](https://github.com/Mudb0y/openevv).
+- **Eloquence**, la voz clásica de los lectores de pantalla: diez idiomas (inglés de EE. UU. y británico, español de España y de México, francés de Francia y de Canadá, alemán, italiano, polaco y japonés) y sus ocho voces, con todos sus ajustes como en NVDA. De fábrica suena como el driver IBMTTS de NVDA, y al 100 % habla a su velocidad normal (desde la 1.0.5; antes iba unas diez veces más deprisa). Se basa en [evvdroid](https://github.com/trypsynth/evvdroid) y en [openevv](https://github.com/Mudb0y/openevv).
 - Voces neuronales **Piper**, que se descargan aparte, y cualquier **voz del sistema**. Si una falla, habla la integrada.
-- **Cada voz con su velocidad, su tono y su volumen**, como en NVDA: al cambiar de voz se pone la suya y Tiresias dice con qué velocidad queda. Eliges por qué voces pasa el control Voz.
+- **Cada voz con su velocidad, su tono y su volumen**, como en NVDA: al cambiar de voz se pone la suya y Tiresias dice con qué velocidad queda; un perfil con otra voz no estropea la velocidad de la de antes. Eliges por qué voces pasa el control Voz.
+- **Voz de las notificaciones**: pueden ir con otra de las voces incluidas, con su propia velocidad.
+- **Voz a demanda**, como en NVDA: al moverse no habla, solo cuando se le pide algo.
 - Tiresias es también un **motor de voz del sistema** que pueden usar otras apps.
-- Salida del audio por el altavoz o los auriculares, voz por el volumen multimedia y cambio de voz según el idioma del texto.
+- Salida del audio por el altavoz o los auriculares, y voz por el volumen multimedia o el de accesibilidad, que se cambia al momento con una acción (en los Samsung con One UI 8, subir el volumen en una llamada por Bluetooth calla al lector).
+- Cambio de voz según el idioma del texto y, si la app no lo marca, detección del idioma de los textos largos (español o inglés).
 
 ### Verbosidad y pronunciación
 
 - Niveles de verbosidad y de puntuación, y qué se dice de cada elemento y en qué orden.
-- Números, mayúsculas, letras fonéticas, encabezados de tabla, y los nombres de 3886 emojis y cientos de símbolos en español y en inglés.
+- Números, mayúsculas, letras fonéticas (también tras una pausa: «b»... «Barcelona»), encabezados de tabla, y los nombres de 3886 emojis y cientos de símbolos en español y en inglés.
+- Menos ruido: los cronómetros y ecualizadores respetan el plazo que pide la app, lo que llega tarde de un foco que ya pasó no se dice y las regiones vivas de las ventanas de fondo no cortan la lectura.
 - Los controles sin nombre se dicen por su identificador traducido («contact_photo», «foto de contacto»).
 - Diccionario de pronunciación, que importa el de NVDA.
 - Temas de sonidos, con un archivo propio para cada sonido y una vibración distinta para cada uno.
@@ -76,6 +84,9 @@ Tiresias dice en voz alta lo que hay en la pantalla y deja manejar el móvil con
 - Eco por caracteres, palabras o los dos; menú de edición y modo selección.
 - Faltas de ortografía: cuántas marca el corrector y cambiarlas por lo que propone.
 - **Lo copiado por Tiresias** (los últimos 20 textos, solo en la memoria del móvil), copiar la lista entera y copiar por trozos de un texto que no se puede editar.
+- **Elegir y copiar texto** de un mensaje o una web, que no es un campo: el texto pasa a una ventana donde se selecciona el trozo que se quiera.
+- Decir la posición del cursor («Carácter 5 de 11, línea 2 de 3») y el formato del texto (negrita, cursiva, subrayado, enlaces).
+- Teclados que hablan solos: con ellos, Tiresias no repite lo que se escribe.
 
 ### Notificaciones y llamadas
 
@@ -83,7 +94,7 @@ Tiresias dice en voz alta lo que hay en la pantalla y deja manejar el móvil con
 - **Resumen de los avisos**: «Tienes 5 avisos de las últimas 12 horas. WhatsApp: 3, de Ana y Juan».
 - Contestar y colgar con un gesto (doble toque con dos dedos) las llamadas del teléfono y las de **WhatsApp, Telegram, Signal y las demás de internet**.
 - Altavoz al apartar el móvil de la oreja durante una llamada.
-- Qué se dice al encender la pantalla y al desbloquear, y un gesto de estado que dice lo que elijas: hora, fecha, batería, conexión, avisos y más.
+- Qué se dice al encender la pantalla y al desbloquear (también la hora y el resumen de los avisos), y un gesto de estado que dice lo que elijas: hora, fecha, batería, conexión, avisos y más.
 
 ### Braille
 
@@ -100,9 +111,10 @@ Tiresias dice en voz alta lo que hay en la pantalla y deja manejar el móvil con
 - **Descripción de imágenes y de la pantalla con IA**, como tú elijas:
   - en el móvil y sin Internet, con Gemma 4 (con versiones para el chip Tensor de los Pixel 10 y 11);
   - con Gemini Nano, mediante el complemento Tiresias Nano, en los móviles que lo traen;
-  - o en la nube con tu propia clave: Claude, OpenAI, Gemini o un servidor compatible.
+  - o en la nube con tu propia clave: Claude, OpenAI, Gemini o un servidor compatible. Gemini usa de fábrica un modelo concreto y, si no contesta, prueba solo otros.
 - Preguntar a la IA sobre la pantalla, traducir un elemento, reconocer quién sale en una foto entre las personas que conoces, y botones sin nombre reconocidos en el móvil («posiblemente: Enviar»).
 - Descripción continua de vídeos y juegos (solo lo que cambia) y un asistente que hace lo que le pides en la pantalla, siempre con tu confirmación.
+- Si no se puede capturar la pantalla, Tiresias dice por qué (una app protegida, capturas demasiado seguidas) y lo reintenta solo.
 
 ### Dictado y órdenes por voz
 
@@ -122,25 +134,28 @@ Para personas mayores que empiezan o solo quieren lo básico, hecho a partir de 
 - Complementos en JavaScript que mejoran Tiresias o apps concretas, cada uno aislado y con sus propios ajustes. Se instalan desde la tienda o desde otras fuentes (GitHub, GitLab, Codeberg).
 - En la tienda: Códigos de seguridad, Notificaciones a tu medida, Reloj parlante, Vigilante de la batería, Datos del texto, Lectura limpia, Modo braille, Letras decorativas, Anuncios y patrocinados, Quién llama, Recordatorios, Versión de la app y Cuánta luz hay.
 - Reglas sin código para poner nombre, tipo, estado o pista a un elemento, ocultarlo o agrupar una fila con sus botones. Guía para hacerlos: [`docs/complementos.md`](docs/complementos.md).
+- Versión de la API en el manifiesto (`apiMinima`, `apiProbada`): un complemento que pide una API más nueva no se instala ni sale en la tienda.
 - API para que otras apps (juegos, sobre todo) hablen con Tiresias o escriban en la línea braille, con tu permiso: [`docs/api.md`](docs/api.md).
 
 ### Perfiles y etiquetas
 
-- Etiquetas para los botones sin nombre, que se exportan e importan.
+- Etiquetas para los botones sin nombre, que se exportan e importan, y nombre propio para una pantalla, que se dice al abrirla en vez de su título.
 - Perfiles por app (verbosidad, velocidad, puntuación).
 - Copia de seguridad de toda la configuración en un archivo, para otro móvil (sin las claves de IA).
-- Cortina de pantalla, toque directo por app y mosaico de ajustes rápidos.
+- Cortina de pantalla, toque directo por app (en toda la pantalla, también la barra de navegación) y mosaico de ajustes rápidos.
 
 ### Privacidad
 
 - Nada de lo que Tiresias lee se guarda, se registra ni se envía. No hay publicidad ni estadísticas.
 - Solo se conecta a Internet para lo que tú pides: descargas, actualizaciones, la tienda y la IA en la nube con tu clave, que se guarda cifrada en el móvil.
 - La telemetría que traía ONNX Runtime (la biblioteca del OCR y de las voces neuronales) está quitada del todo desde la 1.0.4.
+- Lo que una app marca como datos sensibles (Android 14: banca, códigos) no se captura para la IA ni para el reconocimiento de texto, y no llega a los complementos.
 
 ### Actualizaciones
 
 - Sin tienda: Tiresias busca versiones nuevas, descarga el APK de tu procesador y comprueba el tamaño, la huella SHA-256 y la firma antes de instalar. Nunca instala nada sin preguntarte.
 - De dónde se actualiza (y de dónde se lee la tienda): el servidor de Tiresias, GitHub, los dos (de fábrica: si el servidor falla, GitHub) o un servidor personalizado.
+- Al abrir la app tras actualizar, salen las novedades de la versión.
 
 ---
 
@@ -150,11 +165,11 @@ Para personas mayores que empiezan o solo quieren lo básico, hecho a partir de 
 
    | Archivo | Para qué móviles |
    |---|---|
-   | `Tiresias_v1.0.4_arm64-v8a.apk` | Casi todos los móviles de los últimos años. Si dudas, este. |
-   | `Tiresias_v1.0.4_armeabi-v7a.apk` | Móviles antiguos de 32 bits. |
-   | `Tiresias_v1.0.4_x86_64.apk` y `_x86.apk` | Emuladores y algunas tabletas con procesador Intel. El de x86 de 32 bits no lleva Eloquence. |
+   | `Tiresias_v1.0.5_arm64-v8a.apk` | Casi todos los móviles de los últimos años. Si dudas, este. |
+   | `Tiresias_v1.0.5_armeabi-v7a.apk` | Móviles antiguos de 32 bits. |
+   | `Tiresias_v1.0.5_x86_64.apk` y `_x86.apk` | Emuladores y algunas tabletas con procesador Intel. El de x86 de 32 bits no lleva Eloquence. |
 
-   `TiresiasNano_v1.0.4.apk` es el complemento de Gemini Nano: solo hace falta en los móviles que lo traen, y también se descarga desde la app.
+   `TiresiasNano_v1.0.5.apk` es el complemento de Gemini Nano: solo hace falta en los móviles que lo traen, y también se descarga desde la app.
 
 2. **Permite instalar la app.** Abre el APK desde el navegador o el gestor de archivos. Si Android dice que no puede instalar apps de esa fuente, entra en los ajustes que te ofrece, activa «Permitir de esta fuente» y vuelve atrás.
 
@@ -164,7 +179,7 @@ Para personas mayores que empiezan o solo quieren lo básico, hecho a partir de 
 
 5. **Si vienes de TalkBack**, deja los dos activados solo un momento: activa Tiresias y después desactiva TalkBack, para que no se pisen los gestos y la voz.
 
-6. **Abre la app**: el asistente te ayuda a quitar el ahorro de batería (para que el sistema no cierre Tiresias) y a dar los permisos necesarios, y el tutorial te enseña los gestos.
+6. **Abre la app**: el asistente te ayuda a quitar el ahorro de batería (para que el sistema no cierre Tiresias) y a dar los permisos necesarios, y el tutorial te enseña los gestos. En los Samsung, Xiaomi, OnePlus, Huawei, Motorola y vivo te dice además qué tocar en esa marca (en los Samsung, también el Auto Blocker, que bloquea las actualizaciones), e Inicio avisa si el sistema cierra Tiresias sin que lo apagues.
 
 Después, Tiresias se actualiza solo desde la propia app. Los APK de GitHub y de la web son los mismos, con la misma firma, así que puedes usar uno u otro.
 
@@ -220,6 +235,22 @@ gradlew :nucleo:test            :: pruebas del núcleo en el PC
 ```
 
 La **variante de pruebas** (`com.xebolax.tiresias.pruebas`) se instala junto a la normal y es la única que registra lo que dice el lector (etiqueta `TiresiasHabla`) y atiende las órdenes de las pruebas. La versión de publicación nunca registra el texto de la pantalla.
+
+### Instalar y activar en un aparato sin TalkBack
+
+En los aparatos sin TalkBack (reproductores, relojes, radios de coche, ROM libres), una persona ciega no puede activar un lector sola. Para ellos está `herramientas\instalar_y_activar.ps1`, que ejecuta **el dueño del aparato, en su aparato**, con la depuración USB activada (Opciones de desarrollador) y el aparato conectado por USB:
+
+```bat
+powershell -ExecutionPolicy Bypass -File herramientas\instalar_y_activar.ps1
+powershell -ExecutionPolicy Bypass -File herramientas\instalar_y_activar.ps1 -Activar
+powershell -ExecutionPolicy Bypass -File herramientas\instalar_y_activar.ps1 -Apk ruta\al\Tiresias.apk
+```
+
+- Sin argumentos, busca el APK del procesador del aparato en `dist\` (o en `apk\`) y lo instala por adb (`adb install -r`). Usa el adb del entorno portátil o, si no está, el del sistema. Solo admite un aparato conectado.
+- Con `-Activar`, después de instalar pregunta y, si se contesta «s», activa Tiresias como servicio de accesibilidad por adb, sumándolo a los que ya hubiera.
+- Con `-Apk`, instala ese APK en vez de buscarlo.
+
+`compilar.bat instalar` es otra cosa: solo instala, nunca toca los ajustes de accesibilidad.
 
 ### Módulos
 

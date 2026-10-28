@@ -10,6 +10,8 @@
 	<!-- Pedir que Android no cierre el lector para ahorrar batería (lo confirma el usuario) -->
 	<uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 	<uses-permission android:name="android.permission.VIBRATE" />
+	<!-- Un momento despierto para terminar un aviso al apagar la pantalla -->
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
 	<!-- Órdenes por voz y dictado (opcional; se pide en Ajustes) -->
 	<uses-permission android:name="android.permission.RECORD_AUDIO" />
 	<!-- Responder y colgar llamadas con un gesto (opcional; se pide en Ajustes) -->
@@ -90,6 +92,15 @@
 		<activity android:name=".ui.ActividadTeclasBraille" android:exported="false" />
 		<activity android:name=".ui.ActividadEloquence" android:exported="false" />
 		<activity android:name=".ui.ActividadModoSenior" android:exported="false" />
+		<!-- Restablecer Tiresias desde el PC (adb): solo con el permiso DUMP, que ninguna app normal tiene -->
+		<receiver
+			android:name=".servicio.ReceptorRestablecer"
+			android:exported="true"
+			android:permission="android.permission.DUMP">
+			<intent-filter>
+				<action android:name="com.xebolax.tiresias.RESTABLECER" />
+			</intent-filter>
+		</receiver>
 		<!-- «Leer con Tiresias»: una imagen compartida desde otra app (sus códigos QR y su texto) -->
 		<activity android:name=".ui.ActividadImagen" android:exported="true" android:label="@string/imagen_compartir">
 			<intent-filter>

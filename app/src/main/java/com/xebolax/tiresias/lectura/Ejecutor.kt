@@ -49,6 +49,8 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		if (suspendido && a != Accion.SUSPENDER && a != Accion.MODO_SEGURO) return false
 		lector.momentoUsuario = SystemClock.uptimeMillis()
 		if (a != Accion.LEER_DESDE_ARRIBA && a != Accion.LEER_DESDE_AQUI && a != Accion.PAUSAR_VOZ) lector.continua.parar()
+		// En voz a demanda, lo que se pide con una acción sí se dice (moverse, no)
+		if (a !in NAVEGAR_CALLADO) lector.voz.pedidoHasta = SystemClock.uptimeMillis() + 2500
 		return try {
 			lector.virtual?.let { v -> enVirtual(v, a)?.let { return it } }
 			if (a != Accion.SOS && cuentaSos != null) {
@@ -136,6 +138,24 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		Accion.IR_A_POSICION -> irAPosicion()
 		Accion.LEER_QR -> lector.vision.leerCodigos()
 		Accion.RESUMEN_AVISOS -> resumenAvisos()
+		Accion.CANAL_VOZ -> canalVoz()
+		Accion.VOZ_A_DEMANDA -> {
+			val v = lector.voz
+			v.aDemanda = !v.aDemanda
+			lector.decir(if (v.aDemanda) R.string.voz_demanda_si else R.string.voz_demanda_no)
+			true
+		}
+		Accion.PISTA_SIGUIENTE -> teclaMultimedia(KeyEvent.KEYCODE_MEDIA_NEXT)
+		Accion.PISTA_ANTERIOR -> teclaMultimedia(KeyEvent.KEYCODE_MEDIA_PREVIOUS)
+		Accion.POSICION_CURSOR -> posicionCursor()
+		Accion.PONER_VALOR -> ponerValor(objetivo())
+		Accion.FORMATO_TEXTO -> formatoTexto(objetivo())
+		Accion.PONER_MARCA -> ponerMarca()
+		Accion.IR_A_MARCA -> irAMarca()
+		Accion.LEER_FILA -> leerLinea(fila = true)
+		Accion.LEER_COLUMNA -> leerLinea(fila = false)
+		Accion.NOMBRAR_VENTANA -> nombrarVentana()
+		Accion.SELECCIONAR_TEXTO -> seleccionarTexto()
 		Accion.PAUSAR_VOZ -> pausar()
 		Accion.ALTERNAR_VOZ -> alternarVoz()
 		Accion.VELOCIDAD_MAS -> cambiarVelocidad(10)
@@ -213,6 +233,8 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 	/** El elemento sobre el que se actúa: el que se ha dicho o, si ya no existe, el que tiene el foco de accesibilidad. */
 	private fun objetivo(): AccessibilityNodeInfo? {
 		lector.foco?.takeIf { Nodos.vivo(it) }?.let { return it }
+		// La app lo rehízo: el más parecido, para no perder el sitio
+		lector.foco?.let { viejo -> lector.recuperarFoco(viejo)?.let { return it } }
 		return lector.raiz()?.findFocus(AccessibilityNodeInfo.FOCUS_ACCESSIBILITY) ?: lector.foco
 	}
 
@@ -259,7 +281,7 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		val gesto = GestureDescription.Builder()
 			.addStroke(GestureDescription.StrokeDescription(camino, 0, if (largo) 800 else 60))
 			.build()
-		return runCatching { servicio.dispatchGesture(gesto, null, null) }.getOrDefault(false)
+		return lector.mandarGesto(gesto)
 	}
 
 	private fun desplazar(vararg acciones: Int): Boolean {
@@ -407,6 +429,7 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		ControlLectura.IDIOMA -> cambiarIdioma()
 		ControlLectura.VERBOSIDAD -> cambiarVerbosidad(abajo)
 		ControlLectura.MOTOR -> cambiarMotor(!abajo)
+		ControlLectura.MULTIMEDIA -> teclaMultimedia(if (abajo) KeyEvent.KEYCODE_MEDIA_NEXT else KeyEvent.KEYCODE_MEDIA_PREVIOUS)
 		ControlLectura.SALIDA -> cambiarSalida(!abajo)
 		// En las apps, los enlaces de dentro del texto uno a uno (el doble toque pulsa el dicho) y luego el elemento siguiente
 		ControlLectura.ENLACES -> enlaceDentro(abajo) ?: nav.porTipo(c, abajo)
@@ -456,7 +479,8 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 	 * Todo lo que se puede hacer con [n]: sus acciones, los botones de dentro si
 	 * una regla lo agrupa, y las que le añaden los complementos.
 	 */
-	private fun opcionesDe(n: AccessibilityNodeInfo): List<Pair<String, () -> Boolean>> {
+	/** Las opciones de [n]; [delMenu]: las del menú de acciones, con alguna más que no entra en arriba y abajo. */
+	private fun opcionesDe(n: AccessibilityNodeInfo, delMenu: Boolean = false): List<Pair<String, () -> Boolean>> {
 		val lista = ArrayList<Pair<String, () -> Boolean>>()
 		// Los enlaces de dentro del texto, primero (en un aviso, «Más información» o «Instalar de todas formas»)
 		for ((texto, enlace) in Nodos.enlacesEnTexto(n)) lista += t.getString(R.string.acc_enlace, texto) to { pulsarEnlace(enlace) }
@@ -466,6 +490,8 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 			lista += t.getString(R.string.acc_ir_falta, f.palabra) to { irAFalta(n, f) }
 		}
 		for (a in accionesDe(n)) lista += nombreAccion(a) to { runCatching { n.performAction(a.id) }.getOrDefault(false) }
+		// Un deslizador: poner un valor exacto, solo en el menú (arriba y abajo siguen cambiando su valor)
+		if (delMenu && n.rangeInfo != null && n.actionList.any { it.id == android.R.id.accessibilityActionSetProgress }) lista += t.getString(R.string.accion_poner_valor) to { ponerValor(n) }
 		if (lector.scriptsListos) {
 			if (lector.scripts.regla(n)?.agrupar == true) {
 				for (hijo in controlesDentro(n)) lista += lector.textoElemento(hijo) to { runCatching { hijo.performAction(AccessibilityNodeInfo.ACTION_CLICK) }.getOrDefault(false) }
@@ -939,6 +965,253 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		lector.manejador.postDelayed({ irAFila(lista, fila, intento + 1) }, 400)
 	}
 
+	// --- Música, cursor y deslizadores ---------------------------------------------------------
+
+	/** Una tecla multimedia (canción siguiente o anterior) para la app que suena. */
+	private fun teclaMultimedia(codigo: Int): Boolean {
+		val audio = servicio.getSystemService(android.media.AudioManager::class.java) ?: return false
+		val ahora = SystemClock.uptimeMillis()
+		audio.dispatchMediaKeyEvent(KeyEvent(ahora, ahora, KeyEvent.ACTION_DOWN, codigo, 0))
+		audio.dispatchMediaKeyEvent(KeyEvent(ahora, ahora, KeyEvent.ACTION_UP, codigo, 0))
+		lector.sonidos.tocar(Sonido.ACTIVAR)
+		return true
+	}
+
+	/** Dónde está el cursor en el campo: el carácter (o lo seleccionado) y la línea, de cuántos. */
+	private fun posicionCursor(): Boolean {
+		val campo = lector.raiz()?.findFocus(AccessibilityNodeInfo.FOCUS_INPUT)?.takeIf { it.isEditable } ?: objetivo()?.takeIf { it.isEditable }
+		if (campo == null) {
+			lector.decir(R.string.cursor_sin_campo)
+			return false
+		}
+		runCatching { campo.refresh() }
+		val texto = campo.text?.toString().orEmpty()
+		if ((Build.VERSION.SDK_INT >= 26 && campo.isShowingHintText) || texto.isEmpty()) {
+			lector.decir(R.string.cursor_vacio)
+			return true
+		}
+		val inicio = campo.textSelectionStart.coerceIn(0, texto.length)
+		val fin = campo.textSelectionEnd.coerceIn(0, texto.length)
+		val linea = texto.substring(0, minOf(inicio, fin)).count { it == '\n' } + 1
+		val lineas = texto.count { it == '\n' } + 1
+		val donde = if (inicio != fin) t.getString(R.string.cursor_seleccion, minOf(inicio, fin) + 1, maxOf(inicio, fin), texto.length)
+		else t.getString(R.string.cursor_caracter, inicio + 1, texto.length + 1)
+		lector.decir(if (lineas > 1) t.getString(R.string.cursor_con_linea, donde, linea, lineas) else donde)
+		return true
+	}
+
+	/** Un valor exacto en un deslizador (entre su mínimo y su máximo), escrito, en vez de ir paso a paso. */
+	private fun ponerValor(n: AccessibilityNodeInfo?): Boolean {
+		val r = n?.rangeInfo
+		if (n == null || r == null || !n.actionList.any { it.id == android.R.id.accessibilityActionSetProgress }) {
+			lector.decir(R.string.valor_sin_deslizador)
+			return false
+		}
+		val min = r.min
+		val max = r.max
+		fun numero(v: Float): String = if (v == Math.round(v).toFloat()) Math.round(v).toString() else "%.2f".format(v)
+		ventanas.pedirTexto(t.getString(R.string.valor_titulo), t.getString(R.string.valor_pista, numero(min), numero(max)), numero(r.current)) { texto ->
+			val v = texto.trim().replace(',', '.').toFloatOrNull()
+			if (v == null || v < min || v > max) {
+				lector.decir(t.getString(R.string.valor_fuera, numero(min), numero(max)))
+				return@pedirTexto
+			}
+			lector.manejador.post {
+				val args = android.os.Bundle().apply { putFloat(AccessibilityNodeInfo.ACTION_ARGUMENT_PROGRESS_VALUE, v) }
+				if (!n.performAction(android.R.id.accessibilityActionSetProgress, args)) lector.sonidos.tocar(Sonido.ERROR)
+				else lector.decir(t.getString(R.string.valor_puesto, numero(v)))
+			}
+		}
+		return true
+	}
+
+	// --- Formato, marcas y tablas ----------------------------------------------------------------
+
+	/** El formato del texto de [n] (negrita, cursiva, subrayado, tachado, enlaces), por trozos (Orca 51). */
+	private fun formatoTexto(n: AccessibilityNodeInfo?): Boolean {
+		val texto = n?.text as? android.text.Spanned
+		if (texto == null || texto.isEmpty()) {
+			lector.decir(R.string.formato_sin_texto)
+			return false
+		}
+		val partes = describirFormato(texto)
+		lector.decir(if (partes.isEmpty()) t.getString(R.string.formato_ninguno) else partes.joinToString(". ") + ".")
+		return true
+	}
+
+	/** Los trozos con formato de [texto] dichos («Negrita: hola»), sin repetir, como mucho ocho. */
+	fun describirFormato(texto: android.text.Spanned): List<String> {
+		val partes = ArrayList<String>()
+		for (sp in texto.getSpans(0, texto.length, Any::class.java)) {
+			val inicio = texto.getSpanStart(sp).coerceAtLeast(0)
+			val fin = texto.getSpanEnd(sp).coerceAtMost(texto.length)
+			if (fin <= inicio) continue
+			val trozo = texto.subSequence(inicio, fin).toString().trim().take(60)
+			if (trozo.isEmpty()) continue
+			val tipo = when (sp) {
+				is android.text.style.StyleSpan -> when (sp.style) {
+					android.graphics.Typeface.BOLD -> R.string.formato_negrita
+					android.graphics.Typeface.ITALIC -> R.string.formato_cursiva
+					android.graphics.Typeface.BOLD_ITALIC -> R.string.formato_negrita_cursiva
+					else -> null
+				}
+				is android.text.style.UnderlineSpan -> R.string.formato_subrayado
+				is android.text.style.StrikethroughSpan -> R.string.formato_tachado
+				is android.text.style.URLSpan, is android.text.style.ClickableSpan -> R.string.formato_enlace
+				is android.text.style.SuperscriptSpan -> R.string.formato_superindice
+				is android.text.style.SubscriptSpan -> R.string.formato_subindice
+				else -> null
+			} ?: continue
+			partes += t.getString(tipo, trozo)
+		}
+		return partes.distinct().take(8)
+	}
+
+	/**
+	 * El texto de lo enfocado (y de lo que tiene dentro: un mensaje, un artículo)
+	 * en una ventana para elegir un trozo y copiarlo, como en un campo. Lo más
+	 * pedido a los lectores de Android: copiar texto que no es editable.
+	 */
+	private fun seleccionarTexto(): Boolean {
+		val f = objetivo()
+		if (f == null) {
+			lector.decir(R.string.elegir_nada)
+			return false
+		}
+		if (f.isEditable) {
+			lector.decir(R.string.elegir_es_campo)
+			return false
+		}
+		if (Nodos.sensible(f)) {
+			lector.decir(R.string.vision_sensible)
+			return false
+		}
+		val partes = ArrayList<String>()
+		val cola = ArrayDeque<AccessibilityNodeInfo>()
+		cola.add(f)
+		var vistos = 0
+		var largo = 0
+		while (cola.isNotEmpty() && vistos++ < 600 && largo < 20_000) {
+			val n = cola.removeFirst()
+			if (!n.isVisibleToUser || Nodos.sensible(n)) continue
+			(n.text ?: n.contentDescription)?.toString()?.trim()?.takeIf { it.isNotEmpty() && it !in partes }?.let {
+				partes += it
+				largo += it.length
+			}
+			for (i in 0 until n.childCount) runCatching { n.getChild(i) }.getOrNull()?.let { cola.add(it) }
+		}
+		val texto = partes.joinToString("\n").take(20_000)
+		if (texto.isBlank()) {
+			lector.decir(R.string.elegir_nada)
+			return false
+		}
+		ventanas.textoParaElegir(t.getString(R.string.elegir_titulo), texto) { elegido ->
+			lector.manejador.post {
+				lector.edicion.portapapeles(elegido)
+				lector.decir(t.getString(R.string.elegir_copiado, elegido.length))
+			}
+		}
+		return true
+	}
+
+	/** Un nombre propio para la pantalla de delante; vacío lo quita. */
+	private fun nombrarVentana(): Boolean {
+		val paquete = lector.raiz()?.packageName?.toString()
+		val clase = lector.actividadDelante
+		if (paquete == null || clase == null) {
+			lector.decir(R.string.nombre_ventana_no)
+			return false
+		}
+		val clave = "$paquete/$clase"
+		val a = lector.ajustes
+		val nombres = runCatching { org.json.JSONObject(a.p.getString(com.xebolax.tiresias.base.Claves.NOMBRES_VENTANA, "{}") ?: "{}") }.getOrDefault(org.json.JSONObject())
+		ventanas.pedirTexto(t.getString(R.string.nombre_ventana_titulo), t.getString(R.string.nombre_ventana_pista), nombres.optString(clave, lector.tituloActivo())) { nombre ->
+			if (nombre.isBlank()) nombres.remove(clave) else nombres.put(clave, nombre.trim())
+			a.p.edit().putString(com.xebolax.tiresias.base.Claves.NOMBRES_VENTANA, nombres.toString()).apply()
+			lector.decir(if (nombre.isBlank()) t.getString(R.string.nombre_ventana_quitado) else t.getString(R.string.nombre_ventana_puesto, nombre.trim()))
+		}
+		return true
+	}
+
+	/** Dónde se guardan las marcas: la app y la pantalla de delante. */
+	private fun claveMarca(): String = (lector.raiz()?.packageName?.toString().orEmpty()) + "/" + lector.actividadDelante.orEmpty()
+
+	/** Una marca de posición en esta pantalla (JAWS): se vuelve a ella con «Ir a la marca». */
+	private fun ponerMarca(): Boolean {
+		val f = objetivo() ?: run { lector.decir(R.string.marca_nada); return false }
+		val a = lector.ajustes
+		val marcas = runCatching { org.json.JSONObject(a.p.getString(com.xebolax.tiresias.base.Claves.MARCAS, "{}") ?: "{}") }.getOrDefault(org.json.JSONObject())
+		marcas.put(claveMarca(), org.json.JSONObject().put("id", f.viewIdResourceName.orEmpty()).put("texto", lector.textoElemento(f)).put("nombre", lector.elemento(f).nombre))
+		a.p.edit().putString(com.xebolax.tiresias.base.Claves.MARCAS, marcas.toString()).apply()
+		lector.sonidos.tocar(Sonido.ACTIVAR)
+		lector.decir(t.getString(R.string.marca_puesta, lector.elemento(f).nombre.ifBlank { lector.textoElemento(f) }))
+		return true
+	}
+
+	private fun irAMarca(): Boolean {
+		val marcas = runCatching { org.json.JSONObject(lector.ajustes.p.getString(com.xebolax.tiresias.base.Claves.MARCAS, "{}") ?: "{}") }.getOrNull()
+		val m = marcas?.optJSONObject(claveMarca())
+		if (m == null) {
+			lector.decir(R.string.marca_no_hay)
+			return false
+		}
+		val raiz = lector.raiz() ?: return false
+		val id = m.optString("id")
+		val nombre = m.optString("nombre")
+		val candidatos = if (id.isNotEmpty()) raiz.findAccessibilityNodeInfosByViewId(id) else emptyList()
+		val destino = candidatos.firstOrNull { nombre.isEmpty() || lector.elemento(it).nombre == nombre } ?: candidatos.firstOrNull()
+			?: nombre.takeIf { it.isNotEmpty() }?.let { raiz.findAccessibilityNodeInfosByText(it).firstOrNull { n -> n.isVisibleToUser } }
+		if (destino == null) {
+			lector.decir(R.string.marca_no_esta)
+			return false
+		}
+		lector.enfocar(Nodos.enfocable(destino) ?: destino)
+		return true
+	}
+
+	/** La fila o la columna entera de la celda enfocada, en orden, de lo que se ve de la tabla. */
+	private fun leerLinea(fila: Boolean): Boolean {
+		val celda = objetivo()
+		val info = celda?.collectionItemInfo
+		val tabla = generateSequence(celda) { runCatching { it.parent }.getOrNull() }.take(8).firstOrNull { it.collectionInfo != null }
+		if (celda == null || info == null || tabla == null) {
+			lector.decir(R.string.tabla_sin_celda)
+			return false
+		}
+		val celdas = ArrayList<Pair<Int, String>>()
+		val cola = ArrayDeque<AccessibilityNodeInfo>()
+		cola.add(tabla)
+		var vistos = 0
+		while (cola.isNotEmpty() && vistos++ < 800) {
+			val n = cola.removeFirst()
+			val i = n.collectionItemInfo
+			if (i != null && n != tabla) {
+				if (if (fila) i.rowIndex == info.rowIndex else i.columnIndex == info.columnIndex) {
+					celdas += (if (fila) i.columnIndex else i.rowIndex) to lector.textoElemento(n)
+					continue
+				}
+			}
+			for (k in 0 until n.childCount) runCatching { n.getChild(k) }.getOrNull()?.let { cola.add(it) }
+		}
+		if (celdas.isEmpty()) {
+			lector.decir(R.string.tabla_sin_celda)
+			return false
+		}
+		lector.decir(celdas.sortedBy { it.first }.distinctBy { it.first }.joinToString(". ") { it.second })
+		return true
+	}
+
+	// --- El volumen de la voz -------------------------------------------------------------------
+
+	private fun canalVoz(): Boolean {
+		val a = lector.ajustes
+		val multimedia = !a.vozMultimedia
+		a.p.edit().putBoolean(com.xebolax.tiresias.base.Claves.VOZ_MULTIMEDIA, multimedia).apply()
+		lector.cambiarCanal(multimedia)
+		lector.decir(if (multimedia) R.string.canal_multimedia else R.string.canal_accesibilidad)
+		return true
+	}
+
 	// --- Resumen de los avisos -------------------------------------------------------------------
 
 	/**
@@ -1000,12 +1273,12 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 	private fun tocarPunto(x: Float, y: Float, largo: Boolean): Boolean {
 		val camino = Path().apply { moveTo(x, y) }
 		val gesto = GestureDescription.Builder().addStroke(GestureDescription.StrokeDescription(camino, 0, if (largo) 800 else 60)).build()
-		return runCatching { servicio.dispatchGesture(gesto, null, null) }.getOrDefault(false)
+		return lector.mandarGesto(gesto)
 	}
 
 	private fun menuAcciones(): Boolean {
 		val f = lector.foco ?: return false
-		val acciones = opcionesDe(f)
+		val acciones = opcionesDe(f, delMenu = true)
 		if (acciones.isEmpty()) {
 			lector.decir(R.string.acc_ninguna)
 			return false
@@ -1632,6 +1905,11 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 	}
 
 	companion object {
+		/** Lo que en voz a demanda no habla: moverse (lo demás, que se pide, sí). */
+		private val NAVEGAR_CALLADO = setOf(
+			Accion.SIGUIENTE, Accion.ANTERIOR, Accion.PRIMERO, Accion.ULTIMO, Accion.DESPLAZAR_ARRIBA, Accion.DESPLAZAR_ABAJO,
+			Accion.ACTIVAR, Accion.MANTENER, Accion.NINGUNA,
+		)
 		/** Las páginas que se desplaza como mucho una lista para llegar a una posición. */
 		private const val MAXIMO_PAGINAS_POSICION = 60
 		/** Las horas que abarca el resumen de los avisos. */

@@ -101,6 +101,18 @@ enum class Accion {
 	// Vigilar un elemento y avisar cuando cambia (Talk Forward); ir al elemento número N de la lista;
 	// leer los códigos QR y de barras de la pantalla; y el resumen de los avisos de las últimas horas
 	VIGILAR, IR_A_POSICION, LEER_QR, RESUMEN_AVISOS,
+	// La voz por el volumen multimedia o el de accesibilidad (One UI 8 calla el de accesibilidad en las llamadas por Bluetooth)
+	CANAL_VOZ,
+	// Música: la canción siguiente y la anterior; dónde está el cursor; un valor exacto en un deslizador
+	PISTA_SIGUIENTE, PISTA_ANTERIOR, POSICION_CURSOR, PONER_VALOR,
+	// Voz a demanda (NVDA 2024.1): al moverse no habla, solo cuando se le pide algo
+	VOZ_A_DEMANDA,
+	// El formato del texto (negrita, cursiva, enlaces); marcas de posición (JAWS); leer la fila o la columna de una tabla
+	FORMATO_TEXTO, PONER_MARCA, IR_A_MARCA, LEER_FILA, LEER_COLUMNA,
+	// Un nombre propio para la pantalla de delante (Jieshuo 42), que se dice en vez de su título
+	NOMBRAR_VENTANA,
+	// El texto de lo enfocado (un mensaje, una web) en una ventana para elegir y copiar un trozo
+	SELECCIONAR_TEXTO,
 	APAGAR_SCRIPTS, ORDENES_COMPLEMENTOS, MODO_SEGURO,
 }
 
@@ -306,10 +318,12 @@ enum class ControlLectura {
 	CARACTERES, PALABRAS, LINEAS, PARRAFOS, ENCABEZADOS, ENLACES, CONTROLES, BOTONES, CAMPOS, CASILLAS,
 	LISTAS, TABLAS, REGIONES, IMAGENES, VENTANAS, PREDETERMINADO, CUADRICULA, ACCIONES, EDICION,
 	VELOCIDAD, VOLUMEN, TONO, PUNTUACION, IDIOMA, VERBOSIDAD, MOTOR, SALIDA,
+	// La música: arriba, la canción anterior; abajo, la siguiente (Backtalk 303)
+	MULTIMEDIA,
 	;
 
 	/** Si es un control de movimiento por el texto o por la pantalla (los demás cambian un ajuste). */
-	val esNavegacion: Boolean get() = this !in setOf(VELOCIDAD, VOLUMEN, TONO, PUNTUACION, IDIOMA, VERBOSIDAD, MOTOR, SALIDA, ACCIONES, EDICION)
+	val esNavegacion: Boolean get() = this !in setOf(VELOCIDAD, VOLUMEN, TONO, PUNTUACION, IDIOMA, VERBOSIDAD, MOTOR, SALIDA, ACCIONES, EDICION, MULTIMEDIA)
 
 	/** Los que solo tienen sentido dentro de una página web (Backtalk 222). */
 	val soloWeb: Boolean get() = this == ENLACES || this == REGIONES

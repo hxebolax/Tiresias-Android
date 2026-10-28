@@ -25,7 +25,7 @@
 	<string name="modo_seguro">Safe mode: everything is back to normal. No curtain, no pause, and the Tiresias voice.</string>
 	<string name="cortina_si">Screen curtain on: the screen is black and everything still works</string>
 	<string name="cortina_no">Screen curtain off</string>
-	<string name="ayuda_entrada_si">Input help on: gestures and keys are announced but not performed. To exit, repeat the gesture or press Tiresias+1.</string>
+	<string name="ayuda_entrada_si">Input help on: gestures and keys are spoken and not performed. To leave: press Back, both volume keys together or double tap Finish practice.</string>
 	<string name="ayuda_entrada_no">Input help off</string>
 	<string name="ayuda_entrada_gesto">%1$s: %2$s</string>
 	<string name="ayuda_entrada_accion">This key: %1$s</string>
@@ -34,6 +34,7 @@
 	<string name="llamada_contestando">Answering</string>
 	<string name="llamada_colgando">Hanging up</string>
 	<string name="scripts_apagado_uno">The add-on %1$s has been turned off because it kept failing</string>
+	<string name="scripts_api_nueva">“%1$s” needs a newer version of Tiresias: update Tiresias to install it</string>
 	<string name="scripts_sin_ordenes">There are no add-on commands for this app</string>
 	<string name="scripts_ordenes">Add-on commands</string>
 	<string name="ui_complementos">Add-ons</string>

@@ -121,6 +121,46 @@ class Ventanas(private val servicio: AccessibilityService) {
 		campo.requestFocus()
 	}
 
+	/**
+	 * [texto] en un campo para leerlo y elegir un trozo con el modo de edición
+	 * (por caracteres, palabras o líneas, como en cualquier campo): «Copiar lo
+	 * elegido» da a [alCopiar] lo seleccionado o, si no hay nada, todo. No se
+	 * guarda nada: es para copiar texto que no está en un campo (un mensaje, una web).
+	 */
+	fun textoParaElegir(titulo: String, texto: String, alCopiar: (String) -> Unit) = principal.post {
+		val c = contexto()
+		val campo = TextInputEditText(c).apply {
+			setText(texto)
+			minLines = 4
+			maxLines = 12
+			setSelection(0)
+		}
+		val margen = (20 * c.resources.displayMetrics.density).toInt()
+		val marco = FrameLayout(c).apply {
+			setPadding(margen, margen / 2, margen, 0)
+			addView(campo)
+		}
+		var copiar: String? = null
+		val d = MaterialAlertDialogBuilder(c)
+			.setTitle(titulo)
+			.setView(marco)
+			.setPositiveButton(R.string.elegir_copiar) { _, _ ->
+				val t = campo.text?.toString().orEmpty()
+				val a = minOf(campo.selectionStart, campo.selectionEnd).coerceIn(0, t.length)
+				val b = maxOf(campo.selectionStart, campo.selectionEnd).coerceIn(0, t.length)
+				copiar = if (b > a) t.substring(a, b) else t
+			}
+			.setNegativeButton(R.string.cerrar, null)
+			.create()
+		d.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
+		d.window?.let { w ->
+			w.setGravity(Gravity.TOP or Gravity.CENTER_HORIZONTAL)
+			w.attributes = w.attributes.apply { y = (24 * c.resources.displayMetrics.density).toInt() }
+		}
+		mostrar(d) { copiar?.let(alCopiar) }
+		campo.requestFocus()
+	}
+
 	/** Un texto largo para leer (resultado de la IA, del OCR, el historial). Se puede copiar. */
 	fun mensaje(titulo: String, texto: String, alCerrar: () -> Unit = {}, alCopiar: ((String) -> Unit)? = null) = principal.post {
 		val b = MaterialAlertDialogBuilder(contexto())

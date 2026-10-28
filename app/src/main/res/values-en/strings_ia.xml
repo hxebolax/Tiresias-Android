@@ -4,9 +4,13 @@
 	<!-- Vision -->
 	<string name="vision_android11">Needs Android 11 or later (screenshots)</string>
 	<string name="vision_contrasena">Nothing is done with a password field</string>
+	<string name="vision_sensible">This screen has data the app marks as sensitive: for privacy, it is not captured or recognised</string>
 	<string name="vision_ocr_falta">Text recognition is missing. Download it in Tiresias, Downloads.</string>
 	<string name="vision_reconociendo">Recognizing text…</string>
 	<string name="vision_sin_captura">Couldn\'t capture the screen</string>
+	<string name="vision_captura_protegida">This app protects its screen and does not allow capturing it</string>
+	<string name="vision_captura_seguida">Android does not allow capturing the screen so often: try again in a moment</string>
+	<string name="vision_captura_sin_permiso">Tiresias has no permission to capture the screen: turn it on again in Accessibility</string>
 	<string name="vision_sin_texto">No text found</string>
 	<string name="vision_ocr_error">Text recognition failed</string>
 	<plurals name="vision_titulo_ocr">
@@ -41,6 +45,7 @@
 	<string name="ia_error_saldo">%1$s says there is no credit left on the key\'s account</string>
 	<string name="ia_error_limite">%1$s says the usage limit has been reached: wait a little or check your plan</string>
 	<string name="ia_error_caido">%1$s has a problem right now: try again in a while</string>
+	<string name="ia_error_modelo">%1$s does not answer with any of its models right now. Your key may be fine: try again later or choose another model in Settings, Artificial intelligence</string>
 	<string name="ia_error_general">The AI failed</string>
 	<string name="ia_movil_ventana">Gemini Nano answers in its own window</string>
 	<string name="ia_movil_falta">The Tiresias on-device AI add-on is missing</string>

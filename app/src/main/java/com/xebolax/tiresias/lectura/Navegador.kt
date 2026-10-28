@@ -3,6 +3,7 @@ package com.xebolax.tiresias.lectura
 import android.graphics.Rect
 import android.os.Bundle
 import android.os.SystemClock
+import com.xebolax.tiresias.base.Ajustes
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import android.view.accessibility.AccessibilityWindowInfo
@@ -94,6 +95,12 @@ class Navegador(private val lector: Lector) {
 	fun anterior() = mover(false)
 
 	fun mover(adelante: Boolean, filtro: ((AccessibilityNodeInfo) -> Boolean)? = null): Boolean {
+		// La lista se está adelantando sola: se espera a que acabe (unos ms) en vez de desplazarla otra vez
+		val espera = anticipandoHasta - SystemClock.uptimeMillis()
+		if (espera > 0) {
+			lector.manejador.postDelayed({ mover(adelante, filtro) }, espera)
+			return true
+		}
 		val raiz = lector.raiz() ?: return borde()
 		val lista = orden(raiz)
 		val candidatos = if (filtro != null) lista.filter(filtro) else lista
@@ -119,6 +126,7 @@ class Navegador(private val lector: Lector) {
 		}
 		if (destino != null) {
 			lector.enfocar(destino)
+			anticipar(destino, adelante, lista)
 			return true
 		}
 		// Al final: se desplaza la lista y se sigue por lo nuevo
@@ -210,8 +218,41 @@ class Navegador(private val lector: Lector) {
 		} ?: -1
 	}
 
+	/** Hasta cuándo la lista se está adelantando sola, y hasta cuándo no suena su desplazamiento. */
+	@Volatile private var anticipandoHasta = 0L
+	@Volatile var silencioDesplazarHasta = 0L
+		private set
+
+	/**
+	 * Desplazamiento anticipado (como VoiceOver): si [n] es lo último que se ve de
+	 * su lista (o lo primero, hacia atrás), la lista se adelanta ya un tercio, en
+	 * silencio, mientras se dice el elemento. El foco sigue a la vista y lo
+	 * siguiente ya está en la pantalla: el próximo deslizamiento no espera.
+	 */
+	private fun anticipar(n: AccessibilityNodeInfo, adelante: Boolean, lista: List<AccessibilityNodeInfo>) {
+		if (lector.ajustes.desplazarListas != Ajustes.DESPLAZAR_ANTICIPADO) return
+		val contenedor = Nodos.desplazable(n) ?: return
+		val accion = if (adelante) AccessibilityNodeInfo.ACTION_SCROLL_FORWARD else AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD
+		// Solo si aún puede ir hacia ahí
+		if (contenedor.actionList.none { it.id == accion }) return
+		val dentro = lista.filter { Nodos.dentroDe(it, contenedor) }
+		val i = dentro.indexOf(n)
+		if (i < 0 || (adelante && i < dentro.lastIndex) || (!adelante && i > 0)) return
+		lector.manejador.postDelayed({
+			if (lector.foco != n || !Nodos.vivo(contenedor)) return@postDelayed
+			val ahora = SystemClock.uptimeMillis()
+			anticipandoHasta = ahora + DURACION_ANTICIPO_MS
+			silencioDesplazarHasta = ahora + DURACION_ANTICIPO_MS + 400
+			if (!arrastrar(contenedor, adelante, sonido = false)) {
+				anticipandoHasta = 0L
+				return@postDelayed
+			}
+			invalidarTodo()
+		}, 60)
+	}
+
 	/** Arrastra con dos dedos el contenido de [lista] (para ver lo siguiente, los dedos suben), sin lanzarlo. */
-	fun arrastrar(lista: AccessibilityNodeInfo, adelante: Boolean, horizontal: Boolean = false): Boolean {
+	fun arrastrar(lista: AccessibilityNodeInfo, adelante: Boolean, horizontal: Boolean = false, sonido: Boolean = true): Boolean {
 		val r = Nodos.limites(lista)
 		if (r.width() < 40 || r.height() < 40) return false
 		val cx = r.exactCenterX()
@@ -230,8 +271,8 @@ class Navegador(private val lector: Lector) {
 			}
 			gesto.addStroke(android.accessibilityservice.GestureDescription.StrokeDescription(camino, 0, 450))
 		}
-		lector.sonidos.tocar(Sonido.DESPLAZAR)
-		return runCatching { lector.servicio.dispatchGesture(gesto.build(), null, null) }.getOrDefault(false)
+		if (sonido && lector.ajustes.desplazarListas == Ajustes.DESPLAZAR_NORMAL) lector.sonidos.tocar(Sonido.DESPLAZAR)
+		return lector.mandarGesto(gesto.build())
 	}
 
 	private fun desplazarParaSeguir(adelante: Boolean, foco: AccessibilityNodeInfo?, raiz: AccessibilityNodeInfo): Boolean {
@@ -530,6 +571,8 @@ class Navegador(private val lector: Lector) {
 
 	companion object {
 		const val ESPERA_DESPLAZAR_MS = 150L
+		/** Lo que tarda el arrastre que adelanta la lista (el gesto dura 450 ms) y un poco para que se coloque. */
+		private const val DURACION_ANTICIPO_MS = 560L
 		/** Páginas que se desplazan como mucho al dar la vuelta (entre todas las listas). */
 		private const val MAXIMO_PAGINAS_VUELTA = 60
 	}

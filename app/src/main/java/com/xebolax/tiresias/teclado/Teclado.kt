@@ -177,7 +177,9 @@ class Teclado(private val lector: Lector, private val alAccion: (Accion) -> Unit
 				lector.manejador.postDelayed({
 					if (volumenArriba > 0 && volumenAbajo > 0 && !ambasDisparada) {
 						ambasDisparada = true
-						if (lector.gestos.toqueDirecto) {
+						// Las dos teclas de volumen también terminan la práctica de los gestos
+						if (lector.ayudaEntrada) alAccion(Accion.AYUDA_ENTRADA)
+						else if (lector.gestos.toqueDirecto) {
 							val eraAyuda = lector.gestos.ayuda
 							lector.gestos.restablecer()
 							lector.decir(if (eraAyuda) R.string.ayuda_otra_no else R.string.gestos_toque_directo_no)

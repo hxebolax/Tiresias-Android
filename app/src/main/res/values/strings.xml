@@ -25,12 +25,13 @@
 	<string name="modo_seguro">Modo seguro: todo vuelve a la normalidad. Sin cortina, sin pausa y con la voz de Tiresias.</string>
 	<string name="cortina_si">Cortina puesta: la pantalla está en negro y todo sigue funcionando</string>
 	<string name="cortina_no">Cortina quitada</string>
-	<string name="ayuda_entrada_si">Ayuda de entrada activada: los gestos y las teclas se dicen y no se hacen. Para salir, repite el gesto o pulsa Tiresias y 1.</string>
+	<string name="ayuda_entrada_si">Ayuda de entrada activada: los gestos y las teclas se dicen y no se hacen. Para salir: pulsa Atrás, las dos teclas de volumen a la vez o toca dos veces en Terminar la práctica.</string>
 	<string name="ayuda_entrada_no">Ayuda de entrada desactivada</string>
 	<string name="ayuda_entrada_gesto">%1$s: %2$s</string>
 	<string name="ayuda_entrada_accion">Esta tecla: %1$s</string>
 	<string name="scripts_apagados">Complementos apagados. Se vuelven a encender en Tiresias, Complementos.</string>
 	<string name="scripts_apagado_uno">El complemento %1$s se ha apagado porque fallaba</string>
+	<string name="scripts_api_nueva">«%1$s» necesita una versión más nueva de Tiresias: actualiza Tiresias para instalarlo</string>
 	<string name="scripts_sin_ordenes">No hay órdenes de complementos para esta app</string>
 	<string name="scripts_ordenes">Órdenes de los complementos</string>
 	<string name="ui_complementos">Complementos</string>

@@ -46,7 +46,7 @@ class Voz(contexto: Context) {
 	private val app = contexto.applicationContext
 	val ajustes = Ajustes(app)
 	private val audio = (app.getSystemService(Context.AUDIO_SERVICE) as AudioManager).also { PistaAudio.gestor = it }
-	private val atributos = PistaAudio.atributosVoz()
+	private var atributos = PistaAudio.atributosVoz()
 	private val pista = PistaAudio(atributos)
 	private val espeak = MotorEspeak(app, pista)
 	private val pico = MotorPico(app, pista)
@@ -85,6 +85,15 @@ class Voz(contexto: Context) {
 	/** Con el modo «primero braille»: los únicos tipos de frase que suenan (null: todos). */
 	@Volatile var tiposPermitidos: Set<Tipo>? = null
 
+	/**
+	 * Voz a demanda (NVDA 2024.1): al moverse, al llegar avisos o al escribir no
+	 * habla; solo lo que se pide con una acción (repetir, leer, la hora...). La
+	 * línea braille y los sonidos siguen igual.
+	 */
+	@Volatile var aDemanda = false
+	/** Hasta cuándo vale lo que se dice por una acción pedida (en voz a demanda). */
+	@Volatile var pedidoHasta = 0L
+
 	private val historial = ArrayDeque<String>()
 
 	private val hilo = Thread({ bucle() }, "tiresias-voz").apply {
@@ -100,7 +109,22 @@ class Voz(contexto: Context) {
 	}
 
 	/** Lee el motor elegido en Ajustes (y lo cambia si hace falta). */
+	/**
+	 * La voz por el volumen de ahora ([PistaAudio.multimedia]): la pista y la voz
+	 * del sistema se rehacen con los atributos nuevos. Así se cambia en mitad de
+	 * una llamada (One UI 8 calla el volumen de accesibilidad al subir el de la
+	 * llamada por Bluetooth), sin volver a activar Tiresias.
+	 */
+	fun aplicarCanal() {
+		atributos = PistaAudio.atributosVoz()
+		pista.atributos = atributos
+		sistema?.cerrar()
+		sistema = null
+		elegirMotor()
+	}
+
 	fun elegirMotor() {
+		ajustes.normalizarEloquence()
 		ajustes.ajustarVozAlMotor()
 		PistaAudio.salida = ajustes.salidaAudio
 		val id = ajustes.motor
@@ -153,6 +177,10 @@ class Voz(contexto: Context) {
 				e.alTerminar?.invoke(false)
 				return
 			}
+		}
+		if (aDemanda && e.tipo in CALLADOS_A_DEMANDA && SystemClock.uptimeMillis() > pedidoHasta) {
+			e.alTerminar?.invoke(false)
+			return
 		}
 		if (grabando && ajustes.callarAlGrabar && e.tipo in setOf(Tipo.ANUNCIO, Tipo.NOTIFICACION, Tipo.PISTA)) {
 			e.alTerminar?.invoke(false)
@@ -292,6 +320,18 @@ class Voz(contexto: Context) {
 	}
 
 	/** Los motores a probar, en orden: el elegido (si no está apartado), eSpeak y Pico. */
+	/** La voz de las notificaciones, si se ha elegido una incluida distinta de la de siempre; null, la de siempre. */
+	private fun motorDeAvisos(): Motor? {
+		val m = ajustes.motorAvisos
+		if (m.isEmpty() || m == ajustes.motor) return null
+		return when (m) {
+			Ajustes.MOTOR_ESPEAK -> espeak
+			Ajustes.MOTOR_PICO -> pico
+			Ajustes.MOTOR_ELOQUENCE -> eloquence.takeIf { BibliotecaEloquence.disponible(app) }
+			else -> null
+		}
+	}
+
 	private fun motores(): List<Motor> {
 		val lista = mutableListOf<Motor>()
 		neuronal?.let { lista += it }
@@ -323,6 +363,11 @@ class Voz(contexto: Context) {
 				if (terminar) return
 				cola.removeFirst().also { enCurso = it }
 			}
+			// Lo de un foco que ya ha pasado no se dice
+			if (runCatching { pedido.e.vigente?.invoke() }.getOrDefault(true) == false) {
+				enCurso = null
+				continue
+			}
 			try {
 				hablar(pedido)
 			} catch (e: Exception) {
@@ -341,10 +386,12 @@ class Voz(contexto: Context) {
 			return
 		}
 		pedirFoco()
-		val velocidad = (velocidadPerfil ?: ajustes.velocidad) * p.e.velocidad / 100
+		// Las notificaciones pueden ir con otra voz (Prudence), con la velocidad que tenga esa voz
+		val deAvisos = if (p.e.tipo == Tipo.NOTIFICACION) motorDeAvisos() else null
+		val velocidad = (if (deAvisos != null) ajustes.velocidadDe(ajustes.motorAvisos) else velocidadPerfil ?: ajustes.velocidad) * p.e.velocidad / 100
 		val tono = ajustes.tono * p.e.tono / 100
 		var resultado = Resultado.FALLO
-		for (motor in motores()) {
+		for (motor in deAvisos?.let { listOf(it, espeak) } ?: motores()) {
 			if (!sigue()) {
 				resultado = Resultado.CORTADO
 				break
@@ -406,9 +453,29 @@ class Voz(contexto: Context) {
 				.setOnAudioFocusChangeListener { }
 				.build()
 			if (audio.requestAudioFocus(peticion) == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) foco = peticion
+			else focoDenegado()
 		} catch (e: Exception) {
 			Registro.w(ETIQUETA, "No se pudo pedir el foco de audio", e)
 		}
+	}
+
+	/** La última vez que Android negó el foco de audio (para avisar como mucho una vez por minuto). */
+	private var momentoFocoDenegado = 0L
+
+	/**
+	 * Android ha negado el foco de audio: en Android 17 el audio que no lo tiene
+	 * puede no sonar, sin dar error. Se apunta y se avisa con una vibración corta,
+	 * como mucho una vez por minuto, para que no parezca que Tiresias se ha callado sin más.
+	 */
+	private fun focoDenegado() {
+		val ahora = SystemClock.uptimeMillis()
+		if (ahora - momentoFocoDenegado < 60_000) return
+		momentoFocoDenegado = ahora
+		Registro.w(ETIQUETA, "Android no dio el foco de audio a la voz")
+		runCatching {
+			val v = app.getSystemService(android.os.Vibrator::class.java)
+			if (Build.VERSION.SDK_INT >= 26) v?.vibrate(android.os.VibrationEffect.createOneShot(60, android.os.VibrationEffect.DEFAULT_AMPLITUDE))
+		}.onFailure { Registro.w(ETIQUETA, "No se pudo avisar con vibración", it) }
 	}
 
 	private fun soltarFoco() {
@@ -435,6 +502,8 @@ class Voz(contexto: Context) {
 	}
 
 	companion object {
+		/** Lo que no se dice en voz a demanda si no se ha pedido. */
+		private val CALLADOS_A_DEMANDA = setOf(Tipo.NAVEGACION, Tipo.NOTIFICACION, Tipo.ANUNCIO, Tipo.PISTA, Tipo.ESCRITURA)
 		/** A partir de cuántos caracteres un texto se dice por frases. */
 		private const val LARGO = 200
 		private const val ETIQUETA = "Voz"

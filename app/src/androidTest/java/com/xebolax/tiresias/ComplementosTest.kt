@@ -196,6 +196,26 @@ class ComplementosTest {
 		}
 	}
 
+	/** Un complemento que pide una API más nueva no se instala, la tienda no lo ofrece, y todos ven la versión. */
+	@Test
+	fun laVersionDeLaApi() {
+		val futuro = """export const manifest = { id: "del-futuro", nombre: "Del futuro", version: "1.0", descripcion: "d", apps: ["*"], permisos: [], apiMinima: 99 };"""
+		val error = runCatching { scripts.leerManifiesto(futuro) }.exceptionOrNull()
+		assertTrue("Se aceptó un complemento que pide la API 99", error != null && error.message.orEmpty().contains("más nueva"))
+		val catalogo = """{"formato":1,"complementos":[{"id":"del-futuro","nombre":"F","version":"1.0","archivo":"del-futuro.js","apiMinima":99},{"id":"de-hoy","nombre":"H","version":"1.0","archivo":"de-hoy.js","apiMinima":2}]}"""
+		assertEquals(listOf("de-hoy"), Tienda.leer(catalogo).map { it.id })
+		val actual = """export const manifest = { id: "version-api", nombre: "V", version: "1.0", descripcion: "d", apps: ["*"], permisos: ["voz"], ajustes: [{ clave: "x", tipo: "si_no", defecto: true, nombre: "X" }] };
+tiresias.orden("Versión", () => tiresias.decir("API " + tiresias.versionApi));"""
+		scripts.instalar(actual)
+		try {
+			pedidos.clear()
+			scripts.ejecutarOrden("version-api", "Versión")
+			assertEquals(listOf("API ${Scripts.VERSION_API}"), dicho())
+		} finally {
+			scripts.desinstalar("version-api")
+		}
+	}
+
 	/** La tienda publicada de verdad en el servidor de Tiresias (necesita Internet en el emulador). */
 	@Test
 	fun laTiendaDelServidor() = kotlinx.coroutines.runBlocking {

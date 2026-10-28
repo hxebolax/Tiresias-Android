@@ -13,6 +13,9 @@ export const manifest = {
 	autor: "Héctor J. Benítez Corredera",
 	descripcion: "Mientras suena una llamada del teléfono o de WhatsApp, Telegram, Signal y otras, repite quién llama y por qué app, y puede recordar el gesto para contestar.",
 	descripcion_en: "While a call from the phone or from WhatsApp, Telegram, Signal and others is ringing, it repeats who is calling and from which app, and can remind you of the answer gesture.",
+	// Usa la API de la 1.0.4
+	apiMinima: 2,
+	apiProbada: 2,
 	apps: ["*"],
 	permisos: ["voz"],
 	ajustes: [

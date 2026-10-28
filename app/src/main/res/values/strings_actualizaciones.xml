@@ -61,4 +61,5 @@
 	<string name="act_desde_github">Viene de GitHub, porque el servidor propio no responde.</string>
 	<string name="act_descargando_complemento">Descargando %1$s</string>
 	<string name="act_sin_complemento">El servidor no tiene ese complemento</string>
+	<string name="act_novedades_titulo">Novedades de la versión %1$s</string>
 </resources>

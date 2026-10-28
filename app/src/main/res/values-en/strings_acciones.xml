@@ -183,6 +183,7 @@
 	<string name="control_puntuacion">punctuation</string>
 	<string name="control_idioma">Tiresias language</string>
 	<string name="control_motor">voice</string>
+	<string name="control_multimedia">music (next and previous track)</string>
 	<string name="control_verbosidad">verbosity</string>
 
 	<!-- Item and editing actions (menus and selector) -->
@@ -283,4 +284,17 @@
 	<string name="accion_ir_a_posicion">Go to item number… of the list</string>
 	<string name="accion_leer_qr">Read the QR codes and barcodes on the screen</string>
 	<string name="accion_resumen_avisos">Notification summary</string>
+	<string name="accion_canal_voz">Voice on the media or the accessibility volume</string>
+	<string name="accion_pista_siguiente">Next track</string>
+	<string name="accion_pista_anterior">Previous track</string>
+	<string name="accion_posicion_cursor">Say the cursor position</string>
+	<string name="accion_poner_valor">Set a value</string>
+	<string name="accion_voz_a_demanda">Speech on demand (only speaks when asked)</string>
+	<string name="accion_formato_texto">Say the text formatting</string>
+	<string name="accion_poner_marca">Set a place marker on this screen</string>
+	<string name="accion_ir_a_marca">Go to the marker on this screen</string>
+	<string name="accion_leer_fila">Read the whole table row</string>
+	<string name="accion_leer_columna">Read the whole table column</string>
+	<string name="accion_nombrar_ventana">Name this screen</string>
+	<string name="accion_seleccionar_texto">Choose and copy text from the focused item</string>
 </resources>

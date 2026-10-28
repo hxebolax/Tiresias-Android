@@ -98,7 +98,7 @@ class Iconos(private val lector: Lector, private val vision: Vision) {
 
 	private fun decir(n: AccessibilityNodeInfo, nombre: String) {
 		if (lector.foco != n) return
-		lector.voz.decir(com.xebolax.tiresias.voz.Enunciado(lector.textos.getString(R.string.iconos_posible, nombre), Modo.ENCOLAR, Tipo.NAVEGACION))
+		lector.voz.decir(com.xebolax.tiresias.voz.Enunciado(lector.textos.getString(R.string.iconos_posible, nombre), Modo.ENCOLAR, Tipo.NAVEGACION, vigente = { lector.foco == n }))
 	}
 
 	private fun conOcr(icono: Bitmap): String? {

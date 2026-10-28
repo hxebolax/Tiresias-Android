@@ -335,9 +335,7 @@
 	<string name="elo_puesta">Eloquence puesta como voz de Tiresias</string>
 	<string name="elo_voz">Voz</string>
 	<string name="elo_velocidad">Velocidad</string>
-	<string name="elo_velocidad_res">La misma que en Ajustes, Voz, y la que cambian los gestos. Cada motor tiene la suya: la de Eloquence no cambia la de las otras voces. Al cien por cien suena como NVDA con la velocidad 55.</string>
-	<string name="elo_aumento">Aumento de velocidad</string>
-	<string name="elo_aumento_res">Como en NVDA: la misma velocidad, 1,6 veces más rápida</string>
+	<string name="elo_velocidad_res">La misma que en Ajustes, Voz, y la que cambian los gestos. Cada motor tiene la suya: la de Eloquence no cambia la de las otras voces. Al cien por cien es la velocidad normal de Eloquence; al doble, el doble de rápida.</string>
 	<string name="elo_genero">Voz de hombre o de mujer</string>
 	<string name="elo_cabeza">Tamaño de la cabeza</string>
 	<string name="elo_tono_base">Tono de base</string>
@@ -401,22 +399,26 @@
 		<item>No</item>
 		<item>Después de la letra (b, Barcelona)</item>
 		<item>En vez de la letra (Barcelona)</item>
+		<item>Tras una pausa de un segundo (b... Barcelona)</item>
 	</string-array>
 	<string-array name="foneticas_valores" translatable="false">
 		<item>no</item>
 		<item>despues</item>
 		<item>en_vez</item>
+		<item>pausa</item>
 	</string-array>
 	<string name="aj_al_encender">Al encender la pantalla, decir</string>
 	<string-array name="al_encender_nombres">
 		<item>Nada</item>
 		<item>La hora</item>
 		<item>La hora, la fecha y la batería</item>
+		<item>La hora y el resumen de los avisos</item>
 	</string-array>
 	<string-array name="al_encender_valores" translatable="false">
 		<item>nada</item>
 		<item>hora</item>
 		<item>estado</item>
+		<item>avisos</item>
 	</string-array>
 	<string name="aj_al_apagar">Avisar al apagar la pantalla</string>
 	<string name="aj_al_apagar_res">Un sonido y «pantalla apagada»</string>
@@ -431,7 +433,7 @@
 	<string name="aj_foco_ventanas_nuevas">Foco en lo primero de cada pantalla nueva</string>
 	<string name="aj_foco_ventanas_nuevas_res">Al abrir una pantalla, tras su título, Tiresias va a su primer elemento (sin esperar a que deslices)</string>
 	<string name="aj_voz_multimedia">Voz por el volumen multimedia</string>
-	<string name="aj_voz_multimedia_res">La voz y los sonidos usan el volumen de la música en vez del de accesibilidad. Se aplica al volver a activar Tiresias.</string>
+	<string name="aj_voz_multimedia_res">La voz y los sonidos usan el volumen de la música en vez del de accesibilidad. Se puede cambiar al momento con la acción «Voz por el volumen multimedia o el de accesibilidad», también en una llamada.</string>
 	<string name="aj_toque_directo_teclado">Toque directo en el teclado en pantalla</string>
 	<string name="aj_toque_directo_teclado_res">Se escribe tocando las teclas, como sin lector (para quien escribe rápido de memoria o con un teclado braille de otra app)</string>
 	<string name="aj_braille_espejo">Puntos en espejo</string>
@@ -487,12 +489,14 @@
 		<item>«Desbloqueado»</item>
 		<item>La hora</item>
 		<item>El estado (lo elegido en «Elegir lo que dice el estado»)</item>
+		<item>La hora y el resumen de los avisos</item>
 	</string-array>
 	<string-array name="al_desbloquear_valores" translatable="false">
 		<item>nada</item>
 		<item>desbloqueado</item>
 		<item>hora</item>
 		<item>estado</item>
+		<item>avisos</item>
 	</string-array>
 	<string name="aj_callar_bloqueo">Callar la pantalla de bloqueo</string>
 	<string name="aj_callar_bloqueo_res">Con el móvil bloqueado, ni notificaciones ni avisos: solo lo que tú pides. Las notificaciones se guardan en Notificaciones recientes</string>
@@ -600,4 +604,24 @@
 	<string name="senior_codigo_pedir">Código de los ajustes</string>
 	<string name="senior_codigo_pedir_pista">Código</string>
 	<string name="senior_codigo_mal">Ese no es el código</string>
+	<string name="aj_motor_avisos">Voz de las notificaciones</string>
+	<string name="aj_motor_avisos_misma">La misma voz de siempre</string>
+	<string name="aj_teclados_que_hablan">Teclados que hablan solos</string>
+	<string name="aj_teclados_que_hablan_res">Con estos teclados, Tiresias no repite lo que se escribe ni sus teclas: ya lo dicen ellos</string>
+	<string name="aj_detectar_idioma">Detectar el idioma de los textos largos</string>
+	<string name="aj_detectar_idioma_res">Si la app no dice en qué idioma está un texto largo, Tiresias lo deduce (español o inglés) y lo lee con esa voz</string>
+	<string name="aj_restablecer">Restablecer Tiresias</string>
+	<string name="aj_restablecer_res">Como recién instalado: ajustes, gestos, complementos, etiquetas y perfiles de fábrica. Las voces descargadas se quedan y Tiresias sigue activado.</string>
+	<string name="aj_restablecer_pregunta">¿Dejar Tiresias como recién instalado? Se pierden los ajustes, los gestos, los complementos, las etiquetas y los perfiles. Si quieres, guarda antes una copia de seguridad.</string>
+	<string name="aj_desplazar_listas">Al llegar al final de lo que se ve de una lista</string>
+	<string-array name="desplazar_listas_nombres">
+		<item>Desplazar con un sonido (normal)</item>
+		<item>Desplazar sin sonido</item>
+		<item>Adelantar la lista antes, sin pausa (como VoiceOver)</item>
+	</string-array>
+	<string-array name="desplazar_listas_valores" translatable="false">
+		<item>normal</item>
+		<item>sin_sonido</item>
+		<item>anticipado</item>
+	</string-array>
 </resources>

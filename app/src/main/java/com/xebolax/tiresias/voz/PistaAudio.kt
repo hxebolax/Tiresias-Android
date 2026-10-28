@@ -22,7 +22,10 @@ import com.xebolax.tiresias.base.Registro
  * Solo se usa desde el hilo de la voz, salvo [cortar], que puede llamarse desde
  * cualquier hilo.
  */
-class PistaAudio(private val atributos: AudioAttributes) {
+class PistaAudio(atributosIniciales: AudioAttributes) {
+	/** Los atributos de la voz; al cambiarlos (otro volumen), la pista se rehace en la siguiente frase. */
+	@Volatile var atributos: AudioAttributes = atributosIniciales
+	private var atributosDePista: AudioAttributes? = null
 	private var pista: AudioTrack? = null
 	private var frecuencia = 0
 	@Volatile private var cortada = false
@@ -119,7 +122,7 @@ class PistaAudio(private val atributos: AudioAttributes) {
 
 	private fun abrir(hz: Int): AudioTrack? {
 		val elegido = dispositivoElegido()
-		pista?.let { if (frecuencia == hz && it.state == AudioTrack.STATE_INITIALIZED && dispositivo == elegido?.id) return it else cerrar() }
+		pista?.let { if (frecuencia == hz && it.state == AudioTrack.STATE_INITIALIZED && dispositivo == elegido?.id && atributosDePista === atributos) return it else cerrar() }
 		return try {
 			val minimo = AudioTrack.getMinBufferSize(hz, AudioFormat.CHANNEL_OUT_MONO, AudioFormat.ENCODING_PCM_16BIT)
 			val tamano = maxOf(minimo, hz / 10 * 2)
@@ -144,6 +147,7 @@ class PistaAudio(private val atributos: AudioAttributes) {
 			nueva.setVolume(volumen)
 			if (elegido != null && !nueva.setPreferredDevice(elegido)) Registro.w(ETIQUETA, "La pista no aceptó la salida elegida: suena por la del sistema")
 			dispositivo = elegido?.id
+			atributosDePista = atributos
 			pista = nueva
 			frecuencia = hz
 			nueva

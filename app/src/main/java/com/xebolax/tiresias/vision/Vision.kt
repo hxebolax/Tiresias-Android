@@ -53,9 +53,33 @@ class Vision(private val lector: Lector, private val ventanas: Ventanas) {
 
 	// --- Captura -------------------------------------------------------------------------
 
-	/** Una captura de la pantalla (o null si no se puede). Bloquea hasta 3 s. */
+	/** El motivo de la última captura que falló (el código de Android), o 0. */
+	@Volatile private var errorCaptura = 0
+
+	/**
+	 * Una captura de la pantalla (o null si no se puede). Bloquea hasta 4 s. Si
+	 * Android dice que se ha pedido otra hace muy poco (hay un mínimo entre
+	 * capturas), se espera un segundo y se prueba otra vez.
+	 */
 	fun capturar(): Bitmap? {
 		if (Build.VERSION.SDK_INT < 30) return null
+		val primera = capturarUnaVez()
+		if (primera != null || errorCaptura != AccessibilityService.ERROR_TAKE_SCREENSHOT_INTERVAL_TIME_SHORT) return primera
+		Thread.sleep(1000)
+		return capturarUnaVez()
+	}
+
+	/** Lo que se dice cuando no se pudo capturar la pantalla, según lo que dijo Android. */
+	private fun motivoSinCaptura(): Int = when (errorCaptura) {
+		AccessibilityService.ERROR_TAKE_SCREENSHOT_SECURE_WINDOW -> R.string.vision_captura_protegida
+		AccessibilityService.ERROR_TAKE_SCREENSHOT_INTERVAL_TIME_SHORT -> R.string.vision_captura_seguida
+		AccessibilityService.ERROR_TAKE_SCREENSHOT_NO_ACCESSIBILITY_ACCESS -> R.string.vision_captura_sin_permiso
+		else -> R.string.vision_sin_captura
+	}
+
+	@androidx.annotation.RequiresApi(30)
+	private fun capturarUnaVez(): Bitmap? {
+		errorCaptura = 0
 		val listo = CountDownLatch(1)
 		var resultado: Bitmap? = null
 		servicio.takeScreenshot(Display.DEFAULT_DISPLAY, trabajoCaptura, object : AccessibilityService.TakeScreenshotCallback {
@@ -73,6 +97,7 @@ class Vision(private val lector: Lector, private val ventanas: Ventanas) {
 			}
 
 			override fun onFailure(error: Int) {
+				errorCaptura = error
 				Registro.w(ETIQUETA, "La captura falló (código $error)")
 				listo.countDown()
 			}
@@ -108,6 +133,11 @@ class Vision(private val lector: Lector, private val ventanas: Ventanas) {
 			lector.decir(R.string.vision_contrasena)
 			return false
 		}
+		// Lo que la app marca como datos sensibles (banca, códigos) no sale del móvil ni se reconoce
+		if (lector.foco?.let { Nodos.sensible(it) } == true || Nodos.haySensibles(lector.raiz())) {
+			lector.decir(R.string.vision_sensible)
+			return false
+		}
 		return true
 	}
 
@@ -124,7 +154,8 @@ class Vision(private val lector: Lector, private val ventanas: Ventanas) {
 		trabajo.execute {
 			try {
 				val captura = capturar() ?: run {
-					lector.manejador.post { lector.decir(R.string.vision_sin_captura) }
+					val motivo = motivoSinCaptura()
+					lector.manejador.post { lector.decir(motivo) }
 					return@execute
 				}
 				val codigos = Codigos.leer(captura)
@@ -191,7 +222,8 @@ class Vision(private val lector: Lector, private val ventanas: Ventanas) {
 		trabajo.execute {
 			try {
 				val captura = capturar() ?: run {
-					lector.manejador.post { lector.decir(R.string.vision_sin_captura) }
+					val motivo = motivoSinCaptura()
+					lector.manejador.post { lector.decir(motivo) }
 					return@execute
 				}
 				val imagen = zona?.let { recortar(captura, it) } ?: captura
@@ -227,7 +259,7 @@ class Vision(private val lector: Lector, private val ventanas: Ventanas) {
 		val camino = Path().apply { moveTo(r.exactCenterX(), r.exactCenterY()) }
 		val gesto = GestureDescription.Builder().addStroke(GestureDescription.StrokeDescription(camino, 0, 60)).build()
 		lector.sonidos.tocar(Sonido.ACTIVAR)
-		servicio.dispatchGesture(gesto, null, null)
+		lector.mandarGesto(gesto)
 	}
 
 	// --- IA ---------------------------------------------------------------------------------
@@ -261,7 +293,8 @@ class Vision(private val lector: Lector, private val ventanas: Ventanas) {
 			trabajo.execute {
 				try {
 					val captura = capturar() ?: run {
-					lector.manejador.post { lector.decir(R.string.vision_sin_captura) }
+					val motivo = motivoSinCaptura()
+					lector.manejador.post { lector.decir(motivo) }
 					return@execute
 				}
 					val imagen = zona?.let { recortar(captura, it) } ?: captura
@@ -531,7 +564,8 @@ class Vision(private val lector: Lector, private val ventanas: Ventanas) {
 		trabajo.execute {
 			try {
 				val captura = capturar() ?: run {
-					lector.manejador.post { lector.decir(R.string.vision_sin_captura) }
+					val motivo = motivoSinCaptura()
+					lector.manejador.post { lector.decir(motivo) }
 					return@execute
 				}
 				val archivo = jpeg(captura)
@@ -605,7 +639,7 @@ class Vision(private val lector: Lector, private val ventanas: Ventanas) {
 	/** Toca (o mantiene pulsado [ms]) el punto [p] de la pantalla. */
 	private fun gesto(p: android.graphics.PointF, ms: Long): Boolean {
 		val camino = Path().apply { moveTo(p.x, p.y) }
-		return servicio.dispatchGesture(GestureDescription.Builder().addStroke(GestureDescription.StrokeDescription(camino, 0, ms)).build(), null, null)
+		return lector.mandarGesto(GestureDescription.Builder().addStroke(GestureDescription.StrokeDescription(camino, 0, ms)).build())
 	}
 
 	/** Desliza un dedo por el centro de la pantalla para que el contenido se mueva en [d]. */
@@ -623,7 +657,7 @@ class Vision(private val lector: Lector, private val ventanas: Ventanas) {
 			moveTo(desde.x, desde.y)
 			lineTo(hasta.x, hasta.y)
 		}
-		return servicio.dispatchGesture(GestureDescription.Builder().addStroke(GestureDescription.StrokeDescription(camino, 0, 350)).build(), null, null)
+		return lector.mandarGesto(GestureDescription.Builder().addStroke(GestureDescription.StrokeDescription(camino, 0, 350)).build())
 	}
 
 	fun cerrar() {

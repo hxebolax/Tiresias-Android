@@ -30,7 +30,7 @@ class ActividadAsistente : ActividadBase() {
 			Paso(R.string.asis_2_titulo, if (Build.VERSION.SDK_INT >= 33) R.string.asis_2 else R.string.asis_2_antiguo, R.string.asis_2_boton) { abrirInfoApp() },
 			Paso(R.string.asis_3_titulo, R.string.asis_3, R.string.asis_3_boton) { abrir(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)) },
 			Paso(R.string.asis_4_titulo, R.string.asis_4, R.string.asis_4_boton) { bateria() },
-			Paso(R.string.asis_5_titulo, R.string.asis_5, R.string.asis_5_boton) { abrirInfoApp() },
+			Paso(R.string.asis_5_titulo, textoFabricante(), R.string.asis_5_boton) { abrirInfoApp() },
 			Paso(R.string.asis_6_titulo, R.string.asis_6, R.string.asis_6_boton) { startActivity(Intent(this, ActividadTutorial::class.java)) },
 		)
 	}
@@ -59,6 +59,22 @@ class ActividadAsistente : ActividadBase() {
 			finish()
 		}
 		if (paso > 0) p.botonSecundario(getString(R.string.asis_anterior)) { paso--; construir() }
+	}
+
+	/**
+	 * Lo que hay que tocar en cada marca para que no cierre Tiresias ni bloquee sus
+	 * actualizaciones (dontkillmyapp.com, Backtalk, AppleVis): el Auto Blocker de
+	 * Samsung, el candado de Recientes de Xiaomi y OnePlus, PowerGenie de Huawei y
+	 * los gestos de Moto que chocan con el doble toque.
+	 */
+	private fun textoFabricante(): Int = when (Build.MANUFACTURER.lowercase()) {
+		"samsung" -> R.string.asis_5_samsung
+		"xiaomi", "redmi", "poco" -> R.string.asis_5_xiaomi
+		"oneplus", "oppo", "realme" -> R.string.asis_5_oneplus
+		"huawei", "honor" -> R.string.asis_5_huawei
+		"motorola" -> R.string.asis_5_motorola
+		"vivo", "iqoo" -> R.string.asis_5_vivo
+		else -> R.string.asis_5
 	}
 
 	private fun abrir(i: Intent) {

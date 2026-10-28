@@ -34,8 +34,8 @@ android {
 		// versión posterior (gestos de varios dedos, capturas, braille HID...) se comprueba al usarlo.
 		minSdk = 24
 		targetSdk = 37
-		versionCode = 5
-		versionName = "1.0.4"
+		versionCode = 6
+		versionName = "1.0.5"
 
 		buildConfigField("String", "URL_ACTUALIZACIONES", "\"$urlActualizaciones\"")
 		buildConfigField("String", "REPO_GITHUB", "\"$repoGithub\"")
@@ -145,6 +145,15 @@ android {
 		disable += listOf("MissingTranslation")
 	}
 }
+
+// Las novedades (NOVEDADES.txt) dentro de la app, para enseñarlas al abrirla tras actualizar
+val copiarNovedades = tasks.register<Copy>("copiarNovedades") {
+	from(rootProject.file("NOVEDADES.txt"))
+	into(layout.buildDirectory.dir("generated/novedades"))
+	rename { "novedades.txt" }
+}
+android.sourceSets.getByName("main").assets.srcDir(layout.buildDirectory.dir("generated/novedades").get().asFile)
+tasks.named("preBuild") { dependsOn(copiarNovedades) }
 
 dependencies {
 	implementation(project(":nucleo"))

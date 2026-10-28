@@ -64,6 +64,7 @@ class Describir(private val etiqueta: (paquete: String, id: String) -> String? =
 			mantenible = n.isLongClickable || acciones.any { it.id == AccessibilityNodeInfo.ACTION_LONG_CLICK },
 			editable = editable,
 			contrasena = n.isPassword,
+			sensible = Nodos.sensible(n),
 			tieneAcciones = accionesPropias(acciones) > 0,
 			enlaces = Nodos.enlacesEnTexto(n).size,
 			faltas = Nodos.faltas(n).size,

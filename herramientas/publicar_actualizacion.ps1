@@ -183,6 +183,7 @@ foreach ($d in Get-ChildItem (Join-Path $Raiz "complementos") -Directory -ErrorA
 		descripcion_en = Campo "descripcion_en"
 		apps = Lista "apps"
 		permisos = Lista "permisos"
+		apiMinima = $(if ($bloque -match 'apiMinima\s*:\s*(\d+)') { [int]$Matches[1] } else { 1 })
 		archivo = $archivoJs
 		sha256 = (Get-FileHash -Algorithm SHA256 $destinoJs).Hash.ToLower()
 		tamano = (Get-Item $destinoJs).Length

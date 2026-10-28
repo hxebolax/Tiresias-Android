@@ -12,6 +12,9 @@ export const manifest = {
 	autor: "Héctor J. Benítez Corredera",
 	descripcion: "Dice el nombre, la versión y la fecha de la última actualización de la app de delante, y lo puede copiar para informar de un fallo.",
 	descripcion_en: "Says the name, version and last update date of the app in front, and can copy it to report a problem.",
+	// Usa la API de la 1.0.4
+	apiMinima: 2,
+	apiProbada: 2,
 	apps: ["*"],
 	permisos: ["voz", "portapapeles"],
 	ajustes: [

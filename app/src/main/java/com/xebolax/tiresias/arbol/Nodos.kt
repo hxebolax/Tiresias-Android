@@ -462,4 +462,28 @@ object Nodos {
 
 	/** Si [n] todavía existe en su ventana (refresh devuelve false si la app lo ha quitado). */
 	fun vivo(n: AccessibilityNodeInfo): Boolean = runCatching { n.refresh() }.getOrDefault(false)
+
+	/** Una contraseña o lo que la app marca como datos sensibles (Android 14). */
+	fun sensible(n: AccessibilityNodeInfo): Boolean =
+		n.isPassword || (android.os.Build.VERSION.SDK_INT >= 34 && runCatching { n.isAccessibilityDataSensitive }.getOrDefault(false))
+
+	/**
+	 * Si en [raiz] (hasta [maximo] nodos) hay algo que la app marca como datos
+	 * sensibles (Android 14): entonces la pantalla no se captura para la IA ni el
+	 * OCR. Un campo de contraseña visible no basta (sale tapado con puntos): si no,
+	 * no se podría describir ninguna pantalla de inicio de sesión.
+	 */
+	fun haySensibles(raiz: AccessibilityNodeInfo?, maximo: Int = 600): Boolean {
+		if (android.os.Build.VERSION.SDK_INT < 34) return false
+		raiz ?: return false
+		val cola = ArrayDeque<AccessibilityNodeInfo>()
+		cola.add(raiz)
+		var vistos = 0
+		while (cola.isNotEmpty() && vistos++ < maximo) {
+			val n = cola.removeFirst()
+			if (runCatching { n.isAccessibilityDataSensitive }.getOrDefault(false) && n.isVisibleToUser) return true
+			for (i in 0 until n.childCount) runCatching { n.getChild(i) }.getOrNull()?.let { cola.add(it) }
+		}
+		return false
+	}
 }

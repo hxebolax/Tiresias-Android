@@ -190,6 +190,31 @@ class CoherenciaTest : PruebaTiresias() {
 	}
 
 	@Test
+	fun unPerfilConOtroMotorPoneSuVelocidadYNoEstropeaLaDelOtro() {
+		val a = com.xebolax.tiresias.base.Ajustes(app)
+		val espeak = com.xebolax.tiresias.base.Ajustes.MOTOR_ESPEAK
+		val pico = com.xebolax.tiresias.base.Ajustes.MOTOR_PICO
+		val perfiles = s.lectorPruebas!!.perfiles
+		ajuste(Claves.MOTOR, pico)
+		ajuste(Claves.VELOCIDAD, 140)
+		perfiles.guardarComo("Prueba Pico")
+		ajuste(Claves.MOTOR, espeak)
+		ajuste(Claves.VELOCIDAD, 260)
+		try {
+			assertTrue(perfiles.aplicar("Prueba Pico"))
+			SystemClock.sleep(600)
+			assertEquals(pico, a.motor)
+			assertEquals("La velocidad del perfil no se respetó", 140, velocidadSera(140))
+			// La de eSpeak se guardó como suya
+			assertEquals(260, a.velocidadDe(espeak))
+			ajuste(Claves.MOTOR, espeak)
+			assertEquals(260, velocidadSera(260))
+		} finally {
+			perfiles.borrar("Prueba Pico")
+		}
+	}
+
+	@Test
 	fun ajustesDiceLaVelocidadQueHayDeVerdad() {
 		abrir(ActividadAjustes::class.java) { it.putExtra(ActividadAjustes.EXTRA_SECCION, "seccion_voz") }
 		SystemClock.sleep(1200)

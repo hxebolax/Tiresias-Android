@@ -1,5 +1,6 @@
 package com.xebolax.tiresias.scripts
 
+import com.xebolax.tiresias.arbol.Nodos
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -56,6 +57,9 @@ class Scripts(private val lector: Lector?, contexto: Context = lector!!.servicio
 		val actividades: List<String> = emptyList(),
 		/** Sus ajustes, en el orden del manifiesto (en el idioma de Tiresias). */
 		val ajustes: List<AjusteComplemento> = emptyList(),
+		/** La versión de la API que necesita como mínimo ([VERSION_API]) y la última con la que se ha probado. */
+		val apiMinima: Int = 1,
+		val apiProbada: Int = 1,
 	)
 
 	/**
@@ -277,7 +281,7 @@ class Scripts(private val lector: Lector?, contexto: Context = lector!!.servicio
 	@Synchronized
 	fun alEnfocar(paquete: String, e: Elemento, texto: String): String? {
 		// Lo de un campo de contraseña nunca llega a un complemento
-		if (!activos || cargados.isEmpty() || e.contrasena) return null
+		if (!activos || cargados.isEmpty() || e.contrasena || e.sensible) return null
 		var actual = texto
 		var cambiado = false
 		for (c in cargados.values) {
@@ -396,7 +400,7 @@ class Scripts(private val lector: Lector?, contexto: Context = lector!!.servicio
 	 */
 	@Synchronized
 	fun acciones(paquete: String, e: Elemento): List<Triple<String, Int, String>> {
-		if (!activos || cargados.isEmpty() || e.contrasena) return emptyList()
+		if (!activos || cargados.isEmpty() || e.contrasena || e.sensible) return emptyList()
 		val json = JSONObject().put("app", paquete).put("nombre", e.nombre).put("rol", e.rol.name.lowercase()).put("texto", e.texto)
 			.put("id", e.identificador ?: "").put("estado", e.estado ?: "").toString()
 		val lista = ArrayList<Triple<String, Int, String>>()
@@ -502,7 +506,7 @@ class Scripts(private val lector: Lector?, contexto: Context = lector!!.servicio
 			// El elemento enfocado (para las órdenes que trabajan con él: copiar su texto, contar sus palabras...)
 			"elemento" -> {
 				val f = l.foco ?: return "null"
-				if (f.isPassword) return "null"
+				if (Nodos.sensible(f)) return "null"
 				val e = l.elemento(f)
 				return JSONObject().put("app", f.packageName?.toString().orEmpty()).put("nombre", e.nombre).put("rol", e.rol.name.lowercase())
 					.put("texto", e.texto).put("id", e.identificador ?: "").put("estado", e.estado ?: "").toString()
@@ -864,7 +868,11 @@ class Scripts(private val lector: Lector?, contexto: Context = lector!!.servicio
 				)
 			}
 		}.orEmpty()
-		return Complemento(id, local(m, "nombre", id), m.optString("version", "1.0"), lista("apps"), lista("permisos"), local(m, "descripcion"), reglas, lista("actividades"), ajustes(m))
+		val minima = m.optInt("apiMinima", 1).coerceAtLeast(1)
+		// Uno que pide una API más nueva que la de esta versión de Tiresias no se instala ni se carga (fallaría a medias)
+		if (minima > VERSION_API) throw QuickJsException(Idioma.envolver(app).getString(com.xebolax.tiresias.R.string.scripts_api_nueva, local(m, "nombre", id)))
+		return Complemento(id, local(m, "nombre", id), m.optString("version", "1.0"), lista("apps"), lista("permisos"), local(m, "descripcion"), reglas, lista("actividades"), ajustes(m),
+			minima, m.optInt("apiProbada", minima).coerceAtLeast(minima))
 	}
 
 	private object HostVacio : QuickJs.Host {
@@ -875,6 +883,15 @@ class Scripts(private val lector: Lector?, contexto: Context = lector!!.servicio
 
 	companion object {
 		private const val ETIQUETA = "Complementos"
+
+		/**
+		 * La versión de la API de los complementos: 1 hasta la 1.0.3; 2 desde la
+		 * 1.0.4 (`llamada`, `alVentana`, `elegir`, `confirmar`, `pedirTexto`, `luz`
+		 * e `infoApp`). Un complemento declara en su manifiesto `apiMinima` y
+		 * `apiProbada`; lo ve en `tiresias.versionApi`. Se sube solo al añadir o
+		 * cambiar algo de la API, nunca se quita nada sin subirla.
+		 */
+		const val VERSION_API = 2
 		private const val ARCHIVO = "complemento.js"
 		private const val CLAVE_ACTIVOS = "__activos"
 		private const val LIMITE_MEMORIA = 16L * 1024 * 1024
@@ -891,6 +908,7 @@ class Scripts(private val lector: Lector?, contexto: Context = lector!!.servicio
 			const __esperar = (f) => { const n = __m.siguiente++; __m.respuestas[n] = typeof f === "function" ? f : () => {}; return n; };
 			const __temporizar = (ms, f, repetir) => { const n = __m.siguiente++; __m.temporizadores[n] = { f, repetir }; __host("temporizador", JSON.stringify([n, Number(ms) || 0, repetir])); return n; };
 			globalThis.tiresias = {
+				versionApi: $VERSION_API,
 				decir: (t, cola) => { __host(cola === true ? "decirEnCola" : "decir", JSON.stringify(String(t))); },
 				sonido: (n) => { __host("sonido", JSON.stringify(String(n))); },
 				portapapeles: (t, sensible) => { __host(sensible === true ? "portapapelesSensible" : "portapapeles", JSON.stringify(String(t))); },

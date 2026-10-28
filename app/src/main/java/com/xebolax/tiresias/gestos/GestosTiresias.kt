@@ -215,8 +215,12 @@ class GestosTiresias(private val lector: Lector) {
 	private fun region(toda: Boolean) {
 		if (Build.VERSION.SDK_INT < 30) return
 		try {
-			val m = servicio.resources.displayMetrics
-			val r = if (toda) Region(0, 0, m.widthPixels, m.heightPixels) else Region()
+			// La pantalla entera de verdad, con la barra de navegación (displayMetrics la deja fuera en muchos móviles:
+			// los toques sobre ella no pasaban a la app); TalkBack y Backtalk usan también las medidas reales
+			val limites = servicio.getSystemService(android.view.WindowManager::class.java)?.maximumWindowMetrics?.bounds
+			val ancho = limites?.width() ?: servicio.resources.displayMetrics.widthPixels
+			val alto = limites?.height() ?: servicio.resources.displayMetrics.heightPixels
+			val r = if (toda) Region(0, 0, ancho, alto) else Region()
 			servicio.setTouchExplorationPassthroughRegion(Display.DEFAULT_DISPLAY, r)
 		} catch (e: Exception) {
 			Registro.w(ETIQUETA, "No se pudo cambiar la región de paso de toques", e)

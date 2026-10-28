@@ -233,6 +233,24 @@ class ActividadAjustes : ActividadBase(), PreferenceFragmentCompat.OnPreferenceS
 				lista.entryValues = motores.map { it.first }.toTypedArray()
 				if (lista.value == null) lista.value = Ajustes.MOTOR_ESPEAK
 			}
+			// La voz de las notificaciones: la de siempre o una de las incluidas
+			findPreference<ListPreference>(Claves.MOTOR_AVISOS)?.let { lista ->
+				val incluidas = motores.filter { it.first == Ajustes.MOTOR_ESPEAK || it.first == Ajustes.MOTOR_PICO || it.first == Ajustes.MOTOR_ELOQUENCE }
+				lista.entries = (listOf(getString(R.string.aj_motor_avisos_misma)) + incluidas.map { it.second }).toTypedArray()
+				lista.entryValues = (listOf("") + incluidas.map { it.first }).toTypedArray()
+				if (lista.value == null) lista.value = ""
+			}
+			// Los teclados que hablan solos: se eligen de los activados en el móvil
+			findPreference<Preference>("teclados_que_hablan")?.setOnPreferenceClickListener {
+				val imm = c.getSystemService(android.view.inputmethod.InputMethodManager::class.java)
+				val teclados = imm?.enabledInputMethodList.orEmpty().map { it.packageName to it.loadLabel(c.packageManager).toString() }.distinctBy { it.first }
+				val a = Ajustes(c)
+				val marcados = a.tecladosQueHablan
+				requireContext().elegirVarios(getString(R.string.aj_teclados_que_hablan), teclados.map { it.second }, BooleanArray(teclados.size) { teclados[it].first in marcados }) { nuevos ->
+					a.tecladosQueHablan = teclados.filterIndexed { i, _ -> nuevos[i] }.map { it.first }.toSet()
+				}
+				true
+			}
 			findPreference<Preference>("voces_control")?.apply {
 				val a = Ajustes(c)
 				fun resumen() {
@@ -353,6 +371,15 @@ class ActividadAjustes : ActividadBase(), PreferenceFragmentCompat.OnPreferenceS
 						activity?.avisar(getString(if (si) R.string.api_denegada else R.string.api_permitida, nombre(p)))
 					}
 				})
+				true
+			}
+			findPreference<Preference>("restablecer")?.setOnPreferenceClickListener {
+				requireContext().confirmar(getString(R.string.aj_restablecer_pregunta), getString(R.string.aj_restablecer)) {
+					com.xebolax.tiresias.base.Restablecer.todo(c)
+					ServicioTiresias.instancia?.alRestablecer()
+					startActivity(android.content.Intent(c, ActividadAsistente::class.java))
+					activity?.finish()
+				}
 				true
 			}
 			findPreference<Preference>("copia_guardar")?.setOnPreferenceClickListener {

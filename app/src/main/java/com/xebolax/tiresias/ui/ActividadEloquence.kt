@@ -126,7 +126,6 @@ class ActividadEloquence : ActividadBase() {
 			}
 		}
 		p.parrafo(getString(R.string.elo_velocidad_res))
-		interruptor(Claves.ELOQUENCE_AUMENTO, R.string.elo_aumento, R.string.elo_aumento_res, ajustes.eloquenceAumento)
 		for (param in MotorEloquence.PARAMETROS) {
 			val puesto = ajustes.eloquenceParametro(voz, param).takeIf { it >= 0 }
 			val valor = puesto ?: fabrica[param]
@@ -135,7 +134,6 @@ class ActividadEloquence : ActividadBase() {
 		p.botonSecundario(getString(R.string.elo_restablecer_voz, MotorEloquence.VOCES[voz])) {
 			confirmar(getString(R.string.elo_restablecer_pregunta, MotorEloquence.VOCES[voz]), getString(R.string.elo_restablecer_voz, MotorEloquence.VOCES[voz])) {
 				ajustes.restablecerEloquence(voz)
-				ajustes.p.edit().remove(Claves.ELOQUENCE_VELOCIDAD).remove(Claves.ELOQUENCE_AUMENTO).apply()
 				ajustes.ponerVelocidadDe(Ajustes.MOTOR_ELOQUENCE, 100)
 				aplicar()
 			}

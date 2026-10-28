@@ -44,6 +44,12 @@
 	<string name="asis_4_boton">Turn off battery optimization</string>
 	<string name="asis_5_titulo">Autostart (%1$s)</string>
 	<string name="asis_5">Phones from Xiaomi, Huawei, OPPO, vivo, OnePlus and others also have an autostart or protected apps setting. Open the Tiresias app info and allow autostart and background activity.</string>
+	<string name="asis_5_samsung">On Samsung phones, open Settings, Battery, Background usage limits, Never sleeping apps, and add Tiresias. If Tiresias cannot install its updates, turn off Auto Blocker in Settings, Security and privacy: it blocks apps from outside the store.</string>
+	<string name="asis_5_xiaomi">On Xiaomi, Redmi and Poco phones, open the Tiresias app info and turn on Autostart; in Battery saver, choose No restrictions. Then, in Recents, touch and hold Tiresias and lock it, so HyperOS does not close it when clearing memory.</string>
+	<string name="asis_5_oneplus">On OnePlus, OPPO and realme phones, open the Tiresias app info, Battery, and choose Do not optimise and Allow background activity. Then, in Recents, touch and hold Tiresias and choose Lock, so it is not closed when clearing memory.</string>
+	<string name="asis_5_huawei">On Huawei and Honor phones, open Settings, Battery, App launch, find Tiresias, turn off automatic management and leave auto-launch, secondary launch and run in background on.</string>
+	<string name="asis_5_motorola">On Motorola phones, if double tap fails or needs three taps, open the Moto app, Gestures, and turn off the gestures you do not use (the screen ones and the taps on the back). Also open the Tiresias app info and turn off battery saving for it.</string>
+	<string name="asis_5_vivo">On vivo and iQOO phones, open the Tiresias app info, Battery, and allow high background power use; also turn on autostart in Settings, Apps, Permissions.</string>
 	<string name="asis_5_boton">Open Tiresias app info</string>
 	<string name="asis_6_titulo">Learn the gestures</string>
 	<string name="asis_6">The tutorial explains the gestures in a few minutes and has a practice area.</string>
@@ -380,4 +386,7 @@
 	<string name="imagen_texto">Text of the image</string>
 	<string name="imagen_copiar_texto">Copy the text</string>
 	<string name="imagen_texto_copiado">Text copied</string>
+	<string name="ui_servicio_cerrado">The system closed Tiresias without you turning it off: it is the %1$s battery saving. Tap here to see what to change</string>
+	<string name="tut_terminar_practica">Finish practice</string>
+	<string name="tut_como_salir">To leave the practice: press Back, both volume keys together or double tap Finish practice. Leaving the tutorial also ends the practice.</string>
 </resources>

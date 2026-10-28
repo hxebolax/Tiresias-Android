@@ -185,6 +185,7 @@
 	<string name="control_puntuacion">puntuación</string>
 	<string name="control_idioma">idioma de Tiresias</string>
 	<string name="control_motor">voz</string>
+	<string name="control_multimedia">música (canción siguiente y anterior)</string>
 	<string name="control_verbosidad">verbosidad</string>
 
 	<!-- Acciones del elemento y de edición (menús y selector) -->
@@ -287,4 +288,17 @@
 	<string name="accion_ir_a_posicion">Ir al elemento número… de la lista</string>
 	<string name="accion_leer_qr">Leer los códigos QR y de barras de la pantalla</string>
 	<string name="accion_resumen_avisos">Resumen de los avisos</string>
+	<string name="accion_canal_voz">Voz por el volumen multimedia o el de accesibilidad</string>
+	<string name="accion_pista_siguiente">Canción siguiente</string>
+	<string name="accion_pista_anterior">Canción anterior</string>
+	<string name="accion_posicion_cursor">Decir la posición del cursor</string>
+	<string name="accion_poner_valor">Poner un valor</string>
+	<string name="accion_voz_a_demanda">Voz a demanda (solo habla cuando se le pide)</string>
+	<string name="accion_formato_texto">Decir el formato del texto</string>
+	<string name="accion_poner_marca">Poner una marca de posición en esta pantalla</string>
+	<string name="accion_ir_a_marca">Ir a la marca de esta pantalla</string>
+	<string name="accion_leer_fila">Leer la fila entera de la tabla</string>
+	<string name="accion_leer_columna">Leer la columna entera de la tabla</string>
+	<string name="accion_nombrar_ventana">Poner nombre a esta pantalla</string>
+	<string name="accion_seleccionar_texto">Elegir y copiar texto de lo enfocado</string>
 </resources>

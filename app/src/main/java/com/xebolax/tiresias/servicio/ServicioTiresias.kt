@@ -75,6 +75,10 @@ class ServicioTiresias : AccessibilityService() {
 					when (lector?.ajustes?.alEncender) {
 						"hora" -> lector?.decir(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(java.util.Date()), Modo.ENCOLAR)
 						"estado" -> ejecutor?.ejecutar(Accion.ESTADO_SISTEMA)
+						"avisos" -> {
+							lector?.decir(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(java.util.Date()), Modo.ENCOLAR)
+							ejecutor?.ejecutar(Accion.RESUMEN_AVISOS)
+						}
 					}
 				}
 				// Al desbloquear (Backtalk 31 y 149)
@@ -83,6 +87,19 @@ class ServicioTiresias : AccessibilityService() {
 						"desbloqueado" -> lector?.decir(R.string.desbloqueado, Modo.ENCOLAR)
 						"hora" -> lector?.decir(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(java.util.Date()), Modo.ENCOLAR)
 						"estado" -> ejecutor?.ejecutar(Accion.ESTADO_SISTEMA)
+						"avisos" -> {
+							lector?.decir(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(java.util.Date()), Modo.ENCOLAR)
+							ejecutor?.ejecutar(Accion.RESUMEN_AVISOS)
+						}
+					}
+				}
+				// El primer desbloqueo tras encender el móvil: ya se ven los complementos y las voces descargadas
+				// (están en el almacenamiento que no existe antes de desbloquear)
+				Intent.ACTION_USER_UNLOCKED -> {
+					Registro.i(ETIQUETA, "Primer desbloqueo: se cargan los complementos y las voces descargadas")
+					lector?.manejador?.post {
+						lector?.let { l -> if (l.scriptsListos) l.scripts.recargar() }
+						voz?.elegirMotor()
 					}
 				}
 				Intent.ACTION_SCREEN_OFF -> {
@@ -94,6 +111,8 @@ class ServicioTiresias : AccessibilityService() {
 					voz?.callar()
 					lector?.let { l ->
 						if (l.ajustes.alApagar) {
+							// Un momento despierto, para que «pantalla apagada» no se corte al dormirse el móvil (Backtalk 13)
+							mantenerDespierto(3000)
 							l.sonidos.tocar(Sonido.APAGADO)
 							l.decir(R.string.pantalla_apagada, modo = Modo.ENCOLAR)
 						}
@@ -105,6 +124,8 @@ class ServicioTiresias : AccessibilityService() {
 
 	override fun onServiceConnected() {
 		super.onServiceConnected()
+		// Encendido: si luego desaparece sin pasar por onUnbind, lo ha cerrado el sistema (no el usuario)
+		Ajustes(this).p.edit().putBoolean(com.xebolax.tiresias.base.Claves.SERVICIO_ENCENDIDO, true).apply()
 		try {
 			iniciar()
 		} catch (e: Exception) {
@@ -115,6 +136,7 @@ class ServicioTiresias : AccessibilityService() {
 
 	private fun iniciar() {
 		Registro.iniciar(this)
+		Thread({ apuntarSalidas() }, "tiresias-salidas").start()
 		com.xebolax.tiresias.voz.PistaAudio.multimedia = Ajustes(this).vozMultimedia
 		val v = Voz(this)
 		voz = v
@@ -129,6 +151,7 @@ class ServicioTiresias : AccessibilityService() {
 		lector = l
 		val ej = Ejecutor(l, vent) { suspendido -> configurar(suspendido) }
 		ejecutor = ej
+		l.alToqueAtascado = { l.manejador.post { l.decir(R.string.toque_atascado); ej.ejecutar(Accion.REINICIAR_TACTIL) } }
 		val alAccion: (Accion) -> Unit = { a -> l.manejador.post { ej.ejecutar(a) } }
 		l.vision = Vision(l, vent)
 		l.escucha = Escucha(l, alAccion) { texto -> l.manejador.post { ej.buscarTexto(texto) } }
@@ -142,7 +165,11 @@ class ServicioTiresias : AccessibilityService() {
 			addAction(Intent.ACTION_SCREEN_ON)
 			addAction(Intent.ACTION_SCREEN_OFF)
 			addAction(Intent.ACTION_USER_PRESENT)
+			addAction(Intent.ACTION_USER_UNLOCKED)
 		})
+		if (Build.VERSION.SDK_INT >= 24 && getSystemService(android.os.UserManager::class.java)?.isUserUnlocked == false) {
+			Registro.i(ETIQUETA, "Tiresias arranca antes del primer desbloqueo: los complementos y las voces descargadas, al desbloquear")
+		}
 		// «Reanudar» de la notificación de pausa (solo la manda Tiresias: no se exporta)
 		androidx.core.content.ContextCompat.registerReceiver(this, reanudar, IntentFilter(AvisoPausa.REANUDAR), androidx.core.content.ContextCompat.RECEIVER_NOT_EXPORTED)
 		instancia = this
@@ -236,6 +263,16 @@ class ServicioTiresias : AccessibilityService() {
 			return true
 		}
 		if (l.ayudaEntrada && accion != Accion.AYUDA_ENTRADA) {
+			// Siempre se puede salir: Atrás termina la práctica, y en las pantallas de Tiresias el doble toque
+			// pulsa de verdad (si no, el botón «Terminar la práctica» no se podía pulsar y no había forma de salir)
+			if (accion == Accion.ATRAS) {
+				l.manejador.post { ej.ejecutar(Accion.AYUDA_ENTRADA) }
+				return true
+			}
+			if ((accion == Accion.ACTIVAR || accion == Accion.MANTENER) && l.foco?.packageName?.toString() == packageName) {
+				l.manejador.post { ej.ejecutar(accion) }
+				return true
+			}
 			l.manejador.post { l.decir(l.textos.getString(R.string.ayuda_entrada_gesto, nombreGesto(gesto), ej.nombreAccion(accion))) }
 			return true
 		}
@@ -263,7 +300,37 @@ class ServicioTiresias : AccessibilityService() {
 		voz?.callar()
 	}
 
+	/**
+	 * Por qué cerró Android Tiresias las últimas veces (falta de memoria, los
+	 * límites de memoria de Android 17, un fallo, el ahorro de batería): se apunta
+	 * en el registro técnico, una vez cada cierre, para saber qué pasa en cada móvil.
+	 */
+	private fun apuntarSalidas() {
+		if (Build.VERSION.SDK_INT < 30) return
+		try {
+			val am = getSystemService(android.app.ActivityManager::class.java) ?: return
+			val prefs = Ajustes(this).p
+			val visto = prefs.getLong(com.xebolax.tiresias.base.Claves.ULTIMA_SALIDA, 0L)
+			val salidas = am.getHistoricalProcessExitReasons(packageName, 0, 5).filter { it.timestamp > visto }
+			for (s in salidas) Registro.w(ETIQUETA, "Android cerró Tiresias: motivo ${s.reason}, importancia ${s.importance}, ${s.description.orEmpty()}")
+			salidas.maxOfOrNull { it.timestamp }?.let { prefs.edit().putLong(com.xebolax.tiresias.base.Claves.ULTIMA_SALIDA, it).apply() }
+		} catch (e: Exception) {
+			Registro.w(ETIQUETA, "No se pudo leer por qué cerró Android Tiresias", e)
+		}
+	}
+
+	/** El móvil despierto [ms] milisegundos como mucho (sin encender la pantalla). */
+	private fun mantenerDespierto(ms: Long) {
+		runCatching {
+			getSystemService(android.os.PowerManager::class.java)?.newWakeLock(android.os.PowerManager.PARTIAL_WAKE_LOCK, "Tiresias:aviso")?.apply {
+				setReferenceCounted(false)
+				acquire(ms)
+			}
+		}.onFailure { Registro.w(ETIQUETA, "No se pudo mantener despierto el móvil", it) }
+	}
+
 	override fun onUnbind(intent: Intent?): Boolean {
+		Ajustes(this).p.edit().putBoolean(com.xebolax.tiresias.base.Claves.SERVICIO_ENCENDIDO, false).apply()
 		cerrar()
 		return super.onUnbind(intent)
 	}
@@ -435,6 +502,24 @@ class ServicioTiresias : AccessibilityService() {
 	val ventanaAbiertaPruebas: Boolean get() = ventanas?.hayAbierta == true || ejecutor?.circular?.abierto == true
 
 	/** Para las pruebas instrumentadas: cierra el menú o diálogo de Tiresias que haya. */
+	/** El formato de [texto] como lo dice «Decir el formato del texto» (para las pruebas). */
+	fun formatoPruebas(texto: android.text.Spanned): List<String> = ejecutor?.describirFormato(texto).orEmpty()
+
+	/**
+	 * Tras restablecer Tiresias como recién instalado: los ajustes de fábrica al
+	 * momento (la voz normal), sin complementos, y lo dice.
+	 */
+	fun alRestablecer() {
+		val l = lector ?: return
+		l.manejador.post {
+			com.xebolax.tiresias.voz.PistaAudio.multimedia = false
+			l.cambiarCanal(false)
+			if (l.scriptsListos) l.scripts.recargar()
+			recargarAjustes()
+			l.decir(R.string.restablecido)
+		}
+	}
+
 	/** «Ir al elemento número…» sin la ventana que pide el número. */
 	fun irALaFilaPruebas(fila: Int) {
 		lector?.manejador?.post { ejecutor?.irALaFila(fila) }
@@ -446,6 +531,15 @@ class ServicioTiresias : AccessibilityService() {
 	}
 
 	/** La zona de práctica del tutorial: los gestos se dicen en vez de hacerse. */
+	/** Si la ayuda de entrada (la práctica del tutorial) está puesta. */
+	val ayudaEntradaActiva: Boolean get() = lector?.ayudaEntrada == true
+
+	/** Quita la ayuda de entrada si está puesta (al salir del tutorial). */
+	fun quitarAyudaEntrada() {
+		val l = lector ?: return
+		if (l.ayudaEntrada) l.manejador.post { if (l.ayudaEntrada) ejecutor?.ejecutar(Accion.AYUDA_ENTRADA) }
+	}
+
 	fun alternarAyudaEntrada() {
 		val l = lector ?: return
 		l.manejador.post { ejecutor?.ejecutar(Accion.AYUDA_ENTRADA) }

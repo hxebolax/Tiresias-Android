@@ -250,9 +250,7 @@
 	<string name="elo_puesta">Eloquence set as the Tiresias voice</string>
 	<string name="elo_voz">Voice</string>
 	<string name="elo_velocidad">Rate</string>
-	<string name="elo_velocidad_res">The same as in Settings, Voice, and the one the gestures change. Each engine has its own: the Eloquence rate does not change the other voices. At one hundred percent it sounds like NVDA at rate 55.</string>
-	<string name="elo_aumento">Rate boost</string>
-	<string name="elo_aumento_res">As in NVDA: the same rate, 1.6 times faster</string>
+	<string name="elo_velocidad_res">The same as in Settings, Voice, and the one the gestures change. Each engine has its own: the Eloquence rate does not change the other voices. At one hundred percent it is the normal Eloquence rate; at double, twice as fast.</string>
 	<string name="elo_genero">Male or female voice</string>
 	<string name="elo_cabeza">Head size</string>
 	<string name="elo_tono_base">Base pitch</string>
@@ -316,12 +314,14 @@
 		<item>No</item>
 		<item>After the letter (b, Bravo)</item>
 		<item>Instead of the letter (Bravo)</item>
+		<item>After a one-second pause (b... Bravo)</item>
 	</string-array>
 	<string name="aj_al_encender">When the screen turns on, say</string>
 	<string-array name="al_encender_nombres">
 		<item>Nothing</item>
 		<item>The time</item>
 		<item>The time, date and battery</item>
+		<item>The time and the notification summary</item>
 	</string-array>
 	<string name="aj_al_apagar">Announce when the screen turns off</string>
 	<string name="aj_al_apagar_res">A sound and “screen off”</string>
@@ -336,7 +336,7 @@
 	<string name="aj_foco_ventanas_nuevas">Focus the first item of each new screen</string>
 	<string name="aj_foco_ventanas_nuevas_res">When a screen opens, after its title, Tiresias goes to its first item (without waiting for you to swipe)</string>
 	<string name="aj_voz_multimedia">Speech on the media volume</string>
-	<string name="aj_voz_multimedia_res">Speech and sounds use the music volume instead of the accessibility one. Applies when Tiresias is turned on again.</string>
+	<string name="aj_voz_multimedia_res">The voice and sounds use the music volume instead of the accessibility volume. It can be switched at once with the “Voice on the media or the accessibility volume” action, also during a call.</string>
 	<string name="aj_toque_directo_teclado">Direct touch on the on-screen keyboard</string>
 	<string name="aj_toque_directo_teclado_res">You type by touching the keys, as without a screen reader (for fast typists or another app\'s braille keyboard)</string>
 	<string name="aj_braille_espejo">Mirrored dots</string>
@@ -376,6 +376,7 @@
 		<item>“Unlocked”</item>
 		<item>The time</item>
 		<item>The status (what you chose in “Choose what the status says”)</item>
+		<item>The time and the notification summary</item>
 	</string-array>
 	<string name="aj_callar_bloqueo">Silence the lock screen</string>
 	<string name="aj_callar_bloqueo_res">While the phone is locked, no notifications or announcements: only what you ask for. Notifications are kept in Recent notifications</string>
@@ -469,4 +470,19 @@
 	<string name="senior_codigo_pedir">Settings code</string>
 	<string name="senior_codigo_pedir_pista">Code</string>
 	<string name="senior_codigo_mal">That is not the code</string>
+	<string name="aj_motor_avisos">Voice for notifications</string>
+	<string name="aj_motor_avisos_misma">The usual voice</string>
+	<string name="aj_teclados_que_hablan">Keyboards that speak by themselves</string>
+	<string name="aj_teclados_que_hablan_res">With these keyboards, Tiresias does not repeat what is typed or their keys: they already say it</string>
+	<string name="aj_detectar_idioma">Detect the language of long texts</string>
+	<string name="aj_detectar_idioma_res">If the app does not say what language a long text is in, Tiresias works it out (Spanish or English) and reads it with that voice</string>
+	<string name="aj_restablecer">Reset Tiresias</string>
+	<string name="aj_restablecer_res">As if just installed: factory settings, gestures, add-ons, labels and profiles. Downloaded voices stay and Tiresias stays on.</string>
+	<string name="aj_restablecer_pregunta">Leave Tiresias as if just installed? Settings, gestures, add-ons, labels and profiles will be lost. You can save a backup first.</string>
+	<string name="aj_desplazar_listas">On reaching the end of what is visible in a list</string>
+	<string-array name="desplazar_listas_nombres">
+		<item>Scroll with a sound (normal)</item>
+		<item>Scroll without a sound</item>
+		<item>Move the list on ahead, without a pause (like VoiceOver)</item>
+	</string-array>
 </resources>

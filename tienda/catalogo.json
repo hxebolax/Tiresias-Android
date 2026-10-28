@@ -15,6 +15,7 @@
                              "permisos":  [
                                               "voz"
                                           ],
+                             "apiMinima":  1,
                              "archivo":  "anuncios.js",
                              "sha256":  "eaecf51e87b22d5137e552eda81e074b18533be63d7f99997856d83de40fa63f",
                              "tamano":  4615
@@ -35,6 +36,7 @@
                                               "portapapeles",
                                               "braille"
                                           ],
+                             "apiMinima":  1,
                              "archivo":  "codigos-de-verificacion.js",
                              "sha256":  "45d96de007905bacac63936ad98975c4ce7f8054d853230d8c7f795116836e54",
                              "tamano":  19563
@@ -55,6 +57,7 @@
                                               "portapapeles",
                                               "abrir"
                                           ],
+                             "apiMinima":  1,
                              "archivo":  "datos-del-texto.js",
                              "sha256":  "fa014ef70012c9b51f7ad7b736c1c7d0bc2f434b75239bf57cf511da9a51a555",
                              "tamano":  9143
@@ -73,6 +76,7 @@
                              "permisos":  [
 
                                           ],
+                             "apiMinima":  1,
                              "archivo":  "lectura-limpia.js",
                              "sha256":  "35ec2dd3feb9cd348061b3b8ca87bbaa1d65c94304d7abf3584e82fff98b7a7a",
                              "tamano":  6605
@@ -92,6 +96,7 @@
                                               "voz",
                                               "portapapeles"
                                           ],
+                             "apiMinima":  1,
                              "archivo":  "letras-decorativas.js",
                              "sha256":  "bc0ee3b047784a2d60a928d820ce0d0722d2f9f3525dcd356af21cfe608cf3c9",
                              "tamano":  5869
@@ -110,9 +115,10 @@
                              "permisos":  [
                                               "voz"
                                           ],
+                             "apiMinima":  2,
                              "archivo":  "llamadas.js",
-                             "sha256":  "d5bfeec75c14728e6b053f062494d79cc52cb78ddf84bba197fe59a5ea15da95",
-                             "tamano":  4371
+                             "sha256":  "5885ff6d10109c756257ec1e04e32d02853abb3709abcb4f45aaab5911ca4737",
+                             "tamano":  4429
                          },
                          {
                              "id":  "luz",
@@ -128,9 +134,10 @@
                              "permisos":  [
                                               "voz"
                                           ],
+                             "apiMinima":  2,
                              "archivo":  "luz.js",
-                             "sha256":  "ac4a43bb52193266ff2db7a1c14d6cc1e11d0232a801e02aabcbe20994b1511c",
-                             "tamano":  4155
+                             "sha256":  "9996f1d89326dc83fe39c81b26c79b70e997ea4af45472d3b6a550613e3ecc4c",
+                             "tamano":  4213
                          },
                          {
                              "id":  "modo-braille",
@@ -148,6 +155,7 @@
                                               "braille",
                                               "abrir"
                                           ],
+                             "apiMinima":  1,
                              "archivo":  "modo-braille.js",
                              "sha256":  "a4545cfa646800173a4c317c725cdeae0b6d3a284ef98f0e985fd6a3b34bd287",
                              "tamano":  14357
@@ -166,6 +174,7 @@
                              "permisos":  [
                                               "voz"
                                           ],
+                             "apiMinima":  1,
                              "archivo":  "notificaciones-a-medida.js",
                              "sha256":  "c5bf1703b7c326159881755f2dbe17c7cf28f2d154aaf2acad37fe2db0d3de90",
                              "tamano":  15909
@@ -184,9 +193,10 @@
                              "permisos":  [
                                               "voz"
                                           ],
+                             "apiMinima":  2,
                              "archivo":  "recordatorios.js",
-                             "sha256":  "88aafdb79e5a9e7d57a0b9ce77fe97e539e4d43c19a0d697b211f78e56af34ec",
-                             "tamano":  8914
+                             "sha256":  "b02eafbcd9cc9e498aa24bb6f633be9f8c909761cc0fa2a846d338ef674757a7",
+                             "tamano":  8972
                          },
                          {
                              "id":  "reloj-parlante",
@@ -202,6 +212,7 @@
                              "permisos":  [
                                               "voz"
                                           ],
+                             "apiMinima":  1,
                              "archivo":  "reloj-parlante.js",
                              "sha256":  "b75112e45d00d21c54e4494609f6fe635422eecfa898338994fa27697ec24436",
                              "tamano":  13658
@@ -221,9 +232,10 @@
                                               "voz",
                                               "portapapeles"
                                           ],
+                             "apiMinima":  2,
                              "archivo":  "version-de-la-app.js",
-                             "sha256":  "9fb671d96815212bb65db83d95cc75d044cdfb041bc52a7376e8169c83f838e1",
-                             "tamano":  3675
+                             "sha256":  "d8ac42aabbdd668aa39daad61060f8279a8a06b3b817116af0b70573d2ce43c3",
+                             "tamano":  3733
                          },
                          {
                              "id":  "vigilante-de-bateria",
@@ -239,6 +251,7 @@
                              "permisos":  [
                                               "voz"
                                           ],
+                             "apiMinima":  1,
                              "archivo":  "vigilante-de-bateria.js",
                              "sha256":  "2d23948be7135f817ff9037eded300fa44ddc2b82f2b8599c492f9721a53c635",
                              "tamano":  6280

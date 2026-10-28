@@ -60,14 +60,31 @@ class GestorActualizaciones(private val actividad: AppCompatActivity) {
 		else actividad.mensaje(actividad.getString(R.string.act_titulo), actividad.getString(R.string.act_sin_permiso))
 	}
 
+	/** Lo que dice NOVEDADES.txt (dentro de la app) de [version], o null. */
+	private fun novedadesDe(version: String): String? = try {
+		val todo = actividad.assets.open("novedades.txt").bufferedReader().use { it.readText() }.replace("\r\n", "\n")
+		val inicio = todo.indexOf("== $version\n").takeIf { it >= 0 } ?: return null
+		val desde = inicio + "== $version\n".length
+		val fin = todo.indexOf("\n== ", desde).takeIf { it >= 0 } ?: todo.length
+		todo.substring(desde, fin).trim().takeIf { it.isNotEmpty() }
+	} catch (e: java.io.IOException) {
+		com.xebolax.tiresias.base.Registro.w("Actualizaciones", "No están las novedades dentro de la app", e)
+		null
+	}
+
 	/** Al abrir la app: aviso si se acaba de actualizar y comprobación automática. */
 	fun alIniciar() {
 		val anterior = prefs.versionAnterior
-		if (anterior in 1 until BuildConfig.VERSION_CODE) {
-			actividad.avisar(actividad.getString(R.string.act_actualizada_a, BuildConfig.VERSION_NAME))
-			Actualizador.carpeta(actividad).listFiles()?.forEach { it.delete() }
-		}
+		if (anterior in 1 until BuildConfig.VERSION_CODE) Actualizador.carpeta(actividad).listFiles()?.forEach { it.delete() }
 		prefs.versionAnterior = BuildConfig.VERSION_CODE
+		// Las novedades de esta versión, una vez, tras actualizar (el servicio ya apuntó la versión: va aparte; Backtalk 297)
+		val vistas = prefs.p.getInt(com.xebolax.tiresias.base.Claves.NOVEDADES_VISTAS, 0)
+		prefs.p.edit().putInt(com.xebolax.tiresias.base.Claves.NOVEDADES_VISTAS, BuildConfig.VERSION_CODE).apply()
+		if (vistas in 1 until BuildConfig.VERSION_CODE || (vistas == 0 && anterior in 1 until BuildConfig.VERSION_CODE)) {
+			val texto = novedadesDe(BuildConfig.VERSION_NAME)
+			if (texto != null) actividad.mensaje(actividad.getString(R.string.act_novedades_titulo, BuildConfig.VERSION_NAME), texto)
+			else actividad.avisar(actividad.getString(R.string.act_actualizada_a, BuildConfig.VERSION_NAME))
+		}
 
 		if (!prefs.buscarActualizaciones) return
 		if (System.currentTimeMillis() - prefs.ultimaBusquedaActualizacion < CADA_MS) return

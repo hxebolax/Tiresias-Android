@@ -20,6 +20,9 @@ export const manifest = {
 	autor: "Héctor J. Benítez Corredera",
 	descripcion: "Recordatorios del día (la medicación, una cita): a su hora los dice con un sonido y los repite hasta que se marcan como hechos.",
 	descripcion_en: "Daily reminders (medication, an appointment): at their time they are spoken with a sound and repeated until marked as done.",
+	// Usa la API de la 1.0.4
+	apiMinima: 2,
+	apiProbada: 2,
 	apps: ["*"],
 	permisos: ["voz"],
 	ajustes: [

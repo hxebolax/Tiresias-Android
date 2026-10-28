@@ -31,6 +31,8 @@ import com.xebolax.tiresias.voz.Tipo
 const val FONETICAS_NO = "no"
 const val FONETICAS_DESPUES = "despues"
 const val FONETICAS_EN_VEZ = "en_vez"
+/** La letra y, si no se sigue en un segundo, su palabra (NVDA 2022.3). */
+const val FONETICAS_PAUSA = "pausa"
 
 class EdicionTexto(private val lector: Lector) {
 	private var ultimoCambio = 0L
@@ -46,6 +48,8 @@ class EdicionTexto(private val lector: Lector) {
 		textoAnterior = despues
 		ultimoCambio = SystemClock.uptimeMillis()
 		val contrasena = e.isPassword
+		// Un teclado que habla solo (un teclado braille con voz): su eco basta, Tiresias no lo repite (Backtalk 310)
+		if (tecladoHablaSolo()) return
 		val eco = lector.perfiles.ecoTeclado() ?: lector.ajustes.ecoTeclado
 		when (val c = Edicion.cambio(antes, despues)) {
 			is CambioTexto.Escrito -> {
@@ -186,12 +190,31 @@ class EdicionTexto(private val lector: Lector) {
 		trozoHasta = -1
 	}
 
+	/** Cuenta las letras dichas: la palabra fonética de una se descarta si ya se ha ido a otra. */
+	@Volatile private var turnoLetra = 0
+
+	/** Si el teclado elegido es de los que hablan solos (Ajustes, Teclado). */
+	fun tecladoHablaSolo(): Boolean {
+		val elegidos = lector.ajustes.tecladosQueHablan
+		if (elegidos.isEmpty()) return false
+		val actual = runCatching { android.provider.Settings.Secure.getString(lector.servicio.contentResolver, android.provider.Settings.Secure.DEFAULT_INPUT_METHOD) }.getOrNull()
+			?.substringBefore('/') ?: return false
+		return actual in elegidos
+	}
+
 	fun decirSegmento(s: String, g: Granularidad) {
+		if (g != Granularidad.CARACTER) turnoLetra++
 		if (g == Granularidad.CARACTER) {
 			val modo = lector.ajustes.foneticas
 			val palabra = if (modo != FONETICAS_NO) com.xebolax.tiresias.textos.DatosIdioma.de(lector.servicio, com.xebolax.tiresias.base.Idioma.efectivo(lector.servicio)).fonetico.de(s.firstOrNull() ?: ' ')?.takeIf { s.length == 1 && s[0].isLetter() } else null
 			when {
 				palabra != null && modo == FONETICAS_EN_VEZ -> lector.voz.decir(Enunciado(palabra, Modo.INTERRUMPIR, Tipo.NAVEGACION, tono = tonoMayuscula(s)))
+				palabra != null && modo == FONETICAS_PAUSA -> {
+					lector.voz.decir(Enunciado(s, Modo.INTERRUMPIR, Tipo.NAVEGACION, deletrear = true, tono = tonoMayuscula(s)))
+					// Si en un segundo no se ha ido a otra letra, la palabra: «b»... «Barcelona»
+					val turno = ++turnoLetra
+					lector.manejador.postDelayed({ if (turno == turnoLetra) lector.voz.decir(Enunciado(palabra, Modo.ENCOLAR, Tipo.NAVEGACION, vigente = { turno == turnoLetra })) }, 1000)
+				}
 				else -> {
 					lector.voz.decir(Enunciado(s, Modo.INTERRUMPIR, Tipo.NAVEGACION, deletrear = true, tono = tonoMayuscula(s)))
 					// «b, Barcelona»: la palabra detrás, tras una pausa corta

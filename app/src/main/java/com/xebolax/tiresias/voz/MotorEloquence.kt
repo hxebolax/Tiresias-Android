@@ -134,8 +134,9 @@ class MotorEloquence(private val contexto: Context, private val pista: PistaAudi
 	private fun aplicar(m: EvvEngine) {
 		val voz = ajustes.eloquenceVoz
 		val forma = (0 until Eci.NUM_VOICE_PARAMS).mapNotNull { p -> ajustes.eloquenceParametro(voz, p).takeIf { it >= 0 }?.let { p to it } }.toMap() +
-			// La velocidad de la voz con la de Tiresias al 100 %: la de Eloquence en Ajustes (como en NVDA)
-			(Eci.VOICE_SPEED to velocidadMotor(ajustes.eloquenceVelocidad, ajustes.eloquenceAumento))
+			// Con la de Tiresias al 100 %, la velocidad normal de Eloquence (la 50 del motor): la velocidad 166
+			// del NVDA del autor, que se usaba antes, habla unas diez veces más deprisa y no la entiende quien empieza
+			(Eci.VOICE_SPEED to Eci.DEFAULT_SPEED)
 		val clave = "$voz|$forma|${ajustes.eloquenceMuestreo}|${ajustes.eloquenceAbreviaturas}"
 		if (clave != puesto) {
 			m.setSampleRate(ajustes.eloquenceMuestreo)
@@ -216,14 +217,11 @@ class MotorEloquence(private val contexto: Context, private val pista: PistaAudi
 		val VOCES: List<String> get() = Eci.PRESET_NAMES.toList()
 
 		/**
-		 * La velocidad del motor para la velocidad [porcentaje] (0 a 100) de NVDA,
-		 * con su «aumento de velocidad»: la misma cuenta que el driver IBMTTS de
-		 * NVDA (de 40 a 156, por 1,6 con el aumento), para que suene igual que allí.
+		 * La velocidad del motor para [porcentaje] de la velocidad de Tiresias: el
+		 * 100 % es la normal de Eloquence, el 200 %, el doble de deprisa (con la
+		 * curva medida de evvdroid, porque la escala del motor no es lineal).
 		 */
-		fun velocidadMotor(porcentaje: Int, aumento: Boolean): Int {
-			val base = Math.round(40 + porcentaje.coerceIn(0, 100) * (156 - 40) / 100.0).toInt()
-			return (if (aumento) Math.round(base * 1.6).toInt() else base).coerceIn(0, Eci.SPEED_MAX)
-		}
+		fun velocidadMotor(porcentaje: Int): Int = org.evvdroid.SpeechRate.speedForPercent(Eci.DEFAULT_SPEED, porcentaje)
 
 		/** Los parámetros de una voz que se pueden cambiar (la velocidad es la de Tiresias). */
 		val PARAMETROS = listOf(

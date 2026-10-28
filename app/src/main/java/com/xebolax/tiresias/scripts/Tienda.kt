@@ -176,6 +176,8 @@ object Tienda {
 			if (!Regex("[a-z0-9][a-z0-9._-]{1,63}").matches(id) || !Regex("[A-Za-z0-9._-]+\\.js").matches(archivo)) return@mapNotNull null
 			fun lista(k: String) = o.optJSONArray(k)?.let { a -> (0 until a.length()).map { a.getString(it) } }.orEmpty()
 			fun local(k: String, defecto: String = "") = o.optString("${k}_$idioma").takeIf { idioma != "es" && it.isNotBlank() } ?: o.optString(k, defecto)
+			// Los que necesitan una API más nueva que la de esta versión de Tiresias no se ofrecen
+			if (o.optInt("apiMinima", 1) > Scripts.VERSION_API) return@mapNotNull null
 			Entrada(id, local("nombre", id), o.optString("version", "1.0"), local("descripcion"), o.optString("autor"),
 				lista("apps"), lista("permisos"), archivo, o.optString("sha256").lowercase(), o.optLong("tamano", 0))
 		}

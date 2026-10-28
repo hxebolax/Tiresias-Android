@@ -1,7 +1,10 @@
 package com.xebolax.tiresias.ui
 
 import android.os.Bundle
+import android.view.View
+import android.view.accessibility.AccessibilityNodeInfo
 import com.xebolax.tiresias.R
+import com.xebolax.tiresias.accesibilidad.lectorActivo
 import com.xebolax.tiresias.base.Ajustes
 import com.xebolax.tiresias.nucleo.Gesto
 import com.xebolax.tiresias.servicio.ServicioTiresias
@@ -38,10 +41,16 @@ class ActividadTutorial : ActividadBase() {
 		estado.putInt("leccion", leccion)
 	}
 
-	private fun construir() {
+	/**
+	 * Rehace la pantalla con la lección actual. [enfocar] es lo que recibe el foco
+	 * del lector al acabar: el encabezado al cambiar de lección (si no, el botón
+	 * pulsado desaparece y no se oye la lección nueva) o el botón de practicar.
+	 */
+	private fun construir(enfocar: Enfoque = Enfoque.NADA) {
 		p.vaciar()
 		val (titulo, texto) = lecciones[leccion]
-		p.encabezado(getString(R.string.tut_paso, leccion + 1, lecciones.size, getString(titulo)))
+		val encabezado = p.encabezado(getString(R.string.tut_paso, leccion + 1, lecciones.size, getString(titulo)))
+		var practica: View? = null
 		p.parrafo(getString(texto))
 		if (leccion == 1) {
 			// La lista de gestos asignados, para repasar
@@ -51,11 +60,21 @@ class ActividadTutorial : ActividadBase() {
 			}
 		}
 		if (leccion == lecciones.lastIndex) {
-			p.boton(getString(R.string.tut_practicar)) { practicar() }
+			val practicando = ServicioTiresias.instancia?.ayudaEntradaActiva == true
+			practica = p.boton(getString(if (practicando) R.string.tut_terminar_practica else R.string.tut_practicar)) { practicar() }
+			p.parrafo(getString(R.string.tut_como_salir))
 		}
-		if (leccion < lecciones.lastIndex) p.boton(getString(R.string.tut_siguiente)) { leccion++; construir() }
-		if (leccion > 0) p.botonSecundario(getString(R.string.tut_anterior)) { leccion--; construir() }
+		if (leccion < lecciones.lastIndex) p.boton(getString(R.string.tut_siguiente)) { leccion++; construir(Enfoque.ENCABEZADO) }
+		if (leccion > 0) p.botonSecundario(getString(R.string.tut_anterior)) { leccion--; construir(Enfoque.ENCABEZADO) }
+		val destino = when (enfocar) {
+			Enfoque.ENCABEZADO -> encabezado
+			Enfoque.PRACTICA -> practica
+			Enfoque.NADA -> null
+		}
+		if (destino != null && lectorActivo()) destino.post { destino.performAccessibilityAction(AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS, null) }
 	}
+
+	private enum class Enfoque { NADA, ENCABEZADO, PRACTICA }
 
 	/** La zona de práctica: la ayuda de entrada de Tiresias dice cada gesto sin hacerlo. Se sale con el mismo botón o con Tiresias+1. */
 	private fun practicar() {
@@ -65,5 +84,18 @@ class ActividadTutorial : ActividadBase() {
 			return
 		}
 		s.alternarAyudaEntrada()
+		// El botón dice lo que hará después (practicar o terminar)
+		p.contenedor.postDelayed({ if (!isFinishing) construir(Enfoque.PRACTICA) }, 400)
+	}
+
+	override fun onPause() {
+		// Al salir del tutorial, la práctica se acaba: fuera de él no tiene sentido y dejaría los gestos sin hacer nada
+		if (isFinishing) ServicioTiresias.instancia?.quitarAyudaEntrada()
+		super.onPause()
+	}
+
+	override fun onStop() {
+		ServicioTiresias.instancia?.quitarAyudaEntrada()
+		super.onStop()
 	}
 }

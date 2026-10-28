@@ -44,6 +44,12 @@
 	<string name="asis_4_boton">Quitar el ahorro de batería</string>
 	<string name="asis_5_titulo">Inicio automático (%1$s)</string>
 	<string name="asis_5">Los móviles de Xiaomi, Huawei, OPPO, vivo, OnePlus y otros tienen además un ajuste de inicio automático o de aplicaciones protegidas. Abre la información de Tiresias y permite el inicio automático y la actividad en segundo plano.</string>
+	<string name="asis_5_samsung">En los Samsung, abre Ajustes, Batería, Límites de uso en segundo plano, Aplicaciones que nunca se suspenden, y añade Tiresias. Si Tiresias no puede instalar sus actualizaciones, apaga el Bloqueador automático (Auto Blocker) en Ajustes, Seguridad y privacidad: no deja instalar apps de fuera de la tienda.</string>
+	<string name="asis_5_xiaomi">En los Xiaomi, Redmi y Poco, abre la información de Tiresias y activa el Inicio automático; en Ahorro de batería, elige Sin restricciones. Después, en Recientes, mantén pulsado Tiresias y ponle el candado, para que HyperOS no lo cierre al limpiar la memoria.</string>
+	<string name="asis_5_oneplus">En los OnePlus, OPPO y realme, abre la información de Tiresias, Batería, y elige No optimizar y Permitir actividad en segundo plano. Después, en Recientes, mantén pulsado Tiresias y elige Bloquear, para que no lo cierre al limpiar la memoria.</string>
+	<string name="asis_5_huawei">En los Huawei y Honor, abre Ajustes, Batería, Inicio de aplicaciones, busca Tiresias, quita la gestión automática y deja activados el inicio automático, el inicio secundario y la ejecución en segundo plano.</string>
+	<string name="asis_5_motorola">En los Motorola, si el doble toque falla o hace falta tocar tres veces, abre la app Moto, Gestos, y quita los gestos que no uses (los de la pantalla y los toques en la parte de atrás). Abre también la información de Tiresias y quítale el ahorro de batería.</string>
+	<string name="asis_5_vivo">En los vivo e iQOO, abre la información de Tiresias, Batería, y elige permitir un consumo alto en segundo plano; activa también el inicio automático en Ajustes, Aplicaciones, Permisos.</string>
 	<string name="asis_5_boton">Abrir la información de Tiresias</string>
 	<string name="asis_6_titulo">Aprender los gestos</string>
 	<string name="asis_6">El tutorial explica los gestos en unos minutos y tiene una zona de práctica.</string>
@@ -386,4 +392,7 @@
 	<string name="imagen_texto">Texto de la imagen</string>
 	<string name="imagen_copiar_texto">Copiar el texto</string>
 	<string name="imagen_texto_copiado">Texto copiado</string>
+	<string name="ui_servicio_cerrado">El sistema ha cerrado Tiresias sin que lo apagaras: es el ahorro de batería de %1$s. Pulsa aquí para ver qué ajustar</string>
+	<string name="tut_terminar_practica">Terminar la práctica</string>
+	<string name="tut_como_salir">Para salir de la práctica: pulsa Atrás, las dos teclas de volumen a la vez o toca dos veces en Terminar la práctica. Al salir del tutorial, la práctica también se acaba.</string>
 </resources>

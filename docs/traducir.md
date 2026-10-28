@@ -1,6 +1,6 @@
 # Cómo traducir Tiresias a otro idioma
 
-Tiresias está en español de España (el idioma base) y en inglés. Esta guía explica todo lo que hay que traducir para añadir otro idioma, dónde está y cómo se prueba y se envía. Está sacada del código de la 1.0.4.
+Tiresias está en español de España (el idioma base) y en inglés. Esta guía explica todo lo que hay que traducir para añadir otro idioma, dónde está y cómo se prueba y se envía. Está sacada del código de la 1.0.5.
 
 En toda la guía, `XX` es el código de dos letras del idioma (ISO 639-1), por ejemplo `fr`, `pt` o `ca`. Es el mismo en todos los sitios: la carpeta de las cadenas, la de las tablas, el manual y la lista de idiomas.
 

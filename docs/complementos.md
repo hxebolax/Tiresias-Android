@@ -1,6 +1,6 @@
 # Cómo hacer complementos para Tiresias
 
-Esta guía es para quien quiere hacer su primer complemento de Tiresias o necesita la referencia completa de la API. Todo lo que dice está sacado del código de Tiresias 1.0.4:
+Esta guía es para quien quiere hacer su primer complemento de Tiresias o necesita la referencia completa de la API. Todo lo que dice está sacado del código de Tiresias 1.0.5 (versión 2 de la API, ver [La versión de la API](#la-versión-de-la-api)):
 
 - El motor y la API: `app/src/main/java/com/xebolax/tiresias/scripts/Scripts.kt` (el preludio JavaScript `PRELUDIO` y la función `atender`).
 - La tienda: `app/src/main/java/com/xebolax/tiresias/scripts/Tienda.kt`.
@@ -73,6 +73,8 @@ Los complementos quedan apagados hasta que el usuario los enciende otra vez en C
 
 Lo de un campo de contraseña nunca llega a un complemento: con el foco en uno, `alEnfocar` no se llama (se dice lo de siempre), `alAcciones` no se pregunta y `tiresias.elemento()` devuelve `null`. Aun así, nunca guardes, copies ni registres el `texto` de un campo sin necesidad.
 
+Desde la 1.0.5, lo mismo vale para lo que la app marca como datos sensibles (Android 14 o posterior, `isAccessibilityDataSensitive`: la banca, los códigos, aunque no sea un campo de contraseña): con el foco en un elemento así, `alEnfocar` no se llama, `alAcciones` no se pregunta y `tiresias.elemento()` devuelve `null`. Tiresias lo lee al usuario como siempre, pero no lo da al complemento. En las versiones de Android anteriores a la 14 no existe esa marca, y solo cuentan los campos de contraseña.
+
 ### Cómo se carga
 
 Al encenderse Tiresias y al instalar, activar o desactivar un complemento, Tiresias vuelve a cargar los complementos activados. Para cada uno:
@@ -108,6 +110,8 @@ export const manifest = {
 	autor: "Tu nombre",
 	descripcion: "Una orden que dice cuántos minutos faltan para la hora en punto.",
 	descripcion_en: "A command that says how many minutes are left until the hour.",
+	apiMinima: 1,
+	apiProbada: 2,
 	apps: ["*"],
 	permisos: ["voz"],
 	ajustes: [
@@ -119,6 +123,7 @@ export const manifest = {
 
 - `apps: ["*"]`: actúa en todas las apps. Pon siempre `apps`: sin él, el complemento no actúa en ninguna.
 - `permisos: ["voz"]`: para hablar y hacer sonidos. Sin él, `tiresias.decir` no hace nada.
+- `apiMinima: 1`, `apiProbada: 2`: no usa nada de lo que llegó con la versión 2 de la API (`llamada`, `alVentana`, `elegir`, `confirmar`, `pedirTexto`, `luz` e `infoApp`), así que vale desde la 1; y la 2 es la última con la que lo pruebas (ver [La versión de la API](#la-versión-de-la-api)).
 - Escribe el manifiesto con comillas dobles, los campos principales primero y cerrado con `};` en su propia línea: el script que publica la tienda lo lee así.
 
 ### Paso 3: la primera orden
@@ -227,6 +232,8 @@ export const manifest = {
 	autor: "Quien lo hace",
 	descripcion: "Qué hace, en una frase.",
 	descripcion_en: "What it does, in one sentence.",
+	apiMinima: 2,
+	apiProbada: 2,
 	apps: ["com.whatsapp"],
 	actividades: ["HomeActivity"],
 	permisos: ["voz"],
@@ -242,6 +249,8 @@ export const manifest = {
 | `version` | No | De fábrica `"1.0"`. La tienda la compara número a número para avisar de versiones nuevas (`1.10` es más nueva que `1.9`) |
 | `autor` | No | Solo lo usan la tienda y el catálogo |
 | `descripcion` | No | Una frase; Tiresias la lee al pedir permiso para instalarlo |
+| `apiMinima` | No | La versión de la API que necesita como mínimo, un número entero. De fábrica `1` (un 0 o un negativo cuentan como 1). Si es más nueva que la de Tiresias, el complemento no se instala ni se carga, ver [La versión de la API](#la-versión-de-la-api) |
+| `apiProbada` | No | La última versión de la API con la que se ha probado. De fábrica, la de `apiMinima` (nunca menos). Solo informa: hoy Tiresias no hace nada distinto con ella |
 | `apps` | En la práctica, sí | Lista de paquetes en los que actúa, o `["*"]` para todas. Vacía o sin poner, también todas (como dice la pantalla de instalar) |
 | `actividades` | No | Solo actúa con estas pantallas delante: el final del nombre de su clase (`"ChatActivity"`). Vacía: en todas |
 | `permisos` | No | Lo que puede hacer, ver la tabla siguiente |
@@ -273,6 +282,34 @@ Todos los ganchos, las órdenes y las reglas valen solo en las apps de `apps` y,
 - `alVentana`: la app de la pantalla nueva (nunca las pantallas de Tiresias).
 
 Con `actividades`, una pantalla recién abierta cuya clase Tiresias aún no sabe cuenta como que vale. Para saber el paquete y la clase de una pantalla, haz una orden que diga `tiresias.app()` y `tiresias.actividad()`.
+
+### La versión de la API
+
+La API de los complementos tiene un número de versión (`VERSION_API` en `Scripts.kt`), que sube cuando se añade o cambia algo de ella:
+
+| Versión de la API | Tiresias | Qué trae |
+|---|---|---|
+| 1 | Hasta la 1.0.3 | Todo lo de esta guía salvo lo de la fila siguiente |
+| 2 | Desde la 1.0.4 | Añade `llamada`, `alVentana`, `elegir`, `confirmar`, `pedirTexto`, `luz` e `infoApp` |
+
+Un complemento lo declara en su manifiesto:
+
+- `apiMinima`: la versión que necesita como mínimo. Sin ella, `1`. Si usas algo de la tabla de la versión 2, pon `apiMinima: 2`.
+- `apiProbada`: la última con la que lo has probado. Sin ella, la de `apiMinima`.
+
+Lo que pasa con un complemento que pide una API más nueva que la de ese Tiresias:
+
+- **No se instala**: al leer su manifiesto (desde un archivo, una fuente o la tienda), Tiresias lo rechaza y dice ««Nombre del complemento» necesita una versión más nueva de Tiresias: actualiza Tiresias para instalarlo». Tampoco se carga si ya estaba en el móvil.
+- **No sale en la tienda**: una entrada del catálogo con un `apiMinima` mayor que la de ese Tiresias se salta, ver [El catálogo](#el-catálogo). `publicar_actualizacion.ps1` copia al catálogo el `apiMinima` del manifiesto (y pone `1` si no lo tiene).
+
+Ojo: este filtro existe desde la 1.0.5. Tiresias 1.0.4 y anteriores no miran `apiMinima` ni `apiProbada`: instalan el complemento y, si usa algo que no tienen, esa función no existe y fallará al llamarla.
+
+Desde el código, `tiresias.versionApi` dice la versión de la API del Tiresias en el que corre (ver [Saber cosas](#saber-cosas)). Existe desde la 1.0.5: en las anteriores es `undefined`. Sirve para que un complemento con `apiMinima: 1` use lo nuevo solo si está; para no perderlo en la 1.0.4, que ya tiene la versión 2 pero no `versionApi`, mira también si existe la función:
+
+```js
+const api = tiresias.versionApi || (typeof tiresias.alVentana === "function" ? 2 : 1);
+if (api >= 2) tiresias.alVentana((v) => { /* … */ });
+```
 
 ## Las traducciones
 
@@ -639,6 +676,15 @@ tiresias.pedirTexto("Nuevo recordatorio", "08:00 Pastilla azul", (t) => { if (t)
 
 ### Saber cosas
 
+#### `tiresias.versionApi`
+
+- **Permiso**: ninguno.
+- **Qué es**: un número, no una función: la versión de la API de los complementos de este Tiresias (`2` en la 1.0.5). Está ya al cargar, en el nivel superior del módulo. No existe antes de la 1.0.5 (`undefined`). Ver [La versión de la API](#la-versión-de-la-api).
+
+```js
+tiresias.orden("Versión de la API", () => tiresias.decir("API " + tiresias.versionApi));
+```
+
 #### `tiresias.idioma()`
 
 - **Permiso**: ninguno.
@@ -790,6 +836,7 @@ tiresias.registro("Cargados " + notas.length + " recordatorios");
 - **No hables de más.** Cambia lo que se dice solo cuando haga falta y devuelve `null` en lo demás. Di lo justo, sin repetir lo que Tiresias ya dice. Pon un ajuste para lo que no todo el mundo quiere.
 - **`cola` cuando no seas la respuesta a algo.** Lo que llega solo (una hora, una batería, un código) va con `tiresias.decir(texto, true)`, para no cortar lo que el usuario está oyendo. Sin `cola`, solo la respuesta a una orden suya.
 - **Los datos sensibles, como sensibles.** Copia los códigos y las claves con `portapapeles(texto, true)` y bórralos pasado un rato con `vaciarPortapapeles` (el de códigos de seguridad lo hace a los dos minutos, si nadie ha copiado otra cosa). No guardes con `guardar` lo que no haga falta guardar, y nunca lo pongas en `registro`.
+- **La versión de la API, declarada.** Si usas algo de la versión 2 (`llamada`, `alVentana`, `elegir`, `confirmar`, `pedirTexto`, `luz`, `infoApp`), pon `apiMinima: 2` y `apiProbada` con la última que has probado. Los cuatro complementos de la tienda que usan la versión 2 (`llamadas`, `luz`, `recordatorios` y `version-de-la-app`) lo hacen así.
 - **Rápido.** 30 ms por llamada: nada de bucles largos en `alEnfocar`. Prepara las expresiones regulares una vez, fuera de las funciones.
 - **Sin excepciones sueltas.** Comprueba los `null` (`elemento()`, `ahora()`, `bateria()`, `infoApp()`, `leer()`), y envuelve en `try` el `JSON.parse` de tus datos: tres fallos seguidos apagan el complemento.
 - **Solo las apps que necesitas.** Pon sus paquetes en `apps` en vez de `"*"` si el complemento es para una app, y pide solo los permisos que usas: el usuario los ve antes de instalar.
@@ -829,10 +876,10 @@ Cada función exportada del archivo de pruebas es una prueba. Recibe `c`, y fall
 Lo que el banco no simula, y hay que probar en el emulador o en el móvil:
 
 - `idioma()` siempre da `"es"`; `app()`, `"com.prueba"`; `actividad()`, `""`; `bateria()` y `elemento()`, `null`; `apps()`, tres apps de ejemplo.
-- No mira los permisos, las `apps` ni las `actividades` del manifiesto, ni las reglas.
+- No mira los permisos, las `apps` ni las `actividades` del manifiesto, ni las reglas, ni `apiMinima`; y no tiene `tiresias.versionApi` (es `undefined`).
 - No pone límites de tiempo ni de memoria, y es el JavaScript de Node, no QuickJS.
 - `luz()` contesta al momento, y las preguntas esperan a `c.contestar`.
-- Contesta mientras se carga el módulo, cosa que Tiresias no hace (ver [Cómo se carga](#cómo-se-carga)).
+- Contesta mientras se carga el módulo, como Tiresias desde la 1.0.4; la 1.0.3 y anteriores no contestaban (ver [Cómo se carga](#cómo-se-carga)).
 
 Un ejemplo real, de `herramientas/banco-complementos/luz.mjs` (una de sus cinco pruebas): el detector de luz solo avisa cuando cambia la luz, y se para con la misma orden.
 
@@ -897,6 +944,7 @@ Si un `id` está en varios, manda el primero: el de Tiresias sobre las fuentes. 
 			"descripcion_en": "What it does, in one sentence.",
 			"apps": ["*"],
 			"permisos": ["voz"],
+			"apiMinima": 1,
 			"archivo": "hora-y-fecha.js",
 			"sha256": "9c570c1777a350aca5a05ddd449306e069a94a86d00f8e261939531fdd2ff785",
 			"tamano": 1234
@@ -914,6 +962,7 @@ Si un `id` está en varios, manda el primero: el de Tiresias sobre las fuentes. 
 | `nombre`, `descripcion` | Lo que enseña la tienda; con `nombre_<idioma>` y `descripcion_<idioma>`, en el idioma de Tiresias |
 | `version` | Para avisar de las versiones nuevas |
 | `autor`, `apps`, `permisos` | Informativos: al instalar manda el manifiesto del propio archivo |
+| `apiMinima` | La del manifiesto; sin él, `1`. Desde la 1.0.5, una entrada que pide una API más nueva que la de ese Tiresias se salta: no sale en la tienda (ver [La versión de la API](#la-versión-de-la-api)). Si falta aquí pero está en el manifiesto, la tienda lo ofrece y al instalar se rechaza: ponlo igual en los dos |
 | `archivo` | Solo un nombre de archivo `.js` (letras, cifras, punto, guion y guion bajo), en la misma carpeta que el catálogo. Nunca una ruta ni otra web: la entrada se salta |
 | `sha256` | La huella SHA-256 del archivo, en hexadecimal. Si no coincide, no se instala |
 | `tamano` | Su tamaño en bytes. Si no coincide, no se instala |
@@ -924,7 +973,7 @@ Con `sha256` vacío o `tamano` a 0, esa comprobación no se hace: ponlos siempre
 
 `herramientas/publicar_actualizacion.ps1` (lo llama `compilar.bat publicar`) genera la tienda a partir de la carpeta `complementos/`:
 
-1. Para cada `complementos/<carpeta>/complemento.js`, lee el bloque `export const manifest = { … };` con expresiones regulares (por eso los textos van entre comillas dobles y el bloque se cierra con `};`) y saca `id`, `nombre`, `version`, `autor`, `descripcion`, `nombre_en`, `descripcion_en`, `apps` y `permisos`. Con la primera aparición de cada campo: pon los del complemento antes que los `ajustes`, que también tienen `nombre` y `descripcion`.
+1. Para cada `complementos/<carpeta>/complemento.js`, lee el bloque `export const manifest = { … };` con expresiones regulares (por eso los textos van entre comillas dobles y el bloque se cierra con `};`) y saca `id`, `nombre`, `version`, `autor`, `descripcion`, `nombre_en`, `descripcion_en`, `apps`, `permisos` y `apiMinima` (`1` si no lo tiene). Con la primera aparición de cada campo: pon los del complemento antes que los `ajustes`, que también tienen `nombre` y `descripcion`.
 2. Copia el archivo a `dist/complementos/<id>.js` y calcula su `sha256` y su `tamano`.
 3. Hace lo mismo con los temas de `temas/` (ver [Los temas de sonido](#los-temas-de-sonido)).
 4. Escribe `dist/complementos/catalogo.json`, deja una copia de todo en `tienda/` (el respaldo de GitHub) y lo sube a la carpeta del servidor: primero los archivos y al final el catálogo.

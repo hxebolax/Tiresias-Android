@@ -59,4 +59,5 @@
 	<string name="act_desde_github">It comes from GitHub, because the own server is not responding.</string>
 	<string name="act_descargando_complemento">Downloading %1$s</string>
 	<string name="act_sin_complemento">The server does not have that add-on</string>
+	<string name="act_novedades_titulo">What is new in version %1$s</string>
 </resources>

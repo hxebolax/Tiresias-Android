@@ -16,6 +16,9 @@ export const manifest = {
 	autor: "Héctor J. Benítez Corredera",
 	descripcion: "Dice con el sensor del móvil si está oscuro, hay poca luz, luz normal o mucha, y tiene un detector que avisa al cambiar, para encontrar una luz encendida.",
 	descripcion_en: "Uses the phone sensor to say whether it is dark or there is little, normal or a lot of light, with a detector that announces changes, to find a light that is on.",
+	// Usa la API de la 1.0.4
+	apiMinima: 2,
+	apiProbada: 2,
 	apps: ["*"],
 	permisos: ["voz"],
 	ajustes: [

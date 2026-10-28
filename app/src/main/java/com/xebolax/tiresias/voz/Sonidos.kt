@@ -65,7 +65,9 @@ enum class Sonido {
 class Sonidos(contexto: Context) {
 	private val app = contexto.applicationContext
 	private val ajustes = Ajustes(app)
-	private val pool: SoundPool = SoundPool.Builder()
+	@Volatile private var pool: SoundPool = nuevoPool()
+
+	private fun nuevoPool(): SoundPool = SoundPool.Builder()
 		.setMaxStreams(4)
 		.setAudioAttributes(
 			AudioAttributes.Builder()
@@ -74,6 +76,16 @@ class Sonidos(contexto: Context) {
 				.build()
 		)
 		.build()
+
+	/** Los sonidos por el volumen de ahora ([PistaAudio.multimedia]): un SoundPool nuevo con los mismos sonidos. En un hilo de fondo. */
+	fun cambiarCanal() {
+		val viejo = pool
+		cargados = false
+		pool = nuevoPool()
+		ids.clear()
+		cargar()
+		runCatching { viejo.release() }
+	}
 	private val ids = HashMap<Sonido, Int>()
 	@Volatile private var cargados = false
 

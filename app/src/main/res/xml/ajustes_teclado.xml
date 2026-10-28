@@ -5,5 +5,6 @@
 	<ListPreference app:key="teclas_cortan" app:title="@string/aj_teclas_cortan" app:entries="@array/teclas_cortan_nombres" app:entryValues="@array/teclas_cortan_valores" app:defaultValue="siempre" app:useSimpleSummaryProvider="true" />
 	<SwitchPreferenceCompat app:key="intro_corta" app:title="@string/aj_intro_corta" app:summary="@string/aj_intro_corta_res" app:defaultValue="true" />
 	<SwitchPreferenceCompat app:key="escribir_al_levantar" app:title="@string/aj_escribir_al_levantar" app:summary="@string/aj_escribir_al_levantar_res" app:defaultValue="false" />
+	<Preference app:key="teclados_que_hablan" app:title="@string/aj_teclados_que_hablan" app:summary="@string/aj_teclados_que_hablan_res" />
 	<SwitchPreferenceCompat app:key="toque_directo_teclado" app:title="@string/aj_toque_directo_teclado" app:summary="@string/aj_toque_directo_teclado_res" app:defaultValue="false" />
 </PreferenceScreen>

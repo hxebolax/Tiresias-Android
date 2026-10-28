@@ -52,6 +52,10 @@ class ActividadPrincipal : ActividadBase() {
 		p.encabezado(getString(R.string.ui_estado))
 		p.estadoVivo(getString(if (activo) R.string.ui_tiresias_activo else R.string.ui_tiresias_inactivo))
 		p.estado(getString(if (activo) R.string.ui_servicio_bien else R.string.ui_servicio_mal), activo) { abrirAccesibilidad() }
+		// Estaba encendido y ya no lo está, sin que se apagara a mano: lo ha cerrado el sistema (ahorro de batería)
+		if (!activo && com.xebolax.tiresias.base.Ajustes(this).p.getBoolean(com.xebolax.tiresias.base.Claves.SERVICIO_ENCENDIDO, false)) {
+			p.estado(getString(R.string.ui_servicio_cerrado, Build.MANUFACTURER), false) { startActivity(Intent(this, ActividadAsistente::class.java)) }
+		}
 		val bateria = sinOptimizar()
 		p.estado(getString(if (bateria) R.string.ui_bateria_bien else R.string.ui_bateria_mal), bateria) { pedirBateria() }
 		if (Build.VERSION.SDK_INT >= 33 && !activo) p.parrafo(getString(R.string.ui_ajustes_restringidos))

@@ -37,4 +37,10 @@ data class Enunciado(
 	val alEmpezar: (() -> Unit)? = null,
 	/** Se llama al terminar, con true si sonó entero (false si se cortó o falló). */
 	val alTerminar: ((Boolean) -> Unit)? = null,
+	/**
+	 * Si sigue valiendo justo antes de sonar (como NVDA 2020.2: lo de un foco que
+	 * ya ha pasado no se dice): lo que llega tarde de un elemento que ya no tiene el
+	 * foco se descarta. Null: siempre vale.
+	 */
+	val vigente: (() -> Boolean)? = null,
 )

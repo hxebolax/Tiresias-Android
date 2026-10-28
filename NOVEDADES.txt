@@ -1,3 +1,33 @@
+== 1.0.5
+- Eloquence ya no va rapidísima: su 100 % era la velocidad del NVDA del autor con el aumento, unas diez veces la normal del motor, y ni bajando al 30 % se entendía. Ahora, al 100 %, Eloquence habla a su velocidad normal (medido: lo mismo que eSpeak a la suya), al 30 % bien despacio y al 200 %, el doble de rápido. Quien ya tenía una velocidad guardada para Eloquence vuelve una vez al 100 %. Ya no está el «aumento de velocidad».
+- Cada voz, la primera vez que se usa (las incluidas, las neuronales y las del sistema), empieza a la velocidad normal, y después recuerda la suya. Un perfil con otra voz y otra velocidad ya no estropea la velocidad de la voz de antes.
+- Voz por el volumen multimedia o el de accesibilidad, al momento y con una acción que se puede poner en un gesto o una tecla: en los Samsung con One UI 8, subir el volumen en una llamada por Bluetooth calla al lector.
+- Privacidad: lo que una app marca como datos sensibles (Android 14: banca, códigos) no se captura para la IA ni para el reconocimiento de texto, y no llega a los complementos.
+- La IA de Gemini usa de fábrica un modelo concreto y, si no contesta, prueba sola otros; el aviso dice que tu clave puede estar bien y que se puede elegir otro modelo.
+- Acciones nuevas: canción siguiente y anterior; decir la posición del cursor («Carácter 5 de 11, línea 2 de 3»); poner un valor exacto en un deslizador (también en su menú de acciones); decir el formato del texto (negrita, cursiva, subrayado, enlaces); poner una marca en una pantalla e ir a ella; leer la fila o la columna entera de una tabla; poner nombre propio a una pantalla, que se dice al abrirla en vez de su título; y elegir y copiar un trozo del texto de un mensaje o una web, que no es un campo.
+- Voz a demanda (como NVDA): al moverse no habla, solo cuando se le pide algo (repetir, leer, la hora). La línea braille y los sonidos siguen igual.
+- Voz de las notificaciones: pueden ir con otra de las voces incluidas, cada una con su velocidad (Ajustes, Voz).
+- Control de lectura «Música»: deslizar arriba y abajo pasa a la canción anterior o a la siguiente.
+- Al encender la pantalla o al desbloquear, Tiresias puede decir la hora y el resumen de los avisos.
+- Letras fonéticas tras una pausa: al ir por caracteres, la letra y, si te quedas un segundo, su palabra («b»... «Barcelona»).
+- Detectar el idioma de los textos largos que la app no marca, español o inglés, para leerlos con su voz (Ajustes, Voz).
+- Teclados que hablan solos (Ajustes, Teclado): con ellos, Tiresias no repite lo que se escribe ni sus teclas.
+- Si en un Samsung la exploración táctil se atasca (el dedo «pegado» de One UI 8.5), Tiresias lo nota y la reinicia sola.
+- Si la app pide dónde poner el foco al abrir una pantalla, el foco va ahí; se dicen el título del grupo al entrar en él y los errores de los campos en cuanto aparecen (Android 14). Lo que llega tarde de un elemento que ya no tiene el foco no se dice.
+- Menos ruido: los cronómetros y ecualizadores que cambian sin parar respetan el plazo que pide la app, como mucho un «seleccionado» por segundo, y las regiones vivas educadas de ventanas que no están delante no cortan lo que se lee.
+- La ventana de buscar sale arriba de la pantalla, con sus botones por encima del teclado, y la tecla Intro del teclado acepta.
+- Si la app rehace el elemento que tenía el foco, Tiresias sigue en el más parecido, sin perder el sitio.
+- El asistente explica qué tocar en cada marca para que no cierre Tiresias (Samsung y su Auto Blocker, Xiaomi, OnePlus, Huawei, Motorola, vivo), e Inicio avisa si el sistema ha cerrado Tiresias sin que lo apagaras.
+- Al abrir la app tras actualizar, salen las novedades de la versión.
+- Las capturas de pantalla dicen por qué fallan (una app protegida, demasiado seguidas) y se reintentan solas; si Android no da el audio a la voz, Tiresias vibra; y se apunta en el registro por qué cerró Android Tiresias las últimas veces.
+- El aviso de «pantalla apagada» ya no se corta al dormirse el móvil; los complementos y las voces descargadas se cargan al desbloquear el móvil por primera vez tras encenderlo.
+- El paso directo de los toques cubre la pantalla entera, también la barra de navegación.
+- Complementos: el manifiesto puede pedir una versión mínima de la API (apiMinima); los que necesitan una más nueva no se instalan ni salen en la tienda, y todos ven tiresias.versionApi.
+- Para los aparatos sin TalkBack, un instalador desde el PC (herramientas\instalar_y_activar.ps1) que instala Tiresias y, si se pide, lo activa por adb.
+- Se sale siempre de la práctica del tutorial: con Atrás, con las dos teclas de volumen a la vez o tocando dos veces en «Terminar la práctica»; y al salir del tutorial, la práctica se acaba sola. Dentro de las pantallas de Tiresias, el doble toque pulsa de verdad durante la práctica.
+- Al llegar al final de lo que se ve de una lista (Ajustes, Navegación), se elige: desplazar con su sonido, desplazar sin sonido o adelantar la lista antes de llegar al último elemento, sin pausa, como VoiceOver.
+- Todas las ventanas de Tiresias (menús, buscar, historial) se cierran con el gesto de Atrás, con la tecla Atrás y con su botón Cancelar o Cerrar.
+
 == 1.0.4
 - Cada voz con su velocidad, su tono y su volumen, como en NVDA: al cambiar de voz (con el gesto, el control Voz o Ajustes) se pone la suya, y la primera vez que se usa una voz, la velocidad normal (100 %). Ya no pasa que una velocidad que va bien en una voz rápida sea incomprensible en otra. Al cambiar de voz, Tiresias dice con qué velocidad queda. La voz del sistema elegida también es de cada motor.
 - La velocidad es la misma en todas partes: la de los gestos, la de Ajustes, Voz, y la de los ajustes de Eloquence (que ya no tienen una aparte). Si Ajustes está abierto mientras se cambia con un gesto, el deslizador enseña el valor de verdad.

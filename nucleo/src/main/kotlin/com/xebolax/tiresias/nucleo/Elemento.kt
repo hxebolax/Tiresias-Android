@@ -123,6 +123,12 @@ data class Elemento(
 	val mantenible: Boolean = false,
 	val editable: Boolean = false,
 	val contrasena: Boolean = false,
+	/**
+	 * Datos sensibles: una contraseña o lo que la app marca así (Android 14,
+	 * `isAccessibilityDataSensitive`: banca, códigos). Tiresias lo lee, pero nunca
+	 * lo da a un complemento, a la IA ni al reconocimiento de texto.
+	 */
+	val sensible: Boolean = false,
 	/** Si tiene acciones propias de la app (además de pulsar y mantener). */
 	val tieneAcciones: Boolean = false,
 	/** Cuántos enlaces hay dentro de su texto («Más información» en medio de una frase). */

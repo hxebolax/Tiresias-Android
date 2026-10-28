@@ -2,6 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" app:title="@string/aj_seccion_voz">
 	<ListPreference app:key="motor" app:title="@string/aj_motor" app:useSimpleSummaryProvider="true" />
 	<Preference app:key="voces_control" app:title="@string/aj_voces_control" />
+	<ListPreference app:key="motor_avisos" app:title="@string/aj_motor_avisos" app:useSimpleSummaryProvider="true" />
 	<Preference app:key="eloquence_ajustes" app:title="@string/aj_eloquence_ajustes" app:summary="@string/aj_eloquence_ajustes_res" />
 	<Preference app:key="probar_voz" app:title="@string/ui_probar_voz" />
 	<com.xebolax.tiresias.accesibilidad.DeslizadorAjuste app:key="velocidad" app:title="@string/aj_velocidad" app:min="30" android:max="600" app:seekBarIncrement="10" app:defaultValue="100" />
@@ -9,6 +10,7 @@
 	<com.xebolax.tiresias.accesibilidad.DeslizadorAjuste app:key="volumen_voz" app:title="@string/aj_volumen_voz" app:min="10" android:max="100" app:seekBarIncrement="5" app:defaultValue="100" />
 	<SwitchPreferenceCompat app:key="atenuar" app:title="@string/aj_atenuar" app:summary="@string/aj_atenuar_res" app:defaultValue="true" />
 	<SwitchPreferenceCompat app:key="cambio_idioma" app:title="@string/aj_cambio_idioma" app:summary="@string/aj_cambio_idioma_res" app:defaultValue="true" />
+	<SwitchPreferenceCompat app:key="detectar_idioma" app:title="@string/aj_detectar_idioma" app:summary="@string/aj_detectar_idioma_res" app:defaultValue="true" app:dependency="cambio_idioma" />
 	<SwitchPreferenceCompat app:key="cambio_dialecto" app:title="@string/aj_cambio_dialecto" app:summary="@string/aj_cambio_dialecto_res" app:defaultValue="true" app:dependency="cambio_idioma" />
 	<SwitchPreferenceCompat app:key="callar_al_grabar" app:title="@string/aj_callar_grabar" app:summary="@string/aj_callar_grabar_res" app:defaultValue="true" />
 	<PreferenceCategory app:title="@string/aj_cat_sonidos">

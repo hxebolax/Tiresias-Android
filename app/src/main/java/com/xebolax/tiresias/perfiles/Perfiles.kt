@@ -185,7 +185,10 @@ class Perfiles(contexto: Context, private val lector: Lector? = null) {
 	fun aplicar(nombre: String, c: Context = contexto): Boolean {
 		cargar(c)
 		val mapa = conNombre[nombre] ?: return false
-		val editor = Ajustes(c).p.edit()
+		// La voz de ahora queda como la de su motor, y la del perfil, como la del motor del perfil
+		val a = Ajustes(c)
+		a.guardarVozAntesDeCambiar(mapa[Claves.MOTOR] as? String)
+		val editor = a.p.edit()
 		for ((k, v) in mapa) {
 			when (v) {
 				is String -> editor.putString(k, v)

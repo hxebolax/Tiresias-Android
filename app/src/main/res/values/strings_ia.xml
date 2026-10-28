@@ -4,9 +4,13 @@
 	<!-- Visión -->
 	<string name="vision_android11">Necesita Android 11 o posterior (capturas de pantalla)</string>
 	<string name="vision_contrasena">No se hace nada con un campo de contraseña</string>
+	<string name="vision_sensible">Esta pantalla tiene datos que la app marca como sensibles: por privacidad, no se captura ni se reconoce</string>
 	<string name="vision_ocr_falta">Falta el reconocimiento de texto. Descárgalo en Tiresias, Descargas.</string>
 	<string name="vision_reconociendo">Reconociendo el texto…</string>
 	<string name="vision_sin_captura">No se ha podido capturar la pantalla</string>
+	<string name="vision_captura_protegida">Esta app protege su pantalla y no deja capturarla</string>
+	<string name="vision_captura_seguida">Android no deja capturar la pantalla tan seguido: prueba otra vez en un momento</string>
+	<string name="vision_captura_sin_permiso">Tiresias no tiene permiso para capturar la pantalla: vuelve a activarlo en Accesibilidad</string>
 	<string name="vision_sin_texto">No se ha encontrado texto</string>
 	<string name="vision_ocr_error">El reconocimiento de texto ha fallado</string>
 	<plurals name="vision_titulo_ocr">
@@ -42,6 +46,7 @@
 	<string name="ia_error_saldo">%1$s dice que no queda saldo en la cuenta de la clave</string>
 	<string name="ia_error_limite">%1$s dice que se ha pasado el límite de uso: espera un poco o revisa tu plan</string>
 	<string name="ia_error_caido">%1$s tiene un problema ahora mismo: prueba dentro de un rato</string>
+	<string name="ia_error_modelo">%1$s no contesta con ninguno de sus modelos ahora mismo. Tu clave puede estar bien: prueba dentro de un rato o elige otro modelo en Ajustes, Inteligencia artificial</string>
 	<string name="ia_error_general">La IA ha fallado</string>
 	<string name="ia_movil_ventana">Gemini Nano responde en su propia ventana</string>
 	<string name="ia_movil_falta">Falta el complemento Tiresias IA del móvil</string>

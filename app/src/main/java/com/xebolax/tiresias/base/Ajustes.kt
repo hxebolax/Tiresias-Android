@@ -60,7 +60,21 @@ class Ajustes(contexto: Context) {
 		get() = cadena(Claves.MOTOR, MOTOR_ESPEAK)
 		set(v) = poner(Claves.MOTOR, v)
 
-	/** Las voces del control «Voz» ([com.xebolax.tiresias.voz.Motores.delControl]); vacío, todas. */
+	/** Los teclados (paquetes) que hablan solos: con ellos, Tiresias no repite lo que se escribe ni sus teclas. */
+	var tecladosQueHablan: Set<String>
+		get() = p.getStringSet(Claves.TECLADOS_QUE_HABLAN, null) ?: TECLADOS_QUE_HABLAN_DE_FABRICA
+		set(v) = p.edit().putStringSet(Claves.TECLADOS_QUE_HABLAN, v).apply()
+
+	/** Cómo se desplazan las listas al llegar a lo último que se ve: normal, sin sonido o anticipado (como VoiceOver). */
+	val desplazarListas: String get() = cadena(Claves.DESPLAZAR_LISTAS, DESPLAZAR_NORMAL)
+
+	/** Si se detecta el idioma de los textos largos que la app no marca (español o inglés). */
+	val detectarIdioma: Boolean get() = logico(Claves.DETECTAR_IDIOMA, true)
+
+	/** La voz de las notificaciones (una de las incluidas), o "" para la de siempre. */
+	val motorAvisos: String get() = cadena(Claves.MOTOR_AVISOS, "")
+
+	/** Las voces del control «Voz» ([com.xebolax.tiresias.voz.VocesDisponibles.delControl]); vacío, todas. */
 	var vocesControl: Set<String>
 		get() = p.getStringSet(Claves.VOCES_CONTROL, emptySet()) ?: emptySet()
 		set(v) = p.edit().putStringSet(Claves.VOCES_CONTROL, v).apply()
@@ -102,6 +116,18 @@ class Ajustes(contexto: Context) {
 			.putInt(Claves.VOLUMEN_VOZ, vol.coerceIn(10, 100))
 			.apply()
 		return suyos == null
+	}
+
+	/**
+	 * Guarda la velocidad, el tono, el volumen y la voz del sistema de ahora como
+	 * los de su motor, y da los que se van a poner a mano (un perfil con nombre)
+	 * como los de [nuevoMotor]: así el cambio de motor no los confunde.
+	 */
+	fun guardarVozAntesDeCambiar(nuevoMotor: String?): Unit = synchronized(CERROJO_VOZ) {
+		val de = p.getString(Claves.MOTOR_DE_LA_VOZ, null) ?: motor
+		val e = p.edit().putString(Claves.VOZ_DE + de, "$velocidad;$tono;$volumenVoz").putString(Claves.VOZ_SISTEMA_DE + de, vozSistema)
+		if (nuevoMotor != null) e.putString(Claves.MOTOR_DE_LA_VOZ, nuevoMotor)
+		e.commit()
 	}
 
 	/** La velocidad que tiene [motor] (la de ahora si es el elegido). */
@@ -458,13 +484,22 @@ class Ajustes(contexto: Context) {
 	 */
 	fun eloquenceParametro(voz: Int, parametro: Int): Int = entero("${Claves.ELOQUENCE_PARAMETRO}${voz}_$parametro", ELOQUENCE_DE_FABRICA[voz]?.get(parametro) ?: -1)
 
-	/** La velocidad de Eloquence como en NVDA (0 a 100), la que suena con la de Tiresias al 100 %. */
-	var eloquenceVelocidad: Int
-		get() = entero(Claves.ELOQUENCE_VELOCIDAD, 55).coerceIn(0, 100)
-		set(v) = poner(Claves.ELOQUENCE_VELOCIDAD, v.coerceIn(0, 100))
-
-	/** El «aumento de velocidad» del driver de NVDA (activo en NVDA de fábrica). */
-	val eloquenceAumento: Boolean get() = logico(Claves.ELOQUENCE_AUMENTO, true)
+	/**
+	 * Una sola vez (1.0.5): la velocidad guardada de Eloquence vuelve al 100 %.
+	 * Hasta la 1.0.4, su 100 % era la velocidad 55 de NVDA con el aumento, unas
+	 * diez veces la normal del motor, y un porcentaje guardado sobre esa base
+	 * suena ahora muy distinto. Se quitan también aquella velocidad y su aumento.
+	 */
+	fun normalizarEloquence(): Unit = synchronized(CERROJO_VOZ) {
+		if (p.getBoolean(Claves.ELOQUENCE_VELOCIDAD_NORMAL, false)) return
+		val e = p.edit().putBoolean(Claves.ELOQUENCE_VELOCIDAD_NORMAL, true)
+			.remove(Claves.ELOQUENCE_VELOCIDAD).remove(Claves.ELOQUENCE_AUMENTO)
+		if (motor == MOTOR_ELOQUENCE && p.getString(Claves.MOTOR_DE_LA_VOZ, null) == MOTOR_ELOQUENCE) e.putInt(Claves.VELOCIDAD, 100)
+		p.getString(Claves.VOZ_DE + MOTOR_ELOQUENCE, null)?.let { guardada ->
+			e.putString(Claves.VOZ_DE + MOTOR_ELOQUENCE, "100;" + guardada.substringAfter(';', "100;100"))
+		}
+		e.apply()
+	}
 
 	fun ponerEloquenceParametro(voz: Int, parametro: Int, valor: Int) = poner("${Claves.ELOQUENCE_PARAMETRO}${voz}_$parametro", valor)
 
@@ -603,6 +638,13 @@ class Ajustes(contexto: Context) {
 		const val TECLAS_SIEMPRE = "siempre"
 		const val TECLAS_CAMPOS = "campos"
 		const val TECLAS_NUNCA = "nunca"
+		const val DESPLAZAR_NORMAL = "normal"
+		const val DESPLAZAR_SIN_SONIDO = "sin_sonido"
+		const val DESPLAZAR_ANTICIPADO = "anticipado"
+
+		/** El teclado braille de TalkBack habla solo. */
+		val TECLADOS_QUE_HABLAN_DE_FABRICA = setOf("com.google.android.marvin.talkback", "com.android.talkback")
+
 		/** Para que el cambio de motor y lo que cambian los gestos o Ajustes no se pisen. */
 		private val CERROJO_VOZ = Any()
 
@@ -637,6 +679,20 @@ object Claves {
 	/** La voz del sistema elegida de cada motor que no es el elegido: voz_sistema_de_<motor>. */
 	const val VOZ_SISTEMA_DE = "voz_sistema_de_"
 	const val VOCES_CONTROL = "voces_control"
+	const val MOTOR_AVISOS = "motor_avisos"
+	const val DETECTAR_IDIOMA = "detectar_idioma"
+	const val DESPLAZAR_LISTAS = "desplazar_listas"
+	const val TECLADOS_QUE_HABLAN = "teclados_que_hablan"
+	/** El versionCode cuyas novedades ya se enseñaron al abrir la app. */
+	const val NOVEDADES_VISTAS = "novedades_vistas"
+	/** Las marcas de posición: JSON {app/pantalla: firma del elemento}. */
+	const val MARCAS = "marcas"
+	/** Los nombres propios de las pantallas: JSON {paquete/clase: nombre}. */
+	const val NOMBRES_VENTANA = "nombres_ventana"
+	/** Si el servicio estaba encendido la última vez (se apaga al quitarlo el usuario, no si lo cierra el sistema). */
+	const val SERVICIO_ENCENDIDO = "servicio_encendido"
+	/** El momento del último cierre de Tiresias por Android ya apuntado en el registro. */
+	const val ULTIMA_SALIDA = "ultima_salida"
 	const val ATENUAR = "atenuar"
 	const val CAMBIO_IDIOMA = "cambio_idioma"
 	const val CAMBIO_DIALECTO = "cambio_dialecto"
@@ -728,6 +784,8 @@ object Claves {
 	const val SENIOR_NOMBRE = "senior_nombre"
 	const val SENIOR_CODIGO = "senior_codigo"
 	const val ELOQUENCE_AUMENTO = "eloquence_aumento"
+	/** Si ya se ha puesto la velocidad de Eloquence en su escala nueva ([Ajustes.normalizarEloquence]). */
+	const val ELOQUENCE_VELOCIDAD_NORMAL = "eloquence_velocidad_normal"
 	const val BRAILLE_VIBRAR_PUNTOS = "braille_vibrar_puntos"
 	const val SONIDO_ESPERA = "sonido_espera"
 	const val AVISO_ESPERA = "aviso_espera"
