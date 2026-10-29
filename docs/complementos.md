@@ -1019,7 +1019,7 @@ El usuario los instala en la pantalla de Sonidos de Tiresias: «Temas de la tien
 
 En la tienda, los temas van en el apartado `temas` del catálogo, con `id`, `nombre`, `descripcion`, `autor`, `archivo` (un nombre `.zip`), `sha256` y `tamano`. Se leen del catálogo de Tiresias y de las fuentes del usuario, con la misma comprobación de huella. Su nombre y descripción no tienen traducción.
 
-Para publicar uno en la tienda de Tiresias, crea `temas/<id>/` con un `tema.json` (`id`, `nombre`, `descripcion`, `autor`) y los archivos de sonido; `publicar_actualizacion.ps1` los comprime en `<id>.zip` y los añade al catálogo. Los dos temas de Tiresias, «Suave» y «Madera», se generan con `python herramientas/generar_temas_sonido.py`.
+Para publicar uno en la tienda de Tiresias, crea `temas/<id>/` con un `tema.json` (`id`, `nombre`, `descripcion`, `autor`) y los archivos de sonido; `publicar_actualizacion.ps1` los comprime en `<id>.zip` y los añade al catálogo. Los ocho temas de Tiresias («Suave», «Madera», «Cristal», «Retro», «Gotas», «Marimba», «Mínimo» y «Espacio») se generan con `python herramientas/generar_temas_sonido.py` y van también dentro de la app (la tarea `copiarTemas` de `app/build.gradle.kts` los mete en los assets). `tema.json` puede llevar `nombre_en` y `descripcion_en`.
 
 ## Ejemplos reales
 

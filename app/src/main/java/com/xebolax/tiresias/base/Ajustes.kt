@@ -178,6 +178,16 @@ class Ajustes(contexto: Context) {
 		get() = logico(Claves.CALLAR_AL_GRABAR, true)
 		set(v) = poner(Claves.CALLAR_AL_GRABAR, v)
 
+	/** Tapar el sensor de proximidad con la mano calla la voz (como TalkBack). */
+	/** En un campo de texto, las teclas de volumen mueven el cursor un carácter (SandFly). */
+	val volumenCursor: Boolean get() = logico(Claves.VOLUMEN_CURSOR, false)
+	/** Decir el volumen nuevo al cambiarlo con las teclas (SandFly). */
+	val decirVolumen: Boolean get() = logico(Claves.DECIR_VOLUMEN, true)
+
+	var callarProximidad: Boolean
+		get() = logico(Claves.CALLAR_PROXIMIDAD, true)
+		set(v) = poner(Claves.CALLAR_PROXIMIDAD, v)
+
 	val ajustesTexto: AjustesTexto
 		get() = AjustesTexto(
 			puntuacion = enumDe(cadena(Claves.PUNTUACION, NivelPuntuacion.ALGUNAS.name), NivelPuntuacion.ALGUNAS),
@@ -207,7 +217,10 @@ class Ajustes(contexto: Context) {
 			val encabezados = logico(Claves.ENCABEZADOS_TABLA, true)
 			val despues = cadena(Claves.ENCABEZADOS_TABLA_LUGAR, "antes") == "despues"
 			val filaColumna = logico(Claves.DECIR_FILA_COLUMNA, true)
-			if (nivel != NivelVerbosidad.PERSONALIZADA) return base.copy(orden = o, decirPistas = base.decirPistas && pistas, decirEncabezadosTabla = encabezados, encabezadosDespues = despues, decirFilaColumna = filaColumna)
+			// «Avisar de los elementos con acciones» y «Nombrar los elementos sin nombre» valen con cualquier verbosidad
+			// (apagados, quitan lo que daría el nivel; encendidos, lo deja como esté)
+			if (nivel != NivelVerbosidad.PERSONALIZADA) return base.copy(orden = o, decirPistas = base.decirPistas && pistas, decirEncabezadosTabla = encabezados, encabezadosDespues = despues, decirFilaColumna = filaColumna,
+				decirAcciones = base.decirAcciones && logico(Claves.DECIR_ACCIONES, true), decirIdentificador = base.decirIdentificador && logico(Claves.DECIR_IDENTIFICADOR, true))
 			return base.copy(
 				orden = o,
 				decirEncabezadosTabla = encabezados,
@@ -370,6 +383,8 @@ class Ajustes(contexto: Context) {
 
 	/** Con el móvil bloqueado, callar las notificaciones y los avisos (solo se dice lo que tú pides). */
 	val callarBloqueo: Boolean get() = logico(Claves.CALLAR_BLOQUEO, false)
+	/** Al encender con el móvil bloqueado, unos segundos sin lo que dice solo la pantalla de bloqueo (Backtalk 312). */
+	val soloLoElegidoAlEncender: Boolean get() = logico(Claves.SOLO_LO_ELEGIDO_AL_ENCENDER, false)
 
 	/** Las apps en las que activar es siempre un toque de verdad (Backtalk 159). */
 	var appsClicDirecto: Set<String>
@@ -409,6 +424,8 @@ class Ajustes(contexto: Context) {
 
 	/** Teclado braille en pantalla: puntos en espejo, qué se dice al escribir y vibrar al poner cada punto. */
 	val brailleEspejo: Boolean get() = logico(Claves.BRAILLE_ESPEJO, false)
+	/** En el teclado braille, Intro pulsa el botón Enviar de las apps de mensajes (SandFly). */
+	val brailleIntroEnvia: Boolean get() = logico(Claves.BRAILLE_INTRO_ENVIA, true)
 
 	/** El teclado braille pone los puntos según cómo se sujeta el móvil (sensor de gravedad); manda sobre [brailleEspejo]. */
 	val brailleSensor: Boolean get() = logico(Claves.BRAILLE_SENSOR, false)
@@ -568,6 +585,9 @@ class Ajustes(contexto: Context) {
 	// --- Notificaciones -------------------------------------------------------------------
 
 	val leerNotificaciones: Boolean get() = logico(Claves.LEER_NOTIFICACIONES, true)
+	/** Las palabras que callan una notificación (separadas por comas o líneas), en minúsculas. */
+	val palabrasCalladas: List<String>
+		get() = cadena(Claves.PALABRAS_CALLADAS, "").split(',', '\n').map { it.trim() }.filter { it.isNotEmpty() }
 	val notificacionesNoMolestar: Boolean get() = logico(Claves.NOTIFICACIONES_NO_MOLESTAR, false)
 	val notificacionesEnLlamada: Boolean get() = logico(Claves.NOTIFICACIONES_EN_LLAMADA, false)
 	/** Paquetes cuyas notificaciones no se leen solas. */
@@ -697,6 +717,9 @@ object Claves {
 	const val CAMBIO_IDIOMA = "cambio_idioma"
 	const val CAMBIO_DIALECTO = "cambio_dialecto"
 	const val CALLAR_AL_GRABAR = "callar_al_grabar"
+	const val CALLAR_PROXIMIDAD = "callar_proximidad"
+	const val DECIR_VOLUMEN = "decir_volumen"
+	const val VOLUMEN_CURSOR = "volumen_cursor"
 	const val PUNTUACION = "puntuacion"
 	const val NUMEROS = "numeros"
 	const val MAYUSCULAS = "mayusculas"
@@ -720,6 +743,9 @@ object Claves {
 	const val PARTES_ESTADO = "partes_estado"
 	const val AL_DESBLOQUEAR = "al_desbloquear"
 	const val CALLAR_BLOQUEO = "callar_bloqueo"
+	const val PALABRAS_CALLADAS = "palabras_calladas"
+	const val BRAILLE_INTRO_ENVIA = "braille_intro_envia"
+	const val SOLO_LO_ELEGIDO_AL_ENCENDER = "solo_lo_elegido_al_encender"
 	const val CONTROLES_SOLO_WEB = "controles_solo_web"
 	const val FOCO_SIN_ESPERAR_TITULO = "foco_sin_esperar_titulo"
 	const val ACTIVAR_AL_LEVANTAR = "activar_al_levantar"

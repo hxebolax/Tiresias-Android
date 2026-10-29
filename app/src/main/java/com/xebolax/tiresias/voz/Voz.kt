@@ -160,6 +160,25 @@ class Voz(contexto: Context) {
 
 	val hablando: Boolean get() = enCurso != null || cerrojo.withLock { cola.isNotEmpty() }
 
+	/** Si lo que suena ahora es una notificación (las dos teclas de volumen la callan). */
+	val diciendoAviso: Boolean get() = enCurso?.e?.tipo == Tipo.NOTIFICACION
+
+	/**
+	 * Avisa (en el hilo de la voz) cuando la voz empieza a hablar y cuando lleva
+	 * un rato callada: el sensor de proximidad solo se mira mientras habla.
+	 */
+	@Volatile var alCambiarHablando: ((Boolean) -> Unit)? = null
+
+	/** Si el foco está en una contraseña o un dato sensible (lo pone el lector). */
+	@Volatile var focoSensible = false
+	private var activa = false
+
+	private fun ponerActiva(si: Boolean) {
+		if (activa == si) return
+		activa = si
+		runCatching { alCambiarHablando?.invoke(si) }.onFailure { Registro.w(ETIQUETA, "Fallo al avisar de que la voz habla o calla", it) }
+	}
+
 	/** Lo último que se dijo (para repetir o deletrear). */
 	val ultimo: String? get() = synchronized(historial) { historial.lastOrNull() }
 
@@ -194,7 +213,9 @@ class Voz(contexto: Context) {
 		}
 		if (e.tipo != Tipo.PISTA) recordar(texto)
 		if (BuildConfig.PRUEBAS) {
-			Log.i(ETIQUETA_HABLA, "[${e.tipo}${e.idioma?.let { "|" + it.toLanguageTag() }.orEmpty()}] $texto")
+			// Ni en esta variante se registra lo de una contraseña o un dato sensible (Android 14)
+			val registrado = if (focoSensible && e.tipo in DEL_FOCO) "(dato sensible, ${texto.length} caracteres)" else texto
+			Log.i(ETIQUETA_HABLA, "[${e.tipo}${e.idioma?.let { "|" + it.toLanguageTag() }.orEmpty()}] $registrado")
 			idiomaPruebas = e.idioma
 		}
 		cerrojo.withLock {
@@ -238,8 +259,13 @@ class Voz(contexto: Context) {
 		partes.joinToString(" ").takeIf { it.isNotBlank() }
 	}
 
+	/** Las veces que se ha cortado la voz (para las pruebas: que nada la corte sin que nadie lo pida). */
+	@Volatile var vecesCallada = 0
+		private set
+
 	/** Corta todo lo que suena y lo que espera. */
 	fun callar() {
+		vecesCallada++
 		cerrojo.withLock {
 			generacion.incrementAndGet()
 			cola.clear()
@@ -357,6 +383,7 @@ class Voz(contexto: Context) {
 					// Callada: suelta el foco de audio y, al rato, la pista
 					if (!hayTrabajo.await(ESPERA_CALLADA_MS, java.util.concurrent.TimeUnit.MILLISECONDS)) {
 						soltarFoco()
+						ponerActiva(false)
 						pista.cerrarSiCallada(CERRAR_PISTA_MS)
 					}
 				}
@@ -368,6 +395,7 @@ class Voz(contexto: Context) {
 				enCurso = null
 				continue
 			}
+			ponerActiva(true)
 			try {
 				hablar(pedido)
 			} catch (e: Exception) {
@@ -515,6 +543,8 @@ class Voz(contexto: Context) {
 		private const val FALLOS_PARA_APARTAR = 3
 		private const val APARTADO_MS = 60_000L
 		private const val ESPERA_CALLADA_MS = 400L
+		/** Lo que se dice del elemento enfocado y de lo que se escribe en él. */
+		private val DEL_FOCO = setOf(Tipo.NAVEGACION, Tipo.ESCRITURA)
 		private const val CERRAR_PISTA_MS = 5_000L
 	}
 }

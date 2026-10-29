@@ -48,9 +48,12 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 	fun ejecutar(a: Accion): Boolean {
 		if (suspendido && a != Accion.SUSPENDER && a != Accion.MODO_SEGURO) return false
 		lector.momentoUsuario = SystemClock.uptimeMillis()
-		if (a != Accion.LEER_DESDE_ARRIBA && a != Accion.LEER_DESDE_AQUI && a != Accion.PAUSAR_VOZ) lector.continua.parar()
+		// (el volumen de la voz no la para: se cambia mientras lee, como en TalkBack)
+		if (a != Accion.LEER_DESDE_ARRIBA && a != Accion.LEER_DESDE_AQUI && a != Accion.PAUSAR_VOZ && a != Accion.VOLUMEN_MAS && a != Accion.VOLUMEN_MENOS) lector.continua.parar()
 		// En voz a demanda, lo que se pide con una acción sí se dice (moverse, no)
 		if (a !in NAVEGAR_CALLADO) lector.voz.pedidoHasta = SystemClock.uptimeMillis() + 2500
+		// Lo que no es moverse (activar, abrir algo) deja a la app llevar el foco adonde quiera
+		if (a == Accion.ACTIVAR || a == Accion.MANTENER || a !in NAVEGAR_CALLADO) lector.soltarProteccionFoco()
 		return try {
 			lector.virtual?.let { v -> enVirtual(v, a)?.let { return it } }
 			if (a != Accion.SOS && cuentaSos != null) {
@@ -180,6 +183,7 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		Accion.DESHACER, Accion.REHACER -> deshacer(a == Accion.DESHACER)
 		Accion.CURSOR_INICIO -> lector.edicion.cursorA(true)
 		Accion.CURSOR_FINAL -> lector.edicion.cursorA(false)
+		Accion.BORRAR_TEXTO -> lector.edicion.borrarTodo()
 		Accion.DESCRIBIR_IA -> lector.vision.describirElemento()
 		Accion.PANTALLA_IA -> lector.vision.describirPantalla()
 		Accion.PREGUNTAR_IA -> lector.vision.preguntar()
@@ -258,7 +262,7 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		val ok = runCatching { f.performAction(AccessibilityNodeInfo.ACTION_CLICK) }.getOrDefault(false)
 		// Si la app no atiende el clic de accesibilidad (Telegram en HyperOS: Backtalk 266), un toque de verdad
 		if (!ok) return tocarEn(f, false)
-		com.xebolax.tiresias.base.Registro.i(ETIQUETA, "Clic en ${SystemClock.uptimeMillis() - antes} ms")
+		if (com.xebolax.tiresias.BuildConfig.PRUEBAS) android.util.Log.d(ETIQUETA, "Clic en ${SystemClock.uptimeMillis() - antes} ms")
 		return true
 	}
 
@@ -620,6 +624,7 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		R.string.acc_pegar to Accion.PEGAR,
 		R.string.acc_cursor_inicio to Accion.CURSOR_INICIO,
 		R.string.acc_cursor_final to Accion.CURSOR_FINAL,
+		R.string.acc_borrar_texto to Accion.BORRAR_TEXTO,
 		R.string.acc_modo_seleccion to Accion.MODO_SELECCION,
 	)
 
@@ -1141,7 +1146,7 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		val f = objetivo() ?: run { lector.decir(R.string.marca_nada); return false }
 		val a = lector.ajustes
 		val marcas = runCatching { org.json.JSONObject(a.p.getString(com.xebolax.tiresias.base.Claves.MARCAS, "{}") ?: "{}") }.getOrDefault(org.json.JSONObject())
-		marcas.put(claveMarca(), org.json.JSONObject().put("id", f.viewIdResourceName.orEmpty()).put("texto", lector.textoElemento(f)).put("nombre", lector.elemento(f).nombre))
+		marcas.put(claveMarca(), org.json.JSONObject().put("id", f.viewIdResourceName.orEmpty()).put("nombre", lector.elemento(f).nombre))
 		a.p.edit().putString(com.xebolax.tiresias.base.Claves.MARCAS, marcas.toString()).apply()
 		lector.sonidos.tocar(Sonido.ACTIVAR)
 		lector.decir(t.getString(R.string.marca_puesta, lector.elemento(f).nombre.ifBlank { lector.textoElemento(f) }))
@@ -1390,7 +1395,11 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 			return false
 		}
 		val formato = DateFormat.getTimeInstance(DateFormat.SHORT)
-		val textos = avisos.map { t.getString(R.string.historial_aviso, it.app, formato.format(Date(it.momento)), listOf(it.titulo, it.texto).filter { s -> s.isNotEmpty() }.joinToString(". ")) }
+		val textos = avisos.map { a ->
+			val linea = t.getString(R.string.historial_aviso, a.app, formato.format(Date(a.momento)), listOf(a.titulo, a.texto).filter { s -> s.isNotEmpty() }.joinToString(". "))
+			// Por qué no se leyó sola, si no se leyó
+			a.motivo?.let { t.getString(R.string.aviso_no_leida, linea, t.getString(it)) } ?: linea
+		}
 		val previo = lector.foco
 		ventanas.lista(t.getString(R.string.historial_avisos), textos, devolverFoco(previo)) { i ->
 			lector.manejador.postDelayed({ accionesAviso(avisos[i], textos[i], previo) }, 350)
@@ -1510,8 +1519,12 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		// El valor exacto (con auriculares Bluetooth, «subir» movía el volumen de la música: Backtalk 265),
 		// y nunca a cero: Tiresias no se puede quedar mudo con un gesto
 		val nuevo = (audio.getStreamVolume(flujo) + if (subir) 1 else -1).coerceIn(1, max)
+		// Lo dice Tiresias mismo: el aviso de los cambios de volumen no lo repite
+		com.xebolax.tiresias.servicio.AvisoVolumen.propio()
 		runCatching { audio.setStreamVolume(flujo, nuevo, 0) }
-		lector.decir(t.getString(R.string.valor_volumen, audio.getStreamVolume(flujo) * 100 / max))
+		// Leyendo de seguido, sin cortar la lectura: el sonido del selector ya se oye con el volumen nuevo
+		if (lector.continua.activa) lector.sonidos.tocar(Sonido.SELECTOR)
+		else lector.decir(t.getString(R.string.valor_volumen, audio.getStreamVolume(flujo) * 100 / max))
 		return true
 	}
 
@@ -1600,11 +1613,11 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		return true
 	}
 
-	/** Sistema, altavoz y auriculares, por turno ([adelante]) o al revés; los auriculares solo si hay unos conectados. */
+	/** Sistema, altavoz, auriculares y auricular de llamada, por turno ([adelante]) o al revés; los auriculares solo si hay unos conectados. */
 	private fun cambiarSalida(adelante: Boolean = true): Boolean {
 		val a = lector.ajustes
 		val p = com.xebolax.tiresias.voz.PistaAudio
-		val orden = listOf(p.SALIDA_SISTEMA, p.SALIDA_ALTAVOZ, p.SALIDA_AURICULARES)
+		val orden = listOf(p.SALIDA_SISTEMA, p.SALIDA_ALTAVOZ, p.SALIDA_AURICULARES, p.SALIDA_AURICULAR_LLAMADA)
 		var siguiente = orden[(orden.indexOf(a.salidaAudio).coerceAtLeast(0) + if (adelante) 1 else orden.size - 1) % orden.size]
 		if (siguiente == p.SALIDA_AURICULARES) {
 			p.salida = siguiente
@@ -1618,6 +1631,7 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		val nombre = when (siguiente) {
 			p.SALIDA_ALTAVOZ -> R.string.salida_altavoz
 			p.SALIDA_AURICULARES -> R.string.salida_auriculares
+			p.SALIDA_AURICULAR_LLAMADA -> R.string.salida_auricular_llamada
 			else -> R.string.salida_sistema
 		}
 		lector.decir(t.getString(R.string.valor_salida, t.getString(nombre)), Modo.ENCOLAR)
@@ -1847,6 +1861,40 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		return runCatching { servicio.startActivity(intent); true }.getOrElse {
 			com.xebolax.tiresias.base.Registro.e(ETIQUETA, "No se pudo abrir ${clase.simpleName}", it)
 			false
+		}.also { if (it) comprobarAbierta(intent, clase.simpleName) }
+	}
+
+	/**
+	 * Algunos móviles (Xiaomi y otros fabricantes) no dejan abrir una pantalla desde segundo plano sin
+	 * un permiso aparte, y Android no avisa: no pasa nada. Si al poco no se ve Tiresias delante, se pide
+	 * otra vez de otra forma (como si se tocara una notificación) y, si tampoco, se dice qué hacer.
+	 */
+	private fun comprobarAbierta(intent: Intent, nombre: String, intento: Int = 0) {
+		lector.manejador.postDelayed({
+			if (seVeTiresias() || lector.bloqueado()) return@postDelayed
+			if (intento == 0) {
+				com.xebolax.tiresias.base.Registro.w(ETIQUETA, "$nombre no se abrió: se prueba con un PendingIntent")
+				abrirComoNotificacion(intent)
+				comprobarAbierta(intent, nombre, 1)
+			} else {
+				com.xebolax.tiresias.base.Registro.w(ETIQUETA, "$nombre tampoco se abrió así: Android no deja abrir pantallas en segundo plano")
+				lector.decir(R.string.no_se_pudo_abrir)
+			}
+		}, ESPERA_ABIERTA_MS)
+	}
+
+	private fun seVeTiresias(): Boolean = runCatching {
+		servicio.windows.any { it.type == android.view.accessibility.AccessibilityWindowInfo.TYPE_APPLICATION && it.root?.packageName == servicio.packageName }
+	}.getOrDefault(true)
+
+	private fun abrirComoNotificacion(intent: Intent) {
+		try {
+			val pendiente = android.app.PendingIntent.getActivity(servicio, 0, intent, android.app.PendingIntent.FLAG_IMMUTABLE or android.app.PendingIntent.FLAG_UPDATE_CURRENT)
+			val opciones = if (Build.VERSION.SDK_INT >= 34) android.app.ActivityOptions.makeBasic()
+				.setPendingIntentBackgroundActivityStartMode(android.app.ActivityOptions.MODE_BACKGROUND_ACTIVITY_START_ALLOWED).toBundle() else null
+			pendiente.send(servicio, 0, null, null, null, null, opciones)
+		} catch (e: Exception) {
+			com.xebolax.tiresias.base.Registro.w(ETIQUETA, "No se pudo abrir con un PendingIntent", e)
 		}
 	}
 
@@ -1916,6 +1964,8 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		const val HORAS_RESUMEN = 12
 		/** Páginas que se recorren como mucho al copiar una lista entera. */
 		private const val MAXIMO_PAGINAS_LISTA = 150
+		/** Lo que se espera a que se vea una pantalla de Tiresias antes de probar otra forma de abrirla. */
+		private const val ESPERA_ABIERTA_MS = 1500L
 		private const val ETIQUETA = "Ejecutor"
 	}
 }

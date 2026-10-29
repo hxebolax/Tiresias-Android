@@ -212,7 +212,7 @@ class Scripts(private val lector: Lector?, contexto: Context = lector!!.servicio
 			override fun call(method: String, json: String?): String? = c?.let { atender(it, method, json) }
 			override fun loadModule(name: String): ByteArray? = null
 			override fun onUnhandledError(error: QuickJsException) {
-				Registro.w(ETIQUETA, "Error sin atender en un complemento: ${error.message}")
+				Registro.w(ETIQUETA, "Error sin atender en un complemento: ${detalle(error)}")
 			}
 		}
 		val motor = try {
@@ -455,10 +455,17 @@ class Scripts(private val lector: Lector?, contexto: Context = lector!!.servicio
 		return c.info.actividades.any { delante.endsWith(it) }
 	}
 
+	/**
+	 * Lo que se apunta de un error al ejecutar un complemento: su mensaje puede
+	 * llevar texto de la pantalla (un `throw new Error(texto)`), así que fuera de
+	 * la variante de pruebas solo va el tipo de error.
+	 */
+	private fun detalle(e: Exception): String = if (com.xebolax.tiresias.BuildConfig.PRUEBAS) e.message.orEmpty() else e.javaClass.simpleName
+
 	private fun llamar(c: Cargado, funcion: String, json: String?): String? = try {
 		c.motor.llamar(funcion, json, LIMITE_LLAMADA_MS).also { c.fallos = 0 }
 	} catch (e: QuickJsException) {
-		Registro.w(ETIQUETA, "El complemento ${c.info.id} falló en $funcion${if (e.interrumpido) " (se pasó de tiempo)" else ""}: ${e.message}")
+		Registro.w(ETIQUETA, "El complemento ${c.info.id} falló en $funcion${if (e.interrumpido) " (se pasó de tiempo)" else ""}: ${detalle(e)}")
 		if (++c.fallos >= FALLOS_PARA_APAGAR) {
 			Registro.w(ETIQUETA, "El complemento ${c.info.id} se apaga por fallar seguido")
 			prefs.edit().putBoolean(c.info.id, false).apply()
@@ -489,7 +496,8 @@ class Scripts(private val lector: Lector?, contexto: Context = lector!!.servicio
 			"sonido" -> if ("voz" in c.info.permisos) runCatching { Sonido.valueOf((arg as? String).orEmpty().uppercase()) }.getOrNull()?.let { l.sonidos.tocar(it) }
 			"portapapeles" -> if ("portapapeles" in c.info.permisos) l.edicion.portapapeles((arg as? String).orEmpty())
 			"app" -> return JSONObject.quote(l.raiz()?.packageName?.toString().orEmpty())
-			"registro" -> Registro.i(ETIQUETA, "[${c.info.id}] ${(arg as? String).orEmpty().take(200)}")
+			// Lo que escribe un complemento puede ser texto de la pantalla: solo en la variante de pruebas, y solo en logcat
+			"registro" -> if (com.xebolax.tiresias.BuildConfig.PRUEBAS) android.util.Log.i(ETIQUETA, "[${c.info.id}] ${(arg as? String).orEmpty().take(200)}")
 			"braille" -> if ("braille" in c.info.permisos && l.brailleListo) l.braille.mensaje((arg as? String).orEmpty().take(500))
 			// Lo que guarda un complemento (sus notas, sus ajustes): solo él lo ve, en el móvil, sin pasar de 64 KB
 			"guardar" -> (arg as? JSONArray)?.let { a ->

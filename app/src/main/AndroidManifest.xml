@@ -46,6 +46,11 @@
 		<intent>
 			<action android:name="android.speech.RecognitionService" />
 		</intent>
+		<!-- El escritorio de ahora: al tocar entre sus iconos no se dice su página (SandFly) -->
+		<intent>
+			<action android:name="android.intent.action.MAIN" />
+			<category android:name="android.intent.category.HOME" />
+		</intent>
 		<package android:name="com.xebolax.tiresias.nano" />
 		<package android:name="com.google.android.aicore" />
 	</queries>
@@ -131,6 +136,16 @@
 		</service>
 
 		<!-- «Voces de Tiresias» como motor de voz del sistema (eSpeak NG y Pico), también antes de desbloquear -->
+		<!-- Oyente de notificaciones (con el acceso que da el usuario): las que Android no manda al lector -->
+		<service
+			android:name=".servicio.OyenteAvisos"
+			android:exported="true"
+			android:label="@string/servicio_nombre"
+			android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+			<intent-filter>
+				<action android:name="android.service.notification.NotificationListenerService" />
+			</intent-filter>
+		</service>
 		<service
 			android:name=".tts.ServicioTtsTiresias"
 			android:directBootAware="true"

@@ -38,7 +38,29 @@ object Registro {
 
 	/** Se llama una vez al arrancar el proceso (App.onCreate). */
 	fun iniciar(contexto: Context) {
-		carpeta = Almacen.protegido(contexto).filesDir
+		val dir = Almacen.protegido(contexto).filesDir
+		carpeta = dir
+		runCatching { hilo.execute { quitarDiagnostico(dir) } }.onFailure { Log.w("Registro", "No se pudo pasar al hilo del registro", it) }
+	}
+
+	/**
+	 * Quita las líneas de un diagnóstico de pruebas de la 1.0.6 (en un móvil de pruebas apuntaban los
+	 * identificadores de lo que se exploraba, también en la pantalla de bloqueo): no deben quedar ni
+	 * compartirse con un informe.
+	 */
+	@Synchronized
+	private fun quitarDiagnostico(dir: File) {
+		for (nombre in listOf(ARCHIVO, ANTERIOR)) {
+			val f = File(dir, nombre)
+			try {
+				if (!f.exists()) continue
+				val lineas = f.readLines()
+				if (lineas.none { it.contains(" Diagnostico: ") }) continue
+				f.writeText(lineas.filterNot { it.contains(" Diagnostico: ") }.joinToString("\n", postfix = "\n"))
+			} catch (e: Exception) {
+				Log.w("Registro", "No se pudo limpiar el registro", e)
+			}
+		}
 	}
 
 	fun i(etiqueta: String, mensaje: String) {

@@ -74,21 +74,30 @@ class ActividadAjustes : ActividadBase(), PreferenceFragmentCompat.OnPreferenceS
 	/** Copia de seguridad de toda la configuración (CopiaSeguridad), a un archivo que elige el usuario. */
 	val guardarCopia = registerForActivityResult(ActivityResultContracts.CreateDocument("application/json")) { uri ->
 		uri ?: return@registerForActivityResult
-		try {
-			contentResolver.openOutputStream(uri)?.bufferedWriter()?.use { it.write(com.xebolax.tiresias.base.CopiaSeguridad.exportar(this)) }
-			avisar(getString(R.string.aj_copia_guardada))
-		} catch (e: Exception) {
-			com.xebolax.tiresias.base.Registro.e("Ajustes", "No se pudo guardar la copia de seguridad", e)
-			avisar(getString(R.string.error_exportar))
+		lifecycleScope.launch {
+			try {
+				kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+					contentResolver.openOutputStream(uri)?.bufferedWriter()?.use { it.write(com.xebolax.tiresias.base.CopiaSeguridad.exportar(this@ActividadAjustes)) }
+				}
+				avisar(getString(R.string.aj_copia_guardada))
+			} catch (e: kotlinx.coroutines.CancellationException) {
+				throw e
+			} catch (e: Exception) {
+				com.xebolax.tiresias.base.Registro.e("Ajustes", "No se pudo guardar la copia de seguridad", e)
+				avisar(getString(R.string.error_exportar))
+			}
 		}
 	}
 
 	val recuperarCopia = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
 		uri ?: return@registerForActivityResult
-		confirmar(getString(R.string.aj_copia_confirmar), getString(R.string.aj_copia_recuperar)) {
+		confirmar(getString(R.string.aj_copia_confirmar), getString(R.string.aj_copia_recuperar)) { lifecycleScope.launch {
 			try {
-				val texto = contentResolver.openInputStream(uri)?.bufferedReader()?.use { it.readText() }.orEmpty()
-				if (com.xebolax.tiresias.base.CopiaSeguridad.importar(this, texto)) {
+				val bien = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+					val texto = contentResolver.openInputStream(uri)?.bufferedReader()?.use { it.readText() }.orEmpty()
+					com.xebolax.tiresias.base.CopiaSeguridad.importar(this@ActividadAjustes, texto)
+				}
+				if (bien) {
 					ServicioTiresias.instancia?.recargarAjustes()
 					ServicioTiresias.instancia?.recargarComplementos()
 					avisar(getString(R.string.aj_copia_recuperada))
@@ -96,11 +105,13 @@ class ActividadAjustes : ActividadBase(), PreferenceFragmentCompat.OnPreferenceS
 				} else {
 					avisar(getString(R.string.aj_copia_no_valida))
 				}
+			} catch (e: kotlinx.coroutines.CancellationException) {
+				throw e
 			} catch (e: Exception) {
 				com.xebolax.tiresias.base.Registro.e("Ajustes", "No se pudo recuperar la copia de seguridad", e)
 				avisar(getString(R.string.error_importar))
 			}
-		}
+		} }
 	}
 
 	val pedirBluetooth = registerForActivityResult(ActivityResultContracts.RequestPermission()) { concedido ->
@@ -190,6 +201,10 @@ class ActividadAjustes : ActividadBase(), PreferenceFragmentCompat.OnPreferenceS
 		override fun onResume() {
 			super.onResume()
 			refrescarVoz()
+			refrescarTemas()
+			findPreference<Preference>("oyente_avisos")?.summary = getString(
+				if (com.xebolax.tiresias.servicio.OyenteAvisos.tieneAcceso(requireContext())) R.string.aj_oyente_avisos_si else R.string.aj_oyente_avisos_no,
+			)
 			preferenceManager.sharedPreferences?.registerOnSharedPreferenceChangeListener(cambio)
 		}
 
@@ -205,6 +220,7 @@ class ActividadAjustes : ActividadBase(), PreferenceFragmentCompat.OnPreferenceS
 			// Lo que cambian los gestos con la pantalla abierta, o el motor, se ve en los deslizadores
 			if (clave in DE_LA_VOZ) refrescarVoz()
 			ServicioTiresias.instancia?.recargarAjustes()
+			if (clave == Claves.TEMA_SONIDOS) ServicioTiresias.instancia?.recargarSonidos()
 		}
 
 		/** Los deslizadores de la voz con lo que hay guardado (cambia con los gestos y con el motor). */
@@ -219,6 +235,17 @@ class ActividadAjustes : ActividadBase(), PreferenceFragmentCompat.OnPreferenceS
 			}
 		}
 
+		/** El tema de sonidos: los de Tiresias, los incluidos y los instalados (cambian en «Sonidos y vibraciones uno a uno»). */
+		private fun refrescarTemas() {
+			val lista = findPreference<ListPreference>(Claves.TEMA_SONIDOS) ?: return
+			val c = requireContext()
+			val temas = listOf("") + com.xebolax.tiresias.voz.TemasSonido.instalados(c)
+			lista.entries = temas.map { if (it.isEmpty()) getString(R.string.temas_tiresias) else com.xebolax.tiresias.voz.TemasSonido.nombreDe(c, it) }.toTypedArray()
+			lista.entryValues = temas.toTypedArray()
+			val actual = Ajustes(c).temaSonidos
+			lista.value = if (actual in temas) actual else ""
+		}
+
 		private fun preparar() {
 			val c = requireContext()
 			findPreference<ListPreference>(Claves.IDIOMA)?.setOnPreferenceChangeListener { _, valor ->
@@ -227,18 +254,30 @@ class ActividadAjustes : ActividadBase(), PreferenceFragmentCompat.OnPreferenceS
 				activity?.recreate()
 				true
 			}
-			val motores = com.xebolax.tiresias.voz.VocesDisponibles.disponibles(c)
+			// Las voces (archivos y apps instaladas) solo se buscan en la sección que las usa
+			val motores = if (findPreference<Preference>(Claves.MOTOR) != null || findPreference<Preference>("voces_control") != null)
+				com.xebolax.tiresias.voz.VocesDisponibles.disponibles(c) else emptyList()
 			findPreference<ListPreference>(Claves.MOTOR)?.let { lista ->
 				lista.entries = motores.map { it.second }.toTypedArray()
 				lista.entryValues = motores.map { it.first }.toTypedArray()
-				if (lista.value == null) lista.value = Ajustes.MOTOR_ESPEAK
+				// Sin valor o con una voz que ya no está (desinstalada): la de fábrica, para que se vea cuál suena
+				if (lista.value == null || lista.findIndexOfValue(lista.value) < 0) lista.value = Ajustes.MOTOR_ESPEAK
 			}
 			// La voz de las notificaciones: la de siempre o una de las incluidas
 			findPreference<ListPreference>(Claves.MOTOR_AVISOS)?.let { lista ->
 				val incluidas = motores.filter { it.first == Ajustes.MOTOR_ESPEAK || it.first == Ajustes.MOTOR_PICO || it.first == Ajustes.MOTOR_ELOQUENCE }
 				lista.entries = (listOf(getString(R.string.aj_motor_avisos_misma)) + incluidas.map { it.second }).toTypedArray()
 				lista.entryValues = (listOf("") + incluidas.map { it.first }).toTypedArray()
-				if (lista.value == null) lista.value = ""
+				if (lista.value == null || lista.findIndexOfValue(lista.value) < 0) lista.value = ""
+			}
+			// El oyente de notificaciones: dice si tiene el acceso y lleva a darlo
+			findPreference<Preference>("oyente_avisos")?.setOnPreferenceClickListener {
+				val intent = if (android.os.Build.VERSION.SDK_INT >= 30) android.content.Intent(android.provider.Settings.ACTION_NOTIFICATION_LISTENER_DETAIL_SETTINGS)
+					.putExtra(android.provider.Settings.EXTRA_NOTIFICATION_LISTENER_COMPONENT_NAME, android.content.ComponentName(c, com.xebolax.tiresias.servicio.OyenteAvisos::class.java).flattenToString())
+				else android.content.Intent(android.provider.Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)
+				runCatching { startActivity(intent) }.recoverCatching { startActivity(android.content.Intent(android.provider.Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)) }
+					.onFailure { com.xebolax.tiresias.base.Registro.w("ActividadAjustes", "No se pudo abrir el acceso a las notificaciones", it) }
+				true
 			}
 			// Los teclados que hablan solos: se eligen de los activados en el móvil
 			findPreference<Preference>("teclados_que_hablan")?.setOnPreferenceClickListener {
@@ -271,6 +310,15 @@ class ActividadAjustes : ActividadBase(), PreferenceFragmentCompat.OnPreferenceS
 					true
 				}
 			}
+			// Los emojis: sin elegir, lo que da el interruptor antiguo (no el valor de fábrica, que lo pisaría)
+			findPreference<ListPreference>(Claves.MODO_EMOJIS)?.let { if (it.value == null) it.value = Ajustes(c).modoEmojis.name }
+			// La salida del audio: lo elegido y, detrás, la explicación
+			findPreference<ListPreference>(Claves.SALIDA_AUDIO)?.summaryProvider = Preference.SummaryProvider<ListPreference> { p ->
+				listOfNotNull(p.entry, getString(R.string.aj_salida_audio_res)).joinToString(". ")
+			}
+			// Sin sensor de proximidad (algunas tabletas), el ajuste no haría nada
+			findPreference<Preference>(Claves.CALLAR_PROXIMIDAD)?.isVisible =
+				c.getSystemService(android.hardware.SensorManager::class.java)?.getDefaultSensor(android.hardware.Sensor.TYPE_PROXIMITY) != null
 			findPreference<Preference>("modo_senior")?.setOnPreferenceClickListener {
 				startActivity(android.content.Intent(c, ActividadModoSenior::class.java))
 				true
@@ -455,7 +503,8 @@ class ActividadAjustes : ActividadBase(), PreferenceFragmentCompat.OnPreferenceS
 					lista.entries = arrayOf(getString(R.string.aj_origen_servidor), getString(R.string.aj_origen_personalizado))
 					lista.entryValues = arrayOf(Ajustes.ORIGEN_SERVIDOR, Ajustes.ORIGEN_PERSONALIZADO)
 				}
-				lista.value = ajustes.origenActualizaciones
+				// Un origen que no está en la lista (el automático, sin GitHub): el servidor de Tiresias
+				lista.value = ajustes.origenActualizaciones.takeIf { lista.findIndexOfValue(it) >= 0 } ?: Ajustes.ORIGEN_SERVIDOR
 				lista.setOnPreferenceChangeListener { _, valor ->
 					url?.isVisible = valor == Ajustes.ORIGEN_PERSONALIZADO
 					true

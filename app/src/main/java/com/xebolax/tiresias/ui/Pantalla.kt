@@ -40,13 +40,27 @@ abstract class ActividadBase : AppCompatActivity() {
 	 * cambia los ajustes de una persona mayor sin querer.
 	 */
 	protected fun protegerConCodigo() {
-		if (!com.xebolax.tiresias.base.ModoSenior.protegido(this)) return
+		// Ya se dio bien en esta pantalla (se ha vuelto a crear al girarla o al cambiar de idioma): no se pide otra vez
+		if (codigoAceptado || !com.xebolax.tiresias.base.ModoSenior.protegido(this)) return
 		pedirTexto(getString(R.string.senior_codigo_pedir), getString(R.string.senior_codigo_pedir_pista), numerico = true, alCancelar = { finish() }) { codigo ->
 			if (!com.xebolax.tiresias.base.ModoSenior.comprobar(this, codigo)) {
 				avisar(getString(R.string.senior_codigo_mal))
 				finish()
-			}
+			} else codigoAceptado = true
 		}
+	}
+
+	/** Si el código del modo senior ya se dio bien en esta pantalla (se guarda al rehacerla). */
+	private var codigoAceptado = false
+
+	override fun onCreate(savedInstanceState: android.os.Bundle?) {
+		codigoAceptado = savedInstanceState?.getBoolean(CODIGO_ACEPTADO) == true
+		super.onCreate(savedInstanceState)
+	}
+
+	override fun onSaveInstanceState(outState: android.os.Bundle) {
+		super.onSaveInstanceState(outState)
+		outState.putBoolean(CODIGO_ACEPTADO, codigoAceptado)
 	}
 
 	/**
@@ -83,6 +97,10 @@ abstract class ActividadBase : AppCompatActivity() {
 			WindowInsetsCompat.CONSUMED
 		}
 		return Pantalla(this, contenido)
+	}
+
+	private companion object {
+		const val CODIGO_ACEPTADO = "codigo_senior_aceptado"
 	}
 }
 

@@ -2,5 +2,7 @@
 	"id": "madera",
 	"nombre": "Madera",
 	"descripcion": "Golpes cortos como de caja china: se oyen bien sin tapar la voz.",
+	"nombre_en": "Wood",
+	"descripcion_en": "Short knocks like a wood block: easy to hear without covering the voice.",
 	"autor": "Tiresias"
 }

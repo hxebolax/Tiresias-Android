@@ -14,7 +14,7 @@ import com.xebolax.tiresias.voz.Tipo
 class LecturaContinua(private val lector: Lector) {
 	@Volatile var activa = false
 		private set
-	private var vuelta = 0
+	@Volatile private var vuelta = 0
 
 	fun desdeArriba() {
 		val raiz = lector.raiz() ?: return

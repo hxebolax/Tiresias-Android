@@ -165,8 +165,29 @@ class TecladoBraille : InputMethodService(), SensorEventListener {
 	fun intro() {
 		val ic = currentInputConnection ?: return
 		val accion = (currentInputEditorInfo?.imeOptions ?: 0) and EditorInfo.IME_MASK_ACTION
-		if (accion != EditorInfo.IME_ACTION_NONE && accion != EditorInfo.IME_ACTION_UNSPECIFIED) ic.performEditorAction(accion)
-		else ic.commitText("\n", 1)
+		if (accion != EditorInfo.IME_ACTION_NONE && accion != EditorInfo.IME_ACTION_UNSPECIFIED) {
+			ic.performEditorAction(accion)
+			return
+		}
+		// En una app de mensajes, su campo no tiene acción del editor: Intro pulsa su botón Enviar (SandFly)
+		if (Ajustes(this).brailleIntroEnvia && enviarConBoton()) return
+		ic.commitText("\n", 1)
+	}
+
+	/** Pulsa el botón Enviar junto al campo, si es de una app de mensajes y se encuentra. */
+	private fun enviarConBoton(): Boolean {
+		val paquete = currentInputEditorInfo?.packageName ?: return false
+		if (paquete !in APPS_MENSAJES) return false
+		val servicio = com.xebolax.tiresias.servicio.ServicioTiresias.instancia ?: return false
+		return try {
+			val raiz = servicio.rootInActiveWindow ?: return false
+			val campo = raiz.findFocus(android.view.accessibility.AccessibilityNodeInfo.FOCUS_INPUT) ?: return false
+			val boton = BuscarEnviar.buscar(raiz, campo) ?: return false
+			boton.performAction(android.view.accessibility.AccessibilityNodeInfo.ACTION_CLICK)
+		} catch (e: Exception) {
+			com.xebolax.tiresias.base.Registro.w("TecladoBraille", "No se pudo pulsar Enviar", e)
+			false
+		}
 	}
 
 	fun cambiarTeclado() {
@@ -301,6 +322,12 @@ class TecladoBraille : InputMethodService(), SensorEventListener {
 			p(3) to ".", p(2) to ",", p(2, 3) to ";", p(2, 5) to ":", p(2, 6) to "?", p(2, 3, 5) to "!", p(3, 6) to "-",
 			p(1, 2, 6) to "(", p(3, 4, 5) to ")", p(2, 3, 6) to "\"", p(5) to "'", p(2, 3, 5, 6) to "=", p(3, 5) to "*",
 			p(2, 5, 6) to "/", p(4, 5, 6) to "_",
+		)
+
+		/** Las apps de mensajes en las que Intro pulsa Enviar. */
+		private val APPS_MENSAJES = setOf(
+			"com.whatsapp", "com.whatsapp.w4b", "org.telegram.messenger", "org.thoughtcrime.securesms", "com.google.android.apps.messaging",
+			"com.samsung.android.messaging", "com.facebook.orca", "com.instagram.android", "com.discord", "org.telegram.plus",
 		)
 
 		private val NUMEROS: Map<Int, String> = mapOf(

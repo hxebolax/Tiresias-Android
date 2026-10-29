@@ -21,17 +21,55 @@ import com.xebolax.tiresias.voz.Tipo
  * guardan igual en el historial (solo en memoria) para leerlas cuando se quiera.
  */
 class Avisos(private val lector: Lector) {
-	/** Una notificación recibida: la app, su título y su texto. Solo en memoria, nunca en disco. */
-	data class Aviso(val paquete: String, val app: String, val titulo: String, val texto: String, val momento: Long, val notificacion: Notification? = null)
+	/**
+	 * Una notificación recibida: la app, su título y su texto. Solo en memoria, nunca en disco. [motivo] es por
+	 * qué no se leyó sola (la cadena), o null si se leyó.
+	 */
+	data class Aviso(val paquete: String, val app: String, val titulo: String, val texto: String, val momento: Long, val notificacion: Notification? = null) {
+		@Volatile var motivo: Int? = null
+	}
 
 	private val historial = ArrayDeque<Aviso>()
 	private val filtro = FiltroRepetidos(ventanaMs = 3000, maximoPorSegundo = 3)
 
+	/** Las notificaciones que han llegado como evento de accesibilidad hace poco (app, hora y título), para el oyente. */
+	private val porEvento = object : LinkedHashMap<String, Long>(32, 0.75f, true) {
+		override fun removeEldestEntry(eldest: MutableMap.MutableEntry<String, Long>?) = size > 50
+	}
+
+	private fun clave(paquete: String, n: Notification): String =
+		"$paquete|${n.`when`}|${n.extras?.getCharSequence(Notification.EXTRA_TITLE)}"
+
 	fun alNotificar(paquete: String, n: Notification, e: AccessibilityEvent) {
+		synchronized(porEvento) { porEvento[clave(paquete, n)] = SystemClock.uptimeMillis() }
+		// Con el oyente de notificaciones y el móvil bloqueado, la lee el oyente: trae la notificación entera
+		// (el evento, solo la versión pública). Las llamadas, siempre por aquí
+		if (com.xebolax.tiresias.servicio.OyenteAvisos.conectado && lector.bloqueado() && !esLlamada(n)) return
+		procesar(paquete, n, e.text.joinToString(" ").trim())
+	}
+
+	/**
+	 * Una notificación del oyente ([com.xebolax.tiresias.servicio.OyenteAvisos]), en el hilo del lector. Con el
+	 * móvil bloqueado se lee ya; si no, solo si al poco no ha llegado su evento de accesibilidad (las que retiene
+	 * No molestar o las que se actualizan sin avisar), para no decirla dos veces.
+	 */
+	fun alNotificarDesdeOyente(paquete: String, n: Notification) {
+		if (lector.bloqueado()) {
+			procesar(paquete, n, "")
+			return
+		}
+		val c = clave(paquete, n)
+		lector.manejador.postDelayed({
+			val llego = synchronized(porEvento) { porEvento[c]?.let { SystemClock.uptimeMillis() - it < VIGENCIA_EVENTO_MS } == true }
+			if (!llego) procesar(paquete, n, "")
+		}, ESPERA_EVENTO_MS)
+	}
+
+	private fun procesar(paquete: String, n: Notification, textoEvento: String) {
 		val extras = n.extras
 		val titulo = extras?.getCharSequence(Notification.EXTRA_TITLE)?.toString()?.trim().orEmpty()
 		val texto = (extras?.getCharSequence(Notification.EXTRA_BIG_TEXT) ?: extras?.getCharSequence(Notification.EXTRA_TEXT))?.toString()?.trim()
-			?: e.text.joinToString(" ").trim()
+			?: textoEvento
 		if (titulo.isEmpty() && texto.isEmpty()) return
 		// Las llamadas de WhatsApp, Telegram, Signal...: se guardan para contestarlas o colgarlas con el gesto
 		if (esLlamada(n) && paquete !in marcadores()) llamadaInternet = LlamadaInternet(paquete, titulo, n, System.currentTimeMillis())
@@ -44,7 +82,9 @@ class Avisos(private val lector: Lector) {
 			historial.addFirst(aviso)
 			while (historial.size > MAXIMO) historial.removeLast()
 		}
-		val seLee = debeLeerse(paquete) && (!lector.ajustes.modoSenior || !lector.ajustes.seniorSoloMensajes || esDeLasQueImportan(paquete, n))
+		aviso.motivo = motivoParaCallar(paquete)
+			?: if (lector.ajustes.modoSenior && lector.ajustes.seniorSoloMensajes && !esDeLasQueImportan(paquete, n)) R.string.aviso_motivo_senior else null
+		val seLee = aviso.motivo == null
 		// Los complementos la reciben aunque no se lea (uno que copia los códigos los quiere también con el móvil
 		// bloqueado o la app callada); uno de esta app puede cambiarla o callarla ("" la calla)
 		val propia = if (lector.scriptsListos) lector.scripts.alNotificar(paquete, titulo, texto, mapOf(
@@ -58,9 +98,23 @@ class Avisos(private val lector: Lector) {
 			"mensajes" to mensajesDe(n),
 		)) else null
 		if (!seLee) return
-		if (propia != null && propia.isEmpty()) return
-		val frase = propia ?: lector.textos.getString(R.string.aviso_notificacion, app, listOf(titulo, texto).filter { it.isNotEmpty() }.distinct().joinToString(". "))
-		if (!filtro.pasa(paquete, frase, SystemClock.uptimeMillis())) return
+		if (propia != null && propia.isEmpty()) {
+			aviso.motivo = R.string.aviso_motivo_complemento
+			return
+		}
+		// El principio que se repite (el nombre del grupo de WhatsApp en «Familia: Ana»), solo la primera vez
+		val tituloDicho = sinPrefijoRepetido(paquete, titulo)
+		val frase = propia ?: lector.textos.getString(R.string.aviso_notificacion, app, listOf(tituloDicho, texto).filter { it.isNotEmpty() }.distinct().joinToString(". "))
+		// Palabras que callan una notificación (Ajustes, Notificaciones)
+		val palabras = lector.ajustes.palabrasCalladas
+		if (palabras.isNotEmpty() && palabras.any { frase.contains(it, ignoreCase = true) }) {
+			aviso.motivo = R.string.aviso_motivo_palabra
+			return
+		}
+		if (!filtro.pasa(paquete, frase, SystemClock.uptimeMillis())) {
+			aviso.motivo = R.string.aviso_motivo_repetida
+			return
+		}
 		lector.sonidos.tocar(Sonido.NOTIFICACION)
 		lector.voz.decir(Enunciado(frase, Modo.ENCOLAR, Tipo.NOTIFICACION))
 		if (lector.brailleListo) lector.braille.mensaje(frase)
@@ -125,17 +179,36 @@ class Avisos(private val lector: Lector) {
 	/** La app de SMS del móvil (la que reciben los códigos por mensaje). */
 	private fun appSms(): String? = runCatching { android.provider.Telephony.Sms.getDefaultSmsPackage(lector.servicio) }.getOrNull()
 
-	private fun debeLeerse(paquete: String): Boolean {
+	/** Por qué no se lee sola una notificación de [paquete] (la cadena del motivo), o null si se lee. */
+	private fun motivoParaCallar(paquete: String): Int? {
 		val a = lector.ajustes
-		if (!a.leerNotificaciones) return false
-		if (paquete in a.appsSilenciadas) return false
-		if (lector.noMolestar() && !a.notificacionesNoMolestar) return false
+		if (!a.leerNotificaciones) return R.string.aviso_motivo_apagadas
+		if (paquete in a.appsSilenciadas) return R.string.aviso_motivo_app
+		if (lector.noMolestar() && !a.notificacionesNoMolestar) return R.string.aviso_motivo_no_molestar
 		val audio = lector.servicio.getSystemService(AudioManager::class.java)
 		val enLlamada = audio?.mode == AudioManager.MODE_IN_CALL || audio?.mode == AudioManager.MODE_IN_COMMUNICATION
-		if (enLlamada && !a.notificacionesEnLlamada) return false
+		if (enLlamada && !a.notificacionesEnLlamada) return R.string.aviso_motivo_llamada
 		// Con el móvil bloqueado, si así se ha elegido, nada que no se pida (se guardan en Notificaciones recientes)
-		if (a.callarBloqueo && lector.bloqueado()) return false
-		return true
+		if (a.callarBloqueo && lector.bloqueado()) return R.string.aviso_motivo_bloqueo
+		return null
+	}
+
+	/** El último principio de título de cada app («Familia» en «Familia: Ana») y cuándo se dijo. */
+	private val prefijos = HashMap<String, Pair<String, Long>>()
+
+	/**
+	 * [titulo] sin el principio que se repite (el nombre del grupo, «Familia: Ana» tras «Familia: Juan»), si la
+	 * misma app lo ha dicho hace poco (SandFly). La primera vez se dice entero.
+	 */
+	private fun sinPrefijoRepetido(paquete: String, titulo: String): String {
+		val i = titulo.indexOf(": ")
+		if (i <= 0 || i > 60) return titulo
+		val prefijo = titulo.substring(0, i)
+		val ahora = SystemClock.uptimeMillis()
+		val antes = prefijos[paquete]
+		prefijos[paquete] = prefijo to ahora
+		if (prefijos.size > 50) prefijos.clear()
+		return if (antes != null && antes.first == prefijo && ahora - antes.second < PREFIJO_MS) titulo.substring(i + 2).trim().ifEmpty { titulo } else titulo
 	}
 
 	fun historial(): List<Aviso> = synchronized(historial) { historial.toList() }
@@ -171,5 +244,10 @@ class Avisos(private val lector: Lector) {
 			"com.samsung.android.messaging", "com.google.android.dialer", "com.android.dialer", "com.samsung.android.dialer",
 		)
 		private const val MAXIMO = 100
+		/** Lo que se espera al evento de accesibilidad de una notificación del oyente, y cuánto vale el evento. */
+		private const val ESPERA_EVENTO_MS = 1500L
+		private const val VIGENCIA_EVENTO_MS = 10_000L
+		/** Lo que dura un principio de título repetido (el grupo) para no volver a decirlo. */
+		private const val PREFIJO_MS = 120_000L
 	}
 }

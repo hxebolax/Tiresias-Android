@@ -1,5 +1,6 @@
 package com.xebolax.tiresias.lectura
 
+import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.accessibility.AccessibilityEvent
@@ -79,7 +80,8 @@ class EdicionTexto(private val lector: Lector) {
 				val dicho = if (borrado.length == 1) lector.edicionCaracter(borrado) else borrado
 				lector.decir(lector.textos.getString(R.string.edicion_borrado, dicho), Modo.INTERRUMPIR, Tipo.ESCRITURA)
 			}
-			is CambioTexto.Sustituido -> if (!contrasena) lector.decir(c.despues, Modo.INTERRUMPIR, Tipo.ESCRITURA)
+			// Una autocorrección o una palabra sugerida: como lo escrito, nada con el eco apagado
+			is CambioTexto.Sustituido -> if (!contrasena && eco != "nada") lector.decir(c.despues, Modo.INTERRUMPIR, Tipo.ESCRITURA)
 			CambioTexto.SinCambios -> Unit
 		}
 	}
@@ -304,12 +306,19 @@ class EdicionTexto(private val lector: Lector) {
 		portapapeles(junto)
 	}
 
-	private var vigilando = false
+	private var vigilado: android.content.ClipboardManager? = null
+	private val alCambiarPortapapeles = android.content.ClipboardManager.OnPrimaryClipChangedListener { cambiosPortapapeles++ }
 
 	private fun vigilarPortapapeles(cm: android.content.ClipboardManager) {
-		if (vigilando) return
-		vigilando = true
-		cm.addPrimaryClipChangedListener { cambiosPortapapeles++ }
+		if (vigilado != null) return
+		vigilado = cm
+		cm.addPrimaryClipChangedListener(alCambiarPortapapeles)
+	}
+
+	/** Al apagarse el lector: deja de vigilar el portapapeles (si no, cada arranque del servicio dejaría uno más). */
+	fun cerrar() {
+		vigilado?.let { cm -> runCatching { cm.removePrimaryClipChangedListener(alCambiarPortapapeles) }.onFailure { com.xebolax.tiresias.base.Registro.w("EdicionTexto", "No se pudo soltar el portapapeles", it) } }
+		vigilado = null
 	}
 
 	/** La huella (no el texto) de lo último que copió Tiresias, para no vaciar lo que haya copiado otro. */
@@ -353,6 +362,19 @@ class EdicionTexto(private val lector: Lector) {
 		val c = campo() ?: return false
 		val p = if (inicio) 0 else c.text?.length ?: 0
 		return seleccion(c, p, p).also { if (it) lector.decir(if (inicio) R.string.edicion_principio else R.string.edicion_final) }
+	}
+
+	/** Borra todo el texto del campo (Backtalk 318). Si solo tiene la pista (está vacío), no hay nada que borrar. */
+	fun borrarTodo(): Boolean {
+		val c = campo() ?: return false
+		if (c.text.isNullOrEmpty() || (Build.VERSION.SDK_INT >= 26 && c.isShowingHintText)) {
+			lector.decir(R.string.edicion_nada_que_borrar)
+			return false
+		}
+		val args = Bundle().apply { putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, "") }
+		val hecho = runCatching { c.performAction(AccessibilityNodeInfo.ACTION_SET_TEXT, args) }.getOrDefault(false)
+		lector.decir(if (hecho) R.string.edicion_texto_borrado else R.string.edicion_no_borrado)
+		return hecho
 	}
 
 	private fun seleccion(c: AccessibilityNodeInfo, a: Int, b: Int): Boolean {

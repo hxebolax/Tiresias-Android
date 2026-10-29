@@ -259,22 +259,92 @@
                      ],
     "temas":  [
                   {
+                      "id":  "cristal",
+                      "nombre":  "Cristal",
+                      "descripcion":  "Campanillas de vidrio, brillantes y muy cortas.",
+                      "nombre_en":  "Glass",
+                      "descripcion_en":  "Glass chimes, bright and very short.",
+                      "autor":  "Tiresias",
+                      "archivo":  "cristal.zip",
+                      "sha256":  "8219055717f367db90276b7391da782a8fea9a100f1d542503ced91c3daa0362",
+                      "tamano":  108929
+                  },
+                  {
+                      "id":  "espacio",
+                      "nombre":  "Espacio",
+                      "descripcion":  "Barridos de ciencia ficción con un poco de eco.",
+                      "nombre_en":  "Space",
+                      "descripcion_en":  "Science fiction sweeps with a little echo.",
+                      "autor":  "Tiresias",
+                      "archivo":  "espacio.zip",
+                      "sha256":  "e2481064cc0c8e2f451d889839e97d6a2a701b62c95c7db84d7050d0640729e5",
+                      "tamano":  194481
+                  },
+                  {
+                      "id":  "gotas",
+                      "nombre":  "Gotas",
+                      "descripcion":  "Gotas de agua que suben de tono: suaves y fáciles de distinguir.",
+                      "nombre_en":  "Drops",
+                      "descripcion_en":  "Water drops rising in pitch: soft and easy to tell apart.",
+                      "autor":  "Tiresias",
+                      "archivo":  "gotas.zip",
+                      "sha256":  "24c83fa8ef849cb2b508eaf1fe00e22de9ba37f36bb77657c1e1c8947d6c2d8d",
+                      "tamano":  114790
+                  },
+                  {
                       "id":  "madera",
                       "nombre":  "Madera",
                       "descripcion":  "Golpes cortos como de caja china: se oyen bien sin tapar la voz.",
+                      "nombre_en":  "Wood",
+                      "descripcion_en":  "Short knocks like a wood block: easy to hear without covering the voice.",
                       "autor":  "Tiresias",
                       "archivo":  "madera.zip",
-                      "sha256":  "78d862b8d63c6ad0322d9003072a074fd8e4060f6a5c8d2b9e3e7ddfa2d9013a",
-                      "tamano":  40897
+                      "sha256":  "e916a5453cfeaca74193686c82c52bef8ef503230aee3374b29c79d4effd6047",
+                      "tamano":  42225
+                  },
+                  {
+                      "id":  "marimba",
+                      "nombre":  "Marimba",
+                      "descripcion":  "Láminas de madera golpeadas con maza, cálidas y graves.",
+                      "nombre_en":  "Marimba",
+                      "descripcion_en":  "Wooden bars struck with a mallet, warm and low.",
+                      "autor":  "Tiresias",
+                      "archivo":  "marimba.zip",
+                      "sha256":  "027df7efba9b932760b29b40fbffd1e19b23124d4cbe0189fbd861c688cd7c97",
+                      "tamano":  184630
+                  },
+                  {
+                      "id":  "minimo",
+                      "nombre":  "Mínimo",
+                      "descripcion":  "Chasquidos muy cortos y bajos, para molestar lo menos posible.",
+                      "nombre_en":  "Minimal",
+                      "descripcion_en":  "Very short, quiet clicks, to disturb as little as possible.",
+                      "autor":  "Tiresias",
+                      "archivo":  "minimo.zip",
+                      "sha256":  "e08a69615031d08913b1cfa53d51a73f12c992f2bfb57dd6383e3b0fd82ba90d",
+                      "tamano":  20528
+                  },
+                  {
+                      "id":  "retro",
+                      "nombre":  "Retro",
+                      "descripcion":  "Pitidos de onda cuadrada, como los de las consolas de ocho bits.",
+                      "nombre_en":  "Retro",
+                      "descripcion_en":  "Square wave beeps, like eight-bit game consoles.",
+                      "autor":  "Tiresias",
+                      "archivo":  "retro.zip",
+                      "sha256":  "bfd359215dc40ae0b5b207b8622843aedf45fedd8833d5b8b34552d1d1f6456f",
+                      "tamano":  8996
                   },
                   {
                       "id":  "suave",
                       "nombre":  "Suave",
                       "descripcion":  "Tonos más graves y redondos, para quien encuentra agudos los de Tiresias.",
+                      "nombre_en":  "Soft",
+                      "descripcion_en":  "Lower, rounder tones, for those who find the Tiresias ones too sharp.",
                       "autor":  "Tiresias",
                       "archivo":  "suave.zip",
-                      "sha256":  "c9ee488daa51176b1b3a85f166370068fff05912b53acea477beea01fdf78d21",
-                      "tamano":  100557
+                      "sha256":  "efb72efdd7b95c2a3df504b193c9edb76530dfb70005307579eba57fdd9d6646",
+                      "tamano":  103437
                   }
               ]
 }

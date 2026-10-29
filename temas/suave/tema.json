@@ -2,5 +2,7 @@
 	"id": "suave",
 	"nombre": "Suave",
 	"descripcion": "Tonos más graves y redondos, para quien encuentra agudos los de Tiresias.",
+	"nombre_en": "Soft",
+	"descripcion_en": "Lower, rounder tones, for those who find the Tiresias ones too sharp.",
 	"autor": "Tiresias"
 }

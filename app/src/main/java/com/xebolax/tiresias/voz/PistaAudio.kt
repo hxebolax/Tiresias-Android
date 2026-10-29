@@ -168,6 +168,8 @@ class PistaAudio(atributosIniciales: AudioAttributes) {
 		const val SALIDA_SISTEMA = "sistema"
 		const val SALIDA_ALTAVOZ = "altavoz"
 		const val SALIDA_AURICULARES = "auriculares"
+		/** El auricular de las llamadas: para oír la voz con el móvil en la oreja, en público y sin auriculares (SandFly). */
+		const val SALIDA_AURICULAR_LLAMADA = "auricular_llamada"
 
 		/** Por dónde suenan las voces incluidas (Ajustes, Voz); lo pone la voz al leer los ajustes. */
 		@Volatile var salida = SALIDA_SISTEMA
@@ -195,7 +197,11 @@ class PistaAudio(atributosIniciales: AudioAttributes) {
 			val am = gestor ?: return null
 			if (am.mode == AudioManager.MODE_IN_CALL || am.mode == AudioManager.MODE_IN_COMMUNICATION) return null
 			val salidas = runCatching { am.getDevices(AudioManager.GET_DEVICES_OUTPUTS) }.getOrNull() ?: return null
-			val tipos = if (s == SALIDA_ALTAVOZ) listOf(AudioDeviceInfo.TYPE_BUILTIN_SPEAKER) else AURICULARES
+			val tipos = when (s) {
+				SALIDA_ALTAVOZ -> listOf(AudioDeviceInfo.TYPE_BUILTIN_SPEAKER)
+				SALIDA_AURICULAR_LLAMADA -> listOf(AudioDeviceInfo.TYPE_BUILTIN_EARPIECE)
+				else -> AURICULARES
+			}
 			return tipos.firstNotNullOfOrNull { t -> salidas.firstOrNull { it.type == t } }
 		}
 

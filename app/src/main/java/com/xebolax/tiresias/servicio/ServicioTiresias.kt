@@ -56,6 +56,8 @@ class ServicioTiresias : AccessibilityService() {
 	private var ejecutor: Ejecutor? = null
 	private var teclado: Teclado? = null
 	private var ventanas: Ventanas? = null
+	private var proximidad: CallarConProximidad? = null
+	private var avisoVolumen: AvisoVolumen? = null
 	private var paqueteActual: String? = null
 	private var ordenesPrueba: OrdenesPrueba? = null
 
@@ -71,6 +73,8 @@ class ServicioTiresias : AccessibilityService() {
 			when (i?.action) {
 				Intent.ACTION_SCREEN_ON -> lector?.manejador?.post {
 					if (ejecutor?.suspendido == true) ejecutor?.suspender(false)
+					// Con el móvil bloqueado, unos segundos sin lo que SystemUI dice solo (Backtalk 312)
+					lector?.let { l -> if (l.ajustes.soloLoElegidoAlEncender && l.bloqueado()) l.callarSistemaUnMomento() }
 					// Lo que el usuario quiere oír al encender la pantalla (Ajustes, Notificaciones y pantalla)
 					when (lector?.ajustes?.alEncender) {
 						"hora" -> lector?.decir(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(java.util.Date()), Modo.ENCOLAR)
@@ -144,6 +148,8 @@ class ServicioTiresias : AccessibilityService() {
 		sonidos = s
 		Thread({ s.cargar() }, "tiresias-sonidos").start()
 		val vibracion = Vibracion(this)
+		// Cada sonido de Tiresias vibra con su patrón (aunque los sonidos estén quitados: para quien los quita)
+		s.alSonar = { vibracion.vibrar(it) }
 		val vent = Ventanas(this)
 		ventanas = vent
 		val l = Lector(this, v, s, vibracion)
@@ -152,6 +158,12 @@ class ServicioTiresias : AccessibilityService() {
 		val ej = Ejecutor(l, vent) { suspendido -> configurar(suspendido) }
 		ejecutor = ej
 		l.alToqueAtascado = { l.manejador.post { l.decir(R.string.toque_atascado); ej.ejecutar(Accion.REINICIAR_TACTIL) } }
+		l.alMantenerDeVerdad = { si ->
+			principal.post {
+				dobleToqueDeseado = si
+				aplicarDobleToque()
+			}
+		}
 		val alAccion: (Accion) -> Unit = { a -> l.manejador.post { ej.ejecutar(a) } }
 		l.vision = Vision(l, vent)
 		l.escucha = Escucha(l, alAccion) { texto -> l.manejador.post { ej.buscarTexto(texto) } }
@@ -159,7 +171,22 @@ class ServicioTiresias : AccessibilityService() {
 		l.scripts = Scripts(l).also { it.ventanas = vent }
 		l.manejador.post { l.scripts.recargar() }
 		teclado = Teclado(l, alAccion)
+		// Tapar el sensor de proximidad calla la voz (solo se mira mientras habla)
+		val prox = CallarConProximidad(this, l.ajustes) {
+			l.manejador.post {
+				l.continua.parar()
+				l.vision.pararDescripcionContinua()
+				v.callar()
+			}
+		}
+		proximidad = prox
+		v.alCambiarHablando = { hablando -> prox.alCambiarHablando(hablando) }
+		// El volumen nuevo al cambiarlo con las teclas («Volumen multimedia, 40 por ciento»)
+		avisoVolumen = AvisoVolumen(this, l.ajustes) { nombre, porCiento ->
+			l.manejador.post { l.decir(l.textos.getString(R.string.volumen_cambiado, l.textos.getString(nombre), porCiento)) }
+		}.also { it.iniciar() }
 		configurar(false)
+		vigilarOtrosExploradores()
 		cargarDiccionario(v)
 		registerReceiver(pantalla, IntentFilter().apply {
 			addAction(Intent.ACTION_SCREEN_ON)
@@ -187,8 +214,77 @@ class ServicioTiresias : AccessibilityService() {
 		v.decir(Enunciado(frase, Modo.ENCOLAR, Tipo.SISTEMA))
 	}
 
+	/** Mientras el foco está en un botón de mantener pulsado (una nota de voz), el doble toque lo hace Android. */
+	@Volatile private var dobleToqueDeAndroid = false
+	/**
+	 * Otro servicio activo pide la exploración táctil (el ayudante de otro lector): Android tiene un solo modo de
+	 * gestos para todos y, si Tiresias se queda el doble toque, deja de funcionar (Backtalk 275). Mientras esté,
+	 * el doble toque lo hace Android.
+	 */
+	@Volatile private var otroExplora = false
+	private var oyenteServicios: Any? = null
+	private val alCambiarServicios = Runnable { revisarOtrosExploradores() }
+
+	private fun vigilarOtrosExploradores() {
+		revisarOtrosExploradores()
+		if (Build.VERSION.SDK_INT < 33 || oyenteServicios != null) return
+		val am = getSystemService(android.view.accessibility.AccessibilityManager::class.java) ?: return
+		val oyente = android.view.accessibility.AccessibilityManager.AccessibilityServicesStateChangeListener {
+			// Android rehace la detección de gestos al cambiar: se mira un poco después
+			principal.removeCallbacks(alCambiarServicios)
+			principal.postDelayed(alCambiarServicios, ESPERA_OTROS_MS)
+		}
+		runCatching { am.addAccessibilityServicesStateChangeListener(mainExecutor, oyente) }
+			.onSuccess { oyenteServicios = oyente }
+			.onFailure { Registro.w(ETIQUETA, "No se pudo vigilar los demás servicios de accesibilidad", it) }
+	}
+
+	private fun dejarDeVigilarOtros() {
+		principal.removeCallbacks(alCambiarServicios)
+		if (Build.VERSION.SDK_INT < 33) return
+		val oyente = oyenteServicios as? android.view.accessibility.AccessibilityManager.AccessibilityServicesStateChangeListener ?: return
+		runCatching { getSystemService(android.view.accessibility.AccessibilityManager::class.java)?.removeAccessibilityServicesStateChangeListener(oyente) }
+		oyenteServicios = null
+	}
+
+	private fun revisarOtrosExploradores() {
+		val am = getSystemService(android.view.accessibility.AccessibilityManager::class.java) ?: return
+		val hay = runCatching {
+			am.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_ALL_MASK).any { s ->
+				s.resolveInfo?.serviceInfo?.packageName != packageName && s.flags and AccessibilityServiceInfo.FLAG_REQUEST_TOUCH_EXPLORATION_MODE != 0
+			}
+		}.getOrDefault(false)
+		if (hay == otroExplora) return
+		otroExplora = hay
+		Registro.i(ETIQUETA, if (hay) "Otro servicio explora por toque: el doble toque lo hace Android" else "Ya no hay otro servicio que explore: el doble toque vuelve a Tiresias")
+		configurar(suspendidoAhora)
+	}
+
+	/** El que se quiere ahora (el foco está o no en un botón de mantener pulsado); se pone al levantar el dedo. */
+	@Volatile private var dobleToqueDeseado = false
+	private val aplicarDobleToqueLuego = Runnable { aplicarDobleToque() }
+
+	/**
+	 * Pone el doble toque de Android o el de Tiresias. Cambiar la configuración con un dedo en la pantalla rehace
+	 * la exploración táctil y corta el toque (al arrastrar el dedo desde el micrófono ya no se leía nada hasta
+	 * levantarlo): se espera a que se levante, y el doble toque siempre llega después.
+	 */
+	private fun aplicarDobleToque() {
+		principal.removeCallbacks(aplicarDobleToqueLuego)
+		if (dobleToqueDeseado == dobleToqueDeAndroid) return
+		if (lector?.dedoEnPantalla == true) {
+			principal.postDelayed(aplicarDobleToqueLuego, ESPERA_DEDO_MS)
+			return
+		}
+		dobleToqueDeAndroid = dobleToqueDeseado
+		configurar(suspendidoAhora)
+	}
+	@Volatile private var suspendidoAhora = false
+	private val principal = android.os.Handler(android.os.Looper.getMainLooper())
+
 	/** Pone la configuración del servicio. Suspendido: sin exploración táctil ni gestos (solo las teclas de volumen). */
 	private fun configurar(suspendido: Boolean) {
+		suspendidoAhora = suspendido
 		val info = serviceInfo ?: return
 		var banderas = AccessibilityServiceInfo.FLAG_REPORT_VIEW_IDS or
 			AccessibilityServiceInfo.FLAG_RETRIEVE_INTERACTIVE_WINDOWS or
@@ -200,8 +296,11 @@ class ServicioTiresias : AccessibilityService() {
 			if (Build.VERSION.SDK_INT >= 30) {
 				// El doble toque (y el doble toque mantenido) los hace Tiresias sobre lo que acaba de decir,
 				// como TalkBack: si los hace Android, actúa sobre SU foco, que puede no ser el que se ha oído
-				// (en los menús de Tiresias y en las listas había que repetir el doble toque)
-				banderas = banderas or AccessibilityServiceInfo.FLAG_REQUEST_MULTI_FINGER_GESTURES or AccessibilityServiceInfo.FLAG_SERVICE_HANDLES_DOUBLE_TAP
+				// (en los menús de Tiresias y en las listas había que repetir el doble toque). Salvo en un botón
+				// de mantener pulsado (grabar una nota de voz): ahí Android deja el botón pulsado mientras no se
+				// levanta el dedo, y Tiresias solo podría mandar una pulsación larga que la app descarta
+				banderas = banderas or AccessibilityServiceInfo.FLAG_REQUEST_MULTI_FINGER_GESTURES
+				if (!dobleToqueDeAndroid && !otroExplora) banderas = banderas or AccessibilityServiceInfo.FLAG_SERVICE_HANDLES_DOUBLE_TAP
 			}
 			if (Build.VERSION.SDK_INT >= 31) banderas = banderas or AccessibilityServiceInfo.FLAG_REQUEST_2_FINGER_PASSTHROUGH
 		}
@@ -352,6 +451,13 @@ class ServicioTiresias : AccessibilityService() {
 		runCatching { lector?.takeIf { it.scriptsListos }?.scripts?.cerrar() }
 		runCatching { lector?.braille?.parar() }
 		runCatching { ventanas?.ponerCortina(false) }
+		runCatching {
+			voz?.alCambiarHablando = null
+			principal.removeCallbacks(aplicarDobleToqueLuego)
+			dejarDeVigilarOtros()
+			proximidad?.cerrar()
+			avisoVolumen?.cerrar()
+		}
 		runCatching { lector?.cerrar() }
 		runCatching {
 			sonidos?.tocar(Sonido.APAGADO)
@@ -426,7 +532,6 @@ class ServicioTiresias : AccessibilityService() {
 	fun probarSonido(s: Sonido) {
 		val l = lector ?: return
 		l.sonidos.tocar(s)
-		l.vibracion.vibrar(s)
 	}
 
 	// --- API para otras apps (api/ServicioApi) ---------------------------------------------
@@ -547,6 +652,10 @@ class ServicioTiresias : AccessibilityService() {
 
 	companion object {
 		private const val ETIQUETA = "ServicioTiresias"
+		/** Lo que se espera, al cambiar los servicios de accesibilidad, antes de mirar si otro explora por toque. */
+		private const val ESPERA_OTROS_MS = 500L
+		/** Cada cuánto se mira si ya se ha levantado el dedo para cambiar el doble toque. */
+		private const val ESPERA_DEDO_MS = 120L
 
 		/** El servicio conectado ahora, o null si Tiresias no está activo. */
 		@Volatile var instancia: ServicioTiresias? = null

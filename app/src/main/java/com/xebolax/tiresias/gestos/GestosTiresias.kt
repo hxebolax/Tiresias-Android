@@ -191,7 +191,7 @@ class GestosTiresias(private val lector: Lector) {
 	/** Los toques en [zona] (el teclado en pantalla) pasan directos a la app; null: ninguna. */
 	fun zonaDirecta(zona: android.graphics.Rect?) {
 		if (Build.VERSION.SDK_INT < 30 || toqueDirectoEn != null || zonaDeApp || ayuda) return
-		runCatching { servicio.setTouchExplorationPassthroughRegion(Display.DEFAULT_DISPLAY, if (zona != null && !zona.isEmpty) Region(zona) else Region()) }
+		runCatching { fijarRegion(if (zona != null && !zona.isEmpty) Region(zona) else Region()) }
 			.onFailure { Registro.w(ETIQUETA, "No se pudo poner el toque directo en el teclado", it) }
 	}
 
@@ -208,8 +208,38 @@ class GestosTiresias(private val lector: Lector) {
 
 	private fun ponerRegion(zona: android.graphics.Rect?) {
 		if (Build.VERSION.SDK_INT < 30) return
-		runCatching { servicio.setTouchExplorationPassthroughRegion(Display.DEFAULT_DISPLAY, if (zona != null && !zona.isEmpty) Region(zona) else Region()) }
+		runCatching { fijarRegion(if (zona != null && !zona.isEmpty) Region(zona) else Region()) }
 			.onFailure { Registro.w(ETIQUETA, "No se pudo poner la zona de toque directo de la app", it) }
+	}
+
+	/** La zona de paso de toques puesta ahora (para devolverla tras un toque de Tiresias). */
+	private var regionPuesta = Region()
+
+	@androidx.annotation.RequiresApi(30)
+	private fun fijarRegion(r: Region) {
+		servicio.setTouchExplorationPassthroughRegion(Display.DEFAULT_DISPLAY, r)
+		regionPuesta = Region(r)
+	}
+
+	/**
+	 * Un gesto de un dedo de Tiresias (un toque de verdad, una pulsación larga) que empieza en [zona]: si no
+	 * pasa directo a la app, la exploración táctil lo toma por un dedo que explora y la app no recibe nada
+	 * (Backtalk, DirectClick). Mientras dura, [zona] se suma a la de paso de toques; la función que devuelve
+	 * pone la de antes (si nadie la ha cambiado entretanto).
+	 */
+	fun pasoParaToque(zona: android.graphics.Rect): () -> Unit {
+		if (Build.VERSION.SDK_INT < 30) return {}
+		val antes = Region(regionPuesta)
+		val con = Region(antes).apply { op(zona, Region.Op.UNION) }
+		try {
+			fijarRegion(con)
+		} catch (e: Exception) {
+			Registro.w(ETIQUETA, "No se pudo abrir el paso para un toque de Tiresias", e)
+			return {}
+		}
+		return {
+			if (regionPuesta == con) runCatching { fijarRegion(antes) }.onFailure { Registro.w(ETIQUETA, "No se pudo devolver la zona de paso de toques", it) }
+		}
 	}
 
 	private fun region(toda: Boolean) {
@@ -221,7 +251,7 @@ class GestosTiresias(private val lector: Lector) {
 			val ancho = limites?.width() ?: servicio.resources.displayMetrics.widthPixels
 			val alto = limites?.height() ?: servicio.resources.displayMetrics.heightPixels
 			val r = if (toda) Region(0, 0, ancho, alto) else Region()
-			servicio.setTouchExplorationPassthroughRegion(Display.DEFAULT_DISPLAY, r)
+			fijarRegion(r)
 		} catch (e: Exception) {
 			Registro.w(ETIQUETA, "No se pudo cambiar la región de paso de toques", e)
 		}

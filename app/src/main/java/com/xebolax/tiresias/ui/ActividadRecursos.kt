@@ -149,9 +149,11 @@ class ActividadRecursos : ActividadBase() {
 		val dialogo: AlertDialog = MaterialAlertDialogBuilder(this)
 			.setTitle(getString(R.string.rec_bajando, titulo))
 			.setView(vista)
-			.setCancelable(false)
+			// Atrás cancela la descarga, como el botón (tocar fuera, no: se cancelaría sin querer)
+			.setOnCancelListener { descarga?.cancel() }
 			.setNegativeButton(R.string.cancelar) { _, _ -> descarga?.cancel() }
 			.show()
+			.also { it.setCanceledOnTouchOutside(false) }
 		var ultimo = 0L
 		descarga = lifecycleScope.launch {
 			try {

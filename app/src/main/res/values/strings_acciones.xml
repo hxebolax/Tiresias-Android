@@ -79,6 +79,7 @@
 	<string name="accion_rehacer">Rehacer</string>
 	<string name="accion_cursor_inicio">Cursor al principio</string>
 	<string name="accion_cursor_final">Cursor al final</string>
+	<string name="accion_borrar_texto">Borrar todo el texto</string>
 	<string name="accion_describir_ia">Describir el elemento con IA</string>
 	<string name="accion_pantalla_ia">Describir la pantalla con IA</string>
 	<string name="accion_preguntar_ia">Preguntar a la IA sobre la pantalla</string>
@@ -206,6 +207,7 @@
 	<string name="acc_pegar">Pegar</string>
 	<string name="acc_cursor_inicio">Cursor al principio</string>
 	<string name="acc_cursor_final">Cursor al final</string>
+	<string name="acc_borrar_texto">Borrar todo el texto</string>
 	<string name="acc_modo_seleccion">Modo selección</string>
 	<string name="acc_deshacer">Deshacer</string>
 	<string name="acc_rehacer">Rehacer</string>

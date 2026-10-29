@@ -248,14 +248,16 @@ object Nodos {
 	 */
 	fun textoHijos(n: AccessibilityNodeInfo, maximo: Int = 600): String {
 		val sb = StringBuilder()
-		textoHijos(n, sb, 0, maximo, false)
+		val dichos = HashSet<String>()
+		textoHijos(n, sb, 0, maximo, false, dichos)
 		// Una fila medio fuera de la pantalla (al final de una lista que aún se está desplazando) tiene
 		// sus textos todavía sin ver: antes que «sin nombre», se leen aunque no se vean
-		if (sb.isBlank() && n.isVisibleToUser) textoHijos(n, sb, 0, maximo, true)
-		return sb.toString().replace(Regex("\\s+"), " ").trim()
+		if (sb.isBlank() && n.isVisibleToUser) textoHijos(n, sb, 0, maximo, true, dichos)
+		// (sin comas seguidas, que dejan los textos que acaban en coma)
+		return sb.toString().replace(Regex("\\s+"), " ").replace(Regex(",(\\s*,)+"), ",").trim().trimEnd(',')
 	}
 
-	private fun textoHijos(n: AccessibilityNodeInfo, sb: StringBuilder, nivel: Int, maximo: Int, ocultos: Boolean) {
+	private fun textoHijos(n: AccessibilityNodeInfo, sb: StringBuilder, nivel: Int, maximo: Int, ocultos: Boolean, dichos: MutableSet<String>) {
 		if (nivel > 8 || sb.length > maximo) return
 		for (i in 0 until n.childCount) {
 			val hijo = runCatching { n.getChild(i) }.getOrNull() ?: continue
@@ -268,10 +270,14 @@ object Nodos {
 				else -> hijo.text
 			}
 			if (!propio.isNullOrBlank()) {
+				// El mismo texto otra vez (el título y el deslizador que lo repite como descripción) no se dice dos veces
+				// (solo frases con letras: un marcador «2» y «2» sí se dice entero)
+				val clave = propio.toString().trim().trimEnd(',').lowercase()
+				if (clave.length >= 4 && clave.any { it.isLetter() } && !dichos.add(clave)) continue
 				if (sb.isNotEmpty()) sb.append(", ")
 				sb.append(propio)
 				if (Build.VERSION.SDK_INT >= 30) hijo.stateDescription?.takeIf { it.isNotBlank() }?.let { sb.append(", ").append(it) }
-			} else textoHijos(hijo, sb, nivel + 1, maximo, ocultos)
+			} else textoHijos(hijo, sb, nivel + 1, maximo, ocultos, dichos)
 		}
 	}
 
@@ -462,6 +468,28 @@ object Nodos {
 
 	/** Si [n] todavía existe en su ventana (refresh devuelve false si la app lo ha quitado). */
 	fun vivo(n: AccessibilityNodeInfo): Boolean = runCatching { n.refresh() }.getOrDefault(false)
+
+	/**
+	 * Un botón que se usa manteniéndolo pulsado: grabar una nota de voz en WhatsApp
+	 * o Telegram, hablar en un walkie. Ahí el doble toque mantenido tiene que dejarlo
+	 * pulsado de verdad hasta que se levanta el dedo (una pulsación larga no basta:
+	 * la app graba medio segundo y lo descarta). Se reconoce por su identificador o
+	 * por su nombre.
+	 */
+	fun esDeMantenerPulsado(n: AccessibilityNodeInfo): Boolean {
+		// (el de WhatsApp no se dice pulsable ni de pulsación larga: solo trae la acción de pulsación larga)
+		if (!accionable(n)) return false
+		val id = n.viewIdResourceName?.substringAfter(":id/", "")?.lowercase().orEmpty()
+		if (id.isNotEmpty() && ID_MANTENER.containsMatchIn(id)) return true
+		val nombre = (n.contentDescription ?: n.text)?.toString().orEmpty()
+		return nombre.length <= 60 && NOMBRE_MANTENER.containsMatchIn(nombre)
+	}
+
+	private val ID_MANTENER = Regex("(^|_)(voice_?note|ptt|record\\w*|mic|microphone)(_|$)")
+	private val NOMBRE_MANTENER = Regex(
+		"(?i)\\b(mensajes? de voz|notas? de voz|grabar audio|graba(r|ción) de voz|mantén pulsado para grabar|" +
+			"voice (message|note)s?|hold to record|record (audio|voice)|push to talk|pulsa para hablar)\\b",
+	)
 
 	/** Una contraseña o lo que la app marca como datos sensibles (Android 14). */
 	fun sensible(n: AccessibilityNodeInfo): Boolean =

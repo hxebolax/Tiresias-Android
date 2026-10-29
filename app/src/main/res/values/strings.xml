@@ -142,9 +142,19 @@
 	<string name="valor_motor_velocidad">Voz: %1$s, velocidad %2$d por ciento</string>
 	<string name="valor_idioma">Idioma: %1$s</string>
 	<string name="valor_salida">Salida: %1$s</string>
+	<string name="volumen_cambiado">%1$s, %2$d por ciento</string>
+	<string name="volumen_multimedia">Volumen multimedia</string>
+	<string name="volumen_tono">Volumen del tono de llamada</string>
+	<string name="volumen_notificaciones">Volumen de las notificaciones</string>
+	<string name="volumen_alarma">Volumen de la alarma</string>
+	<string name="volumen_llamada">Volumen de la llamada</string>
+	<string name="volumen_sistema">Volumen del sistema</string>
+	<string name="volumen_accesibilidad">Volumen de accesibilidad</string>
+	<string name="volumen_otro">Volumen</string>
 	<string name="salida_sistema">la del sistema</string>
 	<string name="salida_altavoz">el altavoz del móvil</string>
 	<string name="salida_auriculares">los auriculares</string>
+	<string name="salida_auricular_llamada">el auricular de las llamadas</string>
 	<string name="salida_sin_auriculares">No hay auriculares conectados</string>
 
 	<!-- Pantallas: generales -->

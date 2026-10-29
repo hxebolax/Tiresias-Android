@@ -9,8 +9,8 @@ plugins {
 // Se puede cambiar en Ajustes; para compilar con otro: gradle assembleRelease -PurlActualizaciones=https://...
 val urlActualizaciones = (project.findProperty("urlActualizaciones") as String?) ?: "https://xebolax.synology.me/Tiresias-Android"
 
-// Repositorio de GitHub (respaldo del actualizador). De momento no está publicado: el respaldo
-// queda en el código pero apagado. Cuando se suba: -PgithubActivo=true (o cambiar el valor aquí).
+// Repositorio de GitHub (respaldo del actualizador y de la tienda), publicado desde la 1.0.4:
+// encendido. Para compilar sin él: -PgithubActivo=false.
 val repoGithub = (project.findProperty("repoGithub") as String?) ?: "hxebolax/Tiresias-Android"
 val githubActivo = (project.findProperty("githubActivo") as String?)?.toBoolean() ?: true
 
@@ -34,8 +34,8 @@ android {
 		// versión posterior (gestos de varios dedos, capturas, braille HID...) se comprueba al usarlo.
 		minSdk = 24
 		targetSdk = 37
-		versionCode = 6
-		versionName = "1.0.5"
+		versionCode = 7
+		versionName = "1.0.6"
 
 		buildConfigField("String", "URL_ACTUALIZACIONES", "\"$urlActualizaciones\"")
 		buildConfigField("String", "REPO_GITHUB", "\"$repoGithub\"")
@@ -154,6 +154,14 @@ val copiarNovedades = tasks.register<Copy>("copiarNovedades") {
 }
 android.sourceSets.getByName("main").assets.srcDir(layout.buildDirectory.dir("generated/novedades").get().asFile)
 tasks.named("preBuild") { dependsOn(copiarNovedades) }
+
+// Los temas de sonidos de Tiresias (temas/<id>/, los mismos de la tienda) dentro de la app, para elegirlos sin internet
+val copiarTemas = tasks.register<Sync>("copiarTemas") {
+	from(rootProject.file("temas"))
+	into(layout.buildDirectory.dir("generated/temas/temas"))
+}
+android.sourceSets.getByName("main").assets.srcDir(layout.buildDirectory.dir("generated/temas").get().asFile)
+tasks.named("preBuild") { dependsOn(copiarTemas) }
 
 dependencies {
 	implementation(project(":nucleo"))

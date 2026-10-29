@@ -154,6 +154,23 @@ class Teclado(private val lector: Lector, private val alAccion: (Accion) -> Unit
 		lector.perfiles.mapaGestos(lector.ajustes.mapaGestos, lector.foco?.packageName?.toString())[g]
 
 	private var volumenLarga = false
+	/** La tecla de volumen pulsada ahora mueve el cursor del campo de texto. */
+	private var volumenEnCursor = false
+	/** La tecla de volumen pulsada ahora cambia el volumen de la voz (había un dedo en la pantalla al pulsarla). */
+	private var volumenConDedo = false
+
+	/**
+	 * Con un dedo en la pantalla (o leyendo de seguido), la tecla cambia el volumen de la voz de Tiresias, como
+	 * en TalkBack; también es de Tiresias el soltar de esa tecla, aunque el dedo ya se haya levantado.
+	 */
+	private fun volumenDeLaVoz(e: KeyEvent, arriba: Boolean): Boolean {
+		volumenConDedo = true
+		if (e.repeatCount % 3 == 0) alAccion(if (arriba) Accion.VOLUMEN_MAS else Accion.VOLUMEN_MENOS)
+		return true
+	}
+
+	private fun pantallaEncendida(): Boolean =
+		runCatching { lector.servicio.getSystemService(android.os.PowerManager::class.java)?.isInteractive }.getOrNull() ?: true
 	private val toquesVolumen = ArrayList<Long>()
 	private var volumenPendiente: Runnable? = null
 
@@ -174,6 +191,8 @@ class Teclado(private val lector: Lector, private val alAccion: (Accion) -> Unit
 			if (arriba) volumenArriba = ahora else volumenAbajo = ahora
 			if (volumenArriba > 0 && volumenAbajo > 0) {
 				ambasDisparada = false
+				// Las dos a la vez (casi a la vez) mientras se lee una notificación: se calla (SandFly)
+				if (lector.voz.diciendoAviso && Math.abs(volumenArriba - volumenAbajo) <= AMBAS_AVISO_MS) lector.voz.callar()
 				lector.manejador.postDelayed({
 					if (volumenArriba > 0 && volumenAbajo > 0 && !ambasDisparada) {
 						ambasDisparada = true
@@ -192,14 +211,42 @@ class Teclado(private val lector: Lector, private val alAccion: (Accion) -> Unit
 		}
 		// Las dos a la vez: no se toca nada más
 		if (volumenArriba > 0 && volumenAbajo > 0) return false
-		// Un deslizador enfocado: las teclas cambian su valor
-		if (lector.ajustes.volumenDeslizadores && lector.foco?.rangeInfo != null) {
+		// Con un dedo en la pantalla, el volumen de la voz de Tiresias (como TalkBack); el soltar de esa
+		// tecla también es de Tiresias, aunque el dedo ya se haya levantado
+		if (e.action == KeyEvent.ACTION_DOWN && lector.dedoEnPantalla) return volumenDeLaVoz(e, arriba)
+		if (volumenConDedo) {
+			if (e.action == KeyEvent.ACTION_UP) volumenConDedo = false
+			return true
+		}
+		// En un campo de texto, si se ha elegido, las teclas mueven el cursor: arriba, un carácter atrás; abajo,
+		// uno adelante (SandFly). Lo que se decide al pulsar vale hasta soltar
+		if (e.action == KeyEvent.ACTION_DOWN && e.repeatCount == 0 && lector.ajustes.volumenCursor && lector.foco?.isEditable == true &&
+			!lector.continua.activa && pantallaEncendida()) volumenEnCursor = true
+		if (volumenEnCursor) {
+			if (e.action == KeyEvent.ACTION_DOWN) {
+				val f = lector.foco
+				if (f != null) {
+					val args = android.os.Bundle().apply {
+						putInt(android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_MOVEMENT_GRANULARITY_INT, android.view.accessibility.AccessibilityNodeInfo.MOVEMENT_GRANULARITY_CHARACTER)
+					}
+					val accion = if (arriba) android.view.accessibility.AccessibilityNodeInfo.ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY
+					else android.view.accessibility.AccessibilityNodeInfo.ACTION_NEXT_AT_MOVEMENT_GRANULARITY
+					lector.manejador.post { runCatching { f.performAction(accion, args) } }
+				}
+			} else if (e.action == KeyEvent.ACTION_UP) volumenEnCursor = false
+			return true
+		}
+		// Un deslizador enfocado: las teclas cambian su valor (con la pantalla encendida: apagada, el volumen de siempre)
+		if (lector.ajustes.volumenDeslizadores && lector.foco?.rangeInfo != null && pantallaEncendida()) {
 			if (e.action == KeyEvent.ACTION_DOWN) alAccion(if (arriba) Accion.VALOR_MAS else Accion.VALOR_MENOS)
 			return true
 		}
 		val larga = accionDe(if (arriba) Gesto.VOLUMEN_ARRIBA_MANTENIDO else Gesto.VOLUMEN_ABAJO_MANTENIDO)
 		val triple = accionDe(if (arriba) Gesto.VOLUMEN_ARRIBA_TRIPLE else Gesto.VOLUMEN_ABAJO_TRIPLE)
-		if (larga == Accion.NINGUNA && triple == Accion.NINGUNA) return false
+		if (larga == Accion.NINGUNA && triple == Accion.NINGUNA) {
+			// Leyendo de seguido, el volumen de la voz sin cortar la lectura (como TalkBack); si no, el del sistema
+			return if (e.action == KeyEvent.ACTION_DOWN && lector.continua.activa) volumenDeLaVoz(e, arriba) else false
+		}
 		if (e.action == KeyEvent.ACTION_DOWN) {
 			if (e.repeatCount == 0) {
 				volumenLarga = false
@@ -256,5 +303,7 @@ class Teclado(private val lector: Lector, private val alAccion: (Accion) -> Unit
 		const val MANTENER_AMBAS_MS = 1500L
 		const val MANTENER_UNA_MS = 700L
 		const val TRIPLE_MS = 500L
+		/** Lo que puede haber entre las dos teclas de volumen para callar una notificación. */
+		const val AMBAS_AVISO_MS = 400L
 	}
 }

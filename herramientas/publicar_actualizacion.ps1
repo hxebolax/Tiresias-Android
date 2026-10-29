@@ -206,6 +206,8 @@ foreach ($d in Get-ChildItem (Join-Path $Raiz "temas") -Directory -ErrorAction S
 		id = $t.id
 		nombre = $t.nombre
 		descripcion = $t.descripcion
+		nombre_en = $t.nombre_en
+		descripcion_en = $t.descripcion_en
 		autor = $t.autor
 		archivo = "$($t.id).zip"
 		sha256 = (Get-FileHash -Algorithm SHA256 $zip).Hash.ToLower()

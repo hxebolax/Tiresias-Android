@@ -139,9 +139,19 @@
 	<string name="estado_parte_no_molestar">Whether Do not disturb is on</string>
 	<string name="estado_parte_timbre">The ringer (sound, vibrate or silent)</string>
 	<string name="estado_parte_espacio">Free storage</string>
+	<string name="volumen_cambiado">%1$s, %2$d percent</string>
+	<string name="volumen_multimedia">Media volume</string>
+	<string name="volumen_tono">Ring volume</string>
+	<string name="volumen_notificaciones">Notification volume</string>
+	<string name="volumen_alarma">Alarm volume</string>
+	<string name="volumen_llamada">Call volume</string>
+	<string name="volumen_sistema">System volume</string>
+	<string name="volumen_accesibilidad">Accessibility volume</string>
+	<string name="volumen_otro">Volume</string>
 	<string name="salida_sistema">the system one</string>
 	<string name="salida_altavoz">the phone speaker</string>
 	<string name="salida_auriculares">the headphones</string>
+	<string name="salida_auricular_llamada">the call earpiece</string>
 	<string name="salida_sin_auriculares">No headphones connected</string>
 
 	<!-- Screens: general -->

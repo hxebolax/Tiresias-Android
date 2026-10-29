@@ -199,7 +199,9 @@ object AsistenteIA {
 			.put("system_instruction", JSONObject().put("parts", JSONArray().put(JSONObject().put("text", sistema))))
 			.put("contents", contenidos)
 		// El elegido y, si el servicio falla (5xx) o no lo encuentra (404), los de reserva
-		val modelos = (listOf(modelo.ifBlank { MODELO_GEMINI }) + GEMINI_RESERVA).distinct()
+		// (sin espacios ni el «models/» con el que AI Studio enseña los nombres: Backtalk 306)
+		val elegido = modelo.trim().removePrefix("models/").trim()
+		val modelos = (listOf(elegido.ifBlank { MODELO_GEMINI }) + GEMINI_RESERVA).distinct()
 		var fallo: ErrorIA? = null
 		var r: JSONObject? = null
 		for (m in modelos) {

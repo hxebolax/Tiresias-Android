@@ -34,6 +34,8 @@
 	<string name="aj_cambio_idioma_res">Cuando la app indica el idioma de un texto</string>
 	<string name="aj_callar_grabar">No hablar encima de las grabaciones</string>
 	<string name="aj_callar_grabar_res">Mientras otra app graba con el micrófono, solo se dice lo que tú pides al moverte</string>
+	<string name="aj_callar_proximidad">Callar al tapar el sensor de proximidad</string>
+	<string name="aj_callar_proximidad_res">Pasa la mano por encima de la parte de arriba de la pantalla para que la voz se calle. No funciona durante las llamadas.</string>
 	<string name="aj_cat_sonidos">Sonidos y vibración</string>
 	<string name="aj_sonidos">Sonidos</string>
 	<string name="aj_volumen_sonidos">Volumen de los sonidos</string>
@@ -556,11 +558,13 @@
 		<item>La del sistema</item>
 		<item>El altavoz del móvil</item>
 		<item>Los auriculares, si hay unos conectados</item>
+		<item>El auricular de las llamadas (con el móvil en la oreja)</item>
 	</string-array>
 	<string-array name="salida_audio_valores" translatable="false">
 		<item>sistema</item>
 		<item>altavoz</item>
 		<item>auriculares</item>
+		<item>auricular_llamada</item>
 	</string-array>
 	<string name="aj_modo_senior">Modo senior</string>
 	<string name="aj_modo_senior_res">Tiresias sencillo para personas mayores: pocos gestos, las teclas de volumen y pedir ayuda</string>
@@ -606,8 +610,21 @@
 	<string name="senior_codigo_mal">Ese no es el código</string>
 	<string name="aj_motor_avisos">Voz de las notificaciones</string>
 	<string name="aj_motor_avisos_misma">La misma voz de siempre</string>
+	<string name="aj_volumen_cursor">Teclas de volumen en los campos de texto</string>
+	<string name="aj_volumen_cursor_res">En un campo de texto, volumen arriba lleva el cursor un carácter atrás y volumen abajo, uno adelante, diciendo el carácter</string>
+	<string name="aj_braille_intro_envia">Intro envía en las apps de mensajes</string>
+	<string name="aj_braille_intro_envia_res">En el teclado braille, Intro (dos dedos hacia abajo) pulsa el botón Enviar de WhatsApp, Telegram, Signal o Mensajes, en vez de saltar de línea</string>
+	<string name="aj_oyente_avisos">Leer también las que Android no avisa</string>
+	<string name="aj_oyente_avisos_si">Con acceso a las notificaciones: con el móvil bloqueado se leen enteras, y también las que retiene No molestar y las que se actualizan sin avisar. No se guarda nada</string>
+	<string name="aj_oyente_avisos_no">Sin acceso. Toca para dárselo a Tiresias en los ajustes del móvil: así, con el móvil bloqueado, las notificaciones se leen enteras</string>
+	<string name="aj_palabras_calladas">Palabras que callan una notificación</string>
+	<string name="aj_palabras_calladas_res">Si una notificación tiene alguna de estas palabras, no se lee sola (se guarda igual en Notificaciones recientes). Sepáralas con comas</string>
+	<string name="aj_decir_volumen">Decir los cambios de volumen</string>
+	<string name="aj_decir_volumen_res">Al subir o bajar un volumen con las teclas, se dice cuál y cuánto queda («Volumen multimedia, 40 por ciento»)</string>
+	<string name="aj_solo_lo_elegido">Al encender, decir solo lo elegido</string>
+	<string name="aj_solo_lo_elegido_res">Con el móvil bloqueado, durante unos segundos tras encender la pantalla no se dice lo que la pantalla de bloqueo anuncia sola (el operador, el foco que pone). Las llamadas y las alertas de emergencia se dicen siempre; tocar la pantalla o una tecla lo termina</string>
 	<string name="aj_teclados_que_hablan">Teclados que hablan solos</string>
-	<string name="aj_teclados_que_hablan_res">Con estos teclados, Tiresias no repite lo que se escribe ni sus teclas: ya lo dicen ellos</string>
+	<string name="aj_teclados_que_hablan_res">Con estos teclados, Tiresias no dice sus teclas ni lo que se escribe, porque ya lo dicen ellos (como el teclado braille de TalkBack). No marques Gboard, SwiftKey ni el teclado de Samsung: no hablan solos y te quedarías sin oír las teclas</string>
 	<string name="aj_detectar_idioma">Detectar el idioma de los textos largos</string>
 	<string name="aj_detectar_idioma_res">Si la app no dice en qué idioma está un texto largo, Tiresias lo deduce (español o inglés) y lo lee con esa voz</string>
 	<string name="aj_restablecer">Restablecer Tiresias</string>

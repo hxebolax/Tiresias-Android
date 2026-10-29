@@ -353,6 +353,7 @@
 	<string name="sonido_tecla">Physical keyboard key</string>
 	<string name="sonido_edicion">Text editing</string>
 	<string name="sonido_cargando">Working (text recognition, AI...)</string>
+	<string name="sonido_fila">Moving to the next row (icons, cells)</string>
 	<string name="pantalla_apagada">Screen off</string>
 	<string name="ordenar_partes_titulo">Choose what is spoken and in which order</string>
 	<string name="ordenar_partes_res">The parts spoken for each item (name, type, state, position...) and their order</string>

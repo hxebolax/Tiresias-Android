@@ -1,6 +1,8 @@
 package com.xebolax.tiresias.lectura
 
+import android.accessibilityservice.GestureDescription
 import android.graphics.Rect
+import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
 import com.xebolax.tiresias.base.Ajustes
@@ -40,7 +42,10 @@ class Navegador(private val lector: Lector) {
 		val contenedor: AccessibilityNodeInfo? = null, val filaDesde: Int? = null, val firmaFoco: String? = null,
 		/** Las firmas de lo que se veía en la lista antes de desplazarla: lo nuevo es lo que no está. */
 		val firmasAntes: Set<String> = emptySet(),
-	)
+	) {
+		/** Las veces que se ha vuelto a mirar porque la lista aún no se había colocado. */
+		var reintentos = 0
+	}
 	private var avance: Avance? = null
 
 	/** Cursor propio en el texto de un nodo que no admite moverse por granularidad. */
@@ -94,11 +99,11 @@ class Navegador(private val lector: Lector) {
 	fun siguiente() = mover(true)
 	fun anterior() = mover(false)
 
-	fun mover(adelante: Boolean, filtro: ((AccessibilityNodeInfo) -> Boolean)? = null): Boolean {
+	fun mover(adelante: Boolean, filtro: ((AccessibilityNodeInfo) -> Boolean)? = null, intento: Int = 0): Boolean {
 		// La lista se está adelantando sola: se espera a que acabe (unos ms) en vez de desplazarla otra vez
 		val espera = anticipandoHasta - SystemClock.uptimeMillis()
 		if (espera > 0) {
-			lector.manejador.postDelayed({ mover(adelante, filtro) }, espera)
+			lector.manejador.postDelayed({ mover(adelante, filtro, intento) }, espera)
 			return true
 		}
 		val raiz = lector.raiz() ?: return borde()
@@ -106,7 +111,7 @@ class Navegador(private val lector: Lector) {
 		val candidatos = if (filtro != null) lista.filter(filtro) else lista
 		if (candidatos.isEmpty()) return if (filtro != null) noHay() else borde()
 		val foco = lector.foco
-		val i = indice(lista, foco)
+		val i = indiceFueraDeLaPantalla(lista, foco, adelante) ?: indice(lista, foco)
 		val destino = if (filtro == null) {
 			val j = if (i < 0) (if (adelante) 0 else lista.lastIndex) else if (adelante) i + 1 else i - 1
 			lista.getOrNull(j)
@@ -124,8 +129,16 @@ class Navegador(private val lector: Lector) {
 				if (desplazarParaSeguir(adelante, foco, raiz)) return true
 			}
 		}
+		// Justo después de desplazarse la lista, un hueco en sus posiciones (del 17 al 22) es que aún no ha
+		// colocado todas sus filas: se vuelve a mirar en un momento, en vez de saltárselas
+		if (filtro == null && destino != null && foco != null && intento < REINTENTOS_COLOCAR &&
+			SystemClock.uptimeMillis() - desplazadaEn < RECIEN_DESPLAZADA_MS && hayHueco(foco, destino, adelante)) {
+			invalidarTodo()
+			lector.manejador.postDelayed({ mover(adelante, null, intento + 1) }, ESPERA_COLOCAR_MS)
+			return true
+		}
 		if (destino != null) {
-			lector.enfocar(destino)
+			lector.enfocar(destino, if (filtro == null && foco != null && cambiaDeFila(foco, destino, adelante)) Sonido.FILA else Sonido.FOCO)
 			anticipar(destino, adelante, lista)
 			return true
 		}
@@ -203,6 +216,22 @@ class Navegador(private val lector: Lector) {
 		return true
 	}
 
+	/**
+	 * Si [foco] se ha ido de la pantalla con su lista (se desplazó más de la cuenta) y la app da la posición
+	 * de cada fila («17 de 28»): el índice que deja como siguiente (o anterior) a la fila de al lado, para no
+	 * saltarse las que hay entre medias. null si no hace falta o no se sabe.
+	 */
+	private fun indiceFueraDeLaPantalla(lista: List<AccessibilityNodeInfo>, foco: AccessibilityNodeInfo?, adelante: Boolean): Int? {
+		if (foco == null) return null
+		val desde = fila(foco) ?: return null
+		// Sigue en la pantalla y es la misma fila (una lista reutiliza la vista de una fila que se va para otra que llega)
+		val k = lista.indexOf(foco)
+		if (k >= 0 && fila(lista[k]) == desde) return null
+		val conFila = lista.withIndex().filter { it.value.windowId == foco.windowId }.mapNotNull { (k, n) -> fila(n)?.let { k to it } }
+		return if (adelante) conFila.filter { it.second > desde }.minByOrNull { it.second }?.let { it.first - 1 }
+		else conFila.filter { it.second < desde }.maxByOrNull { it.second }?.let { it.first + 1 }
+	}
+
 	/** El índice de [foco] en [lista]; si ya no está (la lista cambió), el del más cercano por posición. */
 	private fun indice(lista: List<AccessibilityNodeInfo>, foco: AccessibilityNodeInfo?): Int {
 		if (foco == null) return -1
@@ -251,7 +280,11 @@ class Navegador(private val lector: Lector) {
 		}, 60)
 	}
 
-	/** Arrastra con dos dedos el contenido de [lista] (para ver lo siguiente, los dedos suben), sin lanzarlo. */
+	/**
+	 * Arrastra con dos dedos el contenido de [lista] (para ver lo siguiente, los dedos suben), sin lanzarlo:
+	 * al final los dedos se quedan quietos un momento antes de levantarse (Android 8+). Si se levantaran en
+	 * marcha, la lista seguiría corriendo sola, se pasaría y el foco se quedaría fuera de la pantalla.
+	 */
 	fun arrastrar(lista: AccessibilityNodeInfo, adelante: Boolean, horizontal: Boolean = false, sonido: Boolean = true): Boolean {
 		val r = Nodos.limites(lista)
 		if (r.width() < 40 || r.height() < 40) return false
@@ -259,20 +292,35 @@ class Navegador(private val lector: Lector) {
 		val cy = r.exactCenterY()
 		val largo = if (horizontal) r.width() * 0.3f else r.height() * 0.3f
 		val signo = if (adelante) -1f else 1f
-		val gesto = android.accessibilityservice.GestureDescription.Builder()
+		val seQueda = Build.VERSION.SDK_INT >= 26
+		val gesto = GestureDescription.Builder()
+		val trazos = ArrayList<Pair<GestureDescription.StrokeDescription, android.graphics.PointF>>()
 		for (dedo in listOf(-40f, 40f)) {
 			val camino = android.graphics.Path()
-			if (horizontal) {
+			val fin = if (horizontal) {
 				camino.moveTo(cx - signo * largo, cy + dedo)
-				camino.lineTo(cx + signo * largo, cy + dedo)
+				android.graphics.PointF(cx + signo * largo, cy + dedo)
 			} else {
 				camino.moveTo(cx + dedo, cy - signo * largo)
-				camino.lineTo(cx + dedo, cy + signo * largo)
+				android.graphics.PointF(cx + dedo, cy + signo * largo)
 			}
-			gesto.addStroke(android.accessibilityservice.GestureDescription.StrokeDescription(camino, 0, 450))
+			camino.lineTo(fin.x, fin.y)
+			val trazo = if (seQueda) GestureDescription.StrokeDescription(camino, 0, DURACION_ARRASTRE_MS, true)
+			else GestureDescription.StrokeDescription(camino, 0, DURACION_ARRASTRE_MS)
+			gesto.addStroke(trazo)
+			trazos += trazo to fin
 		}
 		if (sonido && lector.ajustes.desplazarListas == Ajustes.DESPLAZAR_NORMAL) lector.sonidos.tocar(Sonido.DESPLAZAR)
-		return lector.mandarGesto(gesto.build())
+		if (!seQueda) return lector.mandarGesto(gesto.build())
+		return lector.mandarGesto(gesto.build()) {
+			// Quietos donde acabaron, y entonces se levantan
+			val quietos = GestureDescription.Builder()
+			for ((trazo, fin) in trazos) {
+				val punto = android.graphics.Path().apply { moveTo(fin.x, fin.y) }
+				quietos.addStroke(trazo.continueStroke(punto, 0, QUIETOS_MS, false))
+			}
+			lector.mandarGesto(quietos.build())
+		}
 	}
 
 	private fun desplazarParaSeguir(adelante: Boolean, foco: AccessibilityNodeInfo?, raiz: AccessibilityNodeInfo): Boolean {
@@ -304,7 +352,11 @@ class Navegador(private val lector: Lector) {
 		return true
 	}
 
+	/** Cuándo se desplazó por última vez una lista (para saber si aún se está colocando). */
+	@Volatile private var desplazadaEn = 0L
+
 	fun alDesplazar(e: AccessibilityEvent) {
+		desplazadaEn = SystemClock.uptimeMillis()
 		val a = avance ?: return
 		// Se deja que la lista termine de colocarse
 		lector.manejador.postDelayed({ if (avance === a) seguirTrasDesplazar(a) }, 40)
@@ -315,16 +367,32 @@ class Navegador(private val lector: Lector) {
 		val raiz = lector.raiz() ?: return
 		invalidarTodo()
 		val lista = orden(raiz)
-		if (lista.isEmpty()) return
+		if (lista.isEmpty()) {
+			// La lista a medio rehacer: se vuelve a mirar en un momento (si no, el deslizamiento se quedaría callado)
+			if (a.reintentos++ < REINTENTOS_COLOCAR) {
+				avance = a
+				lector.manejador.postDelayed({ if (avance === a) seguirTrasDesplazar(a) }, ESPERA_COLOCAR_MS)
+			}
+			return
+		}
 		val foco = lector.foco
 		a.contenedor?.let { runCatching { it.refresh() } }
 		val dentro = a.contenedor?.let { c -> lista.filter { Nodos.dentroDe(it, c) } }.orEmpty()
 		// 1. Por su posición en la lista, si la app la da («7 de 19»): el 8, aunque la lista haya pasado una página entera
-		val porFila = a.filaDesde?.let { desde ->
+		val conPosicion = a.filaDesde?.let { desde ->
 			val conFila = dentro.mapNotNull { n -> fila(n)?.let { n to it } }
-			if (a.adelante) conFila.filter { it.second > desde }.minByOrNull { it.second }?.first
-			else conFila.filter { it.second < desde }.maxByOrNull { it.second }?.first
+			if (a.adelante) conFila.filter { it.second > desde }.minByOrNull { it.second }
+			else conFila.filter { it.second < desde }.maxByOrNull { it.second }
 		}
+		// Con un hueco (del 14 al 19), la lista aún se está colocando y faltan filas: se vuelve a mirar
+		// en un momento, en vez de saltárselas (un móvil lento, Android 15)
+		if (conPosicion != null && a.reintentos < REINTENTOS_COLOCAR && !vecinas(a.filaDesde!!, conPosicion.second, a.adelante)) {
+			a.reintentos++
+			avance = a
+			lector.manejador.postDelayed({ if (avance === a) seguirTrasDesplazar(a) }, ESPERA_COLOCAR_MS)
+			return
+		}
+		val porFila = conPosicion?.first
 		// 2. El de partida sigue ahí (y es el mismo: una lista reutiliza sus filas para otros elementos): su vecino
 		val sigueAhi = foco != null && lista.contains(foco) && a.firmaFoco != null && runCatching { foco.refresh() }.getOrDefault(false) && firma(foco) == a.firmaFoco
 		val destino = porFila ?: if (sigueAhi) {
@@ -339,6 +407,35 @@ class Navegador(private val lector: Lector) {
 		}
 		if (destino != null && destino != foco) lector.enfocar(destino) else borde()
 	}
+
+	/** Si entre [desde] y [hasta], de la misma lista, faltan filas (las dos dicen su posición y no son vecinas). */
+	private fun hayHueco(desde: AccessibilityNodeInfo, hasta: AccessibilityNodeInfo, adelante: Boolean): Boolean {
+		if (desde.windowId != hasta.windowId) return false
+		val f0 = fila(desde) ?: return false
+		val f1 = fila(hasta) ?: return false
+		// En la misma fila (un interruptor dentro de su fila) no hay hueco
+		if (f0 == f1 || (adelante && f1 < f0) || (!adelante && f1 > f0)) return false
+		return !vecinas(f0, f1, adelante)
+	}
+
+	/**
+	 * Si al ir de [desde] a [hasta] se pasa del final de una fila al principio de la siguiente (adelante: debajo
+	 * y a la izquierda; atrás: encima y a la derecha), en la misma ventana. En una lista de una columna no: cada
+	 * elemento está debajo del anterior, pero no a su izquierda.
+	 */
+	private fun cambiaDeFila(desde: AccessibilityNodeInfo, hasta: AccessibilityNodeInfo, adelante: Boolean): Boolean {
+		if (desde.windowId != hasta.windowId) return false
+		val a = Nodos.limites(desde)
+		val b = Nodos.limites(hasta)
+		if (a.isEmpty || b.isEmpty) return false
+		return if (adelante) b.centerY() >= a.bottom && b.centerX() < a.left
+		else b.centerY() <= a.top && b.centerX() > a.right
+	}
+
+	/** Si la posición [hasta] va justo después (o antes) de [desde]: la siguiente columna o el principio (o el final) de la otra fila. */
+	private fun vecinas(desde: Int, hasta: Int, adelante: Boolean): Boolean =
+		if (adelante) hasta == desde + 1 || hasta == (desde / 1000 + 1) * 1000
+		else hasta == desde - 1 || hasta / 1000 == desde / 1000 - 1
 
 	/** Lo que identifica a un elemento por lo que es, no por la vista que lo enseña (las listas reutilizan sus filas). */
 	private fun firma(n: AccessibilityNodeInfo): String =
@@ -374,7 +471,6 @@ class Navegador(private val lector: Lector) {
 
 	private fun borde(): Boolean {
 		lector.sonidos.tocar(Sonido.BORDE)
-		lector.vibracion.vibrar(Sonido.BORDE)
 		return false
 	}
 
@@ -501,7 +597,7 @@ class Navegador(private val lector: Lector) {
 	 * arriba y abajo van al elemento de la fila de encima o de debajo que más se
 	 * solapa en horizontal; izquierda y derecha, al de la misma fila.
 	 */
-	fun cuadricula(dx: Int, dy: Int): Boolean {
+	fun cuadricula(dx: Int, dy: Int, desplazada: Boolean = false): Boolean {
 		val raiz = lector.raiz() ?: return borde()
 		val foco = lector.foco ?: return primero()
 		val r = Nodos.limites(foco)
@@ -520,9 +616,40 @@ class Navegador(private val lector: Lector) {
 			}
 			distancia?.let { n to it }
 		}.minByOrNull { it.second }?.first
-		if (candidato == null) return borde()
+		if (candidato == null) {
+			// Arriba o abajo dentro de una lista que aún puede ir hacia ahí: se desplaza una página y se vuelve
+			// a buscar la fila de debajo (o de encima), como Backtalk 309. Una vez: si tampoco hay, el borde
+			if (dy != 0 && !desplazada) {
+				val accion = if (dy > 0) AccessibilityNodeInfo.ACTION_SCROLL_FORWARD else AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD
+				val contenedor = Nodos.desplazable(foco)?.takeIf { c -> c.actionList.any { it.id == accion } && !esHorizontal(c) }
+				val antes = firma(foco)
+				if (contenedor != null && runCatching { contenedor.performAction(accion) }.getOrDefault(false)) {
+					lector.manejador.postDelayed({
+						invalidarTodo()
+						val sigue = Nodos.vivo(foco) && foco.isVisibleToUser && firma(foco) == antes
+						if (sigue) cuadricula(dx, dy, desplazada = true)
+						else {
+							// El de partida ya no se ve (la lista reutilizó su vista): la primera fila nueva (o la última, hacia arriba)
+							val dentro = (lector.raiz()?.let { orden(it) }).orEmpty().filter { Nodos.dentroDe(it, contenedor) }
+							val destino = if (dy > 0) dentro.firstOrNull() else dentro.lastOrNull()
+							if (destino != null) lector.enfocar(destino) else borde()
+						}
+					}, ESPERA_VERTICAL_MS)
+					return true
+				}
+			}
+			return borde()
+		}
 		lector.enfocar(candidato)
 		return true
+	}
+
+	/** Una lista que se desplaza de lado (un carrusel, unas pestañas): ahí arriba y abajo no la mueven. */
+	private fun esHorizontal(n: AccessibilityNodeInfo): Boolean {
+		val nombre = n.className?.toString()?.substringAfterLast('.').orEmpty()
+		if (nombre == "HorizontalScrollView" || nombre == "ViewPager" || nombre == "ViewPager2") return true
+		val info = n.collectionInfo ?: return false
+		return info.rowCount <= 1 && info.columnCount > 1
 	}
 
 	// --- Ventanas -----------------------------------------------------------------------------
@@ -571,8 +698,18 @@ class Navegador(private val lector: Lector) {
 
 	companion object {
 		const val ESPERA_DESPLAZAR_MS = 150L
-		/** Lo que tarda el arrastre que adelanta la lista (el gesto dura 450 ms) y un poco para que se coloque. */
-		private const val DURACION_ANTICIPO_MS = 560L
+		/** Lo que se espera, y cuántas veces, a que una lista desplazada termine de colocar sus filas. */
+		private const val ESPERA_COLOCAR_MS = 150L
+		private const val REINTENTOS_COLOCAR = 2
+		/** Lo que se considera «recién desplazada» una lista. */
+		private const val RECIEN_DESPLAZADA_MS = 1500L
+		/** Lo que tarda el arrastre que adelanta la lista (450 ms de gesto, 120 quietos) y un poco para que se coloque. */
+		private const val DURACION_ANTICIPO_MS = 700L
+		/** Lo que dura el arrastre de una lista y lo que se quedan quietos los dedos al final (para que no se lance). */
+		private const val DURACION_ARRASTRE_MS = 450L
+		private const val QUIETOS_MS = 120L
+		/** Lo que se espera tras desplazar una página en la navegación vertical antes de buscar la fila siguiente. */
+		private const val ESPERA_VERTICAL_MS = 300L
 		/** Páginas que se desplazan como mucho al dar la vuelta (entre todas las listas). */
 		private const val MAXIMO_PAGINAS_VUELTA = 60
 	}

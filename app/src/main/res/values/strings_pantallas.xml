@@ -359,6 +359,7 @@
 	<string name="sonido_tecla">Tecla del teclado físico</string>
 	<string name="sonido_edicion">Edición de texto</string>
 	<string name="sonido_cargando">Trabajando (reconocer texto, IA...)</string>
+	<string name="sonido_fila">Al pasar a la fila siguiente (iconos, celdas)</string>
 	<string name="pantalla_apagada">Pantalla apagada</string>
 	<string name="ordenar_partes_titulo">Elegir qué se dice y en qué orden</string>
 	<string name="ordenar_partes_res">Las partes de lo que se dice de cada elemento (nombre, tipo, estado, posición...) y su orden</string>

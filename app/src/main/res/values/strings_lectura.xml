@@ -137,6 +137,16 @@
 	<string name="lect_sin_titulo">Sin título</string>
 	<string name="nav_no_hay">No hay más %1$s</string>
 	<string name="aviso_notificacion">Notificación de %1$s: %2$s</string>
+	<string name="aviso_no_leida">%1$s (no se leyó: %2$s)</string>
+	<string name="aviso_motivo_apagadas">la lectura de notificaciones está quitada</string>
+	<string name="aviso_motivo_app">la app está callada</string>
+	<string name="aviso_motivo_no_molestar">No molestar</string>
+	<string name="aviso_motivo_llamada">en una llamada</string>
+	<string name="aviso_motivo_bloqueo">con el móvil bloqueado</string>
+	<string name="aviso_motivo_senior">el modo senior solo lee mensajes y llamadas</string>
+	<string name="aviso_motivo_complemento">la calló un complemento</string>
+	<string name="aviso_motivo_palabra">tiene una palabra que la calla</string>
+	<string name="aviso_motivo_repetida">repetida</string>
 
 	<!-- Edición de texto -->
 	<string name="edicion_punto">punto</string>
@@ -149,6 +159,9 @@
 	<string name="edicion_todo_seleccionado">Todo seleccionado</string>
 	<string name="edicion_principio">Principio del texto</string>
 	<string name="edicion_final">Final del texto</string>
+	<string name="edicion_texto_borrado">Texto borrado</string>
+	<string name="edicion_no_borrado">Este campo no deja borrar su texto así</string>
+	<string name="edicion_nada_que_borrar">El campo está vacío</string>
 	<string name="edicion_portapapeles_vacio">El portapapeles está vacío</string>
 	<string name="edicion_modo_seleccion_si">Modo selección activado: al moverte por el texto, se selecciona</string>
 	<string name="edicion_modo_seleccion_no">Modo selección desactivado</string>
@@ -230,6 +243,7 @@
 	<string name="voz_demanda_si">Voz a demanda: al moverte no hablo, solo cuando me pidas algo</string>
 	<string name="voz_demanda_no">Voz normal</string>
 	<string name="toque_atascado">La exploración táctil se había atascado: la reinicio</string>
+	<string name="no_se_pudo_abrir">No se ha podido abrir. Algunos móviles no dejan abrir pantallas a Tiresias si no se le da el permiso: en los ajustes del móvil, Aplicaciones, Tiresias, Permisos, «Mostrar ventanas emergentes en segundo plano» o «Abrir ventanas nuevas en segundo plano». Mientras, ábrelo desde su icono.</string>
 	<string name="formato_sin_texto">No hay texto con formato aquí</string>
 	<string name="formato_ninguno">El texto no tiene formato</string>
 	<string name="formato_negrita">Negrita: %1$s</string>

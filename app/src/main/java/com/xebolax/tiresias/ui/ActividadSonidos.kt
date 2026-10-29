@@ -57,7 +57,7 @@ class ActividadSonidos : ActividadBase() {
 		return if (id != 0) getString(id) else s.name.lowercase()
 	}
 
-	private fun nombreTema(t: String): String = if (t.isEmpty()) getString(R.string.temas_tiresias) else t
+	private fun nombreTema(t: String): String = if (t.isEmpty()) getString(R.string.temas_tiresias) else TemasSonido.nombreDe(this, t)
 
 	private fun construir() {
 		p.vaciar()
@@ -119,22 +119,26 @@ class ActividadSonidos : ActividadBase() {
 		val temas = listOf("") + TemasSonido.instalados(this)
 		elegirUno(getString(R.string.temas_titulo), temas.map { nombreTema(it) }, temas.indexOf(ajustes.temaSonidos).coerceAtLeast(0)) { i ->
 			val t = temas[i]
-			if (t.isEmpty() || t == ajustes.temaSonidos) {
+			// Los de Tiresias, el que ya está o uno incluido (no se borra): se pone sin más
+			if (t.isEmpty() || t == ajustes.temaSonidos || TemasSonido.esIncluido(this, t)) {
+				val cambia = t != ajustes.temaSonidos
 				ajustes.temaSonidos = t
 				recargar()
+				if (cambia) avisar(getString(R.string.temas_puesto, nombreTema(t)))
 				construir()
 				return@elegirUno
 			}
 			// Un tema instalado: ponerlo o borrarlo
-			elegir(t, listOf(
-				getString(R.string.temas_poner, t) to {
+			val nombre = nombreTema(t)
+			elegir(nombre, listOf(
+				getString(R.string.temas_poner, nombre) to {
 					ajustes.temaSonidos = t
 					recargar()
-					avisar(getString(R.string.temas_puesto, t))
+					avisar(getString(R.string.temas_puesto, nombre))
 					construir()
 				},
-				getString(R.string.temas_borrar, t) to {
-					confirmar(getString(R.string.temas_borrar_pregunta, t), getString(R.string.temas_borrar, t)) {
+				getString(R.string.temas_borrar, nombre) to {
+					confirmar(getString(R.string.temas_borrar_pregunta, nombre), getString(R.string.temas_borrar, nombre)) {
 						TemasSonido.borrar(this, t)
 						if (ajustes.temaSonidos == t) ajustes.temaSonidos = ""
 						recargar()
@@ -172,7 +176,7 @@ class ActividadSonidos : ActividadBase() {
 				val tema = withContext(Dispatchers.IO) { contentResolver.openInputStream(uri)?.use { TemasSonido.importarZip(this@ActividadSonidos, it, nombre) } } ?: return@launch
 				ajustes.temaSonidos = tema
 				recargar()
-				avisar(getString(R.string.temas_importado, tema))
+				avisar(getString(R.string.temas_importado, nombreTema(tema)))
 				construir()
 			} catch (e: CancellationException) {
 				throw e
@@ -227,6 +231,14 @@ class ActividadSonidos : ActividadBase() {
 	}
 
 	private fun instalarDeLaTienda(t: Tienda.Tema) {
+		// Los que vienen dentro de Tiresias no hace falta bajarlos
+		if (TemasSonido.esIncluido(this, t.id)) {
+			ajustes.temaSonidos = t.id
+			recargar()
+			avisar(getString(R.string.temas_puesto, t.nombre))
+			construir()
+			return
+		}
 		lifecycleScope.launch {
 			try {
 				val datos = conEspera(getString(R.string.temas_tienda), getString(R.string.tienda_descargando, t.nombre)) { Tienda.descargarTema(this@ActividadSonidos, t) }

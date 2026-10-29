@@ -34,6 +34,8 @@
 	<string name="aj_cambio_idioma_res">When the app indicates the language of a text</string>
 	<string name="aj_callar_grabar">Don\'t speak over recordings</string>
 	<string name="aj_callar_grabar_res">While another app is recording with the microphone, only what you ask for as you move is spoken</string>
+	<string name="aj_callar_proximidad">Stop speech when covering the proximity sensor</string>
+	<string name="aj_callar_proximidad_res">Pass your hand over the top of the screen to stop the voice. It does not work during calls.</string>
 	<string name="aj_cat_sonidos">Sounds and vibration</string>
 	<string name="aj_sonidos">Sounds</string>
 	<string name="aj_volumen_sonidos">Sound volume</string>
@@ -427,6 +429,7 @@
 		<item>The system one</item>
 		<item>The phone speaker</item>
 		<item>The headphones, if some are connected</item>
+		<item>The call earpiece (with the phone at your ear)</item>
 	</string-array>
 	<string name="aj_modo_senior">Senior mode</string>
 	<string name="aj_modo_senior_res">Simple Tiresias for older people: few gestures, the volume keys and calling for help</string>
@@ -472,8 +475,21 @@
 	<string name="senior_codigo_mal">That is not the code</string>
 	<string name="aj_motor_avisos">Voice for notifications</string>
 	<string name="aj_motor_avisos_misma">The usual voice</string>
+	<string name="aj_volumen_cursor">Volume keys in text fields</string>
+	<string name="aj_volumen_cursor_res">In a text field, volume up moves the cursor one character back and volume down one forward, saying the character</string>
+	<string name="aj_braille_intro_envia">Enter sends in messaging apps</string>
+	<string name="aj_braille_intro_envia_res">On the braille keyboard, Enter (two fingers down) presses the Send button in WhatsApp, Telegram, Signal or Messages, instead of starting a new line</string>
+	<string name="aj_oyente_avisos">Also read what Android does not announce</string>
+	<string name="aj_oyente_avisos_si">With notification access: with the phone locked they are read in full, and also the ones Do Not Disturb holds back and the ones that update silently. Nothing is stored</string>
+	<string name="aj_oyente_avisos_no">No access. Tap to give it to Tiresias in the phone settings: then, with the phone locked, notifications are read in full</string>
+	<string name="aj_palabras_calladas">Words that silence a notification</string>
+	<string name="aj_palabras_calladas_res">If a notification has any of these words, it is not read on its own (it is still kept in Recent notifications). Separate them with commas</string>
+	<string name="aj_decir_volumen">Announce volume changes</string>
+	<string name="aj_decir_volumen_res">When you raise or lower a volume with the keys, it says which one and how much is left ("Media volume, 40 percent")</string>
+	<string name="aj_solo_lo_elegido">When turning on, say only what you chose</string>
+	<string name="aj_solo_lo_elegido_res">With the phone locked, for a few seconds after the screen turns on, what the lock screen announces on its own (the carrier, the focus it sets) is not spoken. Calls and emergency alerts are always spoken; touching the screen or a key ends it</string>
 	<string name="aj_teclados_que_hablan">Keyboards that speak by themselves</string>
-	<string name="aj_teclados_que_hablan_res">With these keyboards, Tiresias does not repeat what is typed or their keys: they already say it</string>
+	<string name="aj_teclados_que_hablan_res">With these keyboards, Tiresias does not say their keys or what is typed, because they already do (like the TalkBack braille keyboard). Do not tick Gboard, SwiftKey or the Samsung keyboard: they do not speak on their own and you would stop hearing the keys</string>
 	<string name="aj_detectar_idioma">Detect the language of long texts</string>
 	<string name="aj_detectar_idioma_res">If the app does not say what language a long text is in, Tiresias works it out (Spanish or English) and reads it with that voice</string>
 	<string name="aj_restablecer">Reset Tiresias</string>

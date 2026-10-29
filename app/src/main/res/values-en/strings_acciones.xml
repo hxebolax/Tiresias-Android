@@ -77,6 +77,7 @@
 	<string name="accion_rehacer">Redo</string>
 	<string name="accion_cursor_inicio">Move cursor to start</string>
 	<string name="accion_cursor_final">Move cursor to end</string>
+	<string name="accion_borrar_texto">Clear all text</string>
 	<string name="accion_describir_ia">Describe the item with AI</string>
 	<string name="accion_pantalla_ia">Describe the screen with AI</string>
 	<string name="accion_preguntar_ia">Ask AI about the screen</string>
@@ -204,6 +205,7 @@
 	<string name="acc_pegar">Paste</string>
 	<string name="acc_cursor_inicio">Move cursor to start</string>
 	<string name="acc_cursor_final">Move cursor to end</string>
+	<string name="acc_borrar_texto">Clear all text</string>
 	<string name="acc_modo_seleccion">Selection mode</string>
 	<string name="acc_deshacer">Undo</string>
 	<string name="acc_rehacer">Redo</string>

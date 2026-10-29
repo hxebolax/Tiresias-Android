@@ -127,6 +127,16 @@
 	<string name="lect_sin_titulo">Untitled</string>
 	<string name="nav_no_hay">No more %1$s</string>
 	<string name="aviso_notificacion">Notification from %1$s: %2$s</string>
+	<string name="aviso_no_leida">%1$s (not read: %2$s)</string>
+	<string name="aviso_motivo_apagadas">notification reading is off</string>
+	<string name="aviso_motivo_app">the app is silenced</string>
+	<string name="aviso_motivo_no_molestar">Do Not Disturb</string>
+	<string name="aviso_motivo_llamada">during a call</string>
+	<string name="aviso_motivo_bloqueo">with the phone locked</string>
+	<string name="aviso_motivo_senior">senior mode only reads messages and calls</string>
+	<string name="aviso_motivo_complemento">an add-on silenced it</string>
+	<string name="aviso_motivo_palabra">it has a word that silences it</string>
+	<string name="aviso_motivo_repetida">repeated</string>
 
 	<!-- Text editing -->
 	<string name="edicion_punto">dot</string>
@@ -139,6 +149,9 @@
 	<string name="edicion_todo_seleccionado">All selected</string>
 	<string name="edicion_principio">Start of text</string>
 	<string name="edicion_final">End of text</string>
+	<string name="edicion_texto_borrado">Text cleared</string>
+	<string name="edicion_no_borrado">This field doesn\'t let its text be cleared this way</string>
+	<string name="edicion_nada_que_borrar">The field is empty</string>
 	<string name="edicion_portapapeles_vacio">The clipboard is empty</string>
 	<string name="edicion_modo_seleccion_si">Selection mode on: moving through the text selects it</string>
 	<string name="edicion_modo_seleccion_no">Selection mode off</string>
@@ -219,6 +232,7 @@
 	<string name="voz_demanda_si">Speech on demand: I will not speak as you move, only when you ask</string>
 	<string name="voz_demanda_no">Normal speech</string>
 	<string name="toque_atascado">Touch exploration was stuck: restarting it</string>
+	<string name="no_se_pudo_abrir">Couldn\'t open it. Some phones don\'t let Tiresias open screens unless it has permission: in the phone\'s settings, Apps, Tiresias, Permissions, \"Display pop-up windows while running in the background\" or \"Open new windows while running in the background\". Meanwhile, open it from its icon.</string>
 	<string name="formato_sin_texto">There is no formatted text here</string>
 	<string name="formato_ninguno">The text has no formatting</string>
 	<string name="formato_negrita">Bold: %1$s</string>

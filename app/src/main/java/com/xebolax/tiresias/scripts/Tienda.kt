@@ -128,7 +128,7 @@ object Tienda {
 		for (base in (bases(c).take(1) + fuentes(c))) {
 			try {
 				val texto = String(bajar("$base/catalogo.json?t=${System.currentTimeMillis()}", MAXIMO), Charsets.UTF_8)
-				leerTemas(texto).forEach { t -> if (lista.none { it.id == t.id }) lista += t.copy(base = base) }
+				leerTemas(texto, Idioma.efectivo(c).language).forEach { t -> if (lista.none { it.id == t.id }) lista += t.copy(base = base) }
 			} catch (e: kotlinx.coroutines.CancellationException) {
 				throw e
 			} catch (e: Exception) {
@@ -140,14 +140,16 @@ object Tienda {
 		lista
 	}
 
-	fun leerTemas(texto: String): List<Tema> {
+	/** Los temas de un catálogo, con el nombre y la descripción en [idioma] si los trae (`nombre_en`). */
+	fun leerTemas(texto: String, idioma: String = "es"): List<Tema> {
 		val a = JSONObject(texto).optJSONArray("temas") ?: return emptyList()
 		return (0 until a.length()).mapNotNull { i ->
 			val o = a.optJSONObject(i) ?: return@mapNotNull null
 			val id = o.optString("id")
 			val archivo = o.optString("archivo")
 			if (!Regex("[a-z0-9][a-z0-9._-]{1,63}").matches(id) || !Regex("[A-Za-z0-9._-]+\\.zip").matches(archivo)) return@mapNotNull null
-			Tema(id, o.optString("nombre", id), o.optString("descripcion"), o.optString("autor"), archivo, o.optString("sha256").lowercase(), o.optLong("tamano", 0))
+			fun local(k: String, defecto: String = "") = o.optString("${k}_$idioma").takeIf { idioma != "es" && it.isNotBlank() } ?: o.optString(k, defecto)
+			Tema(id, local("nombre", id), local("descripcion"), o.optString("autor"), archivo, o.optString("sha256").lowercase(), o.optLong("tamano", 0))
 		}
 	}
 

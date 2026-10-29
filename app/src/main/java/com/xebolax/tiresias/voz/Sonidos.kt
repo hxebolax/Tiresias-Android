@@ -49,6 +49,8 @@ enum class Sonido {
 	/** Un campo de texto o el cursor al principio o al final. */
 	EDICION,
 	CARGANDO,
+	/** Al deslizar se pasa del final de una fila al principio de la siguiente (iconos, celdas), SandFly. */
+	FILA,
 }
 
 /**
@@ -111,7 +113,11 @@ class Sonidos(contexto: Context) {
 	fun efectivo(s: Sonido, tema: String = ajustes.temaSonidos, dir: File = File(Almacen.protegido(app).noBackupFilesDir, "sonidos/$VERSION").apply { mkdirs() }): File =
 		TemasSonido.archivoDe(app, tema, s) ?: File(dir, s.name.lowercase() + ".wav").also { if (!it.isFile) generar(s, it) }
 
+	/** Lo que hace cada sonido además de sonar: vibrar con su patrón (lo pone el servicio). */
+	@Volatile var alSonar: ((Sonido) -> Unit)? = null
+
 	fun tocar(s: Sonido, posicion: Float = 0.5f, tono: Float = 1f) {
+		alSonar?.invoke(s)
 		if (!cargados || !ajustes.sonidos || s.name in ajustes.sonidosApagados) return
 		val id = ids[s] ?: return
 		val v = ajustes.volumenSonidos / 100f
@@ -145,6 +151,7 @@ class Sonidos(contexto: Context) {
 			Sonido.TECLA -> listOf(Triple(2637.0, 10, 16.0))
 			Sonido.EDICION -> listOf(Triple(440.0, 40, 8.0))
 			Sonido.CARGANDO -> listOf(Triple(600.0, 60, 2.0), Triple(600.0, 60, 2.0))
+			Sonido.FILA -> listOf(Triple(1175.0, 22, 8.0), Triple(880.0, 30, 8.0))
 		}
 		val hz = 22050
 		val muestras = ArrayList<Short>()
@@ -191,23 +198,58 @@ class Vibracion(contexto: Context) {
 		app.getSystemService(VibratorManager::class.java)?.defaultVibrator
 	} else @Suppress("DEPRECATION") app.getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
 
+	/** Empezar a vibrar espera al sistema: en un hilo propio, para no retrasar la voz (SandFly). */
+	private val hilo = java.util.concurrent.Executors.newSingleThreadExecutor { r -> Thread(r, "tiresias-vibracion").apply { isDaemon = true } }
+
+	/** Si el vibrador tiene las primitivas de composición que se usan (Android 11+): se mira una vez. */
+	private val conPrimitivas: Boolean by lazy {
+		Build.VERSION.SDK_INT >= 30 && runCatching {
+			vibrador?.areAllPrimitivesSupported(VibrationEffect.Composition.PRIMITIVE_TICK, VibrationEffect.Composition.PRIMITIVE_CLICK) == true
+		}.getOrDefault(false)
+	}
+
 	fun vibrar(s: Sonido) {
 		if (!ajustes.vibracion || s.name in ajustes.vibracionesApagadas) return
 		val v = vibrador ?: return
+		runCatching { hilo.execute { vibrarYa(v, s) } }.onFailure { Registro.w("Vibracion", "No se pudo pasar al hilo de la vibración", it) }
+	}
+
+	private fun vibrarYa(v: Vibrator, s: Sonido) {
 		if (!v.hasVibrator()) return
-		val patron = patron(s)
-		// Sin control de intensidad (vibradores sencillos), más cortas: se notan igual y no zumban (Backtalk 52)
-		val suave = Build.VERSION.SDK_INT >= 26 && !v.hasAmplitudeControl()
-		val ms = if (suave) LongArray(patron.size) { i -> if (i % 2 == 1) maxOf(6L, patron[i] * 6 / 10) else patron[i] } else patron
+		val intensidad = ajustes.intensidadVibracion
 		try {
+			if (conPrimitivas && Build.VERSION.SDK_INT >= 30) {
+				v.vibrate(composicion(patron(s), intensidad))
+				return
+			}
+			val ms = duraciones(patron(s), Build.VERSION.SDK_INT >= 26 && v.hasAmplitudeControl(), intensidad)
 			if (Build.VERSION.SDK_INT >= 26) {
-				val amplitud = (ajustes.intensidadVibracion * 255 / 100).coerceIn(1, 255)
+				val amplitud = (intensidad * 255 / 100).coerceIn(1, 255)
 				val amplitudes = IntArray(ms.size) { if (it % 2 == 1) amplitud else 0 }
 				v.vibrate(VibrationEffect.createWaveform(ms, amplitudes, -1))
 			} else @Suppress("DEPRECATION") v.vibrate(ms, -1)
 		} catch (e: Exception) {
 			Registro.w("Vibracion", "No se pudo vibrar", e)
 		}
+	}
+
+	/**
+	 * El patrón con las primitivas del vibrador (más nítidas que una onda): cada pulso corto, un TICK; cada
+	 * pulso largo, un CLICK; con la misma pausa delante. La intensidad elegida es su fuerza.
+	 */
+	@androidx.annotation.RequiresApi(30)
+	private fun composicion(patron: LongArray, intensidad: Int): VibrationEffect {
+		val c = VibrationEffect.startComposition()
+		val fuerza = (intensidad.coerceIn(0, 100) / 100f).coerceAtLeast(0.05f)
+		var i = 1
+		while (i < patron.size) {
+			val pausa = patron[i - 1].toInt().coerceIn(0, 1000)
+			val largo = patron[i] > PULSO_CORTO_MS
+			val primitiva = if (largo) VibrationEffect.Composition.PRIMITIVE_CLICK else VibrationEffect.Composition.PRIMITIVE_TICK
+			c.addPrimitive(primitiva, (fuerza * if (largo) 1f else 0.8f).coerceIn(0.05f, 1f), pausa)
+			i += 2
+		}
+		return c.compose()
 	}
 
 	/**
@@ -233,6 +275,26 @@ class Vibracion(contexto: Context) {
 		Sonido.APAGADO -> longArrayOf(0, 60, 70, 40, 70, 20)
 		Sonido.EDICION -> longArrayOf(0, 14, 25, 14)
 		Sonido.CARGANDO -> longArrayOf(0, 10, 90, 10)
+		Sonido.FILA -> longArrayOf(0, 10, 25, 18)
+	}
+
+	companion object {
+		/**
+		 * Los milisegundos de [patron] para este vibrador. Un pulso muy corto no se nota: el motor de los
+		 * móviles sencillos (sin control de intensidad) ni llega a arrancar con menos de unos 25 ms, y ahí la
+		 * intensidad elegida alarga o acorta los pulsos (no hay otra forma de cambiarla). Con control de
+		 * intensidad, la intensidad va en la fuerza y el pulso dura al menos 12 ms.
+		 */
+		fun duraciones(patron: LongArray, conIntensidad: Boolean, intensidad: Int): LongArray = LongArray(patron.size) { i ->
+			if (i % 2 == 0) patron[i]
+			else if (conIntensidad) maxOf(MINIMO_CON_INTENSIDAD_MS, patron[i])
+			else maxOf(MINIMO_SIN_INTENSIDAD_MS, maxOf(MINIMO_SIN_INTENSIDAD_MS, patron[i]) * (50 + intensidad.coerceIn(0, 100)) / 100)
+		}
+
+		private const val MINIMO_CON_INTENSIDAD_MS = 12L
+		private const val MINIMO_SIN_INTENSIDAD_MS = 25L
+		/** Hasta cuánto un pulso es corto (un TICK) al componer con primitivas. */
+		private const val PULSO_CORTO_MS = 20L
 	}
 
 	/** Vibra [veces] pulsos (cuenta posiciones sin voz, último recurso si no hay sonido). */

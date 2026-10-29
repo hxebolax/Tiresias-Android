@@ -35,7 +35,8 @@ import java.util.concurrent.TimeUnit
  *
  * Las capturas usan `takeScreenshot` (Android 11 o posterior), sin pedir
  * permiso de grabación. Los campos de contraseña nunca se mandan: si el foco
- * está en uno, no se hace nada.
+ * está en uno, no se hace nada. Con la cortina puesta, se quita el instante
+ * de la captura.
  */
 class Vision(private val lector: Lector, private val ventanas: Ventanas) {
 	private val servicio = lector.servicio
@@ -63,10 +64,12 @@ class Vision(private val lector: Lector, private val ventanas: Ventanas) {
 	 */
 	fun capturar(): Bitmap? {
 		if (Build.VERSION.SDK_INT < 30) return null
-		val primera = capturarUnaVez()
+		// Con la cortina puesta, se quita el instante de la captura (si no, la IA vería la pantalla negra),
+		// y no mientras se espera para repetirla
+		val primera = ventanas.sinCortina { capturarUnaVez() }
 		if (primera != null || errorCaptura != AccessibilityService.ERROR_TAKE_SCREENSHOT_INTERVAL_TIME_SHORT) return primera
 		Thread.sleep(1000)
-		return capturarUnaVez()
+		return ventanas.sinCortina { capturarUnaVez() }
 	}
 
 	/** Lo que se dice cuando no se pudo capturar la pantalla, según lo que dijo Android. */

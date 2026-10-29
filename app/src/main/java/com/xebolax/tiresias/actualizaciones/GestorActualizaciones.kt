@@ -184,9 +184,11 @@ class GestorActualizaciones(private val actividad: AppCompatActivity) {
 		val dialogo: AlertDialog = MaterialAlertDialogBuilder(actividad)
 			.setTitle(titulo)
 			.setView(vista)
-			.setCancelable(false)
+			// Atrás cancela la descarga, como el botón (tocar fuera, no: se cancelaría sin querer)
+			.setOnCancelListener { descarga?.cancel() }
 			.setNegativeButton(R.string.cancelar) { _, _ -> descarga?.cancel() }
 			.show()
+			.also { it.setCanceledOnTouchOutside(false) }
 
 		var ultimoRefresco = 0L
 		descarga = actividad.lifecycleScope.launch {

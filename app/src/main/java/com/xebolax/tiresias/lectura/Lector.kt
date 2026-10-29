@@ -125,7 +125,6 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		}
 		if (destino !in v.elementos.indices) {
 			sonidos.tocar(Sonido.BORDE)
-			vibracion.vibrar(Sonido.BORDE)
 			return false
 		}
 		decirVirtual(v, destino, Sonido.FOCO)
@@ -171,7 +170,9 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	private var tituloVentana = ""
 	/** La ventana de la que es [tituloVentana]. */
 	private var idVentanaTitulo = -1
-	private var ventanaActiva = -1
+	/** Si hay un teclado en pantalla y desde cuándo no lo hay (un teclado que se rehace al momento no se anuncia otra vez). */
+	private var hayTeclado = false
+	private var sinTecladoDesde = 0L
 	private var ultimoSonidoDesplazar = 0L
 
 	/** Elementos ya descritos, para hablar sin volver a preguntar a la app. Se vacía con cada cambio. */
@@ -208,6 +209,7 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 
 	fun cerrar() {
 		continua.parar()
+		edicion.cerrar()
 		hilo.quitSafely()
 	}
 
@@ -218,11 +220,64 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	@Volatile var toques = 0
 		private set
 
+	/** Hasta cuándo se calla lo que SystemUI dice solo al encender con el móvil bloqueado, y desde cuándo. */
+	@Volatile private var silencioSistemaHasta = 0L
+	@Volatile private var silencioSistemaDesde = 0L
+
+	/** Al encender bloqueado: unos segundos sin el foco, las ventanas ni los anuncios que SystemUI pone solo. */
+	fun callarSistemaUnMomento() {
+		val ahora = SystemClock.uptimeMillis()
+		silencioSistemaDesde = ahora
+		silencioSistemaHasta = ahora + SILENCIO_ENCENDER_MS
+	}
+
+	/**
+	 * Si lo que llega de [paquete] se calla ahora: es de SystemUI, sigue bloqueado, no ha pasado el plazo y el
+	 * usuario no ha tocado nada desde que se encendió la pantalla.
+	 */
+	private fun calladoAlEncender(paquete: CharSequence?): Boolean {
+		val ahora = SystemClock.uptimeMillis()
+		if (ahora > silencioSistemaHasta) return false
+		if (momentoUsuario > silencioSistemaDesde || !bloqueado()) {
+			silencioSistemaHasta = 0L
+			return false
+		}
+		return paquete?.toString() in paquetesDelSistema
+	}
+
+	/** SystemUI y la pantalla de bloqueo, como los nombra Android (sin nombres de fabricante). */
+	private val paquetesDelSistema: Set<String> by lazy {
+		val r = servicio.resources
+		val desdeConfig = listOf("config_systemUi", "config_systemUIServiceComponent", "config_keyguardComponent").mapNotNull { nombre ->
+			runCatching {
+				val id = r.getIdentifier(nombre, "string", "android")
+				if (id != 0) r.getString(id).substringBefore('/').takeIf { it.isNotBlank() } else null
+			}.getOrNull()
+		}
+		(desdeConfig + PAQUETE_SISTEMA).toSet()
+	}
+
+	/** Desde cuándo hay un dedo del usuario en la pantalla (0: ninguno). */
+	@Volatile private var dedoDesde = 0L
+
+	/**
+	 * Si el usuario tiene ahora un dedo en la pantalla (las teclas de volumen cambian entonces el de la voz,
+	 * como en TalkBack). No más de medio minuto: si Android no avisa de que se levantó (el dedo «pegado» de
+	 * algunos móviles), las teclas no se quedan cambiando la voz para siempre.
+	 */
+	val dedoEnPantalla: Boolean get() = dedoDesde > 0 && SystemClock.uptimeMillis() - dedoDesde < DEDO_MAXIMO_MS
+
 	fun alEvento(e: AccessibilityEvent) {
-		if (e.eventType == AccessibilityEvent.TYPE_TOUCH_INTERACTION_START) toques++
+		// Los toques de un gesto que ha mandado Tiresias (la lista que se adelanta sola) no son del usuario:
+		// ni cortan lo que se está diciendo ni paran lo que va por pasos
+		val toqueUsuario = e.eventType == AccessibilityEvent.TYPE_TOUCH_INTERACTION_START && !esGestoPropio(e)
+		if (toqueUsuario) {
+			toques++
+			dedoDesde = SystemClock.uptimeMillis()
+		} else if (e.eventType == AccessibilityEvent.TYPE_TOUCH_INTERACTION_END) dedoDesde = 0L
 		val copia = copiar(e) ?: return
 		// Tocar la pantalla corta la voz al momento, sin esperar al hilo del lector
-		if (e.eventType == AccessibilityEvent.TYPE_TOUCH_INTERACTION_START && ajustes.cortarAlTocar) {
+		if (toqueUsuario && ajustes.cortarAlTocar) {
 			continua.parar()
 			voz.callar()
 		}
@@ -246,6 +301,8 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		when (e.eventType) {
 			AccessibilityEvent.TYPE_VIEW_HOVER_ENTER -> alExplorar(e)
 			AccessibilityEvent.TYPE_TOUCH_INTERACTION_START -> {
+				toquePropio = esGestoPropio(e)
+				if (toquePropio) return
 				momentoUsuario = SystemClock.uptimeMillis()
 				teclaExplorada = null
 				ultimoExplorado = null
@@ -258,8 +315,9 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 			}
 			AccessibilityEvent.TYPE_TOUCH_INTERACTION_END -> {
 				// Los toques de un gesto que ha mandado Tiresias (arrastrar una lista, pulsar) no son del dedo del
-				// usuario: ni cuentan como un dedo atascado ni activan nada con «un toque activa»
-				if (SystemClock.uptimeMillis() > gestoPropioHasta) {
+				// usuario: ni cuentan como un dedo atascado ni activan nada con «un toque activa». Se decide al
+				// empezar el toque: el final puede llegar tarde (con el móvil ocupado) y ya no se distinguiría
+				if (!toquePropio) {
 					vigilarToqueAtascado()
 					alLevantarDedo()
 				}
@@ -286,7 +344,6 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 			AccessibilityEvent.TYPE_ANNOUNCEMENT -> alAnunciar(e)
 			AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED -> alNotificar(e)
 			AccessibilityEvent.TYPE_TOUCH_EXPLORATION_GESTURE_START -> Unit
-			AccessibilityEvent.TYPE_TOUCH_INTERACTION_END -> Unit
 		}
 	}
 
@@ -546,28 +603,64 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		}
 	}
 
-	/** Hasta cuándo los toques que llegan son de un gesto que ha mandado Tiresias. */
+	/** Hasta cuándo un toque que empieza es de un gesto que ha mandado Tiresias. */
 	@Volatile
 	private var gestoPropioHasta = 0L
+	/** Si el toque de ahora (desde que empezó hasta que acabe) es de un gesto de Tiresias (hilo del lector). */
+	private var toquePropio = false
+
+	/** Si [e], el principio de un toque, es de un gesto de Tiresias (por cuándo lo vio Android, no por cuándo llega aquí). */
+	private fun esGestoPropio(e: AccessibilityEvent): Boolean = (e.eventTime.takeIf { it > 0 } ?: SystemClock.uptimeMillis()) <= gestoPropioHasta
 
 	/**
 	 * Manda un gesto de Tiresias a la pantalla (todos pasan por aquí) y apunta
 	 * cuánto dura, para no tomar sus toques por los del usuario.
 	 */
-	fun mandarGesto(gesto: android.accessibilityservice.GestureDescription): Boolean {
-		var dura = 0L
-		for (i in 0 until gesto.strokeCount) {
-			val trazo = gesto.getStroke(i)
-			dura = maxOf(dura, trazo.startTime + trazo.duration)
+	fun mandarGesto(gesto: android.accessibilityservice.GestureDescription, alAcabar: (() -> Unit)? = null): Boolean {
+		// Su toque empieza con el primer trazo: un toque que empiece después ya es del usuario
+		var empieza = Long.MAX_VALUE
+		for (i in 0 until gesto.strokeCount) empieza = minOf(empieza, gesto.getStroke(i).startTime)
+		gestoPropioHasta = SystemClock.uptimeMillis() + empieza.coerceIn(0L, 10_000L) + MARGEN_GESTO_PROPIO_MS
+		// Un gesto de un dedo (un toque, una pulsación larga, un deslizamiento) pasa directo a la app por una zona
+		// de paso de toques donde empieza: si no, la exploración táctil lo tomaría por un dedo que explora y la app
+		// no recibiría nada (los de dos dedos, como el arrastre de una lista, sí le llegan)
+		val inicio = if (Build.VERSION.SDK_INT >= 30 && gesto.strokeCount == 1) inicioDe(gesto.getStroke(0)) else null
+		val devolver: () -> Unit = inicio?.let { p ->
+			gestos.pasoParaToque(android.graphics.Rect(p.x.toInt() - PASO_TOQUE_PX, p.y.toInt() - PASO_TOQUE_PX, p.x.toInt() + PASO_TOQUE_PX, p.y.toInt() + PASO_TOQUE_PX))
+		} ?: {}
+		// [alAcabar], en el hilo del lector cuando Android ha hecho el gesto (para seguirlo: los dedos que se quedan quietos)
+		val aviso = if (alAcabar != null || inicio != null) object : android.accessibilityservice.AccessibilityService.GestureResultCallback() {
+			override fun onCompleted(descripcion: android.accessibilityservice.GestureDescription?) {
+				devolver()
+				alAcabar?.invoke()
+			}
+
+			override fun onCancelled(descripcion: android.accessibilityservice.GestureDescription?) = devolver()
+		} else null
+		val mandar = {
+			runCatching { servicio.dispatchGesture(gesto, aviso, aviso?.let { manejador }) }
+				.onFailure { Registro.w(ETIQUETA, "No se pudo mandar el gesto", it) }
+				.getOrDefault(false)
+				.also { if (!it) devolver() }
 		}
-		gestoPropioHasta = SystemClock.uptimeMillis() + dura + MARGEN_GESTO_PROPIO_MS
-		return runCatching { servicio.dispatchGesture(gesto, null, null) }
-			.onFailure { Registro.w(ETIQUETA, "No se pudo mandar el gesto", it) }
-			.getOrDefault(false)
+		if (inicio == null) return mandar()
+		// Android pone la zona de paso un momento después de pedirla: el gesto va detrás
+		gestoPropioHasta += ESPERA_PASO_TOQUE_MS
+		manejador.postDelayed({ mandar() }, ESPERA_PASO_TOQUE_MS)
+		return true
+	}
+
+	/** Dónde empieza [trazo]. */
+	private fun inicioDe(trazo: android.accessibilityservice.GestureDescription.StrokeDescription): android.graphics.PointF? {
+		val medida = android.graphics.PathMeasure(trazo.path, false)
+		val punto = FloatArray(2)
+		return if (medida.getPosTan(0f, punto, null)) android.graphics.PointF(punto[0], punto[1])
+		else android.graphics.RectF().also { trazo.path.computeBounds(it, true) }.let { android.graphics.PointF(it.left, it.top) }
 	}
 
 	/** Un clic de accesibilidad en [n] o, si la app no lo atiende, un toque de verdad en su centro. */
 	private fun pulsar(n: AccessibilityNodeInfo) {
+		soltarProteccionFoco()
 		if (runCatching { n.performAction(AccessibilityNodeInfo.ACTION_CLICK) }.getOrDefault(false)) return
 		val r = Nodos.visibleEnVentana(n)
 		if (r.isEmpty) return
@@ -596,6 +689,9 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 			return
 		}
 		val destino = Nodos.enfocable(origen) ?: return
+		// El fondo de la pantalla de bloqueo (detrás del reloj y del teclado del PIN), al tocar entre las teclas:
+		// no se dice «Pantalla de bloqueo» cada vez, el foco se queda en lo último tocado (SandFly, 657ca24b5)
+		if (esFondoDelBloqueo(destino) || esPaginaDelEscritorio(destino)) return
 		ultimoExplorado = destino
 		// Las teclas del teclado en pantalla: se apunta la última que se toca
 		teclaExplorada = if (runCatching { destino.window?.type }.getOrNull() == AccessibilityWindowInfo.TYPE_INPUT_METHOD) destino else null
@@ -611,14 +707,88 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		manejador.postDelayed(r, espera)
 	}
 
+	/**
+	 * Una vista de SystemUI sin hijos que no se pulsa y ocupa un tercio o más de su ventana, con el móvil
+	 * bloqueado: el fondo de la pantalla de bloqueo, que Android nombra «Pantalla de bloqueo».
+	 */
+	private fun esFondoDelBloqueo(n: AccessibilityNodeInfo): Boolean {
+		if (n.packageName?.toString() != PAQUETE_SISTEMA || n.childCount > 0 || n.isClickable || n.isLongClickable) return false
+		if (!bloqueado()) return false
+		val r = Nodos.limites(n)
+		val v = android.graphics.Rect().also { runCatching { n.window?.getBoundsInScreen(it) } }
+		if (v.isEmpty) return false
+		return r.width().toLong() * r.height() * 3 >= v.width().toLong() * v.height()
+	}
+
+	/**
+	 * La página del escritorio («Pantalla de inicio 1 de 2»), al tocar entre los iconos: no se pulsa y tiene
+	 * iconos dentro o cubre un tercio de la ventana o más. No se dice cada vez (SandFly, HomeScreenPages).
+	 */
+	private fun esPaginaDelEscritorio(n: AccessibilityNodeInfo): Boolean {
+		if (n.packageName?.toString() != escritorio() || Nodos.accionable(n)) return false
+		var conIconos = false
+		for (i in 0 until minOf(n.childCount, 40)) {
+			val h = runCatching { n.getChild(i) }.getOrNull() ?: continue
+			if (Nodos.accionable(h) || h.isFocusable) {
+				conIconos = true
+				break
+			}
+		}
+		if (conIconos) return true
+		val r = Nodos.limites(n)
+		val v = android.graphics.Rect().also { runCatching { n.window?.getBoundsInScreen(it) } }
+		return !v.isEmpty && r.width().toLong() * r.height() * 3 >= v.width().toLong() * v.height()
+	}
+
+	/** El paquete del escritorio de ahora (se vuelve a mirar cada minuto: se puede cambiar de escritorio). */
+	private var paqueteEscritorio: String? = null
+	private var escritorioMirado = 0L
+
+	private fun escritorio(): String? {
+		val ahora = SystemClock.uptimeMillis()
+		if (ahora - escritorioMirado > 60_000L) {
+			escritorioMirado = ahora
+			paqueteEscritorio = runCatching {
+				val inicio = android.content.Intent(android.content.Intent.ACTION_MAIN).addCategory(android.content.Intent.CATEGORY_HOME)
+				servicio.packageManager.resolveActivity(inicio, android.content.pm.PackageManager.MATCH_DEFAULT_ONLY)?.activityInfo?.packageName
+			}.getOrNull()
+		}
+		return paqueteEscritorio
+	}
+
 	/** El foco de accesibilidad ha cambiado (por Tiresias, por la app o por el sistema). */
 	private fun alEnfocar(e: AccessibilityEvent) {
 		val n = e.source ?: return
+		if (calladoAlEncender(e.packageName)) {
+			cambiarFoco(n)
+			return
+		}
+		// La app avisa del foco del elemento que esperaba a rellenarse: ya se puede decir
+		porRellenar?.takeIf { it.nodo == n }?.let {
+			decirRellena(it)
+			return
+		}
 		val ahora = SystemClock.uptimeMillis()
 		val yaDicho = n == dichoAlEnfocar && ahora - momentoDicho < 2000
 		// El aviso tardío de un elemento que Tiresias enfocó antes del actual (deslizando deprisa):
 		// ni se vuelve a él ni se repite
 		if (!yaDicho && enfocadosPropios.any { it.first == n && ahora - it.second < 2000 }) return
+		// Protección del foco (VoiceOver): justo después de que el usuario se mueva, la app no se lleva el foco
+		// a otro elemento de la misma ventana (un carrusel que avanza solo, una lista que se rehace); se queda donde iba
+		val actual = foco
+		if (!yaDicho && actual != null && n != actual && ahora - momentoMovido < PROTEGER_FOCO_MS && n.windowId == actual.windowId &&
+			Nodos.vivo(actual) && actual.isVisibleToUser) {
+			if (com.xebolax.tiresias.BuildConfig.PRUEBAS) android.util.Log.d(ETIQUETA, "La app quiso llevarse el foco justo después de moverse: se deja donde estaba")
+			runCatching { actual.performAction(AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS) }
+			return
+		}
+		// El teclado del PIN de la pantalla de bloqueo: SystemUI pone el foco en su contenedor (sin texto propio,
+		// no enfocable) justo después del campo del PIN, y leerlo diría toda la numeración («1, 2, 3...»).
+		// El foco se queda donde estaba
+		if (n.packageName?.toString() == PAQUETE_SISTEMA && n.childCount > 0 && !n.isFocusable && !Nodos.tieneTexto(n) && bloqueado()) {
+			if (actual != null && actual != n && Nodos.vivo(actual)) runCatching { actual.performAction(AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS) }
+			return
+		}
 		cambiarFoco(n)
 		if (yaDicho) return
 		// Justo después de anunciar una ventana, el foco inicial va detrás del título (no lo corta)
@@ -628,14 +798,45 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 
 	/** Pone el foco de accesibilidad en [n] y lo dice enseguida (sin esperar a la app). */
 	fun enfocar(n: AccessibilityNodeInfo, sonido: Sonido? = Sonido.FOCO, modo: Modo = Modo.INTERRUMPIR) {
+		momentoMovido = SystemClock.uptimeMillis()
 		cambiarFoco(n)
-		apuntarPropio(n)
-		decirElemento(n, modo, sonido)
-		if (ajustes.leerMasSolo) abrirLeerMas(n)
+		// Una fila que la app rellena al recibir el foco (Telegram, Nekogram: aún sin texto, sin descripción y sin
+		// hijos): se dice cuando la app avisa de su foco, ya rellena; si no avisa, al poco con lo que tenga (Backtalk 240)
+		val vacia = vaciaDeMomento(n)
+		if (vacia) {
+			val r = Rellenar(n, modo, sonido)
+			porRellenar = r
+			manejador.postDelayed({ if (porRellenar === r) decirRellena(r) }, ESPERA_RELLENO_MS)
+		} else {
+			porRellenar = null
+			apuntarPropio(n)
+			decirElemento(n, modo, sonido)
+			if (ajustes.leerMasSolo) abrirLeerMas(n)
+		}
 		val puesto = runCatching { n.performAction(AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS) }.getOrDefault(false)
-		if (!puesto) Registro.i(ETIQUETA, "La app no aceptó el foco de accesibilidad; se sigue con el foco propio")
+		if (!puesto && com.xebolax.tiresias.BuildConfig.PRUEBAS) android.util.Log.d(ETIQUETA, "La app no aceptó el foco de accesibilidad; se sigue con el foco propio")
+		// Sin el foco de accesibilidad en él, Android pulsaría otra cosa: el doble toque sigue siendo de Tiresias
+		if (!puesto) mantenerDeVerdad(false)
 		// La frase de los vecinos, preparada para el siguiente deslizamiento
 		manejador.post { navegador.prepararVecinos(n) }
+	}
+
+	/** Un elemento enfocado por Tiresias que se dirá cuando la app lo rellene (o al poco, si no avisa). */
+	private class Rellenar(val nodo: AccessibilityNodeInfo, val modo: Modo, val sonido: Sonido?)
+	private var porRellenar: Rellenar? = null
+
+	/** Sin nada que decir todavía: ni texto, ni descripción, ni estado, ni hijos (ni es un campo). */
+	private fun vaciaDeMomento(n: AccessibilityNodeInfo): Boolean =
+		n.childCount == 0 && !n.isEditable && n.text.isNullOrEmpty() && n.contentDescription.isNullOrEmpty() &&
+			(Build.VERSION.SDK_INT < 30 || n.stateDescription.isNullOrEmpty()) && (Build.VERSION.SDK_INT < 26 || n.hintText.isNullOrEmpty())
+
+	private fun decirRellena(r: Rellenar) {
+		porRellenar = null
+		val n = r.nodo
+		if (foco != n) return
+		runCatching { n.refresh() }
+		apuntarPropio(n)
+		decirElemento(n, r.modo, r.sonido)
 	}
 
 	/** El último «Leer más» pulsado solo, para no pulsar dos veces el mismo mensaje. */
@@ -697,7 +898,6 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 			val limites = Nodos.limites(n)
 			val ancho = servicio.resources.displayMetrics.widthPixels.coerceAtLeast(1)
 			sonidos.tocar(if (elemento.tieneAcciones && verbosidad.decirAcciones) Sonido.ACCIONES else sonido, limites.exactCenterX() / ancho, tonoDe(elemento, limites))
-			vibracion.vibrar(sonido)
 		}
 		// Las teclas de un teclado que habla solo: ya las dice él
 		if (edicion.tecladoHablaSolo() && runCatching { n.window?.type }.getOrNull() == AccessibilityWindowInfo.TYPE_INPUT_METHOD) {
@@ -864,7 +1064,17 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	@Volatile var momentoUsuario = 0L
 
 	private fun alCambiarVentana(e: AccessibilityEvent, comprobada: Boolean = false) {
+		// El teclado en pantalla cambia de ventana con cada tecla, con las mayúsculas o los símbolos (Gboard, SwiftKey,
+		// Samsung): no es una pantalla nueva. Su aparición ya se dice una vez (alCambiarVentanas); lo de dentro, al tocarlo.
+		if (esDelTeclado(e)) {
+			olvidarCaches()
+			return
+		}
 		virtual?.let { v -> if (e.windowId != v.ventana && e.packageName != servicio.packageName) salirVirtual(true) }
+		if (calladoAlEncender(e.packageName)) {
+			olvidarCaches()
+			return
+		}
 		if (!comprobada && sinQueLoPidaElUsuario(e)) {
 			val copia = copiar(e) ?: return
 			val desde = System.currentTimeMillis() - 6000
@@ -900,14 +1110,14 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		// El foco de otra ventana ya no vale: el siguiente deslizamiento empieza en la nueva
 		if (foco?.let { it.windowId != e.windowId || !Nodos.vivo(it) } == true) perderFoco()
 		val dialogo = esDialogo(e)
-		manejador.postDelayed({
+		cuandoEstable(e.windowId, ahora + esperaVentana()) {
 			// Volver a donde estaba en esta ventana (también al pulsar Atrás: Backtalk 151)
 			// (en los menús y diálogos de Tiresias, siempre su primera opción: no la última que se tocó)
 			if (ajustes.recordarFoco && !(dialogo && e.packageName == servicio.packageName)) memoria.restaurar(this, e.windowId)
 			// La app pide dónde empezar (Android 14, requestInitialAccessibilityFocus): ahí va el foco
 			if (foco?.windowId != e.windowId) focoInicialPedido(e.windowId)?.let {
 				enfocar(it, null, if (ajustes.focoSinEsperarTitulo) Modo.INTERRUMPIR else Modo.ENCOLAR)
-				return@postDelayed
+				return@cuandoEstable
 			}
 			// En un diálogo (también los de Tiresias), el foco entra en él: su primer elemento, tras el título
 			// (el título ya se ha dicho: el foco va a lo primero que no es el título)
@@ -924,7 +1134,29 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 				// Con «sin esperar al título», el primer elemento corta el título (el sonido de ventana ya avisa)
 				primero?.let { enfocar(it, null, if (ajustes.focoSinEsperarTitulo) Modo.INTERRUMPIR else Modo.ENCOLAR) }
 			}
-		}, esperaVentana())
+		}
+	}
+
+	/** Cuándo cambió por última vez el contenido de cada ventana, para saber si una ventana nueva ya está quieta. */
+	private val cambiosPorVentana = HashMap<Int, Long>()
+
+	/**
+	 * Hace [accion] en [desde] (la espera de la ventana) o, si la ventana [ventana]
+	 * sigue cambiando (se está construyendo), cuando lleve un momento quieta, sin
+	 * esperar nunca más de [ESTABLE_MAXIMO_MS] de más: así el foco no se pone en lo
+	 * que aún no está ni en lo que la app va a quitar.
+	 */
+	private fun cuandoEstable(ventana: Int, desde: Long, accion: () -> Unit) {
+		val limite = desde + ESTABLE_MAXIMO_MS
+		fun probar() {
+			val ahora = SystemClock.uptimeMillis()
+			if (ahora - (cambiosPorVentana[ventana] ?: 0L) < ESTABLE_QUIETA_MS && ahora < limite) {
+				manejador.postDelayed({ probar() }, ESTABLE_QUIETA_MS)
+				return
+			}
+			accion()
+		}
+		manejador.postAtTime({ probar() }, desde)
 	}
 
 	/** El elemento de la ventana [ventana] que la app ha pedido que tenga el foco al abrirla (Android 14), o null. */
@@ -942,21 +1174,48 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		return null
 	}
 
+	/** Cuándo puso Tiresias el foco en un elemento (al deslizar, al tocar, al buscar): lo protege un momento. */
+	private var momentoMovido = 0L
+
+	/** Tras activar algo, la app puede mover el foco al momento (a un diálogo, al resultado). */
+	fun soltarProteccionFoco() {
+		momentoMovido = 0L
+	}
+
 	/** Los últimos elementos que tuvieron el foco, para volver a ellos al cerrarse un panel o un diálogo. */
 	private val focosAnteriores = ArrayDeque<AccessibilityNodeInfo>()
 
 	private fun cambiarFoco(n: AccessibilityNodeInfo) {
 		val anterior = foco
 		foco = n
+		// Una contraseña o un dato sensible: lo que se diga de él no va al registro de la variante de pruebas
+		voz.focoSensible = Nodos.sensible(n)
 		if (anterior != n) cambiosFoco++
 		if (anterior != null && anterior != n) apuntarAnterior(anterior)
+		mantenerDeVerdad(n.packageName?.toString() != servicio.packageName && Nodos.esDeMantenerPulsado(n))
 	}
 
 	/** El foco se ha ido (lo que lo tenía se ocultó o se cerró): se apunta por si vuelve a verse. */
 	private fun perderFoco() {
 		foco?.let { apuntarAnterior(it) }
 		foco = null
+		voz.focoSensible = false
 		cambiosFoco++
+		mantenerDeVerdad(false)
+	}
+
+	/**
+	 * Lo que hace el servicio cuando el foco llega a un botón de mantener pulsado (true) o sale de él:
+	 * el doble toque lo hace entonces Android, que con el doble toque mantenido deja el botón pulsado
+	 * de verdad mientras no se levanta el dedo (como con TalkBack). Desde el hilo del lector.
+	 */
+	var alMantenerDeVerdad: ((Boolean) -> Unit)? = null
+	private var enBotonDeMantener = false
+
+	private fun mantenerDeVerdad(si: Boolean) {
+		if (si == enBotonDeMantener) return
+		enBotonDeMantener = si
+		alMantenerDeVerdad?.invoke(si)
 	}
 
 	private fun apuntarAnterior(n: AccessibilityNodeInfo) {
@@ -982,6 +1241,18 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 				return
 			}
 		}
+	}
+
+	/** Si el evento es de la ventana del teclado en pantalla (o de su app, si la lista de ventanas aún no lo tiene). */
+	private fun esDelTeclado(e: AccessibilityEvent): Boolean {
+		val paquete = e.packageName?.toString() ?: return false
+		if (paquete == servicio.packageName) return false
+		val ventanas = runCatching { servicio.windows }.getOrNull().orEmpty()
+		ventanas.firstOrNull { it.id == e.windowId }?.let { return it.type == AccessibilityWindowInfo.TYPE_INPUT_METHOD }
+		// (los ajustes del teclado son una pantalla de su app: solo cuenta mientras el teclado está a la vista)
+		if (ventanas.none { it.type == AccessibilityWindowInfo.TYPE_INPUT_METHOD }) return false
+		val teclado = runCatching { android.provider.Settings.Secure.getString(servicio.contentResolver, android.provider.Settings.Secure.DEFAULT_INPUT_METHOD) }.getOrNull()?.substringBefore('/')
+		return paquete == teclado
 	}
 
 	/** Si la ventana del evento es un diálogo o una ventana de Tiresias encima de la app. */
@@ -1011,15 +1282,19 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		if (Build.VERSION.SDK_INT >= 28 && e.windowChanges and AccessibilityEvent.WINDOWS_CHANGE_REMOVED != 0) {
 			manejador.postDelayed({ volverAlFocoAnterior() }, 300)
 		}
-		val activa = runCatching { servicio.windows.firstOrNull { it.isActive } }.getOrNull() ?: return
-		if (activa.id != ventanaActiva) {
-			ventanaActiva = activa.id
-			// El teclado en pantalla aparece o desaparece
-			if (activa.type == AccessibilityWindowInfo.TYPE_INPUT_METHOD) voz.decir(Enunciado(textos.getString(R.string.lect_teclado), Modo.ENCOLAR, Tipo.ANUNCIO))
+		// (si Android no da la lista de ventanas, no se sabe nada del teclado: no se cambia lo que había)
+		val ventanas = runCatching { servicio.windows }.getOrNull() ?: return
+		val teclado = ventanas.firstOrNull { it.type == AccessibilityWindowInfo.TYPE_INPUT_METHOD }
+		// El teclado en pantalla aparece: se dice una vez. No cuando pasa a ser la ventana activa (al explorar sus teclas
+		// o al escribir cada letra), ni cuando el teclado se rehace al momento (al cambiar de idioma o de teclas)
+		val ahora = SystemClock.uptimeMillis()
+		if (teclado != null && !hayTeclado && ahora - sinTecladoDesde > TECLADO_REHECHO_MS) {
+			voz.decir(Enunciado(textos.getString(R.string.lect_teclado), Modo.ENCOLAR, Tipo.ANUNCIO))
 		}
+		if (teclado == null && hayTeclado) sinTecladoDesde = ahora
+		hayTeclado = teclado != null
 		// Con «Toque directo en el teclado», los toques en el teclado en pantalla pasan directos a él
 		if (ajustes.toqueDirectoTeclado) {
-			val teclado = runCatching { servicio.windows.firstOrNull { it.type == AccessibilityWindowInfo.TYPE_INPUT_METHOD } }.getOrNull()
 			val zona = teclado?.let { android.graphics.Rect().also { r -> it.getBoundsInScreen(r) } }
 			gestos.zonaDirecta(zona)
 		}
@@ -1029,6 +1304,8 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	@android.annotation.SuppressLint("InlinedApi")
 	private fun alCambiarContenido(e: AccessibilityEvent) {
 		navegador.invalidar(e.windowId)
+		cambiosPorVentana[e.windowId] = SystemClock.uptimeMillis()
+		if (cambiosPorVentana.size > 32) cambiosPorVentana.clear()
 		descritos.clear()
 		val n = e.source ?: return
 		// Una regla de un complemento puede silenciar los cambios de este elemento (o de lo que hay dentro de otro)
@@ -1036,6 +1313,7 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		val tipos = e.contentChangeTypes
 		// Región viva: se dice lo nuevo (educada, a la cola; urgente, cortando), sin repetir
 		val viva = runCatching { n.liveRegion }.getOrDefault(0)
+		if (viva != android.view.View.ACCESSIBILITY_LIVE_REGION_NONE && calladoAlEncender(e.packageName)) return
 		if (viva != android.view.View.ACCESSIBILITY_LIVE_REGION_NONE && (tipos and AccessibilityEvent.CONTENT_CHANGE_TYPE_TEXT != 0 || tipos == 0 || tipos and AccessibilityEvent.CONTENT_CHANGE_TYPE_SUBTREE != 0)) {
 			// El plazo mínimo entre cambios que pide la app (un cronómetro no habla cada décima)
 			if (!pasaPlazo(n, SystemClock.uptimeMillis())) return
@@ -1180,6 +1458,7 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 
 	private fun alAnunciar(e: AccessibilityEvent) {
 		if (ajustes.callarBloqueo && bloqueado()) return
+		if (calladoAlEncender(e.packageName)) return
 		if (scriptsListos) e.source?.let { if (scripts.silenciado(it)) return }
 		val texto = e.text.joinToString(" ").trim()
 		if (texto.isBlank() || !filtro.pasa("anuncio:${e.packageName}", texto, SystemClock.uptimeMillis())) return
@@ -1277,8 +1556,24 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 
 		/** Un toque así de largo debería haber explorado algo; tres seguidos sin nada en este tiempo, atasco. */
 		private const val TOQUE_LARGO_MS = 450L
-		/** Lo que tardan en llegar los últimos toques de un gesto propio tras acabar. */
-		private const val MARGEN_GESTO_PROPIO_MS = 400L
+		/** Lo que se espera a que la app rellene un elemento enfocado vacío antes de decirlo con lo que tenga. */
+		private const val ESPERA_RELLENO_MS = 300L
+		/** Lo que dura el silencio de SystemUI al encender con el móvil bloqueado (Backtalk 312). */
+		private const val SILENCIO_ENCENDER_MS = 3000L
+		/** Lo que como mucho se cuenta un dedo en la pantalla para las teclas de volumen. */
+		private const val DEDO_MAXIMO_MS = 30_000L
+		/** La mitad del lado de la zona de paso que se abre para un toque de Tiresias, y lo que se espera a que Android la ponga. */
+		private const val PASO_TOQUE_PX = 24
+		private const val ESPERA_PASO_TOQUE_MS = 60L
+		/** Lo que puede tardar Android en empezar el toque de un gesto propio. */
+		private const val MARGEN_GESTO_PROPIO_MS = 500L
+		/** Lo que puede tardar un teclado en volver a salir para no anunciarlo otra vez. */
+		private const val TECLADO_REHECHO_MS = 600L
+		/** Lo que dura la protección del foco tras moverse el usuario. */
+		private const val PROTEGER_FOCO_MS = 600L
+		/** Lo que tiene que estar quieta una ventana nueva para poner el foco en ella, y lo que se espera de más como mucho. */
+		private const val ESTABLE_QUIETA_MS = 120L
+		private const val ESTABLE_MAXIMO_MS = 400L
 		private const val TOQUES_ATASCO = 3
 		private const val RACHA_ATASCO_MS = 30_000L
 

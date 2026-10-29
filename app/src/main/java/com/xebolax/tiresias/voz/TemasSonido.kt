@@ -2,6 +2,7 @@ package com.xebolax.tiresias.voz
 
 import android.content.Context
 import com.xebolax.tiresias.base.Almacen
+import com.xebolax.tiresias.base.Registro
 import java.io.File
 import java.io.IOException
 import java.io.InputStream
@@ -26,6 +27,8 @@ import java.util.zip.ZipOutputStream
 object TemasSonido {
 	private val EXTENSIONES = listOf("ogg", "wav", "mp3")
 	private const val PROPIOS = "_propios"
+	private const val INCLUIDOS = "temas"
+	private const val INCLUIDOS_SACADOS = "_incluidos"
 	private const val MAXIMO_ARCHIVO = 2L * 1024 * 1024
 	private const val MAXIMO_TEMA = 24L * 1024 * 1024
 
@@ -33,15 +36,65 @@ object TemasSonido {
 
 	private fun propios(c: Context): File = File(carpeta(c), PROPIOS)
 
-	/** Los temas instalados (el nombre de su carpeta), por orden alfabético. */
-	fun instalados(c: Context): List<String> =
-		carpeta(c).listFiles().orEmpty().filter { it.isDirectory && it.name != PROPIOS }.map { it.name }.sorted()
+	/** Los temas que vienen dentro de Tiresias (`assets/temas/<id>/`, los mismos de la tienda): no hace falta internet. */
+	fun incluidos(c: Context): List<String> =
+		runCatching { c.assets.list(INCLUIDOS).orEmpty().toList() }.getOrDefault(emptyList()).sorted()
 
-	/** El archivo que suena para [s]: el propio, el del [tema] o null (el generado de Tiresias). */
+	/** Los temas que se pueden elegir (los incluidos y los instalados, sin repetir), por orden alfabético. */
+	fun instalados(c: Context): List<String> =
+		(incluidos(c) + carpeta(c).listFiles().orEmpty().filter { it.isDirectory && !it.name.startsWith("_") && !it.name.endsWith(".parcial") }.map { it.name })
+			.distinct().sorted()
+
+	/** Si [tema] es de los que vienen dentro de Tiresias (no se borra: siempre se puede volver a elegir). */
+	fun esIncluido(c: Context, tema: String): Boolean = tema in incluidos(c)
+
+	/**
+	 * El nombre que se enseña de [tema]: el de su `tema.json` en el idioma de
+	 * Tiresias (`nombre_en`) o en español, o, si no tiene, el de su carpeta.
+	 */
+	fun nombreDe(c: Context, tema: String): String {
+		val json = runCatching { c.assets.open("$INCLUIDOS/$tema/tema.json").bufferedReader().use { it.readText() } }.getOrNull()
+			?: File(carpeta(c), "$tema/tema.json").takeIf { it.isFile }?.let { runCatching { it.readText() }.getOrNull() }
+		val o = json?.let { runCatching { org.json.JSONObject(it) }.getOrNull() } ?: return tema
+		val idioma = com.xebolax.tiresias.base.Idioma.efectivo(c).language
+		return o.optString("nombre_$idioma").takeIf { idioma != "es" && it.isNotBlank() } ?: o.optString("nombre").takeIf { it.isNotBlank() } ?: tema
+	}
+
+	/** El archivo que suena para [s]: el propio, el del [tema] o null (el generado de Tiresias). En un hilo de fondo. */
 	fun archivoDe(c: Context, tema: String?, s: Sonido): File? {
 		propio(c, s)?.let { return it }
 		if (tema.isNullOrEmpty()) return null
-		return buscar(File(carpeta(c), tema), s)
+		// Uno instalado (de la tienda o importado) o, si no, el incluido en Tiresias
+		buscar(File(carpeta(c), tema), s)?.let { return it }
+		if (!esIncluido(c, tema)) return null
+		return buscar(sacarIncluido(c, tema), s)
+	}
+
+	/**
+	 * Copia un tema incluido de los assets a su carpeta (SoundPool necesita un
+	 * archivo), una vez por instalación de Tiresias (versión y hora de instalación:
+	 * reinstalar la misma versión también trae sus sonidos nuevos). Las copias
+	 * anteriores se borran.
+	 */
+	@Synchronized
+	private fun sacarIncluido(c: Context, tema: String): File {
+		val base = File(carpeta(c), INCLUIDOS_SACADOS)
+		val instalada = runCatching { c.packageManager.getPackageInfo(c.packageName, 0).lastUpdateTime }.getOrDefault(0L)
+		val version = File(base, "${com.xebolax.tiresias.BuildConfig.VERSION_CODE}-$instalada")
+		val destino = File(version, tema)
+		if (destino.isDirectory) return destino
+		base.listFiles().orEmpty().filter { it != version }.forEach { it.deleteRecursively() }
+		val parcial = File(version, "$tema.parcial").apply { deleteRecursively(); mkdirs() }
+		try {
+			for (archivo in c.assets.list("$INCLUIDOS/$tema").orEmpty()) {
+				c.assets.open("$INCLUIDOS/$tema/$archivo").use { e -> File(parcial, archivo).outputStream().use { e.copyTo(it) } }
+			}
+			if (!parcial.renameTo(destino)) throw IOException("No se pudo guardar el tema $tema")
+		} catch (e: IOException) {
+			parcial.deleteRecursively()
+			Registro.w("TemasSonido", "No se pudo sacar el tema incluido $tema", e)
+		}
+		return destino
 	}
 
 	fun propio(c: Context, s: Sonido): File? = buscar(propios(c), s)
@@ -68,6 +121,8 @@ object TemasSonido {
 	 */
 	fun importarZip(c: Context, entrada: InputStream, nombre: String): String {
 		val limpio = nombre.substringBeforeLast('.').lowercase().replace(Regex("[^a-z0-9áéíóúñü_-]+"), "-").trim('-').take(40).ifEmpty { "tema" }
+			// Un ZIP con el nombre de un tema incluido no lo tapa: se guarda aparte
+			.let { if (it in incluidos(c)) "$it-propio" else it }
 		val destino = File(carpeta(c), limpio)
 		val parcial = File(carpeta(c), "$limpio.parcial").apply { deleteRecursively(); mkdirs() }
 		val nombres = Sonido.entries.map { it.name.lowercase() }.toSet()
@@ -108,7 +163,7 @@ object TemasSonido {
 	}
 
 	fun borrar(c: Context, tema: String) {
-		if (tema.isNotEmpty() && tema != PROPIOS) File(carpeta(c), tema).deleteRecursively()
+		if (tema.isNotEmpty() && !tema.startsWith("_")) File(carpeta(c), tema).deleteRecursively()
 	}
 
 	private fun copiarLimitado(entrada: InputStream, destino: File, maximo: Long): Long {

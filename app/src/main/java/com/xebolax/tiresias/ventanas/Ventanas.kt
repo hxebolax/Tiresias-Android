@@ -32,8 +32,8 @@ import com.xebolax.tiresias.base.Registro
  */
 class Ventanas(private val servicio: AccessibilityService) {
 	private val principal = Handler(Looper.getMainLooper())
-	private var abierta: AlertDialog? = null
-	private var cortina: View? = null
+	@Volatile private var abierta: AlertDialog? = null
+	@Volatile private var cortina: View? = null
 
 	val hayAbierta: Boolean get() = abierta?.isShowing == true
 
@@ -184,6 +184,27 @@ class Ventanas(private val servicio: AccessibilityService) {
 	 * (algunos sistemas dejan de mandar eventos con una ventana a pantalla
 	 * completa encima, arreglo de TalkBack). La quita el modo seguro siempre.
 	 */
+	/**
+	 * Hace [accion] (una captura de la pantalla para la IA o el OCR, desde otro hilo, nunca el principal)
+	 * con la cortina quitada un momento: si no, la captura sale negra. Vuelve a ponerse aunque falle.
+	 */
+	fun <T> sinCortina(accion: () -> T): T {
+		val v = cortina ?: return accion()
+		val oculta = java.util.concurrent.CountDownLatch(1)
+		principal.post {
+			v.visibility = View.INVISIBLE
+			oculta.countDown()
+		}
+		oculta.await(500, java.util.concurrent.TimeUnit.MILLISECONDS)
+		// Lo que tarda Android en pintar la pantalla sin ella
+		Thread.sleep(SIN_CORTINA_MS)
+		try {
+			return accion()
+		} finally {
+			principal.post { if (cortina === v) v.visibility = View.VISIBLE }
+		}
+	}
+
 	fun ponerCortina(poner: Boolean) = principal.post {
 		val wm = servicio.getSystemService(WindowManager::class.java) ?: return@post
 		if (poner && cortina == null) {
@@ -219,5 +240,7 @@ class Ventanas(private val servicio: AccessibilityService) {
 
 	companion object {
 		private const val ETIQUETA = "Ventanas"
+		/** Lo que se espera, con la cortina quitada, antes de capturar la pantalla. */
+		private const val SIN_CORTINA_MS = 120L
 	}
 }
