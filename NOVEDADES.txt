@@ -1,3 +1,42 @@
+== 1.0.6.1
+- Con el selector en «Edición», el doble toque vuelve a activar: no abría nada (ni WhatsApp ni las opciones del menú de Tiresias, tampoco Cancelar) porque hacía la opción de edición elegida, aunque no hubiera ninguna. Ahora esa opción solo se hace en un campo de texto y si se ha elegido una.
+- Las teclas de volumen en los campos de texto mueven el cursor también mientras se escribe con el teclado en pantalla (el foco estaba en la tecla, no en el campo, y cambiaban el volumen).
+- Temas de sonidos a mano: en Ajustes, Voz, dentro de «Sonidos y vibración», está «Tema de sonidos» con el tema que suena. Vienen dentro de Tiresias, sin descargar nada, ocho temas completos (todos los sonidos): los de siempre, Suave y Madera, y seis nuevos, Cristal, Retro, Gotas, Marimba, Mínimo y Espacio.
+- Al deslizar por una lista que se desplaza (los ajustes), ya no se corta ni se salta ningún elemento, tampoco los encabezados: el arrastre con el que Tiresias adelanta la lista se tomaba por un toque tuyo (y a veces por un dedo atascado) y la lanzaba más de la cuenta, y en un móvil lento se elegía el siguiente antes de que la lista acabara de colocarse.
+- Grabar una nota de voz en WhatsApp o Telegram: en el botón de grabar, tocar dos veces y mantener lo deja pulsado mientras no levantes el dedo, como con TalkBack (antes era una pulsación larga corta y la app no grababa nada).
+- La vibración se nota en todos los móviles: en los de vibrador sencillo era tan corta que el motor no llegaba a arrancar, y ahí la intensidad alarga la vibración. Y vibra cada sonido de Tiresias (activar, ventana nueva, desplazar...), no solo el foco y el borde, también con los sonidos quitados.
+- Los toques de verdad de Tiresias pulsan de verdad: el clic directo de algunas apps, el respaldo cuando una app no atiende el clic (Telegram), la pulsación larga, los toques de la IA y de la pantalla virtual. Con la exploración táctil llegaban a la app como un dedo que explora y no pulsaban nada.
+- Con un dedo en la pantalla, las teclas de volumen suben y bajan el volumen de la voz, como en TalkBack. También mientras Tiresias lee de seguido, sin cortar la lectura, si no has asignado nada a esa tecla.
+- «Borrar todo el texto» en el menú de edición y para asignar a un gesto.
+- En la pantalla de bloqueo con PIN ya no se dice toda la numeración («1, 2, 3...») al salir el teclado: el foco se queda en el campo del PIN.
+- Notificaciones: con el acceso a las notificaciones (Ajustes, Notificaciones), con el móvil bloqueado se leen enteras, y también las que retiene No molestar y las que se actualizan sin avisar. Las dos teclas de volumen a la vez callan la que se está leyendo. El nombre del grupo que se repite («Familia: Ana», «Familia: Juan») se dice la primera vez. Palabras que callan una notificación. En Notificaciones recientes, por qué no se leyó una.
+- Al cambiar un volumen con las teclas se dice cuál y cuánto queda («Volumen multimedia, 40 por ciento»); se puede quitar.
+- Las voces incluidas también pueden sonar por el auricular de las llamadas, para oírlas con el móvil en la oreja.
+- En el teclado braille, Intro pulsa el botón Enviar de WhatsApp, Telegram, Signal o Mensajes.
+- Las teclas de volumen pueden mover el cursor en los campos de texto (Ajustes, Teclado).
+- Al encender con el móvil bloqueado se puede decir solo lo elegido, sin lo que la pantalla de bloqueo anuncia sola (Ajustes, Notificaciones).
+- Al volver a una pantalla, el foco vuelve a donde estaba aunque la app rehaga la lista tarde, y la lista se desplaza hasta esa fila.
+- Las filas que la app rellena al enfocarlas (Telegram) se dicen ya rellenas.
+- La navegación vertical desplaza la lista cuando no hay más filas debajo.
+- Al tocar entre los iconos del escritorio ya no se dice su página cada vez, y suena un sonido nuevo al pasar del final de una fila de iconos a la siguiente (en los ocho temas).
+- Vibración más nítida en los móviles que la admiten, y sin retrasar la voz.
+- Con otro servicio que explora por toque (el ayudante de otro lector), el doble toque sigue funcionando.
+- En la pantalla de bloqueo, al tocar entre las teclas del PIN ya no se dice «Pantalla de bloqueo» cada vez.
+- La IA y el reconocimiento de texto ven la pantalla con la cortina puesta (antes la captura salía negra).
+- Si Ajustes o el tutorial no se abren desde el menú de Tiresias (algunos móviles no dejan abrir pantallas en segundo plano), Tiresias lo prueba de otra forma y, si tampoco, dice qué permiso dar.
+- El teclado en pantalla se anuncia una sola vez, al salir: antes se decía «Teclado en pantalla» al ir buscando una tecla y a veces con cada letra.
+- Callar la voz pasando la mano por encima de la parte de arriba de la pantalla (el sensor de proximidad), como en TalkBack. Se puede quitar en Ajustes, Voz; no actúa en las llamadas.
+- Protección del foco: justo después de moverte, una app ya no puede llevarse el foco a otro sitio de la misma pantalla (un carrusel que avanza solo, una lista que se rehace). Al activar algo, la app sí puede llevarlo adonde quiera.
+- Al abrirse una pantalla, Tiresias espera a que deje de cambiar (como mucho un momento) antes de poner el foco, para no caer en lo que la app va a quitar.
+- Ajustes más ordenados: en Lectura y en Inteligencia artificial, las opciones que parecían de un apartado sin serlo están en su sitio; la salida del audio dice lo elegido; si la voz elegida se ha desinstalado, se ve la que suena. Abrir Lectura ya no vuelve a encender los emojis a quien los tenía quitados con el ajuste antiguo.
+- «Avisar de los elementos con acciones» y «Nombrar los elementos sin nombre» funcionan con cualquier verbosidad, no solo con la personalizada.
+- Con el eco del teclado en «nada», las autocorrecciones tampoco se dicen.
+- Las descargas de voces, modelos y actualizaciones se cancelan también con Atrás.
+- El código del modo senior no se vuelve a pedir al girar la pantalla o al cambiar de idioma.
+- Privacidad: lo que escribe un complemento en el registro y los mensajes de sus errores ya no van al registro de Tiresias (podían llevar texto de la pantalla), las marcas de posición ya no guardan el texto del elemento, y ni en la variante de pruebas se registra lo dicho de una contraseña.
+- La copia de seguridad se guarda y se recupera sin trabar la pantalla.
+- Las filas que repiten su nombre (los volúmenes de los ajustes del sistema) lo dicen una sola vez.
+
 == 1.0.6
 - Temas de sonidos a mano: en Ajustes, Voz, dentro de «Sonidos y vibración», está «Tema de sonidos» con el tema que suena. Vienen dentro de Tiresias, sin descargar nada, ocho temas completos (todos los sonidos): los de siempre, Suave y Madera, y seis nuevos, Cristal, Retro, Gotas, Marimba, Mínimo y Espacio.
 - Al deslizar por una lista que se desplaza (los ajustes), ya no se corta ni se salta ningún elemento, tampoco los encabezados: el arrastre con el que Tiresias adelanta la lista se tomaba por un toque tuyo (y a veces por un dedo atascado) y la lanzaba más de la cuenta, y en un móvil lento se elegía el siguiente antes de que la lista acabara de colocarse.

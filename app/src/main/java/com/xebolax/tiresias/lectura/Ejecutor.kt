@@ -244,7 +244,10 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 
 	private fun activar(): Boolean {
 		val f = objetivo() ?: return false
-		if (lector.control == ControlLectura.EDICION) return hacerEdicionElegida()
+		// Con el control Edición, el doble toque hace la opción de edición elegida, pero solo en un campo de texto
+		// y si se ha elegido una: si no, activa como siempre (con el selector en Edición, el doble toque no
+		// abría nada: ni WhatsApp ni las opciones del menú de Tiresias)
+		if (lector.control == ControlLectura.EDICION && f.isEditable && edicionElegida >= 0) return hacerEdicionElegida()
 		// La acción elegida con arriba y abajo para este elemento (con el control Acciones o con el predeterminado)
 		accionElegidaDe(f)?.let { a ->
 			lector.sonidos.tocar(Sonido.ACTIVAR)

@@ -154,8 +154,17 @@ class Teclado(private val lector: Lector, private val alAccion: (Accion) -> Unit
 		lector.perfiles.mapaGestos(lector.ajustes.mapaGestos, lector.foco?.packageName?.toString())[g]
 
 	private var volumenLarga = false
-	/** La tecla de volumen pulsada ahora mueve el cursor del campo de texto. */
+	/** La tecla de volumen pulsada ahora mueve el cursor del campo de texto, y ese campo. */
 	private var volumenEnCursor = false
+	private var campoCursor: android.view.accessibility.AccessibilityNodeInfo? = null
+
+	/**
+	 * El campo de texto en el que se escribe: el del foco de Tiresias o, si el foco está en otra cosa (la tecla
+	 * del teclado en pantalla que se acaba de explorar), el que tiene el foco de escritura.
+	 */
+	private fun campoEditando(): android.view.accessibility.AccessibilityNodeInfo? =
+		lector.foco?.takeIf { it.isEditable }
+			?: runCatching { lector.servicio.findFocus(android.view.accessibility.AccessibilityNodeInfo.FOCUS_INPUT) }.getOrNull()?.takeIf { it.isEditable }
 	/** La tecla de volumen pulsada ahora cambia el volumen de la voz (había un dedo en la pantalla al pulsarla). */
 	private var volumenConDedo = false
 
@@ -220,11 +229,13 @@ class Teclado(private val lector: Lector, private val alAccion: (Accion) -> Unit
 		}
 		// En un campo de texto, si se ha elegido, las teclas mueven el cursor: arriba, un carácter atrás; abajo,
 		// uno adelante (SandFly). Lo que se decide al pulsar vale hasta soltar
-		if (e.action == KeyEvent.ACTION_DOWN && e.repeatCount == 0 && lector.ajustes.volumenCursor && lector.foco?.isEditable == true &&
-			!lector.continua.activa && pantallaEncendida()) volumenEnCursor = true
+		if (e.action == KeyEvent.ACTION_DOWN && e.repeatCount == 0 && lector.ajustes.volumenCursor && !lector.continua.activa && pantallaEncendida()) {
+			campoCursor = campoEditando()
+			volumenEnCursor = campoCursor != null
+		}
 		if (volumenEnCursor) {
 			if (e.action == KeyEvent.ACTION_DOWN) {
-				val f = lector.foco
+				val f = campoCursor
 				if (f != null) {
 					val args = android.os.Bundle().apply {
 						putInt(android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_MOVEMENT_GRANULARITY_INT, android.view.accessibility.AccessibilityNodeInfo.MOVEMENT_GRANULARITY_CHARACTER)

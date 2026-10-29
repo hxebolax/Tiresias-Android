@@ -126,7 +126,16 @@ class Sonidos(contexto: Context) {
 			v * minOf(1f, 2f * (1f - p)) to v * minOf(1f, 2f * p)
 		} else v to v
 		runCatching { pool.play(id, izq, der, 1, 0, tono.coerceIn(0.5f, 2f)) }
+		sonados++
+		porSonido[s.ordinal]++
 	}
+
+	/** Los sonidos que han sonado de verdad, en total y de cada uno (para las pruebas: que nada deje de sonar). */
+	@Volatile var sonados = 0
+		private set
+	private val porSonido = IntArray(Sonido.entries.size)
+
+	fun vecesSonado(s: Sonido): Int = porSonido[s.ordinal]
 
 	fun cerrar() = runCatching { pool.release() }
 

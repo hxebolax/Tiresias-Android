@@ -440,6 +440,102 @@ class Peticiones106Test : PruebaTiresias() {
 		}
 	}
 
+	/**
+	 * El menú de Tiresias se usa varias veces seguidas (OnePlus 6, 29-10-2026: la segunda vez el doble toque no
+	 * activaba nada, ni Ajustes ni Cancelar). La causa: con el selector en Edición, el doble toque hacía la opción
+	 * de edición elegida (ninguna) en vez de activar; en un elemento que no es un campo, ahora activa.
+	 */
+	@Test
+	fun elMenuDeTiresiasSeUsaVariasVecesSeguidas() {
+		val maneja = android.accessibilityservice.AccessibilityServiceInfo.FLAG_SERVICE_HANDLES_DOUBLE_TAP
+		fun dobleToqueDeTiresias() = android.os.Build.VERSION.SDK_INT < 30 || esperar(2000) { (s.serviceInfo.flags and maneja != 0).takeIf { it } } == true
+		fun abrirMenu(vuelta: Int) {
+			hacer(Accion.MENU_TIRESIAS, 1500)
+			assertTrue("Vuelta $vuelta: no se abrió el menú", s.ventanaAbiertaPruebas)
+			assertTrue("Vuelta $vuelta: en el menú, el doble toque no es de Tiresias", dobleToqueDeTiresias())
+		}
+		val l = s.lectorPruebas!!
+		abrirMuestrario()
+		for (vuelta in 1..3) {
+			// Con el selector en Edición (deslizar arriba o abajo sin querer)
+			l.control = if (vuelta == 2) com.xebolax.tiresias.nucleo.ControlLectura.EDICION else com.xebolax.tiresias.nucleo.ControlLectura.PREDETERMINADO
+			// 1. Una opción que se queda en la pantalla: Hora, fecha y batería
+			abrirMenu(vuelta)
+			assertNotNull("Vuelta $vuelta: no se llega a la hora", irA(nombreAccionDe(Accion.ESTADO_SISTEMA), 60))
+			var m = marca()
+			s.ejecutarPrueba(Accion.ACTIVAR)
+			assertTrue("Vuelta $vuelta: el menú no se cerró al elegir", esperar(4000) { (!s.ventanaAbiertaPruebas).takeIf { it } } == true)
+			assertNotNull("Vuelta $vuelta: no dijo la batería", dichoQue(6000, m) { it.contains("%") || it.contains("por ciento") || it.contains("batería") })
+			SystemClock.sleep(1200)
+			// 2. Cancelar
+			abrirMenu(vuelta)
+			assertNotNull("Vuelta $vuelta: no se llega a Cancelar", irA("Cancelar", 60))
+			s.ejecutarPrueba(Accion.ACTIVAR)
+			assertTrue("Vuelta $vuelta: Cancelar no cerró el menú", esperar(4000) { (!s.ventanaAbiertaPruebas).takeIf { it } } == true)
+			SystemClock.sleep(1200)
+		}
+		// 3. Ajustes de Tiresias, tras haberlo usado varias veces (y con el selector en Edición)
+		l.control = com.xebolax.tiresias.nucleo.ControlLectura.EDICION
+		abrirMenu(4)
+		assertNotNull("No se llega a Ajustes de Tiresias", irA(nombreAccionDe(Accion.AJUSTES_TIRESIAS), 60))
+		val m = marca()
+		s.ejecutarPrueba(Accion.ACTIVAR)
+		val abierta = esperar(6000) { s.windows.firstOrNull { it.type == AccessibilityWindowInfo.TYPE_APPLICATION && it.root?.packageName == app.packageName } }
+		assertNotNull("Ajustes de Tiresias no se abrió desde el menú", abierta)
+		assertTrue("Dijo que no se pudo abrir", s.vozPruebas!!.dichoDesde(m).none { it.startsWith("No se ha podido abrir") })
+		l.control = com.xebolax.tiresias.nucleo.ControlLectura.PREDETERMINADO
+		s.performGlobalAction(android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_BACK)
+		SystemClock.sleep(800)
+	}
+
+	/** Al recorrer el menú de Tiresias (largo: se desplaza), cada paso suena, adelante y con arriba y abajo. */
+	@Test
+	fun alRecorrerElMenuDeTiresiasSuenaCadaPaso() {
+		val son = s.lectorPruebas!!.sonidos
+		val mudos = ArrayList<String>()
+		abrirMuestrario()
+		for (modo in listOf(Ajustes.DESPLAZAR_NORMAL, Ajustes.DESPLAZAR_SIN_SONIDO, Ajustes.DESPLAZAR_ANTICIPADO)) {
+			ajuste(Claves.DESPLAZAR_LISTAS, modo)
+			hacer(Accion.MENU_TIRESIAS, 1500)
+			assertTrue("No se abrió el menú", s.ventanaAbiertaPruebas)
+			try {
+				repeat(30) { i ->
+					val antes = son.sonados
+					val d = hacer(Accion.SIGUIENTE, 400)
+					if (son.sonados == antes) mudos += "$modo, siguiente $i: «$d»"
+				}
+				repeat(12) { i ->
+					val antes = son.sonados
+					val d = hacer(Accion.SELECTOR_ANTERIOR, 400)
+					if (son.sonados == antes) mudos += "$modo, arriba $i: «$d»"
+				}
+				repeat(6) { i ->
+					val antes = son.sonados
+					val d = hacer(Accion.SELECTOR_SIGUIENTE, 400)
+					if (son.sonados == antes) mudos += "$modo, abajo $i: «$d»"
+				}
+			} finally {
+				hacer(Accion.ATRAS, 1000)
+			}
+		}
+		ajuste(Claves.DESPLAZAR_LISTAS, Ajustes.DESPLAZAR_NORMAL)
+		assertTrue("Pasos sin sonido en el menú: $mudos", mudos.isEmpty())
+		// Con «desplazar con su sonido», al moverse la lista del menú (es larga) suena el de desplazar
+		hacer(Accion.MENU_TIRESIAS, 1500)
+		val antes = son.vecesSonado(com.xebolax.tiresias.voz.Sonido.DESPLAZAR)
+		try {
+			repeat(35) { hacer(Accion.SIGUIENTE, 400) }
+		} finally {
+			hacer(Accion.ATRAS, 1000)
+		}
+		assertTrue("Al desplazarse la lista del menú no sonó el sonido de desplazar", son.vecesSonado(com.xebolax.tiresias.voz.Sonido.DESPLAZAR) > antes)
+	}
+
+	private fun nombreAccionDe(a: Accion): String {
+		val id = app.resources.getIdentifier("accion_" + a.name.lowercase(), "string", app.packageName)
+		return com.xebolax.tiresias.base.Idioma.envolver(app).getString(id)
+	}
+
 	/** Las vibraciones se notan: ningún pulso es tan corto que el motor no llegue a arrancar. */
 	@Test
 	fun lasVibracionesDuranLoBastanteParaNotarse() {
