@@ -5,6 +5,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.xebolax.tiresias.base.Ajustes
 import com.xebolax.tiresias.base.Almacen
+import com.xebolax.tiresias.base.Claves
 import com.xebolax.tiresias.base.CopiaSeguridad
 import com.xebolax.tiresias.ia.Secretos
 import org.junit.Assert.assertEquals
@@ -37,15 +38,23 @@ class CopiaSeguridadTest {
 				.putStringSet("apps_silenciadas", setOf("com.ejemplo.a", "com.ejemplo.b")).commit()
 			etiquetas.writeText("""{"com.ejemplo.a":{"boton_1":"Enviar"}}""")
 			if (!habiaClave) secretos.guardar(Secretos.CLAUDE, "clave-de-prueba-que-no-debe-salir")
+			prefs.edit().putString(Claves.SENIOR_CODIGO, "480917").commit()
 
 			val copia = CopiaSeguridad.exportar(c)
 			assertFalse("La copia no puede llevar claves de IA", copia.contains("clave-de-prueba-que-no-debe-salir"))
+			assertFalse("La copia no puede llevar el código del modo senior", copia.contains("480917") || copia.contains(Claves.SENIOR_CODIGO))
 
 			// Se cambia todo y se recupera
 			prefs.edit().putInt("velocidad", 90).putBoolean("sonidos", true).putString("nivel_verbosidad", "BAJA").commit()
 			etiquetas.writeText("{}")
 			assertTrue(CopiaSeguridad.importar(c, copia))
 
+			assertEquals("Recuperar una copia no quita el código de este móvil", "480917", prefs.getString(Claves.SENIOR_CODIGO, null))
+			// Una copia antigua que aún lo lleve tampoco lo cambia
+			val antigua = copia.replaceFirst("\"ajustes\": {", "\"ajustes\": {\"${Claves.SENIOR_CODIGO}\": {\"s\": \"1111\"},")
+			assertTrue(antigua.contains("1111"))
+			assertTrue(CopiaSeguridad.importar(c, antigua))
+			assertEquals("480917", prefs.getString(Claves.SENIOR_CODIGO, null))
 			assertEquals(173, prefs.getInt("velocidad", 0))
 			assertEquals(false, prefs.getBoolean("sonidos", true))
 			assertEquals("literario", prefs.getString("braille_tabla", null))

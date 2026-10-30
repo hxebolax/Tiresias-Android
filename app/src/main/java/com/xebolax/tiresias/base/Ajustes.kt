@@ -609,6 +609,101 @@ class Ajustes(contexto: Context) {
 		p.edit().putStringSet(Claves.APPS_SILENCIADAS, nuevas).apply()
 	}
 
+	// --- 1.0.7: teclado braille (Can Talk) ------------------------------------------------
+
+	/** La calibración del teclado braille («x,y;x,y;...», seis puntos en proporción), normal o en espejo; vacía, sin calibrar. */
+	fun calibracionBraille(espejo: Boolean): String = cadena(if (espejo) Claves.BRAILLE_CALIBRACION_ESPEJO else Claves.BRAILLE_CALIBRACION, "")
+
+	fun ponerCalibracionBraille(espejo: Boolean, valor: String) = poner(if (espejo) Claves.BRAILLE_CALIBRACION_ESPEJO else Claves.BRAILLE_CALIBRACION, valor)
+
+	/** Los gestos del teclado braille que el usuario ha cambiado ([com.xebolax.tiresias.braille.GestosTeclado]). */
+	var gestosTecladoBraille: String
+		get() = cadena(Claves.BRAILLE_GESTOS, "")
+		set(v) = poner(Claves.BRAILLE_GESTOS, v)
+
+	/** Mayúscula automática al empezar una frase en el teclado braille, si el campo la pide. */
+	val brailleMayusculaAuto: Boolean get() = logico(Claves.BRAILLE_MAYUSCULA_AUTO, false)
+	/** Un sonido al escribir un espacio, borrar o Intro en el teclado braille. */
+	val brailleSonarTeclas: Boolean get() = logico(Claves.BRAILLE_SONAR_TECLAS, false)
+	/** Los sonidos del teclado braille: "android" (los del sistema) o "tiresias" (los del tema, por el canal del lector). */
+	val brailleEstiloSonidos: String get() = cadena(Claves.BRAILLE_ESTILO_SONIDOS, "android")
+	val brailleVolumenSonidos: Int get() = entero(Claves.BRAILLE_VOLUMEN_SONIDOS, 60).coerceIn(0, 100)
+
+	/** Los emojis favoritos del teclado braille (es configuración: los elige el usuario). */
+	var emojisFavoritos: List<String>
+		get() = cadena(Claves.EMOJIS_FAVORITOS, "").split('\n').filter { it.isNotEmpty() }
+		set(v) = poner(Claves.EMOJIS_FAVORITOS, v.joinToString("\n"))
+
+	/** El dictado pide al reconocedor del sistema que no tape las palabras malsonantes. */
+	val dictadoSinCensura: Boolean get() = logico(Claves.DICTADO_SIN_CENSURA, false)
+
+	// --- 1.0.7: voz en las llamadas, Bluetooth e IA ------------------------------------------
+
+	/** En una llamada, la voz y los sonidos a un porcentaje propio del volumen ([com.xebolax.tiresias.voz.VozEnLlamadas]). */
+	val vozLlamadas: Boolean get() = logico(Claves.VOZ_LLAMADAS, false)
+	var volumenLlamadas: Int
+		get() = entero(Claves.VOLUMEN_LLAMADAS, 50).coerceIn(5, 100)
+		set(v) = poner(Claves.VOLUMEN_LLAMADAS, v.coerceIn(5, 100))
+	/** Compensar los cambios del volumen de la llamada (experimental). */
+	val compensarLlamadas: Boolean get() = logico(Claves.COMPENSAR_LLAMADAS, false)
+
+	/** Qué hace cada aparato Bluetooth: identidad → "altavoz" o "auriculares" (lo que no está, lo del sistema). */
+	var reglasBluetooth: Map<String, String>
+		get() = cadena(Claves.REGLAS_BLUETOOTH, "").split('\n').mapNotNull { l ->
+			val i = l.lastIndexOf('=')
+			if (i <= 0) null else l.substring(0, i) to l.substring(i + 1)
+		}.toMap()
+		set(v) = poner(Claves.REGLAS_BLUETOOTH, v.entries.joinToString("\n") { "${it.key}=${it.value}" })
+
+	/** Pedir a Gemini que no bloquee lo que describe (Can Talk); apagado de fábrica. */
+	val iaSinFiltros: Boolean get() = logico(Claves.IA_SIN_FILTROS, false)
+
+	// --- 1.0.7: control de un PC con NVDA (NVDA Remote) ------------------------------------
+
+	/** Los equipos guardados (JSON); la clave va cifrada con el almacén de claves de Android. */
+	var nvdaEquipos: String
+		get() = cadena(Claves.NVDA_EQUIPOS, "")
+		set(v) = poner(Claves.NVDA_EQUIPOS, v)
+	/** Las huellas de los certificados de confianza: «servidor:puerto=sha256» por línea. */
+	var nvdaHuellas: String
+		get() = cadena(Claves.NVDA_HUELLAS, "")
+		set(v) = poner(Claves.NVDA_HUELLAS, v)
+	/** Al bloquear el móvil con un PC conectado: "desconectar", "silenciar" o "seguir". */
+	val nvdaAlBloquear: String get() = cadena(Claves.NVDA_AL_BLOQUEAR, "desconectar")
+
+	// --- 1.0.7: asistencia remota --------------------------------------------------------------
+
+	/** El nombre con el que este móvil se presenta en la asistencia remota (vacío: el del contacto de ayuda o «Tiresias»). */
+	var ayudaNombre: String
+		get() = cadena(Claves.AYUDA_NOMBRE, "")
+		set(v) = poner(Claves.AYUDA_NOMBRE, v)
+	/** Cómo se manda la petición de ayuda al contacto: "whatsapp", "sms" o "compartir". */
+	var ayudaMetodo: String
+		get() = cadena(Claves.AYUDA_METODO, "whatsapp")
+		set(v) = poner(Claves.AYUDA_METODO, v)
+	/** El lector en primer plano, con un aviso discreto, para que limpiar Recientes no lo cierre ([com.xebolax.tiresias.servicio.Guarda]). */
+	val guardaActiva: Boolean get() = logico(Claves.GUARDA_ACTIVA, true)
+
+	/** Preguntar también a las personas de confianza antes de dejarlas entrar. A las demás se les pregunta siempre. */
+	val ayudaPreguntar: Boolean get() = logico(Claves.AYUDA_PREGUNTAR, true)
+	/** Solo pueden entrar las personas de confianza (la primera entra sin espera; las siguientes, tras 24 horas). */
+	val ayudaSoloConfianza: Boolean get() = logico(Claves.AYUDA_SOLO_CONFIANZA, true)
+	/** A quién más se le pide ayuda si el contacto de ayuda no entra en unos minutos. */
+	var ayudaContacto2: String
+		get() = cadena(Claves.AYUDA_CONTACTO2, "")
+		set(v) = p.edit().putString(Claves.AYUDA_CONTACTO2, v).apply()
+	var ayudaNombre2: String
+		get() = cadena(Claves.AYUDA_NOMBRE2, "")
+		set(v) = p.edit().putString(Claves.AYUDA_NOMBRE2, v).apply()
+	/** Usar la red Tor si los móviles no se ven directamente (datos móviles en los dos lados). */
+	val ayudaTor: Boolean get() = logico(Claves.AYUDA_TOR, true)
+	/** Lo que dura como mucho una ayuda, en minutos. */
+	val ayudaMinutos: Int get() = cadena(Claves.AYUDA_MINUTOS, "60").toIntOrNull()?.coerceIn(5, 240) ?: 60
+	/** Cada cuántos minutos se recuerda que alguien está ayudando (0, nunca). */
+	val ayudaAviso: Int get() = cadena(Claves.AYUDA_AVISO, "5").toIntOrNull()?.coerceIn(0, 60) ?: 5
+	/** Pedir al router que abra un puerto (UPnP o NAT-PMP) para que entren desde fuera de casa. */
+	val ayudaRouter: Boolean get() = logico(Claves.AYUDA_ROUTER, true)
+
 	// --- Actualizaciones ----------------------------------------------------------------
 
 	var buscarActualizaciones: Boolean
@@ -843,4 +938,34 @@ object Claves {
 	const val URL_ACTUALIZACIONES = "url_actualizaciones"
 	const val ULTIMA_BUSQUEDA = "ultima_busqueda_actualizacion"
 	const val VERSION_OMITIDA = "version_omitida"
+	const val BRAILLE_CALIBRACION = "braille_calibracion"
+	const val BRAILLE_CALIBRACION_ESPEJO = "braille_calibracion_espejo"
+	const val BRAILLE_GESTOS = "braille_gestos"
+	const val BRAILLE_MAYUSCULA_AUTO = "braille_mayuscula_auto"
+	const val BRAILLE_SONAR_TECLAS = "braille_sonar_teclas"
+	const val BRAILLE_ESTILO_SONIDOS = "braille_estilo_sonidos"
+	const val BRAILLE_VOLUMEN_SONIDOS = "braille_volumen_sonidos"
+	const val EMOJIS_FAVORITOS = "emojis_favoritos"
+	const val DICTADO_SIN_CENSURA = "dictado_sin_censura"
+	const val VOZ_LLAMADAS = "voz_llamadas"
+	const val VOLUMEN_LLAMADAS = "volumen_llamadas"
+	const val COMPENSAR_LLAMADAS = "compensar_llamadas"
+	const val REGLAS_BLUETOOTH = "reglas_bluetooth"
+	const val IA_SIN_FILTROS = "ia_sin_filtros"
+	const val NVDA_EQUIPOS = "nvda_equipos"
+	const val NVDA_HUELLAS = "nvda_huellas"
+	const val NVDA_AL_BLOQUEAR = "nvda_al_bloquear"
+	const val GUARDA_ACTIVA = "guarda_activa"
+	const val AYUDA_NOMBRE = "ayuda_nombre"
+	const val AYUDA_METODO = "ayuda_metodo"
+	const val AYUDA_PREGUNTAR = "ayuda_preguntar"
+	const val AYUDA_MINUTOS = "ayuda_minutos"
+	const val AYUDA_AVISO = "ayuda_aviso"
+	const val AYUDA_ROUTER = "ayuda_router"
+	const val AYUDA_TOR = "ayuda_tor"
+	const val AYUDA_SOLO_CONFIANZA = "ayuda_solo_confianza"
+	const val AYUDA_NUEVO_DESDE = "ayuda_nuevo_desde"
+	const val AYUDA_CONTACTO2 = "ayuda_contacto2"
+	const val AYUDA_NOMBRE2 = "ayuda_nombre2"
+	const val AYUDA_HISTORIAL = "ayuda_historial"
 }

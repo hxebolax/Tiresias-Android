@@ -174,6 +174,14 @@ class Teclado(private val lector: Lector, private val alAccion: (Accion) -> Unit
 	 */
 	private fun volumenDeLaVoz(e: KeyEvent, arriba: Boolean): Boolean {
 		volumenConDedo = true
+		// En una llamada, con «Voz en llamadas», el volumen propio de la voz en las llamadas (Can Talk)
+		if (lector.ajustes.vozLlamadas && com.xebolax.tiresias.voz.VozEnLlamadas.enLlamada(lector.servicio)) {
+			if (e.repeatCount % 3 == 0) lector.manejador.post {
+				val nuevo = com.xebolax.tiresias.voz.VozEnLlamadas.cambiar(lector.ajustes, arriba)
+				lector.decir(lector.textos.getString(R.string.voz_llamadas_volumen, nuevo))
+			}
+			return true
+		}
 		if (e.repeatCount % 3 == 0) alAccion(if (arriba) Accion.VOLUMEN_MAS else Accion.VOLUMEN_MENOS)
 		return true
 	}

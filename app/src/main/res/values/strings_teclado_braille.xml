@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Teclado braille en pantalla: calibración, gestos, menú, listas, emojis, portapapeles y menciones (1.0.7, Can Talk). -->
+<resources>
+	<!-- Calibración punto a punto -->
+	<string name="braille_calibrar_empezar">Calibrar el teclado. Toca con un dedo donde pones el punto 1. Dos dedos hacia arriba cancelan.</string>
+	<string name="braille_calibrar_siguiente">Punto %1$d guardado. Toca el punto %2$d.</string>
+	<string name="braille_calibrar_cerca">Muy cerca de otro punto. Toca otra vez el punto %1$d.</string>
+	<string name="braille_calibrar_un_dedo">Con un solo dedo y sin deslizar. Toca el punto %1$d.</string>
+	<string name="braille_calibrar_hecho">Calibración guardada. Ya puedes escribir.</string>
+	<string name="braille_calibrar_cancelado">Calibración cancelada</string>
+	<string name="braille_calibracion_quitada">Calibración quitada: los puntos vuelven a ir por posición</string>
+
+	<!-- Acciones del teclado -->
+	<string name="braille_accion_ninguna">Nada (lo del gesto de un dedo)</string>
+	<string name="braille_accion_borrar">Borrar</string>
+	<string name="braille_accion_borrar_palabra">Borrar la palabra</string>
+	<string name="braille_accion_espacio">Espacio</string>
+	<string name="braille_accion_intro">Intro</string>
+	<string name="braille_accion_cambiar_teclado">Cambiar de teclado</string>
+	<string name="braille_accion_bloquear_orientacion">Bloquear la orientación</string>
+	<string name="braille_accion_menu">Menú del teclado</string>
+	<string name="braille_accion_dictado">Dictar</string>
+	<string name="braille_accion_emojis">Emojis</string>
+	<string name="braille_accion_portapapeles">Portapapeles</string>
+	<string name="braille_accion_sugerencias">Sugerencias de mención</string>
+	<string name="braille_accion_leer_campo">Leer lo escrito</string>
+	<string name="braille_accion_calibrar">Calibrar los puntos</string>
+	<string name="braille_accion_quitar_calibracion">Quitar la calibración</string>
+
+	<!-- Nombres de los gestos -->
+	<string name="braille_dir_izquierda">hacia la izquierda</string>
+	<string name="braille_dir_derecha">hacia la derecha</string>
+	<string name="braille_dir_arriba">hacia arriba</string>
+	<string name="braille_dir_abajo">hacia abajo</string>
+	<string name="braille_gesto_punto">Desde el punto %1$d %2$s</string>
+	<plurals name="braille_gesto_dedos">
+		<item quantity="one">Un dedo %2$s</item>
+		<item quantity="other">%1$d dedos %2$s</item>
+	</plurals>
+
+	<!-- Listas del teclado: menú, emojis, portapapeles y sugerencias -->
+	<string name="braille_lista_abierta">%1$s</string>
+	<string name="braille_lista_grupo">%1$s, %2$d</string>
+	<string name="braille_lista_elemento">%1$s, %2$d de %3$d</string>
+	<string name="braille_lista_ayuda">Un dedo a los lados para recorrer, dos dedos hacia abajo para elegir, dos hacia arriba para salir</string>
+	<string name="braille_lista_cerrada">Escribiendo</string>
+	<string name="braille_lista_vacia">%1$s: no hay nada</string>
+	<string name="braille_lista_un_grupo">Esta lista no tiene grupos</string>
+	<string name="braille_lista_elige_antes">Elige antes uno con un dedo a la derecha</string>
+	<string name="braille_lista_sin_favoritos">Esta lista no tiene favoritos</string>
+	<string name="braille_favoritos">Favoritos</string>
+	<string name="braille_favorito_puesto">Añadido a favoritos</string>
+	<string name="braille_favorito_quitado">Quitado de favoritos</string>
+	<string name="braille_escrito">%1$s escrito</string>
+	<string name="braille_pegado">Pegado: %1$s</string>
+	<string name="braille_portapapeles_general">Lo copiado</string>
+	<string name="braille_portapapeles_sin_tiresias">El portapapeles del teclado necesita Tiresias activo</string>
+	<string name="braille_sin_sugerencias">No hay sugerencias de mención</string>
+	<string name="braille_sugerencia_elegida">%1$s elegido</string>
+	<string name="braille_sugerencia_no">La sugerencia ya no está en la lista</string>
+	<plurals name="braille_hay_sugerencias">
+		<item quantity="one">Una sugerencia de mención: un dedo hacia abajo para elegirla</item>
+		<item quantity="other">%1$d sugerencias de mención: un dedo hacia abajo para elegirlas</item>
+	</plurals>
+	<string name="braille_nada_que_borrar">No hay nada que borrar</string>
+	<string name="braille_campo_vacio">El campo está vacío</string>
+	<string name="braille_dictado_sin_tiresias">El dictado del teclado necesita Tiresias activo</string>
+
+	<!-- Categorías de emojis -->
+	<string name="emoji_caras">Caras</string>
+	<string name="emoji_gestos">Manos y gestos</string>
+	<string name="emoji_personas">Personas</string>
+	<string name="emoji_corazones">Corazones</string>
+	<string name="emoji_animales">Animales y plantas</string>
+	<string name="emoji_comida">Comida y bebida</string>
+	<string name="emoji_actividades">Actividades y fiestas</string>
+	<string name="emoji_viajes">Viajes y lugares</string>
+	<string name="emoji_objetos">Objetos</string>
+	<string name="emoji_simbolos">Símbolos</string>
+	<string name="emoji_banderas">Banderas</string>
+
+	<!-- Ajustes -->
+	<string name="aj_braille_mayuscula_auto">Mayúscula automática</string>
+	<string name="aj_braille_mayuscula_auto_res">Al empezar a escribir y tras un punto, la primera letra en mayúscula, si el campo la pide (los de correo o contraseña no)</string>
+	<string name="aj_braille_calibracion">Calibración de los puntos</string>
+	<string name="aj_braille_calibracion_si">Calibrado: cada dedo es el punto más cercano de los que tocaste. Pulsa para quitarla.</string>
+	<string name="aj_braille_calibracion_no">Sin calibrar: los puntos van por posición. Para calibrar, abre el teclado braille, desliza un dedo hacia arriba (menú del teclado) y elige «Calibrar los puntos».</string>
+	<string name="aj_braille_calibracion_quitar">¿Quitar la calibración? Los puntos volverán a ir por posición.</string>
+	<string name="aj_braille_calibracion_quitar_si">Quitar</string>
+	<string name="aj_braille_gestos">Gestos del teclado braille</string>
+	<string name="aj_braille_gestos_res">Qué hace cada deslizamiento de uno, dos o tres dedos, y desde cada punto</string>
+	<string name="aj_braille_sonar_teclas">Sonidos al escribir</string>
+	<string name="aj_braille_sonar_teclas_res">Un sonido distinto al escribir un espacio, al borrar y con Intro</string>
+	<string name="aj_braille_estilo_sonidos">Sonidos del teclado braille</string>
+	<string-array name="braille_estilo_nombres">
+		<item>Los de Android (no suenan si quitas los sonidos al tocar)</item>
+		<item>Los del tema de Tiresias, por el volumen del lector</item>
+	</string-array>
+	<string-array name="braille_estilo_valores" translatable="false">
+		<item>android</item>
+		<item>tiresias</item>
+	</string-array>
+	<string name="aj_braille_volumen_sonidos">Volumen de los sonidos del teclado braille</string>
+	<string name="aj_dictado_sin_censura">Dictado sin tapar palabrotas</string>
+	<string name="aj_dictado_sin_censura_res">Pide al reconocedor de voz del sistema que escriba las palabras malsonantes tal cual. Solo lo entiende el de Google; Vosk no tapa nada.</string>
+
+	<!-- Pantalla de los gestos del teclado braille -->
+	<string name="gestos_braille_titulo">Gestos del teclado braille</string>
+	<string name="gestos_braille_explicacion">Cada fila es un gesto y lo que hace. Pulsa una para cambiarla. Los gestos de un punto empiezan con el dedo en ese punto; si no tienen nada, hacen lo del gesto de un dedo en esa dirección. En los menús y listas del teclado los gestos son siempre los mismos: un dedo a los lados, recorrer; un dedo arriba o abajo, cambiar de grupo; dos dedos hacia abajo, elegir; dos hacia arriba, salir; dos a la derecha, favorito.</string>
+	<string name="gestos_braille_fila">%1$s: %2$s</string>
+	<string name="gestos_braille_cabecera_dedos">Gestos de uno, dos y tres dedos</string>
+	<string name="gestos_braille_cabecera_puntos">Gestos de un punto</string>
+	<string name="gestos_braille_restablecer">Volver a los gestos de fábrica</string>
+	<string name="gestos_braille_restablecer_pregunta">¿Volver a los gestos de fábrica del teclado braille?</string>
+	<string name="gestos_braille_restablecidos">Gestos de fábrica puestos</string>
+	<string name="gestos_braille_cambiado">%1$s: ahora %2$s</string>
+</resources>

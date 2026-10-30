@@ -25,6 +25,7 @@ import com.xebolax.tiresias.accesibilidad.confirmar
 import com.xebolax.tiresias.accesibilidad.copiar
 import com.xebolax.tiresias.accesibilidad.elegir
 import com.xebolax.tiresias.accesibilidad.elegirVarios
+import com.xebolax.tiresias.accesibilidad.mensaje
 import com.xebolax.tiresias.base.Ajustes
 import com.xebolax.tiresias.base.Claves
 import com.xebolax.tiresias.base.Idioma
@@ -383,6 +384,31 @@ class ActividadAjustes : ActividadBase(), PreferenceFragmentCompat.OnPreferenceS
 				setOnPreferenceClickListener {
 					c.copiar(orden)
 					(activity as? ActividadAjustes)?.avisar(getString(R.string.aj_altavoz_copiado))
+					true
+				}
+			}
+			findPreference<Preference>("reglas_bluetooth")?.setOnPreferenceClickListener {
+				startActivity(android.content.Intent(c, ActividadReglasBluetooth::class.java))
+				true
+			}
+			findPreference<Preference>("braille_gestos")?.setOnPreferenceClickListener {
+				startActivity(android.content.Intent(c, ActividadGestosTeclado::class.java))
+				true
+			}
+			findPreference<Preference>("braille_calibracion")?.apply {
+				val ajustesBraille = com.xebolax.tiresias.base.Ajustes(c)
+				fun resumen() {
+					summary = getString(if (com.xebolax.tiresias.braille.CalibracionBraille.hay(ajustesBraille)) R.string.aj_braille_calibracion_si else R.string.aj_braille_calibracion_no)
+				}
+				resumen()
+				setOnPreferenceClickListener {
+					if (com.xebolax.tiresias.braille.CalibracionBraille.hay(ajustesBraille)) {
+						c.confirmar(getString(R.string.aj_braille_calibracion_quitar), getString(R.string.aj_braille_calibracion_quitar_si)) {
+							com.xebolax.tiresias.braille.CalibracionBraille.quitar(ajustesBraille)
+							resumen()
+							(activity as? ActividadAjustes)?.avisar(getString(R.string.braille_calibracion_quitada))
+						}
+					} else c.mensaje(getString(R.string.aj_braille_calibracion), getString(R.string.aj_braille_calibracion_no))
 					true
 				}
 			}

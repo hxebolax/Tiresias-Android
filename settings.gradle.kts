@@ -11,6 +11,10 @@ dependencyResolutionManagement {
 	repositories {
 		google()
 		mavenCentral()
+		// Tor para Android (Guardian Project), para la ayuda remota por datos móviles
+		maven("https://raw.githubusercontent.com/guardianproject/gpmaven/master") {
+			content { includeGroup("info.guardianproject") }
+		}
 	}
 }
 

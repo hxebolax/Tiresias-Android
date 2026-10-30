@@ -198,6 +198,12 @@ object AsistenteIA {
 		val cuerpo = JSONObject()
 			.put("system_instruction", JSONObject().put("parts", JSONArray().put(JSONObject().put("text", sistema))))
 			.put("contents", contenidos)
+		// Sin filtros (Can Talk), si el usuario lo pide: que no se niegue a describir una foto que no es para todos los públicos
+		if (com.xebolax.tiresias.base.Ajustes(c).iaSinFiltros) cuerpo.put("safetySettings", JSONArray().apply {
+			for (categoria in listOf("HARM_CATEGORY_HARASSMENT", "HARM_CATEGORY_HATE_SPEECH", "HARM_CATEGORY_SEXUALLY_EXPLICIT", "HARM_CATEGORY_DANGEROUS_CONTENT")) {
+				put(JSONObject().put("category", categoria).put("threshold", "BLOCK_NONE"))
+			}
+		})
 		// El elegido y, si el servicio falla (5xx) o no lo encuentra (404), los de reserva
 		// (sin espacios ni el «models/» con el que AI Studio enseña los nombres: Backtalk 306)
 		val elegido = modelo.trim().removePrefix("models/").trim()

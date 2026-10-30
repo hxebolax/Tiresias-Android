@@ -19,10 +19,17 @@ import java.io.File
 object CopiaSeguridad {
 	private const val FORMATO = 1
 
-	/** Ajustes que son de este móvil o de esta instalación, no de la persona. */
-	private val PROPIOS_DEL_MOVIL = setOf(Claves.VERSION_ANTERIOR, Claves.ULTIMA_BUSQUEDA, Claves.VERSION_OMITIDA)
+	/**
+	 * Ajustes que son de este móvil o de esta instalación, no de la persona. El código
+	 * del modo senior va aquí porque el archivo es texto y puede acabar en cualquier
+	 * sitio: ni sale en la copia ni una copia antigua que lo lleve lo cambia.
+	 */
+	private val PROPIOS_DEL_MOVIL = setOf(Claves.VERSION_ANTERIOR, Claves.ULTIMA_BUSQUEDA, Claves.VERSION_OMITIDA, Claves.SENIOR_CODIGO)
 
 	private val ARCHIVOS = listOf("perfiles.json", "etiquetas.json", "diccionario.tsv")
+
+	/** Lo que Tiresias apunta por su cuenta: no son cambios de nadie. */
+	private val SOLOS = listOf("ultima", "ultimo", "servicio_encendido", "ayuda_historial", "ayuda_nuevo_desde")
 
 	fun exportar(c: Context): String {
 		val o = JSONObject()
@@ -42,6 +49,14 @@ object CopiaSeguridad {
 		o.put("complementos", complementos)
 		o.put("complementos_ajustes", preferencias(c.applicationContext.getSharedPreferences("complementos", Context.MODE_PRIVATE).all, emptySet()))
 		return o.toString(1)
+	}
+
+	/** Cuántos ajustes distintos hay entre dos copias de [exportar], sin contar los que cambian solos. */
+	fun cambios(antes: String, ahora: String): Int {
+		val a = runCatching { JSONObject(antes).optJSONObject("ajustes") }.getOrNull() ?: return 0
+		val b = runCatching { JSONObject(ahora).optJSONObject("ajustes") }.getOrNull() ?: return 0
+		val claves = (a.keys().asSequence() + b.keys().asSequence()).toSet().filter { c -> SOLOS.none { c.startsWith(it) } }
+		return claves.count { a.opt(it)?.toString() != b.opt(it)?.toString() }
 	}
 
 	/** Recupera una copia (sustituye lo que hay). Devuelve false si el archivo no es una copia de Tiresias. */

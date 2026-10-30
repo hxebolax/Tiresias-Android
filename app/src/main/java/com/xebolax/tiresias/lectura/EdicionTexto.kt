@@ -298,6 +298,35 @@ class EdicionTexto(private val lector: Lector) {
 
 	fun olvidarCopiado(texto: String? = null) = synchronized(copiado) { if (texto == null) copiado.clear() else copiado.remove(texto) }
 
+	/**
+	 * Apunta lo que ha copiado una app (lo ve el teclado braille de Tiresias, el
+	 * único que puede leer el portapapeles desde Android 10), como lo copiado por
+	 * Tiresias: solo en memoria y se olvida al bloquear.
+	 */
+	fun apuntarCopiado(texto: String) {
+		if (texto.isBlank() || texto.hashCode() == huellaCopiado) return
+		synchronized(copiado) {
+			copiado.remove(texto)
+			copiado.addFirst(texto)
+			while (copiado.size > MAXIMO_COPIADO) copiado.removeLast()
+		}
+	}
+
+	/** Lo copiado que el usuario ha marcado como favorito (Can Talk): solo en memoria; no se olvida al bloquear, sí al reiniciar. */
+	private val favoritos = ArrayDeque<String>()
+
+	fun copiadoFavorito(): List<String> = synchronized(favoritos) { favoritos.toList() }
+
+	/** Pone o quita [texto] de los favoritos; devuelve si queda puesto. */
+	fun alternarFavorito(texto: String): Boolean = synchronized(favoritos) {
+		if (favoritos.remove(texto)) false
+		else {
+			favoritos.addFirst(texto)
+			while (favoritos.size > MAXIMO_FAVORITOS) favoritos.removeLast()
+			true
+		}
+	}
+
 	/** Añade [texto] (lo último dicho) a lo último que copió Tiresias, en otra línea, y lo copia junto. */
 	fun copiarAnadiendo(texto: String) {
 		val antes = synchronized(copiado) { copiado.firstOrNull() }
@@ -389,6 +418,7 @@ class EdicionTexto(private val lector: Lector) {
 	companion object {
 		/** Cuántas cosas copiadas se recuerdan. */
 		private const val MAXIMO_COPIADO = 20
+		private const val MAXIMO_FAVORITOS = 50
 	}
 
 	fun leerPortapapeles() {

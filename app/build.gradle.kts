@@ -26,7 +26,10 @@ val porProcesador = gradle.startParameter.taskNames.any { it.contains("Release",
 
 android {
 	namespace = "com.xebolax.tiresias"
-	compileSdk = 37
+	// 37.1: lo exige tor-android (ayuda remota)
+	compileSdk {
+		version = release(37) { minorApiLevel = 1 }
+	}
 
 	defaultConfig {
 		applicationId = "com.xebolax.tiresias"
@@ -34,8 +37,8 @@ android {
 		// versión posterior (gestos de varios dedos, capturas, braille HID...) se comprueba al usarlo.
 		minSdk = 24
 		targetSdk = 37
-		versionCode = 8
-		versionName = "1.0.6.1"
+		versionCode = 9
+		versionName = "1.0.7"
 
 		buildConfigField("String", "URL_ACTUALIZACIONES", "\"$urlActualizaciones\"")
 		buildConfigField("String", "REPO_GITHUB", "\"$repoGithub\"")
@@ -177,6 +180,8 @@ dependencies {
 	implementation("com.google.android.material:material:1.14.0")
 	// Los códigos QR y de barras (de la pantalla y de las imágenes compartidas), sin Google Play Services
 	implementation("com.google.zxing:core:3.5.3")
+	// Tor embebido para la ayuda remota por datos móviles (BSD), en su propio proceso
+	implementation("info.guardianproject:tor-android:0.4.9.13.2")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.11.0")
 
 	// Reconocimiento de texto (PP-OCRv5) y voces neuronales (Piper) sin Play Services: ONNX Runtime (MIT)

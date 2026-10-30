@@ -47,6 +47,17 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 
 	fun ejecutar(a: Accion): Boolean {
 		if (suspendido && a != Accion.SUSPENDER && a != Accion.MODO_SEGURO) return false
+		// Una superficie braille encima de todo: las dos teclas de volumen y la salida de emergencia la quitan primero
+		if (lector.superficie.abierta && (a == Accion.SUSPENDER || a == Accion.MODO_SEGURO || a == Accion.INICIO_SEGURO)) {
+			lector.superficie.cerrar()
+			if (a == Accion.SUSPENDER) return true
+		}
+		// La asistencia remota: las dos teclas de volumen y la salida de emergencia terminan antes la ayuda
+		if ((a == Accion.SUSPENDER || a == Accion.MODO_SEGURO) && com.xebolax.tiresias.remoto.Asistencia.terminarPorUsuario()) {
+			if (a == Accion.SUSPENDER) return true
+		}
+		// Manejando otro móvil con los gestos propios: lo que no es de este móvil va al otro
+		if (com.xebolax.tiresias.remoto.Asistencia.redirigir(a)) return true
 		lector.momentoUsuario = SystemClock.uptimeMillis()
 		// (el volumen de la voz no la para: se cambia mientras lee, como en TalkBack)
 		if (a != Accion.LEER_DESDE_ARRIBA && a != Accion.LEER_DESDE_AQUI && a != Accion.PAUSAR_VOZ && a != Accion.VOLUMEN_MAS && a != Accion.VOLUMEN_MENOS) lector.continua.parar()
@@ -230,6 +241,14 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		Accion.APAGAR_SCRIPTS -> true.also { lector.scripts.apagarTodos(); lector.decir(R.string.scripts_apagados) }
 		Accion.ORDENES_COMPLEMENTOS -> ordenesComplementos()
 		Accion.MODO_SEGURO -> modoSeguro()
+		Accion.NAVEGACION_BRAILLE -> true.also { lector.superficie.abrir(com.xebolax.tiresias.braille.NavegacionWebBraille(lector) { ejecutar(it) }) }
+		Accion.BUSQUEDA_BRAILLE -> true.also { lector.superficie.abrir(com.xebolax.tiresias.braille.BusquedaBraille(lector) { ejecutar(it) }) }
+		Accion.TRADUCIR_ULTIMO -> lector.vision.traducirDicho(ultimoDicho())
+		Accion.CONTROL_PC -> abrir(com.xebolax.tiresias.ui.ActividadControlPc::class.java)
+		Accion.PEDIR_AYUDA -> com.xebolax.tiresias.remoto.Asistencia.pedirAyuda(servicio)
+		Accion.AYUDA_REMOTA -> com.xebolax.tiresias.remoto.Asistencia.decirQuienAyuda(lector) || abrir(com.xebolax.tiresias.ui.ActividadAyudaRemota::class.java)
+		Accion.AYUDA_TERMINAR -> com.xebolax.tiresias.remoto.Asistencia.terminarPorUsuario().also { if (!it) lector.decir(R.string.ayuda_no_hay) }
+		Accion.AYUDA_CONTROLAR -> com.xebolax.tiresias.remoto.Asistencia.alternarControl()
 	}
 
 	// --- Activar ------------------------------------------------------------------------------
@@ -887,7 +906,7 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 	}
 
 	@android.annotation.SuppressLint("MissingPermission")
-	private fun llamarAyuda(numero: String) {
+	fun llamarAyuda(numero: String) {
 		val uri = android.net.Uri.parse("tel:$numero")
 		val puede = servicio.checkSelfPermission(android.Manifest.permission.CALL_PHONE) == android.content.pm.PackageManager.PERMISSION_GRANTED
 		val intent = android.content.Intent(if (puede) android.content.Intent.ACTION_CALL else android.content.Intent.ACTION_DIAL, uri)

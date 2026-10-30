@@ -18,4 +18,11 @@
 	<SwitchPreferenceCompat app:key="braille_sensor" app:title="@string/aj_braille_sensor" app:summary="@string/aj_braille_sensor_res" app:defaultValue="false" />
 	<ListPreference app:key="braille_eco" app:title="@string/aj_braille_eco" app:entries="@array/braille_eco_nombres" app:entryValues="@array/braille_eco_valores" app:defaultValue="letras" app:useSimpleSummaryProvider="true" />
 	<SwitchPreferenceCompat app:key="braille_vibrar_puntos" app:title="@string/aj_braille_vibrar_puntos" app:defaultValue="false" />
+	<SwitchPreferenceCompat app:key="braille_mayuscula_auto" app:title="@string/aj_braille_mayuscula_auto" app:summary="@string/aj_braille_mayuscula_auto_res" app:defaultValue="false" />
+	<Preference app:key="braille_calibracion" app:title="@string/aj_braille_calibracion" />
+	<Preference app:key="braille_gestos" app:title="@string/aj_braille_gestos" app:summary="@string/aj_braille_gestos_res" />
+	<SwitchPreferenceCompat app:key="braille_sonar_teclas" app:title="@string/aj_braille_sonar_teclas" app:summary="@string/aj_braille_sonar_teclas_res" app:defaultValue="false" />
+	<ListPreference app:key="braille_estilo_sonidos" app:title="@string/aj_braille_estilo_sonidos" app:entries="@array/braille_estilo_nombres" app:entryValues="@array/braille_estilo_valores" app:defaultValue="android" app:useSimpleSummaryProvider="true" />
+	<ListPreference app:key="nvda_al_bloquear" app:title="@string/aj_nvda_al_bloquear" app:entries="@array/nvda_al_bloquear_nombres" app:entryValues="@array/nvda_al_bloquear_valores" app:defaultValue="desconectar" app:useSimpleSummaryProvider="true" />
+	<com.xebolax.tiresias.accesibilidad.DeslizadorAjuste app:key="braille_volumen_sonidos" app:title="@string/aj_braille_volumen_sonidos" app:min="0" android:max="100" app:seekBarIncrement="5" app:defaultValue="60" />
 </PreferenceScreen>

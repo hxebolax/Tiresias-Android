@@ -46,9 +46,26 @@ class Escucha(private val lector: Lector, private val alAccion: (Accion) -> Unit
 	private var sistema: SpeechRecognizer? = null
 	@Volatile private var escuchando = false
 
-	private enum class Para { ORDENES, DICTADO }
+	private enum class Para { ORDENES, DICTADO, TECLADO }
+
+	/** A quién se da lo dictado desde el teclado braille. */
+	@Volatile private var alDictadoTeclado: ((String) -> Unit)? = null
 
 	fun ordenes(): Boolean = empezar(Para.ORDENES)
+
+	/**
+	 * Dictado para el teclado braille (Can Talk): lo reconocido se da a
+	 * [alTexto] (en el hilo del lector), que lo escribe con el teclado. Si ya se
+	 * está escuchando, para. Devuelve si se ha empezado a escuchar.
+	 */
+	fun dictarEn(alTexto: (String) -> Unit): Boolean {
+		if (escuchando) {
+			parar()
+			return false
+		}
+		alDictadoTeclado = alTexto
+		return empezar(Para.TECLADO)
+	}
 
 	fun dictar(): Boolean {
 		if (lector.foco?.isEditable != true) {
@@ -147,7 +164,8 @@ class Escucha(private val lector: Lector, private val alAccion: (Accion) -> Unit
 			r.startListening(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
 				.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
 				.putExtra(RecognizerIntent.EXTRA_LANGUAGE, idioma)
-				.putExtra(RecognizerIntent.EXTRA_PREFER_OFFLINE, true))
+				.putExtra(RecognizerIntent.EXTRA_PREFER_OFFLINE, true)
+				.apply { if (para != Para.ORDENES && lector.ajustes.dictadoSinCensura) sinCensura(this) })
 		} catch (e: Exception) {
 			Registro.e(ETIQUETA, "No se pudo usar el reconocedor del sistema", e)
 			parar()
@@ -167,7 +185,25 @@ class Escucha(private val lector: Lector, private val alAccion: (Accion) -> Unit
 		lector.sonidos.tocar(Sonido.APAGADO)
 	}
 
+	/**
+	 * Pide al reconocedor que no tape las palabras malsonantes (Can Talk). Son
+	 * extras que solo entiende el reconocedor de Google; los demás los ignoran.
+	 * Vosk no tapa nada.
+	 */
+	private fun sinCensura(i: Intent) {
+		i.putExtra("android.speech.extra.MASK_OFFENSIVE_WORDS", false)
+		i.putExtra("com.google.recognition.extra.MASK_OFFENSIVE_WORDS", false)
+		i.putExtra("android.speech.extra.PROFANITY_FILTER", false)
+		i.putExtra("profanity_filter", false)
+		i.putExtra("maskOffensiveWords", false)
+	}
+
 	private fun atender(para: Para, texto: String, campo: AccessibilityNodeInfo?) {
+		if (para == Para.TECLADO) {
+			alDictadoTeclado?.invoke(texto)
+			alDictadoTeclado = null
+			return
+		}
 		if (para == Para.DICTADO) {
 			escribir(campo, texto)
 			return
@@ -205,7 +241,17 @@ class Escucha(private val lector: Lector, private val alAccion: (Accion) -> Unit
 		} else lector.decir(R.string.escucha_no_escrito)
 	}
 
+	/** Abre la app que más se parezca a [nombre]; devuelve si la ha encontrado (también para la asistencia remota). */
+	fun abrirAppPorNombre(nombre: String): Boolean {
+		abrirApp(nombre)
+		return encontrada
+	}
+
+	/** Si la última búsqueda de [abrirApp] encontró una app. */
+	private var encontrada = false
+
 	private fun abrirApp(nombre: String) {
+		encontrada = false
 		val pm = servicio.packageManager
 		val lanzables = pm.queryIntentActivities(Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER), 0)
 		val buscado = normalizar(nombre)
@@ -222,6 +268,7 @@ class Escucha(private val lector: Lector, private val alAccion: (Accion) -> Unit
 			lector.decir(t.getString(R.string.escucha_app_no, nombre))
 			return
 		}
+		encontrada = true
 		val intent = pm.getLaunchIntentForPackage(elegida.activityInfo.packageName)?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) ?: return
 		runCatching { servicio.startActivity(intent) }.onFailure { Registro.w(ETIQUETA, "No se pudo abrir la app", it) }
 	}

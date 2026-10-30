@@ -285,7 +285,7 @@
 		<item>literario</item>
 	</string-array>
 	<string name="aj_copia_guardar">Guardar una copia de la configuración</string>
-	<string name="aj_copia_guardar_res">Ajustes, gestos, teclas, perfiles, etiquetas, diccionario y complementos, en un archivo. Las claves de IA no se guardan.</string>
+	<string name="aj_copia_guardar_res">Ajustes, gestos, teclas, perfiles, etiquetas, diccionario y complementos, en un archivo. Las claves de IA y el código del modo senior no se guardan.</string>
 	<string name="aj_copia_recuperar">Recuperar una copia</string>
 	<string name="aj_copia_recuperar_res">Pone la configuración de un archivo guardado antes, en este móvil o en otro</string>
 	<string name="aj_copia_confirmar">La configuración de ahora se sustituirá por la de la copia. Las claves de IA y las descargas no cambian. ¿Recuperar la copia?</string>
@@ -641,4 +641,9 @@
 		<item>sin_sonido</item>
 		<item>anticipado</item>
 	</string-array>
+	<string name="guarda_canal">Tiresias activo</string>
+	<string name="guarda_titulo">Tiresias está activo</string>
+	<string name="guarda_texto">Este aviso impide que el sistema cierre el lector. Se puede quitar en Ajustes, Notificaciones.</string>
+	<string name="aj_guarda">Aviso fijo para que el sistema no cierre Tiresias</string>
+	<string name="aj_guarda_res">Evita que limpiar la lista de apps recientes pare el lector. Consume muy poco. Si lo apagas, el aviso desaparece, pero en algunos móviles Tiresias puede cerrarse.</string>
 </resources>

@@ -127,8 +127,8 @@ class GestosTiresias(private val lector: Lector) {
 	fun alCambiarApp(paquete: String?) {
 		if (Build.VERSION.SDK_INT < 30) return
 		appDelante = paquete
-		// Con la ayuda de otra persona, toda la pantalla pasa siempre
-		if (ayuda) return
+		// Con la ayuda de otra persona o una superficie braille encima, toda la pantalla pasa siempre
+		if (ayuda || superficie) return
 		val pausado = com.xebolax.tiresias.base.Ajustes(servicio).toqueDirectoPausado
 		val quiere = paquete != null && !pausado && preferencias.getBoolean(paquete, false)
 		if (quiere && toqueDirectoEn != paquete) ponerToqueDirecto(paquete)
@@ -190,7 +190,7 @@ class GestosTiresias(private val lector: Lector) {
 
 	/** Los toques en [zona] (el teclado en pantalla) pasan directos a la app; null: ninguna. */
 	fun zonaDirecta(zona: android.graphics.Rect?) {
-		if (Build.VERSION.SDK_INT < 30 || toqueDirectoEn != null || zonaDeApp || ayuda) return
+		if (Build.VERSION.SDK_INT < 30 || toqueDirectoEn != null || zonaDeApp || ayuda || superficie) return
 		runCatching { fijarRegion(if (zona != null && !zona.isEmpty) Region(zona) else Region()) }
 			.onFailure { Registro.w(ETIQUETA, "No se pudo poner el toque directo en el teclado", it) }
 	}
@@ -204,6 +204,20 @@ class GestosTiresias(private val lector: Lector) {
 			region(false)
 			alCambiarApp(appDelante)
 		}
+	}
+
+	/**
+	 * Mientras hay una superficie braille encima de todo (navegación web braille,
+	 * búsqueda braille, control de un PC), todos los toques van a ella y nada
+	 * cambia la zona de paso: ni el cambio de app ni el teclado en pantalla.
+	 */
+	@Volatile var superficie = false
+		private set
+
+	fun pasoParaSuperficie(poner: Boolean) {
+		if (Build.VERSION.SDK_INT < 30) return
+		superficie = poner
+		pasoParaMenu(poner)
 	}
 
 	private fun ponerRegion(zona: android.graphics.Rect?) {

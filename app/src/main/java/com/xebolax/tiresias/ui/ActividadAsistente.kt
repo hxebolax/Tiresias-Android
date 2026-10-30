@@ -65,16 +65,22 @@ class ActividadAsistente : ActividadBase() {
 	 * Lo que hay que tocar en cada marca para que no cierre Tiresias ni bloquee sus
 	 * actualizaciones (dontkillmyapp.com, Backtalk, AppleVis): el Auto Blocker de
 	 * Samsung, el candado de Recientes de Xiaomi y OnePlus, PowerGenie de Huawei y
-	 * los gestos de Moto que chocan con el doble toque.
+	 * los gestos de Moto que chocan con el doble toque. Se busca dentro del nombre
+	 * porque algunas marcas lo traen largo («INFINIX MOBILITY LIMITED»).
 	 */
-	private fun textoFabricante(): Int = when (Build.MANUFACTURER.lowercase()) {
-		"samsung" -> R.string.asis_5_samsung
-		"xiaomi", "redmi", "poco" -> R.string.asis_5_xiaomi
-		"oneplus", "oppo", "realme" -> R.string.asis_5_oneplus
-		"huawei", "honor" -> R.string.asis_5_huawei
-		"motorola" -> R.string.asis_5_motorola
-		"vivo", "iqoo" -> R.string.asis_5_vivo
-		else -> R.string.asis_5
+	private fun textoFabricante(): Int {
+		val marca = (Build.MANUFACTURER + " " + Build.BRAND).lowercase()
+		fun es(vararg nombres: String) = nombres.any { it in marca }
+		return when {
+			es("samsung") -> R.string.asis_5_samsung
+			es("xiaomi", "redmi", "poco") -> R.string.asis_5_xiaomi
+			es("oneplus", "oppo", "realme") -> R.string.asis_5_oneplus
+			es("huawei", "honor") -> R.string.asis_5_huawei
+			es("motorola") -> R.string.asis_5_motorola
+			es("vivo", "iqoo") -> R.string.asis_5_vivo
+			es("infinix", "tecno", "itel") -> R.string.asis_5_transsion
+			else -> R.string.asis_5
+		}
 	}
 
 	private fun abrir(i: Intent) {

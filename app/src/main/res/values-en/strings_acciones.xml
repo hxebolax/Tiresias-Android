@@ -299,4 +299,13 @@
 	<string name="accion_leer_columna">Read the whole table column</string>
 	<string name="accion_nombrar_ventana">Name this screen</string>
 	<string name="accion_seleccionar_texto">Choose and copy text from the focused item</string>
+	<!-- 1.0.7 -->
+	<string name="accion_navegacion_braille">Braille web navigation</string>
+	<string name="accion_busqueda_braille">Braille search for apps and elements</string>
+	<string name="accion_traducir_ultimo">Translate the last thing said</string>
+	<string name="accion_control_pc">Control a PC with NVDA</string>
+	<string name="accion_pedir_ayuda">Ask for remote help</string>
+	<string name="accion_ayuda_remota">Remote help</string>
+	<string name="accion_ayuda_terminar">End remote help</string>
+	<string name="accion_ayuda_controlar">Control the other phone with my gestures</string>
 </resources>

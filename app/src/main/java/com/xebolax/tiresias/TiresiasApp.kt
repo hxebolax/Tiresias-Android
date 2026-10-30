@@ -22,6 +22,8 @@ class TiresiasApp : Application() {
 		DeslizadorAjuste.formatos[Claves.TONO] = DeslizadorAjuste.porCiento
 		DeslizadorAjuste.formatos[Claves.VOLUMEN_VOZ] = DeslizadorAjuste.porCiento
 		DeslizadorAjuste.formatos[Claves.VOLUMEN_SONIDOS] = DeslizadorAjuste.porCiento
+		DeslizadorAjuste.formatos[Claves.BRAILLE_VOLUMEN_SONIDOS] = DeslizadorAjuste.porCiento
+		DeslizadorAjuste.formatos[Claves.VOLUMEN_LLAMADAS] = DeslizadorAjuste.porCiento
 		DeslizadorAjuste.formatos[Claves.INTENSIDAD_VIBRACION] = DeslizadorAjuste.porCiento
 		DeslizadorAjuste.formatos[Claves.ESPERA_PISTAS] = DeslizadorAjuste.milisegundos
 		DeslizadorAjuste.formatos[Claves.BRAILLE_MENSAJES] = DeslizadorAjuste.milisegundos

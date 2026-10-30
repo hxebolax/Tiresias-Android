@@ -67,11 +67,20 @@ class ServicioTiresias : AccessibilityService() {
 		}
 	}
 
+	/** «Terminar» de la notificación de la ayuda remota (solo la manda Tiresias: no se exporta). */
+	private val terminarAyuda = object : BroadcastReceiver() {
+		override fun onReceive(c: Context?, i: Intent?) {
+			lector?.manejador?.post { com.xebolax.tiresias.remoto.Asistencia.terminarPorUsuario() }
+		}
+	}
+
 	/** Al encender la pantalla, Tiresias vuelve si estaba suspendido: nunca deja a nadie atrapado. */
 	private val pantalla = object : BroadcastReceiver() {
 		override fun onReceive(c: Context?, i: Intent?) {
 			when (i?.action) {
 				Intent.ACTION_SCREEN_ON -> lector?.manejador?.post {
+					com.xebolax.tiresias.remoto.Asistencia.alPantalla(true)
+					com.xebolax.tiresias.ui.ControlPc.alPantalla(this@ServicioTiresias, true)
 					if (ejecutor?.suspendido == true) ejecutor?.suspender(false)
 					// Con el móvil bloqueado, unos segundos sin lo que SystemUI dice solo (Backtalk 312)
 					lector?.let { l -> if (l.ajustes.soloLoElegidoAlEncender && l.bloqueado()) l.callarSistemaUnMomento() }
@@ -107,7 +116,10 @@ class ServicioTiresias : AccessibilityService() {
 					}
 				}
 				Intent.ACTION_SCREEN_OFF -> {
+					com.xebolax.tiresias.remoto.Asistencia.alPantalla(false)
+					com.xebolax.tiresias.ui.ControlPc.alPantalla(this@ServicioTiresias, false)
 					lector?.continua?.parar()
+					lector?.superficie?.let { if (it.modo?.cerrarAlCambiarDeApp == true) it.cerrar() }
 					// Lo copiado por Tiresias solo vive mientras se usa el móvil
 					lector?.edicion?.olvidarCopiado()
 					lector?.manejador?.post { lector?.salirVirtual(false) }
@@ -141,6 +153,7 @@ class ServicioTiresias : AccessibilityService() {
 	private fun iniciar() {
 		Registro.iniciar(this)
 		Thread({ apuntarSalidas() }, "tiresias-salidas").start()
+		Guarda.iniciar(this)
 		com.xebolax.tiresias.voz.PistaAudio.multimedia = Ajustes(this).vozMultimedia
 		val v = Voz(this)
 		voz = v
@@ -199,6 +212,7 @@ class ServicioTiresias : AccessibilityService() {
 		}
 		// «Reanudar» de la notificación de pausa (solo la manda Tiresias: no se exporta)
 		androidx.core.content.ContextCompat.registerReceiver(this, reanudar, IntentFilter(AvisoPausa.REANUDAR), androidx.core.content.ContextCompat.RECEIVER_NOT_EXPORTED)
+		androidx.core.content.ContextCompat.registerReceiver(this, terminarAyuda, IntentFilter(com.xebolax.tiresias.remoto.Asistencia.TERMINAR), androidx.core.content.ContextCompat.RECEIVER_NOT_EXPORTED)
 		instancia = this
 		if (BuildConfig.PRUEBAS) {
 			ordenesPrueba = OrdenesPrueba({ g -> alGestoTiresias(g) }, alAccion).also { it.registrar(this) }
@@ -330,6 +344,11 @@ class ServicioTiresias : AccessibilityService() {
 					paqueteActual = paquete
 					l.gestos.alCambiarApp(paquete)
 					l.perfiles.alCambiarApp(paquete)
+					// La barra del sistema (volumen, avisos) no es otra app: no quita la superficie braille
+					if (paquete != "com.android.systemui") {
+						l.superficie.alCambiarApp()
+						com.xebolax.tiresias.remoto.Asistencia.ayudado?.alCambiarApp()
+					}
 				}
 			}
 			AccessibilityEvent.TYPE_TOUCH_INTERACTION_END -> l.gestos.alTerminarToque()
@@ -442,8 +461,13 @@ class ServicioTiresias : AccessibilityService() {
 	private fun cerrar() {
 		if (instancia !== this) return
 		instancia = null
+		Guarda.terminar(this)
 		runCatching { unregisterReceiver(pantalla) }
 		runCatching { unregisterReceiver(reanudar) }
+		runCatching { unregisterReceiver(terminarAyuda) }
+		// Sin lector no hay ayuda remota: se termina (y se quitan sus notificaciones)
+		com.xebolax.tiresias.remoto.Asistencia.terminarPorUsuario()
+		lector?.superficie?.cerrar()
 		AvisoPausa.quitar(this)
 		ordenesPrueba?.let { o -> runCatching { unregisterReceiver(o) } }
 		runCatching { lector?.vision?.cerrar() }
@@ -583,6 +607,15 @@ class ServicioTiresias : AccessibilityService() {
 		l.manejador.post { if (l.scriptsListos) l.scripts.recargar() }
 	}
 
+	/** Hace [a] en el hilo del lector, como si llegara de un gesto (las superficies braille, la asistencia remota). */
+	fun hacer(a: Accion) {
+		val l = lector ?: return
+		l.manejador.post { ejecutor?.ejecutar(a) }
+	}
+
+	/** Hace [a] ya; solo desde el hilo del lector. Devuelve lo que devuelve la acción. */
+	fun hacerYa(a: Accion): Boolean = ejecutor?.ejecutar(a) ?: false
+
 	/** Para las pruebas instrumentadas: hace [a] como si llegara de un gesto. */
 	fun ejecutarPrueba(a: Accion) {
 		val l = lector ?: return
@@ -599,6 +632,17 @@ class ServicioTiresias : AccessibilityService() {
 
 	/** Para las pruebas instrumentadas: el lector (control de lectura, foco). */
 	val lectorPruebas: Lector? get() = lector
+
+	/** El lector, para lo que corre en el mismo proceso: el teclado braille, la asistencia remota y el control de un PC. */
+	val lectorActual: Lector? get() = lector
+
+	/** Las ventanas propias de Tiresias (listas y diálogos encima de todo), para la asistencia remota. */
+	val ventanasActuales: Ventanas? get() = ventanas
+
+	/** Llama por teléfono al contacto de ayuda (ayuda remota). */
+	fun llamarAyuda(numero: String) {
+		ejecutor?.llamarAyuda(numero)
+	}
 
 	/** Para las pruebas instrumentadas: una tecla como si llegara del teclado (devuelve si Tiresias se la queda). */
 	fun teclaPrueba(e: android.view.KeyEvent): Boolean = teclado?.alPulsar(e) ?: false
@@ -633,6 +677,9 @@ class ServicioTiresias : AccessibilityService() {
 	fun cerrarVentanaPruebas() {
 		ventanas?.cerrar()
 		ejecutor?.circular?.cerrar()
+		// Y lo de la 1.0.7 que se queda puesto: la superficie braille y la espera de una ayuda remota
+		lector?.superficie?.cerrar()
+		com.xebolax.tiresias.remoto.Asistencia.terminarPorUsuario()
 	}
 
 	/** La zona de práctica del tutorial: los gestos se dicen en vez de hacerse. */

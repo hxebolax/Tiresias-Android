@@ -184,6 +184,62 @@ class PistaAudio(atributosIniciales: AudioAttributes) {
 			if (Build.VERSION.SDK_INT >= 26) add(AudioDeviceInfo.TYPE_USB_HEADSET)
 			if (Build.VERSION.SDK_INT >= 31) add(AudioDeviceInfo.TYPE_BLE_HEADSET)
 			add(AudioDeviceInfo.TYPE_BLUETOOTH_A2DP)
+			if (Build.VERSION.SDK_INT >= 28) add(AudioDeviceInfo.TYPE_HEARING_AID)
+		}
+
+		/** Qué hace cada aparato Bluetooth ([identidad] → "altavoz" o "auriculares"); lo pone la voz al leer los ajustes. */
+		@Volatile var reglasBluetooth: Map<String, String> = emptyMap()
+
+		const val REGLA_ALTAVOZ = "altavoz"
+		const val REGLA_AURICULARES = "auriculares"
+
+		/** Los tipos de Bluetooth que pueden llevar la música. */
+		val BLUETOOTH: Set<Int> = buildSet {
+			add(AudioDeviceInfo.TYPE_BLUETOOTH_A2DP)
+			add(AudioDeviceInfo.TYPE_BLUETOOTH_SCO)
+			if (Build.VERSION.SDK_INT >= 28) add(AudioDeviceInfo.TYPE_HEARING_AID)
+			if (Build.VERSION.SDK_INT >= 31) {
+				add(AudioDeviceInfo.TYPE_BLE_HEADSET)
+				add(AudioDeviceInfo.TYPE_BLE_SPEAKER)
+			}
+		}
+
+		/**
+		 * La identidad de un aparato Bluetooth para sus reglas (Can Talk): su
+		 * dirección, que agrupa sus perfiles (música, llamadas y LE), o su nombre
+		 * si Android no la da.
+		 */
+		fun identidad(d: AudioDeviceInfo): String? {
+			val direccion = if (Build.VERSION.SDK_INT >= 28) d.address.orEmpty() else ""
+			if (direccion.isNotEmpty() && direccion != "02:00:00:00:00:00" && !direccion.startsWith("00:00:00")) return "address:" + direccion.uppercase()
+			val nombre = d.productName?.toString()?.trim().orEmpty()
+			return if (nombre.isEmpty()) null else "name:$nombre"
+		}
+
+		/**
+		 * Reglas por aparato Bluetooth (Can Talk): con la salida «sistema», si la
+		 * música va por un solo aparato Bluetooth marcado como «altavoz» (el de
+		 * casa), las voces incluidas suenan en el altavoz del móvil y no por toda
+		 * la habitación. Con «auriculares» o sin regla, lo del sistema.
+		 */
+		private fun altavozPorRegla(am: AudioManager): AudioDeviceInfo? {
+			val reglas = reglasBluetooth
+			if (reglas.isEmpty()) return null
+			val musica: List<AudioDeviceInfo> = try {
+				if (Build.VERSION.SDK_INT >= 33) {
+					am.getAudioDevicesForAttributes(AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).build())
+				} else {
+					val salidas = am.getDevices(AudioManager.GET_DEVICES_OUTPUTS).toList()
+					val cable = setOf(AudioDeviceInfo.TYPE_WIRED_HEADSET, AudioDeviceInfo.TYPE_WIRED_HEADPHONES, AudioDeviceInfo.TYPE_USB_HEADSET)
+					if (salidas.any { it.type in cable }) emptyList() else salidas.filter { it.type in BLUETOOTH }
+				}
+			} catch (e: Exception) {
+				Registro.w(ETIQUETA, "No se pudo saber por dónde va la música", e)
+				return null
+			}
+			val unico = musica.singleOrNull()?.takeIf { it.type in BLUETOOTH } ?: return null
+			if (reglas[identidad(unico) ?: return null] != REGLA_ALTAVOZ) return null
+			return runCatching { am.getDevices(AudioManager.GET_DEVICES_OUTPUTS) }.getOrNull()?.firstOrNull { it.type == AudioDeviceInfo.TYPE_BUILTIN_SPEAKER }
 		}
 
 		/**
@@ -193,9 +249,9 @@ class PistaAudio(atributosIniciales: AudioAttributes) {
 		 */
 		fun dispositivoElegido(): AudioDeviceInfo? {
 			val s = salida
-			if (s == SALIDA_SISTEMA) return null
 			val am = gestor ?: return null
 			if (am.mode == AudioManager.MODE_IN_CALL || am.mode == AudioManager.MODE_IN_COMMUNICATION) return null
+			if (s == SALIDA_SISTEMA) return altavozPorRegla(am)
 			val salidas = runCatching { am.getDevices(AudioManager.GET_DEVICES_OUTPUTS) }.getOrNull() ?: return null
 			val tipos = when (s) {
 				SALIDA_ALTAVOZ -> listOf(AudioDeviceInfo.TYPE_BUILTIN_SPEAKER)

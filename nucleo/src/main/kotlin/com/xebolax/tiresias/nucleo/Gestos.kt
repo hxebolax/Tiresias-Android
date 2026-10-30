@@ -114,6 +114,10 @@ enum class Accion {
 	// El texto de lo enfocado (un mensaje, una web) en una ventana para elegir y copiar un trozo
 	SELECCIONAR_TEXTO,
 	APAGAR_SCRIPTS, ORDENES_COMPLEMENTOS, MODO_SEGURO,
+	// 1.0.7 (Can Talk): navegación web y búsqueda con una superficie braille; traducir lo último dicho; manejar un PC con NVDA
+	NAVEGACION_BRAILLE, BUSQUEDA_BRAILLE, TRADUCIR_ULTIMO, CONTROL_PC,
+	// 1.0.7: asistencia remota entre dos móviles: pedir ayuda al contacto, la pantalla, terminar y manejar el otro móvil con los gestos propios
+	PEDIR_AYUDA, AYUDA_REMOTA, AYUDA_TERMINAR, AYUDA_CONTROLAR,
 }
 
 /** Lo que puede decir el gesto de estado («Hora, fecha y batería»), en el orden que se elija. */
@@ -130,7 +134,7 @@ object Listas {
 		Accion.HISTORIAL_HABLA, Accion.HISTORIAL_NOTIFICACIONES, Accion.LEER_PORTAPAPELES, Accion.HISTORIAL_PORTAPAPELES,
 		Accion.COPIAR_LISTA, Accion.ESTADO_SISTEMA,
 		Accion.CORTINA, Accion.ALTERNAR_VOZ, Accion.PERFIL_SIGUIENTE, Accion.AYUDA_ENTRADA, Accion.AYUDA_OTRA_PERSONA, Accion.TUTORIAL,
-		Accion.PRIMERO_BRAILLE, Accion.ORDENES_COMPLEMENTOS, Accion.AJUSTES_TIRESIAS, Accion.SUSPENDER,
+		Accion.PRIMERO_BRAILLE, Accion.ORDENES_COMPLEMENTOS, Accion.PEDIR_AYUDA, Accion.AYUDA_REMOTA, Accion.AJUSTES_TIRESIAS, Accion.SUSPENDER,
 	)
 
 	/** El menú circular de fábrica: ocho opciones, de arriba en el sentido de las agujas del reloj. */
@@ -142,7 +146,7 @@ object Listas {
 	/** El menú de Tiresias del modo senior: pocas cosas y las de cada día. */
 	val MENU_SENIOR = listOf(
 		Accion.ESTADO_SISTEMA, Accion.REPETIR, Accion.LEER_DESDE_ARRIBA, Accion.QUE_PUEDO_HACER,
-		Accion.RESUMEN_AVISOS, Accion.HISTORIAL_NOTIFICACIONES, Accion.ORDENES_VOZ, Accion.INICIO_SEGURO, Accion.SOS,
+		Accion.RESUMEN_AVISOS, Accion.HISTORIAL_NOTIFICACIONES, Accion.ORDENES_VOZ, Accion.INICIO_SEGURO, Accion.SOS, Accion.PEDIR_AYUDA,
 	)
 
 	/** Lo que dice «Hora, fecha y batería» de fábrica. */

@@ -50,6 +50,7 @@
 	<string name="asis_5_huawei">On Huawei and Honor phones, open Settings, Battery, App launch, find Tiresias, turn off automatic management and leave auto-launch, secondary launch and run in background on.</string>
 	<string name="asis_5_motorola">On Motorola phones, if double tap fails or needs three taps, open the Moto app, Gestures, and turn off the gestures you do not use (the screen ones and the taps on the back). Also open the Tiresias app info and turn off battery saving for it.</string>
 	<string name="asis_5_vivo">On vivo and iQOO phones, open the Tiresias app info, Battery, and allow high background power use; also turn on autostart in Settings, Apps, Permissions.</string>
+	<string name="asis_5_transsion">On Infinix, Tecno and itel phones, open Tiresias app info, Battery, and choose Unrestricted. Open Phone Master or Settings, App management, and turn on auto-start for Tiresias. Then, in Recents, lock Tiresias so clearing the list does not close it. If it still stops speaking, turn it back on in Settings, Accessibility.</string>
 	<string name="asis_5_boton">Open Tiresias app info</string>
 	<string name="asis_6_titulo">Learn the gestures</string>
 	<string name="asis_6">The tutorial explains the gestures in a few minutes and has a practice area.</string>
@@ -185,7 +186,7 @@
 	</plurals>
 	<string name="braille_documento_cerrado">Document closed</string>
 	<string name="braille_linea_virtual">Braille display from %1$s, %2$d cells</string>
-	<string name="braille_teclado_listo">Braille keyboard. Dots 1, 2 and 3 at the top; 4, 5 and 6 at the bottom. Lift your fingers to type.</string>
+	<string name="braille_teclado_listo">Braille keyboard. Dots 1, 2 and 3 at the top; 4, 5 and 6 at the bottom. Lift your fingers to type. One finger up opens the keyboard menu.</string>
 	<string name="braille_superficie">Braille keyboard surface</string>
 	<string name="braille_numero">number</string>
 	<string name="braille_mayuscula">capital</string>
@@ -354,6 +355,9 @@
 	<string name="sonido_edicion">Text editing</string>
 	<string name="sonido_cargando">Working (text recognition, AI...)</string>
 	<string name="sonido_fila">Moving to the next row (icons, cells)</string>
+	<string name="sonido_tecla_espacio">Braille keyboard: space</string>
+	<string name="sonido_tecla_borrar">Braille keyboard: delete</string>
+	<string name="sonido_tecla_intro">Braille keyboard: Enter</string>
 	<string name="pantalla_apagada">Screen off</string>
 	<string name="ordenar_partes_titulo">Choose what is spoken and in which order</string>
 	<string name="ordenar_partes_res">The parts spoken for each item (name, type, state, position...) and their order</string>

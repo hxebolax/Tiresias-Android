@@ -127,6 +127,7 @@ class Voz(contexto: Context) {
 		ajustes.normalizarEloquence()
 		ajustes.ajustarVozAlMotor()
 		PistaAudio.salida = ajustes.salidaAudio
+		PistaAudio.reglasBluetooth = ajustes.reglasBluetooth
 		val id = ajustes.motor
 		if (id.startsWith(MotorPiper.PREFIJO)) {
 			sistema?.cerrar()
@@ -212,6 +213,7 @@ class Voz(contexto: Context) {
 			return
 		}
 		if (e.tipo != Tipo.PISTA) recordar(texto)
+		escuchaRemota?.invoke(e, focoSensible && e.tipo in DEL_FOCO)
 		if (BuildConfig.PRUEBAS) {
 			// Ni en esta variante se registra lo de una contraseña o un dato sensible (Android 14)
 			val registrado = if (focoSensible && e.tipo in DEL_FOCO) "(dato sensible, ${texto.length} caracteres)" else texto
@@ -264,7 +266,16 @@ class Voz(contexto: Context) {
 		private set
 
 	/** Corta todo lo que suena y lo que espera. */
+	/**
+	 * Quien oye a distancia lo que dice Tiresias (la asistencia remota): cada
+	 * enunciado que se va a decir, tal cual, y si es de un dato sensible (una
+	 * contraseña), para que no se mande. Y cuando se calla.
+	 */
+	@Volatile var escuchaRemota: ((Enunciado, Boolean) -> Unit)? = null
+	@Volatile var alCallarRemoto: (() -> Unit)? = null
+
 	fun callar() {
+		alCallarRemoto?.invoke()
 		vecesCallada++
 		cerrojo.withLock {
 			generacion.incrementAndGet()
@@ -414,6 +425,9 @@ class Voz(contexto: Context) {
 			return
 		}
 		pedirFoco()
+		// En una llamada, la voz a su volumen propio (Can Talk); fuera de ellas, la ganancia es 1 y todo sigue igual
+		val ganancia = VozEnLlamadas.calcular(app, ajustes)
+		pista.ponerVolumen(ajustes.volumenVoz / 100f * ganancia)
 		// Las notificaciones pueden ir con otra voz (Prudence), con la velocidad que tenga esa voz
 		val deAvisos = if (p.e.tipo == Tipo.NOTIFICACION) motorDeAvisos() else null
 		val velocidad = (if (deAvisos != null) ajustes.velocidadDe(ajustes.motorAvisos) else velocidadPerfil ?: ajustes.velocidad) * p.e.velocidad / 100

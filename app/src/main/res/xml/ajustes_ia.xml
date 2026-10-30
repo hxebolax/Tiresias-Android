@@ -6,6 +6,7 @@
 	<SwitchPreferenceCompat app:key="reconocer_personas" app:title="@string/aj_reconocer_personas" app:summary="@string/aj_reconocer_personas_res" app:defaultValue="true" />
 	<SwitchPreferenceCompat app:key="personas_nube" app:title="@string/aj_personas_nube" app:summary="@string/aj_personas_nube_res" app:defaultValue="false" app:dependency="reconocer_personas" />
 	<ListPreference app:key="iconos" app:title="@string/aj_iconos" app:entries="@array/iconos_nombres" app:entryValues="@array/iconos_valores" app:defaultValue="ocr" app:useSimpleSummaryProvider="true" />
+	<SwitchPreferenceCompat app:key="ia_sin_filtros" app:title="@string/aj_ia_sin_filtros" app:summary="@string/aj_ia_sin_filtros_res" app:defaultValue="false" />
 	<ListPreference app:key="ia_proveedor" app:title="@string/aj_ia_proveedor" app:entries="@array/ia_nombres" app:entryValues="@array/ia_valores" app:useSimpleSummaryProvider="true" />
 	<Preference app:key="ia_info" app:title="@string/aj_ia_info" app:summary="@string/aj_ia_info_res" app:selectable="false" />
 	<SwitchPreferenceCompat app:key="ia_local_gpu" app:title="@string/aj_ia_gpu" app:summary="@string/aj_ia_gpu_res" app:defaultValue="false" />

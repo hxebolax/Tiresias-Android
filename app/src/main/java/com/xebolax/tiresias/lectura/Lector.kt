@@ -65,6 +65,8 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	val continua = LecturaContinua(this)
 	val memoria = MemoriaVentanas()
 	val gestos = com.xebolax.tiresias.gestos.GestosTiresias(this)
+	/** La superficie braille encima de todo (navegación web y búsqueda braille, control de un PC). */
+	val superficie = com.xebolax.tiresias.braille.SuperficieEncima(this)
 	val perfiles = com.xebolax.tiresias.perfiles.Perfiles(servicio, this)
 
 	// Módulos que necesitan el servicio entero (capturas, ventanas, teclado braille): los pone el servicio al conectarse

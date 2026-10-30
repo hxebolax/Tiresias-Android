@@ -12,6 +12,9 @@
 	<uses-permission android:name="android.permission.VIBRATE" />
 	<!-- Un momento despierto para terminar un aviso al apagar la pantalla -->
 	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<!-- Que limpiar Recientes no cierre el lector, y red con el móvil en reposo durante la ayuda remota (se quita en Ajustes) -->
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
 	<!-- Órdenes por voz y dictado (opcional; se pide en Ajustes) -->
 	<uses-permission android:name="android.permission.RECORD_AUDIO" />
 	<!-- Responder y colgar llamadas con un gesto (opcional; se pide en Ajustes) -->
@@ -24,6 +27,11 @@
 	<uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
 	<!-- Pasar la llamada al altavoz al apartar el móvil de la oreja: Android no la da a los lectores; el usuario la da con adb -->
 	<uses-permission android:name="android.permission.MANAGE_ONGOING_CALLS" tools:ignore="ProtectedPermissions" />
+	<!-- Ayuda remota entre dos móviles, sin servidores: mandar la petición de ayuda por SMS (opcional, se pide al elegir SMS), -->
+	<!-- buscar el router y el otro móvil en la wifi (UPnP y NSD) y, desde Android 17, hablar con la red local (se pide al usarla) -->
+	<uses-permission android:name="android.permission.SEND_SMS" />
+	<uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
 	<!-- USB y Bluetooth son opcionales: Tiresias se instala en cualquier móvil -->
 	<uses-feature android:name="android.hardware.usb.host" android:required="false" />
 	<uses-feature android:name="android.hardware.bluetooth" android:required="false" />
@@ -95,6 +103,18 @@
 		<activity android:name=".ui.ActividadComplementos" android:exported="false" android:label="@string/ui_complementos" />
 		<activity android:name=".ui.ActividadAjustesComplemento" android:exported="false" />
 		<activity android:name=".ui.ActividadTeclasBraille" android:exported="false" />
+		<activity android:name=".ui.ActividadGestosTeclado" android:exported="false" />
+		<activity android:name=".ui.ActividadReglasBluetooth" android:exported="false" />
+		<activity android:name=".ui.ActividadControlPc" android:exported="false" android:label="@string/accion_control_pc" />
+		<activity android:name=".ui.ActividadAyudaRemota" android:exported="false" android:label="@string/accion_ayuda_remota" />
+		<!-- Ayudar a otra persona: también con la invitación compartida desde WhatsApp o Mensajes («Compartir», Tiresias) -->
+		<activity android:name=".ui.ActividadAyudar" android:exported="true" android:label="@string/ayudar_compartir">
+			<intent-filter>
+				<action android:name="android.intent.action.SEND" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<data android:mimeType="text/plain" />
+			</intent-filter>
+		</activity>
 		<activity android:name=".ui.ActividadEloquence" android:exported="false" />
 		<activity android:name=".ui.ActividadModoSenior" android:exported="false" />
 		<!-- Restablecer Tiresias desde el PC (adb): solo con el permiso DUMP, que ninguna app normal tiene -->
@@ -125,8 +145,12 @@
 			android:name=".servicio.ServicioTiresias"
 			android:directBootAware="true"
 			android:exported="true"
+			android:foregroundServiceType="specialUse"
 			android:label="@string/servicio_nombre"
 			android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+			<property
+				android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+				android:value="screen_reader_keep_alive" />
 			<intent-filter>
 				<action android:name="android.accessibilityservice.AccessibilityService" />
 			</intent-filter>
@@ -194,6 +218,17 @@
 				<action android:name="com.xebolax.tiresias.API" />
 			</intent-filter>
 		</service>
+
+		<!-- Tor para la ayuda remota, solo mientras dura y en su propio proceso: si falla, el lector sigue hablando -->
+		<service
+			android:name="org.torproject.jni.TorService"
+			android:exported="false"
+			android:process=":tor"
+			tools:node="merge" />
+		<service
+			android:name=".remoto.ServicioTor"
+			android:exported="false"
+			android:process=":tor" />
 
 		<service
 			android:name=".ia.ServicioIALocal"

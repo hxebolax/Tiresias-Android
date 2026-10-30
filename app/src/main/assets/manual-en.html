@@ -46,6 +46,8 @@
 	<li><a href="#personalizar">Customizing Tiresias</a></li>
 	<li><a href="#senior">Senior mode</a></li>
 	<li><a href="#problemas">Common problems</a></li>
+	<li><a href="#ayuda_remota">Remote help between two phones</a></li>
+	<li><a href="#control_pc">Controlling a PC with NVDA</a></li>
 </ol>
 </nav>
 
@@ -155,6 +157,8 @@
 <p>So that it does not talk too much, stopwatches and equalizers that change all the time respect the minimum time between changes the app asks for (Android 14 or later) and, on a focused slider or drop-down, at most one selection change per second is spoken; polite live regions of a window that is not in front do not cut off what is being read.</p>
 <h3>Pronunciation dictionary</h3>
 <p>In the Pronunciation dictionary screen you can make a word be spoken differently (for example, acronyms or names), for every voice. You can import a Tiresias or NVDA dictionary and export it.</p>
+<h3>Voice in calls and Bluetooth devices</h3>
+<p>In Settings, Voice, “<strong>Voice in calls with its own volume</strong>”: during a call, the Tiresias voice and sounds play at their own percentage (50 by default), so they do not blast when you turn the call up. With a finger on the screen, the volume keys change it in steps of 5. “Compensate the call volume” (experimental) corrects the voice the other way when you change the call volume. In “<strong>Bluetooth devices</strong>” you mark each device as a speaker or headphones: if music plays through a speaker, the Tiresias voices stay on the phone.</p>
 </section>
 
 <section aria-labelledby="escribir">
@@ -215,6 +219,19 @@
 <h3>Braille first</h3>
 <p>With the display connected, “braille first” mutes speech and everything is read on the display. Choose it in Settings, Braille: <strong>minimal speech</strong> (only Tiresias alerts and notifications are spoken) or <strong>no speech</strong>. Turn it on and off with the “Braille first” action (in the Tiresias menu, and on the display with space + dots 7 and 8). It cannot be turned on without a display, and if the display disconnects, speech comes back at once: you are never left without output. Safe mode also brings speech back.</p>
 <p>Tables: <strong>8-dot computer braille</strong> (the default, each language's liblouis table: one cell per character) or <strong>6-dot literary braille</strong> (grade 1, with capital and number signs). The “Braille mode” add-on adds a menu on the display with notes, opening apps by typing their name, a calculator and the time.</p>
+<h3>Calibration, gestures and the braille keyboard menu</h3>
+<p><strong>Calibrate</strong>: open the keyboard menu (one finger up) and choose “Calibrate the dots”. Tiresias asks “Touch dot 1”, then 2... up to 6: touch each one with one finger where you put it when typing. From then on, each finger is the nearest of the dots you touched. There is one calibration for normal dots and another for mirrored dots. Remove it in the same menu or in Settings, Braille.</p>
+<p><strong>The keyboard menu</strong> (one finger up): emoji, clipboard, mention suggestions, dictate, read what is written, delete the word, calibrate, lock the orientation and switch keyboard. Keyboard menus and lists always work the same way: one finger sideways, next or previous; one finger up or down, the group (emoji category, copied items or favourites); two fingers down, choose; two up, leave; two to the right, add or remove from favourites. Typing in braille leaves the list.</p>
+<ul>
+	<li><strong>Emoji</strong>: by category (faces, hands, hearts, animals, food...) and your favourites.</li>
+	<li><strong>Clipboard</strong>: what was copied last, by Tiresias and by apps while the braille keyboard is the chosen one, and your favourites. Only in memory: copied items are forgotten when the screen turns off and favourites on restart.</li>
+	<li><strong>Dictate</strong>: you say the text and it is typed at the cursor (with Vosk without Internet or with the system recogniser). In Settings, Keyboard, “Dictation without masking swear words”.</li>
+	<li>WhatsApp <strong>mention suggestions</strong>: when you type “@” in a group, Tiresias says there are suggestions; one finger down opens them and two fingers down choose one, without closing the keyboard.</li>
+</ul>
+<p><strong>Gestures</strong> are changed in Settings, Braille, Braille keyboard gestures: the one, two and three finger ones and the <strong>dot gestures</strong>, which start with the finger on that dot (“from dot 3 left”). If a dot gesture has nothing, it does what the one-finger gesture does. By default: one finger left deletes, right is a space, up the menu and down the suggestions; two fingers down Enter, up switch keyboard, left delete the word; three fingers up lock the orientation.</p>
+<p>Settings, Braille also has <strong>automatic capitals</strong> (at the start and after a full stop, if the field asks for it), <strong>typing sounds</strong> (space, delete and Enter), the sound style (Android ones, silent if touch sounds are off, or the Tiresias theme, at the reader volume) and their volume.</p>
+<h3>Web navigation and search with braille</h3>
+<p>With Android 11 or later, the actions “Braille web navigation” and “Braille search for apps and elements” (assign them to a gesture or put them in the Tiresias menu) show a braille surface on top of everything. In <strong>braille web navigation</strong>, each letter jumps to the next of its type, as in NVDA: h heading, k link, b button, e field, f form, x checkbox, l list, t table, d region, g image; with the capital sign first, to the previous one; with the number sign and a digit, to the heading of that level. One finger sideways moves to the next or previous; up and down, another of the same type; two fingers down activate (in a field, the surface goes away so you can type); two to the right read from there; two up remove it. In <strong>braille search</strong> you type part of a name: one finger down and up go through the results, three fingers sideways switch between the screen elements and the apps, and two fingers down open it. Both volume keys always remove the surface.</p>
 <!-- TIRESIAS:BRAILLE -->
 <p>On Android 14 or earlier, braille displays cannot be used from Tiresias (Android does not give screen readers access to them). The on-screen braille keyboard does work.</p>
 </section>
@@ -315,6 +332,9 @@
 <p>The library used by text recognition and the neural voices (ONNX Runtime) came with Microsoft telemetry that started by itself. Since version 1.0.4 it has been removed completely.</p>
 <p>Whatever an app marks as sensitive data (Android 14 or later: banking, codes) Tiresias reads, but it does not capture it for AI or text recognition, does not put it in “Choose and copy text from the focused item” and does not give it to add-ons, just like a password field.</p>
 <p>What Tiresias copied is only in the phone's memory and is forgotten when the screen turns off. The photos of the people you know stay on the phone.</p>
+
+<p>The only exception, because it is what it is for, is <strong>remote help</strong>: while a help you asked for lasts, what Tiresias says goes end-to-end encrypted to your helper’s phone, directly and without going through any server. Password content is not sent, nothing is stored and it ends when the help ends. When controlling a PC, what the PC says reaches the phone; the phone does not send what it reads.</p>
+<p>Voice in calls, Bluetooth devices and emoji favourites are just settings. Certificate fingerprints and saved NVDA computers stay on the phone, with the key encrypted.</p>
 </section>
 
 <section aria-labelledby="personalizar">
@@ -399,6 +419,43 @@
 </dl>
 <p>Tiresias is free software (GPL 3 or later), by Héctor J. Benítez Corredera. The licenses of what it includes are in About and updates.</p>
 </section>
+<section aria-labelledby="ayuda_remota">
+<h2 id="ayuda_remota">20. Remote help between two phones</h2>
+<p>For people you <strong>fully trust</strong>: a daughter helping her blind mother from home, for example. The helper hears what the other person’s phone says with their own voice (a bit lower, to tell them apart) and controls it from theirs, with Tiresias: adjust the phone, set up Tiresias, recover an app or install one. Both phones link <strong>directly, without any server</strong>, and everything is end-to-end encrypted. It is in the side menu, Remote help.</p>
+<h3>Setting it up (done by the relative)</h3>
+<ul>
+	<li>The <strong>help contact</strong> (name and phone; the same as the senior mode SOS) and how the request is sent: <strong>WhatsApp</strong> (Tiresias opens the chat with the message and presses Send), <strong>SMS</strong> (sent by itself if you grant the SMS permission) or choose it every time.</li>
+	<li>The <strong>name of this phone</strong>: what your helper calls you (“Mum”).</li>
+	<li>“Ask for remote help” on a gesture or in the Tiresias menu (it is already in the default menu and in the senior mode one).</li>
+	<li>Permissions: notifications, nearby devices (for the same Wi-Fi, Android 17) and SMS if chosen.</li>
+	<li>The <strong>first help</strong>: the first person who comes in can be saved as a trusted person. Do it together: after that, an invitation is no use to anyone else.</li>
+	<li>If you want, a <strong>second person</strong>: they are asked too if the first does not come in within a few minutes.</li>
+</ul>
+<h3>Asking for help</h3>
+<p>With “Ask for remote help”, the phone gets ready (a few seconds) and the request reaches the help contact by itself. From the Remote help screen you can also invite whoever you want (with the share sheet) or give an <strong>8-digit code</strong> if your helper is on your same Wi-Fi. The invitation lasts 10 minutes. When they join, you hear “Héctor is helping you” and, every few minutes, that they are still helping. While it lasts, the screen does not turn off by itself.</p>
+<p>To <strong>end it</strong> whenever you want: hold both volume keys (if there is no help, they suspend Tiresias as always), do the emergency gesture, tap “End the help” in the notification or use the action “End remote help”. With the phone locked nothing is done: you enter the PIN.</p>
+<h3>Helping</h3>
+<p>The helper receives the invitation by WhatsApp or SMS, and their Tiresias shows a notification: “Mum is asking you for help, tap to help”. They can also share the message with Tiresias, copy it and choose “Paste the invitation”, or type the code. The help screen has buttons to move (previous, next, activate, long press, where it is, read), Back, Home, their notifications and recent apps, the <strong>list of their elements</strong> (to activate one), type text in their field, open one of their apps or its information (to recover it), their phone, accessibility, Wi-Fi and Tiresias settings, search for an app in their store or open a link, and all Tiresias actions. With Tiresias on, “<strong>Control the other phone with my gestures</strong>” sends your gestures to the other phone, as if it were yours.</p>
+<h3>Good to know</h3>
+<ul>
+	<li>The phones first try to reach each other directly (same Wi-Fi, IPv6, router). If they cannot, for example with mobile data on both, they link through the <strong>Tor network</strong>, which comes inside Tiresias and only runs during the help. Nothing has to be opened or installed. It takes a minute longer to connect and each command takes almost a second. You can turn it off in the help settings.</li>
+	<li>Passwords and codes are not sent. Tiresias cannot be suspended, nor the phone switched off or locked, from outside.</li>
+	<li><strong>Trusted people</strong>: only they can come in. A new person needs you to ask for it in Remote help and wait 24 hours, and never during a call. If someone on the phone asks you to let them into your phone, hang up and call your family.</li>
+	<li>In <strong>banking and payment apps</strong> help is paused until you leave: the helper neither hears nor controls anything. The list of apps cannot be complete: an unknown bank, or a bank website in the browser, is not detected.</li>
+	<li>The help lasts at most the chosen time (one hour by default), ends by itself after 15 minutes without activity and 2 minutes after the network drops. After five attempts with a wrong key, it stops waiting.</li>
+	<li>Trusted people are asked about before they come in; you can turn that off, and then you are told and have a few seconds to stop it. Anyone else is always asked about.</li>
+	<li>Tiresias tells you when nobody comes in and offers to phone them. At the end, if something in Tiresias changed, you can go back to how it was.</li>
+	<li>So Tiresias does not close when you clear recent apps, it keeps a discreet permanent notice; you can remove it in Settings, Notifications.</li>
+</ul>
+</section>
+
+<section aria-labelledby="control_pc">
+<h2 id="control_pc">21. Controlling a PC with NVDA</h2>
+<p>From the side menu, “Control a PC with NVDA”, the phone controls a PC with NVDA (NVDA Remote Access 2025.1 or later, or the NVDA Remote add-on) or with Tiresias for Windows. On the PC, choose “Allow this computer to be controlled” with a server (nvdaremote.com, your own or the direct connection) and a key; on the phone, the same server and key, or paste the nvdaremote:// link NVDA copies. If the server certificate cannot be checked, Tiresias shows its fingerprint and you decide to trust it once or always.</p>
+<p>What the PC says is heard with the Tiresias voice. It is controlled with a full-screen <strong>braille surface</strong>. In <strong>control mode</strong>, braille letters are keys and dots 6, 5, 3 and 2 on their own prepare Control, Alt, Shift and the NVDA key for the next one; one finger is the arrows; two fingers down, Enter; up, Escape; left, Backspace; right, Tab; three fingers left, Alt+Tab, and right, Space. Three fingers up switch to <strong>braille keyboard mode</strong>, where NVDA types the dots with its braille table. Three fingers down open the menu: Windows, applications, Home, End, pages, Delete, Alt+F4, the desktop, Control+Alt+Delete, mute the PC voice, disconnect and remove the surface. Both volume keys remove the surface. On the screen you can also type a text on the PC, paste on it what was copied on the phone and save the computer (with the key encrypted). When the phone locks, by default it disconnects (Settings, Braille).</p>
+<p>NVDA Remote Access encrypts up to the server, but the server can see what happens: use a trusted one or the direct connection to your PC.</p>
+</section>
+
 </main>
 </body>
 </html>

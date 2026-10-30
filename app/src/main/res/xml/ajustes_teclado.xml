@@ -8,4 +8,5 @@
 	<Preference app:key="teclados_que_hablan" app:title="@string/aj_teclados_que_hablan" app:summary="@string/aj_teclados_que_hablan_res" />
 	<SwitchPreferenceCompat app:key="toque_directo_teclado" app:title="@string/aj_toque_directo_teclado" app:summary="@string/aj_toque_directo_teclado_res" app:defaultValue="false" />
 	<SwitchPreferenceCompat app:key="volumen_cursor" app:title="@string/aj_volumen_cursor" app:summary="@string/aj_volumen_cursor_res" app:defaultValue="false" />
+	<SwitchPreferenceCompat app:key="dictado_sin_censura" app:title="@string/aj_dictado_sin_censura" app:summary="@string/aj_dictado_sin_censura_res" app:defaultValue="false" />
 </PreferenceScreen>

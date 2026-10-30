@@ -161,13 +161,14 @@ class Ventanas(private val servicio: AccessibilityService) {
 		campo.requestFocus()
 	}
 
-	/** Un texto largo para leer (resultado de la IA, del OCR, el historial). Se puede copiar. */
-	fun mensaje(titulo: String, texto: String, alCerrar: () -> Unit = {}, alCopiar: ((String) -> Unit)? = null) = principal.post {
+	/** Un texto largo para leer (resultado de la IA, del OCR, el historial). Se puede copiar y, con [alCompartir], compartir. */
+	fun mensaje(titulo: String, texto: String, alCerrar: () -> Unit = {}, alCopiar: ((String) -> Unit)? = null, alCompartir: ((String) -> Unit)? = null) = principal.post {
 		val b = MaterialAlertDialogBuilder(contexto())
 			.setTitle(titulo)
 			.setMessage(texto)
 			.setPositiveButton(R.string.cerrar, null)
 		if (alCopiar != null) b.setNeutralButton(R.string.copiar) { _, _ -> alCopiar(texto) }
+		if (alCompartir != null) b.setNegativeButton(R.string.compartir) { _, _ -> alCompartir(texto) }
 		mostrar(b.create(), alCerrar)
 	}
 

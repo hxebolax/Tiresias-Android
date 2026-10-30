@@ -303,4 +303,13 @@
 	<string name="accion_leer_columna">Leer la columna entera de la tabla</string>
 	<string name="accion_nombrar_ventana">Poner nombre a esta pantalla</string>
 	<string name="accion_seleccionar_texto">Elegir y copiar texto de lo enfocado</string>
+	<!-- 1.0.7 -->
+	<string name="accion_navegacion_braille">Navegación web braille</string>
+	<string name="accion_busqueda_braille">Búsqueda braille de apps y elementos</string>
+	<string name="accion_traducir_ultimo">Traducir lo último dicho</string>
+	<string name="accion_control_pc">Controlar un PC con NVDA</string>
+	<string name="accion_pedir_ayuda">Pedir ayuda a distancia</string>
+	<string name="accion_ayuda_remota">Ayuda remota</string>
+	<string name="accion_ayuda_terminar">Terminar la ayuda remota</string>
+	<string name="accion_ayuda_controlar">Manejar el otro móvil con mis gestos</string>
 </resources>

@@ -50,6 +50,7 @@
 	<string name="asis_5_huawei">En los Huawei y Honor, abre Ajustes, Batería, Inicio de aplicaciones, busca Tiresias, quita la gestión automática y deja activados el inicio automático, el inicio secundario y la ejecución en segundo plano.</string>
 	<string name="asis_5_motorola">En los Motorola, si el doble toque falla o hace falta tocar tres veces, abre la app Moto, Gestos, y quita los gestos que no uses (los de la pantalla y los toques en la parte de atrás). Abre también la información de Tiresias y quítale el ahorro de batería.</string>
 	<string name="asis_5_vivo">En los vivo e iQOO, abre la información de Tiresias, Batería, y elige permitir un consumo alto en segundo plano; activa también el inicio automático en Ajustes, Aplicaciones, Permisos.</string>
+	<string name="asis_5_transsion">En los Infinix, Tecno e itel, abre la información de Tiresias, Batería, y elige Sin restricciones. Abre Phone Master o Ajustes, Gestión de aplicaciones, y activa el inicio automático de Tiresias. Después, en Recientes, ponle el candado a Tiresias para que no se cierre al limpiar la lista. Si aun así deja de hablar, vuelve a activarlo en Ajustes, Accesibilidad.</string>
 	<string name="asis_5_boton">Abrir la información de Tiresias</string>
 	<string name="asis_6_titulo">Aprender los gestos</string>
 	<string name="asis_6">El tutorial explica los gestos en unos minutos y tiene una zona de práctica.</string>
@@ -191,7 +192,7 @@
 	</plurals>
 	<string name="braille_documento_cerrado">Documento cerrado</string>
 	<string name="braille_linea_virtual">Línea braille de %1$s, %2$d celdas</string>
-	<string name="braille_teclado_listo">Teclado braille. Puntos 1, 2 y 3 arriba; 4, 5 y 6 abajo. Levanta los dedos para escribir.</string>
+	<string name="braille_teclado_listo">Teclado braille. Puntos 1, 2 y 3 arriba; 4, 5 y 6 abajo. Levanta los dedos para escribir. Un dedo hacia arriba abre el menú del teclado.</string>
 	<string name="braille_superficie">Superficie del teclado braille</string>
 	<string name="braille_numero">número</string>
 	<string name="braille_mayuscula">mayúscula</string>
@@ -360,6 +361,9 @@
 	<string name="sonido_edicion">Edición de texto</string>
 	<string name="sonido_cargando">Trabajando (reconocer texto, IA...)</string>
 	<string name="sonido_fila">Al pasar a la fila siguiente (iconos, celdas)</string>
+	<string name="sonido_tecla_espacio">Teclado braille: espacio</string>
+	<string name="sonido_tecla_borrar">Teclado braille: borrar</string>
+	<string name="sonido_tecla_intro">Teclado braille: Intro</string>
 	<string name="pantalla_apagada">Pantalla apagada</string>
 	<string name="ordenar_partes_titulo">Elegir qué se dice y en qué orden</string>
 	<string name="ordenar_partes_res">Las partes de lo que se dice de cada elemento (nombre, tipo, estado, posición...) y su orden</string>

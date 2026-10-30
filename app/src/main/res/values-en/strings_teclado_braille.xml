@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- On-screen braille keyboard: calibration, gestures, menu, lists, emoji, clipboard and mentions (1.0.7, Can Talk). -->
+<resources>
+	<!-- Dot-by-dot calibration -->
+	<string name="braille_calibrar_empezar">Calibrate the keyboard. Touch with one finger where you place dot 1. Two fingers up cancel.</string>
+	<string name="braille_calibrar_siguiente">Dot %1$d saved. Touch dot %2$d.</string>
+	<string name="braille_calibrar_cerca">Too close to another dot. Touch dot %1$d again.</string>
+	<string name="braille_calibrar_un_dedo">With a single finger and without sliding. Touch dot %1$d.</string>
+	<string name="braille_calibrar_hecho">Calibration saved. You can type now.</string>
+	<string name="braille_calibrar_cancelado">Calibration cancelled</string>
+	<string name="braille_calibracion_quitada">Calibration removed: dots go by position again</string>
+
+	<!-- Keyboard actions -->
+	<string name="braille_accion_ninguna">Nothing (what the one-finger gesture does)</string>
+	<string name="braille_accion_borrar">Delete</string>
+	<string name="braille_accion_borrar_palabra">Delete the word</string>
+	<string name="braille_accion_espacio">Space</string>
+	<string name="braille_accion_intro">Enter</string>
+	<string name="braille_accion_cambiar_teclado">Switch keyboard</string>
+	<string name="braille_accion_bloquear_orientacion">Lock orientation</string>
+	<string name="braille_accion_menu">Keyboard menu</string>
+	<string name="braille_accion_dictado">Dictate</string>
+	<string name="braille_accion_emojis">Emoji</string>
+	<string name="braille_accion_portapapeles">Clipboard</string>
+	<string name="braille_accion_sugerencias">Mention suggestions</string>
+	<string name="braille_accion_leer_campo">Read what is written</string>
+	<string name="braille_accion_calibrar">Calibrate the dots</string>
+	<string name="braille_accion_quitar_calibracion">Remove the calibration</string>
+
+	<!-- Gesture names -->
+	<string name="braille_dir_izquierda">left</string>
+	<string name="braille_dir_derecha">right</string>
+	<string name="braille_dir_arriba">up</string>
+	<string name="braille_dir_abajo">down</string>
+	<string name="braille_gesto_punto">From dot %1$d %2$s</string>
+	<plurals name="braille_gesto_dedos">
+		<item quantity="one">One finger %2$s</item>
+		<item quantity="other">%1$d fingers %2$s</item>
+	</plurals>
+
+	<!-- Keyboard lists: menu, emoji, clipboard and suggestions -->
+	<string name="braille_lista_abierta">%1$s</string>
+	<string name="braille_lista_grupo">%1$s, %2$d</string>
+	<string name="braille_lista_elemento">%1$s, %2$d of %3$d</string>
+	<string name="braille_lista_ayuda">One finger sideways to move, two fingers down to choose, two up to leave</string>
+	<string name="braille_lista_cerrada">Typing</string>
+	<string name="braille_lista_vacia">%1$s: there is nothing</string>
+	<string name="braille_lista_un_grupo">This list has no groups</string>
+	<string name="braille_lista_elige_antes">First pick one with one finger to the right</string>
+	<string name="braille_lista_sin_favoritos">This list has no favourites</string>
+	<string name="braille_favoritos">Favourites</string>
+	<string name="braille_favorito_puesto">Added to favourites</string>
+	<string name="braille_favorito_quitado">Removed from favourites</string>
+	<string name="braille_escrito">%1$s typed</string>
+	<string name="braille_pegado">Pasted: %1$s</string>
+	<string name="braille_portapapeles_general">Copied items</string>
+	<string name="braille_portapapeles_sin_tiresias">The keyboard clipboard needs Tiresias to be on</string>
+	<string name="braille_sin_sugerencias">No mention suggestions</string>
+	<string name="braille_sugerencia_elegida">%1$s chosen</string>
+	<string name="braille_sugerencia_no">That suggestion is no longer in the list</string>
+	<plurals name="braille_hay_sugerencias">
+		<item quantity="one">One mention suggestion: one finger down to choose it</item>
+		<item quantity="other">%1$d mention suggestions: one finger down to choose them</item>
+	</plurals>
+	<string name="braille_nada_que_borrar">Nothing to delete</string>
+	<string name="braille_campo_vacio">The field is empty</string>
+	<string name="braille_dictado_sin_tiresias">Keyboard dictation needs Tiresias to be on</string>
+
+	<!-- Emoji categories -->
+	<string name="emoji_caras">Faces</string>
+	<string name="emoji_gestos">Hands and gestures</string>
+	<string name="emoji_personas">People</string>
+	<string name="emoji_corazones">Hearts</string>
+	<string name="emoji_animales">Animals and plants</string>
+	<string name="emoji_comida">Food and drink</string>
+	<string name="emoji_actividades">Activities and celebrations</string>
+	<string name="emoji_viajes">Travel and places</string>
+	<string name="emoji_objetos">Objects</string>
+	<string name="emoji_simbolos">Symbols</string>
+	<string name="emoji_banderas">Flags</string>
+
+	<!-- Settings -->
+	<string name="aj_braille_mayuscula_auto">Automatic capitals</string>
+	<string name="aj_braille_mayuscula_auto_res">When you start typing and after a full stop, the first letter in capitals, if the field asks for it (email and password fields do not)</string>
+	<string name="aj_braille_calibracion">Dot calibration</string>
+	<string name="aj_braille_calibracion_si">Calibrated: each finger is the nearest of the dots you touched. Tap to remove it.</string>
+	<string name="aj_braille_calibracion_no">Not calibrated: dots go by position. To calibrate, open the braille keyboard, slide one finger up (keyboard menu) and choose “Calibrate the dots”.</string>
+	<string name="aj_braille_calibracion_quitar">Remove the calibration? Dots will go by position again.</string>
+	<string name="aj_braille_calibracion_quitar_si">Remove</string>
+	<string name="aj_braille_gestos">Braille keyboard gestures</string>
+	<string name="aj_braille_gestos_res">What each one, two or three finger slide does, and from each dot</string>
+	<string name="aj_braille_sonar_teclas">Typing sounds</string>
+	<string name="aj_braille_sonar_teclas_res">A different sound when typing a space, deleting and with Enter</string>
+	<string name="aj_braille_estilo_sonidos">Braille keyboard sounds</string>
+	<string-array name="braille_estilo_nombres">
+		<item>Android ones (silent if touch sounds are off)</item>
+		<item>The Tiresias theme, at the reader volume</item>
+	</string-array>
+	<string name="aj_braille_volumen_sonidos">Braille keyboard sound volume</string>
+	<string name="aj_dictado_sin_censura">Dictation without masking swear words</string>
+	<string name="aj_dictado_sin_censura_res">Asks the system speech recogniser to write offensive words as they are. Only Google’s understands it; Vosk masks nothing.</string>
+
+	<!-- Braille keyboard gestures screen -->
+	<string name="gestos_braille_titulo">Braille keyboard gestures</string>
+	<string name="gestos_braille_explicacion">Each row is a gesture and what it does. Tap one to change it. Dot gestures start with the finger on that dot; if they have nothing, they do what the one-finger gesture in that direction does. In the keyboard menus and lists the gestures are always the same: one finger sideways, move; one finger up or down, change group; two fingers down, choose; two up, leave; two to the right, favourite.</string>
+	<string name="gestos_braille_fila">%1$s: %2$s</string>
+	<string name="gestos_braille_cabecera_dedos">One, two and three finger gestures</string>
+	<string name="gestos_braille_cabecera_puntos">Dot gestures</string>
+	<string name="gestos_braille_restablecer">Back to the factory gestures</string>
+	<string name="gestos_braille_restablecer_pregunta">Go back to the factory braille keyboard gestures?</string>
+	<string name="gestos_braille_restablecidos">Factory gestures set</string>
+	<string name="gestos_braille_cambiado">%1$s: now %2$s</string>
+</resources>

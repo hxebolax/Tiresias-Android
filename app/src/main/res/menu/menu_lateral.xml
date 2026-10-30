@@ -12,6 +12,8 @@
 		<item android:id="@+id/lateral_etiquetas" android:icon="@drawable/ic_manual" android:title="@string/ui_etiquetas" />
 		<item android:id="@+id/lateral_perfiles" android:icon="@drawable/ic_ajustes" android:title="@string/ui_perfiles" />
 		<item android:id="@+id/lateral_complementos" android:icon="@drawable/ic_asistente" android:title="@string/ui_complementos" />
+		<item android:id="@+id/lateral_ayuda_remota" android:icon="@drawable/ic_asistente" android:title="@string/accion_ayuda_remota" />
+		<item android:id="@+id/lateral_control_pc" android:icon="@drawable/ic_asistente" android:title="@string/accion_control_pc" />
 		<item android:id="@+id/lateral_tutorial" android:icon="@drawable/ic_asistente" android:title="@string/ui_tutorial" />
 	</group>
 	<group android:id="@+id/grupo_general">

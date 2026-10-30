@@ -133,7 +133,7 @@ exit /b %errorlevel%
 
 rem ---------------------------------------------------------------------------
 :entorno
-if exist "%JAVA_HOME%\bin\java.exe" if exist "%GRADLE%" if exist "%ANDROID_HOME%\platforms\android-37.0" if exist "%ANDROID_HOME%\ndk\29.0.14206865" exit /b 0
+if exist "%JAVA_HOME%\bin\java.exe" if exist "%GRADLE%" if exist "%ANDROID_HOME%\platforms\android-37.1" if exist "%ANDROID_HOME%\ndk\29.0.14206865" exit /b 0
 echo.
 echo [Entorno] Falta el entorno de compilacion. Se descargara en la carpeta "entorno":
 echo           JDK 17, Android SDK con NDK y CMake, Gradle y los emuladores (unos 10 GB).

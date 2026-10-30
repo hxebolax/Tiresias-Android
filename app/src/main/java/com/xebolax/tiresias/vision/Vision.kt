@@ -310,11 +310,17 @@ class Vision(private val lector: Lector, private val ventanas: Ventanas) {
 						return@execute
 					}
 					val respuesta = AsistenteIA.preguntar(servicio, proveedor, listOf(AsistenteIA.Mensaje(true, pregunta)), archivo)
-					archivo.delete()
+					// La imagen se queda solo mientras está abierta la respuesta, por si se quiere compartir (Can Talk)
+					val paraCompartir = File(servicio.cacheDir, "compartir/descripcion.jpg").apply { parentFile?.mkdirs(); delete() }
+					if (!archivo.renameTo(paraCompartir)) archivo.delete()
 					lector.manejador.post {
 						ventanas.mensaje(t.getString(titulo), respuesta, alCerrar = {
 							previo?.let { lector.manejador.postDelayed({ if (Nodos.vivo(it)) lector.enfocar(it, null) }, 250) }
-						}, alCopiar = { lector.edicion.portapapeles(it) })
+							// Tras compartir, la app que la recibe ya la ha leído: se borra un poco después
+							lector.manejador.postDelayed({ paraCompartir.delete() }, BORRAR_COMPARTIDA_MS)
+						}, alCopiar = { lector.edicion.portapapeles(it) }, alCompartir = { texto ->
+							elegirQueCompartir(texto, paraCompartir.takeIf { it.isFile })
+						})
 					}
 				} catch (e: AsistenteIA.ErrorIA) {
 					lector.manejador.post { lector.decir(e.message.orEmpty()) }
@@ -327,6 +333,40 @@ class Vision(private val lector: Lector, private val ventanas: Ventanas) {
 			}
 		}
 		return true
+	}
+
+	/** Compartir la descripción, la imagen o las dos (Can Talk), con la hoja de compartir de Android. */
+	private fun elegirQueCompartir(texto: String, imagen: File?) {
+		if (imagen == null) {
+			compartir(texto, null)
+			return
+		}
+		val opciones = listOf(t.getString(R.string.compartir_las_dos), t.getString(R.string.compartir_descripcion), t.getString(R.string.compartir_imagen))
+		ventanas.lista(t.getString(R.string.compartir), opciones) { i ->
+			when (i) {
+				0 -> compartir(texto, imagen)
+				1 -> compartir(texto, null)
+				else -> compartir(null, imagen)
+			}
+		}
+	}
+
+	private fun compartir(texto: String?, imagen: File?) {
+		try {
+			val i = android.content.Intent(android.content.Intent.ACTION_SEND)
+			if (imagen != null) {
+				val uri = androidx.core.content.FileProvider.getUriForFile(servicio, servicio.packageName + ".archivos", imagen)
+				i.type = "image/jpeg"
+				i.putExtra(android.content.Intent.EXTRA_STREAM, uri)
+				i.addFlags(android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION)
+			} else i.type = "text/plain"
+			if (texto != null) i.putExtra(android.content.Intent.EXTRA_TEXT, texto)
+			val elegir = android.content.Intent.createChooser(i, t.getString(R.string.compartir)).addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
+			servicio.startActivity(elegir)
+		} catch (e: Exception) {
+			Registro.e(ETIQUETA, "No se pudo compartir la descripción", e)
+			lector.decir(R.string.compartir_no)
+		}
 	}
 
 	/** La primera vez que se usa un servicio de Internet, se dice qué se envía y a quién, y se pide permiso. */
@@ -491,6 +531,30 @@ class Vision(private val lector: Lector, private val ventanas: Ventanas) {
 			lector.decir(R.string.traducir_nada)
 			return false
 		}
+		return traducirCon(texto) { respuesta ->
+			ventanas.mensaje(t.getString(R.string.traducir_titulo), respuesta, alCerrar = {
+				lector.manejador.postDelayed({ if (Nodos.vivo(f)) lector.enfocar(f, null) }, 250)
+			}, alCopiar = { lector.edicion.portapapeles(it) })
+		}
+	}
+
+	/**
+	 * Traduce [texto], lo último que ha dicho Tiresias (Can Talk), al idioma de
+	 * Tiresias con la IA elegida, y lo dice con la voz de ese idioma.
+	 */
+	fun traducirDicho(texto: String?): Boolean {
+		if (texto.isNullOrBlank()) {
+			lector.decir(R.string.traducir_nada)
+			return false
+		}
+		val idioma = com.xebolax.tiresias.base.Idioma.efectivo(servicio)
+		return traducirCon(texto.trim()) { respuesta ->
+			lector.voz.decir(com.xebolax.tiresias.voz.Enunciado(respuesta, Modo.INTERRUMPIR, com.xebolax.tiresias.voz.Tipo.IA, idioma = idioma))
+		}
+	}
+
+	/** Pide la traducción de [texto] a la IA (con su confirmación) y da la respuesta a [alResponder] en el hilo del lector. */
+	private fun traducirCon(texto: String, alResponder: (String) -> Unit): Boolean {
 		val proveedor = AsistenteIA.elegir(servicio) ?: run {
 			lector.decir(R.string.ia_sin_configurar)
 			return false
@@ -506,11 +570,7 @@ class Vision(private val lector: Lector, private val ventanas: Ventanas) {
 			trabajo.execute {
 				try {
 					val respuesta = AsistenteIA.preguntar(servicio, proveedor, listOf(AsistenteIA.Mensaje(true, t.getString(R.string.traducir_pedir, idioma, texto))), null)
-					lector.manejador.post {
-						ventanas.mensaje(t.getString(R.string.traducir_titulo), respuesta.trim(), alCerrar = {
-							lector.manejador.postDelayed({ if (Nodos.vivo(f)) lector.enfocar(f, null) }, 250)
-						}, alCopiar = { lector.edicion.portapapeles(it) })
-					}
+					lector.manejador.post { alResponder(respuesta.trim()) }
 				} catch (e: AsistenteIA.ErrorIA) {
 					lector.manejador.post { lector.decir(e.message.orEmpty()) }
 				} catch (e: Exception) {
@@ -676,6 +736,8 @@ class Vision(private val lector: Lector, private val ventanas: Ventanas) {
 		private const val ETIQUETA = "Vision"
 		/** Peticiones a la nube como mucho en una descripción continua (cada una cuesta dinero al usuario). */
 		private const val MAXIMO_NUBE = 120
+		/** Lo que se espera para borrar la imagen compartida, para que la app que la recibe la lea antes. */
+		private const val BORRAR_COMPARTIDA_MS = 10 * 60_000L
 		/** Lado de la captura en la descripción continua: más pequeña, más rápida. */
 		private const val LADO_CONTINUA = 1024
 		private const val MAXIMO_ELEMENTOS = 80

@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 1.0.7: ayuda remota entre dos móviles, control de un PC con NVDA, superficies braille, voz en llamadas, Bluetooth y compartir. -->
+<resources>
+	<!-- Ayuda remota: la persona ayudada -->
+	<string name="ayuda_canal">Ayuda remota</string>
+	<string name="ayuda_explicacion">Para personas de total confianza. Quien te ayuda oye lo que dice tu móvil y lo maneja desde el suyo, con Tiresias: puede ajustar el móvil, configurar Tiresias o recuperar una app. Tú lo oyes todo y lo cortas cuando quieras.</string>
+	<string name="ayuda_pedir_titulo">Pedir ayuda</string>
+	<string name="ayuda_pedir_a">Pedir ayuda a %1$s</string>
+	<string name="ayuda_invitar">Invitar a alguien a ayudarme</string>
+	<string name="ayuda_codigo_wifi">Código para la misma wifi</string>
+	<string name="ayuda_codigo_wifi_texto">Si quien te ayuda está en tu misma wifi, díctale este código: %1$s. Lo escribe en su Tiresias, en Ayuda remota, «Escribir el código».</string>
+	<string name="ayuda_compartir_otra_vez">Mandar otra vez la invitación</string>
+	<string name="ayuda_ver_codigo_corto">Ver el código para la misma wifi</string>
+	<string name="ayuda_terminar">Terminar la ayuda</string>
+	<string name="ayuda_preparando">Preparando la ayuda remota</string>
+	<string name="ayuda_no_empieza">No he podido preparar la ayuda. Comprueba que tienes internet.</string>
+	<string name="ayuda_sin_red">No hay internet. Conéctate a una wifi o activa los datos para pedir ayuda.</string>
+	<string name="ayuda_sin_puerto">No he podido preparar la ayuda. Inténtalo otra vez.</string>
+	<string name="ayuda_sin_tiresias">La ayuda remota necesita Tiresias activo en este móvil</string>
+	<string name="ayuda_esperando">Esperando a quien te ayuda</string>
+	<string name="ayuda_mensaje">%1$s te pide ayuda con el móvil desde Tiresias. Si lo tienes instalado, te saldrá un aviso para ayudar con un toque. Si no, comparte este mensaje con Tiresias. Vale %2$d minutos. Código: %3$s</string>
+	<string name="ayuda_compartir_titulo">Mandar la invitación de ayuda</string>
+	<string name="ayuda_compartir_elige">Elige cómo mandar la invitación de ayuda</string>
+	<string name="ayuda_no_enviada">No se ha podido mandar la invitación de ayuda</string>
+	<string name="ayuda_enviando_whatsapp">Mandando la petición de ayuda por WhatsApp</string>
+	<string name="ayuda_enviada">Petición de ayuda mandada a %1$s. Espera a que entre.</string>
+	<string name="ayuda_enviada_sms">Petición de ayuda mandada a %1$s por SMS. Espera a que entre.</string>
+	<string name="ayuda_pulsa_enviar">El mensaje está escrito: pulsa Enviar para mandar la petición de ayuda</string>
+	<string name="ayuda_pregunta">%1$s quiere ayudarte desde su móvil. ¿Le dejas?</string>
+	<string name="ayuda_pregunta_si">Dejar que me ayude</string>
+	<string name="ayuda_pregunta_no">No dejar</string>
+	<string name="ayuda_alguien">Alguien</string>
+	<string name="ayuda_empieza">%1$s te está ayudando desde su móvil. Oye lo que dice tu móvil y puede manejarlo. Para terminar, mantén pulsadas las dos teclas de volumen.</string>
+	<string name="ayuda_vuelve">%1$s ha vuelto a conectarse</string>
+	<string name="ayuda_cortada">Se ha cortado la conexión con %1$s. Si no vuelve en dos minutos, la ayuda termina sola.</string>
+	<string name="ayuda_recordatorio">%1$s te está ayudando desde su móvil</string>
+	<string name="ayuda_casi_fin">Quedan dos minutos de ayuda</string>
+	<string name="ayuda_fin">Ha terminado la ayuda de %1$s. Ya nadie maneja tu móvil.</string>
+	<string name="ayuda_fin_tiempo">Se ha acabado el tiempo de la ayuda de %1$s. Ya nadie maneja tu móvil.</string>
+	<string name="ayuda_fin_ayudante">%1$s ha terminado de ayudarte. Ya nadie maneja tu móvil.</string>
+	<string name="ayuda_ya_no_se_espera">Ya no se espera ayuda</string>
+	<string name="ayuda_no_hay">No hay ninguna ayuda remota en marcha</string>
+	<string name="ayuda_notificacion_titulo">Ayuda remota</string>
+	<string name="ayuda_notificacion_texto">%1$s te está ayudando</string>
+	<string name="ayuda_dato_protegido">dato protegido</string>
+	<string name="ayuda_bloqueado">El móvil está bloqueado: la persona tiene que desbloquearlo</string>
+	<string name="ayuda_pantalla_apagada">Se ha apagado la pantalla del otro móvil</string>
+	<string name="ayuda_pantalla_encendida">Se ha encendido la pantalla del otro móvil</string>
+	<string name="ayuda_no_permitida">Eso no se puede hacer desde la ayuda remota</string>
+	<string name="ayuda_sin_campo">No hay un campo de texto elegido en el otro móvil</string>
+	<string name="ayuda_escrito">Escrito</string>
+	<string name="ayuda_no_escrito">No se ha podido escribir</string>
+	<string name="ayuda_elemento_ya_no">Ese elemento ya no está en la pantalla: pide la lista otra vez</string>
+	<string name="ayuda_no_abierto">No se ha podido abrir</string>
+
+	<!-- Ayuda remota: estado -->
+	<string name="ayuda_estado_nada">Sin ayuda remota</string>
+	<string name="ayuda_estado_esperando">Esperando a quien te ayuda. Puede que solo llegue si estáis en la misma wifi.</string>
+	<string name="ayuda_estado_esperando_fuera">Esperando a quien te ayuda, desde donde esté</string>
+	<string name="ayuda_estado_ayudando_te">%1$s te está ayudando</string>
+	<string name="ayuda_estado_ayudas">Estás ayudando a %1$s</string>
+	<string name="ayuda_estado_conectando">Conectando con el otro móvil</string>
+
+	<!-- Ayuda remota: ayudar a alguien -->
+	<string name="ayuda_ayudar_titulo">Ayudar a alguien</string>
+	<string name="ayuda_ayudar_explicacion">Cuando alguien te pide ayuda, te llega su invitación por WhatsApp o SMS y Tiresias te avisa con una notificación para ayudar con un toque. También puedes compartir el mensaje con Tiresias, copiarlo y pegarlo aquí, o escribir su código.</string>
+	<string name="ayuda_pegar">Pegar la invitación</string>
+	<string name="ayuda_escribir_codigo">Escribir el código</string>
+	<string name="ayuda_escribir_codigo_pista">El código TIR1 o las 8 cifras de la misma wifi</string>
+	<string name="ayuda_codigo_mal">Ese código no es válido</string>
+	<string name="ayuda_sin_invitacion">No hay una invitación de ayuda de Tiresias en lo copiado</string>
+	<string name="ayuda_invitacion_caducada">La invitación ha caducado: pide a la persona que la mande otra vez</string>
+	<string name="ayuda_volver_a_ayudar">Volver a la ayuda a %1$s</string>
+	<string name="ayuda_peticion_titulo">%1$s te pide ayuda</string>
+	<string name="ayuda_peticion_texto">Toca para ayudar con Tiresias</string>
+	<string name="ayuda_peticion_ayudar">Ayudar</string>
+
+	<!-- Ayuda remota: ajustes -->
+	<string name="ayuda_ajustes_titulo">Ajustes de la ayuda remota</string>
+	<string name="ayuda_contacto">Contacto de ayuda: %1$s</string>
+	<string name="ayuda_metodo">Mandar la petición por: %1$s</string>
+	<string name="ayuda_metodo_titulo">Mandar la petición de ayuda por</string>
+	<string name="ayuda_metodo_whatsapp">WhatsApp (Tiresias pulsa Enviar)</string>
+	<string name="ayuda_metodo_sms">SMS (sale solo con el permiso de SMS)</string>
+	<string name="ayuda_metodo_compartir">Elegirlo cada vez</string>
+	<string name="ayuda_nombre_boton">Nombre de este móvil: %1$s</string>
+	<string name="ayuda_nombre_ninguno">el del aparato</string>
+	<string name="ayuda_nombre_titulo">Nombre de este móvil en la ayuda</string>
+	<string name="ayuda_nombre_pista">Cómo te llama quien te ayuda, por ejemplo Mamá</string>
+	<string name="ayuda_preguntar">Preguntarme también antes de dejar entrar a las personas de confianza</string>
+	<string name="ayuda_preguntar_res">Si lo quitas, te avisará y tendrás unos segundos para cortar. A las demás personas siempre se les pregunta.</string>
+	<string name="ayuda_router">Pedir al router que deje entrar desde fuera</string>
+	<string name="ayuda_router_res">Pide al router de casa que deje pasar a quien te ayuda (UPnP o NAT-PMP) mientras dura la ayuda. Si el router no lo deja, no pasa nada: se prueba por otros caminos.</string>
+	<string name="ayuda_minutos_boton">Lo que dura como mucho: %1$d minutos</string>
+	<string name="ayuda_minutos_titulo">Lo que dura como mucho la ayuda</string>
+	<plurals name="ayuda_minutos">
+		<item quantity="one">%1$d minuto</item>
+		<item quantity="other">%1$d minutos</item>
+	</plurals>
+	<string name="ayuda_aviso_boton">Recordar que te ayudan cada %1$d minutos</string>
+	<string name="ayuda_aviso_nunca">Recordar que te ayudan: nunca</string>
+	<string name="ayuda_aviso_titulo">Recordar que te están ayudando</string>
+	<string name="ayuda_aviso_no">Nunca</string>
+	<string name="ayuda_permiso_red">Permiso de dispositivos cercanos (red local), para la misma wifi</string>
+	<string name="ayuda_permiso_sms">Permiso para mandar SMS solo</string>
+	<string name="ayuda_permiso_avisos">Permiso de notificaciones, para el aviso de la ayuda</string>
+	<string name="ayuda_permiso_si">Permiso concedido</string>
+	<string name="ayuda_permiso_no">Sin ese permiso, esa parte no funciona</string>
+	<string name="ayuda_limites_titulo">Lo que conviene saber</string>
+	<string name="ayuda_limites">Los móviles prueban primero a verse directamente. Si no pueden, por ejemplo con datos móviles en los dos, se enlazan por la red Tor, sin abrir nada y sin un servidor nuestro: tarda un minuto más en conectar y cada orden casi un segundo. Todo va cifrado de punta a punta. Las apps de banco y los códigos no pasan por la ayuda.</string>
+
+	<!-- Ayudar: la pantalla de quien ayuda -->
+	<string name="ayudar_titulo">Ayudar</string>
+	<string name="ayudar_compartir">Ayudar con Tiresias</string>
+	<string name="ayudar_antes_termina">Termina antes tu propia petición de ayuda</string>
+	<string name="ayudar_conectando">Conectando con %1$s</string>
+	<string name="ayudar_conectada">Ayudando a %1$s. Comprobación: %2$s</string>
+	<string name="ayudar_cortada">Se ha cortado la conexión: volviendo a probar</string>
+	<string name="ayudar_no_llega">No se ha podido llegar al otro móvil. Pídele que vuelva a pedir ayuda, o llámale por teléfono.</string>
+	<string name="ayudar_rechazada">La persona no ha dejado entrar. Si no te tiene en su lista de confianza, tiene que permitirlo antes en su Tiresias.</string>
+	<string name="ayudar_terminada_otro">La otra persona ha terminado la ayuda</string>
+	<string name="ayudar_terminada">La ayuda ha terminado</string>
+	<string name="ayudar_con_gestos">Manejar el otro móvil con mis gestos</string>
+	<string name="ayudar_con_gestos_res">Tus gestos de Tiresias van al otro móvil. Para volver al tuyo, la acción «Manejar el otro móvil con mis gestos» o las dos teclas de volumen.</string>
+	<string name="ayudar_moverse">Moverse por su pantalla</string>
+	<string name="ayudar_anterior">Elemento anterior</string>
+	<string name="ayudar_siguiente">Elemento siguiente</string>
+	<string name="ayudar_activar">Activar</string>
+	<string name="ayudar_mantener">Mantener pulsado</string>
+	<string name="ayudar_repetir">Repetir lo último</string>
+	<string name="ayudar_donde">Dónde está</string>
+	<string name="ayudar_leer">Leer su pantalla desde arriba</string>
+	<string name="ayudar_elementos">Lista de sus elementos</string>
+	<plurals name="ayudar_elementos_titulo">
+		<item quantity="one">Un elemento</item>
+		<item quantity="other">%1$d elementos</item>
+	</plurals>
+	<string name="ayudar_ir_a">Ir a él</string>
+	<string name="ayudar_sin_elementos">No hay elementos en su pantalla</string>
+	<string name="ayudar_pidiendo">Pidiendo al otro móvil</string>
+	<string name="ayudar_sistema">Su sistema</string>
+	<string name="ayudar_atras">Atrás</string>
+	<string name="ayudar_inicio">Inicio</string>
+	<string name="ayudar_notificaciones">Sus notificaciones</string>
+	<string name="ayudar_recientes">Sus apps recientes</string>
+	<string name="ayudar_desplazar_abajo">Desplazar hacia abajo</string>
+	<string name="ayudar_desplazar_arriba">Desplazar hacia arriba</string>
+	<string name="ayudar_hacer">Hacer en su móvil</string>
+	<string name="ayudar_escribir">Escribir texto en su campo</string>
+	<string name="ayudar_escribir_pista">Se escribe donde tenga el cursor</string>
+	<string name="ayudar_abrir_app">Abrir una de sus apps</string>
+	<string name="ayudar_info_app">Información de una de sus apps</string>
+	<string name="ayudar_sin_apps">No se han recibido sus apps</string>
+	<string name="ayudar_ajustes_sistema">Abrir sus ajustes del móvil</string>
+	<string name="ayudar_ajustes_tiresias">Abrir su Tiresias</string>
+	<string name="ayudar_accesibilidad">Abrir sus ajustes de accesibilidad</string>
+	<string name="ayudar_wifi">Abrir sus ajustes de wifi</string>
+	<string name="ayudar_tienda">Buscar una app en su tienda</string>
+	<string name="ayudar_tienda_pista">El nombre de la app</string>
+	<string name="ayudar_enlace">Abrir un enlace en su móvil</string>
+	<string name="ayudar_enlace_pista">https://… o market://details?id=…</string>
+	<string name="ayudar_todas">Todas las acciones de Tiresias</string>
+	<string name="ayudar_esta_ayuda">Esta ayuda</string>
+	<string name="ayudar_silenciar">Callar la voz del otro móvil</string>
+	<string name="ayudar_voz_otra_vez">Oír otra vez la voz del otro móvil</string>
+	<string name="ayudar_silenciada">Voz del otro móvil callada</string>
+	<string name="ayudar_con_voz">Se oye otra vez la voz del otro móvil</string>
+	<string name="ayudar_terminar_pregunta">¿Terminar la ayuda a %1$s?</string>
+	<string name="ayudar_sin_conexion">Ahora no hay conexión con el otro móvil</string>
+	<string name="ayuda_no_ayudando">No estás ayudando a nadie</string>
+	<string name="ayuda_controlando_si">Tus gestos van al móvil de %1$s</string>
+	<string name="ayuda_controlando_no">Tus gestos vuelven a tu móvil</string>
+
+	<!-- Control de un PC con NVDA -->
+	<string name="nvda_explicacion">Maneja un PC con NVDA o con Tiresias para Windows desde el móvil, con la superficie braille: oyes el PC con la voz de Tiresias. En el PC, en NVDA, Acceso remoto (o el complemento NVDA Remote), «Permitir que este equipo sea controlado», con el mismo servidor y la misma clave. Va cifrado hasta el servidor, pero el servidor puede ver lo que pasa: usa uno de confianza o la conexión directa a tu PC.</string>
+	<string name="nvda_estado_nada">Sin conectar a ningún PC</string>
+	<string name="nvda_estado_conectando">Conectando a %1$s</string>
+	<string name="nvda_estado_conectado">Conectado al PC por %1$s</string>
+	<string name="nvda_estado_sin_pc">En el canal, pero el PC no está: en NVDA, que se deje controlar con la misma clave</string>
+	<string name="nvda_equipos">Equipos guardados</string>
+	<string name="nvda_sin_equipos">No hay equipos guardados</string>
+	<string name="nvda_equipo_fila">%1$s, en %2$s</string>
+	<string name="nvda_nuevo">Otro PC</string>
+	<string name="nvda_conectar_nuevo">Conectar a un PC</string>
+	<string name="nvda_pegar_enlace">Pegar un enlace nvdaremote</string>
+	<string name="nvda_sin_enlace">No hay un enlace nvdaremote en lo copiado</string>
+	<string name="nvda_conectar">Conectar</string>
+	<string name="nvda_quitar_equipo">Quitar el equipo</string>
+	<string name="nvda_quitar_pregunta">¿Quitar %1$s de los equipos guardados?</string>
+	<string name="nvda_servidor">Servidor</string>
+	<string name="nvda_servidor_pista">nvdaremote.com, un servidor propio o la IP del PC (con :puerto si no es 6837)</string>
+	<string name="nvda_clave">Clave</string>
+	<string name="nvda_clave_pista">La misma que en NVDA</string>
+	<string name="nvda_poner_superficie">Poner la superficie braille</string>
+	<string name="nvda_enviar_texto">Escribir un texto en el PC</string>
+	<string name="nvda_enviar_texto_pista">Se pega donde esté el cursor del PC</string>
+	<string name="nvda_pegar_copiado">Pegar en el PC lo copiado en el móvil</string>
+	<string name="nvda_guardar">Guardar este equipo</string>
+	<string name="nvda_nombre_equipo">Nombre del equipo</string>
+	<string name="nvda_nombre_equipo_pista">Por ejemplo, el portátil</string>
+	<string name="nvda_guardar_clave_pregunta">¿Guardar también la clave? Va cifrada en el móvil.</string>
+	<string name="nvda_guardar_clave">Guardar la clave</string>
+	<string name="nvda_guardado">Equipo guardado</string>
+	<string name="nvda_sin_tiresias">La superficie braille necesita Tiresias activo</string>
+	<string name="nvda_certificado">No se puede comprobar el certificado del servidor</string>
+	<string name="nvda_certificado_titulo">¿Te fías de este servidor?</string>
+	<string name="nvda_certificado_texto">El certificado de %1$s no se puede comprobar (un servidor propio o la conexión directa a un PC). Su huella es %2$s. Fíate solo si es el tuyo.</string>
+	<string name="nvda_fiarse_siempre">Fiarme siempre</string>
+	<string name="nvda_fiarse_una_vez">Solo esta vez</string>
+	<string name="nvda_cortada">Se ha cortado la conexión con el PC</string>
+	<string name="nvda_varios">Hay más de un PC con esa clave: no se sabría a cuál se habla</string>
+	<string name="nvda_error">El servidor dice: %1$s</string>
+	<string name="nvda_version">El servidor usa otra versión del acceso remoto</string>
+	<string name="nvda_portapapeles">El PC ha mandado texto al portapapeles del móvil</string>
+	<string name="nvda_superficie_aviso">Superficie braille del PC, modo control: las letras son teclas; los puntos 6, 5, 3 y 2 sueltos preparan Control, Alt, Mayúsculas y NVDA; un dedo, las flechas; dos dedos abajo, Intro; arriba, Escape. Tres dedos arriba cambian al teclado braille; abajo, el menú. Las dos teclas de volumen quitan la superficie.</string>
+	<string name="nvda_modo_control">Modo control</string>
+	<string name="nvda_modo_teclado">Modo teclado braille</string>
+	<string name="nvda_control">Control</string>
+	<string name="nvda_alt">Alt</string>
+	<string name="nvda_mayusculas">Mayúsculas</string>
+	<string name="nvda_tecla_nvda">Tecla NVDA</string>
+	<string name="nvda_sin_tecla">Esa combinación no es una tecla</string>
+	<string name="nvda_menu">Menú del PC</string>
+	<string name="nvda_menu_windows">Tecla Windows</string>
+	<string name="nvda_menu_aplicaciones">Tecla de aplicaciones (menú contextual)</string>
+	<string name="nvda_menu_inicio">Inicio</string>
+	<string name="nvda_menu_fin">Fin</string>
+	<string name="nvda_menu_repag">Retroceder página</string>
+	<string name="nvda_menu_avpag">Avanzar página</string>
+	<string name="nvda_menu_suprimir">Suprimir</string>
+	<string name="nvda_menu_f4">Alt+F4, cerrar la ventana</string>
+	<string name="nvda_menu_escritorio">Windows+D, el escritorio</string>
+	<string name="nvda_menu_sas">Control+Alt+Supr</string>
+	<string name="nvda_menu_pegar">Pegar en el PC lo copiado en el móvil</string>
+	<string name="nvda_menu_voz_no">Callar la voz del PC en el móvil</string>
+	<string name="nvda_menu_voz_si">Oír otra vez la voz del PC</string>
+	<string name="nvda_voz_callada">Voz del PC callada</string>
+	<string name="nvda_voz_oida">Se oye otra vez la voz del PC</string>
+	<string name="nvda_menu_desconectar">Desconectar del PC</string>
+	<string name="nvda_menu_quitar">Quitar la superficie braille</string>
+	<string name="nvda_portapapeles_vacio">Desde aquí no se puede leer lo copiado: usa «Pegar en el PC lo copiado» en la pantalla de Controlar un PC</string>
+	<string name="aj_nvda_al_bloquear">Al bloquear el móvil con un PC conectado</string>
+	<string-array name="nvda_al_bloquear_nombres">
+		<item>Desconectar</item>
+		<item>Callar la voz del PC</item>
+		<item>Seguir conectado</item>
+	</string-array>
+	<string-array name="nvda_al_bloquear_valores" translatable="false">
+		<item>desconectar</item>
+		<item>silenciar</item>
+		<item>seguir</item>
+	</string-array>
+
+	<!-- Superficies braille encima de todo -->
+	<string name="superficie_no_disponible">La superficie braille necesita Android 11 o posterior</string>
+	<string name="superficie_cerrada">Superficie braille quitada</string>
+	<string name="navegacion_braille_aviso">Navegación web braille. Escribe una letra para ir al siguiente: h encabezado, k enlace, b botón, e campo, f formulario, x casilla, l lista, t tabla, d región, g imagen; con mayúscula, al anterior. Un dedo a los lados, el siguiente o el anterior; dos dedos abajo, activar; dos arriba, salir.</string>
+	<string name="navegacion_braille_anterior">al anterior</string>
+	<string name="navegacion_braille_sin_uso">%1$s no lleva a nada</string>
+	<string name="navegacion_braille_ayuda">Una letra salta a su tipo; un dedo a los lados se mueve; dos dedos abajo activan; dos arriba salen</string>
+	<string name="busqueda_braille_aviso">Búsqueda braille entre los elementos de la pantalla. Escribe parte de un nombre; un dedo abajo y arriba recorren lo encontrado; tres dedos a un lado buscan entre las apps; dos dedos abajo lo abren; dos arriba, salir.</string>
+	<string name="busqueda_braille_apps">Buscar entre las apps</string>
+	<string name="busqueda_braille_elementos">Buscar entre los elementos de la pantalla</string>
+	<string name="busqueda_braille_nada">Nada con %1$s</string>
+	<plurals name="busqueda_braille_resultados">
+		<item quantity="one">una coincidencia</item>
+		<item quantity="other">%1$d coincidencias</item>
+	</plurals>
+	<string name="busqueda_braille_ya_no">Ya no está en la pantalla</string>
+	<string name="busqueda_braille_ayuda">Escribe para buscar; un dedo abajo y arriba recorren; dos dedos abajo abren; dos arriba salen</string>
+
+	<!-- Voz en llamadas y Bluetooth -->
+	<string name="voz_llamadas_volumen">Voz en llamadas, %1$d por ciento</string>
+	<string name="aj_voz_llamadas">Voz en llamadas con su propio volumen</string>
+	<string name="aj_voz_llamadas_res">Durante una llamada, la voz y los sonidos de Tiresias a un porcentaje propio, para que no atruenen al subir la llamada. Con un dedo en la pantalla, las teclas de volumen lo cambian.</string>
+	<string name="aj_volumen_llamadas">Volumen de la voz en llamadas</string>
+	<string name="aj_compensar_llamadas">Compensar el volumen de la llamada (experimental)</string>
+	<string name="aj_compensar_llamadas_res">Con «Voz en llamadas» puesta: si subes o bajas la llamada, la voz se corrige al revés para oírse igual</string>
+	<string name="aj_reglas_bluetooth">Aparatos Bluetooth</string>
+	<string name="aj_reglas_bluetooth_res">Para cada uno, si es un altavoz (la voz se queda en el móvil) o unos auriculares</string>
+	<string name="bt_titulo">Aparatos Bluetooth</string>
+	<string name="bt_explicacion">Con la salida de la voz en «Sistema», si la música suena por un aparato marcado como altavoz, las voces de Tiresias suenan en el móvil y no por toda la habitación. Las demás voces y los sonidos siguen al sistema. En las llamadas no se cambia nada.</string>
+	<string name="bt_permiso">Dar el permiso de dispositivos cercanos para ver los emparejados</string>
+	<string name="bt_ninguno">No hay aparatos Bluetooth emparejados ni conectados</string>
+	<string name="bt_fila">%1$s: %2$s</string>
+	<string name="bt_regla_altavoz">altavoz</string>
+	<string name="bt_regla_auriculares">auriculares</string>
+	<string name="bt_regla_sistema">lo del sistema</string>
+
+	<!-- IA y compartir -->
+	<string name="aj_ia_sin_filtros">Que Gemini no bloquee nada</string>
+	<string name="aj_ia_sin_filtros_res">Pide a Gemini que describa también lo que no es para todos los públicos (fotos, mensajes). Apagado, Gemini puede negarse.</string>
+	<string name="compartir">Compartir</string>
+	<string name="compartir_las_dos">La imagen y la descripción</string>
+	<string name="compartir_descripcion">Solo la descripción</string>
+	<string name="compartir_imagen">Solo la imagen</string>
+	<string name="compartir_no">No se ha podido compartir</string>
+	<!-- 1.0.7: seguridad y mayores -->
+	<string name="ayuda_modo_avion">El móvil está en modo avión. Quítalo para que la ayuda pueda llegar.</string>
+	<string name="ayuda_no_empieza_llamar">No he podido preparar la ayuda. ¿Llamo a %1$s por teléfono?</string>
+	<string name="ayuda_llamar_a">Llamar a %1$s por teléfono</string>
+	<string name="ayuda_quien">%1$s te está ayudando desde su móvil. Para terminar, mantén pulsadas las dos teclas de volumen.</string>
+	<string name="ayuda_oferta_pregunta">%1$s se ofrece a ayudarte con el móvil. ¿Le dejas?</string>
+	<string name="ayuda_oferta_mensaje">Te ofrezco ayuda con el móvil. Si tienes Tiresias, te saldrá un aviso. Código: %1$s</string>
+	<string name="ayuda_va_a_entrar">%1$s va a entrar en tu móvil para ayudarte. Si no quieres, mantén pulsadas las dos teclas de volumen.</string>
+	<string name="ayuda_en_llamada">Durante una llamada no se deja entrar a nadie nuevo. Si alguien te lo está pidiendo por teléfono, cuelga y llama a tu familia.</string>
+	<string name="ayuda_no_en_lista">Alguien que no está en tu lista de confianza ha querido entrar. No le he dejado.</string>
+	<string name="ayuda_pregunta_nueva">%1$s quiere ayudarte desde su móvil. Es la primera vez. Déjale solo si es de tu familia y se lo has pedido tú. ¿Le dejas?</string>
+	<string name="ayuda_confianza_pregunta">¿%1$s es de tu total confianza? Si dices que sí, la próxima vez la reconocerá tu móvil.</string>
+	<string name="ayuda_confianza_si">Sí, es de mi familia</string>
+	<string name="ayuda_confianza_no">Ahora no</string>
+	<string name="ayuda_confianza_hecho">%1$s ya es persona de confianza</string>
+	<string name="ayuda_tu_contacto">tu contacto de ayuda</string>
+	<string name="ayuda_aun_no">%1$s aún no ha entrado. Sigo esperando.</string>
+	<string name="ayuda_pido_a_otro">Se lo pido también a %1$s</string>
+	<string name="ayuda_nadie_entra">%1$s no ha entrado. ¿Qué hago?</string>
+	<string name="ayuda_seguir">Seguir esperando</string>
+	<string name="ayuda_dejarlo">Dejarlo</string>
+	<string name="ayuda_app_protegida">Es una app de banco o de pagos: quien te ayuda ni la oye ni la maneja hasta que salgas de ella.</string>
+	<string name="ayuda_app_protegida_ayudante">Ha abierto una app de banco o de pagos: la ayuda se queda en pausa hasta que salga. Solo puedes llevarle a Inicio.</string>
+	<string name="ayuda_app_protegida_fin">Ha salido de la app de banco: la ayuda sigue</string>
+	<string name="ayuda_te_dice">%1$s te dice: %2$s</string>
+	<string name="ayuda_sin_contacto">No tiene contacto de ayuda puesto: no puede llamar sola</string>
+	<string name="ayuda_historial_linea">%1$s: %2$s, %3$d min</string>
+	<plurals name="ayuda_deshacer">
+		<item quantity="one">Durante la ayuda ha cambiado un ajuste de Tiresias. ¿Lo dejo así?</item>
+		<item quantity="other">Durante la ayuda han cambiado %1$d ajustes de Tiresias. ¿Los dejo así?</item>
+	</plurals>
+	<string name="ayuda_deshacer_no">Dejarlo como está ahora</string>
+	<string name="ayuda_deshacer_si">Volver a como estaba</string>
+	<string name="ayuda_deshecho">Ajustes como estaban</string>
+	<string name="ayuda_no_deshecho">No se ha podido deshacer</string>
+	<string name="ayuda_ficha_movil">%1$s %2$s, Android %3$s, Tiresias %4$s</string>
+	<string name="ayuda_ficha_volumen">Volumen de la voz %1$d por ciento, timbre en %2$d</string>
+	<string name="ayuda_ficha_wifi">Con wifi</string>
+	<string name="ayuda_ficha_datos">Con datos móviles</string>
+	<string name="ayuda_ficha_avion">En modo avión</string>
+	<string name="ayuda_ficha_espacio">%1$d GB libres</string>
+	<string name="ayuda_ficha_no_molestar">Con No molestar puesto</string>
+	<string name="ayuda_confianza_titulo">Personas de confianza</string>
+	<string name="ayuda_confianza_explicacion">Solo ellas pueden ayudarte. La primera se añade en su primera ayuda. Para otra, hay que pedirlo aquí y esperar 24 horas: así nadie te lo puede pedir con prisas por teléfono.</string>
+	<string name="ayuda_quitar_persona">Quitar a %1$s de la lista</string>
+	<string name="ayuda_quitar_pregunta">¿Quitar a %1$s? Ya no podrá ayudarte.</string>
+	<string name="ayuda_quitar">Quitar</string>
+	<string name="ayuda_persona_nueva">Permitir una persona nueva</string>
+	<string name="ayuda_persona_nueva_pregunta">Dentro de 24 horas podrá entrar una persona nueva. Si alguien te lo está pidiendo por teléfono, no lo hagas: cuelga y llama a tu familia. ¿Seguir?</string>
+	<string name="ayuda_persona_nueva_si">Sí, lo he decidido yo</string>
+	<string name="ayuda_persona_nueva_desde">Podrá entrar una persona nueva desde: %1$s</string>
+	<string name="ayuda_persona_nueva_cancelar">No permitir personas nuevas</string>
+	<string name="ayuda_a_quien_ayudo">A quién ayudo</string>
+	<string name="ayuda_ofrecer">Ofrecer ayuda a %1$s</string>
+	<string name="ayuda_dejar_de_ayudar">Dejar de ayudar a %1$s</string>
+	<string name="ayuda_dejar_pregunta">¿Dejar de ayudar a %1$s?</string>
+	<string name="ayuda_historial">Historial de ayudas</string>
+	<string name="ayuda_historial_vacio">Aún no te ha ayudado nadie</string>
+	<string name="ayuda_solo_confianza">Solo personas de confianza</string>
+	<string name="ayuda_solo_confianza_res">Una invitación no basta para entrar: protege de las estafas por teléfono. Quítalo solo si sabes lo que haces.</string>
+	<string name="ayuda_tor">Usar la red Tor si hace falta</string>
+	<string name="ayuda_tor_res">Para que la ayuda llegue aunque estéis con datos móviles o en casas distintas, sin abrir nada en el router. Solo se enciende mientras dura la ayuda.</string>
+	<string name="ayuda_segundo_boton">Si no entra, pedírselo también a: %1$s</string>
+	<string name="ayuda_segundo_ninguno">nadie</string>
+	<string name="ayuda_segundo_numero">Teléfono de la segunda persona</string>
+	<string name="ayuda_segundo_numero_pista">Déjalo vacío para no usarlo</string>
+	<string name="ayuda_segundo_nombre">Nombre de la segunda persona</string>
+	<string name="ayuda_segundo_nombre_pista">Por ejemplo Juan</string>
+	<string name="ayudar_ahora_confianza">%1$s te ha puesto como persona de confianza</string>
+	<string name="ayudar_conectando_tor">Conectando con %1$s por la red Tor. Puede tardar uno o dos minutos.</string>
+	<string name="ayudar_vidente">Tu móvil no necesita lector de pantalla. El otro móvil funciona por voz: una persona ciega no toca la pantalla como tú, sino que recorre sus elementos uno a uno. Con estos botones haces lo mismo que ella.</string>
+	<string name="ayudar_ultimo_vacio">Aquí verás lo que dice su móvil.</string>
+	<string name="ayudar_ultimo">Lo último que ha dicho su móvil:\n%1$s</string>
+	<string name="ayudar_ficha">Ver cómo está su móvil</string>
+	<string name="ayudar_sin_ficha">Aún no han llegado sus datos</string>
+	<string name="ayudar_decir">Decirle algo por su móvil</string>
+	<string name="ayudar_decir_pista">Su móvil lo dirá en voz alta</string>
+	<string name="ayudar_que_llame">Que su móvil me llame por teléfono</string>
+</resources>

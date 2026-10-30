@@ -82,6 +82,8 @@ class Avisos(private val lector: Lector) {
 			historial.addFirst(aviso)
 			while (historial.size > MAXIMO) historial.removeLast()
 		}
+		// Una invitación de ayuda de Tiresias en un WhatsApp o un SMS: aviso propio para ayudar con un toque
+		if (paquete != lector.servicio.packageName) com.xebolax.tiresias.remoto.Asistencia.mirarAviso(lector.servicio, titulo, texto)
 		aviso.motivo = motivoParaCallar(paquete)
 			?: if (lector.ajustes.modoSenior && lector.ajustes.seniorSoloMensajes && !esDeLasQueImportan(paquete, n)) R.string.aviso_motivo_senior else null
 		val seLee = aviso.motivo == null

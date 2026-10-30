@@ -19,6 +19,8 @@ fun abrirDestino(actividad: Activity, opcion: Int) {
 		R.id.lateral_etiquetas -> ActividadEtiquetas::class.java
 		R.id.lateral_perfiles -> ActividadPerfiles::class.java
 		R.id.lateral_complementos -> ActividadComplementos::class.java
+		R.id.lateral_ayuda_remota -> ActividadAyudaRemota::class.java
+		R.id.lateral_control_pc -> ActividadControlPc::class.java
 		R.id.lateral_tutorial -> ActividadTutorial::class.java
 		R.id.lateral_ajustes -> ActividadAjustes::class.java
 		R.id.lateral_manual -> ActividadManual::class.java

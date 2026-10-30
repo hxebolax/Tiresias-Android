@@ -51,6 +51,8 @@ enum class Sonido {
 	CARGANDO,
 	/** Al deslizar se pasa del final de una fila al principio de la siguiente (iconos, celdas), SandFly. */
 	FILA,
+	/** Teclado braille en pantalla: espacio, borrar e Intro (Can Talk). */
+	TECLA_ESPACIO, TECLA_BORRAR, TECLA_INTRO,
 }
 
 /**
@@ -116,11 +118,15 @@ class Sonidos(contexto: Context) {
 	/** Lo que hace cada sonido además de sonar: vibrar con su patrón (lo pone el servicio). */
 	@Volatile var alSonar: ((Sonido) -> Unit)? = null
 
-	fun tocar(s: Sonido, posicion: Float = 0.5f, tono: Float = 1f) {
+	/** Suena [s]; con [volumen] (0 a 1), ese en vez del de los sonidos (el del teclado braille). */
+	fun tocar(s: Sonido, posicion: Float = 0.5f, tono: Float = 1f, volumen: Float? = null) {
 		alSonar?.invoke(s)
 		if (!cargados || !ajustes.sonidos || s.name in ajustes.sonidosApagados) return
 		val id = ids[s] ?: return
-		val v = ajustes.volumenSonidos / 100f
+		// En una llamada, a la misma ganancia que la voz (Can Talk)
+		val ganancia = if (ajustes.vozLlamadas) VozEnLlamadas.calcular(app, ajustes) else 1f
+		val v = (volumen ?: (ajustes.volumenSonidos / 100f)) * ganancia
+		escuchaSonido?.invoke(s)
 		val (izq, der) = if (ajustes.sonidoPosicional) {
 			val p = posicion.coerceIn(0f, 1f)
 			v * minOf(1f, 2f * (1f - p)) to v * minOf(1f, 2f * p)
@@ -129,6 +135,9 @@ class Sonidos(contexto: Context) {
 		sonados++
 		porSonido[s.ordinal]++
 	}
+
+	/** Quien quiere saber qué suena (la asistencia remota lo manda al otro móvil). */
+	@Volatile var escuchaSonido: ((Sonido) -> Unit)? = null
 
 	/** Los sonidos que han sonado de verdad, en total y de cada uno (para las pruebas: que nada deje de sonar). */
 	@Volatile var sonados = 0
@@ -161,6 +170,9 @@ class Sonidos(contexto: Context) {
 			Sonido.EDICION -> listOf(Triple(440.0, 40, 8.0))
 			Sonido.CARGANDO -> listOf(Triple(600.0, 60, 2.0), Triple(600.0, 60, 2.0))
 			Sonido.FILA -> listOf(Triple(1175.0, 22, 8.0), Triple(880.0, 30, 8.0))
+			Sonido.TECLA_ESPACIO -> listOf(Triple(1976.0, 14, 14.0))
+			Sonido.TECLA_BORRAR -> listOf(Triple(1319.0, 12, 12.0), Triple(988.0, 16, 12.0))
+			Sonido.TECLA_INTRO -> listOf(Triple(1568.0, 18, 10.0), Triple(2093.0, 26, 10.0))
 		}
 		val hz = 22050
 		val muestras = ArrayList<Short>()
@@ -285,6 +297,9 @@ class Vibracion(contexto: Context) {
 		Sonido.EDICION -> longArrayOf(0, 14, 25, 14)
 		Sonido.CARGANDO -> longArrayOf(0, 10, 90, 10)
 		Sonido.FILA -> longArrayOf(0, 10, 25, 18)
+		Sonido.TECLA_ESPACIO -> longArrayOf(0, 9)
+		Sonido.TECLA_BORRAR -> longArrayOf(0, 9, 25, 9)
+		Sonido.TECLA_INTRO -> longArrayOf(0, 18)
 	}
 
 	companion object {

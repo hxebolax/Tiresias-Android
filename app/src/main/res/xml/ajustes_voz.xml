@@ -18,6 +18,10 @@
 	<SwitchPreferenceCompat app:key="trocear_largos" app:title="@string/aj_trocear_largos" app:summary="@string/aj_trocear_largos_res" app:defaultValue="true" />
 	<ListPreference app:key="salida_audio" app:title="@string/aj_salida_audio" app:entries="@array/salida_audio_nombres" app:entryValues="@array/salida_audio_valores" app:defaultValue="sistema" />
 	<SwitchPreferenceCompat app:key="voz_multimedia" app:title="@string/aj_voz_multimedia" app:summary="@string/aj_voz_multimedia_res" app:defaultValue="false" />
+	<Preference app:key="reglas_bluetooth" app:title="@string/aj_reglas_bluetooth" app:summary="@string/aj_reglas_bluetooth_res" />
+	<SwitchPreferenceCompat app:key="voz_llamadas" app:title="@string/aj_voz_llamadas" app:summary="@string/aj_voz_llamadas_res" app:defaultValue="false" />
+	<com.xebolax.tiresias.accesibilidad.DeslizadorAjuste app:key="volumen_llamadas" app:title="@string/aj_volumen_llamadas" app:min="5" android:max="100" app:seekBarIncrement="5" app:defaultValue="50" />
+	<SwitchPreferenceCompat app:key="compensar_llamadas" app:title="@string/aj_compensar_llamadas" app:summary="@string/aj_compensar_llamadas_res" app:defaultValue="false" />
 	<PreferenceCategory app:title="@string/aj_cat_sonidos">
 		<SwitchPreferenceCompat app:key="sonidos" app:title="@string/aj_sonidos" app:defaultValue="true" />
 		<ListPreference app:key="tema_sonidos" app:title="@string/temas_titulo" app:useSimpleSummaryProvider="true" app:defaultValue="" />

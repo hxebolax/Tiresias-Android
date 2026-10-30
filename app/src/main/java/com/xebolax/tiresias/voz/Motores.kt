@@ -212,6 +212,8 @@ class MotorSistema(private val contexto: Context, override val id: String, priva
 			val p = Pendiente("t" + contador.incrementAndGet())
 			pendiente = p
 			val params = Bundle()
+			// En una llamada, el volumen propio de la voz (Can Talk): solo cuando baja, para no cambiar nada fuera de ellas
+			VozEnLlamadas.ganancia.takeIf { it < 1f }?.let { params.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, it) }
 			if (t.speak(texto, TextToSpeech.QUEUE_FLUSH, params, p.id) != TextToSpeech.SUCCESS) return Resultado.FALLO
 			val inicio = SystemClock.uptimeMillis()
 			while (!p.empezado.await(20, TimeUnit.MILLISECONDS)) {
