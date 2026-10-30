@@ -142,13 +142,7 @@ class ActividadAjustesComplemento : ActividadBase() {
 	private fun elegirApps(a: AjusteComplemento, actual: String) {
 		lifecycleScope.launch {
 			val apps = try {
-				withContext(Dispatchers.IO) {
-					val pm = packageManager
-					pm.queryIntentActivities(Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER), 0)
-						.map { it.activityInfo.packageName to it.loadLabel(pm).toString() }
-						.distinctBy { it.first }
-						.sortedBy { it.second.lowercase() }
-				}
+				withContext(Dispatchers.IO) { com.xebolax.tiresias.base.Lanzables.todas(this@ActividadAjustesComplemento).map { it.paquete to it.nombre } }
 			} catch (e: CancellationException) {
 				throw e
 			} catch (e: Exception) {

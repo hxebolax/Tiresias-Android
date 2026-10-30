@@ -11,6 +11,7 @@ import com.xebolax.tiresias.base.Idioma
 import com.xebolax.tiresias.nucleo.Accion
 import com.xebolax.tiresias.nucleo.Gesto
 import com.xebolax.tiresias.nucleo.MapaGestos
+import com.xebolax.tiresias.servicio.PuenteEscritorio
 import com.xebolax.tiresias.servicio.ServicioTiresias
 
 /**
@@ -73,7 +74,7 @@ class ActividadGestos : ActividadBase() {
 
 	private fun elegir(g: Gesto) {
 		val ajustes = Ajustes(this)
-		val acciones = Accion.entries.filter { it != Accion.MODO_SEGURO }
+		val acciones = Accion.entries.filter { it != Accion.MODO_SEGURO && it !in PuenteEscritorio.ACCIONES_OCULTAS }
 		val actual = acciones.indexOf(ajustes.mapaGestos[g]).coerceAtLeast(0)
 		elegirUno(getString(R.string.gestos_elegir, nombreGesto(this, g)), acciones.map { nombreAccion(this, it) }, actual) { i ->
 			ajustes.mapaGestos = ajustes.mapaGestos.mas(mapOf(g to acciones[i]))

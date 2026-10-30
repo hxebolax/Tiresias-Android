@@ -763,16 +763,7 @@ class Scripts(private val lector: Lector?, contexto: Context = lector!!.servicio
 
 	/** Las apps que se pueden abrir (las del lanzador), por su nombre: [{nombre, paquete}]. */
 	private fun appsDelLanzador(): JSONArray {
-		val pm = app.packageManager
-		val lista = runCatching {
-			pm.queryIntentActivities(Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER), 0)
-				.map { it.activityInfo.packageName to it.loadLabel(pm).toString() }
-				.distinctBy { it.first }
-				.sortedBy { it.second.lowercase() }
-		}.getOrElse {
-			Registro.w(ETIQUETA, "No se pudo leer la lista de apps", it)
-			emptyList()
-		}
+		val lista = com.xebolax.tiresias.base.Lanzables.todas(app).map { it.paquete to it.nombre }
 		return JSONArray().also { a -> lista.forEach { (p, n) -> a.put(JSONObject().put("nombre", n).put("paquete", p)) } }
 	}
 

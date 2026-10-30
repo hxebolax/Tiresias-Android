@@ -85,7 +85,11 @@ fun AppCompatActivity.ponerMenuLateral(
 	})
 	barra.setNavigationIcon(iconoMenu)
 	barra.navigationContentDescription = getString(R.string.abrir_menu)
-	barra.setNavigationOnClickListener { cajon.openDrawer(GravityCompat.START) }
+	barra.setNavigationOnClickListener {
+		// Lo que se haya cambiado en Ajustes desde que se montó el menú (enseñar los experimentos) se refleja al abrirlo
+		navegacion.refrescarExperimentos()
+		cajon.openDrawer(GravityCompat.START)
+	}
 	// Atrás con el menú abierto lo cierra: se registra al abrirlo para ir antes que los demás callbacks
 	var cerrar: OnBackPressedCallback? = null
 	cajon.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
@@ -106,6 +110,12 @@ fun AppCompatActivity.ponerMenuLateral(
 	// Título del panel: TalkBack lo anuncia al abrir el cajón
 	cajon.setDrawerTitle(GravityCompat.START, getString(R.string.menu_lateral))
 	return cajon
+}
+
+/** La fila «Experimentos» del menú se enseña solo si se ha elegido en Ajustes (se mira cada vez que se abre el menú). */
+fun View.refrescarExperimentos() {
+	val fila = findViewWithTag<View>(R.id.lateral_experimentos) ?: return
+	fila.visibility = if (com.xebolax.tiresias.base.Ajustes(context).mostrarExperimentos) View.VISIBLE else View.GONE
 }
 
 /**
@@ -181,10 +191,13 @@ fun AppCompatActivity.contenidoMenuLateral(@MenuRes menuRes: Int, destinoActual:
 			// Solo el destino actual dice «seleccionado»; los demás, nada
 			isSelected = esActual
 			setOnClickListener { alElegir(item.itemId) }
+			// Para encontrar la fila después (los experimentos se enseñan o no según Ajustes, sin rehacer el menú)
+			tag = item.itemId
 		}
 		if (esActual) actual = fila
 		lista.addView(fila, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
 	}
+	lista.refrescarExperimentos()
 	val contenido = ScrollView(this).apply {
 		id = R.id.menu_lateral_navegacion
 		// Borde a borde: el cajón no queda bajo la barra de estado ni la de navegación

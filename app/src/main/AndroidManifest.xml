@@ -30,6 +30,12 @@
 	<!-- Ayuda remota entre dos móviles, sin servidores: mandar la petición de ayuda por SMS (opcional, se pide al elegir SMS), -->
 	<!-- buscar el router y el otro móvil en la wifi (UPnP y NSD) y, desde Android 17, hablar con la red local (se pide al usarla) -->
 	<uses-permission android:name="android.permission.SEND_SMS" />
+	<!-- Con el SOS del modo senior, la última ubicación conocida en el SMS (opcional, se pide al activarlo) -->
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<!-- Sacar al Escritorio de Tiresias de Inicio si se rompe: solo entre APK con la misma firma -->
+	<permission android:name="com.xebolax.tiresias.permission.ESCRITORIO" android:protectionLevel="signature" />
+	<uses-permission android:name="com.xebolax.tiresias.permission.ESCRITORIO" />
 	<uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
 	<!-- USB y Bluetooth son opcionales: Tiresias se instala en cualquier móvil -->
@@ -60,6 +66,7 @@
 			<category android:name="android.intent.category.HOME" />
 		</intent>
 		<package android:name="com.xebolax.tiresias.nano" />
+		<package android:name="com.xebolax.tiresias.escritorio" />
 		<package android:name="com.google.android.aicore" />
 	</queries>
 
@@ -106,6 +113,8 @@
 		<activity android:name=".ui.ActividadGestosTeclado" android:exported="false" />
 		<activity android:name=".ui.ActividadReglasBluetooth" android:exported="false" />
 		<activity android:name=".ui.ActividadControlPc" android:exported="false" android:label="@string/accion_control_pc" />
+		<activity android:name=".ui.ActividadTutorialPc" android:exported="false" android:label="@string/pc_tutorial" />
+		<activity android:name=".ui.ActividadExperimentos" android:exported="false" android:label="@string/ui_experimentos" />
 		<activity android:name=".ui.ActividadAyudaRemota" android:exported="false" android:label="@string/accion_ayuda_remota" />
 		<!-- Ayudar a otra persona: también con la invitación compartida desde WhatsApp o Mensajes («Compartir», Tiresias) -->
 		<activity android:name=".ui.ActividadAyudar" android:exported="true" android:label="@string/ayudar_compartir">

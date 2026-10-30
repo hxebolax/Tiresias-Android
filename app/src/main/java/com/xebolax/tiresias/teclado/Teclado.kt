@@ -45,11 +45,26 @@ class Teclado(private val lector: Lector, private val alAccion: (Accion) -> Unit
 		}
 	}
 
+	/** En el modo senior, con el teléfono sonando: subir volumen descuelga y bajarlo cuelga, sin buscar nada en la pantalla. */
+	private fun teclaDeLlamada(e: KeyEvent): Boolean {
+		val a = lector.ajustes
+		if (!a.modoSenior || !a.seniorTeclasLlamada) return false
+		val modo = lector.servicio.getSystemService(android.media.AudioManager::class.java)?.mode
+		if (modo != android.media.AudioManager.MODE_RINGTONE) return false
+		if (e.action == KeyEvent.ACTION_DOWN && e.repeatCount == 0) {
+			alAccion(if (e.keyCode == KeyEvent.KEYCODE_VOLUME_UP) Accion.LLAMADA_CONTESTAR else Accion.LLAMADA_RECHAZAR)
+		}
+		return true
+	}
+
 	fun alPulsar(e: KeyEvent): Boolean {
 		val codigo = e.keyCode
 		if (codigo != KeyEvent.KEYCODE_VOLUME_UP && codigo != KeyEvent.KEYCODE_VOLUME_DOWN) lector.momentoTecla = SystemClock.uptimeMillis()
 		lector.momentoUsuario = SystemClock.uptimeMillis()
-		if (codigo == KeyEvent.KEYCODE_VOLUME_UP || codigo == KeyEvent.KEYCODE_VOLUME_DOWN) return volumen(e)
+		if (codigo == KeyEvent.KEYCODE_VOLUME_UP || codigo == KeyEvent.KEYCODE_VOLUME_DOWN) {
+			if (teclaDeLlamada(e)) return true
+			return volumen(e)
+		}
 		val esTiresias = esTeclaTiresias(codigo)
 		if (e.action == KeyEvent.ACTION_DOWN) {
 			if (esTiresias) {

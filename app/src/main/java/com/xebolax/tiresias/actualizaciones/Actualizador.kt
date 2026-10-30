@@ -29,7 +29,7 @@ import java.security.MessageDigest
 enum class OrigenVersion { SERVIDOR, GITHUB }
 
 /** Un complemento publicado junto a la versión (apartado «complementos» de version.json). */
-data class ComplementoPublicado(val id: String, val paquete: String, val archivo: String, val sha256: String, val tamano: Long)
+data class ComplementoPublicado(val id: String, val paquete: String, val archivo: String, val sha256: String, val tamano: Long, val versionCode: Long = 0)
 
 /** Versión publicada (version.json del servidor propio o de la release de GitHub). */
 data class VersionPublicada(
@@ -259,9 +259,13 @@ object Actualizador {
 			val c = lista.optJSONObject(i) ?: return@mapNotNull null
 			val archivo = c.optString("file").trim()
 			if (!Regex("[A-Za-z0-9._-]+\\.apk").matches(archivo)) return@mapNotNull null
-			ComplementoPublicado(c.optString("id"), c.optString("package"), archivo, c.optString("sha256").trim().lowercase(), c.optLong("size", 0L))
+			ComplementoPublicado(c.optString("id"), c.optString("package"), archivo, c.optString("sha256").trim().lowercase(), c.optLong("size", 0L), c.optLong("versionCode", 0L))
 		}
 	}
+
+	/** Lo publicado del complemento [id], o null si no está. Lee version.json. */
+	suspend fun complemento(contexto: Context, id: String): ComplementoPublicado? =
+		versionPublicada(contexto).complementos.firstOrNull { it.id == id }
 
 	/**
 	 * Descarga y verifica el complemento [id] publicado con la última versión

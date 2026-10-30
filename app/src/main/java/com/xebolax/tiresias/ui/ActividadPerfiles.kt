@@ -83,10 +83,7 @@ class ActividadPerfiles : ActividadBase() {
 	).joinToString(", ").ifEmpty { getString(R.string.perf_sin_cambios) }
 
 	private fun elegirApp() {
-		val pm = packageManager
-		val apps = pm.queryIntentActivities(Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER), 0)
-			.map { it.activityInfo.packageName to it.loadLabel(pm).toString() }
-			.distinctBy { it.first }.sortedBy { it.second.lowercase() }
+		val apps = com.xebolax.tiresias.base.Lanzables.todas(this).map { it.paquete to it.nombre }
 		elegirUno(getString(R.string.perf_app_elegir), apps.map { it.second }, -1) { i -> editarApp(apps[i].first) }
 	}
 

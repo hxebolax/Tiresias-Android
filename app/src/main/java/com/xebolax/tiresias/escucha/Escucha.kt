@@ -219,7 +219,7 @@ class Escucha(private val lector: Lector, private val alAccion: (Accion) -> Unit
 			alBuscar(m.groupValues[2])
 			return
 		}
-		val accion = ORDENES.entries.firstOrNull { (frases, _) -> frases.any { orden == it || orden.startsWith("$it ") } }?.value
+		val accion = ORDENES.entries.firstOrNull { (frases, a) -> a !in com.xebolax.tiresias.servicio.PuenteEscritorio.ACCIONES_OCULTAS && frases.any { orden == it || orden.startsWith("$it ") } }?.value
 		if (accion != null) alAccion(accion) else lector.decir(t.getString(R.string.escucha_no_se, texto))
 	}
 
@@ -253,23 +253,13 @@ class Escucha(private val lector: Lector, private val alAccion: (Accion) -> Unit
 	private fun abrirApp(nombre: String) {
 		encontrada = false
 		val pm = servicio.packageManager
-		val lanzables = pm.queryIntentActivities(Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER), 0)
-		val buscado = normalizar(nombre)
-		val elegida = lanzables.minByOrNull { r ->
-			val etiqueta = normalizar(r.loadLabel(pm).toString())
-			when {
-				etiqueta == buscado -> 0
-				etiqueta.startsWith(buscado) -> 1
-				etiqueta.contains(buscado) -> 2
-				else -> 99
-			}
-		}?.takeIf { r -> normalizar(r.loadLabel(pm).toString()).contains(buscado) }
+		val elegida = com.xebolax.tiresias.base.Lanzables.buscar(servicio, nombre)
 		if (elegida == null) {
 			lector.decir(t.getString(R.string.escucha_app_no, nombre))
 			return
 		}
 		encontrada = true
-		val intent = pm.getLaunchIntentForPackage(elegida.activityInfo.packageName)?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) ?: return
+		val intent = pm.getLaunchIntentForPackage(elegida.paquete)?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) ?: return
 		runCatching { servicio.startActivity(intent) }.onFailure { Registro.w(ETIQUETA, "No se pudo abrir la app", it) }
 	}
 
@@ -288,6 +278,7 @@ class Escucha(private val lector: Lector, private val alAccion: (Accion) -> Unit
 		/** Frases (sin acentos ni mayúsculas) de cada orden; en español y en inglés. */
 		private val ORDENES: Map<List<String>, Accion> = mapOf(
 			listOf("inicio", "pantalla de inicio", "home") to Accion.INICIO,
+			listOf("escritorio del sistema", "inicio del sistema", "system home") to Accion.ESCRITORIO_SISTEMA,
 			listOf("atras", "volver", "back") to Accion.ATRAS,
 			listOf("notificaciones", "notifications") to Accion.NOTIFICACIONES,
 			listOf("recientes", "aplicaciones recientes", "recent apps") to Accion.RECIENTES,

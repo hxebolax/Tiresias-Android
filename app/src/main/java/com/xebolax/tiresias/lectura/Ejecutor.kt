@@ -106,7 +106,7 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		Accion.DESPLAZAR_ABAJO -> desplazar(android.R.id.accessibilityActionScrollDown, AccessibilityNodeInfo.ACTION_SCROLL_FORWARD)
 		Accion.DESPLAZAR_IZQUIERDA -> desplazar(android.R.id.accessibilityActionScrollLeft, AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD)
 		Accion.DESPLAZAR_DERECHA -> desplazar(android.R.id.accessibilityActionScrollRight, AccessibilityNodeInfo.ACTION_SCROLL_FORWARD)
-		Accion.INICIO -> global(AccessibilityService.GLOBAL_ACTION_HOME)
+		Accion.INICIO -> global(AccessibilityService.GLOBAL_ACTION_HOME).also { com.xebolax.tiresias.servicio.PuenteEscritorio.vigilarInicio(lector) }
 		Accion.ATRAS -> when {
 			circular.abierto -> true.also { circular.cerrar() }
 			ventanas.hayAbierta -> true.also { ventanas.cerrar() }
@@ -245,8 +245,18 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		Accion.BUSQUEDA_BRAILLE -> true.also { lector.superficie.abrir(com.xebolax.tiresias.braille.BusquedaBraille(lector) { ejecutar(it) }) }
 		Accion.TRADUCIR_ULTIMO -> lector.vision.traducirDicho(ultimoDicho())
 		Accion.CONTROL_PC -> abrir(com.xebolax.tiresias.ui.ActividadControlPc::class.java)
+		// La pantalla de control del PC directamente, si hay un PC conectado; si no, la pantalla para conectar
+		Accion.CONTROL_PC_PANTALLA -> {
+			val cl = com.xebolax.tiresias.ui.ControlPc.cliente
+			if (cl != null && cl.estado == com.xebolax.tiresias.remoto.ClienteNvda.Estado.CONECTADO) true.also { lector.superficie.abrir(com.xebolax.tiresias.remoto.SuperficieControlPc(lector, cl)) }
+			else abrir(com.xebolax.tiresias.ui.ActividadControlPc::class.java)
+		}
 		Accion.PEDIR_AYUDA -> com.xebolax.tiresias.remoto.Asistencia.pedirAyuda(servicio)
 		Accion.AYUDA_REMOTA -> com.xebolax.tiresias.remoto.Asistencia.decirQuienAyuda(lector) || abrir(com.xebolax.tiresias.ui.ActividadAyudaRemota::class.java)
+		Accion.ESCRITORIO_SISTEMA -> escritorioSistema()
+		Accion.ESTADO_Y_AVISOS -> estadoYAvisos()
+		Accion.LLAMADA_CONTESTAR -> llamada(servicio.getSystemService(android.media.AudioManager::class.java))
+		Accion.LLAMADA_RECHAZAR -> rechazarLlamada()
 		Accion.AYUDA_TERMINAR -> com.xebolax.tiresias.remoto.Asistencia.terminarPorUsuario().also { if (!it) lector.decir(R.string.ayuda_no_hay) }
 		Accion.AYUDA_CONTROLAR -> com.xebolax.tiresias.remoto.Asistencia.alternarControl()
 	}
@@ -313,7 +323,9 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 	private fun desplazar(vararg acciones: Int): Boolean {
 		val f = lector.foco
 		val raiz = lector.raiz() ?: return false
-		val lista = f?.let { Nodos.desplazable(it) } ?: Nodos.primerDesplazable(raiz) ?: run {
+		// La lista más cercana que pueda ir hacia ahí (si la lista mide lo que su contenido, el contenedor que la envuelve)
+		val lista = f?.let { n -> acciones.toList().firstNotNullOfOrNull { a -> Nodos.desplazableHacia(n, a) } ?: Nodos.desplazable(n) }
+			?: acciones.toList().firstNotNullOfOrNull { a -> Nodos.primerDesplazable(raiz, a) } ?: Nodos.primerDesplazable(raiz) ?: run {
 			lector.sonidos.tocar(Sonido.BORDE)
 			return false
 		}
@@ -337,11 +349,13 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 	 */
 	private fun irAlExtremo(final: Boolean): Boolean {
 		val raiz = lector.raiz() ?: return false
-		val lista = lector.foco?.let { Nodos.desplazable(it) } ?: Nodos.primerDesplazable(raiz) ?: run {
+		val accion = if (final) AccessibilityNodeInfo.ACTION_SCROLL_FORWARD else AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD
+		// La lista más cercana que pueda ir hacia ahí (si la lista mide lo que su contenido, el contenedor que la envuelve)
+		val lista = lector.foco?.let { Nodos.desplazableHacia(it, accion) ?: Nodos.desplazable(it) }
+			?: Nodos.primerDesplazable(raiz, accion) ?: Nodos.primerDesplazable(raiz) ?: run {
 			lector.sonidos.tocar(Sonido.BORDE)
 			return false
 		}
-		val accion = if (final) AccessibilityNodeInfo.ACTION_SCROLL_FORWARD else AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD
 		var paginas = 0
 		val tocado = lector.toques
 		if (com.xebolax.tiresias.BuildConfig.PRUEBAS) android.util.Log.d("TiresiasExtremo", "empieza en ${lista.className} ${lista.actionList.map { it.id }}")
@@ -362,13 +376,14 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 				}
 				extremo = null
 				nav.sinRehacer = false
-				lector.manejador.postDelayed({
+				// Se espera a que la lista se quede quieta (el desplazamiento suave sigue un rato): si no, se enfocaría una fila de en medio
+				nav.cuandoQuieta(accion) {
 					runCatching { lista.refresh() }
 					val dentro = lector.raiz()?.let { r -> nav.orden(r).filter { Nodos.dentroDe(it, lista) } }.orEmpty()
 					val destino = if (final) dentro.lastOrNull() else dentro.firstOrNull()
 					if (com.xebolax.tiresias.BuildConfig.PRUEBAS) android.util.Log.d("TiresiasExtremo", "$paginas páginas, ${dentro.size} dentro, destino ${destino?.className}")
 					if (destino != null) lector.enfocar(destino) else lector.sonidos.tocar(Sonido.BORDE)
-				}, 250)
+				}
 			}
 		}
 		extremo = paso
@@ -749,7 +764,10 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 	 */
 	private fun copiarLista(): Boolean {
 		val raiz = lector.raiz() ?: return false
-		val lista = lector.foco?.let { Nodos.desplazable(it) } ?: Nodos.primerDesplazable(raiz) ?: run {
+		// La lista más cercana que pueda desplazarse (si la lista mide lo que su contenido, el contenedor que la envuelve)
+		val lista = lector.foco?.let { f ->
+			Nodos.desplazableHacia(f, AccessibilityNodeInfo.ACTION_SCROLL_FORWARD) ?: Nodos.desplazableHacia(f, AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD) ?: Nodos.desplazable(f)
+		} ?: Nodos.primerDesplazable(raiz, AccessibilityNodeInfo.ACTION_SCROLL_FORWARD) ?: Nodos.primerDesplazable(raiz) ?: run {
 			lector.decir(R.string.lista_sin_lista)
 			return false
 		}
@@ -824,8 +842,10 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		lector.gestos.restablecer()
 		lector.continua.parar()
 		cancelarSos()
-		servicio.performGlobalAction(AccessibilityService.GLOBAL_ACTION_HOME)
 		lector.sonidos.tocar(Sonido.VENTANA)
+		// El inicio hablado del escritorio saluda él mismo; sin escritorio, el Inicio de siempre
+		if (lector.ajustes.modoSenior && com.xebolax.tiresias.servicio.PuenteEscritorio.abrirSenior(servicio)) return true
+		servicio.performGlobalAction(AccessibilityService.GLOBAL_ACTION_HOME)
 		val hora = java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(java.util.Date())
 		lector.manejador.postDelayed({ lector.decir(t.getString(R.string.senior_inicio, hora)) }, 400)
 		return true
@@ -895,6 +915,7 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 				}
 				cuentaSos = null
 				lector.decir(t.getString(R.string.senior_sos_llamando, quien))
+				mensajeSos()
 				llamarAyuda(numero)
 			}
 		}
@@ -903,6 +924,29 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		lector.decir(t.getString(R.string.senior_sos_aviso, quien))
 		lector.manejador.postDelayed(paso, 3500)
 		return true
+	}
+
+	/**
+	 * Con el SOS, además de llamar, un SMS a los dos contactos de ayuda con la última
+	 * ubicación conocida, si hay permiso. Es a personas, no a un servicio de emergencias.
+	 */
+	@android.annotation.SuppressLint("MissingPermission")
+	private fun mensajeSos() {
+		val a = lector.ajustes
+		if (!a.seniorSosSms || servicio.checkSelfPermission(android.Manifest.permission.SEND_SMS) != android.content.pm.PackageManager.PERMISSION_GRANTED) return
+		val numeros = listOf(a.seniorContactoAyuda, a.ayudaContacto2).map { n -> n.filter { it.isDigit() || it == '+' } }.filter { it.isNotEmpty() }.distinct()
+		val sitio = runCatching {
+			val puede = servicio.checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION) == android.content.pm.PackageManager.PERMISSION_GRANTED
+			if (!puede) return@runCatching null
+			val lm = servicio.getSystemService(android.location.LocationManager::class.java)
+			lm?.getProviders(true).orEmpty().mapNotNull { lm?.getLastKnownLocation(it) }.maxByOrNull { it.time }
+		}.onFailure { com.xebolax.tiresias.base.Registro.w(ETIQUETA, "Sin ubicación para el SOS", it) }.getOrNull()
+		val texto = if (sitio != null) t.getString(R.string.senior_sos_sms_sitio, sitio.latitude.toString(), sitio.longitude.toString())
+		else t.getString(R.string.senior_sos_sms)
+		for (n in numeros) runCatching {
+			val sm = if (Build.VERSION.SDK_INT >= 31) servicio.getSystemService(android.telephony.SmsManager::class.java) else @Suppress("DEPRECATION") android.telephony.SmsManager.getDefault()
+			sm.sendMultipartTextMessage(n, null, sm.divideMessage(texto), null, null)
+		}.onFailure { com.xebolax.tiresias.base.Registro.w(ETIQUETA, "No se pudo mandar el SMS del SOS", it) }
 	}
 
 	@android.annotation.SuppressLint("MissingPermission")
@@ -1247,14 +1291,16 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 	 * los de progreso. Para no tener que recorrer el historial entero.
 	 */
 	private fun resumenAvisos(): Boolean {
+		lector.decir(textoResumen())
+		return true
+	}
+
+	private fun textoResumen(): String {
 		val desde = System.currentTimeMillis() - HORAS_RESUMEN * 3_600_000L
 		val avisos = lector.avisos.historial().filter { a ->
 			a.momento >= desde && a.notificacion?.let { it.flags and android.app.Notification.FLAG_ONGOING_EVENT == 0 } != false
 		}
-		if (avisos.isEmpty()) {
-			lector.decir(t.getString(R.string.resumen_ninguno, HORAS_RESUMEN))
-			return true
-		}
+		if (avisos.isEmpty()) return t.getString(R.string.resumen_ninguno, HORAS_RESUMEN)
 		val partes = ArrayList<String>()
 		partes += t.resources.getQuantityString(R.plurals.resumen_avisos, avisos.size, avisos.size, HORAS_RESUMEN)
 		for ((app, deApp) in avisos.groupBy { it.app }.entries.sortedByDescending { it.value.size }.take(6)) {
@@ -1262,8 +1308,7 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 			partes += if (quienes.isEmpty() || quienes.size > 3) t.getString(R.string.resumen_app, app, deApp.size)
 			else t.getString(R.string.resumen_app_de, app, deApp.size, enumerar(quienes))
 		}
-		lector.decir(partes.joinToString(". ") + ".")
-		return true
+		return partes.joinToString(". ") + "."
 	}
 
 	/** «Ana», «Ana y Juan», «Ana, Juan y Luis». */
@@ -1703,8 +1748,18 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 
 	/** Lo que el usuario ha elegido de hora, fecha, batería, conexión... en su orden (Ajustes, Notificaciones y pantalla). */
 	private fun estadoSistema(): Boolean {
+		lector.decir(textoEstado())
+		return true
+	}
+
+	private fun textoEstado(): String {
 		val partes = lector.ajustes.partesEstado.mapNotNull { parte -> runCatching { parteEstado(parte) }.getOrNull() }
-		lector.decir(partes.filter { it.isNotBlank() }.joinToString(". ").ifBlank { DateFormat.getTimeInstance(DateFormat.SHORT).format(Date()) })
+		return partes.filter { it.isNotBlank() }.joinToString(". ").ifBlank { DateFormat.getTimeInstance(DateFormat.SHORT).format(Date()) }
+	}
+
+	/** El botón de estado del escritorio: todo en una frase, para que lo segundo no corte lo primero. */
+	private fun estadoYAvisos(): Boolean {
+		lector.decir(textoEstado() + ". " + textoResumen())
 		return true
 	}
 
@@ -1966,7 +2021,41 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		lector.control = ControlLectura.PREDETERMINADO
 		lector.ayudaEntrada = false
 		lector.decir(R.string.modo_seguro)
+		// El escritorio puede ser lo que falla: la emergencia también lleva a un Inicio que funciona
+		if (com.xebolax.tiresias.servicio.PuenteEscritorio.esInicio(servicio)) {
+			com.xebolax.tiresias.servicio.PuenteEscritorio.salirAlSistema(servicio)
+			lector.decir(t.getString(R.string.escritorio_vuelve_sistema), Modo.ENCOLAR, com.xebolax.tiresias.voz.Tipo.SISTEMA)
+		}
 		return true
+	}
+
+	/** Vuelve al Inicio del sistema. El escritorio se puede poner otra vez desde él mismo. */
+	private fun escritorioSistema(): Boolean {
+		if (!com.xebolax.tiresias.servicio.PuenteEscritorio.instalado(servicio)) {
+			lector.decir(R.string.escritorio_no_instalado)
+			return false
+		}
+		val hecho = com.xebolax.tiresias.servicio.PuenteEscritorio.salirAlSistema(servicio)
+		lector.decir(if (hecho) t.getString(R.string.escritorio_vuelve_sistema) else t.getString(R.string.escritorio_sin_otro))
+		return hecho
+	}
+
+	@android.annotation.SuppressLint("MissingPermission")
+	private fun rechazarLlamada(): Boolean {
+		if (Build.VERSION.SDK_INT < 28) return false
+		if (servicio.checkSelfPermission(android.Manifest.permission.ANSWER_PHONE_CALLS) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+			lector.decir(R.string.llamada_sin_permiso)
+			return true
+		}
+		val telecom = servicio.getSystemService(android.telecom.TelecomManager::class.java) ?: return false
+		return runCatching {
+			@Suppress("DEPRECATION") telecom.endCall()
+			lector.sonidos.tocar(Sonido.APAGADO)
+			true
+		}.getOrElse {
+			com.xebolax.tiresias.base.Registro.w(ETIQUETA, "No se pudo colgar", it)
+			false
+		}
 	}
 
 	fun nombreAccion(a: Accion): String {

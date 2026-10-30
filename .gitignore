@@ -34,3 +34,11 @@ docs/investigacion/
 docs/informes/
 docs/00_analisis_y_plan.md
 docs/modo_senior.md
+
+# Escritorio de Tiresias: sigue en desarrollo y aún no sale. Del núcleo solo se queda lo que usa el lector
+/escritorio/
+nucleo/src/main/kotlin/com/xebolax/tiresias/nucleo/escritorio/*
+!nucleo/src/main/kotlin/com/xebolax/tiresias/nucleo/escritorio/Buscar.kt
+!nucleo/src/main/kotlin/com/xebolax/tiresias/nucleo/escritorio/Contrato.kt
+nucleo/src/test/kotlin/com/xebolax/tiresias/nucleo/escritorio/*
+!nucleo/src/test/kotlin/com/xebolax/tiresias/nucleo/escritorio/BuscarTest.kt

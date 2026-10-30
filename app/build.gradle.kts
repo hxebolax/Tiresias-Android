@@ -128,6 +128,9 @@ android {
 		buildConfig = true
 	}
 
+	// Las cadenas de los ayudantes de accesibilidad son las mismas en el escritorio
+	sourceSets.getByName("main").res.srcDir("../compartido/res")
+
 	packaging {
 		resources.excludes += listOf("META-INF/*.kotlin_module", "META-INF/AL2.0", "META-INF/LGPL2.1", "META-INF/DEPENDENCIES")
 		// Las bibliotecas nativas sin comprimir y alineadas: se cargan directamente del APK

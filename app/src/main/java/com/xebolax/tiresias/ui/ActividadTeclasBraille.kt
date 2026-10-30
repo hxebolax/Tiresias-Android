@@ -11,6 +11,7 @@ import com.xebolax.tiresias.base.Ajustes
 import com.xebolax.tiresias.nucleo.Accion
 import com.xebolax.tiresias.nucleo.braille.Puntos
 import com.xebolax.tiresias.nucleo.braille.TecladoLinea
+import com.xebolax.tiresias.servicio.PuenteEscritorio
 import com.xebolax.tiresias.servicio.ServicioTiresias
 
 /**
@@ -70,7 +71,7 @@ class ActividadTeclasBraille : ActividadBase() {
 	}
 
 	private fun elegirAccion(celda: Int) {
-		val acciones = Accion.entries.filter { it != Accion.MODO_SEGURO && it != Accion.NINGUNA }
+		val acciones = Accion.entries.filter { it != Accion.MODO_SEGURO && it != Accion.NINGUNA && it !in PuenteEscritorio.ACCIONES_OCULTAS }
 		val actual = acciones.indexOf(mapa[celda]).coerceAtLeast(-1)
 		elegirUno(getString(R.string.acordes_elegir, Puntos.describir(celda)), acciones.map { ActividadGestos.nombreAccion(this, it) }, actual) { i ->
 			guardar(mapa + (celda to acciones[i]))

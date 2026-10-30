@@ -54,7 +54,8 @@ class LecturaContinua(private val lector: Lector) {
 			return
 		}
 		// Final de lo visible: se desplaza la lista y se sigue
-		val desplazable = Nodos.desplazable(actual) ?: Nodos.primerDesplazable(raiz)
+		val adelante = AccessibilityNodeInfo.ACTION_SCROLL_FORWARD
+		val desplazable = Nodos.desplazableHacia(actual, adelante) ?: Nodos.desplazable(actual) ?: Nodos.primerDesplazable(raiz, adelante) ?: Nodos.primerDesplazable(raiz)
 		if (desplazable != null && runCatching { desplazable.performAction(AccessibilityNodeInfo.ACTION_SCROLL_FORWARD) }.getOrDefault(false)) {
 			val desde = Nodos.limites(actual)
 			lector.manejador.postDelayed({

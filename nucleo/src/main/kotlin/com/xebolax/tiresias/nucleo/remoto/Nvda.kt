@@ -316,6 +316,17 @@ enum class TeclaVk(val vk: Int, val extendida: Boolean) {
 	INTRO(0x0D, false), ESCAPE(0x1B, false), TABULADOR(0x09, false), RETROCESO(0x08, false), ESPACIO(0x20, false),
 	MAYUSCULAS(0x10, false), CONTROL(0x11, false), ALT(0x12, false),
 	WINDOWS(0x5B, true), APLICACIONES(0x5D, true), BLOQ_MAYUS(0x14, false),
+	/** El teclado numérico (con Bloq Num apagado): la navegación por objetos y el cursor de revisión de NVDA en la disposición de escritorio. */
+	NUM0(0x60, false), NUM1(0x61, false), NUM2(0x62, false), NUM3(0x63, false), NUM4(0x64, false),
+	NUM5(0x65, false), NUM6(0x66, false), NUM7(0x67, false), NUM8(0x68, false), NUM9(0x69, false),
+	NUM_MAS(0x6B, false), NUM_MENOS(0x6D, false), NUM_POR(0x6A, false), NUM_DIVIDIR(0x6F, true),
+	/** Intro del teclado numérico (extendida): activa el navegador de objetos de NVDA. */
+	NUM_INTRO(0x0D, true),
+	/** El punto del teclado numérico (Supr con Bloq Num apagado): las dimensiones del objeto en NVDA. */
+	NUM_PUNTO(0x6E, false),
+	IMPRIMIR_PANTALLA(0x2C, true), PAUSA(0x13, false),
+	/** El punto y la coma del teclado principal: el cursor de revisión en la disposición de portátil y salir del contenedor en la web. */
+	PUNTO(0xBE, false), COMA(0xBC, false),
 
 	/** Insertar del teclado numérico (no extendida): la tecla NVDA por defecto. */
 	NVDA(0x2D, false);

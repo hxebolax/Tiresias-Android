@@ -1,0 +1,144 @@
+# Etiquetas en inglés de las teclas del teclado en pantalla (Gboard las da así en algunos móviles) y su nombre en español.
+# etiqueta en inglés<TAB>nombre
+period	punto
+full stop	punto
+comma	coma
+space	espacio
+spacebar	espacio
+delete	borrar
+backspace	retroceso
+shift	mayúsculas
+caps lock	bloqueo de mayúsculas
+enter	intro
+return	intro
+new line	nueva línea
+tab	tabulador
+search	buscar
+go	ir
+done	listo
+next	siguiente
+previous	anterior
+send	enviar
+emoji	emoji
+emojis	emojis
+symbols	símbolos
+letters	letras
+numbers	números
+more symbols	más símbolos
+question mark	signo de interrogación
+inverted question mark	signo de interrogación de apertura
+exclamation point	signo de exclamación
+exclamation mark	signo de exclamación
+inverted exclamation mark	signo de exclamación de apertura
+apostrophe	apóstrofo
+hyphen	guion
+dash	guion
+underscore	guion bajo
+at sign	arroba
+at	arroba
+hashtag	almohadilla
+number sign	almohadilla
+pound sign	almohadilla
+slash	barra
+forward slash	barra
+backslash	barra invertida
+ampersand	y comercial
+asterisk	asterisco
+quotation mark	comillas
+double quote	comillas
+quote	comillas
+single quote	comilla simple
+semicolon	punto y coma
+colon	dos puntos
+left parenthesis	paréntesis izquierdo
+right parenthesis	paréntesis derecho
+left bracket	corchete izquierdo
+right bracket	corchete derecho
+left brace	llave izquierda
+right brace	llave derecha
+less than	menor que
+greater than	mayor que
+dollar sign	dólar
+euro sign	euro
+pound	libra
+percent	por ciento
+percent sign	por ciento
+plus	más
+plus sign	más
+minus	menos
+minus sign	menos
+equals	igual
+equals sign	igual
+caret	acento circunflejo
+tilde	virgulilla
+grave accent	acento grave
+vertical bar	barra vertical
+degree sign	grado
+bullet	viñeta
+voice input	dictado por voz
+voice typing	dictado por voz
+microphone	micrófono
+settings	ajustes
+language switch	cambiar de idioma
+switch language	cambiar de idioma
+switch keyboard	cambiar de teclado
+hide keyboard	ocultar el teclado
+clipboard	portapapeles
+stickers	stickers
+gif	gif
+one handed mode	modo de una mano
+translate	traducir
+cursor	cursor
+text editing	edición de texto
+# Las del teclado de Android (LatinIME), de las que parte Gboard
+shift enabled	mayúsculas activadas
+shift disabled	mayúsculas desactivadas
+caps lock enabled	bloqueo de mayúsculas activado
+caps lock disabled	bloqueo de mayúsculas desactivado
+more symbols	más símbolos
+dot	punto
+symbols mode	modo símbolos
+more symbols mode	modo más símbolos
+letters mode	modo letras
+phone mode	modo teléfono
+phone symbols mode	modo símbolos de teléfono
+unknown character	carácter desconocido
+unknown symbol	símbolo desconocido
+unknown emoji	emoji desconocido
+no suggestion	sin sugerencias
+alternative characters are available	hay caracteres alternativos
+alternative characters are dismissed	caracteres alternativos cerrados
+alternative suggestions are available	hay sugerencias alternativas
+alternative suggestions are dismissed	sugerencias alternativas cerradas
+recents	recientes
+people	personas
+objects	objetos
+nature	naturaleza
+places	lugares
+flags	banderas
+smiley & people	caras y personas
+animals & nature	animales y naturaleza
+food & drink	comida y bebida
+travel & places	viajes y lugares
+activity	actividades
+emoticons	emoticonos
+yen	yen
+yen sign	yen
+euro	euro
+section sign	párrafo
+copyright sign	copyright
+registered sign	marca registrada
+trademark	marca comercial
+ellipsis	puntos suspensivos
+inverted question mark	signo de interrogación de apertura
+left single quote	comilla simple de apertura
+right single quote	comilla simple de cierre
+left double quote	comillas de apertura
+right double quote	comillas de cierre
+middle dot	punto medio
+multiplication sign	signo de multiplicar
+division sign	signo de dividir
+not sign	negación
+plus-minus sign	más menos
+micro sign	micro
+pilcrow	calderón

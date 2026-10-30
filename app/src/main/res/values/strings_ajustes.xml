@@ -36,6 +36,8 @@
 	<string name="aj_callar_grabar_res">Mientras otra app graba con el micrófono, solo se dice lo que tú pides al moverte</string>
 	<string name="aj_callar_proximidad">Callar al tapar el sensor de proximidad</string>
 	<string name="aj_callar_proximidad_res">Pasa la mano por encima de la parte de arriba de la pantalla para que la voz se calle. No funciona durante las llamadas.</string>
+	<string name="aj_pantalla_al_hablar">Mantener la pantalla encendida mientras habla</string>
+	<string name="aj_pantalla_al_hablar_res">Al leer un mensaje largo o de seguido, la pantalla no se apaga hasta que Tiresias termina (puede atenuarse). Gasta algo más de batería.</string>
 	<string name="aj_cat_sonidos">Sonidos y vibración</string>
 	<string name="aj_sonidos">Sonidos</string>
 	<string name="aj_volumen_sonidos">Volumen de los sonidos</string>
@@ -567,6 +569,8 @@
 		<item>auricular_llamada</item>
 	</string-array>
 	<string name="aj_modo_senior">Modo senior</string>
+	<string name="aj_mostrar_experimentos">Enseñar los experimentos en el menú</string>
+	<string name="aj_mostrar_experimentos_res">Funciones aún en pruebas (la ayuda remota entre dos móviles y el control de un PC con NVDA). Pueden fallar o cambiar: úsalas si quieres probarlas y contar qué tal van.</string>
 	<string name="aj_modo_senior_res">Tiresias sencillo para personas mayores: pocos gestos, las teclas de volumen y pedir ayuda</string>
 	<string name="senior_titulo">Modo senior</string>
 	<string name="senior_explicacion">El modo senior deja Tiresias en lo básico, para quien está empezando o solo quiere lo de cada día: pocos gestos y fáciles, lo importante con las teclas de volumen, frases cortas y una llamada de ayuda. Al quitarlo, todo vuelve a estar como antes.</string>
@@ -646,4 +650,18 @@
 	<string name="guarda_texto">Este aviso impide que el sistema cierre el lector. Se puede quitar en Ajustes, Notificaciones.</string>
 	<string name="aj_guarda">Aviso fijo para que el sistema no cierre Tiresias</string>
 	<string name="aj_guarda_res">Evita que limpiar la lista de apps recientes pare el lector. Consume muy poco. Si lo apagas, el aviso desaparece, pero en algunos móviles Tiresias puede cerrarse.</string>
+	<string name="escritorio_prueba_fallida">No se ha confirmado el escritorio: he vuelto al Inicio del sistema.</string>
+	<string name="escritorio_no_responde">Inicio no responde. Para volver al del sistema, haz el gesto de emergencia.</string>
+	<string name="escritorio_rol_perdido">El Escritorio de Tiresias ya no es tu Inicio.</string>
+	<string name="escritorio_vigia">Para volver al inicio, mantén pulsadas las dos teclas de volumen.</string>
+	<string name="escritorio_vuelve_sistema">He vuelto al Inicio del sistema. Puedes poner otra vez el escritorio desde él.</string>
+	<string name="escritorio_no_instalado">El Escritorio de Tiresias no está instalado.</string>
+	<string name="escritorio_sin_otro">No he encontrado otro Inicio.</string>
+	<string name="senior_sos_sms">Necesito ayuda. Te llamo por Tiresias.</string>
+	<string name="senior_sos_sms_sitio">Necesito ayuda. Estoy cerca de aquí: https://www.openstreetmap.org/?mlat=%1$s&amp;mlon=%2$s</string>
+	<string name="senior_sos_sin_sms">Sin el permiso de SMS, el SOS solo llama.</string>
+	<string name="senior_sos_sms_ajuste">Mandar un SMS con el SOS</string>
+	<string name="senior_sos_sms_ajuste_res">Además de llamar, un mensaje a tus contactos de ayuda con tu última ubicación conocida. Va a personas, no a un servicio de emergencias.</string>
+	<string name="senior_teclas_llamada">Descolgar con las teclas de volumen</string>
+	<string name="senior_teclas_llamada_res">Con el teléfono sonando, subir volumen descuelga y bajarlo cuelga.</string>
 </resources>

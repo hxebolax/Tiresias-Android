@@ -26,5 +26,7 @@ include(":app")
 include(":nucleo")
 // Complemento aparte con Gemini Nano del sistema (ML Kit GenAI, propietario): fuera del APK principal
 include(":nano")
+// Escritorio de Tiresias: la app de Inicio accesible. Aún no sale ni está en el repositorio: solo si está la carpeta
+if (file("escritorio/build.gradle.kts").exists()) include(":escritorio")
 // App de pruebas con todos los tipos de control (no se publica)
 include(":muestrario")

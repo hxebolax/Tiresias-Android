@@ -249,12 +249,27 @@ object Nodos {
 	fun textoHijos(n: AccessibilityNodeInfo, maximo: Int = 600): String {
 		val sb = StringBuilder()
 		val dichos = HashSet<String>()
-		textoHijos(n, sb, 0, maximo, false, dichos)
+		// Una fila pegada al borde de su lista puede estar cortada (el título por encima del borde al volver
+		// hacia atrás): sus textos que no se ven se leen igual, que son parte de ella
+		textoHijos(n, sb, 0, maximo, aMedias(n), dichos)
 		// Una fila medio fuera de la pantalla (al final de una lista que aún se está desplazando) tiene
 		// sus textos todavía sin ver: antes que «sin nombre», se leen aunque no se vean
 		if (sb.isBlank() && n.isVisibleToUser) textoHijos(n, sb, 0, maximo, true, dichos)
 		// (sin comas seguidas, que dejan los textos que acaban en coma)
 		return sb.toString().replace(Regex("\\s+"), " ").replace(Regex(",(\\s*,)+"), ",").trim().trimEnd(',')
+	}
+
+	/**
+	 * Si [n] se ve pero está pegado al borde de arriba o de abajo de su lista: puede
+	 * estar a medias fuera, con parte de sus textos sin ver.
+	 */
+	fun aMedias(n: AccessibilityNodeInfo): Boolean {
+		if (!n.isVisibleToUser) return false
+		val lista = runCatching { n.parent }.getOrNull()?.let { desplazable(it) } ?: return false
+		val r = limites(n)
+		val l = limites(lista)
+		if (r.isEmpty || l.isEmpty) return false
+		return r.top <= l.top || r.bottom >= l.bottom
 	}
 
 	private fun textoHijos(n: AccessibilityNodeInfo, sb: StringBuilder, nivel: Int, maximo: Int, ocultos: Boolean, dichos: MutableSet<String>) {
@@ -376,13 +391,36 @@ object Nodos {
 		return null
 	}
 
-	/** El primer nodo desplazable visible de la ventana (si el foco no está en ninguna lista). */
-	fun primerDesplazable(raiz: AccessibilityNodeInfo, nivel: Int = 0): AccessibilityNodeInfo? {
+	/**
+	 * El antepasado más cercano de [n] que puede desplazarse ahora con [accion]
+	 * (hacia delante o hacia atrás), como hace TalkBack. No vale el desplazable más
+	 * cercano sin más: la lista de los Ajustes de LineageOS (Android 15) es una
+	 * RecyclerView que se declara desplazable pero mide lo que su contenido, y el
+	 * que se mueve de verdad es el NestedScrollView que la envuelve. Si se pide el
+	 * desplazamiento a la lista, no pasa nada y la navegación se queda clavada al
+	 * final de lo que se ve. null si ningún antepasado puede ir hacia ahí.
+	 */
+	fun desplazableHacia(n: AccessibilityNodeInfo, accion: Int): AccessibilityNodeInfo? {
+		var p: AccessibilityNodeInfo? = n
+		var nivel = 0
+		while (p != null && nivel < 20) {
+			if (p.isScrollable && p.rangeInfo == null && p.actionList.any { it.id == accion }) return p
+			p = runCatching { p!!.parent }.getOrNull()
+			nivel++
+		}
+		return null
+	}
+
+	/**
+	 * El primer nodo desplazable visible de la ventana (si el foco no está en ninguna
+	 * lista); con [accion], el primero que pueda desplazarse ahora con ella.
+	 */
+	fun primerDesplazable(raiz: AccessibilityNodeInfo, accion: Int? = null, nivel: Int = 0): AccessibilityNodeInfo? {
 		if (nivel > 30) return null
-		if (raiz.isScrollable && raiz.isVisibleToUser && raiz.rangeInfo == null) return raiz
+		if (raiz.isScrollable && raiz.isVisibleToUser && raiz.rangeInfo == null && (accion == null || raiz.actionList.any { it.id == accion })) return raiz
 		for (i in 0 until raiz.childCount) {
 			val h = runCatching { raiz.getChild(i) }.getOrNull() ?: continue
-			primerDesplazable(h, nivel + 1)?.let { return it }
+			primerDesplazable(h, accion, nivel + 1)?.let { return it }
 		}
 		return null
 	}

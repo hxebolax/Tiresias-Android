@@ -86,13 +86,16 @@ class AyudaSeguraTest {
 					s.getOutputStream().write(byteArrayOf(5, 0))
 					e.readFully(ByteArray(5 + onion.host.length + 2))
 					s.getOutputStream().write(byteArrayOf(5, 4, 0, 1, 0, 0, 0, 0, 0, 0))
+					s.getOutputStream().flush()
+					// Cerrar ya cortaría la conexión antes de que el otro lado lea el código
+					e.read()
 				}
 			}
 			try {
 				Socks5.conectar(proxy.localPort, onion.host, onion.puerto, 3000).close()
 				fail("Debería lanzar")
 			} catch (e: IOException) {
-				assertTrue(e.message.orEmpty().contains("4"))
+				assertTrue(e.toString(), e.message.orEmpty().contains("código 4"))
 			}
 			hilo.join(3000)
 		}
@@ -117,8 +120,13 @@ class AyudaSeguraTest {
 		assertEquals(marta, Emparejar.leerOferta("Mamá, te ayudo: $oferta.", listOf(marta), ahora + 60))
 		assertNull("Caducada", Emparejar.leerOferta(oferta, listOf(marta), ahora + Emparejar.MINUTOS_OFERTA * 60L + 60))
 		assertNull("De otra pareja", Emparejar.leerOferta(oferta, listOf(Emparejar.nueva("Otra", ahora)), ahora))
-		val tocada = oferta.dropLast(1) + if (oferta.last() == 'A') 'B' else 'A'
-		assertNull("Tocada", Emparejar.leerOferta(tocada, listOf(marta), ahora))
+		// La última letra lleva bits de relleno que no cuentan: se toca la anterior, que es todo datos
+		repeat(200) {
+			val p = Emparejar.nueva("Marta", ahora)
+			val o = Emparejar.oferta(p, ahora)
+			val tocada = o.replaceRange(o.length - 2, o.length - 1, if (o[o.length - 2] == 'A') "B" else "A")
+			assertNull("Tocada", Emparejar.leerOferta(tocada, listOf(p), ahora))
+		}
 	}
 
 	@Test

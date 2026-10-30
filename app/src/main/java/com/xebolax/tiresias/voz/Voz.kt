@@ -45,6 +45,8 @@ import kotlin.concurrent.withLock
 class Voz(contexto: Context) {
 	private val app = contexto.applicationContext
 	val ajustes = Ajustes(app)
+	/** La pantalla encendida mientras habla, si se ha elegido en Ajustes, Voz. */
+	private val pantalla = PantallaDespierta(app)
 	private val audio = (app.getSystemService(Context.AUDIO_SERVICE) as AudioManager).also { PistaAudio.gestor = it }
 	private var atributos = PistaAudio.atributosVoz()
 	private val pista = PistaAudio(atributos)
@@ -401,6 +403,8 @@ class Voz(contexto: Context) {
 				if (terminar) return
 				cola.removeFirst().also { enCurso = it }
 			}
+			// La pantalla encendida mientras haya algo que decir (si se ha elegido): un mensaje largo no se corta al apagarse
+			if (ajustes.pantallaAlHablar) pantalla.mantener()
 			// Lo de un foco que ya ha pasado no se dice
 			if (runCatching { pedido.e.vigente?.invoke() }.getOrDefault(true) == false) {
 				enCurso = null
@@ -414,8 +418,11 @@ class Voz(contexto: Context) {
 			} finally {
 				enCurso = null
 				motorEnCurso = null
+				// Sin nada más que decir, la pantalla vuelve a contar su tiempo desde ahora
+				if (cerrojo.withLock { cola.isEmpty() }) pantalla.soltar()
 			}
 		}
+		pantalla.soltar()
 	}
 
 	private fun hablar(p: Pedido) {

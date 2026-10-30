@@ -81,6 +81,7 @@ class ServicioTiresias : AccessibilityService() {
 				Intent.ACTION_SCREEN_ON -> lector?.manejador?.post {
 					com.xebolax.tiresias.remoto.Asistencia.alPantalla(true)
 					com.xebolax.tiresias.ui.ControlPc.alPantalla(this@ServicioTiresias, true)
+					lector?.let { PuenteEscritorio.mirarRol(it) }
 					if (ejecutor?.suspendido == true) ejecutor?.suspender(false)
 					// Con el móvil bloqueado, unos segundos sin lo que SystemUI dice solo (Backtalk 312)
 					lector?.let { l -> if (l.ajustes.soloLoElegidoAlEncender && l.bloqueado()) l.callarSistemaUnMomento() }
@@ -348,6 +349,7 @@ class ServicioTiresias : AccessibilityService() {
 					if (paquete != "com.android.systemui") {
 						l.superficie.alCambiarApp()
 						com.xebolax.tiresias.remoto.Asistencia.ayudado?.alCambiarApp()
+						PuenteEscritorio.alCambiarApp(l, paquete)
 					}
 				}
 			}
@@ -638,6 +640,9 @@ class ServicioTiresias : AccessibilityService() {
 
 	/** Las ventanas propias de Tiresias (listas y diálogos encima de todo), para la asistencia remota. */
 	val ventanasActuales: Ventanas? get() = ventanas
+
+	/** Si el lector está suspendido (para la API). */
+	val suspendidoParaApi: Boolean get() = suspendidoAhora
 
 	/** Llama por teléfono al contacto de ayuda (ayuda remota). */
 	fun llamarAyuda(numero: String) {

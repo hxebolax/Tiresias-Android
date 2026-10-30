@@ -48,6 +48,7 @@
 	<li><a href="#problemas">Problemas frecuentes</a></li>
 	<li><a href="#ayuda_remota">Ayuda remota entre dos móviles</a></li>
 	<li><a href="#control_pc">Controlar un PC con NVDA</a></li>
+	<li><a href="#experimentos">Experimentos</a></li>
 </ol>
 </nav>
 
@@ -104,6 +105,7 @@
 	<li><strong>Ayuda de otra persona</strong>: los toques van a la app como si no hubiera lector, para que alguien maneje tu móvil; Tiresias sigue diciendo lo que se pulsa. Se quita con las dos teclas de volumen.</li>
 	<li><strong>Gestos sencillos</strong>: en Gestos, «Usar los gestos sencillos» pone lo de cada día en toques de dos y tres dedos, sin gestos en ángulo.</li>
 </ul>
+<p>«Primer elemento» y «Último elemento» van al principio y al final de verdad de la pantalla: si una lista está a medias, Tiresias la sube o la baja antes hasta el tope y espera a que se quede quieta. Una lista que está dentro de otra que se desplaza (los Ajustes de algunos móviles) se recorre entera: al final de lo visible se desplaza el contenedor que de verdad se mueve. Una fila pegada al borde de la lista se lee entera, con su título, aunque parte quede fuera.</p>
 </section>
 
 <section aria-labelledby="gestos">
@@ -159,6 +161,7 @@
 <p>En la pantalla Diccionario de pronunciación puedes hacer que una palabra se diga de otra manera (por ejemplo, siglas o nombres propios), para todas las voces. Se puede importar un diccionario de Tiresias o de NVDA y exportarlo.</p>
 <h3>Voz en llamadas y aparatos Bluetooth</h3>
 <p>En Ajustes, Voz, «<strong>Voz en llamadas con su propio volumen</strong>»: durante una llamada, la voz y los sonidos de Tiresias suenan a un porcentaje propio (50 de fábrica), para que no atruenen al subir la llamada. Con un dedo en la pantalla, las teclas de volumen lo cambian de 5 en 5. «Compensar el volumen de la llamada» (experimental) corrige la voz al revés cuando cambias el volumen de la llamada. En «<strong>Aparatos Bluetooth</strong>» marcas cada aparato como altavoz o auriculares: si la música suena por un altavoz, las voces de Tiresias se quedan en el móvil.</p>
+<p>Con «Mantener la pantalla encendida mientras habla» (Ajustes, Voz, desactivado de fábrica), al leer un mensaje largo o de seguido la pantalla no se apaga hasta que Tiresias termina (puede atenuarse); después vuelve a contar su tiempo normal, y si ya estaba apagada no la enciende. Las teclas del teclado en pantalla de un solo carácter se dicen con su nombre en el idioma de Tiresias («i griega», «punto», «coma»).</p>
 </section>
 
 <section aria-labelledby="escribir">
@@ -421,6 +424,7 @@
 </section>
 <section aria-labelledby="ayuda_remota">
 <h2 id="ayuda_remota">20. Ayuda remota entre dos móviles</h2>
+<p>Está en el menú lateral, dentro de «Experimentos» (sección 22): sigue en pruebas y de fábrica no se enseña.</p>
 <p>Para personas de <strong>total confianza</strong>: una hija que ayuda a su madre ciega desde su casa, por ejemplo. Quien ayuda oye lo que dice el móvil de la otra persona con su propia voz (algo más grave, para distinguirla) y lo maneja desde el suyo, con Tiresias: ajustar el móvil, configurar Tiresias, recuperar una app o instalar una. Los dos móviles se enlazan <strong>sin ningún servidor propio</strong>, y todo va cifrado de extremo a extremo. Está en el menú lateral, Ayuda remota.</p>
 <h3>Prepararlo (lo hace el familiar)</h3>
 <ul>
@@ -451,11 +455,18 @@
 
 <section aria-labelledby="control_pc">
 <h2 id="control_pc">21. Controlar un PC con NVDA</h2>
-<p>Desde el menú lateral, «Controlar un PC con NVDA», el móvil maneja un PC con NVDA (acceso remoto de NVDA 2025.1 o posterior, o el complemento NVDA Remote) o con Tiresias para Windows. En el PC, elige «Permitir que este equipo sea controlado» con un servidor (nvdaremote.com, uno propio o la conexión directa) y una clave; en el móvil, el mismo servidor y la misma clave, o pega el enlace nvdaremote:// que copia NVDA. Si el certificado del servidor no se puede comprobar, Tiresias enseña su huella y decides fiarte una vez o siempre.</p>
+<p>Está en el menú lateral, dentro de «Experimentos» (sección 22): sigue en pruebas y de fábrica no se enseña. También se abre con la acción «Controlar un PC con NVDA» asignada a un gesto.</p>
+<p>Desde «Controlar un PC con NVDA», el móvil maneja un PC con NVDA (acceso remoto de NVDA 2025.1 o posterior, o el complemento NVDA Remote) o con Tiresias para Windows. En el PC, elige «Permitir que este equipo sea controlado» con un servidor (nvdaremote.com, uno propio o la conexión directa) y una clave; en el móvil, el mismo servidor y la misma clave, o pega el enlace nvdaremote:// que copia NVDA. Si el certificado del servidor no se puede comprobar, Tiresias enseña su huella y decides fiarte una vez o siempre.</p>
 <p>Lo que dice el PC se oye con la voz de Tiresias. Se maneja con una <strong>superficie braille</strong> a pantalla completa. En el <strong>modo control</strong>, las letras braille son teclas y los puntos 6, 5, 3 y 2 sueltos preparan Control, Alt, Mayúsculas y la tecla NVDA para la siguiente; un dedo son las flechas; dos dedos abajo, Intro; arriba, Escape; a la izquierda, Retroceso; a la derecha, Tabulador; tres dedos a la izquierda, Alt+Tab, y a la derecha, Espacio. Tres dedos arriba cambian al <strong>modo teclado braille</strong>, en el que los puntos los escribe NVDA con su tabla braille. Tres dedos abajo abren el menú: Windows, aplicaciones, Inicio, Fin, páginas, Suprimir, Alt+F4, el escritorio, Control+Alt+Supr, callar la voz del PC, desconectar y quitar la superficie. Las dos teclas de volumen quitan la superficie. En la pantalla también puedes escribir un texto en el PC, pegar en él lo copiado en el móvil y guardar el equipo (la clave, cifrada). Al bloquear el móvil, de fábrica se desconecta (Ajustes, Braille).</p>
+<p>Sin saber braille, la <strong>pantalla de control</strong> (la que se pone de fábrica al conectar; en Ajustes, Braille, «Al conectar con un PC» se elige la superficie braille) maneja Windows con gestos de uno a cuatro dedos: un dedo son las flechas, un toque calla, dos toques Intro, tres toques Espacio y un dedo mantenido Alt; dos dedos a los lados Tabulador y Mayúsculas+Tabulador, arriba Escape, abajo el menú contextual, un toque qué tiene el foco, dos toques dictar, tres toques leer la línea y mantenidos el menú Inicio; tres dedos a los lados cambian de ventana, arriba leen todo, abajo abren el <strong>menú de órdenes</strong>, un toque el título, dos toques escribir con el teclado del móvil, tres toques pegar lo copiado y mantenidos la lista de gestos; cuatro dedos arriba y abajo Inicio y Fin, a los lados Retroceso y Suprimir, un toque el estado, dos toques quitar la pantalla, tres toques callar u oír la voz del PC y mantenidos el modo de voz de NVDA. El menú de órdenes tiene, por categorías, Windows, edición, NVDA, navegación por objetos, cursor de revisión, navegación web (letras rápidas), teclas sueltas, modificadores que se preparan para la tecla siguiente y la conexión; se recorre con un dedo y se elige con dos toques. La disposición del teclado de NVDA (escritorio o portátil) se pone en Ajustes, Braille. En la pantalla Controlar un PC está el <strong>tutorial</strong> paso a paso (preparar el PC, conectar, moverse, leer, ventanas, escribir, el menú, la web, objetos y qué hacer si falla), la lista de gestos y la práctica sin PC, en la que cada gesto se dice y no se manda. La acción «Pantalla de control del PC (gestos)» la pone directamente desde un gesto.</p>
 <p>El acceso remoto de NVDA cifra hasta el servidor, pero el servidor puede ver lo que pasa: usa uno de confianza o la conexión directa a tu PC.</p>
 </section>
 
+
+<section aria-labelledby="experimentos">
+<h2 id="experimentos">22. Experimentos</h2>
+<p>En «Experimentos», en el menú lateral, está lo que ya funciona pero sigue en pruebas: hoy, la ayuda remota entre dos móviles (sección 20) y el control de un PC con NVDA (sección 21). Al entrar, Tiresias avisa de que pueden fallar, cambiar de una versión a otra o no estar pulidos del todo; si los usas, cuenta qué tal van. De fábrica el apartado no se enseña: se activa en Ajustes, «Enseñar los experimentos en el menú». Las acciones de esas funciones (pedir ayuda a distancia, controlar un PC, la pantalla de control del PC) se pueden asignar a gestos y poner en los menús igualmente.</p>
+</section>
 </main>
 </body>
 </html>

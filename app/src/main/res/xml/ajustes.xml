@@ -15,4 +15,5 @@
 	<Preference app:key="copia_recuperar" app:title="@string/aj_copia_recuperar" app:summary="@string/aj_copia_recuperar_res" />
 	<Preference app:key="restablecer" app:title="@string/aj_restablecer" app:summary="@string/aj_restablecer_res" />
 	<ListPreference app:key="idioma" app:title="@string/aj_idioma" app:entries="@array/idiomas_nombres" app:entryValues="@array/idiomas_valores" app:defaultValue="" app:useSimpleSummaryProvider="true" />
+	<SwitchPreferenceCompat app:key="mostrar_experimentos" app:title="@string/aj_mostrar_experimentos" app:summary="@string/aj_mostrar_experimentos_res" app:defaultValue="false" />
 </PreferenceScreen>

@@ -107,6 +107,7 @@ Cada idioma tiene su carpeta `app/src/main/assets/idiomas/XX/` con cinco archivo
 | `simbolos.tsv` | Cómo se dice cada símbolo y en qué nivel de puntuación | `símbolo<TAB>nombre<TAB>nivel[<TAB>mantener]` | Se usa el español |
 | `emojis.tsv` | Los nombres de los emojis y de otros símbolos de Unicode | Igual que `simbolos.tsv` | Se usa el español |
 | `letras.tsv` | Las letras que necesitan nombre al leerlas sueltas («y» se dice «i griega») | `letra<TAB>nombre` | Se usa el español |
+| `teclas.tsv` | Las etiquetas en inglés de las teclas del teclado en pantalla (Gboard las da así en algunos móviles: «period», «comma») con su nombre en este idioma | `etiqueta en inglés<TAB>nombre` | Sin tabla propia, ninguna (la del español traduciría al español) |
 | `fonetico.tsv` | El alfabeto para deletrear («a de Antonio») | `letra<TAB>palabra` | Se usa el español |
 | `identificadores.tsv` | Las palabras de los identificadores de vista (casi siempre en inglés) en tu idioma | Ver abajo | Se usa el inglés: solo quita el relleno |
 

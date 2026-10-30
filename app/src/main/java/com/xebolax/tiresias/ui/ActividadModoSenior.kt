@@ -64,8 +64,20 @@ class ActividadModoSenior : ActividadBase() {
 			ajustes.p.edit().putBoolean(Claves.SENIOR_TOQUE_ACTIVA, si).apply()
 			ServicioTiresias.instancia?.recargarAjustes()
 		}
+		interruptor(R.string.senior_teclas_llamada, R.string.senior_teclas_llamada_res, ajustes.seniorTeclasLlamada) { si ->
+			ajustes.p.edit().putBoolean(Claves.SENIOR_TECLAS_LLAMADA, si).apply()
+			if (si && checkSelfPermission(Manifest.permission.ANSWER_PHONE_CALLS) != PackageManager.PERMISSION_GRANTED) pedirLlamar.launch(Manifest.permission.ANSWER_PHONE_CALLS)
+		}
+		interruptor(R.string.senior_sos_sms_ajuste, R.string.senior_sos_sms_ajuste_res, ajustes.seniorSosSms) { si ->
+			ajustes.p.edit().putBoolean(Claves.SENIOR_SOS_SMS, si).apply()
+			if (si) pedirSos.launch(arrayOf(Manifest.permission.SEND_SMS, Manifest.permission.ACCESS_COARSE_LOCATION))
+		}
 		botonContacto = p.botonSecundario(textoContacto()) { cambiarContacto() }
 		botonCodigo = p.botonSecundario(textoCodigo()) { cambiarCodigo() }
+	}
+
+	private val pedirSos = registerForActivityResult(androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions()) { r ->
+		if (r[Manifest.permission.SEND_SMS] != true) avisar(getString(R.string.senior_sos_sin_sms))
 	}
 
 	private fun textoContacto(): String {

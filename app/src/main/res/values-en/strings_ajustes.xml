@@ -36,6 +36,8 @@
 	<string name="aj_callar_grabar_res">While another app is recording with the microphone, only what you ask for as you move is spoken</string>
 	<string name="aj_callar_proximidad">Stop speech when covering the proximity sensor</string>
 	<string name="aj_callar_proximidad_res">Pass your hand over the top of the screen to stop the voice. It does not work during calls.</string>
+	<string name="aj_pantalla_al_hablar">Keep the screen on while speaking</string>
+	<string name="aj_pantalla_al_hablar_res">When reading a long message or continuously, the screen does not turn off until Tiresias finishes (it may dim). Uses a little more battery.</string>
 	<string name="aj_cat_sonidos">Sounds and vibration</string>
 	<string name="aj_sonidos">Sounds</string>
 	<string name="aj_volumen_sonidos">Sound volume</string>
@@ -432,6 +434,8 @@
 		<item>The call earpiece (with the phone at your ear)</item>
 	</string-array>
 	<string name="aj_modo_senior">Senior mode</string>
+	<string name="aj_mostrar_experimentos">Show experiments in the menu</string>
+	<string name="aj_mostrar_experimentos_res">Features still being tested (remote help between two phones and controlling a PC with NVDA). They may fail or change: use them if you want to try them and tell how they go.</string>
 	<string name="aj_modo_senior_res">Simple Tiresias for older people: few gestures, the volume keys and calling for help</string>
 	<string name="senior_titulo">Senior mode</string>
 	<string name="senior_explicacion">Senior mode keeps Tiresias to the basics, for people who are starting out or only want the everyday things: few and easy gestures, the important things on the volume keys, short phrases and a help call. When you turn it off, everything is as it was before.</string>
@@ -506,4 +510,18 @@
 	<string name="guarda_texto">This notice stops the system closing the screen reader. You can remove it in Settings, Notifications.</string>
 	<string name="aj_guarda">Permanent notice so the system does not close Tiresias</string>
 	<string name="aj_guarda_res">Stops clearing the recent apps list from closing the screen reader. It uses very little power. If you turn it off the notice goes away, but on some phones Tiresias may close.</string>
+	<string name="escritorio_prueba_fallida">The Home was not confirmed: I have gone back to the system Home.</string>
+	<string name="escritorio_no_responde">Home is not responding. To go back to the system one, use the emergency gesture.</string>
+	<string name="escritorio_rol_perdido">Tiresias Home is no longer your Home.</string>
+	<string name="escritorio_vigia">To go back to Home, hold both volume keys.</string>
+	<string name="escritorio_vuelve_sistema">I have gone back to the system Home. You can set Tiresias Home again from it.</string>
+	<string name="escritorio_no_instalado">Tiresias Home is not installed.</string>
+	<string name="escritorio_sin_otro">I could not find another Home.</string>
+	<string name="senior_sos_sms">I need help. I am calling you through Tiresias.</string>
+	<string name="senior_sos_sms_sitio">I need help. I am near here: https://www.openstreetmap.org/?mlat=%1$s&amp;mlon=%2$s</string>
+	<string name="senior_sos_sin_sms">Without the SMS permission, SOS only calls.</string>
+	<string name="senior_sos_sms_ajuste">Send a text with SOS</string>
+	<string name="senior_sos_sms_ajuste_res">As well as calling, a message to your help contacts with your last known location. It goes to people, not to an emergency service.</string>
+	<string name="senior_teclas_llamada">Answer with the volume keys</string>
+	<string name="senior_teclas_llamada_res">While the phone rings, volume up answers and volume down hangs up.</string>
 </resources>

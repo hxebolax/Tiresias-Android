@@ -394,4 +394,14 @@
 	<string name="ui_servicio_cerrado">The system closed Tiresias without you turning it off: it is the %1$s battery saving. Tap here to see what to change</string>
 	<string name="tut_terminar_practica">Finish practice</string>
 	<string name="tut_como_salir">To leave the practice: press Back, both volume keys together or double tap Finish practice. Leaving the tutorial also ends the practice.</string>
+	<string name="tienda_escritorio">Tiresias Home</string>
+	<string name="tienda_escritorio_no">%1$s: accessible Home app, not installed</string>
+	<string name="tienda_escritorio_si">%1$s, installed, version %2$s</string>
+	<string name="tienda_escritorio_explicacion">Tiresias Home is an accessible Home app, with a spoken senior mode. It is separate so a fault in it never takes the voice away. It installs like any app and only becomes your Home if you choose it. Install it?</string>
+	<string name="tienda_escritorio_instalar">Install the Home app</string>
+	<string name="tienda_escritorio_abrir">Open the Home app</string>
+	<string name="tienda_escritorio_actualizar">Update the Home app</string>
+	<string name="tienda_escritorio_quitar">Uninstall the Home app</string>
+	<string name="tienda_escritorio_no_publicado">The Home app is not on the server yet</string>
+	<string name="tienda_escritorio_no_abre">The Home app could not be opened</string>
 </resources>

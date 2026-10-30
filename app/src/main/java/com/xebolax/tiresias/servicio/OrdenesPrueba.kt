@@ -37,6 +37,17 @@ class OrdenesPrueba(private val alGesto: (Gesto) -> Unit, private val alAccion: 
 			com.xebolax.tiresias.base.Ajustes(c).p.edit().putString(clave, valor).apply()
 			ServicioTiresias.instancia?.recargarAjustes()
 		}
+		// La pantalla de control del PC en práctica (sin PC): --es practicapc 1
+		if (i.hasExtra("practicapc")) {
+			ServicioTiresias.instancia?.lectorActual?.let { l -> l.manejador.post { l.superficie.abrir(com.xebolax.tiresias.remoto.SuperficieControlPc(l, null, practica = true)) } }
+		}
+		// Un gesto de la pantalla de control del PC: --es gestopc 2_DESLIZAR_DERECHA
+		i.getStringExtra("gestopc")?.let { g ->
+			val lector = ServicioTiresias.instancia?.lectorActual
+			val modo = lector?.superficie?.modo as? com.xebolax.tiresias.remoto.SuperficieControlPc
+			if (lector == null || modo == null) Registro.w(ETIQUETA, "No está la pantalla de control del PC")
+			else lector.manejador.post { if (!modo.gestoDePrueba(g)) Registro.w(ETIQUETA, "Gesto de la pantalla de control desconocido: $g") }
+		}
 		i.getStringExtra("accion")?.let { a ->
 			runCatching { Accion.valueOf(a.uppercase()) }.onSuccess(alAccion).onFailure { Registro.w(ETIQUETA, "Acción desconocida: $a") }
 		}

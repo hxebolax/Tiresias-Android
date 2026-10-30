@@ -48,6 +48,7 @@
 	<li><a href="#problemas">Common problems</a></li>
 	<li><a href="#ayuda_remota">Remote help between two phones</a></li>
 	<li><a href="#control_pc">Controlling a PC with NVDA</a></li>
+	<li><a href="#experimentos">Experiments</a></li>
 </ol>
 </nav>
 
@@ -104,6 +105,7 @@
 	<li><strong>Help from another person</strong>: touches go to the app as if there were no screen reader, so someone else can use your phone; Tiresias keeps saying what is pressed. It is turned off with both volume keys.</li>
 	<li><strong>Simple gestures</strong>: in Gestures, “Use the simple gestures” puts everyday actions on two- and three-finger taps, with no angled gestures.</li>
 </ul>
+<p>“First item” and “Last item” go to the real start and end of the screen: if a list is halfway, Tiresias first scrolls it to the top or bottom and waits for it to settle. A list inside another one that scrolls (the Settings of some phones) is traversed in full: at the end of what is visible, the container that really moves is scrolled. A row touching the edge of the list is read in full, with its title, even if part of it is cut off.</p>
 </section>
 
 <section aria-labelledby="gestos">
@@ -159,6 +161,7 @@
 <p>In the Pronunciation dictionary screen you can make a word be spoken differently (for example, acronyms or names), for every voice. You can import a Tiresias or NVDA dictionary and export it.</p>
 <h3>Voice in calls and Bluetooth devices</h3>
 <p>In Settings, Voice, “<strong>Voice in calls with its own volume</strong>”: during a call, the Tiresias voice and sounds play at their own percentage (50 by default), so they do not blast when you turn the call up. With a finger on the screen, the volume keys change it in steps of 5. “Compensate the call volume” (experimental) corrects the voice the other way when you change the call volume. In “<strong>Bluetooth devices</strong>” you mark each device as a speaker or headphones: if music plays through a speaker, the Tiresias voices stay on the phone.</p>
+<p>With “Keep the screen on while speaking” (Settings, Voice, off by default), when reading a long message or continuously the screen does not turn off until Tiresias finishes (it may dim); afterwards it counts its normal time again, and if it was already off it is not turned on. Single-character keys of the on-screen keyboard are said with their name in the Tiresias language (“period”, “comma”).</p>
 </section>
 
 <section aria-labelledby="escribir">
@@ -421,6 +424,7 @@
 </section>
 <section aria-labelledby="ayuda_remota">
 <h2 id="ayuda_remota">20. Remote help between two phones</h2>
+<p>It is in the side menu, under “Experiments” (section 22): it is still being tested and is not shown by default.</p>
 <p>For people you <strong>fully trust</strong>: a daughter helping her blind mother from home, for example. The helper hears what the other person’s phone says with their own voice (a bit lower, to tell them apart) and controls it from theirs, with Tiresias: adjust the phone, set up Tiresias, recover an app or install one. Both phones link <strong>directly, without any server</strong>, and everything is end-to-end encrypted. It is in the side menu, Remote help.</p>
 <h3>Setting it up (done by the relative)</h3>
 <ul>
@@ -451,11 +455,18 @@
 
 <section aria-labelledby="control_pc">
 <h2 id="control_pc">21. Controlling a PC with NVDA</h2>
-<p>From the side menu, “Control a PC with NVDA”, the phone controls a PC with NVDA (NVDA Remote Access 2025.1 or later, or the NVDA Remote add-on) or with Tiresias for Windows. On the PC, choose “Allow this computer to be controlled” with a server (nvdaremote.com, your own or the direct connection) and a key; on the phone, the same server and key, or paste the nvdaremote:// link NVDA copies. If the server certificate cannot be checked, Tiresias shows its fingerprint and you decide to trust it once or always.</p>
+<p>It is in the side menu, under “Experiments” (section 22): it is still being tested and is not shown by default. It also opens with the “Control a PC with NVDA” action assigned to a gesture.</p>
+<p>From “Control a PC with NVDA”, the phone controls a PC with NVDA (NVDA Remote Access 2025.1 or later, or the NVDA Remote add-on) or with Tiresias for Windows. On the PC, choose “Allow this computer to be controlled” with a server (nvdaremote.com, your own or the direct connection) and a key; on the phone, the same server and key, or paste the nvdaremote:// link NVDA copies. If the server certificate cannot be checked, Tiresias shows its fingerprint and you decide to trust it once or always.</p>
 <p>What the PC says is heard with the Tiresias voice. It is controlled with a full-screen <strong>braille surface</strong>. In <strong>control mode</strong>, braille letters are keys and dots 6, 5, 3 and 2 on their own prepare Control, Alt, Shift and the NVDA key for the next one; one finger is the arrows; two fingers down, Enter; up, Escape; left, Backspace; right, Tab; three fingers left, Alt+Tab, and right, Space. Three fingers up switch to <strong>braille keyboard mode</strong>, where NVDA types the dots with its braille table. Three fingers down open the menu: Windows, applications, Home, End, pages, Delete, Alt+F4, the desktop, Control+Alt+Delete, mute the PC voice, disconnect and remove the surface. Both volume keys remove the surface. On the screen you can also type a text on the PC, paste on it what was copied on the phone and save the computer (with the key encrypted). When the phone locks, by default it disconnects (Settings, Braille).</p>
+<p>Without knowing braille, the <strong>control screen</strong> (the one put up by default when connecting; in Settings, Braille, “When connecting to a PC” you can choose the braille surface) operates Windows with one- to four-finger gestures: one finger is the arrows, one tap silences, two taps Enter, three taps Space and one finger held Alt; two fingers sideways Tab and Shift+Tab, up Escape, down the context menu, one tap what has focus, two taps dictate, three taps read the line and held the Start menu; three fingers sideways switch windows, up say all, down open the <strong>command menu</strong>, one tap the title, two taps type with the phone keyboard, three taps paste what is copied and held the gesture list; four fingers up and down Home and End, sideways Backspace and Delete, one tap the status, two taps remove the screen, three taps mute or unmute the PC voice and held the NVDA speech mode. The command menu has, by category, Windows, editing, NVDA, object navigation, review cursor, web navigation (quick keys), single keys, modifiers armed for the next key, and the connection; it is browsed with one finger and chosen with two taps. The NVDA keyboard layout (desktop or laptop) is set in Settings, Braille. The Control a PC screen holds the step-by-step <strong>tutorial</strong> (preparing the PC, connecting, moving, reading, windows, typing, the menu, the web, objects and what to do if it fails), the gesture list and practice without a PC, where each gesture is said and not sent. The “PC control screen (gestures)” action puts it up straight from a gesture.</p>
 <p>NVDA Remote Access encrypts up to the server, but the server can see what happens: use a trusted one or the direct connection to your PC.</p>
 </section>
 
+
+<section aria-labelledby="experimentos">
+<h2 id="experimentos">22. Experiments</h2>
+<p>“Experiments”, in the side menu, holds what already works but is still being tested: today, remote help between two phones (section 20) and controlling a PC with NVDA (section 21). On entering, Tiresias warns that they may fail, change from one version to the next or not be fully polished; if you use them, tell how they go. By default the section is not shown: turn it on in Settings, “Show experiments in the menu”. The actions of those features (ask for remote help, control a PC, the PC control screen) can still be assigned to gestures and placed in the menus.</p>
+</section>
 </main>
 </body>
 </html>

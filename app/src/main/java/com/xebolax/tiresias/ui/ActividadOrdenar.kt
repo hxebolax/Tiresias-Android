@@ -16,6 +16,7 @@ import com.xebolax.tiresias.base.Ajustes
 import com.xebolax.tiresias.nucleo.Accion
 import com.xebolax.tiresias.nucleo.ControlLectura
 import com.xebolax.tiresias.nucleo.Listas
+import com.xebolax.tiresias.servicio.PuenteEscritorio
 import com.xebolax.tiresias.servicio.ServicioTiresias
 
 /**
@@ -34,7 +35,7 @@ class ActividadOrdenar : ActividadBase() {
 	private var elegidas = mutableListOf<String>()
 	private val todas: List<String> by lazy {
 		when (lista) {
-			LISTA_MENU, LISTA_CIRCULAR -> Accion.entries.filter { it !in Listas.FUERA_DEL_MENU && it != Accion.MENU_CIRCULAR }.map { it.name }
+			LISTA_MENU, LISTA_CIRCULAR -> Accion.entries.filter { it !in Listas.FUERA_DEL_MENU && it != Accion.MENU_CIRCULAR && it !in PuenteEscritorio.ACCIONES_OCULTAS }.map { it.name }
 			LISTA_PARTES -> com.xebolax.tiresias.nucleo.Parte.entries.map { it.name }
 			LISTA_ESTADO -> com.xebolax.tiresias.nucleo.ParteEstado.entries.map { it.name }
 			else -> ControlLectura.entries.map { it.name }

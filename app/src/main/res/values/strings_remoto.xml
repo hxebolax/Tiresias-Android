@@ -184,6 +184,8 @@
 	<string name="nvda_conectar_nuevo">Conectar a un PC</string>
 	<string name="nvda_pegar_enlace">Pegar un enlace nvdaremote</string>
 	<string name="nvda_sin_enlace">No hay un enlace nvdaremote en lo copiado</string>
+	<string name="nvda_falta_servidor">Escribe el servidor: nvdaremote.com, uno propio o la IP del PC</string>
+	<string name="nvda_falta_clave">Escribe la clave, la misma que en el PC</string>
 	<string name="nvda_conectar">Conectar</string>
 	<string name="nvda_quitar_equipo">Quitar el equipo</string>
 	<string name="nvda_quitar_pregunta">¿Quitar %1$s de los equipos guardados?</string>
@@ -373,4 +375,347 @@
 	<string name="ayudar_decir">Decirle algo por su móvil</string>
 	<string name="ayudar_decir_pista">Su móvil lo dirá en voz alta</string>
 	<string name="ayudar_que_llame">Que su móvil me llame por teléfono</string>
+	<string name="ayudar_escritorio_sistema">Llevarle al Inicio del sistema</string>
+
+	<!-- Experimentos: lo que aún está en pruebas -->
+	<string name="exp_aviso">Lo que hay aquí está todavía en pruebas. Funciona, pero puede fallar, cambiar de una versión a otra o no estar pulido del todo. Si lo usas, cuenta qué tal va: así se termina de afinar. Para que este apartado no salga en el menú, desmárcalo en Ajustes, «Enseñar los experimentos en el menú».</string>
+	<string name="exp_ayuda_remota_res">Que una persona de total confianza te ayude desde su móvil: oye lo que dice el tuyo y lo maneja desde el suyo, cifrado de punta a punta.</string>
+	<string name="exp_control_pc_res">Manejar un PC con NVDA o con Tiresias para Windows desde el móvil, con la pantalla de control por gestos o la superficie braille, y un tutorial paso a paso.</string>
+
+	<!-- La pantalla de control de un PC (gestos de uno a cuatro dedos) y su tutorial -->
+	<string name="pc_poner_pantalla">Poner la pantalla de control (gestos)</string>
+	<string name="pc_tutorial">Tutorial: manejar Windows desde el móvil</string>
+	<string name="pc_lista_gestos">Lista de gestos de la pantalla de control</string>
+	<string name="pc_practicar">Practicar los gestos sin PC</string>
+	<string name="pc_abrir_control">Ir a Controlar un PC con NVDA</string>
+	<string name="pc_aprender">Aprender</string>
+	<string name="pc_aprender_texto">El tutorial explica paso a paso cómo preparar el PC, conectar y manejar Windows entero desde el móvil con la pantalla de control. Al acabarlo puedes practicar los gestos sin PC.</string>
+	<string name="aj_nvda_pantalla">Al conectar con un PC, poner</string>
+	<string-array name="nvda_pantalla_nombres">
+		<item>La pantalla de control (gestos de uno a cuatro dedos)</item>
+		<item>La superficie braille</item>
+	</string-array>
+	<string-array name="nvda_pantalla_valores" translatable="false">
+		<item>control</item>
+		<item>braille</item>
+	</string-array>
+	<string name="aj_nvda_disposicion">Disposición del teclado de NVDA en el PC</string>
+	<string-array name="nvda_disposicion_nombres">
+		<item>Escritorio (con teclado numérico)</item>
+		<item>Portátil</item>
+	</string-array>
+	<string-array name="nvda_disposicion_valores" translatable="false">
+		<item>escritorio</item>
+		<item>portatil</item>
+	</string-array>
+	<string name="aj_nvda_decir_ordenes">Decir cada orden que se manda al PC</string>
+	<string name="aj_nvda_decir_ordenes_res">En la pantalla de control, además de lo que responda el PC. Las combinaciones con modificadores se dicen siempre.</string>
+	<string name="pc_aviso">Pantalla de control del PC. Un dedo, las flechas; un toque calla; dos toques, Intro; dos dedos a los lados, Tabulador; tres dedos hacia abajo, el menú de órdenes; tres dedos mantenidos, la lista de gestos. Para quitarla, cuatro dedos con dos toques o las dos teclas de volumen.</string>
+	<string name="pc_aviso_practica">Práctica de la pantalla de control, sin PC: cada gesto se dice y no se manda. Tres dedos mantenidos dicen la lista de gestos. Para salir, cuatro dedos con dos toques o las dos teclas de volumen.</string>
+	<string name="pc_rotulo">Pantalla de control del PC</string>
+	<string name="pc_rotulo_practica">Práctica (sin PC)</string>
+	<string name="pc_sin_conexion">No hay ningún PC conectado</string>
+	<string name="pc_gesto_sin_orden">Ese gesto no tiene orden</string>
+	<string name="pc_con_modificadores">%1$s más %2$s</string>
+	<string name="pc_mas">" más "</string>
+	<string name="pc_modificador_preparado">%1$s preparado para la siguiente tecla</string>
+	<string name="pc_modificador_quitado">%1$s quitado</string>
+	<string name="pc_dictado_enviado">Enviado al PC: %1$s</string>
+	<string name="pc_dictado_no">No se puede dictar ahora</string>
+	<string name="pc_pegado">Pegado en el PC</string>
+	<string name="pc_estado_practica">Práctica, sin PC</string>
+	<string name="pc_estado_modificadores">Preparado: %1$s</string>
+	<string name="pc_disposicion_escritorio">Teclado de NVDA de escritorio</string>
+	<string name="pc_disposicion_portatil">Teclado de NVDA de portátil</string>
+	<string name="pc_opcion_con_teclas">%1$s (%2$s)</string>
+	<string name="pc_menu_posicion">%1$s, %2$d de %3$d</string>
+	<string name="pc_menu_cerrado">Menú cerrado</string>
+	<string name="pc_menu_ayuda">Un dedo a los lados o arriba y abajo recorre; un toque repite; dos toques eligen; dos dedos a la izquierda vuelven atrás; dos dedos hacia arriba cierran el menú</string>
+	<string name="pc_gesto_nombre">%1$s, %2$s</string>
+	<string name="pc_gesto_y_orden">%1$s: %2$s</string>
+	<plurals name="pc_dedos">
+		<item quantity="one">Un dedo</item>
+		<item quantity="other">%d dedos</item>
+	</plurals>
+	<string name="pc_g_toque">un toque</string>
+	<string name="pc_g_doble_toque">dos toques</string>
+	<string name="pc_g_triple_toque">tres toques</string>
+	<string name="pc_g_mantener">mantener</string>
+	<string name="pc_g_izquierda">hacia la izquierda</string>
+	<string name="pc_g_derecha">hacia la derecha</string>
+	<string name="pc_g_arriba">hacia arriba</string>
+	<string name="pc_g_abajo">hacia abajo</string>
+	<string name="pc_gestos_ayuda">Cada gesto con su orden; dos toques la hacen</string>
+
+	<!-- Las órdenes de los gestos -->
+	<string name="pc_o_izquierda">Flecha izquierda</string>
+	<string name="pc_o_derecha">Flecha derecha</string>
+	<string name="pc_o_arriba">Flecha arriba</string>
+	<string name="pc_o_abajo">Flecha abajo</string>
+	<string name="pc_o_callar">Callar la voz (Control)</string>
+	<string name="pc_o_intro">Intro</string>
+	<string name="pc_o_espacio">Espacio</string>
+	<string name="pc_o_alt">Alt (la barra de menús)</string>
+	<string name="pc_o_tab">Tabulador, el control siguiente</string>
+	<string name="pc_o_tab_atras">Mayúsculas más Tabulador, el control anterior</string>
+	<string name="pc_o_escape">Escape</string>
+	<string name="pc_o_menu_contextual">Menú contextual (tecla de aplicaciones)</string>
+	<string name="pc_o_foco">Qué tiene el foco (NVDA más Tabulador)</string>
+	<string name="pc_o_dictar">Dictar un texto al PC</string>
+	<string name="pc_o_leer_linea">Leer la línea actual</string>
+	<string name="pc_o_inicio_windows">Menú Inicio (tecla Windows)</string>
+	<string name="pc_o_ventana_siguiente">Ventana siguiente (Alt más Tabulador)</string>
+	<string name="pc_o_ventana_anterior">Ventana anterior (Alt más Mayúsculas más Tabulador)</string>
+	<string name="pc_o_leer_todo">Leer todo</string>
+	<string name="pc_o_menu_ordenes">Menú de órdenes</string>
+	<string name="pc_o_titulo">Título de la ventana (NVDA más T)</string>
+	<string name="pc_o_escribir">Escribir un texto con el teclado del móvil</string>
+	<string name="pc_o_pegar_copiado">Pegar en el PC lo copiado en el móvil</string>
+	<string name="pc_o_ayuda_gestos">Lista de gestos</string>
+	<string name="pc_o_inicio">Inicio (principio de la línea)</string>
+	<string name="pc_o_fin">Fin (final de la línea)</string>
+	<string name="pc_o_retroceso">Retroceso (borrar hacia atrás)</string>
+	<string name="pc_o_suprimir">Suprimir</string>
+	<string name="pc_o_estado">Estado de la conexión</string>
+	<string name="pc_o_quitar">Quitar la pantalla de control</string>
+	<string name="pc_o_voz_pc">Callar u oír la voz del PC</string>
+	<string name="pc_o_modo_voz">Modo de voz de NVDA (NVDA más S)</string>
+
+	<!-- Las teclas -->
+	<string name="pc_t_izquierda">Flecha izquierda</string>
+	<string name="pc_t_derecha">Flecha derecha</string>
+	<string name="pc_t_arriba">Flecha arriba</string>
+	<string name="pc_t_abajo">Flecha abajo</string>
+	<string name="pc_t_insertar">Insertar</string>
+	<string name="pc_t_intro">Intro</string>
+	<string name="pc_t_escape">Escape</string>
+	<string name="pc_t_tab">Tabulador</string>
+	<string name="pc_t_retroceso">Retroceso</string>
+	<string name="pc_t_espacio">Espacio</string>
+	<string name="pc_t_windows">Windows</string>
+	<string name="pc_t_aplicaciones">Aplicaciones</string>
+	<string name="pc_t_bloq_mayus">Bloqueo de mayúsculas</string>
+	<string name="pc_t_num_mas">Más del teclado numérico</string>
+	<string name="pc_t_num_menos">Menos del teclado numérico</string>
+	<string name="pc_t_num_por">Por del teclado numérico</string>
+	<string name="pc_t_num_dividir">Dividir del teclado numérico</string>
+	<string name="pc_t_num_intro">Intro del teclado numérico</string>
+	<string name="pc_t_num_punto">Punto del teclado numérico</string>
+	<string name="pc_t_numerico">%1$s del teclado numérico</string>
+	<string name="pc_t_impr_pant">Imprimir pantalla</string>
+	<string name="pc_t_pausa">Pausa</string>
+	<string name="pc_t_punto">Punto</string>
+	<string name="pc_t_coma">Coma</string>
+
+	<!-- Las categorías del menú de órdenes -->
+	<string name="pc_c_windows">Windows</string>
+	<string name="pc_c_edicion">Edición y texto</string>
+	<string name="pc_c_nvda">NVDA</string>
+	<string name="pc_c_objetos">Navegación por objetos</string>
+	<string name="pc_c_revision">Cursor de revisión</string>
+	<string name="pc_c_web">Navegación web</string>
+	<string name="pc_c_teclas">Teclas sueltas</string>
+	<string name="pc_c_modificadores">Modificadores</string>
+	<string name="pc_c_gestos">Gestos de esta pantalla</string>
+	<string name="pc_c_pantalla">Esta pantalla y la conexión</string>
+
+	<string name="pc_w_inicio">Menú Inicio</string>
+	<string name="pc_w_escritorio">Ir al escritorio</string>
+	<string name="pc_w_explorador">Explorador de archivos</string>
+	<string name="pc_w_ejecutar">Ejecutar</string>
+	<string name="pc_w_buscar">Buscar en Windows</string>
+	<string name="pc_w_configuracion">Configuración de Windows</string>
+	<string name="pc_w_ventana_siguiente">Ventana siguiente</string>
+	<string name="pc_w_ventana_anterior">Ventana anterior</string>
+	<string name="pc_w_cerrar_ventana">Cerrar la ventana</string>
+	<string name="pc_w_menu_ventana">Menú de la ventana</string>
+	<string name="pc_w_maximizar">Maximizar la ventana</string>
+	<string name="pc_w_minimizar">Minimizar la ventana</string>
+	<string name="pc_w_barra_tareas">Barra de tareas</string>
+	<string name="pc_w_area_notificacion">Área de notificación</string>
+	<string name="pc_w_notificaciones">Centro de notificaciones</string>
+	<string name="pc_w_pestana_siguiente">Pestaña siguiente</string>
+	<string name="pc_w_pestana_anterior">Pestaña anterior</string>
+	<string name="pc_w_cerrar_pestana">Cerrar la pestaña</string>
+	<string name="pc_w_captura">Captura de pantalla</string>
+	<string name="pc_w_bloquear">Bloquear el PC</string>
+
+	<string name="pc_e_copiar">Copiar</string>
+	<string name="pc_e_cortar">Cortar</string>
+	<string name="pc_e_pegar">Pegar</string>
+	<string name="pc_e_deshacer">Deshacer</string>
+	<string name="pc_e_rehacer">Rehacer</string>
+	<string name="pc_e_seleccionar_todo">Seleccionar todo</string>
+	<string name="pc_e_guardar">Guardar</string>
+	<string name="pc_e_buscar">Buscar en el documento</string>
+	<string name="pc_e_nuevo">Nuevo</string>
+	<string name="pc_e_abrir">Abrir</string>
+	<string name="pc_e_imprimir">Imprimir</string>
+	<string name="pc_e_palabra_anterior">Palabra anterior</string>
+	<string name="pc_e_palabra_siguiente">Palabra siguiente</string>
+	<string name="pc_e_inicio_linea">Principio de la línea</string>
+	<string name="pc_e_fin_linea">Final de la línea</string>
+	<string name="pc_e_inicio_documento">Principio del documento</string>
+	<string name="pc_e_fin_documento">Final del documento</string>
+	<string name="pc_e_pagina_anterior">Página anterior</string>
+	<string name="pc_e_pagina_siguiente">Página siguiente</string>
+	<string name="pc_e_sel_caracter_izq">Seleccionar un carácter a la izquierda</string>
+	<string name="pc_e_sel_caracter_der">Seleccionar un carácter a la derecha</string>
+	<string name="pc_e_sel_palabra_izq">Seleccionar la palabra anterior</string>
+	<string name="pc_e_sel_palabra_der">Seleccionar la palabra siguiente</string>
+	<string name="pc_e_sel_linea_arriba">Seleccionar hasta la línea de arriba</string>
+	<string name="pc_e_sel_linea_abajo">Seleccionar hasta la línea de abajo</string>
+	<string name="pc_e_sel_inicio_linea">Seleccionar hasta el principio de la línea</string>
+	<string name="pc_e_sel_fin_linea">Seleccionar hasta el final de la línea</string>
+	<string name="pc_e_borrar_palabra">Borrar la palabra anterior</string>
+
+	<string name="pc_n_leer_todo">Leer todo</string>
+	<string name="pc_n_leer_linea">Leer la línea actual</string>
+	<string name="pc_n_titulo">Título de la ventana</string>
+	<string name="pc_n_foco">Qué tiene el foco</string>
+	<string name="pc_n_ventana">Leer la ventana entera</string>
+	<string name="pc_n_barra_estado">Barra de estado</string>
+	<string name="pc_n_seleccion">Leer el texto seleccionado</string>
+	<string name="pc_n_hora">La hora</string>
+	<string name="pc_n_fecha">La fecha</string>
+	<string name="pc_n_portapapeles">Leer el portapapeles del PC</string>
+	<string name="pc_n_formato">Formato del texto</string>
+	<string name="pc_n_enlace">Destino del enlace</string>
+	<string name="pc_n_modo_voz">Modo de voz (hablar, pitidos, apagada, a demanda)</string>
+	<string name="pc_n_modo_exploracion">Cambiar entre modo exploración y modo foco</string>
+	<string name="pc_n_lista_elementos">Lista de elementos</string>
+	<string name="pc_n_menu">Menú de NVDA</string>
+	<string name="pc_n_configuracion">Opciones de NVDA</string>
+	<string name="pc_n_ayuda_entrada">Ayuda de entrada (dice cada tecla sin hacerla)</string>
+	<string name="pc_n_dejar_pasar">Dejar pasar la siguiente tecla a la app</string>
+	<string name="pc_n_sintetizador">Elegir el sintetizador</string>
+	<string name="pc_n_voz_siguiente">Siguiente ajuste de la voz</string>
+	<string name="pc_n_voz_anterior">Ajuste anterior de la voz</string>
+	<string name="pc_n_voz_subir">Subir el ajuste de la voz</string>
+	<string name="pc_n_voz_bajar">Bajar el ajuste de la voz</string>
+	<string name="pc_n_salir">Salir de NVDA</string>
+
+	<string name="pc_ob_actual">Objeto actual</string>
+	<string name="pc_ob_contenedor">Objeto contenedor</string>
+	<string name="pc_ob_anterior">Objeto anterior</string>
+	<string name="pc_ob_siguiente">Objeto siguiente</string>
+	<string name="pc_ob_primero">Primer objeto de dentro</string>
+	<string name="pc_ob_activar">Activar el objeto</string>
+	<string name="pc_ob_al_foco">Navegador al objeto con el foco</string>
+	<string name="pc_ob_foco_al_navegador">Mover el foco al navegador</string>
+	<string name="pc_ob_dimensiones">Dónde está el objeto en la pantalla</string>
+	<string name="pc_ob_leer_todo_revision">Leer todo desde el cursor de revisión</string>
+
+	<string name="pc_r_linea_anterior">Línea anterior</string>
+	<string name="pc_r_linea_actual">Línea actual</string>
+	<string name="pc_r_linea_siguiente">Línea siguiente</string>
+	<string name="pc_r_palabra_anterior">Palabra anterior</string>
+	<string name="pc_r_palabra_actual">Palabra actual</string>
+	<string name="pc_r_palabra_siguiente">Palabra siguiente</string>
+	<string name="pc_r_caracter_anterior">Carácter anterior</string>
+	<string name="pc_r_caracter_actual">Carácter actual</string>
+	<string name="pc_r_caracter_siguiente">Carácter siguiente</string>
+	<string name="pc_r_principio">Principio del texto</string>
+	<string name="pc_r_final">Final del texto</string>
+	<string name="pc_r_leer_todo">Leer todo desde aquí</string>
+	<string name="pc_r_copiar_desde">Marcar el principio para copiar</string>
+	<string name="pc_r_copiar_hasta">Copiar hasta aquí</string>
+	<string name="pc_r_modo_revision_siguiente">Siguiente modo de revisión</string>
+	<string name="pc_r_modo_revision_anterior">Modo de revisión anterior</string>
+
+	<string name="pc_web_ayuda">Dos toques van al siguiente de ese tipo; dos dedos a la derecha, al anterior</string>
+	<string name="pc_web_encabezado">Encabezado</string>
+	<string name="pc_web_encabezado_1">Encabezado de nivel 1</string>
+	<string name="pc_web_encabezado_2">Encabezado de nivel 2</string>
+	<string name="pc_web_encabezado_3">Encabezado de nivel 3</string>
+	<string name="pc_web_encabezado_4">Encabezado de nivel 4</string>
+	<string name="pc_web_encabezado_5">Encabezado de nivel 5</string>
+	<string name="pc_web_encabezado_6">Encabezado de nivel 6</string>
+	<string name="pc_web_enlace">Enlace</string>
+	<string name="pc_web_enlace_no_visitado">Enlace no visitado</string>
+	<string name="pc_web_enlace_visitado">Enlace visitado</string>
+	<string name="pc_web_boton">Botón</string>
+	<string name="pc_web_campo_formulario">Campo de formulario</string>
+	<string name="pc_web_campo_edicion">Campo de edición</string>
+	<string name="pc_web_casilla">Casilla de verificación</string>
+	<string name="pc_web_cuadro_combinado">Cuadro combinado</string>
+	<string name="pc_web_boton_opcion">Botón de opción</string>
+	<string name="pc_web_lista">Lista</string>
+	<string name="pc_web_elemento_lista">Elemento de lista</string>
+	<string name="pc_web_tabla">Tabla</string>
+	<string name="pc_web_region">Región</string>
+	<string name="pc_web_grafico">Gráfico</string>
+	<string name="pc_web_objeto">Objeto incrustado</string>
+	<string name="pc_web_separador">Separador</string>
+	<string name="pc_web_cita">Cita</string>
+	<string name="pc_web_marco">Marco</string>
+	<string name="pc_web_parrafo">Párrafo</string>
+	<string name="pc_web_texto">Texto que no es enlace</string>
+	<string name="pc_web_anotacion">Anotación</string>
+	<string name="pc_web_error">Error de ortografía</string>
+	<string name="pc_web_fuera_contenedor">Salir del contenedor</string>
+	<string name="pc_web_buscar">Buscar en la página</string>
+	<string name="pc_web_buscar_siguiente">Buscar el siguiente</string>
+	<string name="pc_web_buscar_anterior">Buscar el anterior</string>
+	<string name="pc_web_celda_derecha">Celda de la derecha</string>
+	<string name="pc_web_celda_izquierda">Celda de la izquierda</string>
+	<string name="pc_web_celda_abajo">Celda de abajo</string>
+	<string name="pc_web_celda_arriba">Celda de arriba</string>
+	<string name="pc_web_lista_elementos">Lista de elementos de la página</string>
+	<string name="pc_web_modo">Cambiar entre modo exploración y modo foco</string>
+	<string name="pc_web_refrescar">Refrescar la página en NVDA</string>
+	<string name="pc_web_direccion">Barra de direcciones</string>
+	<string name="pc_web_atras">Página anterior</string>
+	<string name="pc_web_adelante">Página siguiente</string>
+
+	<string name="pc_k_letras">Letras</string>
+	<string name="pc_k_numeros">Números</string>
+	<string name="pc_k_funcion">Teclas de función</string>
+	<string name="pc_k_numerico">Teclado numérico</string>
+
+	<string name="pc_m_ayuda">Un modificador preparado va con la siguiente tecla u orden: Control y después la letra S es guardar</string>
+	<string name="pc_m_soltar">Quitar los modificadores preparados</string>
+	<string name="pc_m_soltados">Sin modificadores</string>
+	<string name="pc_m_mantener_alt">Dejar Alt pulsada (para pasar las ventanas de una en una)</string>
+	<string name="pc_m_soltar_alt">Soltar Alt</string>
+	<string name="pc_m_mantenida">%1$s pulsada. Acuérdate de soltarla.</string>
+	<string name="pc_m_soltada">%1$s soltada</string>
+
+	<string name="pc_p_disposicion_a_escritorio">Pasar a la disposición de escritorio de NVDA</string>
+	<string name="pc_p_disposicion_a_portatil">Pasar a la disposición de portátil de NVDA</string>
+	<string name="pc_p_decir_ordenes">Decir cada orden que se manda</string>
+	<string name="pc_p_no_decir_ordenes">No decir las órdenes que se mandan</string>
+	<string name="pc_p_decir_ordenes_si">Se dirá cada orden</string>
+	<string name="pc_p_decir_ordenes_no">No se dirán las órdenes</string>
+	<string name="pc_p_superficie_braille">Pasar a la superficie braille</string>
+
+	<!-- El tutorial del control de un PC -->
+	<string name="pct_1_titulo">Qué es y qué hace falta</string>
+	<string name="pct_1">Con el control de un PC manejas un ordenador con Windows desde el móvil como si tuvieras su teclado en las manos: cada gesto en la pantalla de control manda una tecla o una combinación al PC, y lo que dice el lector del PC lo oyes aquí, con la voz de Tiresias.\n\nHace falta: en el PC, Windows con NVDA 2025.1 o posterior (trae el acceso remoto de serie), o un NVDA anterior con el complemento NVDA Remote, o Tiresias para Windows. En el móvil, Tiresias activo. Y que los dos tengan Internet o estén en la misma wifi.\n\nNo necesitas saber braille: la pantalla de control usa gestos de uno a cuatro dedos. Si prefieres el braille, también está la superficie braille (Ajustes, Braille, «Al conectar con un PC»).</string>
+	<string name="pct_2_titulo">Preparar el PC</string>
+	<string name="pct_2">En el PC, con NVDA: abre el menú de NVDA (NVDA más N), Herramientas, Acceso remoto, Conectar (o pulsa NVDA más Alt más R). Si no ves Acceso remoto, actívalo en Opciones, Acceso remoto, «Habilitar acceso remoto».\n\nEn el diálogo elige «Permitir que este equipo sea controlado». En Servidor, «Usar existente» y escribe nvdaremote.com (o un servidor propio). En Clave, una clave larga y difícil de adivinar, o pulsa «Generar clave». Acepta. NVDA dice que está conectado al servidor.\n\nSi los dos están en la misma wifi puedes elegir «Alojar localmente»: el PC es el servidor, con el puerto 6837; en el móvil escribirás la IP del PC. Es lo más privado: nada sale de casa.\n\nPara no tener que hacerlo cada vez, en Opciones, Acceso remoto, marca «Conectar automáticamente al iniciar NVDA» con los mismos datos. Y para pasar los datos al móvil sin escribirlos, en Herramientas, Acceso remoto, «Copiar enlace»: pégalo en un mensaje y ábrelo o cópialo en el móvil.\n\nCon Tiresias para Windows el camino es el mismo en su menú de acceso remoto.\n\nImportante: quien tenga el servidor y la clave maneja tu PC. No la compartas, y cámbiala si la has mandado a alguien.</string>
+	<string name="pct_3_titulo">Conectar desde el móvil</string>
+	<string name="pct_3">En el móvil, en el menú lateral de Tiresias, «Controlar un PC con NVDA». Pulsa «Conectar a un PC», escribe el servidor (nvdaremote.com, o la IP del PC con dos puntos y el puerto si no es el 6837) y la misma clave que en el PC. O, si has copiado el enlace nvdaremote, «Pegar un enlace nvdaremote».\n\nSi Tiresias pregunta por el certificado del servidor (con un servidor propio o la conexión directa), fíate solo si es el tuyo. Arriba se dice el estado: «Conectado al PC» es que ya está. «En el canal, pero el PC no está» es que la clave no es la misma o el PC aún no ha dado «Permitir que este equipo sea controlado».\n\nCuando entra el PC, la pantalla de control se pone sola. Para no escribirlo todo otra vez, «Guardar este equipo»: la clave queda cifrada en el móvil, y la próxima vez eliges el equipo y Conectar.</string>
+	<string name="pct_4_titulo">La pantalla de control</string>
+	<string name="pct_4">La pantalla de control ocupa todo el móvil y es negra: no hay nada que explorar, toda ella es para los gestos. Los gestos se hacen con uno, dos, tres o cuatro dedos, y son de cinco clases: un toque, dos toques seguidos, tres toques, mantener (dejar los dedos quietos medio segundo) y deslizar hacia un lado, arriba o abajo.\n\nLa norma para acordarse: un dedo es lo más usado (flechas, Intro, callar); dos dedos, el Tabulador, Escape y el menú contextual; tres dedos, las ventanas y el menú de órdenes; cuatro dedos, el principio y el final, el estado y quitar la pantalla.\n\nPara quitarla: cuatro dedos con dos toques, o las dos teclas de volumen a la vez. La pantalla no se quita al cambiar de app ni al apagar el móvil (según Ajustes, Braille, «Al bloquear el móvil»), pero sí tras cinco minutos sin tocarla. Para volver a ponerla, en Controlar un PC, «Poner la pantalla de control», o asigna a un gesto la acción «Pantalla de control del PC».\n\nSi el PC habla demasiado, un toque con un dedo lo calla.</string>
+	<string name="pct_5_titulo">Moverse por Windows</string>
+	<string name="pct_5">Un dedo hacia la izquierda, la derecha, arriba o abajo son las flechas del teclado: con ellas recorres los menús, las listas y el texto.\n\nDos dedos hacia la derecha es el Tabulador, y hacia la izquierda, Mayúsculas más Tabulador: así se pasa de un control al siguiente en las ventanas y los diálogos (botones, casillas, campos). Es la tecla que más usarás.\n\nDos toques con un dedo es Intro: pulsa el botón, abre el archivo o la opción del menú. Tres toques con un dedo es Espacio: marca y desmarca las casillas. Dos dedos hacia arriba es Escape: cierra el menú o el diálogo sin hacer nada. Dos dedos hacia abajo es el menú contextual (lo que sale con el botón derecho del ratón). Un dedo mantenido es Alt: va a la barra de menús del programa; luego muévete con las flechas y acepta con dos toques.\n\nPrueba: dos dedos mantenidos abren el menú Inicio; dicta lo que buscas (dos dedos, dos toques) y acepta con dos toques de un dedo.</string>
+	<string name="pct_6_titulo">Todos los gestos</string>
+	<string name="pct_6">Esta es la tabla entera. Vuelve aquí cuando quieras repasarla; dentro de la pantalla de control, tres dedos mantenidos la abren como un menú.</string>
+	<string name="pct_7_titulo">Leer con NVDA</string>
+	<string name="pct_7">Tres dedos hacia arriba es «leer todo»: NVDA lee desde donde está hasta el final, y un toque con un dedo lo para. Dos dedos con tres toques leen la línea actual. Tres dedos con un toque dicen el título de la ventana (para saber dónde estás). Dos dedos con un toque dicen qué tiene el foco.\n\nEn el menú de órdenes, categoría NVDA, hay más: la barra de estado, la hora y la fecha, leer el portapapeles del PC, el formato del texto, la lista de elementos, las opciones de NVDA y cambiar el modo de voz (hablar, pitidos, apagada o a demanda).\n\nLo que dice el PC se oye con la voz de Tiresias y en su idioma. Si quieres que no se oiga un rato (para atender el móvil), cuatro dedos con tres toques callan la voz del PC y la vuelven a dar. Y si quieres que Tiresias diga cada orden que manda («Tabulador», «Intro»), actívalo en Ajustes, Braille, o en el menú de órdenes, «Esta pantalla».</string>
+	<string name="pct_8_titulo">Las ventanas y el escritorio</string>
+	<string name="pct_8">Tres dedos hacia la derecha es Alt más Tabulador: pasa a la ventana siguiente; hacia la izquierda, a la anterior. Si tienes muchas abiertas, en el menú de órdenes, Modificadores, «Dejar Alt pulsada» te deja recorrerlas con el Tabulador de una en una y oír cada una; al acabar, «Soltar Alt».\n\nEn el menú de órdenes, categoría Windows, está lo demás: el menú Inicio, ir al escritorio, el Explorador de archivos, Ejecutar, Buscar, la Configuración, cerrar la ventana (Alt más F4), el menú de la ventana, maximizar y minimizar, la barra de tareas, el área de notificación, las pestañas del navegador, bloquear el PC y Control más Alt más Suprimir. Esta última solo funciona con NVDA instalado (no con la versión portable) y puede estar limitada por la configuración del PC.</string>
+	<string name="pct_9_titulo">Escribir</string>
+	<string name="pct_9">Hay tres maneras de escribir en el PC. Dos dedos con dos toques es dictar: habla y lo dicho se pega donde esté el cursor del PC. Tres dedos con dos toques abre el teclado del móvil: la pantalla de control se aparta mientras escribes, y al aceptar vuelve sola. Tres dedos con tres toques pegan en el PC lo que tengas copiado en el móvil.\n\nDesde el PC al móvil: en NVDA, Herramientas, Acceso remoto, «Enviar portapapeles» manda lo copiado en el PC al móvil, y Tiresias avisa.\n\nPara corregir: cuatro dedos hacia la izquierda es Retroceso; hacia la derecha, Suprimir; hacia arriba, Inicio (principio de la línea); hacia abajo, Fin. En el menú de órdenes, Edición y texto, están copiar, cortar, pegar, deshacer, seleccionar todo, guardar, buscar, ir por palabras y seleccionar por caracteres, palabras y líneas. Para una letra suelta o un atajo con letra, Teclas sueltas, Letras (o Números y Teclas de función).</string>
+	<string name="pct_10_titulo">El menú de órdenes</string>
+	<string name="pct_10">Tres dedos hacia abajo abren el menú de órdenes, con todo lo que no tiene gesto propio, por categorías: Windows, Edición y texto, NVDA, Navegación por objetos, Cursor de revisión, Navegación web, Teclas sueltas, Modificadores, Gestos de esta pantalla y Esta pantalla.\n\nDentro del menú, un dedo hacia la derecha o abajo pasa a la opción siguiente y hacia la izquierda o arriba a la anterior; un toque repite la opción; dos toques la eligen (y el menú se cierra); dos dedos hacia la izquierda vuelven a la categoría; dos dedos hacia arriba (o tres hacia abajo) cierran el menú; tres dedos hacia arriba van a la primera opción.\n\nLos modificadores (Control, Alt, Mayúsculas, Windows y la tecla NVDA) se preparan para la siguiente tecla: elige Control en Modificadores y luego, en Teclas sueltas, Letras, la S: es Control más S, guardar. Puedes preparar varios. Cuatro dedos con un toque dicen el estado, con los modificadores preparados; en Modificadores, «Quitar los modificadores preparados» los suelta.</string>
+	<string name="pct_11_titulo">Internet con NVDA</string>
+	<string name="pct_11">En las páginas web NVDA tiene dos modos. En el modo exploración lees la página con las flechas, línea a línea, y saltas por tipos de elemento con letras rápidas. En el modo foco escribes en los campos y usas los controles como en un programa. NVDA cambia solo al entrar en un campo; para cambiar a mano, en el menú de órdenes, Navegación web, «Cambiar entre modo exploración y modo foco» (NVDA más Espacio).\n\nLas letras rápidas están en Navegación web: encabezados (y por nivel, del 1 al 6), enlaces, botones, campos de formulario y de edición, casillas, cuadros combinados, listas, tablas, regiones, gráficos y más. Dos toques van al siguiente de ese tipo; dos dedos hacia la derecha, al anterior. En las tablas, las celdas se recorren con las opciones «Celda de la derecha», «de la izquierda», «de abajo» y «de arriba».\n\nLa lista de elementos (NVDA más F7) enseña todos los enlaces, encabezados o campos de la página: recórrela con las flechas y acepta con dos toques. Para buscar un texto en la página, «Buscar en la página», dicta o escribe, e Intro. Para ir a una dirección, «Barra de direcciones» (Control más L), dicta o escribe la dirección e Intro. «Página anterior» es Alt más flecha izquierda.</string>
+	<string name="pct_12_titulo">Objetos y cursor de revisión</string>
+	<string name="pct_12">Cuando el Tabulador no llega a algo (un texto suelto, un aviso), NVDA tiene la navegación por objetos: en el menú de órdenes, Navegación por objetos, están el objeto actual, el contenedor, el anterior y el siguiente, el primero de dentro, activar el objeto y volver al foco.\n\nEl cursor de revisión lee el texto de cualquier sitio sin mover el cursor de verdad: en Cursor de revisión, líneas, palabras y caracteres anteriores, actuales y siguientes, el principio y el final, leer todo desde ahí y copiar un trozo («Marcar el principio» y «Copiar hasta aquí»).\n\nEstas órdenes dependen de la disposición del teclado de NVDA en el PC: de escritorio (con teclado numérico) o de portátil. Pon la misma que tenga NVDA (en NVDA, Opciones, Teclado, «Disposición del teclado») en Ajustes, Braille, «Disposición del teclado de NVDA en el PC», o cámbiala en el menú de órdenes, Esta pantalla.</string>
+	<string name="pct_13_titulo">Cuando algo falla</string>
+	<string name="pct_13">«No hay ningún PC conectado»: mira en Controlar un PC el estado. Si dice «En el canal, pero el PC no está», en el PC falta «Permitir que este equipo sea controlado» o la clave no es la misma.\n\nNo se oye el PC: cuatro dedos con tres toques vuelven a dar la voz del PC si la habías callado; cuatro dedos mantenidos cambian el modo de voz de NVDA (si está «apagada» o «a demanda» no habla); y sube el volumen de la voz de Tiresias.\n\nLas teclas hacen cosas raras: cuatro dedos con un toque dicen si hay un modificador preparado o Alt pulsada; en el menú de órdenes, Modificadores, «Quitar los modificadores preparados» y «Soltar Alt».\n\nNo puedo entrar en el inicio de sesión ni en los avisos de administrador: NVDA tiene que estar instalado en el PC (no portable) y con «Usar NVDA durante el inicio de sesión» marcado en sus opciones generales; Control más Alt más Suprimir puede no funcionar según la configuración del PC.\n\nSe quita la pantalla: tras cinco minutos sin tocarla se quita sola; vuelve a ponerla desde Controlar un PC o con la acción «Pantalla de control del PC». Al bloquear el móvil, de fábrica se desconecta (Ajustes, Braille, «Al bloquear el móvil con un PC conectado»). La pantalla de control necesita Android 11 o posterior.\n\nSeguridad: el servidor de retransmisión ve lo que pasa; usa uno de confianza o la conexión directa. Para cortar, en el menú de órdenes, Esta pantalla, «Desconectar del PC», o en la pantalla de Controlar un PC.</string>
+	<string name="pct_14_titulo">Practicar</string>
+	<string name="pct_14">Ya conoces todo lo que hace falta: preparar el PC, conectar, moverte, leer, las ventanas, escribir, el menú de órdenes, la web, los objetos y qué hacer si algo falla.\n\nCon el botón de abajo se pone la pantalla de control sin PC: cada gesto se dice y no se manda, el menú de órdenes se abre igual y nada llega a ningún sitio. Practica hasta que los gestos te salgan sin pensar; para salir, cuatro dedos con dos toques o las dos teclas de volumen. Después, conecta con tu PC desde Controlar un PC con NVDA.</string>
 </resources>

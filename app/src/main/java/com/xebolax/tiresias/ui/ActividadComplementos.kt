@@ -16,6 +16,7 @@ import com.xebolax.tiresias.accesibilidad.confirmar
 import com.xebolax.tiresias.accesibilidad.elegir
 import com.xebolax.tiresias.base.Registro
 import com.xebolax.tiresias.scripts.Scripts
+import com.xebolax.tiresias.servicio.PuenteEscritorio
 import com.xebolax.tiresias.servicio.ServicioTiresias
 
 /**
@@ -26,11 +27,13 @@ import com.xebolax.tiresias.servicio.ServicioTiresias
 class ActividadComplementos : ActividadBase() {
 	private lateinit var p: Pantalla
 	private val scripts by lazy { Scripts(null, this) }
+	private val actualizaciones by lazy { com.xebolax.tiresias.actualizaciones.GestorActualizaciones(this) }
 
 	private val elegirArchivo = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri -> uri?.let { revisar(it) } }
 
 	override fun onCreate(estado: Bundle?) {
 		super.onCreate(estado)
+		actualizaciones
 		p = pantalla(getString(R.string.ui_complementos))
 		construir()
 	}
@@ -78,6 +81,7 @@ class ActividadComplementos : ActividadBase() {
 		}
 		p.separador()
 		p.boton(getString(R.string.tienda_abrir)) { abrirTienda() }
+		if (PuenteEscritorio.PUBLICADO) p.botonSecundario(TiendaEscritorio.fila(this)) { TiendaEscritorio.abrir(this, actualizaciones) }
 		p.botonSecundario(getString(R.string.tienda_fuentes, Tienda.fuentes(this).size)) { fuentes() }
 		p.botonSecundario(getString(R.string.comp_instalar)) { elegirArchivo.launch(arrayOf("application/javascript", "text/javascript", "text/*", "application/octet-stream")) }
 		if (scripts.activos && lista.isNotEmpty()) p.botonSecundario(getString(R.string.comp_apagar)) {
@@ -127,7 +131,8 @@ class ActividadComplementos : ActividadBase() {
 				return@launch
 			}
 			val instalados = scripts.instalados().associate { it.id to it.version }
-			elegir(getString(R.string.tienda_titulo), catalogo.map { e ->
+			val escritorio = listOf(TiendaEscritorio.fila(this@ActividadComplementos) to { TiendaEscritorio.abrir(this@ActividadComplementos, actualizaciones) }).filter { PuenteEscritorio.PUBLICADO }
+			elegir(getString(R.string.tienda_titulo), escritorio + catalogo.map { e ->
 				val estado = when {
 					Tienda.esNueva(e, instalados[e.id]) -> getString(R.string.tienda_actualizable, instalados[e.id])
 					e.id in instalados -> getString(R.string.tienda_instalado)

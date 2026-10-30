@@ -116,8 +116,11 @@ enum class Accion {
 	APAGAR_SCRIPTS, ORDENES_COMPLEMENTOS, MODO_SEGURO,
 	// 1.0.7 (Can Talk): navegación web y búsqueda con una superficie braille; traducir lo último dicho; manejar un PC con NVDA
 	NAVEGACION_BRAILLE, BUSQUEDA_BRAILLE, TRADUCIR_ULTIMO, CONTROL_PC,
+	// La pantalla de control del PC (gestos de uno a cuatro dedos para manejar Windows), si hay un PC conectado
+	CONTROL_PC_PANTALLA,
 	// 1.0.7: asistencia remota entre dos móviles: pedir ayuda al contacto, la pantalla, terminar y manejar el otro móvil con los gestos propios
 	PEDIR_AYUDA, AYUDA_REMOTA, AYUDA_TERMINAR, AYUDA_CONTROLAR,
+	ESCRITORIO_SISTEMA, LLAMADA_CONTESTAR, LLAMADA_RECHAZAR, ESTADO_Y_AVISOS,
 }
 
 /** Lo que puede decir el gesto de estado («Hora, fecha y batería»), en el orden que se elija. */

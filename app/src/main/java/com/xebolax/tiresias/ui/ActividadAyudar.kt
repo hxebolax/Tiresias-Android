@@ -31,6 +31,7 @@ import com.xebolax.tiresias.nucleo.remoto.MensajeAyuda
 import com.xebolax.tiresias.remoto.Asistencia
 import com.xebolax.tiresias.remoto.SesionAyudado
 import com.xebolax.tiresias.remoto.SesionAyudante
+import com.xebolax.tiresias.servicio.PuenteEscritorio
 import com.xebolax.tiresias.servicio.ServicioTiresias
 import java.util.Locale
 
@@ -208,6 +209,7 @@ class ActividadAyudar : ActividadBase() {
 		enlace(R.string.ayudar_ajustes_tiresias, SesionAyudado.ENLACE_AJUSTES_TIRESIAS)
 		enlace(R.string.ayudar_accesibilidad, SesionAyudado.ENLACE_ACCESIBILIDAD)
 		enlace(R.string.ayudar_wifi, SesionAyudado.ENLACE_WIFI)
+		if (PuenteEscritorio.PUBLICADO) enlace(R.string.ayudar_escritorio_sistema, SesionAyudado.ENLACE_ESCRITORIO_SISTEMA)
 		p.botonSecundario(getString(R.string.ayudar_tienda)) {
 			pedirTexto(getString(R.string.ayudar_tienda), getString(R.string.ayudar_tienda_pista)) { texto ->
 				if (texto.isNotEmpty()) mandar(MensajeAyuda.AbrirEnlace(s.nuevaPeticion(), "market://search?q=" + Uri.encode(texto)))
@@ -301,7 +303,7 @@ class ActividadAyudar : ActividadBase() {
 	}
 
 	private fun todasLasAcciones() {
-		val acciones = Accion.entries.filter { it != Accion.NINGUNA && it !in SesionAyudado.PROHIBIDAS }
+		val acciones = Accion.entries.filter { it != Accion.NINGUNA && it !in SesionAyudado.PROHIBIDAS && it !in PuenteEscritorio.ACCIONES_OCULTAS }
 		elegir(getString(R.string.ayudar_todas), acciones.map { a -> ActividadGestos.nombreAccion(this, a) to { mandar(MensajeAyuda.HacerAccion(a.name)) } })
 	}
 

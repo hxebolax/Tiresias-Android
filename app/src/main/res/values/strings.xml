@@ -166,6 +166,7 @@
 	<string name="ui_etiquetas">Etiquetas</string>
 	<string name="ui_perfiles">Perfiles</string>
 	<string name="ui_tutorial">Tutorial</string>
+	<string name="ui_experimentos">Experimentos</string>
 	<string name="ui_manual">Manual de uso</string>
 	<string name="ui_acerca">Acerca de y actualizaciones</string>
 	<string name="ui_asistente">Asistente de primeros pasos</string>

@@ -36,8 +36,19 @@ abstract class ModoSuperficie(protected val lector: Lector) {
 	/** Lo dibujado arriba (para quien ve un poco). */
 	open val rotulo: String = "⠿ Tiresias"
 
+	/**
+	 * Una vista propia en vez de la superficie braille (la pantalla de control
+	 * de un PC, con sus gestos): recibe los toques tal cual. [tocado] se llama con
+	 * cada toque, para que la superficie no se quite sola por no usarla. null:
+	 * la superficie braille de siempre.
+	 */
+	open fun crearVista(tocado: () -> Unit): android.view.View? = null
+
 	/** Quién la tiene puesta (para cerrarla desde dentro). */
 	internal var encima: SuperficieEncima? = null
+
+	/** Si [this] es lo que está puesto ahora (para no atender lo que llega después de quitarla). */
+	val puesta: Boolean get() = encima?.modo === this
 
 	fun cerrar() {
 		encima?.cerrar()
@@ -58,7 +69,7 @@ abstract class ModoSuperficie(protected val lector: Lector) {
  */
 class SuperficieEncima(private val lector: Lector) {
 	private val principal = Handler(Looper.getMainLooper())
-	@Volatile private var vista: SuperficieBraille? = null
+	@Volatile private var vista: android.view.View? = null
 	@Volatile var modo: ModoSuperficie? = null
 		private set
 
@@ -93,7 +104,7 @@ class SuperficieEncima(private val lector: Lector) {
 				}
 				override fun espejo(): Boolean = lector.ajustes.brailleEspejo
 			}
-			val v = SuperficieBraille(lector.servicio, oyente, lector.textos, parteDelAlto = 0f, rotulo = m.rotulo)
+			val v = m.crearVista { tocado() } ?: SuperficieBraille(lector.servicio, oyente, lector.textos, parteDelAlto = 0f, rotulo = m.rotulo)
 			val params = WindowManager.LayoutParams(
 				WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT,
 				WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY,
@@ -256,7 +267,8 @@ class NavegacionWebBraille(lector: Lector, private val hacer: (Accion) -> Boolea
  */
 class BusquedaBraille(lector: Lector, private val hacer: (Accion) -> Boolean) : ModoSuperficie(lector) {
 	private val consulta = StringBuilder()
-	private var enApps = false
+	/** Desde el Escritorio de Tiresias se empieza por las apps: es lo que se busca ahí. */
+	private var enApps = runCatching { lector.servicio.rootInActiveWindow?.packageName == com.xebolax.tiresias.nucleo.escritorio.Contrato.PAQUETE_ESCRITORIO }.getOrDefault(false)
 	private var numero = false
 	private var actual = -1
 	private var resultados: List<Pair<String, () -> Boolean>> = emptyList()
@@ -331,10 +343,9 @@ class BusquedaBraille(lector: Lector, private val hacer: (Accion) -> Boolean) : 
 	private fun apps(q: String): List<Pair<String, () -> Boolean>> {
 		val pm = lector.servicio.packageManager
 		return runCatching {
-			pm.queryIntentActivities(Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER), 0)
-				.map { it.loadLabel(pm).toString() to it.activityInfo.packageName }
+			com.xebolax.tiresias.base.Lanzables.todas(lector.servicio)
+				.map { it.nombre to it.paquete }
 				.filter { normalizar(it.first).contains(q) }
-				.distinctBy { it.second }
 				.sortedWith(compareBy({ !normalizar(it.first).startsWith(q) }, { it.first.lowercase() }))
 				.take(MAXIMO)
 				.map { (nombre, paquete) ->

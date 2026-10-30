@@ -14,6 +14,7 @@ import com.xebolax.tiresias.base.Registro
 import com.xebolax.tiresias.ia.Secretos
 import com.xebolax.tiresias.nucleo.remoto.Nvda
 import com.xebolax.tiresias.remoto.ClienteNvda
+import com.xebolax.tiresias.remoto.SuperficieControlPc
 import com.xebolax.tiresias.remoto.SuperficiePc
 import com.xebolax.tiresias.servicio.ServicioTiresias
 import org.json.JSONArray
@@ -81,7 +82,8 @@ class ActividadControlPc : ActividadBase() {
 		estado = p.estadoVivo(textoEstado())
 		p.parrafo(getString(R.string.nvda_explicacion))
 		if (cl != null && cl.estado != ClienteNvda.Estado.TERMINADO) {
-			p.boton(getString(R.string.nvda_poner_superficie)) { ponerSuperficie() }
+			p.boton(getString(R.string.pc_poner_pantalla)) { ponerPantalla() }
+			p.botonSecundario(getString(R.string.nvda_poner_superficie)) { ponerSuperficie() }
 			p.botonSecundario(getString(R.string.nvda_enviar_texto)) {
 				pedirTexto(getString(R.string.nvda_enviar_texto), getString(R.string.nvda_enviar_texto_pista), multilinea = true) { texto ->
 					if (texto.isNotEmpty()) cl.pegarTexto(texto)
@@ -99,9 +101,10 @@ class ActividadControlPc : ActividadBase() {
 			p.botonSecundario(getString(R.string.nvda_guardar)) { guardarEquipo() }
 			p.boton(getString(R.string.nvda_menu_desconectar)) {
 				cl.terminar()
-				ServicioTiresias.instancia?.lectorActual?.superficie?.let { if (it.modo is SuperficiePc) it.cerrar() }
+				ServicioTiresias.instancia?.lectorActual?.superficie?.let { if (it.modo is SuperficiePc || it.modo is SuperficieControlPc) it.cerrar() }
 				construir()
 			}
+			aprender()
 			return
 		}
 		p.encabezado(getString(R.string.nvda_equipos))
@@ -113,6 +116,21 @@ class ActividadControlPc : ActividadBase() {
 		p.encabezado(getString(R.string.nvda_nuevo))
 		p.boton(getString(R.string.nvda_conectar_nuevo)) { pedirDatos() }
 		p.botonSecundario(getString(R.string.nvda_pegar_enlace)) { pegarEnlace() }
+		aprender()
+	}
+
+	/** El tutorial, la lista de gestos y la práctica sin PC: siempre a mano, con o sin conexión. */
+	private fun aprender() {
+		p.encabezado(getString(R.string.pc_aprender))
+		p.parrafo(getString(R.string.pc_aprender_texto))
+		p.boton(getString(R.string.pc_tutorial)) { startActivity(android.content.Intent(this, ActividadTutorialPc::class.java)) }
+		p.botonSecundario(getString(R.string.pc_lista_gestos)) {
+			startActivity(android.content.Intent(this, ActividadTutorialPc::class.java).putExtra("leccion", ActividadTutorialPc.LECCION_GESTOS))
+		}
+		p.botonSecundario(getString(R.string.pc_practicar)) {
+			val lector = ServicioTiresias.instancia?.lectorActual
+			if (lector == null) avisar(getString(R.string.nvda_sin_tiresias)) else lector.superficie.abrir(SuperficieControlPc(lector, null, practica = true))
+		}
 	}
 
 	private fun equipos(): List<JSONObject> = runCatching {
@@ -132,7 +150,7 @@ class ActividadControlPc : ActividadBase() {
 		elegir(e.optString("nombre"), listOf(
 			getString(R.string.nvda_conectar) to {
 				val clave = Secretos(this).leer("nvda_$id")
-				if (clave.isEmpty()) pedirTexto(getString(R.string.nvda_clave), getString(R.string.nvda_clave_pista)) { k -> conectar(e.optString("host"), e.optInt("puerto", Nvda.PUERTO), k, null) }
+				if (clave.isEmpty()) pedirClave(e.optString("host"), e.optInt("puerto", Nvda.PUERTO))
 				else conectar(e.optString("host"), e.optInt("puerto", Nvda.PUERTO), clave, null)
 			},
 			getString(R.string.nvda_quitar_equipo) to {
@@ -149,10 +167,23 @@ class ActividadControlPc : ActividadBase() {
 		pedirTexto(getString(R.string.nvda_servidor), getString(R.string.nvda_servidor_pista), ControlPc.host.ifBlank { "nvdaremote.com" }) { servidor ->
 			Nvda.enlace(servidor)?.let { return@pedirTexto conectar(it.host, it.puerto, it.clave, null) }
 			val (host, puerto) = separar(servidor)
-			if (host.isBlank()) return@pedirTexto
-			pedirTexto(getString(R.string.nvda_clave), getString(R.string.nvda_clave_pista)) { clave ->
-				if (clave.isNotBlank()) conectar(host, puerto, clave, null)
+			// Sin servidor no hay a dónde conectar: se dice y se vuelve a pedir
+			if (host.isBlank()) {
+				avisar(getString(R.string.nvda_falta_servidor), mostrar = true)
+				pedirDatos()
+				return@pedirTexto
 			}
+			pedirClave(host, puerto)
+		}
+	}
+
+	/** Pide la clave para [host]; vacía, avisa y la vuelve a pedir (cancelar sí deja salir). */
+	private fun pedirClave(host: String, puerto: Int) {
+		pedirTexto(getString(R.string.nvda_clave), getString(R.string.nvda_clave_pista)) { clave ->
+			if (clave.isBlank()) {
+				avisar(getString(R.string.nvda_falta_clave), mostrar = true)
+				pedirClave(host, puerto)
+			} else conectar(host, puerto, clave.trim(), null)
 		}
 	}
 
@@ -187,10 +218,10 @@ class ActividadControlPc : ActividadBase() {
 		if (cl !== ControlPc.cliente) return
 		if (cl.estado != ultimo) {
 			construir()
-			// Al entrar el PC, la superficie braille se pone sola: es para lo que se conecta
+			// Al entrar el PC, la pantalla de control (o la superficie braille, si se ha elegido) se pone sola: es para lo que se conecta
 			if (cl.estado == ClienteNvda.Estado.CONECTADO && ultimoPuesto !== cl) {
 				ultimoPuesto = cl
-				ponerSuperficie()
+				if (ajustes.nvdaPantalla == Ajustes.NVDA_PANTALLA_BRAILLE) ponerSuperficie() else ponerPantalla()
 			}
 		} else estado.text = textoEstado()
 	}
@@ -231,6 +262,16 @@ class ActividadControlPc : ActividadBase() {
 			return
 		}
 		lector.superficie.abrir(SuperficiePc(lector, cl) {})
+	}
+
+	private fun ponerPantalla() {
+		val cl = ControlPc.cliente ?: return
+		val lector = ServicioTiresias.instancia?.lectorActual
+		if (lector == null) {
+			avisar(getString(R.string.nvda_sin_tiresias))
+			return
+		}
+		lector.superficie.abrir(SuperficieControlPc(lector, cl))
 	}
 
 	private companion object {

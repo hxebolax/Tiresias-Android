@@ -53,7 +53,10 @@ class PlantillasAndroid(contexto: Context) : Plantillas {
  * - `identificadores.tsv`: las palabras de los identificadores de vista (en
  *   inglés casi siempre) en este idioma, ver [Identificadores].
  *
- * Si un idioma no tiene alguno, se usa el del español. Para añadir un idioma
+ * - `teclas.tsv`: las etiquetas en inglés de las teclas del teclado en pantalla
+ *   (Gboard las da así en algunos móviles: «period», «comma») en este idioma.
+ *
+ * Si un idioma no tiene alguno, se usa el del español (las teclas no). Para añadir un idioma
  * basta con crear su carpeta (ver `docs/traducir.md`).
  */
 class DatosIdioma private constructor(
@@ -62,6 +65,8 @@ class DatosIdioma private constructor(
 	val letras: Map<String, String>,
 	val fonetico: Fonetico,
 	val identificadores: Identificadores,
+	/** Las etiquetas en inglés de las teclas del teclado en pantalla (`teclas.tsv`), en minúsculas, con su nombre en este idioma. */
+	val teclas: Map<String, String>,
 ) {
 	companion object {
 		private val cache = ConcurrentHashMap<String, DatosIdioma>()
@@ -84,13 +89,18 @@ class DatosIdioma private constructor(
 				.mapNotNull { l -> l.split('\t').takeIf { it.size >= 2 }?.let { it[0] to it[1].trim() } }
 				.toMap()
 			val fonetico = leer("fonetico.tsv")?.let { Fonetico.leer(it) } ?: Fonetico.OTAN
+			// Las teclas del teclado en pantalla («period» → «punto»): sin tabla propia, ninguna (la del español traduciría al español)
+			val teclas = runCatching { c.assets.open("idiomas/$codigo/teclas.tsv").bufferedReader(Charsets.UTF_8).use { it.readText() } }.getOrNull().orEmpty().lineSequence()
+				.filter { it.isNotBlank() && !it.startsWith("#") }
+				.mapNotNull { l -> l.split('\t').takeIf { it.size >= 2 }?.let { it[0].trim().lowercase() to it[1].trim() } }
+				.toMap()
 			// Sin tabla propia, la del español no sirve (traduciría al español): solo se quita el relleno del inglés
 			val identificadores = runCatching {
 				c.assets.open("idiomas/$codigo/identificadores.tsv").bufferedReader(Charsets.UTF_8).use { Identificadores.leer(it.readText()) }
 			}.getOrNull() ?: runCatching {
 				c.assets.open("idiomas/en/identificadores.tsv").bufferedReader(Charsets.UTF_8).use { Identificadores.leer(it.readText()) }
 			}.getOrNull() ?: Identificadores.VACIO
-			return DatosIdioma(codigo, simbolos, letras, fonetico, identificadores)
+			return DatosIdioma(codigo, simbolos, letras, fonetico, identificadores, teclas)
 		}
 	}
 }

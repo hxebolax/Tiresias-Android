@@ -308,8 +308,13 @@
 	<string name="accion_busqueda_braille">Búsqueda braille de apps y elementos</string>
 	<string name="accion_traducir_ultimo">Traducir lo último dicho</string>
 	<string name="accion_control_pc">Controlar un PC con NVDA</string>
+	<string name="accion_control_pc_pantalla">Pantalla de control del PC (gestos)</string>
 	<string name="accion_pedir_ayuda">Pedir ayuda a distancia</string>
 	<string name="accion_ayuda_remota">Ayuda remota</string>
 	<string name="accion_ayuda_terminar">Terminar la ayuda remota</string>
 	<string name="accion_ayuda_controlar">Manejar el otro móvil con mis gestos</string>
+	<string name="accion_escritorio_sistema">Volver al Inicio del sistema</string>
+	<string name="accion_llamada_contestar">Descolgar la llamada</string>
+	<string name="accion_llamada_rechazar">Rechazar la llamada</string>
+	<string name="accion_estado_y_avisos">Hora, batería, conexión y avisos</string>
 </resources>

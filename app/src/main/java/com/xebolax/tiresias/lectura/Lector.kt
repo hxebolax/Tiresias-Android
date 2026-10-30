@@ -727,7 +727,7 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	 * iconos dentro o cubre un tercio de la ventana o más. No se dice cada vez (SandFly, HomeScreenPages).
 	 */
 	private fun esPaginaDelEscritorio(n: AccessibilityNodeInfo): Boolean {
-		if (n.packageName?.toString() != escritorio() || Nodos.accionable(n)) return false
+		if (n.packageName?.toString() != escritorio() || n.packageName?.toString() == servicio.packageName || Nodos.accionable(n)) return false
 		var conIconos = false
 		for (i in 0 until minOf(n.childCount, 40)) {
 			val h = runCatching { n.getChild(i) }.getOrNull() ?: continue
@@ -892,7 +892,32 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 
 	/** Dice [n] con la verbosidad actual y, tras una pausa, su pista de uso. */
 	fun decirElemento(n: AccessibilityNodeInfo, modo: Modo = Modo.INTERRUMPIR, sonido: Sonido? = null) {
-		val elemento = elemento(n)
+		val esTecla = runCatching { n.window?.type }.getOrNull() == AccessibilityWindowInfo.TYPE_INPUT_METHOD
+		// Una tecla del teclado en pantalla de un solo carácter («u», «.», o «Capital U» como las da Gboard con las
+		// mayúsculas): se dice como un carácter escrito (el eco), con su nombre en el idioma de Tiresias («i griega»,
+		// «punto», «mayúscula u»), no como lea la voz la letra suelta
+		val caracterTecla: String? = if (!esTecla) null else elemento(n).let { e ->
+			if (e.texto.isNotEmpty()) null else {
+				val nombre = e.nombre.trim()
+				val capital = Regex("(?i)capital (\\S)$").find(nombre)?.groupValues?.get(1)?.uppercase()
+				capital ?: nombre.takeIf { it.isNotEmpty() && it.codePointCount(0, it.length) == 1 }
+			}
+		}
+		val elemento = elemento(n).let { e ->
+			val nombre = e.nombre.trim()
+			when {
+				!esTecla || e.texto.isNotEmpty() || nombre.isEmpty() -> e
+				caracterTecla != null -> e.copy(nombre = voz.nombreCaracter(caracterTecla))
+				else -> {
+					// Una etiqueta en inglés que da el teclado («period», «shift enabled»): en el idioma de Tiresias. Gboard
+					// describe los símbolos con su nombre Unicode en inglés («yen sign», «inverted question mark»): se
+					// busca el símbolo y se dice con el nombre que tiene en la tabla de símbolos de Tiresias
+					val traducida = com.xebolax.tiresias.textos.DatosIdioma.de(servicio, Idioma.efectivo(servicio)).teclas[nombre.lowercase()]
+						?: com.xebolax.tiresias.nucleo.NombresUnicode.caracter(nombre)?.let { s -> voz.nombreCaracter(s).takeIf { it != s } }
+					if (traducida != null) e.copy(nombre = traducida) else e
+				}
+			}
+		}
 		val normal = compositor.describir(elemento, verbosidad)
 		// Un complemento de esta app puede cambiar lo que se dice (arreglar etiquetas, quitar ruido)
 		val texto = if (scriptsListos) scripts.alEnfocar(n.packageName?.toString().orEmpty(), elemento, normal) ?: normal else normal
@@ -910,7 +935,11 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		val contenedor = tituloContenedor(n)
 		val dicho = if (contenedor != null && contenedor != ultimoContenedor) "$contenedor, $texto" else texto
 		ultimoContenedor = contenedor
-		voz.decir(Enunciado(dicho, modo = modo, tipo = Tipo.NAVEGACION, idioma = idiomaDe(n), vigente = if (modo == Modo.ENCOLAR) ({ foco == n }) else null))
+		// Las teclas del teclado en pantalla, siempre en el idioma de Tiresias: la «u» con el idioma que marca el teclado sonaba «iu».
+		// Las de un solo carácter van por el mismo camino que el eco al escribir (deletrear), con el tono de mayúscula si se quiere
+		val vigente: (() -> Boolean)? = if (modo == Modo.ENCOLAR) ({ foco == n }) else null
+		if (caracterTecla != null) voz.decir(Enunciado(caracterTecla, modo = modo, tipo = Tipo.NAVEGACION, deletrear = true, vigente = vigente))
+		else voz.decir(Enunciado(dicho, modo = modo, tipo = Tipo.NAVEGACION, idioma = if (esTecla) null else idiomaDe(n), vigente = vigente))
 		if (brailleListo) braille.mostrarElemento(n, texto)
 		// Sin nombre: Tiresias intenta reconocer el icono (en el móvil) y lo dice después
 		if (visionListo && compositor.sinNombre(elemento)) vision.iconos.alEnfocarSinNombre(n)

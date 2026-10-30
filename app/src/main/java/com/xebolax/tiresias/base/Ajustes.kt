@@ -27,7 +27,8 @@ class Ajustes(contexto: Context) {
 
 	private fun cadena(clave: String, porDefecto: String) = p.getString(clave, porDefecto) ?: porDefecto
 	private fun entero(clave: String, porDefecto: Int) = runCatching { p.getInt(clave, porDefecto) }.getOrElse { cadena(clave, porDefecto.toString()).toIntOrNull() ?: porDefecto }
-	private fun logico(clave: String, porDefecto: Boolean) = p.getBoolean(clave, porDefecto)
+	// Si alguna vez se guardó como texto (una copia de seguridad antigua, una orden de prueba), no se cae: se lee como texto
+	private fun logico(clave: String, porDefecto: Boolean) = runCatching { p.getBoolean(clave, porDefecto) }.getOrElse { cadena(clave, porDefecto.toString()).toBooleanStrictOrNull() ?: porDefecto }
 	private fun poner(clave: String, valor: Any) = p.edit().apply {
 		when (valor) {
 			is String -> putString(clave, valor)
@@ -187,6 +188,8 @@ class Ajustes(contexto: Context) {
 	var callarProximidad: Boolean
 		get() = logico(Claves.CALLAR_PROXIMIDAD, true)
 		set(v) = poner(Claves.CALLAR_PROXIMIDAD, v)
+	/** La pantalla encendida mientras Tiresias habla (para que un mensaje largo no se corte al apagarse). */
+	val pantallaAlHablar: Boolean get() = logico(Claves.PANTALLA_AL_HABLAR, false)
 
 	val ajustesTexto: AjustesTexto
 		get() = AjustesTexto(
@@ -448,6 +451,8 @@ class Ajustes(contexto: Context) {
 
 	/** Si está puesto el modo senior ([ModoSenior]). */
 	val modoSenior: Boolean get() = logico(Claves.MODO_SENIOR, false)
+	/** Si el menú lateral enseña «Experimentos» (la ayuda remota, el control de un PC): de fábrica, no. */
+	val mostrarExperimentos: Boolean get() = logico(Claves.MOSTRAR_EXPERIMENTOS, false)
 
 	/** En el modo senior, solo se leen las llamadas, los mensajes, las alarmas y los recordatorios. */
 	val seniorSoloMensajes: Boolean get() = logico(Claves.SENIOR_SOLO_MENSAJES, true)
@@ -464,6 +469,11 @@ class Ajustes(contexto: Context) {
 	var seniorNombreAyuda: String
 		get() = cadena(Claves.SENIOR_NOMBRE, "")
 		set(v) = poner(Claves.SENIOR_NOMBRE, v.trim())
+
+	/** Con el SOS, además de llamar, SMS a los contactos de ayuda con la última ubicación conocida. */
+	val seniorSosSms: Boolean get() = logico(Claves.SENIOR_SOS_SMS, false)
+	/** Con el teléfono sonando, subir volumen descuelga y bajarlo cuelga. */
+	val seniorTeclasLlamada: Boolean get() = logico(Claves.SENIOR_TECLAS_LLAMADA, true)
 
 	/** El código (cifras) que protege los ajustes en el modo senior; vacío, sin código. */
 	var seniorCodigo: String
@@ -670,6 +680,16 @@ class Ajustes(contexto: Context) {
 		set(v) = poner(Claves.NVDA_HUELLAS, v)
 	/** Al bloquear el móvil con un PC conectado: "desconectar", "silenciar" o "seguir". */
 	val nvdaAlBloquear: String get() = cadena(Claves.NVDA_AL_BLOQUEAR, "desconectar")
+	/** La disposición del teclado de NVDA en el PC ([NVDA_ESCRITORIO] o [NVDA_PORTATIL]): cambia las teclas de sus órdenes. */
+	var nvdaDisposicion: String
+		get() = cadena(Claves.NVDA_DISPOSICION, NVDA_ESCRITORIO)
+		set(v) = poner(Claves.NVDA_DISPOSICION, v)
+	/** Si la pantalla de control dice cada orden que manda al PC (además de lo que responda el PC). */
+	var nvdaDecirOrdenes: Boolean
+		get() = logico(Claves.NVDA_DECIR_ORDENES, false)
+		set(v) = p.edit().putBoolean(Claves.NVDA_DECIR_ORDENES, v).apply()
+	/** Lo que se pone al conectar con el PC: la pantalla de control ([NVDA_PANTALLA_CONTROL]) o la superficie braille. */
+	val nvdaPantalla: String get() = cadena(Claves.NVDA_PANTALLA, NVDA_PANTALLA_CONTROL)
 
 	// --- 1.0.7: asistencia remota --------------------------------------------------------------
 
@@ -756,6 +776,12 @@ class Ajustes(contexto: Context) {
 		const val DESPLAZAR_NORMAL = "normal"
 		const val DESPLAZAR_SIN_SONIDO = "sin_sonido"
 		const val DESPLAZAR_ANTICIPADO = "anticipado"
+		/** La disposición del teclado de NVDA: de escritorio (teclado numérico) o de portátil. */
+		const val NVDA_ESCRITORIO = "escritorio"
+		const val NVDA_PORTATIL = "portatil"
+		/** Lo que se pone al conectar con un PC. */
+		const val NVDA_PANTALLA_CONTROL = "control"
+		const val NVDA_PANTALLA_BRAILLE = "braille"
 
 		/** El teclado braille de TalkBack habla solo. */
 		val TECLADOS_QUE_HABLAN_DE_FABRICA = setOf("com.google.android.marvin.talkback", "com.android.talkback")
@@ -813,6 +839,8 @@ object Claves {
 	const val CAMBIO_DIALECTO = "cambio_dialecto"
 	const val CALLAR_AL_GRABAR = "callar_al_grabar"
 	const val CALLAR_PROXIMIDAD = "callar_proximidad"
+	const val PANTALLA_AL_HABLAR = "pantalla_al_hablar"
+	const val MOSTRAR_EXPERIMENTOS = "mostrar_experimentos"
 	const val DECIR_VOLUMEN = "decir_volumen"
 	const val VOLUMEN_CURSOR = "volumen_cursor"
 	const val PUNTUACION = "puntuacion"
@@ -904,6 +932,9 @@ object Claves {
 	const val SENIOR_CONTACTO = "senior_contacto"
 	const val SENIOR_NOMBRE = "senior_nombre"
 	const val SENIOR_CODIGO = "senior_codigo"
+	const val SENIOR_SOS_SMS = "senior_sos_sms"
+	const val SENIOR_TECLAS_LLAMADA = "senior_teclas_llamada"
+	const val ESCRITORIO_ERA_INICIO = "escritorio_era_inicio"
 	const val ELOQUENCE_AUMENTO = "eloquence_aumento"
 	/** Si ya se ha puesto la velocidad de Eloquence en su escala nueva ([Ajustes.normalizarEloquence]). */
 	const val ELOQUENCE_VELOCIDAD_NORMAL = "eloquence_velocidad_normal"
@@ -955,6 +986,9 @@ object Claves {
 	const val NVDA_EQUIPOS = "nvda_equipos"
 	const val NVDA_HUELLAS = "nvda_huellas"
 	const val NVDA_AL_BLOQUEAR = "nvda_al_bloquear"
+	const val NVDA_DISPOSICION = "nvda_disposicion"
+	const val NVDA_DECIR_ORDENES = "nvda_decir_ordenes"
+	const val NVDA_PANTALLA = "nvda_pantalla"
 	const val GUARDA_ACTIVA = "guarda_activa"
 	const val AYUDA_NOMBRE = "ayuda_nombre"
 	const val AYUDA_METODO = "ayuda_metodo"

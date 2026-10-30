@@ -24,5 +24,8 @@
 	<SwitchPreferenceCompat app:key="braille_sonar_teclas" app:title="@string/aj_braille_sonar_teclas" app:summary="@string/aj_braille_sonar_teclas_res" app:defaultValue="false" />
 	<ListPreference app:key="braille_estilo_sonidos" app:title="@string/aj_braille_estilo_sonidos" app:entries="@array/braille_estilo_nombres" app:entryValues="@array/braille_estilo_valores" app:defaultValue="android" app:useSimpleSummaryProvider="true" />
 	<ListPreference app:key="nvda_al_bloquear" app:title="@string/aj_nvda_al_bloquear" app:entries="@array/nvda_al_bloquear_nombres" app:entryValues="@array/nvda_al_bloquear_valores" app:defaultValue="desconectar" app:useSimpleSummaryProvider="true" />
+	<ListPreference app:key="nvda_pantalla" app:title="@string/aj_nvda_pantalla" app:entries="@array/nvda_pantalla_nombres" app:entryValues="@array/nvda_pantalla_valores" app:defaultValue="control" app:useSimpleSummaryProvider="true" />
+	<ListPreference app:key="nvda_disposicion" app:title="@string/aj_nvda_disposicion" app:entries="@array/nvda_disposicion_nombres" app:entryValues="@array/nvda_disposicion_valores" app:defaultValue="escritorio" app:useSimpleSummaryProvider="true" />
+	<SwitchPreferenceCompat app:key="nvda_decir_ordenes" app:title="@string/aj_nvda_decir_ordenes" app:summary="@string/aj_nvda_decir_ordenes_res" app:defaultValue="false" />
 	<com.xebolax.tiresias.accesibilidad.DeslizadorAjuste app:key="braille_volumen_sonidos" app:title="@string/aj_braille_volumen_sonidos" app:min="0" android:max="100" app:seekBarIncrement="5" app:defaultValue="60" />
 </PreferenceScreen>

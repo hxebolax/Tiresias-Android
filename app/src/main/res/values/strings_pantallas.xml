@@ -400,4 +400,14 @@
 	<string name="ui_servicio_cerrado">El sistema ha cerrado Tiresias sin que lo apagaras: es el ahorro de batería de %1$s. Pulsa aquí para ver qué ajustar</string>
 	<string name="tut_terminar_practica">Terminar la práctica</string>
 	<string name="tut_como_salir">Para salir de la práctica: pulsa Atrás, las dos teclas de volumen a la vez o toca dos veces en Terminar la práctica. Al salir del tutorial, la práctica también se acaba.</string>
+	<string name="tienda_escritorio">Escritorio de Tiresias</string>
+	<string name="tienda_escritorio_no">%1$s: app de Inicio accesible, sin instalar</string>
+	<string name="tienda_escritorio_si">%1$s, instalado, versión %2$s</string>
+	<string name="tienda_escritorio_explicacion">El Escritorio de Tiresias es una app de Inicio accesible, con modo senior hablado. Va aparte para que un fallo suyo nunca se lleve la voz. Se instala como una app más y solo será tu Inicio si tú lo eliges. ¿Instalarlo?</string>
+	<string name="tienda_escritorio_instalar">Instalar el escritorio</string>
+	<string name="tienda_escritorio_abrir">Abrir el escritorio</string>
+	<string name="tienda_escritorio_actualizar">Actualizar el escritorio</string>
+	<string name="tienda_escritorio_quitar">Desinstalar el escritorio</string>
+	<string name="tienda_escritorio_no_publicado">El escritorio aún no está publicado en el servidor</string>
+	<string name="tienda_escritorio_no_abre">No se ha podido abrir el escritorio</string>
 </resources>

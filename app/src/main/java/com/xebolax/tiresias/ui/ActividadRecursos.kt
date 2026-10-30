@@ -84,6 +84,11 @@ class ActividadRecursos : ActividadBase() {
 			if (estado == ModeloLocal.Estado.DESCARGANDO) p.estadoVivo(getString(R.string.rec_ia_bajando, ModeloLocal.porcentaje(this)))
 		}
 
+		if (com.xebolax.tiresias.servicio.PuenteEscritorio.PUBLICADO) {
+			p.encabezado(getString(R.string.tienda_escritorio))
+			p.botonSecundario(TiendaEscritorio.fila(this)) { TiendaEscritorio.abrir(this, actualizaciones) }
+		}
+
 		p.encabezado(getString(R.string.rec_cat_nano))
 		val aicore = Nano.tieneAicore(this)
 		val instalado = Nano.instalado(this)

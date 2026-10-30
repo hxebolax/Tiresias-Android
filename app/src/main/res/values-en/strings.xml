@@ -163,6 +163,7 @@
 	<string name="ui_etiquetas">Labels</string>
 	<string name="ui_perfiles">Profiles</string>
 	<string name="ui_tutorial">Tutorial</string>
+	<string name="ui_experimentos">Experiments</string>
 	<string name="ui_manual">User guide</string>
 	<string name="ui_acerca">About and updates</string>
 	<string name="ui_asistente">Setup assistant</string>

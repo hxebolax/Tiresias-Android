@@ -129,6 +129,9 @@ object Json {
 		sb.append('"')
 	}
 
+	/** [comoMapa], para los otros módulos. */
+	fun comoMapaPublico(valor: Any?): Map<String, Any?>? = comoMapa(valor)
+
 	/** [valor] como mapa de claves de texto, o null si no lo es. */
 	internal fun comoMapa(valor: Any?): Map<String, Any?>? {
 		if (valor !is Map<*, *>) return null

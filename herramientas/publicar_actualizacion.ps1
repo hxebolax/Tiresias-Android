@@ -98,20 +98,20 @@ $manifiesto = [ordered]@{
 
 # El complemento de Gemini Nano (APK aparte): solo para los moviles con AICore
 $archivoNano = $null
+$complementos = @()
 if (Test-Path $ApkNano) {
 	$archivoNano = "TiresiasNano_v$nombre.apk"
 	$destinoNano = Join-Path $Dist $archivoNano
 	Copy-Item -Force $ApkNano $destinoNano
-	$manifiesto["complementos"] = @(
-		[ordered]@{
-			id = "nano"
-			package = "com.xebolax.tiresias.nano"
-			file = $archivoNano
-			sha256 = (Get-FileHash -Algorithm SHA256 $destinoNano).Hash.ToLower()
-			size = (Get-Item $destinoNano).Length
-		}
-	)
+	$complementos += [ordered]@{
+		id = "nano"
+		package = "com.xebolax.tiresias.nano"
+		file = $archivoNano
+		sha256 = (Get-FileHash -Algorithm SHA256 $destinoNano).Hash.ToLower()
+		size = (Get-Item $destinoNano).Length
+	}
 }
+if ($complementos.Count -gt 0) { $manifiesto["complementos"] = @($complementos) }
 
 # La pagina web (herramientas\web\index.html con la version, las descargas, las
 # novedades y la huella del certificado), en dist\index.html

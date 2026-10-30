@@ -11,6 +11,10 @@ import android.os.Messenger
 import android.os.SystemClock
 import com.xebolax.tiresias.base.Ajustes
 import com.xebolax.tiresias.base.Registro
+import com.xebolax.tiresias.nucleo.Accion
+import com.xebolax.tiresias.nucleo.escritorio.Contrato
+import com.xebolax.tiresias.remoto.Asistencia
+import com.xebolax.tiresias.servicio.PuenteEscritorio
 import com.xebolax.tiresias.servicio.ServicioTiresias
 
 /**
@@ -45,15 +49,32 @@ class ServicioApi : Service() {
 	private fun atender(m: Message) {
 		val uid = m.sendingUid
 		val paquete = packageManager.getPackagesForUid(uid)?.firstOrNull()
+		val escritorio = paquete != null && PuenteEscritorio.deConfianza(this, paquete)
 		val resultado = when {
 			paquete == null -> SIN_PERMISO
 			// Sin pasar de 20 mensajes por segundo: una app no puede ahogar al lector
-			!aTiempo(uid) -> HECHO
-			else -> hacer(m, paquete)
+			!escritorio && !aTiempo(uid) -> HECHO
+			else -> hacer(m, paquete, escritorio)
 		}
 		m.replyTo?.let { r ->
-			runCatching { r.send(Message.obtain(null, m.what).apply { data = Bundle().apply { putInt(RESULTADO, resultado) } }) }
+			val datos = Bundle().apply {
+				putInt(RESULTADO, resultado)
+				if (escritorio) datosEscritorio(m.what, this)
+			}
+			runCatching { r.send(Message.obtain(null, m.what).apply { data = datos }) }
 				.onFailure { Registro.w(ETIQUETA, "No se pudo contestar a $paquete", it) }
+		}
+	}
+
+	/** Lo que solo se le cuenta al escritorio: cómo está el lector y cuántos avisos hay, nunca su texto. */
+	private fun datosEscritorio(what: Int, d: Bundle) {
+		when (what) {
+			ESTADO -> {
+				d.putBoolean(Contrato.CLAVE_SUSPENDIDO, ServicioTiresias.instancia?.suspendidoParaApi == true)
+				d.putBoolean(Contrato.CLAVE_AYUDA, Asistencia.ayudado?.conectada == true)
+				d.putBoolean(Contrato.CLAVE_SENIOR, Ajustes(this).modoSenior)
+			}
+			Contrato.PEDIR_RECUENTOS -> d.putString(Contrato.CLAVE_RECUENTOS, PuenteEscritorio.recuentos())
 		}
 	}
 
@@ -65,10 +86,11 @@ class ServicioApi : Service() {
 		return true
 	}
 
-	private fun hacer(m: Message, paquete: String): Int {
+	private fun hacer(m: Message, paquete: String, escritorio: Boolean): Int {
 		val s = ServicioTiresias.instancia ?: return INACTIVO
 		val ajustes = Ajustes(this)
-		val propia = paquete == packageName
+		// El escritorio lleva la misma firma: no se le pregunta nada a la persona
+		val propia = paquete == packageName || escritorio
 		if (!propia && paquete !in ajustes.apiPermitidas) {
 			if (paquete in ajustes.apiDenegadas) return SIN_PERMISO
 			s.pedirPermisoApi(paquete)
@@ -90,6 +112,23 @@ class ServicioApi : Service() {
 			}
 			LINEA_TECLA -> s.teclaLineaVirtual(m.data?.getString(ORDEN).orEmpty())
 			LINEA_DESCONECTAR -> s.desconectarLineaVirtual()
+			Contrato.PEDIR_ACCION -> {
+				if (!escritorio) return SIN_PERMISO
+				// Lista blanca: nunca una acción libre, ni aunque el escritorio esté roto
+				val nombre = m.data?.getString(Contrato.CLAVE_ACCION).orEmpty()
+				if (nombre !in Contrato.ACCIONES_PERMITIDAS) return SIN_PERMISO
+				val accion = Accion.entries.firstOrNull { it.name == nombre } ?: return SIN_PERMISO
+				s.hacer(accion)
+			}
+			Contrato.PEDIR_RECUENTOS -> if (!escritorio) return SIN_PERMISO
+			Contrato.PRUEBA_EMPEZAR -> {
+				if (!escritorio) return SIN_PERMISO
+				s.lectorActual?.let { PuenteEscritorio.empezarPrueba(it, m.data?.getInt(Contrato.CLAVE_SEGUNDOS) ?: Contrato.SEGUNDOS_PRUEBA) }
+			}
+			Contrato.PRUEBA_CONFIRMAR -> {
+				if (!escritorio) return SIN_PERMISO
+				s.lectorActual?.let { PuenteEscritorio.confirmarPrueba(it) }
+			}
 			ZONA_TOQUE_DIRECTO -> {
 				val d = m.data
 				val zona = android.graphics.Rect(d?.getInt(IZQUIERDA) ?: 0, d?.getInt(ARRIBA) ?: 0, d?.getInt(DERECHA) ?: 0, d?.getInt(ABAJO) ?: 0)

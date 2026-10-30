@@ -628,16 +628,7 @@ class SesionAyudado(private val servicio: ServicioTiresias, private val lector: 
 	}
 
 	private fun lanzables(): List<Pair<String, String>> {
-		val pm = servicio.packageManager
-		return runCatching {
-			pm.queryIntentActivities(Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER), 0)
-				.map { it.loadLabel(pm).toString() to it.activityInfo.packageName }
-				.distinctBy { it.second }
-				.sortedBy { it.first.lowercase() }
-		}.getOrElse {
-			Registro.w(ETIQUETA, "No se pudieron leer las apps", it)
-			emptyList()
-		}
+		return com.xebolax.tiresias.base.Lanzables.todas(servicio).map { it.nombre to it.paquete }
 	}
 
 	private fun apps(peticion: Long) = mandar(MensajeAyuda.Apps(peticion, lanzables().map { it.first }))
@@ -674,6 +665,11 @@ class SesionAyudado(private val servicio: ServicioTiresias, private val lector: 
 			ENLACE_AJUSTES_TIRESIAS -> Intent(servicio, com.xebolax.tiresias.ui.ActividadPrincipal::class.java)
 			ENLACE_ACCESIBILIDAD -> Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
 			ENLACE_WIFI -> Intent(Settings.ACTION_WIFI_SETTINGS)
+			ENLACE_ESCRITORIO_SISTEMA -> {
+				val ok = com.xebolax.tiresias.servicio.PuenteEscritorio.salirAlSistema(servicio)
+				responder(m.peticion, ok, if (ok) null else t.getString(R.string.ayuda_no_abierto))
+				return
+			}
 			else -> if (Protegido.enlaceSeguro(m.enlace)) runCatching { Intent(Intent.ACTION_VIEW, Uri.parse(m.enlace.trim())) }.getOrNull() else null
 		}
 		val ok = intent != null && abrirIntent(intent)
@@ -806,6 +802,7 @@ class SesionAyudado(private val servicio: ServicioTiresias, private val lector: 
 		const val ENLACE_AJUSTES_TIRESIAS = "tiresias:ajustes-tiresias"
 		const val ENLACE_ACCESIBILIDAD = "tiresias:accesibilidad"
 		const val ENLACE_WIFI = "tiresias:wifi"
+		const val ENLACE_ESCRITORIO_SISTEMA = "tiresias:escritorio-sistema"
 
 		/**
 		 * Lo que el ayudante no puede hacer aunque sea de confianza: lo que dejaría a

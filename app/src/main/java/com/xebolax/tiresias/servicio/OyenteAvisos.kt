@@ -31,6 +31,7 @@ class OyenteAvisos : NotificationListenerService() {
 	override fun onListenerConnected() {
 		super.onListenerConnected()
 		conectado = true
+		actual = this
 		// Lo que ya está en la persiana al conectar no es nuevo
 		runCatching { activeNotifications }.getOrNull()?.forEach { ultimos[it.key] = firma(it.notification) }
 		Registro.i(ETIQUETA, "Oyente de notificaciones conectado")
@@ -38,6 +39,7 @@ class OyenteAvisos : NotificationListenerService() {
 
 	override fun onListenerDisconnected() {
 		conectado = false
+		actual = null
 		super.onListenerDisconnected()
 	}
 
@@ -77,6 +79,10 @@ class OyenteAvisos : NotificationListenerService() {
 
 	companion object {
 		private const val ETIQUETA = "OyenteAvisos"
+
+		/** El oyente conectado, para contar los avisos sin leerlos. */
+		@Volatile var actual: OyenteAvisos? = null
+			private set
 
 		/** Si Android tiene el oyente conectado ahora (con el acceso dado). */
 		@Volatile var conectado = false
