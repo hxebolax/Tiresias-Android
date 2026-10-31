@@ -19,6 +19,7 @@
 	<string name="servicio_descripcion">Tiresias lee en voz alta lo que hay en la pantalla y te deja manejar el móvil con gestos, el teclado y braille. Para hacerlo necesita ver la pantalla, recibir tus gestos y tus teclas y actuar por ti. No guarda, no registra y no envía nada de lo que lee: solo lo dice. La inteligencia artificial en Internet solo se usa cuando tú la pides, con tu propia clave.</string>
 	<string name="servicio_activo">Tiresias activado</string>
 	<string name="servicio_actualizado">Tiresias actualizado a la versión %1$s</string>
+	<string name="servicio_reiniciado">Tiresias se había quedado parado y se ha reiniciado solo</string>
 	<string name="tts_nombre">Voces de Tiresias</string>
 	<string name="suspendido">Tiresias en pausa. Para volver, mantén pulsadas las dos teclas de volumen, o apaga y enciende la pantalla.</string>
 	<string name="reanudado">Tiresias de vuelta</string>

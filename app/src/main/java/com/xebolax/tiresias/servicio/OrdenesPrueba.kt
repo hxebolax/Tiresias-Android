@@ -37,6 +37,12 @@ class OrdenesPrueba(private val alGesto: (Gesto) -> Unit, private val alAccion: 
 			com.xebolax.tiresias.base.Ajustes(c).p.edit().putString(clave, valor).apply()
 			ServicioTiresias.instancia?.recargarAjustes()
 		}
+		// Cuelga un hilo un minuto, para probar el vigilante: --es colgar lector (o principal)
+		i.getStringExtra("colgar")?.let { h ->
+			val espera = Runnable { android.os.SystemClock.sleep(60_000) }
+			if (h == "lector") ServicioTiresias.instancia?.lectorActual?.manejador?.post(espera)
+			else android.os.Handler(android.os.Looper.getMainLooper()).post(espera)
+		}
 		// La pantalla de control del PC en práctica (sin PC): --es practicapc 1
 		if (i.hasExtra("practicapc")) {
 			ServicioTiresias.instancia?.lectorActual?.let { l -> l.manejador.post { l.superficie.abrir(com.xebolax.tiresias.remoto.SuperficieControlPc(l, null, practica = true)) } }

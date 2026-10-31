@@ -60,6 +60,7 @@ class ServicioTiresias : AccessibilityService() {
 	private var avisoVolumen: AvisoVolumen? = null
 	private var paqueteActual: String? = null
 	private var ordenesPrueba: OrdenesPrueba? = null
+	private var vigilante: Vigilante? = null
 
 	private val reanudar = object : BroadcastReceiver() {
 		override fun onReceive(c: Context?, i: Intent?) {
@@ -145,8 +146,8 @@ class ServicioTiresias : AccessibilityService() {
 		Ajustes(this).p.edit().putBoolean(com.xebolax.tiresias.base.Claves.SERVICIO_ENCENDIDO, true).apply()
 		try {
 			iniciar()
-		} catch (e: Exception) {
-			// Si algo falla al arrancar, al menos que hable para decirlo
+		} catch (e: Throwable) {
+			// (también lo que no es una excepción, como una biblioteca que no carga: si no, queda sin apuntar por qué no arranca)
 			Registro.e(ETIQUETA, "Fallo al iniciar Tiresias", e)
 		}
 	}
@@ -223,10 +224,17 @@ class ServicioTiresias : AccessibilityService() {
 		val ajustes = Ajustes(this)
 		val t = Idioma.envolver(this)
 		val anterior = ajustes.versionAnterior
-		val frase = if (anterior in 1 until BuildConfig.VERSION_CODE) t.getString(R.string.servicio_actualizado, BuildConfig.VERSION_NAME) else t.getString(R.string.servicio_activo)
+		val reiniciado = ajustes.p.getBoolean(com.xebolax.tiresias.base.Claves.REINICIO_VIGILANTE, false)
+		if (reiniciado) ajustes.p.edit().remove(com.xebolax.tiresias.base.Claves.REINICIO_VIGILANTE).apply()
+		val frase = when {
+			reiniciado -> t.getString(R.string.servicio_reiniciado)
+			anterior in 1 until BuildConfig.VERSION_CODE -> t.getString(R.string.servicio_actualizado, BuildConfig.VERSION_NAME)
+			else -> t.getString(R.string.servicio_activo)
+		}
 		ajustes.versionAnterior = BuildConfig.VERSION_CODE
 		s.tocar(Sonido.ENCENDIDO)
 		v.decir(Enunciado(frase, Modo.ENCOLAR, Tipo.SISTEMA))
+		vigilante = Vigilante(this, l.manejador, v).also { it.iniciar() }
 	}
 
 	/** Mientras el foco está en un botón de mantener pulsado (una nota de voz), el doble toque lo hace Android. */
@@ -322,6 +330,7 @@ class ServicioTiresias : AccessibilityService() {
 		info.flags = banderas
 		info.eventTypes = if (suspendido) AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED else AccessibilityEvent.TYPES_ALL_MASK
 		info.notificationTimeout = 0
+		if (BuildConfig.PRUEBAS) android.util.Log.d("TiresiasServicio", "configurar: suspendido=$suspendido dobleToqueDeAndroid=$dobleToqueDeAndroid otroExplora=$otroExplora")
 		serviceInfo = info
 	}
 
@@ -383,22 +392,39 @@ class ServicioTiresias : AccessibilityService() {
 			return true
 		}
 		if (l.ayudaEntrada && accion != Accion.AYUDA_ENTRADA) {
-			// Siempre se puede salir: Atrás termina la práctica, y en las pantallas de Tiresias el doble toque
-			// pulsa de verdad (si no, el botón «Terminar la práctica» no se podía pulsar y no había forma de salir)
+			// Siempre se puede salir: Atrás termina la práctica, y el doble toque pulsa de verdad en las pantallas de
+			// Tiresias (si no, el botón «Terminar la práctica» no se podía pulsar y no había forma de salir)
 			if (accion == Accion.ATRAS) {
 				l.manejador.post { ej.ejecutar(Accion.AYUDA_ENTRADA) }
 				return true
 			}
-			if ((accion == Accion.ACTIVAR || accion == Accion.MANTENER) && l.foco?.packageName?.toString() == packageName) {
-				l.manejador.post { ej.ejecutar(accion) }
-				return true
+			if (accion == Accion.ACTIVAR || accion == Accion.MANTENER) {
+				val paquete = l.foco?.packageName?.toString()
+				// También en las barras del sistema: quien toca dos veces en cualquier sitio de la pantalla deja el foco
+				// en la barra de navegación con el primer toque, y entonces no se pulsaba nada y solo se oía «Doble toque: Activar»
+				if (paquete == packageName || l.esDelSistema(paquete)) {
+					l.manejador.post { ej.ejecutar(accion) }
+					return true
+				}
+				// Sin foco no hay nada que pulsar: el doble toque termina la práctica
+				if (paquete == null) {
+					l.manejador.post { if (!ej.ejecutar(accion)) ej.ejecutar(Accion.AYUDA_ENTRADA) }
+					return true
+				}
 			}
-			l.manejador.post { l.decir(l.textos.getString(R.string.ayuda_entrada_gesto, nombreGesto(gesto), ej.nombreAccion(accion))) }
+			val aviso = ++gestosEnPractica % GESTOS_PARA_RECORDAR_SALIDA == 0
+			l.manejador.post {
+				l.decir(l.textos.getString(R.string.ayuda_entrada_gesto, nombreGesto(gesto), ej.nombreAccion(accion)))
+				if (aviso) l.decir(R.string.tut_como_salir, modo = Modo.ENCOLAR)
+			}
 			return true
 		}
 		l.manejador.post { ej.ejecutar(accion) }
 		return true
 	}
+
+	/** Los gestos dichos en la práctica: cada [GESTOS_PARA_RECORDAR_SALIDA] se recuerda cómo salir. */
+	private var gestosEnPractica = 0
 
 	private fun nombreGesto(g: Gesto): String {
 		val t = Idioma.envolver(this)
@@ -463,6 +489,7 @@ class ServicioTiresias : AccessibilityService() {
 	private fun cerrar() {
 		if (instancia !== this) return
 		instancia = null
+		vigilante?.cerrar()
 		Guarda.terminar(this)
 		runCatching { unregisterReceiver(pantalla) }
 		runCatching { unregisterReceiver(reanudar) }
@@ -708,6 +735,7 @@ class ServicioTiresias : AccessibilityService() {
 		private const val ESPERA_OTROS_MS = 500L
 		/** Cada cuánto se mira si ya se ha levantado el dedo para cambiar el doble toque. */
 		private const val ESPERA_DEDO_MS = 120L
+		private const val GESTOS_PARA_RECORDAR_SALIDA = 8
 
 		/** El servicio conectado ahora, o null si Tiresias no está activo. */
 		@Volatile var instancia: ServicioTiresias? = null

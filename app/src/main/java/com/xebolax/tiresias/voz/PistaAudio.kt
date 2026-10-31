@@ -50,18 +50,30 @@ class PistaAudio(atributosIniciales: AudioAttributes) {
 		val p = abrir(hz) ?: return false
 		cortada = false
 		try {
-			if (p.playState != AudioTrack.PLAYSTATE_PLAYING) p.play()
 			var desde = 0
+			var avanzo = SystemClock.uptimeMillis()
 			while (desde < muestras.size) {
 				if (cortada || !sigue()) return true
+				// (un corte puede haberla pausado justo al empezar la frase: pausada no se vacía nunca)
+				if (p.playState != AudioTrack.PLAYSTATE_PLAYING) p.play()
 				val n = minOf(BLOQUE, muestras.size - desde)
-				val escritas = p.write(muestras, desde, n)
+				// Sin bloquear: una escritura que espera sitio se queda ahí para siempre si la salida de audio se cuelga,
+				// y la voz se quedaría muda hasta reiniciar
+				val escritas = p.write(muestras, desde, n, AudioTrack.WRITE_NON_BLOCKING)
 				if (escritas < 0) {
 					Registro.w(ETIQUETA, "La pista rechazó las muestras (código $escritas): se vuelve a abrir")
 					cerrar()
 					return false
 				}
-				desde += escritas
+				val ahora = SystemClock.uptimeMillis()
+				if (escritas > 0) {
+					desde += escritas
+					avanzo = ahora
+				} else if (ahora - avanzo > PISTA_COLGADA_MS) {
+					Registro.w(ETIQUETA, "La pista lleva $PISTA_COLGADA_MS ms sin admitir muestras: se vuelve a abrir")
+					cerrar()
+					return false
+				} else SystemClock.sleep(ESPERA_SITIO_MS)
 			}
 			ultimoUso = SystemClock.uptimeMillis()
 			return true
@@ -161,6 +173,9 @@ class PistaAudio(atributosIniciales: AudioAttributes) {
 		private const val ETIQUETA = "PistaAudio"
 		/** Muestras por escritura: unos 23 ms a 22 050 Hz, para cortar enseguida. */
 		private const val BLOQUE = 512
+		/** Lo que se espera a que haya sitio en la pista, y lo que puede tardar en haberlo antes de darla por colgada. */
+		private const val ESPERA_SITIO_MS = 4L
+		private const val PISTA_COLGADA_MS = 3000L
 
 		/** La voz por el volumen multimedia (Ajustes, Voz); lo pone el servicio al arrancar. */
 		@Volatile var multimedia = false

@@ -834,6 +834,8 @@ object Claves {
 	const val SERVICIO_ENCENDIDO = "servicio_encendido"
 	/** El momento del último cierre de Tiresias por Android ya apuntado en el registro. */
 	const val ULTIMA_SALIDA = "ultima_salida"
+	/** El vigilante acaba de reiniciar Tiresias porque se había colgado (se dice al volver). */
+	const val REINICIO_VIGILANTE = "reinicio_vigilante"
 	const val ATENUAR = "atenuar"
 	const val CAMBIO_IDIOMA = "cambio_idioma"
 	const val CAMBIO_DIALECTO = "cambio_dialecto"

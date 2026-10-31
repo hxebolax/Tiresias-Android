@@ -1661,10 +1661,14 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 	private fun reiniciarTactil(): Boolean {
 		if (suspendido) return false
 		alSuspender(true)
-		lector.manejador.postDelayed({
-			alSuspender(false)
-			lector.gestos.pasoParaMenu(false)
-			lector.decir(R.string.tactil_reiniciado)
+		// Se vuelve a poner desde el hilo principal: si el del lector se quedara esperando a una app, los toques
+		// seguirían sin exploración táctil mientras dure la espera
+		android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+			if (!suspendido) alSuspender(false)
+			lector.manejador.post {
+				lector.gestos.pasoParaMenu(false)
+				lector.decir(R.string.tactil_reiniciado)
+			}
 		}, 600)
 		return true
 	}

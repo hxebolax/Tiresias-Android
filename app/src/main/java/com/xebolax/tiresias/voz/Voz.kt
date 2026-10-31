@@ -29,8 +29,10 @@ import kotlin.concurrent.withLock
  * La voz de Tiresias: recibe lo que hay que decir, lo prepara y lo hace sonar
  * con el motor elegido, en su propio hilo de prioridad de audio.
  *
- * - **Interrumpir es inmediato**: el enunciado nuevo corta el motor desde el
- *   hilo que llama (no espera a que el hilo de la voz se entere).
+ * - **Interrumpir es inmediato**: el motor se corta en su propio hilo, sin esperar
+ *   a que el hilo de la voz se entere y sin que espere quien llama: parar un motor
+ *   del sistema es una llamada a otra app, y el hilo principal (cada vez que se
+ *   toca la pantalla) y el del lector nunca se pueden quedar esperándola.
  * - **Nunca se queda muda**: si el motor del sistema falla o no empieza a
  *   hablar a tiempo, la frase se dice con eSpeak NG y, si falla, con Pico; tras
  *   tres fallos seguidos el motor se aparta un minuto y se avisa una vez.
@@ -65,6 +67,19 @@ class Voz(contexto: Context) {
 	@Volatile private var enCurso: Pedido? = null
 	@Volatile private var motorEnCurso: Motor? = null
 	@Volatile private var terminar = false
+
+	/** Quien corta el motor; [cortesPedidos] son los cortes sin hacer (la frase nueva espera a que acaben, un momento). */
+	private val cortes = java.util.concurrent.Executors.newSingleThreadExecutor { r -> Thread(r, "tiresias-corte").apply { isDaemon = true; priority = Thread.MAX_PRIORITY } }
+	private val cortesPedidos = AtomicInteger()
+
+	/** La última vez que la frase en curso dio señales de vida: entre bloque y bloque se pregunta si sigue. */
+	@Volatile private var latido = 0L
+
+	/** Si la frase en curso lleva [ms] sin avanzar: un motor o la salida de audio se han quedado colgados. */
+	fun atascada(ms: Long): Boolean = enCurso != null && SystemClock.uptimeMillis() - latido > ms
+
+	/** El hilo de la voz, para el registro técnico si se queda colgado. */
+	val hiloVoz: Thread get() = hilo
 
 	/** Fallos seguidos del motor del sistema y hasta cuándo está apartado. */
 	private var fallosSeguidos = 0
@@ -228,7 +243,7 @@ class Voz(contexto: Context) {
 					generacion.incrementAndGet()
 					val descartados = cola.toList()
 					cola.clear()
-					motorEnCurso?.cortar()
+					pedirCorte()
 					descartados.forEach { it.e.alTerminar?.let { f -> principal.post { f(false) } } }
 				}
 				Modo.SI_CALLADO -> if (enCurso != null || cola.isNotEmpty()) {
@@ -282,8 +297,41 @@ class Voz(contexto: Context) {
 		cerrojo.withLock {
 			generacion.incrementAndGet()
 			cola.clear()
-			motorEnCurso?.cortar()
+			pedirCorte()
 		}
+	}
+
+	/**
+	 * Corta en su hilo lo que esté sonando, si es de antes de la frase de ahora. Los cortes que
+	 * llegan mientras otro espera se juntan en uno: un motor lento no acumula una cola de cortes.
+	 */
+	private fun pedirCorte() {
+		if (cortesPedidos.incrementAndGet() > 1) return
+		val corte = Runnable {
+			do {
+				val pedidos = cortesPedidos.get()
+				val motor = motorEnCurso
+				if (motor != null && enCurso?.generacion != generacion.get()) {
+					try {
+						motor.cortar()
+					} catch (e: Exception) {
+						Registro.w(ETIQUETA, "No se pudo cortar ${motor.nombre}", e)
+					}
+				}
+			} while (!cortesPedidos.compareAndSet(pedidos, 0))
+		}
+		try {
+			cortes.execute(corte)
+		} catch (e: java.util.concurrent.RejectedExecutionException) {
+			cortesPedidos.set(0)
+			Registro.w(ETIQUETA, "La voz ya estaba cerrada al pedir un corte", e)
+		}
+	}
+
+	/** Espera a que acabe el corte pedido antes de decir la frase nueva (si no, la cortaría a ella), un momento como mucho. */
+	private fun esperarCortes() {
+		val limite = SystemClock.uptimeMillis() + ESPERA_CORTE_MS
+		while (cortesPedidos.get() > 0 && SystemClock.uptimeMillis() < limite) SystemClock.sleep(2)
 	}
 
 	/** Prueba que la voz habla de verdad con [motor] (Ajustes). */
@@ -293,6 +341,7 @@ class Voz(contexto: Context) {
 		terminar = true
 		callar()
 		cerrojo.withLock { hayTrabajo.signal() }
+		cortes.shutdown()
 		runCatching { grabaciones?.let { audio.unregisterAudioRecordingCallback(it) } }
 		sistema?.cerrar()
 		neuronal?.cerrar()
@@ -391,18 +440,25 @@ class Voz(contexto: Context) {
 	private fun bucle() {
 		Process.setThreadPriority(Process.THREAD_PRIORITY_URGENT_AUDIO)
 		while (!terminar) {
+			var callada = false
 			val pedido = cerrojo.withLock {
-				while (cola.isEmpty() && !terminar) {
-					// Callada: suelta el foco de audio y, al rato, la pista
-					if (!hayTrabajo.await(ESPERA_CALLADA_MS, java.util.concurrent.TimeUnit.MILLISECONDS)) {
-						soltarFoco()
-						ponerActiva(false)
-						pista.cerrarSiCallada(CERRAR_PISTA_MS)
-					}
-				}
+				if (cola.isEmpty() && !terminar) callada = !hayTrabajo.await(ESPERA_CALLADA_MS, java.util.concurrent.TimeUnit.MILLISECONDS)
 				if (terminar) return
-				cola.removeFirst().also { enCurso = it }
+				cola.removeFirstOrNull()?.also {
+					latido = SystemClock.uptimeMillis()
+					enCurso = it
+				}
 			}
+			if (pedido == null) {
+				// Callada: suelta el foco de audio y, al rato, la pista (fuera del cerrojo: son llamadas al sistema)
+				if (callada) {
+					soltarFoco()
+					ponerActiva(false)
+					pista.cerrarSiCallada(CERRAR_PISTA_MS)
+				}
+				continue
+			}
+			esperarCortes()
 			// La pantalla encendida mientras haya algo que decir (si se ha elegido): un mensaje largo no se corta al apagarse
 			if (ajustes.pantallaAlHablar) pantalla.mantener()
 			// Lo de un foco que ya ha pasado no se dice
@@ -426,7 +482,10 @@ class Voz(contexto: Context) {
 	}
 
 	private fun hablar(p: Pedido) {
-		val sigue = { p.generacion == generacion.get() && !terminar }
+		val sigue = {
+			latido = SystemClock.uptimeMillis()
+			p.generacion == generacion.get() && !terminar
+		}
 		if (!sigue()) {
 			p.e.alTerminar?.invoke(false)
 			return
@@ -564,6 +623,8 @@ class Voz(contexto: Context) {
 		private const val FALLOS_PARA_APARTAR = 3
 		private const val APARTADO_MS = 60_000L
 		private const val ESPERA_CALLADA_MS = 400L
+		/** Lo que espera como mucho una frase nueva a que se corte la de antes. */
+		private const val ESPERA_CORTE_MS = 300L
 		/** Lo que se dice del elemento enfocado y de lo que se escribe en él. */
 		private val DEL_FOCO = setOf(Tipo.NAVEGACION, Tipo.ESCRITURA)
 		private const val CERRAR_PISTA_MS = 5_000L

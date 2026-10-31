@@ -112,7 +112,9 @@ class Teclado(private val lector: Lector, private val alAccion: (Accion) -> Unit
 
 	private fun despachar(accion: Accion) {
 		if (lector.ayudaEntrada && accion != Accion.AYUDA_ENTRADA) {
-			lector.manejador.post { lector.decir(lector.textos.getString(R.string.ayuda_entrada_accion, nombre(accion))) }
+			// Con el teclado también se sale con Atrás, como con el gesto
+			if (accion == Accion.ATRAS) alAccion(Accion.AYUDA_ENTRADA)
+			else lector.manejador.post { lector.decir(lector.textos.getString(R.string.ayuda_entrada_accion, nombre(accion))) }
 			return
 		}
 		alAccion(accion)

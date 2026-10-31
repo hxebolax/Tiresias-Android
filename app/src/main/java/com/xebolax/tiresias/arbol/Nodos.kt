@@ -16,6 +16,8 @@ import com.xebolax.tiresias.nucleo.Rol
 object Nodos {
 	private const val ETIQUETA = "Nodos"
 	private const val PROFUNDIDAD_MAXIMA = 60
+	/** Hasta cuántos niveles se mira dentro de un control para saber si agrupa a otros (página, contenedor, icono). */
+	private const val NIVELES_AGRUPAR = 4
 
 	/** El rol de [n] por su clase (como `Role.java` de TalkBack), su rol web y sus propiedades. */
 	fun rol(n: AccessibilityNodeInfo): Rol {
@@ -233,13 +235,57 @@ object Nodos {
 		var nivel = 0
 		var candidato: AccessibilityNodeInfo? = null
 		while (actual != null && nivel < 15) {
-			if (accionable(actual) && actual.isVisibleToUser) return actual
-			if (candidato == null && recibeFoco(actual)) candidato = actual
+			if (!soloAgrupa(actual)) {
+				if (accionable(actual) && actual.isVisibleToUser) return actual
+				if (candidato == null && recibeFoco(actual)) candidato = actual
+			}
 			actual = runCatching { actual!!.parent }.getOrNull()
 			nivel++
 		}
 		return candidato
 	}
+
+	/** Lo que hay directamente dentro de un control: otros controles y textos sueltos (lo de dentro de esos controles es suyo). */
+	private class Dentro(var controles: Int = 0, var textos: Int = 0) {
+		val varios: Boolean get() = controles >= 2
+	}
+
+	private fun mirarDentro(n: AccessibilityNodeInfo, d: Dentro, nivel: Int) {
+		if (nivel > NIVELES_AGRUPAR) return
+		for (i in 0 until n.childCount) {
+			if (d.varios && d.textos > 0) return
+			val h = runCatching { n.getChild(i) }.getOrNull() ?: continue
+			if (!h.isVisibleToUser) continue
+			if (accionable(h)) {
+				d.controles++
+				continue
+			}
+			if (tieneTexto(h)) d.textos++
+			mirarDentro(h, d, nivel + 1)
+		}
+	}
+
+	/** Lo que hay dentro de [n], si [n] es un control que puede agrupar a otros; null si no lo es. */
+	private fun contenido(n: AccessibilityNodeInfo): Dentro? {
+		if (!accionable(n) || n.childCount == 0 || n.isEditable || n.isCheckable || n.collectionItemInfo != null) return null
+		// La app dice que es una sola parada con todo lo de dentro (mergeDescendants)
+		if (Build.VERSION.SDK_INT >= 28 && n.isScreenReaderFocusable) return null
+		return Dentro().also { mirarDentro(n, it, 0) }
+	}
+
+	/**
+	 * Si [n] se pulsa pero dentro tiene varios controles propios: la página y el dock de los escritorios de
+	 * EMUI y de los derivados de Launcher3 antiguos, que se pulsan y se mantienen pulsados para editarlos. Cada
+	 * control de dentro es su propia parada, como en TalkBack (`shouldFocusNode`): si no, se leía la pantalla
+	 * de inicio entera como un solo elemento y no se podía abrir ninguna app deslizando. Una fila de lista no
+	 * cuenta: sigue siendo una sola parada aunque tenga dentro varias cosas que se pulsen.
+	 */
+	fun agrupaControles(n: AccessibilityNodeInfo): Boolean = contenido(n)?.varios == true
+
+	/** Si [n] solo agrupa controles y no tiene nada que decir por sí mismo: no es una parada. */
+	fun soloAgrupa(n: AccessibilityNodeInfo): Boolean = sinNadaQueDecir(n, contenido(n))
+
+	private fun sinNadaQueDecir(n: AccessibilityNodeInfo, d: Dentro?): Boolean = d != null && d.varios && d.textos == 0 && !tieneTexto(n)
 
 	/**
 	 * El texto de los hijos de un contenedor que se lee junto a él (filas de
@@ -249,12 +295,14 @@ object Nodos {
 	fun textoHijos(n: AccessibilityNodeInfo, maximo: Int = 600): String {
 		val sb = StringBuilder()
 		val dichos = HashSet<String>()
+		// Los controles de dentro de un contenedor que los agrupa son paradas propias: no se leen con él
+		val sinControles = agrupaControles(n)
 		// Una fila pegada al borde de su lista puede estar cortada (el título por encima del borde al volver
 		// hacia atrás): sus textos que no se ven se leen igual, que son parte de ella
-		textoHijos(n, sb, 0, maximo, aMedias(n), dichos)
+		textoHijos(n, sb, 0, maximo, aMedias(n), dichos, sinControles)
 		// Una fila medio fuera de la pantalla (al final de una lista que aún se está desplazando) tiene
 		// sus textos todavía sin ver: antes que «sin nombre», se leen aunque no se vean
-		if (sb.isBlank() && n.isVisibleToUser) textoHijos(n, sb, 0, maximo, true, dichos)
+		if (sb.isBlank() && n.isVisibleToUser) textoHijos(n, sb, 0, maximo, true, dichos, sinControles)
 		// (sin comas seguidas, que dejan los textos que acaban en coma)
 		return sb.toString().replace(Regex("\\s+"), " ").replace(Regex(",(\\s*,)+"), ",").trim().trimEnd(',')
 	}
@@ -272,13 +320,13 @@ object Nodos {
 		return r.top <= l.top || r.bottom >= l.bottom
 	}
 
-	private fun textoHijos(n: AccessibilityNodeInfo, sb: StringBuilder, nivel: Int, maximo: Int, ocultos: Boolean, dichos: MutableSet<String>) {
+	private fun textoHijos(n: AccessibilityNodeInfo, sb: StringBuilder, nivel: Int, maximo: Int, ocultos: Boolean, dichos: MutableSet<String>, sinControles: Boolean) {
 		if (nivel > 8 || sb.length > maximo) return
 		for (i in 0 until n.childCount) {
 			val hijo = runCatching { n.getChild(i) }.getOrNull() ?: continue
 			if (!ocultos && !hijo.isVisibleToUser) continue
 			// Un hijo que es un control con nombre propio (un botón «Borrar» en una fila) se lee aparte
-			if (accionable(hijo) && esControlIndependiente(hijo)) continue
+			if (accionable(hijo) && (sinControles || esControlIndependiente(hijo))) continue
 			val propio = when {
 				hijo.isPassword -> hijo.contentDescription
 				!hijo.contentDescription.isNullOrBlank() -> hijo.contentDescription
@@ -292,7 +340,7 @@ object Nodos {
 				if (sb.isNotEmpty()) sb.append(", ")
 				sb.append(propio)
 				if (Build.VERSION.SDK_INT >= 30) hijo.stateDescription?.takeIf { it.isNotBlank() }?.let { sb.append(", ").append(it) }
-			} else textoHijos(hijo, sb, nivel + 1, maximo, ocultos, dichos)
+			} else textoHijos(hijo, sb, nivel + 1, maximo, ocultos, dichos, sinControles)
 		}
 	}
 
@@ -340,9 +388,11 @@ object Nodos {
 			return
 		}
 		val foco = recibeFoco(n)
-		if (foco) lista += n
-		// Un control con texto dentro: sus hijos se leen con él, no aparte (salvo controles propios dentro)
-		val leeHijos = foco && accionable(n)
+		val dentro = if (foco) contenido(n) else null
+		if (foco && !sinNadaQueDecir(n, dentro)) lista += n
+		// Un control con texto dentro: sus hijos se leen con él, no aparte (salvo controles propios dentro;
+		// y si agrupa varios controles, cada uno es su propia parada)
+		val leeHijos = foco && accionable(n) && dentro?.varios != true
 		val hijos = (0 until n.childCount).mapNotNull { i -> runCatching { n.getChild(i) }.getOrNull() }
 			.filter { hijo -> !(leeHijos && !esControlIndependiente(hijo) && !tieneControlDentro(hijo)) }
 		// Muchos hijos (una lista larga, la persiana): cada rama en un hilo, y se juntan en su orden
@@ -517,16 +567,21 @@ object Nodos {
 	fun esDeMantenerPulsado(n: AccessibilityNodeInfo): Boolean {
 		// (el de WhatsApp no se dice pulsable ni de pulsación larga: solo trae la acción de pulsación larga)
 		if (!accionable(n)) return false
+		// Una fila de una lista no es un botón de grabar: cambiar a este modo rehace la exploración táctil de todo
+		// Android, y al recorrer los chats de Telegram (cuyas filas acaban en «Mensaje de voz») se cortaba a cada fila
+		if (n.collectionItemInfo != null) return false
 		val id = n.viewIdResourceName?.substringAfter(":id/", "")?.lowercase().orEmpty()
 		if (id.isNotEmpty() && ID_MANTENER.containsMatchIn(id)) return true
 		val nombre = (n.contentDescription ?: n.text)?.toString().orEmpty()
-		return nombre.length <= 60 && NOMBRE_MANTENER.containsMatchIn(nombre)
+		return nombre.length <= 60 && NOMBRE_MANTENER.matches(nombre)
 	}
 
 	private val ID_MANTENER = Regex("(^|_)(voice_?note|ptt|record\\w*|mic|microphone)(_|$)")
+	/** El nombre entero del botón: «Mensaje de voz» dentro de un texto más largo es de lo que habla ese texto, no el botón. */
 	private val NOMBRE_MANTENER = Regex(
-		"(?i)\\b(mensajes? de voz|notas? de voz|grabar audio|graba(r|ción) de voz|mantén pulsado para grabar|" +
-			"voice (message|note)s?|hold to record|record (audio|voice)|push to talk|pulsa para hablar)\\b",
+		"(?i)\\s*(((grabar|enviar|mandar|record|send)\\s+((un|una|a)\\s+)?)?(mensajes? de voz|notas? de voz|voice (message|note)s?)|" +
+			"grabar audio|grabar voz|grabación de voz|mantén pulsado para (grabar|enviar)( \\S+){0,4}|hold to (record|send)( \\S+){0,4}|" +
+			"record (audio|voice)|push to talk|pulsa para hablar)\\s*[.…]?\\s*",
 	)
 
 	/** Una contraseña o lo que la app marca como datos sensibles (Android 14). */

@@ -53,6 +53,8 @@ class Iconos(private val lector: Lector, private val vision: Vision) {
 	/** Se acaba de decir [n], que no tiene nombre: se intenta reconocer cuando el foco se queda en él. */
 	fun alEnfocarSinNombre(n: AccessibilityNodeInfo) {
 		if (modo() == NO || Build.VERSION.SDK_INT < 30 || n.isPassword) return
+		// Sin el OCR descargado no hay con qué reconocerlo: no se captura la pantalla para nada a cada elemento
+		if (modo() == CON_OCR && !vision.ocr.disponible) return
 		val ya = synchronized(this) { porElemento[clave(n)] }
 		if (ya != null) {
 			if (ya.isNotEmpty()) decir(n, ya)

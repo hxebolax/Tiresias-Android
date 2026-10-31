@@ -20,5 +20,13 @@
 			android:name=".ActividadAviso"
 			android:exported="true"
 			android:label="Aviso de prueba" />
+		<activity
+			android:name=".ActividadChats"
+			android:exported="true"
+			android:label="Chats" />
+		<activity
+			android:name=".ActividadEscritorio"
+			android:exported="true"
+			android:label="Inicio" />
 	</application>
 </manifest>

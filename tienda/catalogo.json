@@ -266,7 +266,7 @@
                       "descripcion_en":  "Glass chimes, bright and very short.",
                       "autor":  "Tiresias",
                       "archivo":  "cristal.zip",
-                      "sha256":  "be3256b6254f79bdcde6f49db74c05b3083db2f10d05f740ce73962882fec145",
+                      "sha256":  "0a4a43ae45299aed8116f864c170af7ea5056ba288e703c6658de210d0fb7bdb",
                       "tamano":  115936
                   },
                   {
@@ -277,7 +277,7 @@
                       "descripcion_en":  "Science fiction sweeps with a little echo.",
                       "autor":  "Tiresias",
                       "archivo":  "espacio.zip",
-                      "sha256":  "7090d11643169524e2c199a5514e30fcec713c88b5197bc7209f5fc3f6b070b5",
+                      "sha256":  "8d6f968778ed96f0d9267aff01b386c718c8e0f3f060c3585d67da815777e810",
                       "tamano":  213480
                   },
                   {
@@ -288,7 +288,7 @@
                       "descripcion_en":  "Water drops rising in pitch: soft and easy to tell apart.",
                       "autor":  "Tiresias",
                       "archivo":  "gotas.zip",
-                      "sha256":  "67da6bf69f75927aabb8cce9ac1f27a919f6c47f118e80b016b2885f03ceee48",
+                      "sha256":  "ed1eb5178ed2e4068c5de3f62263a2ffbc26aa91e459746be955bdbeb4c7641e",
                       "tamano":  123911
                   },
                   {
@@ -299,7 +299,7 @@
                       "descripcion_en":  "Short knocks like a wood block: easy to hear without covering the voice.",
                       "autor":  "Tiresias",
                       "archivo":  "madera.zip",
-                      "sha256":  "bb7b8e23209d398e7b0c8f27124333a04521d16ec1464b81025519b40a6d37f1",
+                      "sha256":  "5b77bcd5304bbc9fa14ed76219d58084a2e2de625a10104198db74284ab5bc38",
                       "tamano":  45534
                   },
                   {
@@ -310,7 +310,7 @@
                       "descripcion_en":  "Wooden bars struck with a mallet, warm and low.",
                       "autor":  "Tiresias",
                       "archivo":  "marimba.zip",
-                      "sha256":  "28e16932c1ed652711155c0f09f00600b19e8b0524e652e0c3fa4dd4e6986e46",
+                      "sha256":  "532e56898daca6e997b39526fc1eea807dc2543907f90862e2a0fc29eed70ac0",
                       "tamano":  202840
                   },
                   {
@@ -321,7 +321,7 @@
                       "descripcion_en":  "Very short, quiet clicks, to disturb as little as possible.",
                       "autor":  "Tiresias",
                       "archivo":  "minimo.zip",
-                      "sha256":  "c4f75b8b81d765aa283c3d4f91af3bc4f41551b6ef94c8aad1b116007f065045",
+                      "sha256":  "67c7e0b01aba2a038a8599ecdb9db4b24db51e20a70f04f9d47174a160061627",
                       "tamano":  22332
                   },
                   {
@@ -332,7 +332,7 @@
                       "descripcion_en":  "Square wave beeps, like eight-bit game consoles.",
                       "autor":  "Tiresias",
                       "archivo":  "retro.zip",
-                      "sha256":  "c40f9019ced8e993b5d444eace3fed57c40a7ec52bec350b6c4e435ea0b2d47c",
+                      "sha256":  "f1522b4356677aab8c0224485e58d1068c4e3670505426c27a919bda0163ffc8",
                       "tamano":  10296
                   },
                   {
@@ -343,7 +343,7 @@
                       "descripcion_en":  "Lower, rounder tones, for those who find the Tiresias ones too sharp.",
                       "autor":  "Tiresias",
                       "archivo":  "suave.zip",
-                      "sha256":  "8c79e8b47875e9b0b71246beacb2c12030cde9331760a363337f41c4c9c51958",
+                      "sha256":  "0d9a0209a68cdf7ca9f4db2b8ebe9b2e0f26aacc76a15e2d554ddc54df99bbfb",
                       "tamano":  108485
                   }
               ]

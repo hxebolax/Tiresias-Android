@@ -259,6 +259,9 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		(desdeConfig + PAQUETE_SISTEMA).toSet()
 	}
 
+	/** Si [paquete] es SystemUI o la pantalla de bloqueo: las barras del sistema, no una app. */
+	fun esDelSistema(paquete: String?): Boolean = paquete in paquetesDelSistema
+
 	/** Desde cuándo hay un dedo del usuario en la pantalla (0: ninguno). */
 	@Volatile private var dedoDesde = 0L
 
@@ -269,6 +272,10 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	 */
 	val dedoEnPantalla: Boolean get() = dedoDesde > 0 && SystemClock.uptimeMillis() - dedoDesde < DEDO_MAXIMO_MS
 
+	/** Los eventos que esperan en el hilo del lector, y si se ha dejado alguno por haber demasiados. */
+	private val enCola = java.util.concurrent.atomic.AtomicInteger()
+	@Volatile private var eventosDejados = false
+
 	fun alEvento(e: AccessibilityEvent) {
 		// Los toques de un gesto que ha mandado Tiresias (la lista que se adelanta sola) no son del usuario:
 		// ni cortan lo que se está diciendo ni paran lo que va por pasos
@@ -277,13 +284,25 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 			toques++
 			dedoDesde = SystemClock.uptimeMillis()
 		} else if (e.eventType == AccessibilityEvent.TYPE_TOUCH_INTERACTION_END) dedoDesde = 0L
+		// Una app que cambia sin parar no puede dejar atrás al lector: con una cola así, lo que solo dice «ha cambiado
+		// algo» se deja, porque los gestos irían detrás de todo eso (al procesar lo siguiente se rehace lo guardado)
+		if ((e.eventType == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED || e.eventType == AccessibilityEvent.TYPE_VIEW_SCROLLED) && enCola.get() >= COLA_MAXIMA) {
+			eventosDejados = true
+			return
+		}
 		val copia = copiar(e) ?: return
 		// Tocar la pantalla corta la voz al momento, sin esperar al hilo del lector
 		if (toqueUsuario && ajustes.cortarAlTocar) {
 			continua.parar()
 			voz.callar()
 		}
+		enCola.incrementAndGet()
 		manejador.post {
+			enCola.decrementAndGet()
+			if (eventosDejados) {
+				eventosDejados = false
+				olvidarCaches()
+			}
 			try {
 				procesar(copia)
 			} catch (ex: Exception) {
@@ -727,7 +746,8 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	 * iconos dentro o cubre un tercio de la ventana o más. No se dice cada vez (SandFly, HomeScreenPages).
 	 */
 	private fun esPaginaDelEscritorio(n: AccessibilityNodeInfo): Boolean {
-		if (n.packageName?.toString() != escritorio() || n.packageName?.toString() == servicio.packageName || Nodos.accionable(n)) return false
+		// (en EMUI la página se pulsa, para editar el escritorio: tampoco se dice al tocar entre los iconos)
+		if (n.packageName?.toString() != escritorio() || n.packageName?.toString() == servicio.packageName || (Nodos.accionable(n) && !Nodos.agrupaControles(n))) return false
 		var conIconos = false
 		for (i in 0 until minOf(n.childCount, 40)) {
 			val h = runCatching { n.getChild(i) }.getOrNull() ?: continue
@@ -883,6 +903,9 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		enfocadosPropios.addFirst(n to momentoDicho)
 		while (enfocadosPropios.size > 8) enfocadosPropios.removeLast()
 	}
+
+	/** Para las pruebas instrumentadas: el foco se pierde, como cuando desaparece lo que lo tenía. */
+	fun perderFocoPruebas() = manejador.post { perderFoco() }
 
 	/** Lo que se dice de [n] con la verbosidad actual (sin decirlo). */
 	fun textoElemento(n: AccessibilityNodeInfo): String = compositor.describir(elemento(n), verbosidad)
@@ -1593,6 +1616,8 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		private const val SILENCIO_ENCENDER_MS = 3000L
 		/** Lo que como mucho se cuenta un dedo en la pantalla para las teclas de volumen. */
 		private const val DEDO_MAXIMO_MS = 30_000L
+		/** Los eventos en espera a partir de los que se dejan los que solo avisan de un cambio. */
+		private const val COLA_MAXIMA = 150
 		/** La mitad del lado de la zona de paso que se abre para un toque de Tiresias, y lo que se espera a que Android la ponga. */
 		private const val PASO_TOQUE_PX = 24
 		private const val ESPERA_PASO_TOQUE_MS = 60L

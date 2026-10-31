@@ -19,6 +19,7 @@
 	<string name="servicio_descripcion">Tiresias reads aloud what is on the screen and lets you control your phone with gestures, the keyboard and braille. To do this it needs to see the screen, receive your gestures and key presses, and act on your behalf. It does not store, log or send anything it reads: it only speaks it. Online artificial intelligence is only used when you ask for it, with your own key.</string>
 	<string name="servicio_activo">Tiresias on</string>
 	<string name="servicio_actualizado">Tiresias updated to version %1$s</string>
+	<string name="servicio_reiniciado">Tiresias had stopped responding and restarted itself</string>
 	<string name="tts_nombre">Tiresias voices</string>
 	<string name="suspendido">Tiresias paused. To resume, hold both volume keys, or turn the screen off and on.</string>
 	<string name="reanudado">Tiresias is back</string>

@@ -37,8 +37,8 @@ android {
 		// versión posterior (gestos de varios dedos, capturas, braille HID...) se comprueba al usarlo.
 		minSdk = 24
 		targetSdk = 37
-		versionCode = 9
-		versionName = "1.0.7"
+		versionCode = 10
+		versionName = "1.0.8"
 
 		buildConfigField("String", "URL_ACTUALIZACIONES", "\"$urlActualizaciones\"")
 		buildConfigField("String", "REPO_GITHUB", "\"$repoGithub\"")

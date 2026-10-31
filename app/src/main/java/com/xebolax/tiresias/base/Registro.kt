@@ -81,17 +81,40 @@ object Registro {
 	/** El archivo del registro (para compartirlo), o null si aún no hay nada. */
 	fun archivo(): File? = carpeta?.let { File(it, ARCHIVO) }?.takeIf { it.exists() }
 
-	/** Todo el registro como texto: la parte anterior y la actual. */
+	/** Todo el registro como texto, listo para compartirlo: la parte anterior y la actual, sin direcciones de red. */
 	fun texto(): String {
 		val dir = carpeta ?: return ""
-		return listOf(ANTERIOR, ARCHIVO).map { File(dir, it) }.filter { it.exists() }
-			.joinToString("") { runCatching { it.readText() }.getOrDefault("") }
+		return limpiar(listOf(ANTERIOR, ARCHIVO).map { File(dir, it) }.filter { it.exists() }
+			.joinToString("") { runCatching { it.readText() }.getOrDefault("") })
 	}
+
+	/**
+	 * Quita las direcciones que traen las trazas de los errores de red (la del PC con NVDA, la del otro móvil en la
+	 * ayuda remota, un servidor propio): en un informe sobra saber que falló la conexión, y no salen del móvil.
+	 */
+	fun limpiar(t: String): String = DIRECCIONES.fold(t) { texto, r -> texto.replace(r) { m -> m.groupValues.getOrElse(1) { "" } + OCULTA } }
+
+	private const val OCULTA = "[dirección]"
+	private val DIRECCIONES = listOf(
+		Regex("(?i)(connect to )\\S+"),
+		Regex("(?i)(resolve host )\"[^\"]*\""),
+		Regex("(?i)(hostname )\\S+"),
+		Regex("(UnknownHostException: )\\S+"),
+		Regex("\\b\\d{1,3}(?:\\.\\d{1,3}){3}\\b"),
+		Regex("(?i)\\b[0-9a-f]{1,4}(?::[0-9a-f]{0,4}){3,7}\\b"),
+		Regex("(?i)\\b[a-z2-7]{16,56}\\.onion\\b"),
+	)
 
 	fun borrar() {
 		val dir = carpeta ?: return
 		File(dir, ARCHIVO).delete()
 		File(dir, ANTERIOR).delete()
+	}
+
+	/** Espera a que quede escrito lo pendiente, [ms] como mucho (antes de reiniciar el proceso). */
+	fun vaciar(ms: Long) {
+		runCatching { hilo.submit { }.get(ms, java.util.concurrent.TimeUnit.MILLISECONDS) }
+			.onFailure { Log.w("Registro", "No se pudo esperar al hilo del registro", it) }
 	}
 
 	private fun escribir(nivel: String, etiqueta: String, mensaje: String, error: Throwable?) {
