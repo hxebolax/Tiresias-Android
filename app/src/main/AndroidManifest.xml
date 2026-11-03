@@ -103,6 +103,8 @@
 		<activity android:name=".ui.ActividadTutorial" android:exported="false" android:label="@string/ui_tutorial" />
 		<activity android:name=".ui.ActividadAsistente" android:exported="false" android:label="@string/ui_asistente" />
 		<activity android:name=".ui.ActividadRecursos" android:exported="false" android:label="@string/ui_recursos" />
+		<!-- En su propia tarea: al cerrarla se vuelve a la app del campo (no a otra pantalla de Tiresias), y ahí se escribe el texto -->
+		<activity android:name=".ui.ActividadEdicionPartes" android:exported="false" android:label="@string/partes_titulo" android:taskAffinity="" android:excludeFromRecents="true" />
 		<activity android:name=".ui.ActividadGestos" android:exported="false" android:label="@string/ui_gestos" />
 		<activity android:name=".ui.ActividadDiccionario" android:exported="false" android:label="@string/ui_diccionario" />
 		<activity android:name=".ui.ActividadEtiquetas" android:exported="false" android:label="@string/ui_etiquetas" />

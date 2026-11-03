@@ -31,6 +31,7 @@ object TemasSonido {
 	private const val INCLUIDOS_SACADOS = "_incluidos"
 	private const val MAXIMO_ARCHIVO = 2L * 1024 * 1024
 	private const val MAXIMO_TEMA = 24L * 1024 * 1024
+	private const val MAXIMO_JSON = 16L * 1024
 
 	fun carpeta(c: Context): File = File(Almacen.protegido(c).filesDir, "temas").apply { mkdirs() }
 
@@ -133,6 +134,11 @@ object TemasSonido {
 				val e = zip.nextEntry ?: break
 				if (e.isDirectory) continue
 				val archivo = e.name.substringAfterLast('/').lowercase()
+				// Su nombre y su descripción, si los trae (lo que se enseña al elegirlo)
+				if (archivo == "tema.json") {
+					copiarLimitado(zip, File(parcial, archivo), MAXIMO_JSON)
+					continue
+				}
 				val base = archivo.substringBeforeLast('.')
 				val ext = archivo.substringAfterLast('.', "")
 				if (base !in nombres || ext !in EXTENSIONES) continue

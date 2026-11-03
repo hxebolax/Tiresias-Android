@@ -186,6 +186,9 @@ object Nodos {
 		if (Build.VERSION.SDK_INT >= 28 && n.isScreenReaderFocusable) return true
 		val rol = rol(n)
 		if (rol == Rol.WEB && n.childCount > 0) return false
+		// Una lista con filas no es una parada por sí misma aunque la app la haga pulsable o mantenible y le ponga
+		// nombre (la de los chats de WhatsApp): son sus filas, como en TalkBack
+		if (esLista(n) && n.childCount > 0) return false
 		if (accionable(n)) return true
 		// Una casilla suelta (sin fila pulsable que la lea) sí es una parada
 		if (n.isCheckable) return !antepasadoQueLee(n)
@@ -217,17 +220,27 @@ object Nodos {
 		var p = runCatching { n.parent }.getOrNull()
 		var nivel = 0
 		while (p != null && nivel < 12) {
+			// Una lista no lee a sus filas, aunque la app la haga mantenible: en «Reenviar a» de WhatsApp las filas
+			// son casillas que no se pulsan solas, y se leía la lista entera de una vez, encabezados incluidos
+			if (esLista(p)) return false
 			if (Build.VERSION.SDK_INT >= 28 && p.isScreenReaderFocusable) return true
 			if (accionable(p) && p.isVisibleToUser) return true
 			// Un encabezado sin texto propio (la fila de una categoría de ajustes) se lee con su texto dentro:
 			// una sola parada, no el encabezado y luego su texto otra vez
 			if (esEncabezado(p) && !tieneTexto(p) && p.isVisibleToUser) return true
-			if (p.collectionInfo != null) return false
 			p = runCatching { p!!.parent }.getOrNull()
 			nivel++
 		}
 		return false
 	}
+
+	/**
+	 * Una lista, una cuadrícula o algo que se desplaza (no un deslizador). Lo que se pulsa no: un desplegable
+	 * (Spinner) se da como lista y es un control. Las listas de WhatsApp se mantienen pulsadas, pero no se pulsan.
+	 */
+	fun esLista(n: AccessibilityNodeInfo): Boolean =
+		(n.collectionInfo != null || (n.isScrollable && n.rangeInfo == null)) &&
+			!n.isClickable
 
 	/** El primer antepasado de [n] (o él mismo) que recibe el foco: el que se lee al tocar. */
 	fun enfocable(n: AccessibilityNodeInfo): AccessibilityNodeInfo? {
@@ -285,7 +298,12 @@ object Nodos {
 	/** Si [n] solo agrupa controles y no tiene nada que decir por sí mismo: no es una parada. */
 	fun soloAgrupa(n: AccessibilityNodeInfo): Boolean = sinNadaQueDecir(n, contenido(n))
 
-	private fun sinNadaQueDecir(n: AccessibilityNodeInfo, d: Dentro?): Boolean = d != null && d.varios && d.textos == 0 && !tieneTexto(n)
+	/**
+	 * Un control que no dice nada por sí mismo y solo envuelve otros controles: él no es una parada, lo son ellos.
+	 * También si envuelve uno solo (el marco pulsable de la foto de cada chat de WhatsApp, sin texto, con la foto
+	 * dentro: si no, eran dos paradas para lo mismo, una de ellas muda).
+	 */
+	private fun sinNadaQueDecir(n: AccessibilityNodeInfo, d: Dentro?): Boolean = d != null && d.controles >= 1 && d.textos == 0 && !tieneTexto(n)
 
 	/**
 	 * El texto de los hijos de un contenedor que se lee junto a él (filas de
@@ -344,10 +362,15 @@ object Nodos {
 		}
 	}
 
-	/** Un control dentro de una fila que tiene su propio nombre (un botón «Borrar» en una fila de lista). */
+	/**
+	 * Un control dentro de una fila que tiene su propio nombre (un botón «Borrar» en una fila de lista). También una
+	 * imagen que se pulsa por sí misma y tiene descripción: la foto de un chat de WhatsApp («Foto de Ana») abre el
+	 * perfil y la fila abre el chat, así que son dos paradas, como en TalkBack (antes se leía «Foto de Ana. Ana: Hola»).
+	 */
 	private fun esControlIndependiente(n: AccessibilityNodeInfo): Boolean {
 		val clase = n.className?.toString().orEmpty()
-		return n.isCheckable || n.isEditable || clase.endsWith("Button") || clase.endsWith("ImageButton") || clase.endsWith("Switch") || clase.endsWith("CheckBox")
+		return n.isCheckable || n.isEditable || clase.endsWith("Button") || clase.endsWith("ImageButton") || clase.endsWith("Switch") || clase.endsWith("CheckBox") ||
+			(clase.endsWith("ImageView") && !n.contentDescription.isNullOrBlank() && accionable(n))
 	}
 
 	/**
@@ -389,10 +412,11 @@ object Nodos {
 		}
 		val foco = recibeFoco(n)
 		val dentro = if (foco) contenido(n) else null
-		if (foco && !sinNadaQueDecir(n, dentro)) lista += n
+		val soloEnvuelve = foco && sinNadaQueDecir(n, dentro)
+		if (foco && !soloEnvuelve) lista += n
 		// Un control con texto dentro: sus hijos se leen con él, no aparte (salvo controles propios dentro;
-		// y si agrupa varios controles, cada uno es su propia parada)
-		val leeHijos = foco && accionable(n) && dentro?.varios != true
+		// y si agrupa varios controles, o solo los envuelve sin decir nada, cada uno es su propia parada)
+		val leeHijos = foco && !soloEnvuelve && accionable(n) && dentro?.varios != true
 		val hijos = (0 until n.childCount).mapNotNull { i -> runCatching { n.getChild(i) }.getOrNull() }
 			.filter { hijo -> !(leeHijos && !esControlIndependiente(hijo) && !tieneControlDentro(hijo)) }
 		// Muchos hijos (una lista larga, la persiana): cada rama en un hilo, y se juntan en su orden
@@ -576,13 +600,63 @@ object Nodos {
 		return nombre.length <= 60 && NOMBRE_MANTENER.matches(nombre)
 	}
 
-	private val ID_MANTENER = Regex("(^|_)(voice_?note|ptt|record\\w*|mic|microphone)(_|$)")
+	private val ID_MANTENER = Regex("(^|_)(voice_?note|ptt|record\\w*|mic|microphone|video_?note)(_|$)")
 	/** El nombre entero del botón: «Mensaje de voz» dentro de un texto más largo es de lo que habla ese texto, no el botón. */
 	private val NOMBRE_MANTENER = Regex(
-		"(?i)\\s*(((grabar|enviar|mandar|record|send)\\s+((un|una|a)\\s+)?)?(mensajes? de voz|notas? de voz|voice (message|note)s?)|" +
+		// (Telegram cambia el botón entre «Mensaje de voz» y «Mensaje de vídeo» con un toque: los dos se mantienen pulsados)
+		"(?i)\\s*(((grabar|enviar|mandar|record|send)\\s+((un|una|a)\\s+)?)?(mensajes? de (voz|v[ií]deo)|notas? de voz|(voice|video) (message|note)s?)|" +
 			"grabar audio|grabar voz|grabación de voz|mantén pulsado para (grabar|enviar)( \\S+){0,4}|hold to (record|send)( \\S+){0,4}|" +
 			"record (audio|voice)|push to talk|pulsa para hablar)\\s*[.…]?\\s*",
 	)
+
+	/**
+	 * Cómo está hecha la ventana de [raiz], para contar un fallo de una app que no se puede probar: cada nodo con
+	 * su clase, su identificador, si se pulsa, si es encabezado, su posición en la lista, dónde está y si es una de
+	 * las [paradas] de Tiresias o el [foco]. **Sin ningún texto de la pantalla**: de los textos y las descripciones
+	 * solo se dice si los hay. Como mucho [maximo] nodos. Devuelve el texto y cuántos nodos lleva.
+	 */
+	fun estructura(raiz: AccessibilityNodeInfo, paradas: Set<AccessibilityNodeInfo>, foco: AccessibilityNodeInfo?, maximo: Int): Pair<String, Int> {
+		val sb = StringBuilder()
+		sb.append(raiz.packageName).append('\n')
+		var nodos = 0
+		fun recorrer(n: AccessibilityNodeInfo, nivel: Int) {
+			if (nodos >= maximo || nivel > 40) return
+			nodos++
+			sb.append("  ".repeat(nivel)).append(n.className?.toString()?.substringAfterLast('.') ?: "?")
+			n.viewIdResourceName?.substringAfter(":id/", "")?.takeIf { it.isNotEmpty() }?.let { sb.append(" #").append(it) }
+			val marcas = buildList {
+				if (n == foco) add("FOCO")
+				if (n in paradas) add("parada")
+				if (!n.isVisibleToUser) add("oculto")
+				if (n.isClickable) add("pulsable")
+				if (n.isLongClickable) add("mantenible")
+				if (n.isFocusable) add("enfocable")
+				if (Build.VERSION.SDK_INT >= 28 && n.isScreenReaderFocusable) add("unaParada")
+				if (esEncabezado(n)) add("encabezado")
+				if (n.isCheckable) add(if (n.isChecked) "marcado" else "marcable")
+				if (n.isEditable) add("editable")
+				if (n.isScrollable) add("desplazable")
+				if (n.isPassword) add("contraseña")
+				if (!n.text.isNullOrEmpty()) add("texto")
+				if (!n.contentDescription.isNullOrEmpty()) add("descripción")
+				n.collectionInfo?.let { add("lista ${it.rowCount}x${it.columnCount}") }
+				n.collectionItemInfo?.let { add("fila ${it.rowIndex},${it.columnIndex}") }
+				if (esDeMantenerPulsado(n)) add("deMantener")
+			}
+			sb.append(" [").append(marcas.joinToString(" ")).append("] ").append(limites(n).toShortString()).append('\n')
+			for (i in 0 until n.childCount) runCatching { n.getChild(i) }.getOrNull()?.let { recorrer(it, nivel + 1) }
+		}
+		recorrer(raiz, 0)
+		return sb.toString() to nodos
+	}
+
+	/**
+	 * Un nombre que no dice nada, que pone la app cuando no tiene el de verdad: «Task no name» o «Tarea null» en
+	 * Recientes del escritorio de los Infinix, Tecno e itel (XOS), «unknown», «sin nombre».
+	 */
+	fun esNombreDeRelleno(nombre: String): Boolean = nombre.isNotEmpty() && NOMBRE_RELLENO.matches(nombre)
+
+	private val NOMBRE_RELLENO = Regex("""(?i)\s*((task|tarea|app|aplicaci[oó]n)[\s:,.-]*)?(no[\s_-]?name|null|unknown|unnamed|sin nombre|desconocid[ao])\s*\.?\s*""")
 
 	/** Una contraseña o lo que la app marca como datos sensibles (Android 14). */
 	fun sensible(n: AccessibilityNodeInfo): Boolean =

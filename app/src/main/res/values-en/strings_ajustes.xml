@@ -382,8 +382,8 @@
 		<item>The status (what you chose in “Choose what the status says”)</item>
 		<item>The time and the notification summary</item>
 	</string-array>
-	<string name="aj_callar_bloqueo">Silence the lock screen</string>
-	<string name="aj_callar_bloqueo_res">While the phone is locked, no notifications or announcements: only what you ask for. Notifications are kept in Recent notifications</string>
+	<string name="aj_callar_bloqueo">Silence while locked or with the screen off</string>
+	<string name="aj_callar_bloqueo_res">While the phone is locked or the screen is off, no notifications or announcements: only what you ask for. Notifications are kept in Recent notifications</string>
 	<string name="aj_sonido_tipo">Sound according to the control type</string>
 	<string name="aj_sonido_tipo_res">The focus sound changes pitch: higher on headings and links, lower on fields and text</string>
 	<string name="aj_sonido_vertical">Sound according to height</string>
@@ -480,7 +480,7 @@
 	<string name="aj_motor_avisos">Voice for notifications</string>
 	<string name="aj_motor_avisos_misma">The usual voice</string>
 	<string name="aj_volumen_cursor">Volume keys in text fields</string>
-	<string name="aj_volumen_cursor_res">In a text field, volume up moves the cursor one character back and volume down one forward, saying the character</string>
+	<string name="aj_volumen_cursor_res">In a text field, volume up moves the cursor back and volume down forward, saying what it passed: one character, or a word, a line or a paragraph if the selector is on them</string>
 	<string name="aj_braille_intro_envia">Enter sends in messaging apps</string>
 	<string name="aj_braille_intro_envia_res">On the braille keyboard, Enter (two fingers down) presses the Send button in WhatsApp, Telegram, Signal or Messages, instead of starting a new line</string>
 	<string name="aj_oyente_avisos">Also read what Android does not announce</string>
@@ -524,4 +524,7 @@
 	<string name="senior_sos_sms_ajuste_res">As well as calling, a message to your help contacts with your last known location. It goes to people, not to an emergency service.</string>
 	<string name="senior_teclas_llamada">Answer with the volume keys</string>
 	<string name="senior_teclas_llamada_res">While the phone rings, volume up answers and volume down hangs up.</string>
+	<string name="aj_motor_del_sistema">Whatever the system uses (now %1$s)</string>
+	<string name="aj_motor_sistema_elegido">%1$s (system, the one chosen on the phone)</string>
+	<string name="aj_motor_espeak_corto">eSpeak NG</string>
 </resources>

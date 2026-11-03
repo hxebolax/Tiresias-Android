@@ -174,6 +174,11 @@ class Ajustes(contexto: Context) {
 	/** Al cambiar de idioma, también de variante (español de México, inglés británico); si no, solo el idioma (Backtalk 58). */
 	val cambioDialecto: Boolean get() = logico(Claves.CAMBIO_DIALECTO, true)
 
+	/** La última unidad elegida en la edición por partes (el nombre de [com.xebolax.tiresias.nucleo.UnidadPartes]). */
+	var unidadPartes: String
+		get() = cadena(Claves.UNIDAD_PARTES, "FRASES")
+		set(v) = poner(Claves.UNIDAD_PARTES, v)
+
 	/** Callarse mientras otra app graba con el micrófono (dictado, notas de voz, llamadas por internet). */
 	var callarAlGrabar: Boolean
 		get() = logico(Claves.CALLAR_AL_GRABAR, true)
@@ -752,6 +757,8 @@ class Ajustes(contexto: Context) {
 		const val MOTOR_ESPEAK = "tiresias:espeak"
 		const val MOTOR_PICO = "tiresias:pico"
 		const val MOTOR_ELOQUENCE = "tiresias:eloquence"
+		/** El motor que esté elegido en los ajustes del móvil, sea cual sea (si se cambia allí, Tiresias lo sigue). */
+		const val MOTOR_DEL_SISTEMA = "tiresias:sistema"
 
 		/**
 		 * Los parámetros de Eloquence de fábrica, por voz (0 es Reed): los del
@@ -842,6 +849,7 @@ object Claves {
 	const val CALLAR_AL_GRABAR = "callar_al_grabar"
 	const val CALLAR_PROXIMIDAD = "callar_proximidad"
 	const val PANTALLA_AL_HABLAR = "pantalla_al_hablar"
+	const val UNIDAD_PARTES = "unidad_partes"
 	const val MOSTRAR_EXPERIMENTOS = "mostrar_experimentos"
 	const val DECIR_VOLUMEN = "decir_volumen"
 	const val VOLUMEN_CURSOR = "volumen_cursor"

@@ -222,6 +222,10 @@ class Teclado(private val lector: Lector, private val alAccion: (Accion) -> Unit
 		val ahora = SystemClock.uptimeMillis()
 		val arriba = e.keyCode == KeyEvent.KEYCODE_VOLUME_UP
 		if (e.action == KeyEvent.ACTION_DOWN && e.repeatCount == 0) {
+			// Una tecla que se pulsó hace mucho y no llegó a soltarse (se perdió su soltar) no cuenta: si no, la otra
+			// se tomaba siempre por las dos a la vez y las teclas dejaban de mover el cursor y de cambiar la voz
+			if (arriba && volumenAbajo > 0 && ahora - volumenAbajo > TECLA_OLVIDADA_MS) volumenAbajo = 0
+			if (!arriba && volumenArriba > 0 && ahora - volumenArriba > TECLA_OLVIDADA_MS) volumenArriba = 0
 			if (arriba) volumenArriba = ahora else volumenAbajo = ahora
 			if (volumenArriba > 0 && volumenAbajo > 0) {
 				ambasDisparada = false
@@ -254,7 +258,7 @@ class Teclado(private val lector: Lector, private val alAccion: (Accion) -> Unit
 		}
 		// En un campo de texto, si se ha elegido, las teclas mueven el cursor: arriba, un carácter atrás; abajo,
 		// uno adelante (SandFly). Lo que se decide al pulsar vale hasta soltar
-		if (e.action == KeyEvent.ACTION_DOWN && e.repeatCount == 0 && lector.ajustes.volumenCursor && !lector.continua.activa && pantallaEncendida()) {
+		if (e.action == KeyEvent.ACTION_DOWN && e.repeatCount == 0 && lector.ajustes.volumenCursor && !lector.continua.leyendo && pantallaEncendida()) {
 			campoCursor = campoEditando()
 			volumenEnCursor = campoCursor != null
 		}
@@ -262,12 +266,22 @@ class Teclado(private val lector: Lector, private val alAccion: (Accion) -> Unit
 			if (e.action == KeyEvent.ACTION_DOWN) {
 				val f = campoCursor
 				if (f != null) {
+					// Por la unidad del selector (palabras, líneas, párrafos); con cualquier otro control, por caracteres
+					val unidad = when (lector.control) {
+						com.xebolax.tiresias.nucleo.ControlLectura.PALABRAS -> android.view.accessibility.AccessibilityNodeInfo.MOVEMENT_GRANULARITY_WORD
+						com.xebolax.tiresias.nucleo.ControlLectura.LINEAS -> android.view.accessibility.AccessibilityNodeInfo.MOVEMENT_GRANULARITY_LINE
+						com.xebolax.tiresias.nucleo.ControlLectura.PARRAFOS -> android.view.accessibility.AccessibilityNodeInfo.MOVEMENT_GRANULARITY_PARAGRAPH
+						else -> android.view.accessibility.AccessibilityNodeInfo.MOVEMENT_GRANULARITY_CHARACTER
+					}
 					val args = android.os.Bundle().apply {
-						putInt(android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_MOVEMENT_GRANULARITY_INT, android.view.accessibility.AccessibilityNodeInfo.MOVEMENT_GRANULARITY_CHARACTER)
+						putInt(android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_MOVEMENT_GRANULARITY_INT, unidad)
 					}
 					val accion = if (arriba) android.view.accessibility.AccessibilityNodeInfo.ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY
 					else android.view.accessibility.AccessibilityNodeInfo.ACTION_NEXT_AT_MOVEMENT_GRANULARITY
-					lector.manejador.post { runCatching { f.performAction(accion, args) } }
+					lector.manejador.post {
+						// Al principio o al final (o el campo no admite esa unidad): el sonido del borde
+						if (!runCatching { f.performAction(accion, args) }.getOrDefault(false)) lector.sonidos.tocar(com.xebolax.tiresias.voz.Sonido.BORDE)
+					}
 				}
 			} else if (e.action == KeyEvent.ACTION_UP) volumenEnCursor = false
 			return true
@@ -281,7 +295,7 @@ class Teclado(private val lector: Lector, private val alAccion: (Accion) -> Unit
 		val triple = accionDe(if (arriba) Gesto.VOLUMEN_ARRIBA_TRIPLE else Gesto.VOLUMEN_ABAJO_TRIPLE)
 		if (larga == Accion.NINGUNA && triple == Accion.NINGUNA) {
 			// Leyendo de seguido, el volumen de la voz sin cortar la lectura (como TalkBack); si no, el del sistema
-			return if (e.action == KeyEvent.ACTION_DOWN && lector.continua.activa) volumenDeLaVoz(e, arriba) else false
+			return if (e.action == KeyEvent.ACTION_DOWN && lector.continua.leyendo) volumenDeLaVoz(e, arriba) else false
 		}
 		if (e.action == KeyEvent.ACTION_DOWN) {
 			if (e.repeatCount == 0) {
@@ -339,6 +353,8 @@ class Teclado(private val lector: Lector, private val alAccion: (Accion) -> Unit
 		const val MANTENER_AMBAS_MS = 1500L
 		const val MANTENER_UNA_MS = 700L
 		const val TRIPLE_MS = 500L
+		/** Lo que como mucho se mantiene una tecla de volumen: más es que su soltar se perdió. */
+		const val TECLA_OLVIDADA_MS = 5_000L
 		/** Lo que puede haber entre las dos teclas de volumen para callar una notificación. */
 		const val AMBAS_AVISO_MS = 400L
 	}

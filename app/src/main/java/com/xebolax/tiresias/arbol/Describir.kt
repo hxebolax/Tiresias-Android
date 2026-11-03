@@ -31,16 +31,20 @@ class Describir(private val etiqueta: (paquete: String, id: String) -> String? =
 		val id = n.viewIdResourceName
 		val paquete = n.packageName?.toString().orEmpty()
 		val acciones = n.actionList
-		val descripcion = n.contentDescription?.toString()?.trim().orEmpty()
 		// Un campo vacío que enseña su pista da la pista como texto (Android 8+ lo marca): no es lo escrito
 		val texto = if (editable && Build.VERSION.SDK_INT >= 26 && n.isShowingHintText) "" else n.text?.toString().orEmpty()
+		// Una descripción de relleno («Task no name» en Recientes de los Infinix): si dentro hay algo mejor, eso
+		val descripcion = n.contentDescription?.toString()?.trim().orEmpty().let { d ->
+			if (Nodos.esNombreDeRelleno(d) && (texto.isNotBlank() || Nodos.textoHijos(n).isNotBlank())) "" else d
+		}
 
+		val complementaria = complementaria(n)
 		val nombre = when {
 			editable -> etiquetaCampo(n, descripcion)
 			descripcion.isNotEmpty() -> descripcion
 			texto.isNotBlank() -> texto.trim()
 			else -> Nodos.textoHijos(n)
-		}
+		}.ifBlank { complementaria.orEmpty() }
 
 		return Elemento(
 			nombre = nombre,
@@ -57,7 +61,7 @@ class Describir(private val etiqueta: (paquete: String, id: String) -> String? =
 			encabezado = Nodos.esEncabezado(n),
 			nivelEncabezado = Nodos.nivelEncabezado(n),
 			pista = pista(n, editable, texto),
-			complementaria = complementaria(n),
+			complementaria = complementaria,
 			rango = rango(n),
 			posicion = posicion(n),
 			pulsable = n.isClickable || acciones.any { it.id == AccessibilityNodeInfo.ACTION_CLICK },
@@ -106,6 +110,8 @@ class Describir(private val etiqueta: (paquete: String, id: String) -> String? =
 
 	private fun complementaria(n: AccessibilityNodeInfo): String? {
 		if (Build.VERSION.SDK_INT >= 36) n.supplementalDescription?.toString()?.takeIf { it.isNotBlank() }?.let { return it }
+		// Antes de Android 16, AndroidX (y Chrome 156, que nombra así las casillas por su <label>) la deja en los extras (Backtalk)
+		runCatching { n.extras?.getCharSequence(CLAVE_COMPLEMENTARIA) }.getOrNull()?.toString()?.takeIf { it.isNotBlank() }?.let { return it }
 		if (Build.VERSION.SDK_INT >= 28) n.tooltipText?.toString()?.takeIf { it.isNotBlank() }?.let { return it }
 		return null
 	}
@@ -196,6 +202,8 @@ class Describir(private val etiqueta: (paquete: String, id: String) -> String? =
 	}
 
 	companion object {
+		/** Donde AndroidX guarda la descripción complementaria antes de Android 16. */
+		private const val CLAVE_COMPLEMENTARIA = "androidx.view.accessibility.AccessibilityNodeInfoCompat.SUPPLEMENTAL_DESCRIPTION_KEY"
 		/** Los roles de Chrome que Tiresias dice con sus propias palabras. */
 		val ROLES_CHROME = setOf("link", "button", "checkBox", "radioButton", "image", "list", "listItem", "table", "cell", "textField", "comboBoxGrouping", "comboBoxMenuButton", "slider", "switch", "tab", "tabList", "menuItem", "menu", "heading", "searchBox", "textFieldWithComboBox", "popUpButton", "toggleButton", "rowHeader", "columnHeader", "row", "navigation", "main", "banner", "contentInfo", "form", "region")
 		/** Los estados que Android pone solo a los controles estándar (en los idiomas de Tiresias y los más comunes). */

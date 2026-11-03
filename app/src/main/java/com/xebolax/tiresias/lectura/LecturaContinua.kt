@@ -15,6 +15,14 @@ class LecturaContinua(private val lector: Lector) {
 	@Volatile var activa = false
 		private set
 	@Volatile private var vuelta = 0
+	/** Cuándo se mandó a decir el último elemento. */
+	@Volatile private var leidoEn = 0L
+
+	/**
+	 * Si de verdad se está leyendo de seguido: marcada y con la voz hablando (o entre un elemento y el siguiente).
+	 * Lo miran las teclas de volumen: una marca que se quedara puesta no les quita lo suyo.
+	 */
+	val leyendo: Boolean get() = activa && (lector.voz.hablando || android.os.SystemClock.uptimeMillis() - leidoEn < ENTRE_ELEMENTOS_MS)
 
 	fun desdeArriba() {
 		val raiz = lector.raiz() ?: return
@@ -37,6 +45,7 @@ class LecturaContinua(private val lector: Lector) {
 	private fun leer(n: AccessibilityNodeInfo, v: Int) {
 		if (!activa || v != vuelta) return
 		lector.enfocarSinHablar(n)
+		leidoEn = android.os.SystemClock.uptimeMillis()
 		val texto = lector.compositor.describir(lector.elemento(n), lector.ajustes.verbosidad.copy(decirPistas = false))
 		lector.voz.decir(Enunciado(texto, Modo.INTERRUMPIR, Tipo.LECTURA_CONTINUA, alTerminar = { entero ->
 			if (entero) lector.manejador.post { siguiente(n, v) } else if (v == vuelta) activa = false
@@ -47,8 +56,7 @@ class LecturaContinua(private val lector: Lector) {
 		if (!activa || v != vuelta) return
 		val raiz = lector.raiz() ?: return parar()
 		val lista = lector.navegador.orden(raiz)
-		val i = lista.indexOf(actual)
-		val siguiente = lista.getOrNull(i + 1)
+		val siguiente = siguienteDe(lista, actual)
 		if (siguiente != null) {
 			leer(siguiente, v)
 			return
@@ -63,14 +71,38 @@ class LecturaContinua(private val lector: Lector) {
 				lector.navegador.invalidarTodo()
 				val nueva = lector.navegador.orden(lector.raiz() ?: return@postDelayed parar())
 				val j = nueva.indexOf(actual)
-				val proximo = if (j >= 0) nueva.getOrNull(j + 1) else nueva.firstOrNull { Nodos.limites(it).top > desde.top }
+				val proximo = if (j >= 0) nueva.getOrNull(j + 1) else posterior(nueva, actual, desde)
 				if (proximo != null) leer(proximo, v) else parar()
 			}, 300)
 		} else parar()
 	}
 
+	/**
+	 * Lo que va después de [actual] en [lista]. Si [actual] ya no está (Chrome desplaza la página al leer y lo
+	 * leído se va por arriba, o un anuncio rehace la página), lo que sigue por posición dentro de lo mismo que se
+	 * desplaza, no lo primero de la ventana: eso era la barra de herramientas de Chrome, y la lectura se iba a ella.
+	 */
+	private fun siguienteDe(lista: List<AccessibilityNodeInfo>, actual: AccessibilityNodeInfo): AccessibilityNodeInfo? {
+		val i = lista.indexOf(actual)
+		if (i >= 0) return lista.getOrNull(i + 1)
+		runCatching { actual.refresh() }
+		return posterior(lista, actual, Nodos.limites(actual))
+	}
+
+	/** Lo primero de [lista] por debajo de [desde], dentro de lo que se desplaza con [actual] si sigue ahí. */
+	private fun posterior(lista: List<AccessibilityNodeInfo>, actual: AccessibilityNodeInfo, desde: android.graphics.Rect): AccessibilityNodeInfo? {
+		val zona = Nodos.desplazable(actual)?.takeIf { Nodos.vivo(it) }?.let { Nodos.limites(it) }
+		val dentro = lista.filter { n -> zona == null || Nodos.limites(n).let { o -> zona.contains(o.centerX(), o.centerY()) } }.ifEmpty { lista }
+		return dentro.firstOrNull { Nodos.limites(it).top > desde.top }
+	}
+
 	fun parar() {
 		activa = false
 		vuelta++
+	}
+
+	private companion object {
+		/** Lo que puede haber entre que acaba un elemento y empieza el siguiente (desplazando la lista, unos 300 ms). */
+		const val ENTRE_ELEMENTOS_MS = 2_000L
 	}
 }

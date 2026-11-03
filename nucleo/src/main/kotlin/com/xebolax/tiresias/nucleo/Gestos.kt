@@ -121,6 +121,10 @@ enum class Accion {
 	// 1.0.7: asistencia remota entre dos móviles: pedir ayuda al contacto, la pantalla, terminar y manejar el otro móvil con los gestos propios
 	PEDIR_AYUDA, AYUDA_REMOTA, AYUDA_TERMINAR, AYUDA_CONTROLAR,
 	ESCRITORIO_SISTEMA, LLAMADA_CONTESTAR, LLAMADA_RECHAZAR, ESTADO_Y_AVISOS,
+	// 1.0.9: copiar cómo está hecha la pantalla, sin ningún texto, para contar un fallo de una app que no se tiene
+	ESTRUCTURA_PANTALLA,
+	// 1.0.9 (Jieshuo): el modo edición (recorrer el texto por todas sus unidades con un dedo y seleccionar) y la edición por partes
+	MODO_EDICION, EDICION_POR_PARTES,
 }
 
 /** Lo que puede decir el gesto de estado («Hora, fecha y batería»), en el orden que se elija. */
@@ -212,11 +216,13 @@ class MapaGestos(private val asignaciones: Map<Gesto, Accion>) {
 				Gesto.ABAJO_ARRIBA to Accion.CONTROL_SIGUIENTE,
 				Gesto.ARRIBA_IZQUIERDA to Accion.INICIO,
 				Gesto.ABAJO_IZQUIERDA to Accion.ATRAS,
-				Gesto.ARRIBA_DERECHA to Accion.MENU_TIRESIAS,
+				// (arriba y a la derecha era otra vez el menú de Tiresias: mejor el circular, que si no no tenía gesto)
+				Gesto.ARRIBA_DERECHA to Accion.MENU_CIRCULAR,
 				Gesto.ABAJO_DERECHA to Accion.MENU_TIRESIAS,
 				Gesto.DERECHA_ABAJO to Accion.NOTIFICACIONES,
 				Gesto.DERECHA_ARRIBA to Accion.ORDENES_VOZ,
-				Gesto.IZQUIERDA_ABAJO to Accion.BUSCAR,
+				// El modo edición, en el gesto de Jieshuo (buscar sigue en mantener con tres dedos)
+				Gesto.IZQUIERDA_ABAJO to Accion.MODO_EDICION,
 				Gesto.IZQUIERDA_ARRIBA to Accion.RECIENTES,
 				Gesto.DOBLE_TOQUE to Accion.ACTIVAR,
 				Gesto.DOBLE_TOQUE_MANTENIDO to Accion.MANTENER,

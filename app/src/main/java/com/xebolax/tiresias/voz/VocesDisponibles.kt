@@ -13,13 +13,20 @@ object VocesDisponibles {
 	fun disponibles(c: Context): List<Pair<String, String>> {
 		val t = Idioma.envolver(c)
 		val lista = ArrayList<Pair<String, String>>()
+		val instalados = MotorSistema.instalados(c)
+		// La que use el sistema: si se cambia el motor en los ajustes del móvil, Tiresias lo sigue
+		val delSistema = MotorSistema.predeterminado(c)
+		val ahora = delSistema?.let { p -> instalados.firstOrNull { it.first == p }?.second } ?: t.getString(R.string.aj_motor_espeak_corto)
+		lista += Ajustes.MOTOR_DEL_SISTEMA to t.getString(R.string.aj_motor_del_sistema, ahora)
 		lista += Ajustes.MOTOR_ESPEAK to t.getString(R.string.aj_motor_espeak)
 		lista += Ajustes.MOTOR_PICO to t.getString(R.string.aj_motor_pico)
 		if (BibliotecaEloquence.disponible(c)) lista += Ajustes.MOTOR_ELOQUENCE to t.getString(R.string.aj_motor_eloquence)
 		for (v in VocesNeuronales.CATALOGO) {
 			if (Recursos.instalado(c, v.recurso)) lista += (MotorPiper.PREFIJO + v.id) to t.getString(R.string.aj_motor_neuronal, v.nombre)
 		}
-		for ((paquete, nombre) in MotorSistema.instalados(c)) lista += paquete to t.getString(R.string.aj_motor_sistema, nombre)
+		for ((paquete, nombre) in instalados) {
+			lista += paquete to t.getString(if (paquete == delSistema) R.string.aj_motor_sistema_elegido else R.string.aj_motor_sistema, nombre)
+		}
 		return lista
 	}
 

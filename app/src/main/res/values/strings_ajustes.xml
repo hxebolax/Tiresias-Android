@@ -502,8 +502,8 @@
 		<item>estado</item>
 		<item>avisos</item>
 	</string-array>
-	<string name="aj_callar_bloqueo">Callar la pantalla de bloqueo</string>
-	<string name="aj_callar_bloqueo_res">Con el móvil bloqueado, ni notificaciones ni avisos: solo lo que tú pides. Las notificaciones se guardan en Notificaciones recientes</string>
+	<string name="aj_callar_bloqueo">Callar con el móvil bloqueado o la pantalla apagada</string>
+	<string name="aj_callar_bloqueo_res">Con el móvil bloqueado o la pantalla apagada, ni notificaciones ni avisos: solo lo que tú pides. Las notificaciones se guardan en Notificaciones recientes</string>
 	<string name="aj_sonido_tipo">Sonido según el tipo de control</string>
 	<string name="aj_sonido_tipo_res">El sonido del foco cambia de tono: más agudo en encabezados y enlaces, más grave en campos y texto</string>
 	<string name="aj_sonido_vertical">Sonido según la altura</string>
@@ -615,7 +615,7 @@
 	<string name="aj_motor_avisos">Voz de las notificaciones</string>
 	<string name="aj_motor_avisos_misma">La misma voz de siempre</string>
 	<string name="aj_volumen_cursor">Teclas de volumen en los campos de texto</string>
-	<string name="aj_volumen_cursor_res">En un campo de texto, volumen arriba lleva el cursor un carácter atrás y volumen abajo, uno adelante, diciendo el carácter</string>
+	<string name="aj_volumen_cursor_res">En un campo de texto, volumen arriba lleva el cursor atrás y volumen abajo, adelante, diciendo lo recorrido: un carácter, o una palabra, una línea o un párrafo si el selector está en ellos</string>
 	<string name="aj_braille_intro_envia">Intro envía en las apps de mensajes</string>
 	<string name="aj_braille_intro_envia_res">En el teclado braille, Intro (dos dedos hacia abajo) pulsa el botón Enviar de WhatsApp, Telegram, Signal o Mensajes, en vez de saltar de línea</string>
 	<string name="aj_oyente_avisos">Leer también las que Android no avisa</string>
@@ -664,4 +664,7 @@
 	<string name="senior_sos_sms_ajuste_res">Además de llamar, un mensaje a tus contactos de ayuda con tu última ubicación conocida. Va a personas, no a un servicio de emergencias.</string>
 	<string name="senior_teclas_llamada">Descolgar con las teclas de volumen</string>
 	<string name="senior_teclas_llamada_res">Con el teléfono sonando, subir volumen descuelga y bajarlo cuelga.</string>
+	<string name="aj_motor_del_sistema">La que use el sistema (ahora, %1$s)</string>
+	<string name="aj_motor_sistema_elegido">%1$s (del sistema, la elegida en el móvil)</string>
+	<string name="aj_motor_espeak_corto">eSpeak NG</string>
 </resources>

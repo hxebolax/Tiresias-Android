@@ -57,7 +57,7 @@
 	<string name="asis_6_boton">Open the tutorial</string>
 
 	<!-- Gestures -->
-	<string name="gestos_explicacion">Tap a gesture to choose what it does. Changes apply to all apps; in Profiles you can change gestures for one app only.</string>
+	<string name="gestos_explicacion">Tap a gesture to choose what it does. Changes apply to all apps; with “Gestures for one app only” (at the end) you change those of a single app.</string>
 	<string name="gestos_un_dedo">One finger</string>
 	<string name="gestos_dos_dedos">Two fingers (Android 11 or later)</string>
 	<string name="gestos_tres_dedos">Three fingers (Android 11 or later)</string>
@@ -404,4 +404,95 @@
 	<string name="tienda_escritorio_quitar">Uninstall the Home app</string>
 	<string name="tienda_escritorio_no_publicado">The Home app is not on the server yet</string>
 	<string name="tienda_escritorio_no_abre">The Home app could not be opened</string>
+	<string name="gestos_de_una_app">Gestures for one app only</string>
+	<string name="gestos_de_app_titulo">Gestures in %1$s</string>
+	<string name="gestos_de_app_explicacion">What you change here only applies in %1$s; the other gestures do the same as everywhere else. For example, in TikTok you can set swipe up to «Scroll down» to go to the next video with one finger.</string>
+	<string name="gestos_fila_de_app">%1$s: %2$s, only in this app</string>
+	<string name="gestos_como_el_resto">Same as everywhere else: %1$s</string>
+	<string name="gestos_de_app_quitar">Remove the gestures of %1$s</string>
+	<string name="gestos_de_app_quitar_pregunta">Remove the gestures of %1$s? They will do the same as everywhere else again.</string>
+	<string name="gestos_de_app_quitados">%1$s uses the usual gestures</string>
+	<string name="perf_app_gestos">Gestures in this app</string>
+	<string name="partes_titulo">Edit by parts</string>
+	<string name="partes_titulo_leer">Read by parts</string>
+	<string name="partes_resumen">By %1$s: %2$s, %3$s</string>
+	<plurals name="partes_partes">
+		<item quantity="one">%1$d part</item>
+		<item quantity="other">%1$d parts</item>
+	</plurals>
+	<plurals name="partes_caracteres">
+		<item quantity="one">%1$d character</item>
+		<item quantity="other">%1$d characters</item>
+	</plurals>
+	<string name="partes_cambiar_unidad">Split by: %1$s</string>
+	<string name="partes_elegir_unidad">Split the text by</string>
+	<string name="partes_unidad_caracteres">characters</string>
+	<string name="partes_unidad_palabras">words</string>
+	<string name="partes_unidad_frases">sentences</string>
+	<string name="partes_unidad_lineas">lines</string>
+	<string name="partes_unidad_parrafos">paragraphs</string>
+	<string name="partes_unidad_todo">the whole text</string>
+	<string name="partes_vacio">There is no text.</string>
+	<string name="partes_anadir">Add text</string>
+	<string name="partes_texto_pista">Text</string>
+	<string name="partes_demasiadas">Only the first %1$d parts are shown: split the text by something bigger to see the rest.</string>
+	<string name="partes_fila_linea">Line %1$d: %2$s</string>
+	<string name="partes_fila_marcada">Marked, %1$s</string>
+	<string name="partes_vacia">blank</string>
+	<string name="partes_espacio">space</string>
+	<string name="partes_salto">line break</string>
+	<string name="partes_tabulador">tab</string>
+	<string name="partes_editar">Edit</string>
+	<string name="partes_editar_titulo">Edit part %1$d</string>
+	<string name="partes_insertar_antes">Insert before</string>
+	<string name="partes_insertar_despues">Insert after</string>
+	<string name="partes_borrar">Delete</string>
+	<string name="partes_borrada">Part deleted</string>
+	<string name="partes_marcar">Mark</string>
+	<string name="partes_desmarcar">Unmark</string>
+	<string name="partes_marcar_hasta_aqui">Mark from the nearest marked one to here</string>
+	<string name="partes_copiar">Copy</string>
+	<plurals name="partes_marcadas">
+		<item quantity="one">%1$d part marked</item>
+		<item quantity="other">%1$d parts marked</item>
+	</plurals>
+	<string name="partes_copiar_marcadas">Copy the marked ones</string>
+	<string name="partes_cortar_marcadas">Cut the marked ones</string>
+	<string name="partes_borrar_marcadas">Delete the marked ones</string>
+	<plurals name="partes_borrar_marcadas_pregunta">
+		<item quantity="one">Delete %1$d marked part?</item>
+		<item quantity="other">Delete the %1$d marked parts?</item>
+	</plurals>
+	<string name="partes_desmarcar_todas">Unmark all</string>
+	<string name="partes_cortadas">Parts cut</string>
+	<string name="partes_borradas">Parts deleted</string>
+	<string name="partes_buscar">Find</string>
+	<string name="partes_buscar_pista">What you are looking for</string>
+	<string name="partes_no_esta">Not found: %1$s</string>
+	<string name="partes_reemplazar">Replace in the whole text</string>
+	<string name="partes_reemplazar_buscar">What to change</string>
+	<string name="partes_reemplazar_por_titulo">Change “%1$s” to</string>
+	<string name="partes_reemplazar_por">The new text (empty: delete it)</string>
+	<string name="partes_sin_distinguir">Ignoring case</string>
+	<string name="partes_distinguiendo">Matching case</string>
+	<plurals name="partes_reemplazadas">
+		<item quantity="one">Changed %1$d time</item>
+		<item quantity="other">Changed %1$d times</item>
+	</plurals>
+	<string name="partes_deshacer">Undo</string>
+	<string name="partes_rehacer">Redo</string>
+	<string name="partes_deshecho">Undone</string>
+	<string name="partes_rehecho">Redone</string>
+	<string name="partes_copiar_todo">Copy the whole text</string>
+	<string name="partes_copiado">Copied</string>
+	<string name="partes_guardar">Save in the field</string>
+	<string name="partes_salir">Exit</string>
+	<string name="partes_demasiado_largo">The field allows %2$d characters and the text has %1$d: shorten it before saving.</string>
+	<string name="partes_campo_perdido">The field is gone (the app closed it). The text is copied so you can paste it.</string>
+	<string name="partes_campo_cambiado">The field text has changed since you opened this screen. Replace it with yours?</string>
+	<string name="partes_sustituir">Replace it</string>
+	<string name="partes_sin_guardar">There are unsaved changes</string>
+	<string name="partes_copiar_y_salir">Copy and exit</string>
+	<string name="partes_salir_sin_guardar">Exit without saving</string>
+	<string name="partes_seguir">Keep editing</string>
 </resources>

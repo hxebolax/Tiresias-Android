@@ -237,6 +237,17 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	 * Si lo que llega de [paquete] se calla ahora: es de SystemUI, sigue bloqueado, no ha pasado el plazo y el
 	 * usuario no ha tocado nada desde que se encendió la pantalla.
 	 */
+	/**
+	 * Lo que la pantalla de bloqueo o las apps hacen solas que no se dice: lo de [calladoAlEncender] y, con la
+	 * pantalla apagada, todo (ventanas nuevas, foco y regiones vivas). Al bloquear, la pantalla de bloqueo se abre
+	 * como ventana nueva y pide el foco para su primera notificación (Android 14+): Tiresias la leía tras decir
+	 * «pantalla apagada». Se apunta igual (el foco, la ventana), pero en silencio.
+	 */
+	private fun calladoDelSistema(paquete: CharSequence?): Boolean = pantallaApagada() || calladoAlEncender(paquete)
+
+	private fun pantallaApagada(): Boolean =
+		runCatching { servicio.getSystemService(android.os.PowerManager::class.java)?.isInteractive == false }.getOrDefault(false)
+
 	private fun calladoAlEncender(paquete: CharSequence?): Boolean {
 		val ahora = SystemClock.uptimeMillis()
 		if (ahora > silencioSistemaHasta) return false
@@ -283,7 +294,11 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		if (toqueUsuario) {
 			toques++
 			dedoDesde = SystemClock.uptimeMillis()
-		} else if (e.eventType == AccessibilityEvent.TYPE_TOUCH_INTERACTION_END) dedoDesde = 0L
+		} else if (e.eventType == AccessibilityEvent.TYPE_TOUCH_INTERACTION_END ||
+			// (también al acabar de explorar, que es al levantar el dedo: si no llegaba el fin del toque, se creía que el
+			// dedo seguía puesto y las teclas de volumen cambiaban la voz en vez de mover el cursor de un campo. El fin
+			// de un gesto no: el doble toque mantenido lo da con el dedo aún puesto en el botón de grabar)
+			e.eventType == AccessibilityEvent.TYPE_TOUCH_EXPLORATION_GESTURE_END) dedoDesde = 0L
 		// Una app que cambia sin parar no puede dejar atrás al lector: con una cola así, lo que solo dice «ha cambiado
 		// algo» se deja, porque los gestos irían detrás de todo eso (al procesar lo siguiente se rehace lo guardado)
 		if ((e.eventType == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED || e.eventType == AccessibilityEvent.TYPE_VIEW_SCROLLED) && enCola.get() >= COLA_MAXIMA) {
@@ -325,6 +340,11 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 				toquePropio = esGestoPropio(e)
 				if (toquePropio) return
 				momentoUsuario = SystemClock.uptimeMillis()
+				// El dedo en un botón de grabar: lo que grabe esa app ahora es una nota de voz (para no hablar encima)
+				if (enBotonDeMantener) {
+					appGrabando = foco?.packageName?.toString()
+					grabarDesde = momentoUsuario
+				}
 				teclaExplorada = null
 				ultimoExplorado = null
 				cancelarToqueActiva()
@@ -781,7 +801,7 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	/** El foco de accesibilidad ha cambiado (por Tiresias, por la app o por el sistema). */
 	private fun alEnfocar(e: AccessibilityEvent) {
 		val n = e.source ?: return
-		if (calladoAlEncender(e.packageName)) {
+		if (calladoDelSistema(e.packageName)) {
 			cambiarFoco(n)
 			return
 		}
@@ -809,6 +829,15 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		// El foco se queda donde estaba
 		if (n.packageName?.toString() == PAQUETE_SISTEMA && n.childCount > 0 && !n.isFocusable && !Nodos.tieneTexto(n) && bloqueado()) {
 			if (actual != null && actual != n && Nodos.vivo(actual)) runCatching { actual.performAction(AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS) }
+			return
+		}
+		// La app lleva el foco a algo que contiene lo enfocado y no es una parada (Chrome a la página entera cuando
+		// se rehace un anuncio o un marco incrustado): el foco se queda donde estaba, que sigue ahí. Si no, el
+		// siguiente deslizamiento empezaba por el principio de la página o por la barra de direcciones
+		if (!yaDicho && actual != null && n != actual && n.windowId == actual.windowId && n.childCount > 0 && !Nodos.recibeFoco(n) &&
+			Nodos.vivo(actual) && actual.isVisibleToUser && Nodos.dentroDe(actual, n)) {
+			if (com.xebolax.tiresias.BuildConfig.PRUEBAS) android.util.Log.d(ETIQUETA, "La app llevó el foco a un contenedor de lo enfocado: se deja donde estaba")
+			runCatching { actual.performAction(AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS) }
 			return
 		}
 		cambiarFoco(n)
@@ -1125,7 +1154,11 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 			return
 		}
 		virtual?.let { v -> if (e.windowId != v.ventana && e.packageName != servicio.packageName) salirVirtual(true) }
-		if (calladoAlEncender(e.packageName)) {
+		// Otra app delante: el modo edición se acaba. Solo la pantalla de otra app: el teclado (que sale al seleccionar),
+		// la barra de copiar y pegar, la persiana y los menús de Tiresias no lo acaban
+		if (modoEdicion.activo && e.packageName != null && e.packageName != servicio.packageName && e.packageName.toString() != modoEdicion.paquete &&
+			runCatching { servicio.windows.firstOrNull { it.id == e.windowId }?.type == AccessibilityWindowInfo.TYPE_APPLICATION }.getOrDefault(false)) modoEdicion.salir(decirlo = true)
+		if (calladoDelSistema(e.packageName)) {
 			olvidarCaches()
 			return
 		}
@@ -1154,6 +1187,14 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		val repetido = tituloVentana.isNotEmpty() && (titulo == tituloVentana ||
 			(e.windowId == idVentanaTitulo && (titulo.startsWith(tituloVentana) || tituloVentana.startsWith(titulo))))
 		if (titulo.isBlank() || (repetido && ahora - momentoVentana < 1500)) return
+		// Grabando una nota de voz: la ventana que pone la app al empezar («Grabadora de mensajes de voz» de WhatsApp)
+		// no se dice, que se oiría en la grabación, ni se lleva el foco a ella (como hacen Prudence y SandFly)
+		if (grabandoNota(e.packageName)) {
+			tituloVentana = titulo
+			idVentanaTitulo = e.windowId
+			momentoVentana = ahora
+			return
+		}
 		if (!filtro.pasa("ventana", titulo, ahora)) return
 		tituloVentana = titulo
 		idVentanaTitulo = e.windowId
@@ -1161,8 +1202,9 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		sonidos.tocar(Sonido.VENTANA)
 		voz.decir(Enunciado(titulo, modo = Modo.INTERRUMPIR, tipo = Tipo.NAVEGACION))
 		if (brailleListo) braille.mensaje(titulo)
-		// El foco de otra ventana ya no vale: el siguiente deslizamiento empieza en la nueva
+		// El foco de otra ventana ya no vale: el siguiente deslizamiento empieza en la nueva (y por el principio)
 		if (foco?.let { it.windowId != e.windowId || !Nodos.vivo(it) } == true) perderFoco()
+		perdido = null
 		val dialogo = esDialogo(e)
 		cuandoEstable(e.windowId, ahora + esperaVentana()) {
 			// Volver a donde estaba en esta ventana (también al pulsar Atrás: Backtalk 151)
@@ -1242,6 +1284,7 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	private fun cambiarFoco(n: AccessibilityNodeInfo) {
 		val anterior = foco
 		foco = n
+		perdido = null
 		// Una contraseña o un dato sensible: lo que se diga de él no va al registro de la variante de pruebas
 		voz.focoSensible = Nodos.sensible(n)
 		if (anterior != n) cambiosFoco++
@@ -1249,9 +1292,24 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		mantenerDeVerdad(n.packageName?.toString() != servicio.packageName && Nodos.esDeMantenerPulsado(n))
 	}
 
+	/** Lo último que tuvo el foco antes de perderlo, dónde estaba y cuándo: para seguir desde ahí al deslizar. */
+	private class Perdido(val nodo: AccessibilityNodeInfo, val sitio: android.graphics.Rect, val momento: Long)
+	@Volatile private var perdido: Perdido? = null
+
+	/**
+	 * Lo que tenía el foco hasta que la app lo quitó hace poco en la ventana [ventana] (un anuncio o un marco de una
+	 * página web que se rehace) y dónde estaba, o null. Con él, el siguiente deslizamiento sigue por ahí en vez de
+	 * volver al principio de la página o a la barra de direcciones.
+	 */
+	fun focoPerdido(ventana: Int): Pair<AccessibilityNodeInfo, android.graphics.Rect>? =
+		perdido?.takeIf { it.nodo.windowId == ventana && SystemClock.uptimeMillis() - it.momento < PERDIDO_VALE_MS }?.let { it.nodo to it.sitio }
+
 	/** El foco se ha ido (lo que lo tenía se ocultó o se cerró): se apunta por si vuelve a verse. */
 	private fun perderFoco() {
-		foco?.let { apuntarAnterior(it) }
+		foco?.let {
+			apuntarAnterior(it)
+			perdido = Perdido(it, Nodos.limites(it), SystemClock.uptimeMillis())
+		}
 		foco = null
 		voz.focoSensible = false
 		cambiosFoco++
@@ -1265,6 +1323,24 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	 */
 	var alMantenerDeVerdad: ((Boolean) -> Unit)? = null
 	private var enBotonDeMantener = false
+
+	/**
+	 * Si se está grabando una nota de voz (u otra app graba con el micrófono) y se ha elegido callar al grabar: el
+	 * micrófono en marcha, o el dedo mantenido en un botón de grabar (la app pone su ventana de grabación un instante
+	 * antes de que Android diga que graba).
+	 */
+	fun grabandoNota(paquete: CharSequence? = null): Boolean {
+		if (!ajustes.callarAlGrabar) return false
+		val app = appGrabando ?: return false
+		if (paquete != null && paquete.toString() != app) return false
+		// (solo la grabación que empezó en ese botón: no una llamada ni una grabadora en segundo plano)
+		return (enBotonDeMantener && dedoDesde > 0L) ||
+			(voz.grabando && voz.grabandoDesde - grabarDesde in -ANTES_DE_GRABAR_MS..EMPEZAR_A_GRABAR_MS && SystemClock.uptimeMillis() - grabarDesde < GRABACION_MAXIMA_MS)
+	}
+
+	/** La app del botón de grabar en el que se puso el dedo por última vez, y cuándo. */
+	@Volatile private var appGrabando: String? = null
+	@Volatile private var grabarDesde = 0L
 
 	private fun mantenerDeVerdad(si: Boolean) {
 		if (si == enBotonDeMantener) return
@@ -1284,6 +1360,8 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	 * hace TalkBack y en lo que confían las apps (el menú lateral, los diálogos).
 	 */
 	private fun volverAlFocoAnterior(ventana: Int? = null) {
+		// Al empezar a grabar, el botón de grabar se cambia por otro: el foco no se lleva a otro sitio ni se dice nada
+		if (grabandoNota()) return
 		val actual = foco
 		if (actual != null && Nodos.vivo(actual) && actual.isVisibleToUser) return
 		// Solo en la ventana que queda delante (en otra pantalla no tiene sentido volver)
@@ -1367,7 +1445,7 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		val tipos = e.contentChangeTypes
 		// Región viva: se dice lo nuevo (educada, a la cola; urgente, cortando), sin repetir
 		val viva = runCatching { n.liveRegion }.getOrDefault(0)
-		if (viva != android.view.View.ACCESSIBILITY_LIVE_REGION_NONE && calladoAlEncender(e.packageName)) return
+		if (viva != android.view.View.ACCESSIBILITY_LIVE_REGION_NONE && calladoDelSistema(e.packageName)) return
 		if (viva != android.view.View.ACCESSIBILITY_LIVE_REGION_NONE && (tipos and AccessibilityEvent.CONTENT_CHANGE_TYPE_TEXT != 0 || tipos == 0 || tipos and AccessibilityEvent.CONTENT_CHANGE_TYPE_SUBTREE != 0)) {
 			// El plazo mínimo entre cambios que pide la app (un cronómetro no habla cada décima)
 			if (!pasaPlazo(n, SystemClock.uptimeMillis())) return
@@ -1510,8 +1588,16 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	/** Si el móvil está bloqueado (la pantalla de bloqueo delante). */
 	fun bloqueado(): Boolean = servicio.getSystemService(android.app.KeyguardManager::class.java)?.isKeyguardLocked == true
 
+	/**
+	 * Si el móvil está bloqueado o con la pantalla apagada: lo que mira «Callar la pantalla de bloqueo». Al apagar
+	 * la pantalla, muchos móviles no se bloquean hasta pasado un rato (o nunca, sin bloqueo de pantalla), y mientras
+	 * tanto las notificaciones se leían igual.
+	 */
+	fun bloqueadoOApagado(): Boolean =
+		bloqueado() || runCatching { servicio.getSystemService(android.os.PowerManager::class.java)?.isInteractive == false }.getOrDefault(false)
+
 	private fun alAnunciar(e: AccessibilityEvent) {
-		if (ajustes.callarBloqueo && bloqueado()) return
+		if (ajustes.callarBloqueo && bloqueadoOApagado()) return
 		if (calladoAlEncender(e.packageName)) return
 		if (scriptsListos) e.source?.let { if (scripts.silenciado(it)) return }
 		val texto = e.text.joinToString(" ").trim()
@@ -1536,6 +1622,9 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	}
 
 	val avisos = Avisos(this)
+
+	/** El modo edición (Jieshuo): recorrer el texto por todas sus unidades con gestos de un dedo y seleccionar. */
+	val modoEdicion = ModoEdicion(this)
 
 	/** Si el modo No molestar está activo (para no leer notificaciones solas). */
 	fun noMolestar(): Boolean = runCatching {
@@ -1615,7 +1704,7 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		/** Lo que dura el silencio de SystemUI al encender con el móvil bloqueado (Backtalk 312). */
 		private const val SILENCIO_ENCENDER_MS = 3000L
 		/** Lo que como mucho se cuenta un dedo en la pantalla para las teclas de volumen. */
-		private const val DEDO_MAXIMO_MS = 30_000L
+		private const val DEDO_MAXIMO_MS = 8_000L
 		/** Los eventos en espera a partir de los que se dejan los que solo avisan de un cambio. */
 		private const val COLA_MAXIMA = 150
 		/** La mitad del lado de la zona de paso que se abre para un toque de Tiresias, y lo que se espera a que Android la ponga. */
@@ -1627,6 +1716,13 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		private const val TECLADO_REHECHO_MS = 600L
 		/** Lo que dura la protección del foco tras moverse el usuario. */
 		private const val PROTEGER_FOCO_MS = 600L
+		/** Lo que vale el sitio del foco que la app ha quitado para seguir desde ahí al deslizar. */
+		private const val PERDIDO_VALE_MS = 120_000L
+		/** Lo que como mucho dura una nota de voz para no anunciar las ventanas de su app mientras graba. */
+		private const val GRABACION_MAXIMA_MS = 15 * 60_000L
+		/** Lo que puede tardar la app en grabar tras poner el dedo en el botón (o adelantarse un poco). */
+		private const val EMPEZAR_A_GRABAR_MS = 5_000L
+		private const val ANTES_DE_GRABAR_MS = 1_000L
 		/** Lo que tiene que estar quieta una ventana nueva para poner el foco en ella, y lo que se espera de más como mucho. */
 		private const val ESTABLE_QUIETA_MS = 120L
 		private const val ESTABLE_MAXIMO_MS = 400L

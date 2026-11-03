@@ -142,7 +142,7 @@
 	<string name="aviso_motivo_app">la app está callada</string>
 	<string name="aviso_motivo_no_molestar">No molestar</string>
 	<string name="aviso_motivo_llamada">en una llamada</string>
-	<string name="aviso_motivo_bloqueo">con el móvil bloqueado</string>
+	<string name="aviso_motivo_bloqueo">con el móvil bloqueado o la pantalla apagada</string>
 	<string name="aviso_motivo_senior">el modo senior solo lee mensajes y llamadas</string>
 	<string name="aviso_motivo_complemento">la calló un complemento</string>
 	<string name="aviso_motivo_palabra">tiene una palabra que la calla</string>
@@ -270,4 +270,30 @@
 	<string name="elegir_es_campo">Es un campo de texto: elige con el modo de edición, directamente en él</string>
 	<string name="elegir_copiado">Copiados %1$d caracteres</string>
 	<string name="restablecido">Tiresias restablecido como recién instalado</string>
+	<string name="mantener_grabar_repetir">Toca dos veces y mantén el dedo para grabar: graba mientras no lo levantes</string>
+	<plurals name="estructura_copiada">
+		<item quantity="one">Copiada la estructura de la pantalla: %1$d elemento, sin ningún texto. Pégala en tu mensaje</item>
+		<item quantity="other">Copiada la estructura de la pantalla: %1$d elementos, sin ningún texto. Pégala en tu mensaje</item>
+	</plurals>
+	<string name="modo_edicion_entrar">Modo edición. %1$s</string>
+	<string name="modo_edicion_pista">Arriba y abajo, letras; ida y vuelta a los lados, palabras; izquierda y derecha, frases; arriba y luego a la derecha, seleccionar; izquierda y luego abajo, salir.</string>
+	<string name="modo_edicion_salir">Fin del modo edición</string>
+	<string name="modo_edicion_sin_texto">Aquí no hay texto que editar</string>
+	<string name="modo_edicion_vacio">Vacío</string>
+	<string name="modo_edicion_linea_vacia">Línea vacía</string>
+	<string name="modo_edicion_no_mueve">Este campo no deja mover el cursor: prueba la edición por partes</string>
+	<string name="modo_edicion_principio_linea">Principio de línea</string>
+	<string name="modo_edicion_final_linea">Final de línea</string>
+	<string name="modo_edicion_seleccionado">Seleccionado: %1$s</string>
+	<string name="modo_edicion_deseleccionado">Deseleccionado: %1$s</string>
+	<string name="modo_edicion_seleccion_empieza">Selección empezada: muévete para seleccionar</string>
+	<string name="modo_edicion_posicion">Carácter %1$d de %2$d, línea %3$d de %4$d</string>
+	<plurals name="modo_edicion_seleccion_acaba">
+		<item quantity="one">Selección terminada, %1$d carácter</item>
+		<item quantity="other">Selección terminada, %1$d caracteres</item>
+	</plurals>
+	<string name="partes_contrasena">En un campo de contraseña no se puede: su texto no sale del campo</string>
+	<string name="partes_muy_largo">El texto es demasiado largo para editarlo por partes</string>
+	<string name="partes_guardado">Texto guardado en el campo</string>
+	<string name="partes_no_guardado">No se pudo escribir en el campo: el texto está copiado para que lo pegues</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.xebolax.tiresias.braille
 
+import android.content.ComponentName
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -41,8 +42,12 @@ class Braille(private val lector: Lector, private val alAccion: (Accion) -> Unit
 	/** El campo de texto que se ve en la línea (para seguir su cursor). */
 	private var campo: AccessibilityNodeInfo? = null
 
-	/** El identificador del teclado braille de Tiresias como método de entrada del sistema. */
-	val idTeclado: String get() = "${servicio.packageName}/${TecladoBraille::class.java.name}"
+	/**
+	 * El identificador del teclado braille de Tiresias como método de entrada del sistema.
+	 * Android lo guarda en forma corta (`com.xebolax.tiresias/.braille.TecladoBraille`)
+	 * cuando la clase está en el paquete de la app, que es lo que pasa en la versión publicada.
+	 */
+	val idTeclado: String get() = ComponentName(servicio, TecladoBraille::class.java).flattenToShortString()
 
 	fun iniciar() {
 		if (lector.ajustes.brailleLinea) conLinea { it.iniciar() }
@@ -359,8 +364,11 @@ class Braille(private val lector: Lector, private val alAccion: (Accion) -> Unit
 
 	/** Si el usuario ha activado el teclado braille en los ajustes del sistema. */
 	fun tecladoActivado(): Boolean = runCatching {
-		Settings.Secure.getString(servicio.contentResolver, Settings.Secure.ENABLED_INPUT_METHODS).orEmpty().split(':').any { it == idTeclado }
-	}.getOrDefault(false)
+		estaEnLista(Settings.Secure.getString(servicio.contentResolver, Settings.Secure.ENABLED_INPUT_METHODS).orEmpty(), ComponentName(servicio, TecladoBraille::class.java))
+	}.getOrElse {
+		Registro.w(ETIQUETA, "No se pudo mirar si el teclado braille está activado", it)
+		false
+	}
 
 	/**
 	 * Cambia al teclado braille (Android 11 o posterior lo hace Tiresias solo,
@@ -419,6 +427,14 @@ class Braille(private val lector: Lector, private val alAccion: (Accion) -> Unit
 				append(if (i >= 0) (0x2800 + i).toChar() else if (c == ' ') ' ' else c)
 			}
 		}
+		/**
+		 * Si [propio] está en [lista], la de los teclados activados del sistema: «id;subtipo;subtipo:id2...», con
+		 * cada id en forma corta (`paquete/.Clase`, la de la versión publicada) o larga. Antes se comparaba con la
+		 * larga y la versión publicada nunca veía activado su teclado braille.
+		 */
+		fun estaEnLista(lista: String, propio: ComponentName): Boolean =
+			lista.split(':').any { ComponentName.unflattenFromString(it.substringBefore(';').trim()) == propio }
+
 		const val PRIMERO_NO = "no"
 		const val PRIMERO_MINIMA = "minima"
 		const val PRIMERO_SIN_VOZ = "sin_voz"

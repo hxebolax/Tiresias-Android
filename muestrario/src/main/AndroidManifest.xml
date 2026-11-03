@@ -25,6 +25,22 @@
 			android:exported="true"
 			android:label="Chats" />
 		<activity
+			android:name=".ActividadContactos"
+			android:exported="true"
+			android:label="Contactos" />
+		<activity
+			android:name=".ActividadPeriodico"
+			android:exported="true"
+			android:label="Periódico" />
+		<activity
+			android:name=".ActividadReenviar"
+			android:exported="true"
+			android:label="Reenviar a" />
+		<activity
+			android:name=".ActividadEditor"
+			android:exported="true"
+			android:label="Editor" />
+		<activity
 			android:name=".ActividadEscritorio"
 			android:exported="true"
 			android:label="Inicio" />

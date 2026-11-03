@@ -57,7 +57,7 @@
 	<string name="asis_6_boton">Abrir el tutorial</string>
 
 	<!-- Gestos -->
-	<string name="gestos_explicacion">Toca un gesto para elegir qué hace. Los cambios valen para todas las apps; en Perfiles puedes cambiar gestos solo en una app.</string>
+	<string name="gestos_explicacion">Toca un gesto para elegir qué hace. Los cambios valen para todas las apps; con «Gestos solo en una app» (al final) cambias los de una sola app.</string>
 	<string name="gestos_un_dedo">Un dedo</string>
 	<string name="gestos_dos_dedos">Dos dedos (Android 11 o posterior)</string>
 	<string name="gestos_tres_dedos">Tres dedos (Android 11 o posterior)</string>
@@ -410,4 +410,95 @@
 	<string name="tienda_escritorio_quitar">Desinstalar el escritorio</string>
 	<string name="tienda_escritorio_no_publicado">El escritorio aún no está publicado en el servidor</string>
 	<string name="tienda_escritorio_no_abre">No se ha podido abrir el escritorio</string>
+	<string name="gestos_de_una_app">Gestos solo en una app</string>
+	<string name="gestos_de_app_titulo">Gestos en %1$s</string>
+	<string name="gestos_de_app_explicacion">Lo que cambies aquí solo vale en %1$s; los demás gestos hacen lo mismo que en el resto. Por ejemplo, en TikTok puedes poner «Desplazar hacia abajo» en deslizar hacia arriba para pasar de vídeo con un dedo.</string>
+	<string name="gestos_fila_de_app">%1$s: %2$s, solo en esta app</string>
+	<string name="gestos_como_el_resto">Como en el resto: %1$s</string>
+	<string name="gestos_de_app_quitar">Quitar los gestos propios de %1$s</string>
+	<string name="gestos_de_app_quitar_pregunta">¿Quitar los gestos propios de %1$s? Volverán a hacer lo mismo que en el resto.</string>
+	<string name="gestos_de_app_quitados">%1$s usa los gestos de siempre</string>
+	<string name="perf_app_gestos">Gestos en esta app</string>
+	<string name="partes_titulo">Edición por partes</string>
+	<string name="partes_titulo_leer">Lectura por partes</string>
+	<string name="partes_resumen">Por %1$s: %2$s, %3$s</string>
+	<plurals name="partes_partes">
+		<item quantity="one">%1$d parte</item>
+		<item quantity="other">%1$d partes</item>
+	</plurals>
+	<plurals name="partes_caracteres">
+		<item quantity="one">%1$d carácter</item>
+		<item quantity="other">%1$d caracteres</item>
+	</plurals>
+	<string name="partes_cambiar_unidad">Partir por: %1$s</string>
+	<string name="partes_elegir_unidad">Partir el texto por</string>
+	<string name="partes_unidad_caracteres">caracteres</string>
+	<string name="partes_unidad_palabras">palabras</string>
+	<string name="partes_unidad_frases">frases</string>
+	<string name="partes_unidad_lineas">líneas</string>
+	<string name="partes_unidad_parrafos">párrafos</string>
+	<string name="partes_unidad_todo">todo el texto</string>
+	<string name="partes_vacio">No hay texto.</string>
+	<string name="partes_anadir">Añadir texto</string>
+	<string name="partes_texto_pista">Texto</string>
+	<string name="partes_demasiadas">Solo se enseñan las %1$d primeras partes: parte el texto por algo más grande para ver el resto.</string>
+	<string name="partes_fila_linea">Línea %1$d: %2$s</string>
+	<string name="partes_fila_marcada">Marcada, %1$s</string>
+	<string name="partes_vacia">vacía</string>
+	<string name="partes_espacio">espacio</string>
+	<string name="partes_salto">salto de línea</string>
+	<string name="partes_tabulador">tabulador</string>
+	<string name="partes_editar">Editar</string>
+	<string name="partes_editar_titulo">Editar la parte %1$d</string>
+	<string name="partes_insertar_antes">Insertar antes</string>
+	<string name="partes_insertar_despues">Insertar después</string>
+	<string name="partes_borrar">Borrar</string>
+	<string name="partes_borrada">Parte borrada</string>
+	<string name="partes_marcar">Marcar</string>
+	<string name="partes_desmarcar">Desmarcar</string>
+	<string name="partes_marcar_hasta_aqui">Marcar desde la marcada más cercana hasta aquí</string>
+	<string name="partes_copiar">Copiar</string>
+	<plurals name="partes_marcadas">
+		<item quantity="one">%1$d parte marcada</item>
+		<item quantity="other">%1$d partes marcadas</item>
+	</plurals>
+	<string name="partes_copiar_marcadas">Copiar las marcadas</string>
+	<string name="partes_cortar_marcadas">Cortar las marcadas</string>
+	<string name="partes_borrar_marcadas">Borrar las marcadas</string>
+	<plurals name="partes_borrar_marcadas_pregunta">
+		<item quantity="one">¿Borrar %1$d parte marcada?</item>
+		<item quantity="other">¿Borrar las %1$d partes marcadas?</item>
+	</plurals>
+	<string name="partes_desmarcar_todas">Desmarcar todas</string>
+	<string name="partes_cortadas">Partes cortadas</string>
+	<string name="partes_borradas">Partes borradas</string>
+	<string name="partes_buscar">Buscar</string>
+	<string name="partes_buscar_pista">Lo que buscas</string>
+	<string name="partes_no_esta">No está: %1$s</string>
+	<string name="partes_reemplazar">Reemplazar en todo el texto</string>
+	<string name="partes_reemplazar_buscar">Lo que se cambia</string>
+	<string name="partes_reemplazar_por_titulo">Cambiar «%1$s» por</string>
+	<string name="partes_reemplazar_por">Lo nuevo (vacío: borrarlo)</string>
+	<string name="partes_sin_distinguir">Sin distinguir mayúsculas</string>
+	<string name="partes_distinguiendo">Distinguiendo mayúsculas</string>
+	<plurals name="partes_reemplazadas">
+		<item quantity="one">Cambiado %1$d vez</item>
+		<item quantity="other">Cambiado %1$d veces</item>
+	</plurals>
+	<string name="partes_deshacer">Deshacer</string>
+	<string name="partes_rehacer">Rehacer</string>
+	<string name="partes_deshecho">Deshecho</string>
+	<string name="partes_rehecho">Rehecho</string>
+	<string name="partes_copiar_todo">Copiar todo el texto</string>
+	<string name="partes_copiado">Copiado</string>
+	<string name="partes_guardar">Guardar en el campo</string>
+	<string name="partes_salir">Salir</string>
+	<string name="partes_demasiado_largo">El campo admite %2$d caracteres y el texto tiene %1$d: acórtalo antes de guardarlo.</string>
+	<string name="partes_campo_perdido">El campo ya no está (la app lo ha cerrado). El texto está copiado para que lo pegues.</string>
+	<string name="partes_campo_cambiado">El texto del campo ha cambiado desde que abriste esta pantalla. ¿Sustituirlo por el tuyo?</string>
+	<string name="partes_sustituir">Sustituirlo</string>
+	<string name="partes_sin_guardar">Hay cambios sin guardar</string>
+	<string name="partes_copiar_y_salir">Copiar y salir</string>
+	<string name="partes_salir_sin_guardar">Salir sin guardar</string>
+	<string name="partes_seguir">Seguir editando</string>
 </resources>

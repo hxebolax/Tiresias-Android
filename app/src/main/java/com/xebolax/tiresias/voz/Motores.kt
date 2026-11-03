@@ -265,6 +265,16 @@ class MotorSistema(private val contexto: Context, override val id: String, priva
 		const val ESPERA_INICIO_MS = 3000L
 
 		/** Los motores de voz del sistema instalados (paquete y nombre), sin Tiresias. */
+		/**
+		 * El motor de voz elegido en los ajustes del móvil (Texto a voz, motor preferido), si está instalado y no
+		 * es el propio Tiresias; null si no hay ninguno que valga.
+		 */
+		fun predeterminado(contexto: Context): String? {
+			val elegido = runCatching { android.provider.Settings.Secure.getString(contexto.contentResolver, android.provider.Settings.Secure.TTS_DEFAULT_SYNTH) }.getOrNull()
+			val instalados = instalados(contexto)
+			return elegido?.takeIf { e -> instalados.any { it.first == e } }
+		}
+
 		fun instalados(contexto: Context): List<Pair<String, String>> {
 			val pm = contexto.packageManager
 			val intent = android.content.Intent(TextToSpeech.Engine.INTENT_ACTION_TTS_SERVICE)

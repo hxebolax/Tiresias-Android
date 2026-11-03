@@ -143,6 +143,9 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 			true
 		} ?: false.also { lector.decir(R.string.portapapeles_nada_que_anadir) }
 		Accion.COPIAR_LISTA -> copiarLista()
+		Accion.ESTRUCTURA_PANTALLA -> copiarEstructura()
+		Accion.MODO_EDICION -> lector.modoEdicion.alternar()
+		Accion.EDICION_POR_PARTES -> edicionPorPartes()
 		Accion.AYUDA_OTRA_PERSONA -> lector.gestos.alternarAyuda()
 		Accion.PANTALLA_VIRTUAL -> lector.vision.pantallaVirtual()
 		Accion.INICIO_SEGURO -> inicioSeguro()
@@ -300,6 +303,15 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 
 	private fun mantener(): Boolean {
 		val f = objetivo() ?: return false
+		// Un botón de grabar (WhatsApp, Telegram): lo mantiene pulsado Android con el doble toque mantenido, mientras
+		// no se levanta el dedo. Si el gesto llega aquí, el cambio aún no se había hecho (el dedo acababa de llegar al
+		// botón). La pulsación larga de accesibilidad no graba nada y en Telegram abre enviar programado o sin sonido:
+		// no se manda, se avisa de repetirlo, que ya lo hará Android
+		if (Build.VERSION.SDK_INT >= 30 && f.packageName?.toString() != lector.servicio.packageName && Nodos.esDeMantenerPulsado(f)) {
+			lector.sonidos.tocar(Sonido.ERROR)
+			lector.decir(R.string.mantener_grabar_repetir)
+			return true
+		}
 		lector.sonidos.tocar(Sonido.MANTENER)
 		val ok = runCatching { f.performAction(AccessibilityNodeInfo.ACTION_LONG_CLICK) }.getOrDefault(false)
 		return ok || tocarEn(f, true)
@@ -655,6 +667,8 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 	}
 
 	private val edicionOpciones = listOf(
+		R.string.accion_modo_edicion to Accion.MODO_EDICION,
+		R.string.accion_edicion_por_partes to Accion.EDICION_POR_PARTES,
 		R.string.acc_seleccionar_todo to Accion.SELECCIONAR_TODO,
 		R.string.acc_copiar to Accion.COPIAR,
 		R.string.acc_cortar to Accion.CORTAR,
@@ -663,6 +677,9 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		R.string.acc_cursor_final to Accion.CURSOR_FINAL,
 		R.string.acc_borrar_texto to Accion.BORRAR_TEXTO,
 		R.string.acc_modo_seleccion to Accion.MODO_SELECCION,
+		// (el manual las daba por puestas y no estaban)
+		R.string.accion_deshacer to Accion.DESHACER,
+		R.string.accion_rehacer to Accion.REHACER,
 	)
 
 	/** La opción de edición elegida con arriba y abajo (con el control Edición). */
@@ -762,6 +779,79 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 	 * página a página hasta abajo, apuntando cada elemento una vez (por su
 	 * posición en la lista, si la app la da). Se para si se toca la pantalla.
 	 */
+	/**
+	 * Copia cómo está hecha la ventana de delante, para mandarla con un fallo de una app que no se puede probar
+	 * (WhatsApp sin cuenta): cada nodo con su clase, su identificador, si se pulsa, si es encabezado, su posición
+	 * en la lista, dónde está y si es una parada de Tiresias. **Sin ningún texto de la pantalla**: de los textos y
+	 * las descripciones solo se dice si los hay, y nunca de un campo de contraseña. Lo pega quien la ha pedido.
+	 */
+	/**
+	 * Abre la edición por partes con lo enfocado (o con el campo en el que se escribe). En una contraseña no: su
+	 * texto no sale del campo. Lo que se guarda vuelve al campo cuando la app está otra vez delante.
+	 */
+	private fun edicionPorPartes(): Boolean {
+		val f = lector.foco?.takeIf { Nodos.vivo(it) }
+		val n = f?.takeIf { it.isEditable } ?: runCatching { lector.raiz()?.findFocus(AccessibilityNodeInfo.FOCUS_INPUT) }.getOrNull()?.takeIf { it.isEditable && (f == null || !Nodos.tieneTexto(f)) } ?: f
+		if (n == null) {
+			lector.decir(R.string.modo_edicion_sin_texto)
+			return false
+		}
+		if (n.isPassword || Nodos.sensible(n)) {
+			lector.sonidos.tocar(Sonido.ERROR)
+			lector.decir(R.string.partes_contrasena)
+			return false
+		}
+		val editable = n.isEditable
+		val texto = if (editable) (if (Build.VERSION.SDK_INT >= 26 && n.isShowingHintText) "" else n.text?.toString().orEmpty()) else lector.elemento(n).nombre
+		if (!editable && texto.isBlank()) {
+			lector.decir(R.string.modo_edicion_sin_texto)
+			return false
+		}
+		if (texto.length > MAXIMO_PARTES) {
+			lector.decir(R.string.partes_muy_largo)
+			return false
+		}
+		if (lector.modoEdicion.activo) lector.modoEdicion.salir(decirlo = false)
+		com.xebolax.tiresias.lectura.EdicionPartes.trabajo = com.xebolax.tiresias.lectura.EdicionPartes.Trabajo(
+			nodo = n, original = texto, editable = editable, maximo = n.maxTextLength.coerceAtLeast(0),
+			unaLinea = editable && !n.isMultiLine, guardar = { nuevo -> lector.manejador.post { devolverAlCampo(n, nuevo) } },
+		)
+		return abrir(com.xebolax.tiresias.ui.ActividadEdicionPartes::class.java)
+	}
+
+	/**
+	 * Escribe [texto] en [n] cuando la app vuelve a estar delante (con la pantalla de Tiresias encima, Android no
+	 * deja tocar sus campos). Si no se puede, el texto se copia para pegarlo a mano, y se dice.
+	 */
+	private fun devolverAlCampo(n: AccessibilityNodeInfo, texto: String, intento: Int = 0) {
+		lector.manejador.postDelayed({
+			runCatching { n.refresh() }
+			val args = android.os.Bundle().apply { putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, texto) }
+			if (runCatching { n.performAction(AccessibilityNodeInfo.ACTION_SET_TEXT, args) }.getOrDefault(false)) {
+				val fin = android.os.Bundle().apply {
+					putInt(AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_START_INT, texto.length)
+					putInt(AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_END_INT, texto.length)
+				}
+				runCatching { n.performAction(AccessibilityNodeInfo.ACTION_SET_SELECTION, fin) }
+				lector.decir(R.string.partes_guardado)
+			} else if (intento < INTENTOS_DEVOLVER) devolverAlCampo(n, texto, intento + 1)
+			else {
+				com.xebolax.tiresias.base.Registro.w(ETIQUETA, "No se pudo devolver el texto al campo")
+				lector.edicion.portapapeles(texto)
+				lector.decir(R.string.partes_no_guardado)
+			}
+		}, ESPERA_DEVOLVER_MS)
+	}
+
+	private fun copiarEstructura(): Boolean {
+		val raiz = lector.raiz() ?: return false
+		val (texto, nodos) = Nodos.estructura(raiz, nav.orden(raiz).toHashSet(), lector.foco, MAXIMO_ESTRUCTURA)
+		val cabecera = "Tiresias ${com.xebolax.tiresias.BuildConfig.VERSION_NAME}, Android ${Build.VERSION.RELEASE}, ${Build.MANUFACTURER} ${Build.MODEL}\n"
+		lector.edicion.portapapeles(cabecera + texto)
+		lector.decir(lector.textos.resources.getQuantityString(R.plurals.estructura_copiada, nodos, nodos))
+		return true
+	}
+
 	private fun copiarLista(): Boolean {
 		val raiz = lector.raiz() ?: return false
 		// La lista más cercana que pueda desplazarse (si la lista mide lo que su contenido, el contenedor que la envuelve)
@@ -1589,11 +1679,22 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		// Lo dice Tiresias mismo: el aviso de los cambios de volumen no lo repite
 		com.xebolax.tiresias.servicio.AvisoVolumen.propio()
 		runCatching { audio.setStreamVolume(flujo, nuevo, 0) }
-		// Leyendo de seguido, sin cortar la lectura: el sonido del selector ya se oye con el volumen nuevo
-		if (lector.continua.activa) lector.sonidos.tocar(Sonido.SELECTOR)
-		else lector.decir(t.getString(R.string.valor_volumen, audio.getStreamVolume(flujo) * 100 / max))
+		// El sonido del selector, ya con el volumen nuevo; leyendo de seguido, solo eso (sin cortar la lectura). Si no,
+		// el porcentaje cuando se deja de pulsar: con una pulsación tras otra, cada frase cortaba la anterior y se oía a trozos
+		lector.sonidos.tocar(Sonido.SELECTOR)
+		volumenDicho?.let { lector.manejador.removeCallbacks(it) }
+		if (lector.continua.leyendo) return true
+		val decirlo = Runnable {
+			volumenDicho = null
+			lector.decir(t.getString(R.string.valor_volumen, audio.getStreamVolume(flujo) * 100 / max))
+		}
+		volumenDicho = decirlo
+		lector.manejador.postDelayed(decirlo, DECIR_VOLUMEN_MS)
 		return true
 	}
+
+	/** El porcentaje del volumen de la voz que se dirá al dejar de pulsar. */
+	private var volumenDicho: Runnable? = null
 
 	private fun cambiarPuntuacion(adelante: Boolean): Boolean {
 		val niveles = listOf(NivelPuntuacion.NINGUNA, NivelPuntuacion.ALGUNAS, NivelPuntuacion.MAYORIA, NivelPuntuacion.TODAS)
@@ -1625,7 +1726,9 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		// Cada motor con su velocidad: la suya o, la primera vez, la normal (y se dice)
 		a.ajustarVozAlMotor()
 		lector.voz.elegirMotor()
-		lector.decir(t.getString(R.string.valor_motor_velocidad, lector.voz.nombreMotor, a.velocidad))
+		// «La que use el sistema» se dice como tal (con el motor de ahora): si no, sonaba igual que ese motor
+		val nombre = if (a.motor == Ajustes.MOTOR_DEL_SISTEMA) t.getString(R.string.aj_motor_del_sistema, lector.voz.nombreMotor) else lector.voz.nombreMotor
+		lector.decir(t.getString(R.string.valor_motor_velocidad, nombre, a.velocidad))
 		return true
 	}
 
@@ -2068,6 +2171,15 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 	}
 
 	companion object {
+		/** Lo que se espera tras la última pulsación para decir el volumen de la voz. */
+		private const val DECIR_VOLUMEN_MS = 300L
+		/** El texto más largo que se abre en la edición por partes. */
+		private const val MAXIMO_PARTES = 50_000
+		/** Lo que se espera a que la app vuelva a estar delante para devolverle el texto, y cuántas veces. */
+		private const val ESPERA_DEVOLVER_MS = 500L
+		private const val INTENTOS_DEVOLVER = 8
+		/** Los nodos que como mucho se copian con la estructura de la pantalla. */
+		private const val MAXIMO_ESTRUCTURA = 1500
 		/** Lo que en voz a demanda no habla: moverse (lo demás, que se pide, sí). */
 		private val NAVEGAR_CALLADO = setOf(
 			Accion.SIGUIENTE, Accion.ANTERIOR, Accion.PRIMERO, Accion.ULTIMO, Accion.DESPLAZAR_ARRIBA, Accion.DESPLAZAR_ABAJO,

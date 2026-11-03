@@ -189,6 +189,8 @@ class ServicioTiresias : AccessibilityService() {
 		// Tapar el sensor de proximidad calla la voz (solo se mira mientras habla)
 		val prox = CallarConProximidad(this, l.ajustes) {
 			l.manejador.post {
+				// Con un dedo en la pantalla (cambiando el volumen, explorando), la mano tapa el sensor sin querer
+				if (l.dedoEnPantalla) return@post
 				l.continua.parar()
 				l.vision.pararDescripcionContinua()
 				v.callar()
@@ -350,7 +352,8 @@ class ServicioTiresias : AccessibilityService() {
 		when (e.eventType) {
 			AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED -> {
 				val paquete = e.packageName?.toString()
-				if (paquete != null && paquete != paqueteActual && paquete != packageName) {
+				// El teclado en pantalla no es la app de delante: con él, los gestos y los ajustes siguen siendo los de la app (SandFly)
+				if (paquete != null && paquete != paqueteActual && paquete != packageName && !esDelTeclado(e.windowId)) {
 					paqueteActual = paquete
 					l.gestos.alCambiarApp(paquete)
 					l.perfiles.alCambiarApp(paquete)
@@ -366,6 +369,10 @@ class ServicioTiresias : AccessibilityService() {
 		}
 		l.alEvento(e)
 	}
+
+	/** Si la ventana [id] es la del teclado en pantalla (la lista de ventanas la da Android, sin preguntar a ninguna app). */
+	private fun esDelTeclado(id: Int): Boolean =
+		runCatching { windows.firstOrNull { it.id == id }?.type == android.view.accessibility.AccessibilityWindowInfo.TYPE_INPUT_METHOD }.getOrDefault(false)
 
 	@androidx.annotation.RequiresApi(30)
 	override fun onGesture(gesto: AccessibilityGestureEvent): Boolean = alGesto(gesto.gestureId)
@@ -389,6 +396,11 @@ class ServicioTiresias : AccessibilityService() {
 		// El gesto de emergencia funciona siempre, aunque Tiresias esté suspendido o en ayuda de entrada
 		if (gesto == Gesto.TRIPLE_TOQUE_MANTENIDO_4) {
 			l.manejador.post { ej.ejecutar(Accion.MODO_SEGURO) }
+			return true
+		}
+		// El modo edición tiene sus propios gestos (los de Jieshuo): los demás hacen lo de siempre
+		if (!l.ayudaEntrada && l.modoEdicion.esDelModo(gesto)) {
+			l.manejador.post { if (!l.modoEdicion.gesto(gesto) { a -> ej.ejecutar(a) }) ej.ejecutar(accion) }
 			return true
 		}
 		if (l.ayudaEntrada && accion != Accion.AYUDA_ENTRADA) {

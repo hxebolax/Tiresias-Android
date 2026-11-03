@@ -33,6 +33,10 @@ class PistaAudio(atributosIniciales: AudioAttributes) {
 	private var volumen = 1f
 	/** El dispositivo elegido con el que se abrió la pista (null: el del sistema). */
 	private var dispositivo: Int? = null
+	/** Las muestras entregadas a la pista desde que se abrió o se vació: cuando la cabeza llega ahí, ha sonado todo. */
+	@Volatile private var entregadas = 0L
+	/** Si la pista se abrió con la salida por Bluetooth (con más búfer). */
+	private var conBluetooth = false
 
 	/** Volumen de la pista (0 a 1), relativo al volumen de accesibilidad del sistema. */
 	fun ponerVolumen(v: Float) {
@@ -68,6 +72,7 @@ class PistaAudio(atributosIniciales: AudioAttributes) {
 				val ahora = SystemClock.uptimeMillis()
 				if (escritas > 0) {
 					desde += escritas
+					entregadas += escritas
 					avanzo = ahora
 				} else if (ahora - avanzo > PISTA_COLGADA_MS) {
 					Registro.w(ETIQUETA, "La pista lleva $PISTA_COLGADA_MS ms sin admitir muestras: se vuelve a abrir")
@@ -90,21 +95,33 @@ class PistaAudio(atributosIniciales: AudioAttributes) {
 	 */
 	fun esperarFin(sigue: () -> Boolean): Boolean {
 		val p = pista ?: return true
-		// Como mucho 15 s (una frase larga); la cabeza de reproducción quieta indica que ya sonó todo
+		val objetivo = entregadas
+		// Con Bluetooth, la salida coge el sonido a tirones (la cabeza se para decenas de milisegundos con el búfer
+		// aún lleno): si se daba por acabada la frase, la siguiente cortaba el final de esta, y con música sonando
+		// la voz se oía a trozos. Ahí solo cuenta una parada larga
+		val parada = if (porBluetooth(p)) PARADA_BLUETOOTH_MS else PARADA_MS
+		// Como mucho 15 s (una frase larga)
 		val limite = SystemClock.uptimeMillis() + 15_000
-		var anterior = -1
-		var quieta = 0
+		var anterior = -1L
+		var quietaDesde = SystemClock.uptimeMillis()
 		while (!cortada && sigue() && SystemClock.uptimeMillis() < limite) {
-			val pos = runCatching { p.playbackHeadPosition }.getOrDefault(0)
+			val pos = runCatching { p.playbackHeadPosition.toLong() and 0xFFFFFFFFL }.getOrDefault(0L)
+			// Ha sonado todo lo entregado
+			if (pos >= objetivo) return true
+			val ahora = SystemClock.uptimeMillis()
 			if (pos == anterior) {
 				// La cabeza no avanza: el búfer está vacío (ya sonó todo)
-				if (++quieta >= 3) return true
-			} else quieta = 0
+				if (ahora - quietaDesde >= parada) return true
+			} else quietaDesde = ahora
 			anterior = pos
 			SystemClock.sleep(8)
 		}
 		return !cortada
 	}
+
+	/** Si [p] suena ahora por Bluetooth. */
+	private fun porBluetooth(p: AudioTrack): Boolean =
+		conBluetooth || runCatching { p.routedDevice?.type in BLUETOOTH }.getOrDefault(false)
 
 	/** Corta en seco lo que suena (desde cualquier hilo). */
 	fun cortar() {
@@ -114,6 +131,8 @@ class PistaAudio(atributosIniciales: AudioAttributes) {
 			p.pause()
 			p.flush()
 		}
+		// (vaciada, la cabeza vuelve a cero)
+		entregadas = 0
 	}
 
 	/** Cierra la pista si lleva [ms] callada. Lo llama la voz de vez en cuando. */
@@ -125,6 +144,7 @@ class PistaAudio(atributosIniciales: AudioAttributes) {
 		val p = pista ?: return
 		pista = null
 		frecuencia = 0
+		entregadas = 0
 		runCatching {
 			p.pause()
 			p.flush()
@@ -134,10 +154,13 @@ class PistaAudio(atributosIniciales: AudioAttributes) {
 
 	private fun abrir(hz: Int): AudioTrack? {
 		val elegido = dispositivoElegido()
-		pista?.let { if (frecuencia == hz && it.state == AudioTrack.STATE_INITIALIZED && dispositivo == elegido?.id && atributosDePista === atributos) return it else cerrar() }
+		val bluetooth = elegido?.type?.let { it in BLUETOOTH } ?: musicaPorBluetooth()
+		pista?.let { if (frecuencia == hz && it.state == AudioTrack.STATE_INITIALIZED && dispositivo == elegido?.id && atributosDePista === atributos && conBluetooth == bluetooth) return it else cerrar() }
 		return try {
 			val minimo = AudioTrack.getMinBufferSize(hz, AudioFormat.CHANNEL_OUT_MONO, AudioFormat.ENCODING_PCM_16BIT)
-			val tamano = maxOf(minimo, hz / 10 * 2)
+			// 100 ms; con Bluetooth, 250 ms: la salida coge el sonido a tirones y un búfer corto se vacía entre uno y otro
+			// (la voz se cortaba, sobre todo con música sonando). El retraso de Bluetooth ya es mayor que eso
+			val tamano = maxOf(minimo, (if (bluetooth) hz / 4 else hz / 10) * 2)
 			val b = AudioTrack.Builder()
 				.setAudioAttributes(atributos)
 				.setAudioFormat(
@@ -159,6 +182,8 @@ class PistaAudio(atributosIniciales: AudioAttributes) {
 			nueva.setVolume(volumen)
 			if (elegido != null && !nueva.setPreferredDevice(elegido)) Registro.w(ETIQUETA, "La pista no aceptó la salida elegida: suena por la del sistema")
 			dispositivo = elegido?.id
+			conBluetooth = bluetooth
+			entregadas = 0
 			atributosDePista = atributos
 			pista = nueva
 			frecuencia = hz
@@ -176,6 +201,9 @@ class PistaAudio(atributosIniciales: AudioAttributes) {
 		/** Lo que se espera a que haya sitio en la pista, y lo que puede tardar en haberlo antes de darla por colgada. */
 		private const val ESPERA_SITIO_MS = 4L
 		private const val PISTA_COLGADA_MS = 3000L
+		/** Lo que tiene que estar quieta la cabeza de reproducción para dar por acabada una frase (con Bluetooth, más). */
+		private const val PARADA_MS = 24L
+		private const val PARADA_BLUETOOTH_MS = 300L
 
 		/** La voz por el volumen multimedia (Ajustes, Voz); lo pone el servicio al arrancar. */
 		@Volatile var multimedia = false
@@ -274,6 +302,26 @@ class PistaAudio(atributosIniciales: AudioAttributes) {
 				else -> AURICULARES
 			}
 			return tipos.firstNotNullOfOrNull { t -> salidas.firstOrNull { it.type == t } }
+		}
+
+		@Volatile private var bluetoothVisto = false
+		@Volatile private var bluetoothMirado = 0L
+
+		/** Si la música (y con ella la voz, con la salida del sistema) va ahora por Bluetooth. Se mira como mucho cada medio segundo. */
+		private fun musicaPorBluetooth(): Boolean {
+			val ahora = SystemClock.uptimeMillis()
+			if (ahora - bluetoothMirado < 500) return bluetoothVisto
+			bluetoothMirado = ahora
+			val am = gestor ?: return false
+			bluetoothVisto = runCatching {
+				if (Build.VERSION.SDK_INT >= 33) am.getAudioDevicesForAttributes(atributosVoz()).any { it.type in BLUETOOTH }
+				else {
+					val salidas = am.getDevices(AudioManager.GET_DEVICES_OUTPUTS).toList()
+					val cable = setOf(AudioDeviceInfo.TYPE_WIRED_HEADSET, AudioDeviceInfo.TYPE_WIRED_HEADPHONES, AudioDeviceInfo.TYPE_USB_HEADSET)
+					salidas.none { it.type in cable } && salidas.any { it.type == AudioDeviceInfo.TYPE_BLUETOOTH_A2DP }
+				}
+			}.getOrDefault(false)
+			return bluetoothVisto
 		}
 
 		/** Los atributos de la voz: uso de accesibilidad (su propio volumen y prioridad) y voz. */

@@ -66,6 +66,8 @@ class Avisos(private val lector: Lector) {
 	}
 
 	private fun procesar(paquete: String, n: Notification, textoEvento: String) {
+		// El «N notificaciones más» que One UI pone en la persiana en lugar de las silenciosas: no es un aviso (SandFly)
+		if (esResumenSamsung(paquete, n)) return
 		val extras = n.extras
 		val titulo = extras?.getCharSequence(Notification.EXTRA_TITLE)?.toString()?.trim().orEmpty()
 		val texto = (extras?.getCharSequence(Notification.EXTRA_BIG_TEXT) ?: extras?.getCharSequence(Notification.EXTRA_TEXT))?.toString()?.trim()
@@ -151,6 +153,9 @@ class Avisos(private val lector: Lector) {
 	/** La última llamada de internet que ha llegado, o null. */
 	@Volatile var llamadaInternet: LlamadaInternet? = null
 
+	private fun esResumenSamsung(paquete: String, n: Notification): Boolean =
+		paquete == "com.android.systemui" && ((android.os.Build.VERSION.SDK_INT >= 26 && n.channelId == "INSIGNIFICANT") || n.extras?.containsKey("insignificant_child_count") == true)
+
 	private fun esLlamada(n: Notification): Boolean =
 		n.category == Notification.CATEGORY_CALL || n.extras?.containsKey("android.callType") == true
 
@@ -191,7 +196,7 @@ class Avisos(private val lector: Lector) {
 		val enLlamada = audio?.mode == AudioManager.MODE_IN_CALL || audio?.mode == AudioManager.MODE_IN_COMMUNICATION
 		if (enLlamada && !a.notificacionesEnLlamada) return R.string.aviso_motivo_llamada
 		// Con el móvil bloqueado, si así se ha elegido, nada que no se pida (se guardan en Notificaciones recientes)
-		if (a.callarBloqueo && lector.bloqueado()) return R.string.aviso_motivo_bloqueo
+		if (a.callarBloqueo && lector.bloqueadoOApagado()) return R.string.aviso_motivo_bloqueo
 		return null
 	}
 

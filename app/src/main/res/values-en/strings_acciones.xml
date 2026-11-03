@@ -313,4 +313,7 @@
 	<string name="accion_llamada_contestar">Answer the call</string>
 	<string name="accion_llamada_rechazar">Reject the call</string>
 	<string name="accion_estado_y_avisos">Time, battery, connection and notices</string>
+	<string name="accion_estructura_pantalla">Copy the screen structure, without text (to report a problem)</string>
+	<string name="accion_modo_edicion">Edit mode (move by characters, words, sentences and paragraphs, and select)</string>
+	<string name="accion_edicion_por_partes">Edit by parts</string>
 </resources>

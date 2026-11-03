@@ -317,4 +317,7 @@
 	<string name="accion_llamada_contestar">Descolgar la llamada</string>
 	<string name="accion_llamada_rechazar">Rechazar la llamada</string>
 	<string name="accion_estado_y_avisos">Hora, batería, conexión y avisos</string>
+	<string name="accion_estructura_pantalla">Copiar la estructura de la pantalla, sin textos (para contar un fallo)</string>
+	<string name="accion_modo_edicion">Modo edición (moverse por letras, palabras, frases y párrafos, y seleccionar)</string>
+	<string name="accion_edicion_por_partes">Edición por partes</string>
 </resources>

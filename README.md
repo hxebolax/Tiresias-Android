@@ -52,8 +52,8 @@ Tiresias dice en voz alta lo que hay en la pantalla y deja manejar el móvil con
 
 ### Gestos y teclas
 
-- Gestos por defecto compatibles con los de TalkBack, que se pueden cambiar para todas las apps o solo para una.
-- Gestos sencillos de dos y tres dedos, menú circular y activar al levantar el dedo.
+- Gestos por defecto compatibles con los de TalkBack, que se pueden cambiar para todas las apps o solo para una (por ejemplo, pasar los vídeos de TikTok con un dedo).
+- Gestos sencillos de dos y tres dedos, menú circular (arriba y luego a la derecha) y activar al levantar el dedo.
 - Teclas de volumen: mantener o pulsar tres veces hace lo que asignes.
 - Música sin salir de donde estás: canción siguiente y anterior con una acción o con el control de lectura «Música».
 - Teclado físico con dos mapas, el de TalkBack y uno al estilo de NVDA y de Tiresias para Windows, con navegación por letras en las webs y ayuda de teclado.
@@ -62,7 +62,7 @@ Tiresias dice en voz alta lo que hay en la pantalla y deja manejar el móvil con
 
 - **eSpeak NG**, **SVOX Pico** y **Eloquence** van dentro de la app y funcionan sin Internet.
 - **Eloquence**, la voz clásica de los lectores de pantalla: diez idiomas (inglés de EE. UU. y británico, español de España y de México, francés de Francia y de Canadá, alemán, italiano, polaco y japonés) y sus ocho voces, con todos sus ajustes como en NVDA. De fábrica suena como el driver IBMTTS de NVDA, y al 100 % habla a su velocidad normal (desde la 1.0.5; antes iba unas diez veces más deprisa). Se basa en [evvdroid](https://github.com/trypsynth/evvdroid) y en [openevv](https://github.com/Mudb0y/openevv).
-- Voces neuronales **Piper**, que se descargan aparte, y cualquier **voz del sistema**. Si una falla, habla la integrada.
+- Voces neuronales **Piper**, que se descargan aparte, y cualquier **voz del sistema**, también «la que use el sistema», que sigue al motor elegido en los ajustes del móvil. Si una falla, habla la integrada.
 - **Cada voz con su velocidad, su tono y su volumen**, como en NVDA: al cambiar de voz se pone la suya y Tiresias dice con qué velocidad queda; un perfil con otra voz no estropea la velocidad de la de antes. Eliges por qué voces pasa el control Voz.
 - **Voz de las notificaciones**: pueden ir con otra de las voces incluidas, con su propia velocidad.
 - **Voz a demanda**, como en NVDA: al moverse no habla, solo cuando se le pide algo.
@@ -77,7 +77,7 @@ Tiresias dice en voz alta lo que hay en la pantalla y deja manejar el móvil con
 - Menos ruido: los cronómetros y ecualizadores respetan el plazo que pide la app, lo que llega tarde de un foco que ya pasó no se dice y las regiones vivas de las ventanas de fondo no cortan la lectura.
 - Los controles sin nombre se dicen por su identificador traducido («contact_photo», «foto de contacto»).
 - Diccionario de pronunciación, que importa el de NVDA.
-- Temas de sonidos, con un archivo propio para cada sonido y una vibración distinta para cada uno.
+- Temas de sonidos, con un archivo propio para cada sonido y una vibración distinta para cada uno. Cómo hacer uno: [`docs/temas_de_sonido.md`](docs/temas_de_sonido.md).
 
 ### Edición de texto
 
@@ -140,7 +140,7 @@ Para personas mayores que empiezan o solo quieren lo básico, hecho a partir de 
 ### Perfiles y etiquetas
 
 - Etiquetas para los botones sin nombre, que se exportan e importan, y nombre propio para una pantalla, que se dice al abrirla en vez de su título.
-- Perfiles por app (verbosidad, velocidad, puntuación).
+- Perfiles por app (gestos, verbosidad, velocidad, puntuación).
 - Copia de seguridad de toda la configuración en un archivo, para otro móvil (sin las claves de IA).
 - Cortina de pantalla, toque directo por app (en toda la pantalla, también la barra de navegación) y mosaico de ajustes rápidos.
 

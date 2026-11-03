@@ -95,6 +95,8 @@ class EdicionTexto(private val lector: Lector) {
 		nodoAnterior = nodo
 		textoAnterior = texto
 		seleccionAnterior = fin
+		// Lo movió el modo edición, que ya ha dicho lo recorrido o lo seleccionado
+		if (lector.modoEdicion.esPropio(nodo)) return
 		// El cursor se mueve solo al escribir: eso ya lo dijo el eco
 		if (SystemClock.uptimeMillis() - ultimoCambio < 150) return
 		if (inicio < 0 || fin < 0 || texto.isEmpty()) return

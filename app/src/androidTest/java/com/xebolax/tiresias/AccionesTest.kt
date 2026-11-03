@@ -82,8 +82,8 @@ class AccionesTest : PruebaTiresias() {
 		s.gestoPrueba(Gesto.TOQUE_4)
 		assertNotNull("Cuatro dedos no dijo la hora", dichoQue(3000, m) { it.contains("batería al") })
 		m = marca()
-		s.gestoPrueba(Gesto.ARRIBA_DERECHA)
-		assertNotNull("Arriba y derecha no abrió el menú", dichoQue(8000, m) { it.startsWith("Menú de Tiresias") })
+		s.gestoPrueba(Gesto.ABAJO_DERECHA)
+		assertNotNull("Abajo y derecha no abrió el menú", dichoQue(8000, m) { it.startsWith("Menú de Tiresias") })
 		s.cerrarVentanaPruebas()
 		// Que cada gesto del mapa tiene una acción que existe (ninguno se queda en nada por error)
 		val sinAccion = MapaGestos.POR_DEFECTO.todas.filterValues { it == Accion.NINGUNA }.keys

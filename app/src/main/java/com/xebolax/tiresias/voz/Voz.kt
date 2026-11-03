@@ -87,7 +87,15 @@ class Voz(contexto: Context) {
 	private var avisadoFallo = false
 
 	private var foco: AudioFocusRequest? = null
-	@Volatile private var grabando = false
+	/** Si otra app graba ahora con el micrófono (una nota de voz, un dictado, una llamada por internet). */
+	@Volatile var grabando = false
+		private set(v) {
+			if (v && !field) grabandoDesde = SystemClock.uptimeMillis()
+			field = v
+		}
+	/** Cuándo empezó la grabación en curso (`SystemClock.uptimeMillis`). */
+	@Volatile var grabandoDesde = 0L
+		private set
 
 	/** Cuándo empezó a sonar la última frase (`SystemClock.uptimeMillis`), para medir la latencia en las pruebas. */
 	@Volatile var ultimoInicioSonido = 0L
@@ -145,7 +153,9 @@ class Voz(contexto: Context) {
 		ajustes.ajustarVozAlMotor()
 		PistaAudio.salida = ajustes.salidaAudio
 		PistaAudio.reglasBluetooth = ajustes.reglasBluetooth
-		val id = ajustes.motor
+		// «La que use el sistema»: el motor preferido de los ajustes del móvil (y si no hay, eSpeak)
+		val id = ajustes.motor.let { if (it == Ajustes.MOTOR_DEL_SISTEMA) MotorSistema.predeterminado(app) ?: Ajustes.MOTOR_ESPEAK else it }
+		vigilarMotorDelSistema(ajustes.motor == Ajustes.MOTOR_DEL_SISTEMA)
 		if (id.startsWith(MotorPiper.PREFIJO)) {
 			sistema?.cerrar()
 			sistema = null
@@ -170,6 +180,27 @@ class Voz(contexto: Context) {
 		apartadoHasta = 0
 		avisadoFallo = false
 		pista.ponerVolumen(ajustes.volumenVoz / 100f)
+	}
+
+	private var vigiaMotor: android.database.ContentObserver? = null
+
+	/** Con «la que use el sistema», se vuelve a elegir motor cuando se cambia el preferido en los ajustes del móvil. */
+	private fun vigilarMotorDelSistema(si: Boolean) {
+		if (si == (vigiaMotor != null)) return
+		val r = app.contentResolver
+		if (!si) {
+			vigiaMotor?.let { runCatching { r.unregisterContentObserver(it) } }
+			vigiaMotor = null
+			return
+		}
+		val vigia = object : android.database.ContentObserver(principal) {
+			override fun onChange(propio: Boolean) {
+				if (ajustes.motor == Ajustes.MOTOR_DEL_SISTEMA) elegirMotor()
+			}
+		}
+		runCatching { r.registerContentObserver(android.provider.Settings.Secure.getUriFor(android.provider.Settings.Secure.TTS_DEFAULT_SYNTH), false, vigia) }
+			.onSuccess { vigiaMotor = vigia }
+			.onFailure { Registro.w(ETIQUETA, "No se puede vigilar el motor de voz del sistema", it) }
 	}
 
 	/** El nombre del motor que suena ahora. */
@@ -294,11 +325,17 @@ class Voz(contexto: Context) {
 	fun callar() {
 		alCallarRemoto?.invoke()
 		vecesCallada++
-		cerrojo.withLock {
+		val descartados = cerrojo.withLock {
 			generacion.incrementAndGet()
+			val d = cola.toList()
 			cola.clear()
 			pedirCorte()
+			d
 		}
+		// Quien esperaba el final de lo que se tira (la lectura continua, con un texto largo dicho por frases) se
+		// entera de que no acabó: si no, la lectura continua se quedaba «en marcha» para siempre, y entonces las
+		// teclas de volumen no movían el cursor de los campos
+		descartados.forEach { it.e.alTerminar?.let { f -> principal.post { f(false) } } }
 	}
 
 	/**
@@ -343,6 +380,7 @@ class Voz(contexto: Context) {
 		cerrojo.withLock { hayTrabajo.signal() }
 		cortes.shutdown()
 		runCatching { grabaciones?.let { audio.unregisterAudioRecordingCallback(it) } }
+		vigilarMotorDelSistema(false)
 		sistema?.cerrar()
 		neuronal?.cerrar()
 		pico.cerrar()
@@ -464,6 +502,9 @@ class Voz(contexto: Context) {
 			// Lo de un foco que ya ha pasado no se dice
 			if (runCatching { pedido.e.vigente?.invoke() }.getOrDefault(true) == false) {
 				enCurso = null
+				pedido.e.alTerminar?.let { f -> principal.post { f(false) } }
+				// (sin soltarla, la pantalla se quedaba encendida hasta el tope si era lo último)
+				if (cerrojo.withLock { cola.isEmpty() }) pantalla.soltar()
 				continue
 			}
 			ponerActiva(true)
@@ -598,16 +639,23 @@ class Voz(contexto: Context) {
 		try {
 			val cb = object : AudioManager.AudioRecordingCallback() {
 				override fun onRecordingConfigChanged(configs: MutableList<AudioRecordingConfiguration>?) {
-					grabando = !configs.isNullOrEmpty()
+					grabando = hayGrabacion(configs)
 				}
 			}
 			audio.registerAudioRecordingCallback(cb, principal)
 			grabaciones = cb
-			grabando = audio.activeRecordingConfigurations.isNotEmpty()
+			grabando = hayGrabacion(audio.activeRecordingConfigurations)
 		} catch (e: Exception) {
 			Registro.w(ETIQUETA, "No se pueden vigilar las grabaciones", e)
 		}
 	}
+
+	/**
+	 * Si alguna de [configs] es una grabación de verdad: Android 10 o posterior deja «grabando» a una app en segundo
+	 * plano a la que no le llega nada (silenciada), y eso no cuenta (SandFly).
+	 */
+	private fun hayGrabacion(configs: List<AudioRecordingConfiguration>?): Boolean =
+		configs.orEmpty().any { Build.VERSION.SDK_INT < 29 || !it.isClientSilenced }
 
 	companion object {
 		/** Lo que no se dice en voz a demanda si no se ha pedido. */

@@ -28,6 +28,19 @@ class ActividadPerfiles : ActividadBase() {
 		construir()
 	}
 
+	/** Al volver de los gestos de una app, su fila dice cuántos tiene ahora. */
+	override fun onRestart() {
+		super.onRestart()
+		perfiles.olvidar()
+		construir()
+	}
+
+	/** Guarda el perfil de [paquete] y el lector lo usa al momento (antes había que reiniciar Tiresias). */
+	private fun ponerApp(paquete: String, perfil: Perfiles.PerfilApp?) {
+		perfiles.ponerApp(paquete, perfil)
+		ServicioTiresias.instancia?.recargarAjustes()
+	}
+
 	private fun nombreApp(paquete: String): String = runCatching {
 		packageManager.getApplicationLabel(packageManager.getApplicationInfo(paquete, PackageManager.GET_META_DATA)).toString()
 	}.getOrDefault(paquete)
@@ -92,30 +105,31 @@ class ActividadPerfiles : ActividadBase() {
 		val app = nombreApp(paquete)
 		val silenciada = paquete in Ajustes(this).appsSilenciadas
 		elegir(app, listOf(
+			getString(R.string.perf_app_gestos) to { ActividadGestos.abrirDeApp(this, paquete) },
 			getString(R.string.perf_app_velocidad) to {
 				pedirTexto(getString(R.string.perf_app_velocidad), getString(R.string.perf_app_velocidad_pista), actual.velocidad?.toString().orEmpty(), numerico = true) { v ->
-					perfiles.ponerApp(paquete, actual.copy(velocidad = v.toIntOrNull()?.coerceIn(Ajustes.VELOCIDAD_MIN, Ajustes.VELOCIDAD_MAX)))
+					ponerApp(paquete, actual.copy(velocidad = v.toIntOrNull()?.coerceIn(Ajustes.VELOCIDAD_MIN, Ajustes.VELOCIDAD_MAX)))
 					construir()
 				}
 			},
 			getString(R.string.perf_app_puntuacion) to {
 				val valores = resources.getStringArray(R.array.puntuacion_valores)
 				elegirUno(getString(R.string.aj_puntuacion), resources.getStringArray(R.array.puntuacion_nombres).toList(), valores.indexOf(actual.puntuacion)) { i ->
-					perfiles.ponerApp(paquete, actual.copy(puntuacion = valores[i]))
+					ponerApp(paquete, actual.copy(puntuacion = valores[i]))
 					construir()
 				}
 			},
 			getString(R.string.perf_app_verbosidad) to {
 				val valores = resources.getStringArray(R.array.verbosidad_valores)
 				elegirUno(getString(R.string.aj_verbosidad), resources.getStringArray(R.array.verbosidad_todas).toList(), valores.indexOf(actual.verbosidad)) { i ->
-					perfiles.ponerApp(paquete, actual.copy(verbosidad = valores[i]))
+					ponerApp(paquete, actual.copy(verbosidad = valores[i]))
 					construir()
 				}
 			},
 			getString(R.string.perf_app_eco) to {
 				val valores = resources.getStringArray(R.array.eco_valores)
 				elegirUno(getString(R.string.aj_eco), resources.getStringArray(R.array.eco_nombres).toList(), valores.indexOf(actual.ecoTeclado)) { i ->
-					perfiles.ponerApp(paquete, actual.copy(ecoTeclado = valores[i]))
+					ponerApp(paquete, actual.copy(ecoTeclado = valores[i]))
 					construir()
 				}
 			},
@@ -124,7 +138,7 @@ class ActividadPerfiles : ActividadBase() {
 				avisar(getString(if (silenciada) R.string.perf_app_notif_vuelven else R.string.perf_app_notif_calladas, app))
 			},
 			getString(R.string.perf_app_quitar, app) to {
-				perfiles.ponerApp(paquete, null)
+				ponerApp(paquete, null)
 				construir()
 			},
 		))

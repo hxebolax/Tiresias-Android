@@ -102,6 +102,9 @@ class Navegador(private val lector: Lector) {
 	fun anterior() = mover(false)
 
 	fun mover(adelante: Boolean, filtro: ((AccessibilityNodeInfo) -> Boolean)? = null, intento: Int = 0): Boolean {
+		// Una vuelta al principio que aún desplaza listas no salta luego al principio cuando el usuario ya va por otro sitio
+		pararVuelta()
+		movimientos++
 		// La lista se está adelantando sola: se espera a que acabe (unos ms) en vez de desplazarla otra vez
 		val espera = anticipandoHasta - SystemClock.uptimeMillis()
 		if (espera > 0) {
@@ -113,7 +116,9 @@ class Navegador(private val lector: Lector) {
 		val candidatos = if (filtro != null) lista.filter(filtro) else lista
 		if (candidatos.isEmpty()) return if (filtro != null) noHay() else borde()
 		val foco = lector.foco
-		val i = indiceFueraDeLaPantalla(lista, foco, adelante) ?: indice(lista, foco)
+		// Sin foco porque la app quitó lo que lo tenía (un anuncio de una página que se rehace): se sigue desde donde estaba
+		val i = if (foco == null) lector.focoPerdido(raiz.windowId)?.let { (n, sitio) -> desdePerdido(lista, n, sitio, adelante) } ?: -1
+			else indiceFueraDeLaPantalla(lista, foco, adelante) ?: indice(lista, foco)
 		val destino = if (filtro == null) {
 			val j = if (i < 0) (if (adelante) 0 else lista.lastIndex) else if (adelante) i + 1 else i - 1
 			lista.getOrNull(j)
@@ -190,9 +195,14 @@ class Navegador(private val lector: Lector) {
 			return true
 		}
 		val tocado = lector.toques
+		val movido = movimientos
 		var cual = 0
 		var paginas = 0
 		var rondas = 0
+		// Cómo estaba cada lista antes de su último desplazamiento: si después sigue igual, no se mueve aunque diga
+		// que sí (el ScrollView de fuera de los Ajustes de Android 17), y se deja. Si no, se le pedía página tras
+		// página hasta el tope, y al acabar, ya con el usuario más abajo, el foco saltaba al principio de la pantalla
+		val antes = HashMap<String, String>()
 		val paso = object : Runnable {
 			override fun run() {
 				if (vuelta !== this) return
@@ -212,7 +222,14 @@ class Navegador(private val lector: Lector) {
 					}
 					val l = listas[cual]
 					runCatching { l.refresh() }
+					val clave = "${l.className}#${l.viewIdResourceName}#${Nodos.limites(l)}"
+					val huella = huella(l)
+					if (antes[clave] == huella) {
+						cual++
+						continue
+					}
 					if (l.actionList.any { it.id == accion } && runCatching { l.performAction(accion) }.getOrDefault(false)) {
+						antes[clave] = huella
 						paginas++
 						if (com.xebolax.tiresias.BuildConfig.PRUEBAS) android.util.Log.d("TiresiasExtremo", "página $paginas en ${l.className?.toString()?.substringAfterLast('.')}#${l.viewIdResourceName?.substringAfterLast('/')}")
 						lector.manejador.postDelayed(this, 90)
@@ -222,13 +239,29 @@ class Navegador(private val lector: Lector) {
 				}
 				vuelta = null
 				sinRehacer = false
-				cuandoQuieta(accion) { if (lector.toques == tocado) enfocarExtremo() }
+				cuandoQuieta(accion) { if (lector.toques == tocado && movimientos == movido) enfocarExtremo() }
 			}
 		}
 		vuelta = paso
 		sinRehacer = true
 		lector.manejador.post(paso)
 		return true
+	}
+
+	/** Lo que se ve de [lista] ahora (su primer hijo y dónde está): si no cambia al desplazarla, no se ha movido. */
+	private fun huella(lista: AccessibilityNodeInfo): String = runCatching {
+		val primero = lista.getChild(0)
+		"${lista.childCount}|${primero?.let { "${Nodos.limites(it)}|${firma(it)}" }}"
+	}.getOrDefault("")
+
+	/** Cuántas veces se ha movido el usuario elemento a elemento: lo que llega tarde de un movimiento anterior no vale. */
+	@Volatile private var movimientos = 0
+
+	/** Para la vuelta al principio o al final que esté en marcha: lo que pide ahora el usuario manda. */
+	private fun pararVuelta() {
+		if (vuelta == null) return
+		vuelta = null
+		sinRehacer = false
 	}
 
 	/**
@@ -285,9 +318,35 @@ class Navegador(private val lector: Lector) {
 		if (i >= 0) return i
 		// El foco está en otra ventana (la de debajo de un menú): se empieza por el principio
 		if (lista.firstOrNull()?.windowId?.let { it != foco.windowId } == true) return -1
-		val r = Nodos.limites(foco)
+		return cercano(lista, foco, Nodos.limites(foco))
+	}
+
+	/**
+	 * El índice desde el que moverse cuando lo enfocado ([n], en [sitio]) ha desaparecido: el del elemento más
+	 * cercano, o el de antes si ese ya está más allá de donde estaba (para no saltárselo). -1 si no hay ninguno
+	 * cerca (la página entera ha cambiado): entonces se empieza por el principio, como siempre.
+	 */
+	private fun desdePerdido(lista: List<AccessibilityNodeInfo>, n: AccessibilityNodeInfo, sitio: android.graphics.Rect, adelante: Boolean): Int {
+		val i = lista.indexOf(n)
+		if (i >= 0) return i
+		val k = cercano(lista, n, sitio)
+		if (k < 0) return -1
+		val r = Nodos.limites(lista[k])
+		return if (adelante && r.top > sitio.top) k - 1 else if (!adelante && r.top < sitio.top) k + 1 else k
+	}
+
+	/**
+	 * El elemento de [lista] más cercano por posición a [n], que ya no está en ella (se ha ido de la pantalla al
+	 * desplazarse, o la app lo ha rehecho: la publicidad de una página web). Si [n] estaba en algo que se desplaza
+	 * (la página de Chrome), solo cuenta lo de dentro de eso: si no, lo más cercano a un párrafo que se ha ido por
+	 * arriba es la barra de direcciones, y se saltaba a ella o al principio de la página. -1 si no hay ninguno.
+	 */
+	fun cercano(lista: List<AccessibilityNodeInfo>, n: AccessibilityNodeInfo, r: android.graphics.Rect): Int {
 		if (r.isEmpty) return -1
-		return lista.indices.minByOrNull { k ->
+		val zona = Nodos.desplazable(n)?.takeIf { Nodos.vivo(it) }?.let { Nodos.limites(it) }
+		// (por dónde está, no subiendo por los padres de cada uno: en una página grande serían miles de preguntas)
+		val dentro = lista.indices.filter { k -> zona == null || Nodos.limites(lista[k]).let { o -> zona.contains(o.centerX(), o.centerY()) } }.ifEmpty { lista.indices.toList() }
+		return dentro.minByOrNull { k ->
 			val o = Nodos.limites(lista[k])
 			Math.abs(o.top - r.top) * 4L + Math.abs(o.left - r.left)
 		} ?: -1
