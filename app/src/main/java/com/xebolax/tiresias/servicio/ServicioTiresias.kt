@@ -84,8 +84,9 @@ class ServicioTiresias : AccessibilityService() {
 					com.xebolax.tiresias.ui.ControlPc.alPantalla(this@ServicioTiresias, true)
 					lector?.let { PuenteEscritorio.mirarRol(it) }
 					if (ejecutor?.suspendido == true) ejecutor?.suspender(false)
-					// Con el móvil bloqueado, unos segundos sin lo que SystemUI dice solo (Backtalk 312)
-					lector?.let { l -> if (l.ajustes.soloLoElegidoAlEncender && l.bloqueado()) l.callarSistemaUnMomento() }
+					// Con el móvil bloqueado, unos segundos sin lo que SystemUI dice solo (Backtalk 312), o sin nada si la
+					// pantalla la ha encendido una notificación que no se lee
+					lector?.let { l -> if (l.bloqueado()) l.alEncenderBloqueado() }
 					// Lo que el usuario quiere oír al encender la pantalla (Ajustes, Notificaciones y pantalla)
 					when (lector?.ajustes?.alEncender) {
 						"hora" -> lector?.decir(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(java.util.Date()), Modo.ENCOLAR)
@@ -274,14 +275,16 @@ class ServicioTiresias : AccessibilityService() {
 
 	private fun revisarOtrosExploradores() {
 		val am = getSystemService(android.view.accessibility.AccessibilityManager::class.java) ?: return
-		val hay = runCatching {
-			am.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_ALL_MASK).any { s ->
+		val otros = runCatching {
+			am.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_ALL_MASK).filter { s ->
 				s.resolveInfo?.serviceInfo?.packageName != packageName && s.flags and AccessibilityServiceInfo.FLAG_REQUEST_TOUCH_EXPLORATION_MODE != 0
-			}
-		}.getOrDefault(false)
+			}.mapNotNull { it.resolveInfo?.serviceInfo?.packageName }
+		}.getOrDefault(emptyList())
+		val hay = otros.isNotEmpty()
 		if (hay == otroExplora) return
 		otroExplora = hay
-		Registro.i(ETIQUETA, if (hay) "Otro servicio explora por toque: el doble toque lo hace Android" else "Ya no hay otro servicio que explore: el doble toque vuelve a Tiresias")
+		// (el nombre técnico de la app, para saber cuál es: TalkBack, otro lector...)
+		Registro.i(ETIQUETA, if (hay) "Otro servicio explora por toque (${otros.joinToString()}): el doble toque lo hace Android" else "Ya no hay otro servicio que explore: el doble toque vuelve a Tiresias")
 		configurar(suspendidoAhora)
 	}
 
@@ -334,6 +337,29 @@ class ServicioTiresias : AccessibilityService() {
 		info.notificationTimeout = 0
 		if (BuildConfig.PRUEBAS) android.util.Log.d("TiresiasServicio", "configurar: suspendido=$suspendido dobleToqueDeAndroid=$dobleToqueDeAndroid otroExplora=$otroExplora")
 		serviceInfo = info
+		if (!suspendido && !otroExplora && Build.VERSION.SDK_INT >= 33) soltarDeteccionDeGestos()
+	}
+
+	/**
+	 * Devuelve a Android la detección de los gestos. TalkBack (desde Android 13) los detecta él mismo con
+	 * `TouchInteractionController`, y Android lo apunta por pantalla en el filtro de entrada: mientras está puesto,
+	 * la exploración táctil solo avisa de que empieza y acaba un toque y espera a que ese servicio la pida, sin
+	 * ningún «encima de». Si TalkBack se va sin quitarlo (cerrado de golpe: al quitarlo de forma normal sí lo quita)
+	 * y Tiresias sigue activo, el filtro no se rehace y se queda puesto: con Tiresias no se podía explorar nada
+	 * (Pixel 9a con Android 17; reproducido en el emulador con TalkBack 17). Reiniciar la exploración no lo quitaba.
+	 * Apuntarse y desapuntarse enseguida lo deja en «lo detecta Android». Solo sin otro lector que explore.
+	 */
+	@androidx.annotation.RequiresApi(33)
+	private fun soltarDeteccionDeGestos() {
+		runCatching {
+			val control = getTouchInteractionController(android.view.Display.DEFAULT_DISPLAY)
+			val nada = object : android.accessibilityservice.TouchInteractionController.Callback {
+				override fun onMotionEvent(event: android.view.MotionEvent) = Unit
+				override fun onStateChanged(state: Int) = Unit
+			}
+			control.registerCallback(mainExecutor, nada)
+			control.unregisterCallback(nada)
+		}.onFailure { Registro.w(ETIQUETA, "No se pudo devolver a Android la detección de gestos", it) }
 	}
 
 	private fun cargarDiccionario(v: Voz) {

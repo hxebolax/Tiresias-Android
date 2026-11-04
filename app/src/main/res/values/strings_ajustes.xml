@@ -503,6 +503,8 @@
 		<item>avisos</item>
 	</string-array>
 	<string name="aj_callar_bloqueo">Callar con el móvil bloqueado o la pantalla apagada</string>
+	<string name="aj_callar_silencio">Respetar el modo silencio del móvil</string>
+	<string name="aj_callar_silencio_res">Con el móvil en silencio o en vibración, mientras la pantalla está apagada, o bloqueada y sin usar, no se leen solas las notificaciones ni los avisos. Mientras usas el móvil, sí. Se guardan en Notificaciones recientes</string>
 	<string name="aj_callar_bloqueo_res">Con el móvil bloqueado o la pantalla apagada, ni notificaciones ni avisos: solo lo que tú pides. Las notificaciones se guardan en Notificaciones recientes</string>
 	<string name="aj_sonido_tipo">Sonido según el tipo de control</string>
 	<string name="aj_sonido_tipo_res">El sonido del foco cambia de tono: más agudo en encabezados y enlaces, más grave en campos y texto</string>

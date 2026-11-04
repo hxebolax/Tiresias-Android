@@ -142,6 +142,7 @@
 	<string name="aviso_motivo_app">la app está callada</string>
 	<string name="aviso_motivo_no_molestar">No molestar</string>
 	<string name="aviso_motivo_llamada">en una llamada</string>
+	<string name="aviso_motivo_silencio">el móvil está en silencio y con la pantalla apagada</string>
 	<string name="aviso_motivo_bloqueo">con el móvil bloqueado o la pantalla apagada</string>
 	<string name="aviso_motivo_senior">el modo senior solo lee mensajes y llamadas</string>
 	<string name="aviso_motivo_complemento">la calló un complemento</string>

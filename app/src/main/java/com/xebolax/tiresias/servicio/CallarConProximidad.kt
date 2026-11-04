@@ -25,7 +25,11 @@ import com.xebolax.tiresias.base.Registro
 class CallarConProximidad(private val c: Context, private val ajustes: Ajustes, private val callar: () -> Unit) {
 	private val principal = Handler(Looper.getMainLooper())
 	private val sensores = c.getSystemService(SensorManager::class.java)
-	private val sensor: Sensor? = runCatching { sensores?.getDefaultSensor(Sensor.TYPE_PROXIMITY) }.getOrNull()
+	// El que no despierta al procesador, si lo hay: Android da por defecto el que sí (en un OnePlus 6), y solo
+	// hace falta con la pantalla encendida
+	private val sensor: Sensor? = runCatching {
+		sensores?.getDefaultSensor(Sensor.TYPE_PROXIMITY, false) ?: sensores?.getDefaultSensor(Sensor.TYPE_PROXIMITY)
+	}.getOrNull()
 	private val lejos = sensor?.let { minOf(it.maximumRange, CERCA_CM) } ?: 0f
 	private var escuchando = false
 	/** Lo último que dijo el sensor: null hasta la primera lectura tras registrarlo. */

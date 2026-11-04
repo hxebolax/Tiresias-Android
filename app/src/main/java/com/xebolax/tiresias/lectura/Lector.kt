@@ -225,10 +225,20 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	/** Hasta cuándo se calla lo que SystemUI dice solo al encender con el móvil bloqueado, y desde cuándo. */
 	@Volatile private var silencioSistemaHasta = 0L
 	@Volatile private var silencioSistemaDesde = 0L
+	/** Si ese silencio es para todo, no solo para SystemUI (la pantalla la ha encendido una notificación). */
+	@Volatile private var silencioDeTodo = false
 
-	/** Al encender bloqueado: unos segundos sin el foco, las ventanas ni los anuncios que SystemUI pone solo. */
-	fun callarSistemaUnMomento() {
+	/**
+	 * Al encender la pantalla bloqueada: unos segundos sin el foco, las ventanas ni los anuncios que SystemUI pone
+	 * solo (con «Solo lo elegido al encender»). Si la ha encendido una notificación que no se lee (bloqueado o en
+	 * silencio, según los ajustes), tampoco lo de la app: en los Samsung, al llegar un WhatsApp se encendía la
+	 * pantalla y se oía «WhatsApp» suelto.
+	 */
+	fun alEncenderBloqueado() {
+		val porAviso = motivoCallarSinPedir() != null && llegoNotificacion(System.currentTimeMillis() - AVISO_ENCIENDE_MS)
+		if (!porAviso && !ajustes.soloLoElegidoAlEncender) return
 		val ahora = SystemClock.uptimeMillis()
+		silencioDeTodo = porAviso
 		silencioSistemaDesde = ahora
 		silencioSistemaHasta = ahora + SILENCIO_ENCENDER_MS
 	}
@@ -255,7 +265,7 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 			silencioSistemaHasta = 0L
 			return false
 		}
-		return paquete?.toString() in paquetesDelSistema
+		return silencioDeTodo || paquete?.toString() in paquetesDelSistema
 	}
 
 	/** SystemUI y la pantalla de bloqueo, como los nombra Android (sin nombres de fabricante). */
@@ -350,6 +360,7 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 				cancelarToqueActiva()
 				focoAlTocar = foco
 				inicioToque = SystemClock.uptimeMillis()
+				toquesTotales++
 				tocoOtro = false
 				exploradoEnEsteToque = false
 				gestoEnEsteToque = false
@@ -384,7 +395,8 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 			AccessibilityEvent.TYPE_VIEW_TEXT_TRAVERSED_AT_MOVEMENT_GRANULARITY -> edicion.alRecorrer(e)
 			AccessibilityEvent.TYPE_ANNOUNCEMENT -> alAnunciar(e)
 			AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED -> alNotificar(e)
-			AccessibilityEvent.TYPE_TOUCH_EXPLORATION_GESTURE_START -> Unit
+			// Android está explorando aunque debajo del dedo no haya nada que decir (el fondo del escritorio)
+			AccessibilityEvent.TYPE_TOUCH_EXPLORATION_GESTURE_START -> exploradoEnEsteToque = true
 		}
 	}
 
@@ -620,28 +632,65 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	/** Los toques largos seguidos sin exploración ni gesto, y cuándo empezó la racha. */
 	private var toquesSinExplorar = 0
 	private var inicioRacha = 0L
+	/** Los toques del usuario y los «encima de» desde que arrancó el servicio (para el registro técnico). */
+	private var toquesTotales = 0L
+	private var exploracionesTotales = 0L
 
 	/** Lo que hace el servicio cuando la exploración táctil se ha atascado (reiniciarla). */
 	var alToqueAtascado: (() -> Unit)? = null
+
+	/** Cuándo se reinició sola la exploración por última vez, y cuántas veces se ha apuntado cómo estaba. */
+	private var ultimoReinicioAtasco = 0L
+	private var diagnosticosAtasco = 0
 
 	/**
 	 * Samsung One UI 8.5 deja a veces un dedo «pegado»: Android sigue dando los
 	 * toques al lector, pero ya no exploran (no llega ningún «encima de»). Tres
 	 * toques largos seguidos así en medio minuto: se reinicia la exploración solo,
 	 * como la acción «Reiniciar la exploración táctil».
+	 *
+	 * No cuenta donde los toques pasan directos a la app a propósito (toque directo, el teclado con toque directo,
+	 * la ayuda de otra persona, una superficie braille): ahí nunca hay exploración. Y si el reinicio no lo ha
+	 * arreglado, no se repite a cada rato: en un Pixel 9a con Android 17 se reiniciaba una y otra vez, y mientras
+	 * dura cada reinicio los toques van directos a la app. Se apunta en el registro cómo estaba la exploración.
 	 */
 	private fun vigilarToqueAtascado() {
 		val ahora = SystemClock.uptimeMillis()
 		if (exploradoEnEsteToque || gestoEnEsteToque || ahora - inicioToque < TOQUE_LARGO_MS) return
+		if (gestos.hayPasoDeToques) return
 		if (ahora - inicioRacha > RACHA_ATASCO_MS) {
 			toquesSinExplorar = 0
 			inicioRacha = ahora
 		}
 		if (++toquesSinExplorar >= TOQUES_ATASCO) {
 			toquesSinExplorar = 0
+			apuntarEstadoTactil()
+			if (ultimoReinicioAtasco > 0L && ahora - ultimoReinicioAtasco < ENTRE_REINICIOS_ATASCO_MS) {
+				Registro.w(ETIQUETA, "La exploración táctil sigue sin explorar tras reiniciarla: no se reinicia otra vez")
+				return
+			}
+			ultimoReinicioAtasco = ahora
 			Registro.w(ETIQUETA, "La exploración táctil parece atascada: se reinicia sola")
 			alToqueAtascado?.invoke()
 		}
+	}
+
+	/** Apunta en el registro técnico cómo está la exploración táctil (sin nada de la pantalla), unas pocas veces. */
+	private fun apuntarEstadoTactil() {
+		if (diagnosticosAtasco >= MAXIMO_DIAGNOSTICOS_ATASCO) return
+		diagnosticosAtasco++
+		runCatching {
+			val am = servicio.getSystemService(android.view.accessibility.AccessibilityManager::class.java)
+			val otros = am?.getEnabledAccessibilityServiceList(android.accessibilityservice.AccessibilityServiceInfo.FEEDBACK_ALL_MASK)
+				?.filter { it.resolveInfo?.serviceInfo?.packageName != servicio.packageName }
+				?.joinToString { s ->
+					val explora = s.flags and android.accessibilityservice.AccessibilityServiceInfo.FLAG_REQUEST_TOUCH_EXPLORATION_MODE != 0
+					"${s.resolveInfo?.serviceInfo?.packageName}${if (explora) " (explora)" else ""}"
+				}
+			val banderas = servicio.serviceInfo?.flags ?: 0
+			Registro.w(ETIQUETA, "Estado de la exploración táctil: activa=${am?.isTouchExplorationEnabled}, banderas=0x${Integer.toHexString(banderas)}, " +
+				"exploraciones=$exploracionesTotales, toques=$toquesTotales, toque directo=${gestos.toqueDirecto}, superficie=${gestos.superficie}, otros servicios=[${otros.orEmpty()}]")
+		}.onFailure { Registro.w(ETIQUETA, "No se pudo mirar el estado de la exploración táctil", it) }
 	}
 
 	/** Hasta cuándo un toque que empieza es de un gesto que ha mandado Tiresias. */
@@ -718,6 +767,7 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 
 	private fun alExplorar(e: AccessibilityEvent) {
 		exploradoEnEsteToque = true
+		exploracionesTotales++
 		toquesSinExplorar = 0
 		val origen = e.source ?: return
 		if (Nodos.enfocable(origen)?.let { it != focoAlTocar } != false) tocoOtro = true
@@ -1596,8 +1646,28 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	fun bloqueadoOApagado(): Boolean =
 		bloqueado() || runCatching { servicio.getSystemService(android.os.PowerManager::class.java)?.isInteractive == false }.getOrDefault(false)
 
+	/** Si el móvil está en silencio o en vibración (el modo del timbre, no No molestar). */
+	fun enSilencio(): Boolean = runCatching {
+		servicio.getSystemService(android.media.AudioManager::class.java)?.ringerMode?.let { it != android.media.AudioManager.RINGER_MODE_NORMAL }
+	}.getOrNull() == true
+
+	/**
+	 * Por qué no se dice ahora nada que no se haya pedido (notificaciones, avisos), según los ajustes: la cadena
+	 * del motivo, o null si se dice. Con el móvil en silencio y la pantalla apagada, una notificación se leía igual
+	 * (y sonaba su sonido), aunque el usuario lo hubiera silenciado para no oír nada. Por el silencio, la pantalla
+	 * de bloqueo solo calla si nadie la está usando: al teclear el PIN se oye «PIN incorrecto».
+	 */
+	fun motivoCallarSinPedir(): Int? {
+		if (!ajustes.callarBloqueo && !ajustes.callarEnSilencio) return null
+		if (!bloqueadoOApagado()) return null
+		if (ajustes.callarBloqueo) return R.string.aviso_motivo_bloqueo
+		if (!enSilencio()) return null
+		val sinUsar = pantallaApagada() || SystemClock.uptimeMillis() - momentoUsuario > BLOQUEO_SIN_USAR_MS
+		return if (sinUsar) R.string.aviso_motivo_silencio else null
+	}
+
 	private fun alAnunciar(e: AccessibilityEvent) {
-		if (ajustes.callarBloqueo && bloqueadoOApagado()) return
+		if (motivoCallarSinPedir() != null) return
 		if (calladoAlEncender(e.packageName)) return
 		if (scriptsListos) e.source?.let { if (scripts.silenciado(it)) return }
 		val texto = e.text.joinToString(" ").trim()
@@ -1616,7 +1686,8 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 			avisos.alNotificar(paquete, datos, e)
 			return
 		}
-		// Un Toast
+		// Un Toast (con la pantalla apagada o bloqueada y así elegido, tampoco)
+		if (motivoCallarSinPedir() != null) return
 		val texto = e.text.joinToString(" ").trim()
 		if (texto.isNotBlank() && filtro.pasa("toast:$paquete", texto, SystemClock.uptimeMillis())) voz.decir(Enunciado(texto, Modo.ENCOLAR, Tipo.ANUNCIO))
 	}
@@ -1703,6 +1774,10 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		private const val ESPERA_RELLENO_MS = 300L
 		/** Lo que dura el silencio de SystemUI al encender con el móvil bloqueado (Backtalk 312). */
 		private const val SILENCIO_ENCENDER_MS = 3000L
+		/** Sin tocar la pantalla de bloqueo desde hace esto, nadie la está usando (para callar por el modo silencio). */
+		private const val BLOQUEO_SIN_USAR_MS = 30_000L
+		/** Una notificación de hace menos que esto al encenderse la pantalla es la que la ha encendido. */
+		private const val AVISO_ENCIENDE_MS = 3000L
 		/** Lo que como mucho se cuenta un dedo en la pantalla para las teclas de volumen. */
 		private const val DEDO_MAXIMO_MS = 8_000L
 		/** Los eventos en espera a partir de los que se dejan los que solo avisan de un cambio. */
@@ -1728,6 +1803,9 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		private const val ESTABLE_MAXIMO_MS = 400L
 		private const val TOQUES_ATASCO = 3
 		private const val RACHA_ATASCO_MS = 30_000L
+		/** Si vuelve a atascarse antes de esto tras reiniciarla sola, no se reinicia otra vez. */
+		private const val ENTRE_REINICIOS_ATASCO_MS = 5 * 60_000L
+		private const val MAXIMO_DIAGNOSTICOS_ATASCO = 5
 
 		/** Un toque que dura menos que esto es un toque (no explorar con el dedo). */
 		private const val TOQUE_CORTO_MS = 350L

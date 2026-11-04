@@ -269,7 +269,7 @@ object Nodos {
 			if (d.varios && d.textos > 0) return
 			val h = runCatching { n.getChild(i) }.getOrNull() ?: continue
 			if (!h.isVisibleToUser) continue
-			if (accionable(h)) {
+			if (accionable(h) || esParadaSuelta(h)) {
 				d.controles++
 				continue
 			}
@@ -345,6 +345,7 @@ object Nodos {
 			if (!ocultos && !hijo.isVisibleToUser) continue
 			// Un hijo que es un control con nombre propio (un botón «Borrar» en una fila) se lee aparte
 			if (accionable(hijo) && (sinControles || esControlIndependiente(hijo))) continue
+			if (esParadaSuelta(hijo)) continue
 			val propio = when {
 				hijo.isPassword -> hijo.contentDescription
 				!hijo.contentDescription.isNullOrBlank() -> hijo.contentDescription
@@ -370,8 +371,18 @@ object Nodos {
 	private fun esControlIndependiente(n: AccessibilityNodeInfo): Boolean {
 		val clase = n.className?.toString().orEmpty()
 		return n.isCheckable || n.isEditable || clase.endsWith("Button") || clase.endsWith("ImageButton") || clase.endsWith("Switch") || clase.endsWith("CheckBox") ||
-			(clase.endsWith("ImageView") && !n.contentDescription.isNullOrBlank() && accionable(n))
+			(clase.endsWith("ImageView") && !n.contentDescription.isNullOrBlank() && accionable(n)) || esParadaSuelta(n)
 	}
+
+	/**
+	 * Algo que no se pulsa pero que la app hace enfocable con su propio nombre, dentro de un control: el micrófono
+	 * de Telegram es un marco enfocable con «Grabar mensaje de voz» dentro del contenedor de enviar, que se mantiene
+	 * pulsado. Es su propia parada, como en TalkBack (para él, enfocable ya es accionable). Si no, la parada era el
+	 * contenedor, y el doble toque mantenido caía en su centro, fuera del micrófono: abría «enviar sin sonido» y
+	 * «programar».
+	 */
+	private fun esParadaSuelta(n: AccessibilityNodeInfo): Boolean =
+		n.isFocusable && !accionable(n) && !n.isEditable && !n.contentDescription.isNullOrBlank() && n.isVisibleToUser
 
 	/**
 	 * Los nodos que reciben el foco en la ventana de [raiz], en orden de lectura
@@ -589,8 +600,9 @@ object Nodos {
 	 * por su nombre.
 	 */
 	fun esDeMantenerPulsado(n: AccessibilityNodeInfo): Boolean {
-		// (el de WhatsApp no se dice pulsable ni de pulsación larga: solo trae la acción de pulsación larga)
-		if (!accionable(n)) return false
+		// (el de WhatsApp no se dice pulsable ni de pulsación larga: solo trae la acción de pulsación larga; el de
+		// Telegram ni eso: es un marco enfocable dentro de un contenedor que se mantiene pulsado)
+		if (!accionable(n) && !(esParadaSuelta(n) && padreMantenible(n))) return false
 		// Una fila de una lista no es un botón de grabar: cambiar a este modo rehace la exploración táctil de todo
 		// Android, y al recorrer los chats de Telegram (cuyas filas acaban en «Mensaje de voz») se cortaba a cada fila
 		if (n.collectionItemInfo != null) return false
@@ -600,11 +612,22 @@ object Nodos {
 		return nombre.length <= 60 && NOMBRE_MANTENER.matches(nombre)
 	}
 
+	/** Si el padre o el abuelo de [n] se mantienen pulsados (el contenedor de enviar de Telegram). */
+	private fun padreMantenible(n: AccessibilityNodeInfo): Boolean {
+		var p = runCatching { n.parent }.getOrNull()
+		for (nivel in 0 until 2) {
+			val x = p ?: return false
+			if (x.isLongClickable || x.actionList.any { it.id == AccessibilityNodeInfo.ACTION_LONG_CLICK }) return true
+			p = runCatching { x.parent }.getOrNull()
+		}
+		return false
+	}
+
 	private val ID_MANTENER = Regex("(^|_)(voice_?note|ptt|record\\w*|mic|microphone|video_?note)(_|$)")
 	/** El nombre entero del botón: «Mensaje de voz» dentro de un texto más largo es de lo que habla ese texto, no el botón. */
 	private val NOMBRE_MANTENER = Regex(
 		// (Telegram cambia el botón entre «Mensaje de voz» y «Mensaje de vídeo» con un toque: los dos se mantienen pulsados)
-		"(?i)\\s*(((grabar|enviar|mandar|record|send)\\s+((un|una|a)\\s+)?)?(mensajes? de (voz|v[ií]deo)|notas? de voz|(voice|video) (message|note)s?)|" +
+		"(?i)\\s*(((grabar|enviar|mandar|record|send)\\s+((un|una|a)\\s+)?)?(mensajes? de (voz|v[ií]deo)|v[ií]deo ?mensajes?|notas? de voz|(voice|video) (message|note)s?)|" +
 			"grabar audio|grabar voz|grabación de voz|mantén pulsado para (grabar|enviar)( \\S+){0,4}|hold to (record|send)( \\S+){0,4}|" +
 			"record (audio|voice)|push to talk|pulsa para hablar)\\s*[.…]?\\s*",
 	)

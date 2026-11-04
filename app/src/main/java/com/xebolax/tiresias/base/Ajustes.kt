@@ -391,6 +391,8 @@ class Ajustes(contexto: Context) {
 
 	/** Con el móvil bloqueado, callar las notificaciones y los avisos (solo se dice lo que tú pides). */
 	val callarBloqueo: Boolean get() = logico(Claves.CALLAR_BLOQUEO, false)
+	/** Con el móvil en silencio o en vibración y la pantalla apagada o bloqueado, callar las notificaciones y los avisos. */
+	val callarEnSilencio: Boolean get() = logico(Claves.CALLAR_EN_SILENCIO, true)
 	/** Al encender con el móvil bloqueado, unos segundos sin lo que dice solo la pantalla de bloqueo (Backtalk 312). */
 	val soloLoElegidoAlEncender: Boolean get() = logico(Claves.SOLO_LO_ELEGIDO_AL_ENCENDER, false)
 
@@ -876,6 +878,7 @@ object Claves {
 	const val PARTES_ESTADO = "partes_estado"
 	const val AL_DESBLOQUEAR = "al_desbloquear"
 	const val CALLAR_BLOQUEO = "callar_bloqueo"
+	const val CALLAR_EN_SILENCIO = "callar_en_silencio"
 	const val PALABRAS_CALLADAS = "palabras_calladas"
 	const val BRAILLE_INTRO_ENVIA = "braille_intro_envia"
 	const val SOLO_LO_ELEGIDO_AL_ENCENDER = "solo_lo_elegido_al_encender"

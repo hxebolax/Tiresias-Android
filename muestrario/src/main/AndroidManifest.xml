@@ -33,6 +33,11 @@
 			android:exported="true"
 			android:label="Periódico" />
 		<activity
+			android:name=".ActividadTelegram"
+			android:exported="true"
+			android:label="Telegram"
+			android:windowSoftInputMode="stateHidden" />
+		<activity
 			android:name=".ActividadReenviar"
 			android:exported="true"
 			android:label="Reenviar a" />

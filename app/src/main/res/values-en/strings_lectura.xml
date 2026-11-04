@@ -132,6 +132,7 @@
 	<string name="aviso_motivo_app">the app is silenced</string>
 	<string name="aviso_motivo_no_molestar">Do Not Disturb</string>
 	<string name="aviso_motivo_llamada">during a call</string>
+	<string name="aviso_motivo_silencio">the phone is on silent with the screen off</string>
 	<string name="aviso_motivo_bloqueo">with the phone locked or the screen off</string>
 	<string name="aviso_motivo_senior">senior mode only reads messages and calls</string>
 	<string name="aviso_motivo_complemento">an add-on silenced it</string>

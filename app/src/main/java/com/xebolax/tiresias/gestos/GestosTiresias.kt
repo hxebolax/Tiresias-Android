@@ -227,7 +227,10 @@ class GestosTiresias(private val lector: Lector) {
 	}
 
 	/** La zona de paso de toques puesta ahora (para devolverla tras un toque de Tiresias). */
-	private var regionPuesta = Region()
+	@Volatile private var regionPuesta = Region()
+
+	/** Si hay alguna zona donde los toques pasan directos a la app (ahí no hay exploración táctil). */
+	val hayPasoDeToques: Boolean get() = !regionPuesta.isEmpty
 
 	@androidx.annotation.RequiresApi(30)
 	private fun fijarRegion(r: Region) {

@@ -383,6 +383,8 @@
 		<item>The time and the notification summary</item>
 	</string-array>
 	<string name="aj_callar_bloqueo">Silence while locked or with the screen off</string>
+	<string name="aj_callar_silencio">Respect the phone\'s silent mode</string>
+	<string name="aj_callar_silencio_res">With the phone on silent or vibrate, notifications and announcements are not read out while the screen is off, or locked and not in use. While you use the phone, they are. They are kept in Recent notifications</string>
 	<string name="aj_callar_bloqueo_res">While the phone is locked or the screen is off, no notifications or announcements: only what you ask for. Notifications are kept in Recent notifications</string>
 	<string name="aj_sonido_tipo">Sound according to the control type</string>
 	<string name="aj_sonido_tipo_res">The focus sound changes pitch: higher on headings and links, lower on fields and text</string>

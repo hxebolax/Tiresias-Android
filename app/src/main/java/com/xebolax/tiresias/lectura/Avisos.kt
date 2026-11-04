@@ -195,9 +195,9 @@ class Avisos(private val lector: Lector) {
 		val audio = lector.servicio.getSystemService(AudioManager::class.java)
 		val enLlamada = audio?.mode == AudioManager.MODE_IN_CALL || audio?.mode == AudioManager.MODE_IN_COMMUNICATION
 		if (enLlamada && !a.notificacionesEnLlamada) return R.string.aviso_motivo_llamada
-		// Con el móvil bloqueado, si así se ha elegido, nada que no se pida (se guardan en Notificaciones recientes)
-		if (a.callarBloqueo && lector.bloqueadoOApagado()) return R.string.aviso_motivo_bloqueo
-		return null
+		// Con el móvil bloqueado (o en silencio y con la pantalla apagada), si así se ha elegido, nada que no se pida
+		// (se guardan en Notificaciones recientes)
+		return lector.motivoCallarSinPedir()
 	}
 
 	/** El último principio de título de cada app («Familia» en «Familia: Ana») y cuándo se dijo. */
