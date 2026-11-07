@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- La reparación automática de las pantallas mal hechas (a partir de su estructura) y actualizar la lista. -->
+<resources>
+	<string name="reparar_propia">Las pantallas de Tiresias no se reparan</string>
+	<string name="reparar_nada">No he encontrado nada que reparar en esta pantalla. Si se sigue leyendo mal, copia su estructura y mándala.</string>
+	<plurals name="reparar_hecho">
+		<item quantity="one">Tiresias ha reparado esta pantalla: %1$d cambio</item>
+		<item quantity="other">Tiresias ha reparado esta pantalla: %1$d cambios</item>
+	</plurals>
+	<plurals name="reparar_hecho_detalle">
+		<item quantity="one">Reparado %1$d cambio: %2$s</item>
+		<item quantity="other">Reparados %1$d cambios: %2$s</item>
+	</plurals>
+	<plurals name="reparar_ya">
+		<item quantity="one">Esta pantalla ya está reparada (%1$d cambio). Se ve y se deshace en Ajustes, Navegación, Reparaciones automáticas.</item>
+		<item quantity="other">Esta pantalla ya está reparada (%1$d cambios). Se ven y se deshacen en Ajustes, Navegación, Reparaciones automáticas.</item>
+	</plurals>
+	<string name="reparar_tipo_agrupar">filas de una lista que se leían a trozos, ahora de una vez</string>
+	<string name="reparar_tipo_vacio">adornos sin nada que decir, quitados</string>
+	<string name="reparar_tipo_repetido">elementos que repetían lo de al lado, quitados</string>
+	<string name="reparar_tipo_encabezado">títulos de sección, ahora encabezados</string>
+	<string name="lista_actualizando">Actualizando la lista</string>
+
+	<string name="aj_reparar_solo">Reparar solas las pantallas mal hechas</string>
+	<string name="aj_reparar_solo_res">Tiresias mira cómo está hecha cada pantalla nueva de una app (sin leer sus textos) y arregla lo que se leería mal: filas a trozos, adornos vacíos, repetidos y títulos que no son encabezados. Avisa cuando repara algo.</string>
+	<string name="aj_reparaciones">Reparaciones automáticas</string>
+	<string name="aj_reparaciones_res">Lo que Tiresias ha reparado en cada app, para verlo y deshacerlo</string>
+	<string name="reparaciones_titulo">Reparaciones automáticas</string>
+	<string name="reparaciones_explica">Tiresias revisa cada pantalla nueva de una app y arregla lo que está mal hecho. Aquí está todo lo que ha arreglado; lo que deshagas no se vuelve a arreglar solo. También puedes pedir que revise la pantalla en la que estás con la acción «Revisar esta pantalla y repararla» (menú de Tiresias o un gesto).</string>
+	<string name="reparaciones_vacio">Todavía no se ha reparado nada.</string>
+	<string name="reparaciones_fila">Pantalla %1$s: %2$s (elemento %3$s)</string>
+	<string name="reparaciones_deshacer">Deshacer esta reparación</string>
+	<string name="reparaciones_deshecha">Reparación deshecha</string>
+	<string name="reparaciones_deshacer_app">Deshacer todo lo de %1$s</string>
+	<string name="reparaciones_deshacer_todo">Deshacer todas las reparaciones</string>
+	<string name="reparaciones_deshacer_todo_pregunta">¿Deshacer todas las reparaciones de todas las apps? Las pantallas se volverán a revisar al abrirlas.</string>
+	<string name="reparaciones_deshechas">Deshechas</string>
+	<string name="reparaciones_toda_app">toda la app</string>
+	<string name="estructura_asunto">Estructura de una pantalla (Tiresias %1$s, %2$s)</string>
+	<string name="estructura_compartir">Mandar la estructura de la pantalla</string>
+	<string name="asis_5_boton_transsion">Abrir el inicio automático de Phone Master</string>
+	<string name="aviso_limpiar_recientes">Tiresias se cerró al limpiar las apps recientes. Para que no vuelva a pasar: en Recientes, ponle el candado a Tiresias; y en Phone Master o en Ajustes, Gestión de aplicaciones, permite su inicio automático. Lo tienes en el asistente de Tiresias, paso 5.</string>
+	<string name="acc_texto_web">Abrir %1$s</string>
+	<string name="acc_texto_correo">Escribir a %1$s</string>
+	<string name="acc_texto_telefono">Llamar al %1$s</string>
+	<string name="acc_texto_codigo">Copiar el código %1$s</string>
+	<string name="acc_texto_copiado">Copiado el código %1$s</string>
+	<string name="aviso_cargador_conectado">Cargando. Batería al %1$d %%</string>
+	<string name="aviso_cargador_desconectado">Cargador desenchufado. Batería al %1$d %%</string>
+	<string name="aviso_bateria_llena">Batería llena</string>
+	<string name="aj_acciones_del_texto">Direcciones, teléfonos y códigos del texto</string>
+	<string name="aj_acciones_del_texto_res">El menú de acciones ofrece abrir las direcciones web, escribir a los correos, llamar a los teléfonos y copiar los códigos (el de un SMS) que haya escritos en el texto, aunque no sean enlaces. Se reconocen en el propio móvil.</string>
+	<string name="aj_voz_sin_captura">Que no se grabe la voz de Tiresias</string>
+	<string name="aj_voz_sin_captura_res">Las apps que graban o emiten la pantalla y las videollamadas que comparten el sonido no recogen la voz ni los sonidos de Tiresias. Sirve con la voz por el volumen multimedia (por el de accesibilidad ya no se recogen). Android 10 o posterior.</string>
+	<string name="aj_avisos_cargador">Avisar del cargador</string>
+	<string name="aj_avisos_cargador_res">Dice cuándo se enchufa y se desenchufa el cargador, con la batería que hay, y cuándo está llena.</string>
+</resources>

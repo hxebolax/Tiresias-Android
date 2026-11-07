@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Las voces de los motores del sistema: elegir motor, idioma y voz de cada idioma (como @Voice). -->
+<resources>
+	<string name="aj_voces_sistema">Voces de los motores del sistema</string>
+	<string name="aj_voces_sistema_res">Elige el motor, el idioma y la voz concreta de cada idioma, y escucha una muestra</string>
+	<string name="voces_titulo">Voces de los motores</string>
+	<string name="voces_motor">Motor: %1$s</string>
+	<string name="voces_idioma">Idioma: %1$s</string>
+	<string name="voces_todos_idiomas">Todos los idiomas</string>
+	<string name="voces_elegir_motor">Elige el motor de voz</string>
+	<string name="voces_elegir_idioma">Elige el idioma</string>
+	<string name="voces_cargando">Cargando las voces de %1$s…</string>
+	<string name="voces_no_arranca">El motor %1$s no ha arrancado. Ábrelo una vez desde su app o elige otro motor.</string>
+	<string name="voces_sin_lista">El motor %1$s no da la lista de sus voces. Puedes elegir la voz en sus propios ajustes.</string>
+	<string name="voces_sin_motores">No hay ningún motor de voz del sistema instalado. Instala uno (Google, Samsung, RHVoice, Vocalizer…) y vuelve aquí.</string>
+	<plurals name="voces_cuantas">
+		<item quantity="one">%1$d voz</item>
+		<item quantity="other">%1$d voces</item>
+	</plurals>
+	<string name="voces_en_uso">Voz para el idioma %1$s: %2$s</string>
+	<string name="voces_la_del_motor">la que tenga el motor</string>
+	<string name="voces_otro_motor">Tiresias habla ahora con otra voz. Si eliges una de aquí, Tiresias pasa a hablar con %1$s.</string>
+	<string name="voces_calidad_muy_alta">calidad muy alta</string>
+	<string name="voces_calidad_alta">calidad alta</string>
+	<string name="voces_calidad_normal">calidad normal</string>
+	<string name="voces_calidad_baja">calidad baja</string>
+	<string name="voces_calidad_muy_baja">calidad muy baja</string>
+	<string name="voces_sin_conexion">sin conexión</string>
+	<string name="voces_internet">necesita internet</string>
+	<string name="voces_sin_descargar">sin descargar</string>
+	<string name="voces_elegida">Elegida</string>
+	<string name="voces_usar">Usar esta voz para el idioma %1$s</string>
+	<string name="voces_escuchar">Escuchar una muestra</string>
+	<string name="voces_frase_muestra">Hola, así suena esta voz. Uno, dos, tres.</string>
+	<string name="voces_usar_del_motor">Para el idioma %1$s, usar la voz que tenga el motor</string>
+	<string name="voces_instalar">Instalar o descargar más voces</string>
+	<string name="voces_elegida_aviso">Voz para el idioma %1$s: %2$s</string>
+	<string name="voces_quitada_aviso">Para el idioma %1$s, la voz que tenga el motor</string>
+	<string name="voces_no_instalar">Este motor no tiene una pantalla para instalar voces. Búscala en su app.</string>
+	<string name="voces_del_idioma">la predeterminada del idioma</string>
+</resources>

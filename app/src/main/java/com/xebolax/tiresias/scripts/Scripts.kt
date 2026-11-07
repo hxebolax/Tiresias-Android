@@ -114,6 +114,8 @@ class Scripts(private val lector: Lector?, contexto: Context = lector!!.servicio
 		val levantar: Boolean = false,
 		val actividad: String? = null,
 		val ventana: String? = null,
+		/** No es una parada: se dice junto con la parada de antes (reparación automática de filas sueltas). */
+		val unirConAnterior: Boolean = false,
 	)
 
 	private inner class Cargado(val info: Complemento, val motor: QuickJs) {
@@ -332,24 +334,31 @@ class Scripts(private val lector: Lector?, contexto: Context = lector!!.servicio
 	fun oculto(paquete: String, id: String): Boolean = reglasDe(paquete, id).any { it.ocultar || it.ocultarDentro }
 
 	/** Si hay alguna regla cargada (para no preguntar por cada elemento si no hay ninguna). */
-	val hayReglas: Boolean get() = activos && cargados.values.toList().any { it.info.reglas.isNotEmpty() }
+	val hayReglas: Boolean get() = (activos && cargados.values.toList().any { it.info.reglas.isNotEmpty() }) || reparador?.hay == true
+
+	/**
+	 * Las reparaciones automáticas de las pantallas ([com.xebolax.tiresias.arbol.Reparador]): son reglas como las de
+	 * los complementos y se aplican igual, también con los complementos apagados.
+	 */
+	@Volatile var reparador: com.xebolax.tiresias.arbol.Reparador? = null
 
 	/** Si alguna regla mira dentro de un elemento (ocultar o silenciar todo lo de dentro). */
 	private val hayReglasDentro: Boolean get() = activos && cargados.values.toList().any { c -> c.info.reglas.any { it.ocultarDentro || it.silenciarDentro } }
 
 	/** Las reglas que tocan al elemento [id] de [paquete], de la primera a la última (manda la primera que ponga algo). */
 	private fun reglasDe(paquete: String, id: String?): List<Regla> {
-		if (!activos || id.isNullOrEmpty()) return emptyList()
+		if (id.isNullOrEmpty()) return emptyList()
+		val reparaciones = reparador?.takeIf { it.hay }?.reglas(paquete).orEmpty()
+		if (!activos && reparaciones.isEmpty()) return emptyList()
 		val corto = id.substringAfter(":id/", id)
 		val delante = lector?.actividadDelante
 		val ventana = lector?.tituloVentanaActual().orEmpty()
-		return cargados.values.toList().filter { vale(it, paquete) }.flatMap { c ->
-			c.info.reglas.filter { r ->
-				(r.id == id || r.id == corto) &&
-					(r.actividad == null || delante == null || delante.endsWith(r.actividad)) &&
-					(r.ventana == null || ventana.contains(r.ventana, ignoreCase = true))
-			}
-		}
+		fun casa(r: Regla) = (r.id == id || r.id == corto) &&
+			(r.actividad == null || delante == null || delante.endsWith(r.actividad)) &&
+			(r.ventana == null || ventana.contains(r.ventana, ignoreCase = true))
+		val deComplementos = if (!activos) emptyList() else cargados.values.toList().filter { vale(it, paquete) }.flatMap { c -> c.info.reglas.filter(::casa) }
+		// Lo que pone un complemento manda sobre lo reparado solo
+		return deComplementos + reparaciones.filter(::casa)
 	}
 
 	/** Todo lo que las reglas cambian del elemento [n], junto (para cada cosa, la primera regla que la pone), o null. */
@@ -371,6 +380,7 @@ class Scripts(private val lector: Lector?, contexto: Context = lector!!.servicio
 			silenciar = lista.any { it.silenciar },
 			silenciarDentro = lista.any { it.silenciarDentro },
 			levantar = lista.any { it.levantar },
+			unirConAnterior = lista.any { it.unirConAnterior },
 		)
 	}
 

@@ -49,5 +49,9 @@
 			android:name=".ActividadEscritorio"
 			android:exported="true"
 			android:label="Inicio" />
+		<activity
+			android:name=".ActividadMalHecha"
+			android:exported="true"
+			android:label="Mal hecha" />
 	</application>
 </manifest>

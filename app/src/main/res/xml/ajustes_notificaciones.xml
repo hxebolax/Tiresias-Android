@@ -10,6 +10,7 @@
 	<ListPreference app:key="al_desbloquear" app:title="@string/aj_al_desbloquear" app:entries="@array/al_desbloquear_nombres" app:entryValues="@array/al_desbloquear_valores" app:defaultValue="nada" app:useSimpleSummaryProvider="true" />
 	<SwitchPreferenceCompat app:key="callar_bloqueo" app:title="@string/aj_callar_bloqueo" app:summary="@string/aj_callar_bloqueo_res" app:defaultValue="false" />
 	<SwitchPreferenceCompat app:key="callar_en_silencio" app:title="@string/aj_callar_silencio" app:summary="@string/aj_callar_silencio_res" app:defaultValue="true" />
+	<SwitchPreferenceCompat app:key="avisos_cargador" app:title="@string/aj_avisos_cargador" app:summary="@string/aj_avisos_cargador_res" app:defaultValue="false" />
 	<SwitchPreferenceCompat app:key="solo_lo_elegido_al_encender" app:title="@string/aj_solo_lo_elegido" app:summary="@string/aj_solo_lo_elegido_res" app:defaultValue="false" />
 	<Preference app:key="ordenar_estado" app:title="@string/ordenar_estado_titulo" app:summary="@string/ordenar_estado_res" />
 	<SwitchPreferenceCompat app:key="al_apagar" app:title="@string/aj_al_apagar" app:summary="@string/aj_al_apagar_res" app:defaultValue="false" />

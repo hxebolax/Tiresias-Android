@@ -400,11 +400,17 @@ object Nodos {
 	}
 
 	/**
+	 * Cuántas ramas a la vez: CAN Talk lee con 8; aquí, tantas como núcleos tenga el móvil, entre 4 y 8 (en uno de
+	 * cuatro núcleos, más hilos solo se estorban).
+	 */
+	private val HILOS_ARBOL = Runtime.getRuntime().availableProcessors().coerceIn(4, 8)
+
+	/**
 	 * Hilos para leer en paralelo las ramas de un contenedor con muchos hijos (la
 	 * persiana de One UI tardaba de 300 a 600 ms por deslizamiento: Backtalk 229).
 	 * Cada pregunta a la app es una llamada entre procesos; varias a la vez van antes.
 	 */
-	private val repartidor = java.util.concurrent.Executors.newFixedThreadPool(4) { r ->
+	private val repartidor = java.util.concurrent.Executors.newFixedThreadPool(HILOS_ARBOL) { r ->
 		Thread(r, "tiresias-arbol").apply { isDaemon = true }
 	}
 	private const val HIJOS_PARA_REPARTIR = 6

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Automatic repair of badly made screens (from their structure) and refreshing the list. -->
+<resources>
+	<string name="reparar_propia">Tiresias screens are not repaired</string>
+	<string name="reparar_nada">I found nothing to repair on this screen. If it is still read badly, copy its structure and send it.</string>
+	<plurals name="reparar_hecho">
+		<item quantity="one">Tiresias repaired this screen: %1$d change</item>
+		<item quantity="other">Tiresias repaired this screen: %1$d changes</item>
+	</plurals>
+	<plurals name="reparar_hecho_detalle">
+		<item quantity="one">Repaired %1$d change: %2$s</item>
+		<item quantity="other">Repaired %1$d changes: %2$s</item>
+	</plurals>
+	<plurals name="reparar_ya">
+		<item quantity="one">This screen is already repaired (%1$d change). See and undo it in Settings, Navigation, Automatic repairs.</item>
+		<item quantity="other">This screen is already repaired (%1$d changes). See and undo them in Settings, Navigation, Automatic repairs.</item>
+	</plurals>
+	<string name="reparar_tipo_agrupar">list rows that were read in pieces, now read at once</string>
+	<string name="reparar_tipo_vacio">decorations with nothing to say, removed</string>
+	<string name="reparar_tipo_repetido">items repeating the one next to them, removed</string>
+	<string name="reparar_tipo_encabezado">section titles, now headings</string>
+	<string name="lista_actualizando">Refreshing the list</string>
+
+	<string name="aj_reparar_solo">Repair badly made screens automatically</string>
+	<string name="aj_reparar_solo_res">Tiresias looks at how each new screen of an app is made (without reading its text) and fixes what would be read badly: rows in pieces, empty decorations, repeated items and titles that are not headings. It tells you when it repairs something.</string>
+	<string name="aj_reparaciones">Automatic repairs</string>
+	<string name="aj_reparaciones_res">What Tiresias has repaired in each app, to see and undo it</string>
+	<string name="reparaciones_titulo">Automatic repairs</string>
+	<string name="reparaciones_explica">Tiresias checks each new screen of an app and fixes what is badly made. Here is everything it has fixed; what you undo is not fixed again automatically. You can also ask it to check the screen you are on with the action «Check this screen and repair it» (Tiresias menu or a gesture).</string>
+	<string name="reparaciones_vacio">Nothing has been repaired yet.</string>
+	<string name="reparaciones_fila">Screen %1$s: %2$s (item %3$s)</string>
+	<string name="reparaciones_deshacer">Undo this repair</string>
+	<string name="reparaciones_deshecha">Repair undone</string>
+	<string name="reparaciones_deshacer_app">Undo everything in %1$s</string>
+	<string name="reparaciones_deshacer_todo">Undo all repairs</string>
+	<string name="reparaciones_deshacer_todo_pregunta">Undo all repairs in all apps? Screens will be checked again when you open them.</string>
+	<string name="reparaciones_deshechas">Undone</string>
+	<string name="reparaciones_toda_app">the whole app</string>
+	<string name="estructura_asunto">Screen structure (Tiresias %1$s, %2$s)</string>
+	<string name="estructura_compartir">Send the screen structure</string>
+	<string name="asis_5_boton_transsion">Open Phone Master auto-start</string>
+	<string name="aviso_limpiar_recientes">Tiresias was closed when the recent apps were cleared. To stop it happening again: in Recents, lock Tiresias; and in Phone Master or Settings, App management, allow it to auto-start. It is in the Tiresias setup assistant, step 5.</string>
+	<string name="acc_texto_web">Open %1$s</string>
+	<string name="acc_texto_correo">Write to %1$s</string>
+	<string name="acc_texto_telefono">Call %1$s</string>
+	<string name="acc_texto_codigo">Copy the code %1$s</string>
+	<string name="acc_texto_copiado">Code %1$s copied</string>
+	<string name="aviso_cargador_conectado">Charging. Battery at %1$d %%</string>
+	<string name="aviso_cargador_desconectado">Charger unplugged. Battery at %1$d %%</string>
+	<string name="aviso_bateria_llena">Battery full</string>
+	<string name="aj_acciones_del_texto">Addresses, phone numbers and codes in text</string>
+	<string name="aj_acciones_del_texto_res">The actions menu offers to open web addresses, write to email addresses, call phone numbers and copy codes (such as one in a text message) written in the text, even when they are not links. They are recognised on the phone itself.</string>
+	<string name="aj_voz_sin_captura">Keep Tiresias speech from being recorded</string>
+	<string name="aj_voz_sin_captura_res">Apps that record or cast the screen and video calls that share sound do not pick up Tiresias speech or sounds. It matters with speech on the media volume (on the accessibility volume they are never picked up). Android 10 or later.</string>
+	<string name="aj_avisos_cargador">Announce the charger</string>
+	<string name="aj_avisos_cargador_res">Says when the charger is plugged in and unplugged, with the battery level, and when the battery is full.</string>
+</resources>

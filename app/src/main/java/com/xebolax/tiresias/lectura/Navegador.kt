@@ -58,7 +58,11 @@ class Navegador(private val lector: Lector) {
 	@Volatile var sinRehacer = false
 
 	fun invalidar(ventana: Int) {
+		// Dónde estaban las paradas antes de este cambio (las cajas son las de cuando se leyeron): para ver qué se queda fijo
+		ordenes[ventana]?.let { o -> previas = o }
 		ordenes.remove(ventana)
+		releidas.remove(ventana)
+		anexos.keys.removeAll { it.windowId == ventana }
 		pendienteRehacer?.let { lector.manejador.removeCallbacks(it) }
 		if (sinRehacer) return
 		// Se rehace en cuanto la ventana se calme, antes de que el usuario deslice
@@ -67,7 +71,10 @@ class Navegador(private val lector: Lector) {
 		lector.manejador.postDelayed(r, 80)
 	}
 
-	fun invalidarTodo() = ordenes.clear()
+	fun invalidarTodo() {
+		ordenes.clear()
+		anexos.clear()
+	}
 
 	/** El orden de lectura de la ventana de [raiz] (de la caché si está). */
 	fun orden(raiz: AccessibilityNodeInfo): List<AccessibilityNodeInfo> {
@@ -75,16 +82,51 @@ class Navegador(private val lector: Lector) {
 		ordenes[id]?.let { return it }
 		val reglas = lector.scriptsListos && lector.scripts.hayReglas
 		val inicio = android.os.SystemClock.uptimeMillis()
-		val todos = Nodos.ordenLectura(raiz, agrupa = if (reglas) { n -> lector.scripts.regla(n)?.agrupar == true } else null)
+		val agrupa: ((AccessibilityNodeInfo) -> Boolean)? = if (reglas) { n -> lector.scripts.regla(n)?.agrupar == true } else null
+		var todos = Nodos.ordenLectura(raiz, agrupa = agrupa)
+		// Xiaomi HyperOS: algunas apps (la de seguridad) dan la raíz con contenedores que Android no devuelve uno a uno, y el
+		// orden se queda en la raíz sola. Leída la ventana entera de golpe, Android los guarda y ya se pueden leer
+		// (SandFly 7b05029ac). Una vez por cambio de la ventana, y solo la activa
+		val incompleto = todos.size <= 1 && raiz.childCount > 0
+		if (incompleto && Build.VERSION.SDK_INT >= 33 && releidas.add(id)) {
+			val entera = runCatching { lector.servicio.getRootInActiveWindow(AccessibilityNodeInfo.FLAG_PREFETCH_DESCENDANTS_HYBRID) }.getOrNull()
+			if (entera != null && entera.windowId == id) {
+				todos = Nodos.ordenLectura(entera, agrupa = agrupa)
+				com.xebolax.tiresias.base.Registro.i("Navegador", "Ventana sin sus hijos: leída de nuevo entera (${todos.size} paradas)")
+			}
+		}
 		if (com.xebolax.tiresias.BuildConfig.PRUEBAS) android.util.Log.d("TiresiasOrden", "${todos.size} paradas en ${android.os.SystemClock.uptimeMillis() - inicio} ms")
 		// Lo que una regla de un complemento oculta no es una parada (ni, con «todo», lo de dentro)
-		val lista = if (reglas) todos.filter { n ->
+		val visibles = if (reglas) todos.filter { n ->
 			val r = lector.scripts.regla(n)
 			r?.ocultar != true && r?.ocultarDentro != true && !lector.scripts.ocultoDentro(n)
 		} else todos
-		ordenes[id] = lista
+		// Los trozos de una fila que se unen a la parada de antes (reparación automática): no son paradas, y se dicen con ella
+		val lista = if (!reglas) visibles else {
+			val unidas = ArrayList<AccessibilityNodeInfo>(visibles.size)
+			for (n in visibles) {
+				val anterior = unidas.lastOrNull()
+				if (anterior != null && lector.scripts.regla(n)?.unirConAnterior == true) {
+					val previos = anexos[anterior].orEmpty()
+					anexos[anterior] = previos + n
+					lector.olvidarDescrito(anterior)
+				} else unidas += n
+			}
+			unidas
+		}
+		// Si aún le faltan los hijos, no se guarda: el próximo gesto lo vuelve a intentar
+		if (!(lista.size <= 1 && raiz.childCount > 0)) ordenes[id] = lista
 		return lista
 	}
+
+	/** Las ventanas que ya se han vuelto a leer enteras desde su último cambio. */
+	private val releidas = java.util.Collections.synchronizedSet(HashSet<Int>())
+
+	/** Los trozos que se dicen con cada parada (los de una fila suelta que la reparación automática une). */
+	private val anexos = java.util.concurrent.ConcurrentHashMap<AccessibilityNodeInfo, List<AccessibilityNodeInfo>>()
+
+	/** Lo que se dice con [n] además de lo suyo (vacío casi siempre). */
+	fun anexosDe(n: AccessibilityNodeInfo): List<AccessibilityNodeInfo> = if (anexos.isEmpty()) emptyList() else anexos[n].orEmpty()
 
 	/** Prepara la frase del elemento anterior y del siguiente a [n]. */
 	fun prepararVecinos(n: AccessibilityNodeInfo) {
@@ -92,9 +134,20 @@ class Navegador(private val lector: Lector) {
 		val lista = orden(raiz)
 		val i = lista.indexOf(n)
 		if (i < 0) return
-		lista.getOrNull(i + 1)?.let { lector.preparar(it) }
-		lista.getOrNull(i - 1)?.let { lector.preparar(it) }
+		// Solo el de la dirección en la que se va (SandFly 26db61024): el otro casi nunca hace falta, y en un móvil lento
+		// preparar los dos retrasa el siguiente gesto. Al principio (sin dirección), los dos
+		when (ultimaDireccion) {
+			true -> lista.getOrNull(i + 1)?.let { lector.preparar(it) }
+			false -> lista.getOrNull(i - 1)?.let { lector.preparar(it) }
+			null -> {
+				lista.getOrNull(i + 1)?.let { lector.preparar(it) }
+				lista.getOrNull(i - 1)?.let { lector.preparar(it) }
+			}
+		}
 	}
+
+	/** Hacia dónde fue el último movimiento elemento a elemento (null: aún ninguno). */
+	@Volatile private var ultimaDireccion: Boolean? = null
 
 	// --- Elemento a elemento --------------------------------------------------------------
 
@@ -102,6 +155,7 @@ class Navegador(private val lector: Lector) {
 	fun anterior() = mover(false)
 
 	fun mover(adelante: Boolean, filtro: ((AccessibilityNodeInfo) -> Boolean)? = null, intento: Int = 0): Boolean {
+		ultimaDireccion = adelante
 		// Una vuelta al principio que aún desplaza listas no salta luego al principio cuando el usuario ya va por otro sitio
 		pararVuelta()
 		movimientos++
@@ -116,9 +170,16 @@ class Navegador(private val lector: Lector) {
 		val candidatos = if (filtro != null) lista.filter(filtro) else lista
 		if (candidatos.isEmpty()) return if (filtro != null) noHay() else borde()
 		val foco = lector.foco
+		// El usuario ha desplazado la lista o la página (con dos dedos, con «Desplazar adelante») y lo enfocado se ha
+		// quedado fuera de la vista (o se ha perdido): se sigue por lo que se ve ahora (SandFly 44d0bf809)
+		desdeLoQueSeVe(lista, foco, raiz.windowId, filtro)?.let { n ->
+			lector.enfocar(n)
+			anticipar(n, adelante, lista)
+			return true
+		}
 		// Sin foco porque la app quitó lo que lo tenía (un anuncio de una página que se rehace): se sigue desde donde estaba
 		val i = if (foco == null) lector.focoPerdido(raiz.windowId)?.let { (n, sitio) -> desdePerdido(lista, n, sitio, adelante) } ?: -1
-			else indiceFueraDeLaPantalla(lista, foco, adelante) ?: indice(lista, foco)
+			else indiceFueraDeLaPantalla(lista, foco, adelante) ?: indice(lista, foco, adelante)
 		val destino = if (filtro == null) {
 			val j = if (i < 0) (if (adelante) 0 else lista.lastIndex) else if (adelante) i + 1 else i - 1
 			lista.getOrNull(j)
@@ -312,14 +373,91 @@ class Navegador(private val lector: Lector) {
 	}
 
 	/** El índice de [foco] en [lista]; si ya no está (la lista cambió), el del más cercano por posición. */
-	private fun indice(lista: List<AccessibilityNodeInfo>, foco: AccessibilityNodeInfo?): Int {
+	private fun indice(lista: List<AccessibilityNodeInfo>, foco: AccessibilityNodeInfo?, adelante: Boolean = true): Int {
 		if (foco == null) return -1
 		val i = lista.indexOf(foco)
 		if (i >= 0) return i
 		// El foco está en otra ventana (la de debajo de un menú): se empieza por el principio
 		if (lista.firstOrNull()?.windowId?.let { it != foco.windowId } == true) return -1
+		// (el más cercano por posición: si lo enfocado se ha rehecho más abajo mientras la página carga, es él mismo; lo de
+		// lo enfocado que se queda fuera de la vista tras desplazar lo resuelve desdeLoQueSeVe)
 		return cercano(lista, foco, Nodos.limites(foco))
 	}
+
+	/** Un desplazamiento que no ha hecho Tiresias al moverse: el del usuario con dos dedos o con «Desplazar adelante». */
+	private class Desplazado(val lista: AccessibilityNodeInfo, val ventana: Int, val adelante: Boolean, val momento: Long)
+	@Volatile private var desplazado: Desplazado? = null
+
+	/** Cuándo pidió el usuario desplazar con una acción de Tiresias («Desplazar adelante», «Desplazar arriba»...). */
+	@Volatile var desplazamientoPedido = 0L
+
+	/**
+	 * Tras un desplazamiento del usuario ([desplazado]), si lo enfocado se ha quedado fuera de la vista o se ha perdido:
+	 * lo primero que se ve en lo desplazado (lo último, si se desplazó hacia atrás). Lo que queda debajo de una franja
+	 * fija arriba (unas pestañas que no se mueven) cuenta como fuera de la vista. null si no hace falta (y se olvida).
+	 */
+	private fun desdeLoQueSeVe(lista: List<AccessibilityNodeInfo>, foco: AccessibilityNodeInfo?, ventana: Int, filtro: ((AccessibilityNodeInfo) -> Boolean)?): AccessibilityNodeInfo? {
+		val d = desplazado ?: return null
+		desplazado = null
+		if (d.ventana != ventana || SystemClock.uptimeMillis() - d.momento > DESPLAZADO_VALE_MS || !Nodos.vivo(d.lista)) return null
+		val zona = Nodos.limites(d.lista)
+		if (zona.isEmpty) return null
+		// Lo enfocado sigue a la vista, o no estaba en lo que se ha desplazado: se sigue desde él, como siempre
+		if (foco != null) {
+			if (!Nodos.dentroDe(foco, d.lista)) return null
+			if (Nodos.vivo(foco) && foco.isVisibleToUser && Nodos.limites(foco).let { r -> !r.isEmpty && zona.contains(r.centerX(), r.centerY()) }) return null
+		}
+		// Una franja fija arriba (lo que sigue en el mismo sitio desde antes de desplazar y no es de la lista que se mueve)
+		val tapado = franjaFija(lista, zona)
+		val visibles = lista.indices.filter { k ->
+			val n = lista[k]
+			val r = Nodos.limites(n)
+			!r.isEmpty && zona.contains(r.centerX(), r.centerY()) && r.centerY() > tapado && (filtro == null || filtro(n))
+		}
+		// Desde el sitio de lo enfocado en el orden de lectura (SandFly): lo que la página deja fijo arriba al bajar (el
+		// título de la noticia, unas pestañas) va antes en el orden y no se toma por lo primero que se ve
+		val desde = foco?.let { lista.indexOf(it) } ?: -1
+		if (desde >= 0) {
+			val k = if (d.adelante) visibles.firstOrNull { it > desde } ?: visibles.firstOrNull()
+				else visibles.lastOrNull { it < desde } ?: visibles.lastOrNull()
+			return k?.let { lista[it] }
+		}
+		// Lo enfocado ya no está en el orden (se fue por arriba): con el orden de antes de desplazar, lo que iba antes
+		// que él (hacia delante) o después (hacia atrás) no vale, aunque ahora se vea (el título fijo repite el titular)
+		val viejo = posicionesAntes.keys.toList()
+		val fi = foco?.let { viejo.indexOf(firma(it)) } ?: -1
+		val k = if (fi < 0) null else {
+			val descartados = (if (d.adelante) viejo.take(fi) else viejo.drop(fi + 1)).map { textoDeFirma(it) }.filter { it.isNotBlank() }.toSet()
+			fun vale(i: Int) = lista[i].let { n -> (n.text ?: n.contentDescription)?.toString().orEmpty().let { t -> t.isBlank() || t !in descartados } }
+			if (d.adelante) visibles.firstOrNull(::vale) else visibles.lastOrNull(::vale)
+		} ?: if (d.adelante) visibles.firstOrNull() else visibles.lastOrNull()
+		return k?.let { lista[it] }
+	}
+
+	/** El texto (o la descripción) que va en una [firma]. */
+	private fun textoDeFirma(f: String): String {
+		val partes = f.split('|')
+		return partes.getOrNull(2)?.takeIf { it != "null" && it.isNotBlank() } ?: partes.getOrNull(3)?.takeIf { it != "null" }.orEmpty()
+	}
+
+	/** Hasta dónde llega por arriba una franja fija dentro de [zona] (unas pestañas que la página no mueve), o su borde. */
+	private fun franjaFija(lista: List<AccessibilityNodeInfo>, zona: Rect): Int {
+		val antes = posicionesAntes
+		if (antes.isEmpty()) return zona.top
+		var abajo = zona.top
+		for (n in lista) {
+			val r = Nodos.limites(n)
+			if (r.isEmpty || !zona.contains(r.centerX(), r.centerY())) continue
+			// Arriba del todo y exactamente donde estaba antes del desplazamiento: no se ha movido con lo demás
+			if (r.top <= zona.top + zona.height() / 5 && antes[firma(n)] == r) abajo = maxOf(abajo, r.bottom) else if (r.top > zona.top + zona.height() / 5) break
+		}
+		return abajo
+	}
+
+	/** Dónde estaba cada parada antes del último desplazamiento del usuario (para ver qué se queda fijo). */
+	@Volatile private var posicionesAntes: Map<String, Rect> = emptyMap()
+	/** El orden de antes del último cambio (sus nodos guardan cómo eran entonces). */
+	@Volatile private var previas: List<AccessibilityNodeInfo> = emptyList()
 
 	/**
 	 * El índice desde el que moverse cuando lo enfocado ([n], en [sitio]) ha desaparecido: el del elemento más
@@ -329,6 +467,8 @@ class Navegador(private val lector: Lector) {
 	private fun desdePerdido(lista: List<AccessibilityNodeInfo>, n: AccessibilityNodeInfo, sitio: android.graphics.Rect, adelante: Boolean): Int {
 		val i = lista.indexOf(n)
 		if (i >= 0) return i
+		// Lo que la página ha puesto en su sitio (el anuncio rehecho): desde ahí, en vez de buscar por la posición
+		lector.recolocar(n)?.let { r -> lista.indexOf(r).takeIf { it >= 0 }?.let { return it } }
 		val k = cercano(lista, n, sitio)
 		if (k < 0) return -1
 		val r = Nodos.limites(lista[k])
@@ -464,6 +604,17 @@ class Navegador(private val lector: Lector) {
 	fun alDesplazar(e: AccessibilityEvent) {
 		val ahora = SystemClock.uptimeMillis()
 		desplazadaEn = ahora
+		// Lo desplaza el usuario (lo tocaba hace poco o lo pidió con una acción), no Tiresias al moverse, ni la página sola
+		if (avance == null && ahora > anticipandoHasta && vuelta == null && !lector.continua.activa &&
+			(ahora - lector.momentoUsuario < USUARIO_DESPLAZA_MS || ahora - desplazamientoPedido < USUARIO_DESPLAZA_MS)) {
+			e.source?.let { lista ->
+				val adelante = if (Build.VERSION.SDK_INT >= 28 && (e.scrollDeltaY != 0 || e.scrollDeltaX != 0)) e.scrollDeltaY > 0 || e.scrollDeltaX > 0
+					else desplazado?.adelante ?: true
+				// Lo que se veía antes de este desplazamiento (solo el primero de una tanda), para ver qué se queda fijo
+				if (desplazado == null) posicionesAntes = previas.take(MAXIMO_PREVIAS).associate { firma(it) to Nodos.limites(it) }
+				desplazado = Desplazado(lista, e.windowId, adelante, ahora)
+			}
+		}
 		val a = avance ?: return
 		// Se deja que la lista termine de colocarse. Con un arrastre, el primer evento llega cuando los dedos
 		// apenas han empezado a moverse y lo siguiente aún no se ve: se espera a que acabe el gesto
@@ -506,7 +657,19 @@ class Navegador(private val lector: Lector) {
 		val sigueAhi = foco != null && lista.contains(foco) && a.firmaFoco != null && runCatching { foco.refresh() }.getOrDefault(false) && firma(foco) == a.firmaFoco
 		val destino = porFila ?: if (sigueAhi) {
 			val i = lista.indexOf(foco)
-			lista.getOrNull(if (a.adelante) i + 1 else i - 1)
+			val vecino = lista.getOrNull(if (a.adelante) i + 1 else i - 1)
+			// Lo enfocado es más alto que la lista (una publicación, una miniatura grande): se queda pegado al borde y
+			// lo de antes aún no asoma, así que su vecino en el orden es lo de fuera de la lista (la barra de arriba).
+			// Si la lista aún puede ir hacia ahí, se vuelve a mirar en un momento en vez de salirse (SandFly be50c5fdc)
+			val accion = if (a.adelante) AccessibilityNodeInfo.ACTION_SCROLL_FORWARD else AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD
+			val c = a.contenedor
+			if (vecino != null && c != null && !Nodos.dentroDe(vecino, c) && c.actionList.any { it.id == accion } && a.reintentos < REINTENTOS_COLOCAR) {
+				a.reintentos++
+				avance = a
+				lector.manejador.postDelayed({ if (avance === a) seguirTrasDesplazar(a) }, ESPERA_COLOCAR_MS)
+				return
+			}
+			vecino
 		} else {
 			// 3. Lo primero (o lo último) que no se veía antes; 4. si no, por la posición en la pantalla
 			val nuevos = dentro.filter { firma(it) !in a.firmasAntes }
@@ -607,12 +770,21 @@ class Navegador(private val lector: Lector) {
 		val foco = lector.foco
 		val html = htmlDe(c, nivel)
 		if (html != null && foco != null && enWeb(foco)) {
+			// Una cola: si el navegador aún no ha movido el foco por la petición de antes (gestos seguidos y rápidos),
+			// esta espera a que lo mueva; si no, saldría desde el mismo sitio y diría otra vez el mismo encabezado (SandFly)
+			val ahora = SystemClock.uptimeMillis()
+			if (ahora - htmlPedidoEn < ESPERA_HTML_MS && lector.cambiosFoco == cambiosAlPedirHtml) {
+				lector.manejador.postDelayed({ porTipo(c, adelante, nivel) }, PASO_ESPERA_HTML_MS)
+				return true
+			}
+			htmlPedidoEn = ahora
+			cambiosAlPedirHtml = lector.cambiosFoco
 			val args = Bundle().apply { putString(AccessibilityNodeInfo.ACTION_ARGUMENT_HTML_ELEMENT_STRING, html) }
 			val accion = if (adelante) AccessibilityNodeInfo.ACTION_NEXT_HTML_ELEMENT else AccessibilityNodeInfo.ACTION_PREVIOUS_HTML_ELEMENT
 			if (runCatching { foco.performAction(accion, args) }.getOrDefault(false)) return true
 		}
 		val filtro: (AccessibilityNodeInfo) -> Boolean = when (c) {
-			ControlLectura.ENCABEZADOS -> { n -> Nodos.esEncabezado(n) && (nivel == 0 || Nodos.nivelEncabezado(n) == nivel) }
+			ControlLectura.ENCABEZADOS -> { n -> (Nodos.esEncabezado(n) || (lector.scriptsListos && lector.scripts.regla(n)?.encabezado == true)) && (nivel == 0 || Nodos.nivelEncabezado(n) == nivel) }
 			// También los textos con enlaces dentro (sus enlaces se eligen después con arriba y abajo)
 			ControlLectura.ENLACES -> { n -> Nodos.rol(n) == Rol.ENLACE || Nodos.tieneEnlacesEnTexto(n) }
 			ControlLectura.CONTROLES -> { n -> Nodos.accionable(n) }
@@ -627,6 +799,10 @@ class Navegador(private val lector: Lector) {
 		}
 		return mover(adelante, filtro)
 	}
+
+	/** Cuándo se pidió al navegador el siguiente elemento de un tipo, y cuántos cambios de foco había entonces. */
+	@Volatile private var htmlPedidoEn = 0L
+	@Volatile private var cambiosAlPedirHtml = -1
 
 	private fun esPrimeroDe(n: AccessibilityNodeInfo, coleccion: AccessibilityNodeInfo): Boolean = runCatching { coleccion.getChild(0) == n }.getOrDefault(false)
 
@@ -765,7 +941,7 @@ class Navegador(private val lector: Lector) {
 	}
 
 	/** Una lista que se desplaza de lado (un carrusel, unas pestañas): ahí arriba y abajo no la mueven. */
-	private fun esHorizontal(n: AccessibilityNodeInfo): Boolean {
+	fun esHorizontal(n: AccessibilityNodeInfo): Boolean {
 		val nombre = n.className?.toString()?.substringAfterLast('.').orEmpty()
 		if (nombre == "HorizontalScrollView" || nombre == "ViewPager" || nombre == "ViewPager2") return true
 		val info = n.collectionInfo ?: return false
@@ -817,6 +993,15 @@ class Navegador(private val lector: Lector) {
 	}
 
 	companion object {
+		/** Lo que se espera como mucho a que el navegador mueva el foco por la petición de antes, y cada cuánto se mira. */
+		private const val ESPERA_HTML_MS = 600L
+		/** Las paradas de antes de desplazar que se recuerdan (su firma y dónde estaban). */
+		private const val MAXIMO_PREVIAS = 400
+		private const val PASO_ESPERA_HTML_MS = 50L
+		/** Lo que vale un desplazamiento del usuario para seguir por lo que se ve. */
+		private const val DESPLAZADO_VALE_MS = 120_000L
+		/** Lo que puede pasar desde que el usuario toca (o pide desplazar) hasta que llega el desplazamiento (con inercia). */
+		private const val USUARIO_DESPLAZA_MS = 4_000L
 		const val ESPERA_DESPLAZAR_MS = 150L
 		/** Lo que se espera, y cuántas veces, a que una lista desplazada termine de colocar sus filas. */
 		private const val ESPERA_COLOCAR_MS = 150L

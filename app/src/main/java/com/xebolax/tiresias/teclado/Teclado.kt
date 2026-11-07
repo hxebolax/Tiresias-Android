@@ -32,6 +32,21 @@ class Teclado(private val lector: Lector, private val alAccion: (Accion) -> Unit
 	private var volumenArriba = 0L
 	private var volumenAbajo = 0L
 	private var ambasDisparada = false
+
+	/**
+	 * Al apagarse la pantalla se olvidan las teclas pulsadas (SandFly): el botón de encendido puede llegar a la vez que
+	 * una de volumen y su «soltar» no llegar nunca, y entonces la otra tecla de volumen haría «las dos a la vez».
+	 */
+	fun olvidarPulsadas() {
+		// (en el hilo principal, como las teclas y el aviso de pantalla apagada)
+		volumenArriba = 0L
+		volumenAbajo = 0L
+		ambasDisparada = false
+		volumenPendiente?.let { lector.manejador.removeCallbacks(it) }
+		volumenPendiente = null
+		pulsadas.clear()
+		tiresiasPulsada = false
+	}
 	private val pulsadas = HashSet<Int>()
 
 	/** Si la tecla [codigo] corta la voz, según el ajuste (siempre, solo escribiendo en un campo o nunca). */

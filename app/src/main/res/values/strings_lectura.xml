@@ -273,8 +273,8 @@
 	<string name="restablecido">Tiresias restablecido como recién instalado</string>
 	<string name="mantener_grabar_repetir">Toca dos veces y mantén el dedo para grabar: graba mientras no lo levantes</string>
 	<plurals name="estructura_copiada">
-		<item quantity="one">Copiada la estructura de la pantalla: %1$d elemento, sin ningún texto. Pégala en tu mensaje</item>
-		<item quantity="other">Copiada la estructura de la pantalla: %1$d elementos, sin ningún texto. Pégala en tu mensaje</item>
+		<item quantity="one">Copiada la estructura de la pantalla: %1$d elemento, sin ningún texto. Pégala en tu mensaje o mándala desde Compartir</item>
+		<item quantity="other">Copiada la estructura de la pantalla: %1$d elementos, sin ningún texto. Pégala en tu mensaje o mándala desde Compartir</item>
 	</plurals>
 	<string name="modo_edicion_entrar">Modo edición. %1$s</string>
 	<string name="modo_edicion_pista">Arriba y abajo, letras; ida y vuelta a los lados, palabras; izquierda y derecha, frases; arriba y luego a la derecha, seleccionar; izquierda y luego abajo, salir.</string>

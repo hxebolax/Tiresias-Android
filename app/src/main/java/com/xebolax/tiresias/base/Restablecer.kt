@@ -21,7 +21,7 @@ object Restablecer {
 				if (!f.name.endsWith(".xml")) continue
 				contexto.getSharedPreferences(f.name.removeSuffix(".xml"), Context.MODE_PRIVATE).edit().clear().commit()
 			}
-			for (nombre in listOf("complementos", "diccionarios", "etiquetas", "perfiles", "personas")) {
+			for (nombre in listOf("complementos", "diccionarios", "etiquetas", "etiquetas.json", "perfiles", "perfiles.json", "personas", "reparaciones.json")) {
 				File(contexto.filesDir, nombre).takeIf { it.exists() }?.deleteRecursively()
 			}
 		}

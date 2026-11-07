@@ -96,7 +96,11 @@
 <h3>Place markers</h3>
 <p>“Set a place marker on this screen” remembers the focused item, and “Go to the marker on this screen” moves focus to it when you come back, even if you have gone somewhere else. There is one marker per screen of each app and it is kept even if you close the app. If the item is no longer there, Tiresias says so.</p>
 <h3>Continuous reading</h3>
-<p>“Read from top” and “Read from here” read the screen continuously, turning the page in lists. Any touch stops it.</p>
+<p>“Read from top” and “Read from here” read the screen continuously, turning the page in lists. Any touch stops it. When it reaches the last visible item of a list or a web page, it scrolls it and goes on with the new content, instead of jumping to what is below (an app’s button bar, the Chrome toolbar).</p>
+<h3>After scrolling with two fingers</h3>
+<p>If you scroll a page or a list with two fingers (or with “Scroll forward”) and the focused item is left out of view, the next swipe goes on with the first item in view after what you were reading (the last one, if you scrolled back). What the page keeps fixed at the top, such as a news title or tabs, does not count. If a focused advert is rebuilt, it goes on from its place.</p>
+<h3>Refresh the list</h3>
+<p>The action “Refresh the list (pull it down)” scrolls the list to the top and pulls it down with two fingers, as you do to reload mail, social apps or YouTube. Put it on a gesture or use it from the Tiresias menu.</p>
 <h3>More ways to move around</h3>
 <ul>
 	<li><strong>Direct actions</strong>: go to the next or previous heading, link, control, button, field, checkbox, list, table, landmark or image without changing the reading control (give them a gesture in Gestures).</li>
@@ -139,6 +143,8 @@
 	<li><strong>Whatever the system uses</strong>: the speech engine chosen in the phone settings (Text-to-speech). If you change it there, Tiresias changes too. The list says which one it is now.</li>
 	<li><strong>Any system voice</strong> (Google, Samsung, RHVoice...); the one chosen on the phone is marked. If a system voice fails three times in a row, Tiresias uses the built-in voice for a minute and then tries again.</li>
 </ul>
+<h3>The voices of each engine</h3>
+<p>In Settings, Speech, “System engine voices”: choose the engine (Google, Samsung, RHVoice, Vocalizer...), the language and the exact voice for that language, and hear a sample of each one before choosing it. Each voice says its language and country, its quality, whether it works offline or needs internet, and whether it is not downloaded yet (downloaded ones come first). One voice is kept per language: the Spanish one for Spanish, the English one for English, and Tiresias uses each when the language changes. “Use the engine’s own voice” removes it. If you choose a voice of an engine Tiresias is not using, Tiresias switches to that engine (with the rate and pitch it had there). “Install or download more voices” opens the engine’s download screen.</p>
 <p>If a voice fails, Tiresias carries on with eSpeak NG; if it is Eloquence that fails, it also tells you once, instead of switching voices without warning.</p>
 <p>Tiresias is also a system speech engine: other apps (book readers, browsers) can use its voices in the system Settings, Text-to-speech output.</p>
 <h3>Rate, pitch and volume of each voice</h3>
@@ -147,6 +153,8 @@
 <p>In Settings, Voice, <strong>“Voices of the Voice control”</strong> chooses which voices the Voice reading control and the “Change voice” action go through (by default, all of them).</p>
 <p>You can also set switching voice by language, lowering music while it speaks and staying quiet while another app records. With “Switch language to match the text” on, <strong>“Detect the language of long texts”</strong> (Settings, Voice; on by default) works out whether a long text the app does not mark is in Spanish or English and reads it with the voice for that language.</p>
 <p><strong>“Voice for notifications”</strong> (Settings, Voice) makes notifications be read with another of the included voices (eSpeak NG, SVOX Pico or Eloquence), at that voice's own rate; by default, “The usual voice”.</p>
+<h3>Keep speech from being recorded</h3>
+<p>Settings, Speech, “Keep Tiresias speech from being recorded”: apps that record or cast the screen and video calls that share sound do not pick up Tiresias speech or sounds. It matters with speech on the media volume: on the accessibility volume they are never picked up. Android 10 or later.</p>
 <h3>Voice on the media or the accessibility volume</h3>
 <p>By default, the Tiresias voice and sounds use the accessibility volume. “Speech on the media volume” (Settings, Voice) moves them to the music volume, and the “Voice on the media or the accessibility volume” action switches from one to the other at once, even in the middle of a call; it can be put on a gesture or a key. It helps, for example, on Samsung phones with One UI 8, where raising the volume during a Bluetooth call silences the screen reader.</p>
 <h3>Speech on demand</h3>
@@ -188,6 +196,10 @@
 	<li>Up then left: the edit menu. Three fingers left and right: undo and redo.</li>
 </ul>
 <p>The other gestures do the usual (double tap, Back, copy and paste with three fingers, the Tiresias menu). In an empty field it says “Empty” and never takes the hint for text.</p>
+<h3>Addresses, phone numbers and codes in text</h3>
+<p>Besides links, the actions menu offers what is written in the text even when it is not a link: “Open” a web address, “Write to” an email address, “Call” a phone number and “Copy the code” (such as a verification code in a text message; four to eight digits on their own). The phone’s own text classifier recognises them, without sending anything out; if the phone has none, only addresses and emails are offered. Turn it off in Settings, Navigation, “Addresses, phone numbers and codes in text”.</p>
+<h3>Text editor</h3>
+<p>The action “Text editor” (in the editing menu or on a gesture) opens the field’s text on a whole screen, in a large multi-line field, and turns on edit mode by itself, so you can move by characters, words, lines and paragraphs and select with the usual gestures; with the keyboard you type at the cursor. At the top are “Save to the field” and “Editor menu” with everything else: undo and redo (many steps; what you type in one go is one step), where the cursor is (line, column and character), select all or the line, copy, cut, delete the selection, paste, find and find next, replace, go to a line, to the start or the end, count characters, words, lines and paragraphs, type the date and time, delete the line, copy all and switch to edit by parts. Undo, redo, where the cursor is, the menu and save are also in the field’s actions menu, and the Tiresias undo and redo gestures work in it. With text that cannot be edited (a message), you work on a copy you can copy. As in edit by parts, the text only stays in memory and it does not open in passwords.</p>
 <h3>Edit by parts</h3>
 <p>Like Jieshuo's granular editing mode: the “Edit by parts” action (in the edit menu or on a gesture) opens a screen with the field's text split into a list of characters, words, sentences, lines, paragraphs or the whole text (“Split by”; the last one is remembered). Each part is a row: tap it to edit it, delete it, insert another one before or after, mark it (and mark from the nearest marked one to it) or copy it. Below: copy, cut or delete the marked ones, find (from the last match), replace in the whole text (matching case or not, and it says how many times it changed), undo, redo, copy the whole text and “Save in the field”. If the app changed the field meanwhile, it asks before overwriting it; if there are unsaved changes when you leave, it asks what to do with them (Back too). With text that cannot be edited (a message) it is reading by parts: you read it and copy it. It does not open in a password field. The text is only in memory while the screen is open.</p>
 <h3>Copying</h3>
@@ -204,6 +216,8 @@
 <p>Notifications are read out with a sound (you can mute those of an app, and choose whether they are read in Do Not Disturb or during a call). The latest ones stay in the notification history; from Recent notifications, each one can be opened, replied to, its buttons used or copied.</p>
 <p>The <strong>notification summary</strong> says in one sentence what has arrived in the last 12 hours, by app and by sender, without going through the history: “You have 5 notifications from the last 12 hours. WhatsApp: 3, from Ana and Juan. Gmail: 2”. Ongoing and progress notifications are not counted. It is also in the senior mode menu, and in Settings, Notifications and screen, “When the screen turns on, say” and “When unlocking, say” can say “The time and the notification summary”.</p>
 <p>Notifications can be read with another voice, at its own rate: Settings, Voice, “Voice for notifications” (section 6).</p>
+<h3>The charger</h3>
+<p>Settings, Notifications, “Announce the charger”: says when the charger is plugged in and unplugged, with the battery level, and when the battery is full. It stays quiet with the phone locked or silent, like notifications.</p>
 <h3>Calls</h3>
 <p>When a call is ringing, “Play or pause” (two-finger double tap) answers it and, during the call, hangs up. Outside calls, it plays or pauses music; “Next track” and “Previous track” (or the Music reading control) change track in the app that is playing.</p>
 <ul>
@@ -297,6 +311,8 @@
 
 <section aria-labelledby="apps">
 <h2 id="apps">13. Labels, profiles and add-ons</h2>
+<h3>Automatic repair of badly made screens</h3>
+<p>Tiresias looks at how each new screen of an app is made (the same structure you copy to report a problem, without reading any text) and fixes by itself what would be read badly: list rows read in pieces (the title in one stop and the date in another) are read at once; section titles the app does not mark as headings become headings (and you can move between them with the Headings control); and decorations with nothing to say and items repeating the one next to them are removed. It never touches a button, a field or a checkbox. When it repairs something it says “Tiresias repaired this screen”. You can turn it off in Settings, Navigation, “Repair badly made screens automatically”, and “Automatic repairs” lists everything repaired in each app so you can undo it (what you undo is not repaired again automatically). The action “Check this screen and repair it” (in the Tiresias menu) does it with the screen in front and says what changed. Only the technical names of apps, their screens and their items are kept, never any text.</p>
 <h3>Labels</h3>
 <p>If a button has no name, give it one with “Label the item” (actions menu): Tiresias will use it from then on. In the Labels screen you can change or delete them, export those of an app and import them.</p>
 <p>A screen of an app can also be given its own name: “Name this screen” asks for the name, and from then on Tiresias says it when the screen opens instead of its title. Leaving it empty removes it.</p>
@@ -410,11 +426,11 @@
 <h2 id="problemas">19. Common problems</h2>
 <dl>
 	<dt>An app is read badly and I want to report it</dt>
-	<dd>Put the action “Copy the screen structure, without text” on a gesture or in the Tiresias menu and use it with that screen in front: it copies how the screen is built (control types, their properties and where the focus is) without any text from the screen. Paste it into your message together with what happens.</dd>
+	<dd>Put the action “Copy the screen structure, without text” on a gesture or in the Tiresias menu and use it with that screen in front: it copies how the screen is built (control types, their properties and where the focus is) without any text from the screen. Paste it into your message together with what happens. “Share” also opens: choose Telegram, WhatsApp or email and it is sent as a file, with nothing to paste. It is in the Tiresias menu by default.</dd>
 	<dt>Recording a voice note in Telegram opens another menu</dt>
 	<dd>Put the focus on the record button, lift your finger and then double-tap and hold: it records until you lift it. If you do it right after reaching the button, Tiresias asks you to repeat it.</dd>
 	<dt>Tiresias goes quiet or turns itself off</dt>
-	<dd>Turn off battery optimization for Tiresias (the assistant does it). Some manufacturers close background apps: look in your phone's battery settings for “unrestricted” for Tiresias. For the brands that do it most, the assistant says what to change, and Home warns you if the system has closed Tiresias without you turning it off. If Tiresias vibrates instead of speaking, Android has not given the audio to the voice.</dd>
+	<dd>Turn off battery optimization for Tiresias (the assistant does it). Some manufacturers close background apps: look in your phone's battery settings for “unrestricted” for Tiresias. For the brands that do it most, the assistant says what to change, and Home warns you if the system has closed Tiresias without you turning it off. On Infinix, Tecno and itel phones, clearing the recent apps closes Tiresias and then the phone does not let it start again: it stays enabled in Settings but does not speak. Lock it in Recents and allow it to auto-start in Phone Master (the assistant opens it, step 5); when you turn it on again, Tiresias reminds you. If Tiresias vibrates instead of speaking, Android has not given the audio to the voice.</dd>
 	<dt>During a Bluetooth call, speech goes silent when I raise the volume</dt>
 	<dd>It happens on Samsung phones with One UI 8, which silence the accessibility volume. Use the “Voice on the media or the accessibility volume” action (put it on a gesture or a key): it switches volume at once, even during the call.</dd>
 	<dt>Eloquence is far too fast</dt>

@@ -125,6 +125,9 @@ enum class Accion {
 	ESTRUCTURA_PANTALLA,
 	// 1.0.9 (Jieshuo): el modo edición (recorrer el texto por todas sus unidades con un dedo y seleccionar) y la edición por partes
 	MODO_EDICION, EDICION_POR_PARTES,
+	// 1.0.11: el editor de texto (el campo en una pantalla entera, con el modo edición), actualizar la lista
+	// (tirar de ella hacia abajo, SandFly) y revisar la pantalla para repararla sola (a partir de su estructura)
+	EDITOR_TEXTO, ACTUALIZAR_LISTA, REVISAR_PANTALLA,
 }
 
 /** Lo que puede decir el gesto de estado («Hora, fecha y batería»), en el orden que se elija. */
@@ -139,7 +142,7 @@ object Listas {
 		Accion.DESCRIBIR_IA, Accion.PANTALLA_IA, Accion.PREGUNTAR_IA, Accion.ACTUAR_IA, Accion.DESCRIPCION_CONTINUA, Accion.TRADUCIR_IA,
 		Accion.OCR_ELEMENTO, Accion.OCR_PANTALLA, Accion.PANTALLA_VIRTUAL,
 		Accion.HISTORIAL_HABLA, Accion.HISTORIAL_NOTIFICACIONES, Accion.LEER_PORTAPAPELES, Accion.HISTORIAL_PORTAPAPELES,
-		Accion.COPIAR_LISTA, Accion.ESTADO_SISTEMA,
+		Accion.COPIAR_LISTA, Accion.ESTADO_SISTEMA, Accion.REVISAR_PANTALLA, Accion.ESTRUCTURA_PANTALLA,
 		Accion.CORTINA, Accion.ALTERNAR_VOZ, Accion.PERFIL_SIGUIENTE, Accion.AYUDA_ENTRADA, Accion.AYUDA_OTRA_PERSONA, Accion.TUTORIAL,
 		Accion.PRIMERO_BRAILLE, Accion.ORDENES_COMPLEMENTOS, Accion.PEDIR_AYUDA, Accion.AYUDA_REMOTA, Accion.AJUSTES_TIRESIAS, Accion.SUSPENDER,
 	)

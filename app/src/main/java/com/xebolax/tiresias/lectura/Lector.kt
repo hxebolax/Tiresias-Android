@@ -188,7 +188,10 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 
 	fun recargarAjustes() = manejador.post {
 		// Otro volumen para la voz (Ajustes, Voz, o la acción): se aplica al momento
-		if (com.xebolax.tiresias.voz.PistaAudio.multimedia != ajustes.vozMultimedia) cambiarCanal(ajustes.vozMultimedia)
+		if (com.xebolax.tiresias.voz.PistaAudio.multimedia != ajustes.vozMultimedia || com.xebolax.tiresias.voz.PistaAudio.sinCaptura != ajustes.vozSinCaptura) {
+			com.xebolax.tiresias.voz.PistaAudio.sinCaptura = ajustes.vozSinCaptura
+			cambiarCanal(ajustes.vozMultimedia)
+		}
 		// Las etiquetas y los perfiles pueden haber cambiado en sus pantallas (son otra copia en memoria)
 		etiquetas.olvidar()
 		perfiles.olvidar()
@@ -204,7 +207,10 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 
 	/** La voz y los sonidos por el volumen multimedia ([multimedia]) o por el de accesibilidad. */
 	fun cambiarCanal(multimedia: Boolean) {
+		val cambia = com.xebolax.tiresias.voz.PistaAudio.multimedia != multimedia
 		com.xebolax.tiresias.voz.PistaAudio.multimedia = multimedia
+		// El volumen de accesibilidad solo se pide con la voz por él
+		if (cambia) (servicio as? com.xebolax.tiresias.servicio.ServicioTiresias)?.reconfigurar()
 		voz.aplicarCanal()
 		Thread({ sonidos.cambiarCanal() }, "tiresias-sonidos").start()
 	}
@@ -345,7 +351,10 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 
 	private fun procesar(e: AccessibilityEvent) {
 		when (e.eventType) {
-			AccessibilityEvent.TYPE_VIEW_HOVER_ENTER -> alExplorar(e)
+			AccessibilityEvent.TYPE_VIEW_HOVER_ENTER -> {
+				pasoTardio(e)
+				alExplorar(e)
+			}
 			AccessibilityEvent.TYPE_TOUCH_INTERACTION_START -> {
 				toquePropio = esGestoPropio(e)
 				if (toquePropio) return
@@ -735,9 +744,28 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		}
 		if (inicio == null) return mandar()
 		// Android pone la zona de paso un momento después de pedirla: el gesto va detrás
-		gestoPropioHasta += ESPERA_PASO_TOQUE_MS
-		manejador.postDelayed({ mandar() }, ESPERA_PASO_TOQUE_MS)
+		val espera = esperaPasoToque
+		gestoPropioHasta += espera
+		pasoPedidoHasta = gestoPropioHasta
+		manejador.postDelayed({ mandar() }, espera)
 		return true
+	}
+
+	/**
+	 * Lo que se espera a que Android ponga la zona de paso antes de mandar un gesto de un dedo. Empieza corto, y si un
+	 * gesto de Tiresias acaba explorando (la zona llegó tarde: un móvil lento), pasa a lo que espera SandFly.
+	 */
+	@Volatile private var esperaPasoToque = ESPERA_PASO_TOQUE_MS
+	/** Hasta cuándo un gesto de un dedo de Tiresias debería pasar por su zona de paso. */
+	@Volatile private var pasoPedidoHasta = 0L
+
+	/** Un gesto de Tiresias que debía ir directo a la app ha acabado explorando: la zona de paso llegó tarde. */
+	private fun pasoTardio(e: AccessibilityEvent) {
+		if (esperaPasoToque >= ESPERA_PASO_LENTA_MS) return
+		val t = e.eventTime.takeIf { it > 0 } ?: SystemClock.uptimeMillis()
+		if (t > pasoPedidoHasta || !esGestoPropio(e)) return
+		esperaPasoToque = ESPERA_PASO_LENTA_MS
+		Registro.i(ETIQUETA, "La zona de paso de toques llegó tarde: los gestos de Tiresias esperan ahora $ESPERA_PASO_LENTA_MS ms")
 	}
 
 	/** Dónde empieza [trazo]. */
@@ -986,6 +1014,50 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	/** Para las pruebas instrumentadas: el foco se pierde, como cuando desaparece lo que lo tenía. */
 	fun perderFocoPruebas() = manejador.post { perderFoco() }
 
+	/** Las reparaciones automáticas de las pantallas mal hechas (a partir de su estructura). */
+	val reparador by lazy { com.xebolax.tiresias.arbol.Reparador(servicio) }
+
+	private fun programarRevision(paquete: String?, actividad: String?) {
+		if (!ajustes.repararSolo || paquete == null || actividad.isNullOrEmpty() || paquete == servicio.packageName) return
+		if (reparador.revisada(paquete, actividad)) return
+		manejador.postDelayed({
+			// Ya en otra pantalla: se revisará esa
+			if (actividadDelante == actividad && raiz()?.packageName?.toString() == paquete) revisarPantalla(manual = false)
+		}, ESPERA_REVISAR_MS)
+	}
+
+	/**
+	 * Revisa la pantalla de delante y repara lo que esté mal hecho ([com.xebolax.tiresias.arbol.Reparador]). Sola
+	 * ([manual] false) avisa solo si ha reparado algo; pedida, dice qué ha hecho, lo que ya estaba o que no hay nada.
+	 */
+	fun revisarPantalla(manual: Boolean): Boolean {
+		val raiz = raiz() ?: return false
+		val paquete = raiz.packageName?.toString() ?: return false
+		if (paquete == servicio.packageName) {
+			if (manual) decir(R.string.reparar_propia)
+			return false
+		}
+		val actividad = actividadDelante.orEmpty()
+		if (!manual && reparador.revisada(paquete, actividad)) return false
+		val paradas = navegador.orden(raiz).toHashSet()
+		// La huella de lo que dice cada parada: su texto y su descripción (solo para ver si dos dicen lo mismo; no se guarda)
+		val nuevas = reparador.revisar(raiz, paquete, actividad, paradas) { n ->
+			val t = "${n.text ?: ""}|${n.contentDescription ?: ""}"
+			if (t == "|") 0 else t.hashCode()
+		}
+		if (nuevas.isNotEmpty()) {
+			navegador.invalidarTodo()
+			descritos.clear()
+			val que = nuevas.map { textos.getString(com.xebolax.tiresias.arbol.Reparador.nombre(it.tipo)) }.distinct().joinToString(", ")
+			if (manual) decir(textos.resources.getQuantityString(R.plurals.reparar_hecho_detalle, nuevas.size, nuevas.size, que))
+			else decir(textos.resources.getQuantityString(R.plurals.reparar_hecho, nuevas.size, nuevas.size), Modo.ENCOLAR)
+		} else if (manual) {
+			val ya = reparador.todas().count { it.paquete == paquete && (it.actividad == actividad || it.actividad.isEmpty()) }
+			if (ya > 0) decir(textos.resources.getQuantityString(R.plurals.reparar_ya, ya, ya)) else decir(R.string.reparar_nada)
+		}
+		return true
+	}
+
 	/** Lo que se dice de [n] con la verbosidad actual (sin decirlo). */
 	fun textoElemento(n: AccessibilityNodeInfo): String = compositor.describir(elemento(n), verbosidad)
 
@@ -1139,9 +1211,22 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	}
 
 	/** El [Elemento] de [n], de la caché si está. */
-	fun elemento(n: AccessibilityNodeInfo): Elemento = descritos[n] ?: conRegla(n, describir.elemento(n)).also {
+	fun elemento(n: AccessibilityNodeInfo): Elemento = descritos[n] ?: conAnexos(n, conRegla(n, describir.elemento(n))).also {
 		if (descritos.size > 200) descritos.clear()
 		descritos[n] = it
+	}
+
+	/** Se vuelve a describir [n] la próxima vez (lo que se dice con él ha cambiado). */
+	fun olvidarDescrito(n: AccessibilityNodeInfo) {
+		descritos.remove(n)
+	}
+
+	/** [e] con lo que se dice con él: los trozos de su fila que la reparación automática le ha unido. */
+	private fun conAnexos(n: AccessibilityNodeInfo, e: Elemento): Elemento {
+		val anexos = navegador.anexosDe(n)
+		if (anexos.isEmpty()) return e
+		val mas = anexos.mapNotNull { a -> describir.elemento(a).nombre.takeIf { it.isNotBlank() } }
+		return if (mas.isEmpty()) e else e.copy(nombre = (listOf(e.nombre) + mas).filter { it.isNotBlank() }.joinToString(", "))
 	}
 
 	/** Prepara (sin decirlo) el elemento de [n]. */
@@ -1233,6 +1318,8 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		if (tipos and AccessibilityEvent.CONTENT_CHANGE_TYPE_PANE_DISAPPEARED != 0) return
 		// Los complementos que quieren saber de las pantallas nuevas (tiresias.alVentana)
 		if (scriptsListos && e.packageName != null && e.packageName != servicio.packageName) scripts.alVentana(e.packageName.toString(), actividadDelante.orEmpty(), titulo)
+		// Revisar la pantalla nueva para repararla sola, cuando se haya quedado quieta
+		programarRevision(e.packageName?.toString(), actividadDelante)
 		// El mismo título otra vez (o con el texto de un botón detrás: «Título» y luego «Título Cancelar»), no se repite
 		val repetido = tituloVentana.isNotEmpty() && (titulo == tituloVentana ||
 			(e.windowId == idVentanaTitulo && (titulo.startsWith(tituloVentana) || tituloVentana.startsWith(titulo))))
@@ -1335,6 +1422,11 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		val anterior = foco
 		foco = n
 		perdido = null
+		// Su sitio entre sus hermanos, después de decirlo (para recolocar el foco si la página lo rehace)
+		if (anterior != n) {
+			lugarFoco = null
+			manejador.post { if (foco === n) lugarFoco = lugarDe(n) }
+		}
 		// Una contraseña o un dato sensible: lo que se diga de él no va al registro de la variante de pruebas
 		voz.focoSensible = Nodos.sensible(n)
 		if (anterior != n) cambiosFoco++
@@ -1343,8 +1435,40 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	}
 
 	/** Lo último que tuvo el foco antes de perderlo, dónde estaba y cuándo: para seguir desde ahí al deslizar. */
-	private class Perdido(val nodo: AccessibilityNodeInfo, val sitio: android.graphics.Rect, val momento: Long)
+	private class Perdido(val nodo: AccessibilityNodeInfo, val sitio: android.graphics.Rect, val momento: Long, val lugar: Lugar? = null)
 	@Volatile private var perdido: Perdido? = null
+
+	/**
+	 * Dónde estaba un elemento entre sus hermanos y lo que dicen los de al lado (SandFly cdf2d897a). Se apunta al
+	 * enfocarlo, porque cuando la página lo quita ya no se puede preguntar. Solo en memoria.
+	 */
+	class Lugar(val padre: AccessibilityNodeInfo, val indice: Int, val antes: String?, val despues: String?)
+	@Volatile private var lugarFoco: Lugar? = null
+
+	private fun lugarDe(n: AccessibilityNodeInfo): Lugar? = runCatching {
+		val padre = n.parent ?: return null
+		val cuantos = padre.childCount
+		if (cuantos > MAXIMO_HERMANOS) return null
+		val i = (0 until cuantos).firstOrNull { padre.getChild(it) == n } ?: return null
+		Lugar(padre, i, textoCorto(runCatching { padre.getChild(i - 1) }.getOrNull()), textoCorto(runCatching { padre.getChild(i + 1) }.getOrNull()))
+	}.getOrNull()
+
+	private fun textoCorto(n: AccessibilityNodeInfo?): String? = n?.let { (it.text ?: it.contentDescription)?.toString()?.take(60) }
+
+	/**
+	 * Lo que ocupa ahora el sitio de [n], que la página ha quitado y puesto otro en su lugar (un anuncio que se
+	 * rehace): el hermano en la misma posición, si al menos uno de los de al lado sigue diciendo lo mismo. null si no.
+	 */
+	fun recolocar(n: AccessibilityNodeInfo): AccessibilityNodeInfo? {
+		val lugar = perdido?.takeIf { it.nodo == n }?.lugar ?: return null
+		if (!Nodos.vivo(lugar.padre) || lugar.padre.childCount > MAXIMO_HERMANOS) return null
+		val hijo = runCatching { lugar.padre.getChild(lugar.indice) }.getOrNull() ?: return null
+		val antes = textoCorto(runCatching { lugar.padre.getChild(lugar.indice - 1) }.getOrNull())
+		val despues = textoCorto(runCatching { lugar.padre.getChild(lugar.indice + 1) }.getOrNull())
+		val mismoSitio = (lugar.antes != null && antes == lugar.antes) || (lugar.despues != null && despues == lugar.despues)
+		if (!mismoSitio) return null
+		return Nodos.enfocable(hijo) ?: hijo
+	}
 
 	/**
 	 * Lo que tenía el foco hasta que la app lo quitó hace poco en la ventana [ventana] (un anuncio o un marco de una
@@ -1358,7 +1482,7 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	private fun perderFoco() {
 		foco?.let {
 			apuntarAnterior(it)
-			perdido = Perdido(it, Nodos.limites(it), SystemClock.uptimeMillis())
+			perdido = Perdido(it, Nodos.limites(it), SystemClock.uptimeMillis(), lugarFoco)
 		}
 		foco = null
 		voz.focoSensible = false
@@ -1601,11 +1725,16 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		if (n != foco || ahora - momentoDicho <= 300 || !(n.rangeInfo != null || Nodos.rol(n) == com.xebolax.tiresias.nucleo.Rol.DESPLEGABLE)) return
 		// Los ecualizadores mandan «seleccionado» cada 10 ms: como mucho uno por segundo (Backtalk) y el plazo de la app
 		if (ahora - ultimaSeleccion < 1000 || !pasaPlazo(n, ahora)) return
+		// El mismo valor otra vez (el ecualizador de Samsung repite su «seleccionado» sin cambiar nada: CAN Talk): no se repite
+		val clave = "${n.hashCode()}|${n.rangeInfo?.current}|${n.text}|${if (Build.VERSION.SDK_INT >= 30) n.stateDescription else ""}"
+		if (clave == ultimaClaveSeleccion) return
+		ultimaClaveSeleccion = clave
 		ultimaSeleccion = ahora
 		decirCambioEstado(n)
 	}
 
 	private var ultimaSeleccion = 0L
+	private var ultimaClaveSeleccion = ""
 
 	/** Foco de entrada (teclado físico, Tab): se lee si no hay foco de accesibilidad que lo diga. */
 	private fun alEnfocarEntrada(e: AccessibilityEvent) {
@@ -1785,6 +1914,10 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		/** La mitad del lado de la zona de paso que se abre para un toque de Tiresias, y lo que se espera a que Android la ponga. */
 		private const val PASO_TOQUE_PX = 24
 		private const val ESPERA_PASO_TOQUE_MS = 60L
+		/** Los hermanos que se miran como mucho para apuntar el sitio del foco (una lista larga no merece la pena). */
+		private const val MAXIMO_HERMANOS = 50
+		/** La espera de SandFly, para los móviles en los que la zona de paso tarda más. */
+		private const val ESPERA_PASO_LENTA_MS = 350L
 		/** Lo que puede tardar Android en empezar el toque de un gesto propio. */
 		private const val MARGEN_GESTO_PROPIO_MS = 500L
 		/** Lo que puede tardar un teclado en volver a salir para no anunciarlo otra vez. */
@@ -1820,6 +1953,8 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		private const val PAQUETE_SISTEMA = "com.android.systemui"
 		/** Lo que se espera a su notificación antes de anunciar una ventana del sistema que nadie ha pedido. */
 		private const val ESPERA_EMERGENTE_MS = 500L
+		/** Lo que se espera a que una pantalla nueva se quede quieta antes de revisarla para repararla. */
+		private const val ESPERA_REVISAR_MS = 1_500L
 		private val BOTONES_BARRA = setOf("back", "home", "recent_apps", "menu", "ime_switcher", "accessibility_button")
 		private const val ETIQUETA = "Lector"
 	}

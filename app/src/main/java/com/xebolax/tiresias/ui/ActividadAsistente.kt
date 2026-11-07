@@ -30,7 +30,7 @@ class ActividadAsistente : ActividadBase() {
 			Paso(R.string.asis_2_titulo, if (Build.VERSION.SDK_INT >= 33) R.string.asis_2 else R.string.asis_2_antiguo, R.string.asis_2_boton) { abrirInfoApp() },
 			Paso(R.string.asis_3_titulo, R.string.asis_3, R.string.asis_3_boton) { abrir(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)) },
 			Paso(R.string.asis_4_titulo, R.string.asis_4, R.string.asis_4_boton) { bateria() },
-			Paso(R.string.asis_5_titulo, textoFabricante(), R.string.asis_5_boton) { abrirInfoApp() },
+			Paso(R.string.asis_5_titulo, textoFabricante(), if (esTranssion()) R.string.asis_5_boton_transsion else R.string.asis_5_boton) { if (esTranssion()) abrirAutoinicioTranssion() else abrirInfoApp() },
 			Paso(R.string.asis_6_titulo, R.string.asis_6, R.string.asis_6_boton) { startActivity(Intent(this, ActividadTutorial::class.java)) },
 		)
 	}
@@ -81,6 +81,17 @@ class ActividadAsistente : ActividadBase() {
 			es("infinix", "tecno", "itel") -> R.string.asis_5_transsion
 			else -> R.string.asis_5
 		}
+	}
+
+	private fun esTranssion(): Boolean = (Build.MANUFACTURER + " " + Build.BRAND).lowercase().let { m -> listOf("infinix", "tecno", "itel").any { it in m } }
+
+	/**
+	 * El inicio automático de Phone Master (Infinix, Tecno, itel): es lo que mira XOS antes de dejar que Android
+	 * vuelva a arrancar Tiresias. Si no existe en ese modelo (cambia con las versiones), la información de Tiresias.
+	 */
+	private fun abrirAutoinicioTranssion() {
+		val autoinicio = Intent().setComponent(android.content.ComponentName("com.transsion.phonemaster", "com.cyin.himgr.autostart.AutoStartActivity"))
+		runCatching { startActivity(autoinicio) }.onFailure { abrirInfoApp() }
 	}
 
 	private fun abrir(i: Intent) {

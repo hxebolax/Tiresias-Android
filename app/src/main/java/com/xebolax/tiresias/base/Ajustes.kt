@@ -393,6 +393,14 @@ class Ajustes(contexto: Context) {
 	val callarBloqueo: Boolean get() = logico(Claves.CALLAR_BLOQUEO, false)
 	/** Con el móvil en silencio o en vibración y la pantalla apagada o bloqueado, callar las notificaciones y los avisos. */
 	val callarEnSilencio: Boolean get() = logico(Claves.CALLAR_EN_SILENCIO, true)
+	/** Revisar cada pantalla nueva de una app y repararla sola si está mal hecha ([com.xebolax.tiresias.arbol.Reparador]). */
+	val repararSolo: Boolean get() = logico(Claves.REPARAR_SOLO, true)
+	/** Ofrecer en el menú de acciones las direcciones, correos, teléfonos y códigos escritos en el texto. */
+	val accionesDelTexto: Boolean get() = logico(Claves.ACCIONES_DEL_TEXTO, true)
+	/** Que las apps que graban o emiten la pantalla no puedan recoger la voz ni los sonidos de Tiresias. */
+	val vozSinCaptura: Boolean get() = logico(Claves.VOZ_SIN_CAPTURA, false)
+	/** Decir al enchufar y desenchufar el cargador y cuando la batería está llena. */
+	val avisosCargador: Boolean get() = logico(Claves.AVISOS_CARGADOR, false)
 	/** Al encender con el móvil bloqueado, unos segundos sin lo que dice solo la pantalla de bloqueo (Backtalk 312). */
 	val soloLoElegidoAlEncender: Boolean get() = logico(Claves.SOLO_LO_ELEGIDO_AL_ENCENDER, false)
 
@@ -879,6 +887,10 @@ object Claves {
 	const val AL_DESBLOQUEAR = "al_desbloquear"
 	const val CALLAR_BLOQUEO = "callar_bloqueo"
 	const val CALLAR_EN_SILENCIO = "callar_en_silencio"
+	const val REPARAR_SOLO = "reparar_solo"
+	const val ACCIONES_DEL_TEXTO = "acciones_del_texto"
+	const val VOZ_SIN_CAPTURA = "voz_sin_captura"
+	const val AVISOS_CARGADOR = "avisos_cargador"
 	const val PALABRAS_CALLADAS = "palabras_calladas"
 	const val BRAILLE_INTRO_ENVIA = "braille_intro_envia"
 	const val SOLO_LO_ELEGIDO_AL_ENCENDER = "solo_lo_elegido_al_encender"

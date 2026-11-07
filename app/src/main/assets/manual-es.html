@@ -96,7 +96,11 @@
 <h3>Marcas de posición</h3>
 <p>«Poner una marca de posición en esta pantalla» recuerda el elemento enfocado, y «Ir a la marca de esta pantalla» lleva el foco a él cuando vuelvas, aunque hayas ido a otra parte. Hay una marca por pantalla de cada app y se guarda aunque cierres la app. Si el elemento ya no está, Tiresias lo dice.</p>
 <h3>Lectura continua</h3>
-<p>«Leer desde arriba» y «Leer desde aquí» leen la pantalla seguida, pasando de página en las listas. Cualquier toque la para.</p>
+<p>«Leer desde arriba» y «Leer desde aquí» leen la pantalla seguida, pasando de página en las listas. Cualquier toque la para. Al llegar a lo último que se ve de una lista o de una página web, la desplaza y sigue por lo nuevo, sin irse a lo que hay debajo (la barra de botones de una app, la barra de herramientas de Chrome).</p>
+<h3>Después de desplazar con dos dedos</h3>
+<p>Si desplazas una página o una lista con dos dedos (o con «Desplazar adelante») y lo enfocado se queda fuera de la vista, el siguiente deslizamiento sigue por lo primero que se ve después de lo que estabas leyendo (lo último, si desplazaste hacia atrás). Lo que la página deja fijo arriba al bajar, como el título de una noticia o unas pestañas, no cuenta. Si un anuncio enfocado se rehace, se sigue desde su sitio.</p>
+<h3>Actualizar la lista</h3>
+<p>La acción «Actualizar la lista (tirar de ella hacia abajo)» sube la lista hasta arriba y tira de ella hacia abajo con dos dedos, como se hace para recargar el correo, las redes o YouTube. Ponla en un gesto o úsala desde el menú de Tiresias.</p>
 <h3>Más formas de moverse</h3>
 <ul>
 	<li><strong>Acciones directas</strong>: ir al siguiente o al anterior encabezado, enlace, control, botón, campo, casilla, lista, tabla, región o imagen sin cambiar el control de lectura (asígnales un gesto en Gestos).</li>
@@ -139,6 +143,8 @@
 	<li><strong>La que use el sistema</strong>: la del motor de voz elegido en los ajustes del móvil (Texto a voz). Si lo cambias allí, Tiresias lo cambia también. En la lista se dice cuál es ahora.</li>
 	<li><strong>Cualquier voz del sistema</strong> (la de Google, Samsung, RHVoice...); la elegida en el móvil sale marcada. Si una voz del sistema falla tres veces seguidas, Tiresias usa la integrada un minuto y vuelve a probar.</li>
 </ul>
+<h3>Las voces de cada motor</h3>
+<p>En Ajustes, Voz, «Voces de los motores del sistema»: eliges el motor (Google, Samsung, RHVoice, Vocalizer...), el idioma y la voz concreta de ese idioma, y puedes escuchar una muestra de cada una antes de elegirla. Cada voz dice su idioma y país, su calidad, si funciona sin conexión o necesita internet, y si aún no está descargada (las descargadas van primero). Se guarda una voz por idioma: la del español para el español, la del inglés para el inglés, y Tiresias usa la de cada uno al cambiar de idioma. «Usar la voz que tenga el motor» la quita. Si eliges una voz de un motor que no es el que usa Tiresias, Tiresias pasa a ese motor (con la velocidad y el tono que tuviera en él). «Instalar o descargar más voces» abre la pantalla de descargas del motor.</p>
 <p>Si una voz falla, Tiresias sigue con eSpeak NG; si es Eloquence la que falla, además te lo dice una vez, en vez de cambiar de voz sin avisar.</p>
 <p>Tiresias es además un motor de voz del sistema: otras apps (lectores de libros, navegadores) pueden usar sus voces en Ajustes del sistema, Salida de texto a voz.</p>
 <h3>Velocidad, tono y volumen de cada voz</h3>
@@ -147,6 +153,8 @@
 <p>En Ajustes, Voz, <strong>«Voces del control Voz»</strong> elige por qué voces pasan el control de lectura Voz y la acción «Cambiar de voz» (de fábrica, todas).</p>
 <p>También se ajustan el cambio de voz por idioma, bajar el volumen de la música mientras habla y callarse mientras otra app graba. Con «Cambiar de idioma según el texto» puesto, <strong>«Detectar el idioma de los textos largos»</strong> (Ajustes, Voz; de fábrica, sí) deduce si un texto largo que la app no marca está en español o en inglés y lo lee con la voz de ese idioma.</p>
 <p><strong>«Voz de las notificaciones»</strong> (Ajustes, Voz) hace que las notificaciones se lean con otra de las voces incluidas (eSpeak NG, SVOX Pico o Eloquence), con la velocidad que tenga esa voz; de fábrica, «La misma voz de siempre».</p>
+<h3>Que no se grabe la voz</h3>
+<p>Ajustes, Voz, «Que no se grabe la voz de Tiresias»: las apps que graban o emiten la pantalla y las videollamadas que comparten el sonido no recogen la voz ni los sonidos de Tiresias. Importa con la voz por el volumen multimedia: por el de accesibilidad nunca se recogen. Android 10 o posterior.</p>
 <h3>Voz por el volumen multimedia o el de accesibilidad</h3>
 <p>De fábrica, la voz y los sonidos de Tiresias van por el volumen de accesibilidad. «Voz por el volumen multimedia» (Ajustes, Voz) los pasa al de la música, y la acción «Voz por el volumen multimedia o el de accesibilidad» cambia de uno a otro al momento, también en mitad de una llamada; se puede poner en un gesto o en una tecla. Sirve, por ejemplo, en los Samsung con One UI 8, donde subir el volumen en una llamada por Bluetooth calla al lector.</p>
 <h3>Voz a demanda</h3>
@@ -190,6 +198,10 @@
 <h3>Edición por partes</h3>
 <p>Como el modo de edición granular de Jieshuo: la acción «Edición por partes» (en el menú de edición o en un gesto) abre una pantalla con el texto del campo partido en una lista de caracteres, palabras, frases, líneas, párrafos o entero («Partir por»; se recuerda la última). Cada parte es una fila: al tocarla, la editas, la borras, insertas otra antes o después, la marcas (y marcas desde la marcada más cercana hasta ella) o la copias. Debajo: copiar, cortar o borrar las marcadas, buscar (desde la última encontrada), reemplazar en todo el texto (distinguiendo o no las mayúsculas, y dice cuántas veces lo ha cambiado), deshacer, rehacer, copiar todo el texto y «Guardar en el campo». Si la app ha cambiado el campo mientras tanto, pregunta antes de taparlo; si al salir hay cambios sin guardar, pregunta qué hacer con ellos (también con Atrás). Con un texto que no se edita (un mensaje) es la lectura por partes: se lee y se copia. No se abre en un campo de contraseña. El texto solo está en la memoria mientras la pantalla está abierta.</p>
 <p>Con el teclado en pantalla, explora hasta la tecla y levanta el dedo para escribirla (o toca dos veces, según los ajustes del sistema).</p>
+<h3>Direcciones, teléfonos y códigos del texto</h3>
+<p>En el menú de acciones, además de los enlaces, sale lo que hay escrito en el texto aunque no sea un enlace: «Abrir» una dirección web, «Escribir a» un correo, «Llamar al» teléfono y «Copiar el código» (el de un SMS de verificación; cuatro a ocho cifras sueltas). Lo reconoce el clasificador de texto del propio móvil, sin mandar nada fuera; si el móvil no lo tiene, solo se ofrecen las direcciones y los correos. Se quita en Ajustes, Navegación, «Direcciones, teléfonos y códigos del texto».</p>
+<h3>Editor de texto</h3>
+<p>La acción «Editor de texto» (en el menú de edición o en un gesto) abre el texto del campo en una pantalla entera, en un campo grande de varias líneas, y pone solo el modo edición, para recorrerlo por letras, palabras, líneas y párrafos y seleccionar con los gestos de siempre; con el teclado escribes donde está el cursor. Arriba están «Guardar en el campo» y «Menú del editor», con todo lo demás: deshacer y rehacer (de muchos pasos; lo escrito de seguido es un paso), dónde está el cursor (línea, columna y carácter), seleccionar todo o la línea, copiar, cortar, borrar lo seleccionado, pegar, buscar y buscar el siguiente, reemplazar, ir a una línea, al principio o al final, contar caracteres, palabras, líneas y párrafos, escribir la fecha y la hora, borrar la línea, copiar todo y pasar a la edición por partes. Deshacer, rehacer, dónde está el cursor, el menú y guardar están también en el menú de acciones del campo, y los gestos de deshacer y rehacer de Tiresias funcionan en él. Con un texto que no se edita (un mensaje), se trabaja con una copia que puedes copiar. Como en la edición por partes, el texto solo está en la memoria y no se abre en contraseñas.</p>
 <h3>Copiar</h3>
 <ul>
 	<li><strong>Lo copiado por Tiresias</strong>: los últimos 20 textos que ha copiado Tiresias, para copiarlos otra vez, pegarlos en el campo u oírlos enteros. Solo están en la memoria del móvil y se olvidan al apagar la pantalla. «Añadir lo último dicho a lo copiado» suma la última frase a lo que ya había.</li>
@@ -204,6 +216,8 @@
 <p>Las notificaciones se leen solas con un sonido (puedes silenciar las de una app, y decidir si se leen en No molestar o durante una llamada). Las últimas quedan en el historial de notificaciones; desde Notificaciones recientes, cada una se abre, se responde, usa sus botones o se copia.</p>
 <p>El <strong>resumen de los avisos</strong> dice en una frase lo que ha llegado en las últimas 12 horas, por app y por quién lo manda, sin recorrer el historial: «Tienes 5 avisos de las últimas 12 horas. WhatsApp: 3, de Ana y Juan. Gmail: 2». No cuenta las notificaciones fijas ni las de progreso. Está también en el menú del modo senior, y en Ajustes, Notificaciones y pantalla, «Al encender la pantalla, decir» y «Al desbloquear, decir» pueden decir «La hora y el resumen de los avisos».</p>
 <p>Las notificaciones se pueden leer con otra voz, con su propia velocidad: Ajustes, Voz, «Voz de las notificaciones» (sección 6).</p>
+<h3>El cargador</h3>
+<p>Ajustes, Notificaciones, «Avisar del cargador»: dice cuándo se enchufa y se desenchufa el cargador, con la batería que hay, y cuándo la batería está llena. Se calla con el móvil bloqueado o en silencio, como las notificaciones.</p>
 <h3>Llamadas</h3>
 <p>Cuando suena una llamada, «Reproducir o pausar» (doble toque con dos dedos) la descuelga y, durante la llamada, la cuelga. Fuera de las llamadas, reproduce o pausa la música; «Canción siguiente» y «Canción anterior» (o el control de lectura Música) pasan de canción en la app que suena.</p>
 <ul>
@@ -299,6 +313,8 @@
 <h2 id="apps">13. Etiquetas, perfiles y complementos</h2>
 <h3>Etiquetas</h3>
 <p>Si un botón no tiene nombre, ponle uno con «Etiquetar el elemento» (menú de acciones): Tiresias lo dirá así a partir de entonces. En la pantalla Etiquetas se cambian o se borran, y se pueden exportar (las de una app) e importar.</p>
+<h3>Reparación automática de las pantallas mal hechas</h3>
+<p>Tiresias mira cómo está hecha cada pantalla nueva de una app (la misma estructura que se copia para contar un fallo, sin leer ningún texto) y arregla solo lo que se leería mal: las filas de una lista que se leen a trozos (el título en una parada y la fecha en otra) pasan a leerse de una vez; los títulos de sección que la app no marca como encabezados pasan a serlo (y se puede ir de uno a otro con el control Encabezados); y se quitan los adornos que no dicen nada y los elementos que repiten lo de al lado. Nunca toca un botón, un campo ni una casilla. Cuando repara algo, dice «Tiresias ha reparado esta pantalla». Se puede quitar en Ajustes, Navegación, «Reparar solas las pantallas mal hechas», y en «Reparaciones automáticas» está todo lo reparado en cada app para deshacerlo (lo que deshaces no se vuelve a reparar solo). La acción «Revisar esta pantalla y repararla» (en el menú de Tiresias) lo hace con la pantalla de delante y dice qué ha cambiado. Se guardan solo los nombres técnicos de las apps, de sus pantallas y de sus elementos, nunca un texto.</p>
 <p>A una pantalla de una app también se le puede poner nombre propio: «Poner nombre a esta pantalla» pide el nombre, y desde entonces Tiresias lo dice al abrirla en vez de su título. Dejarlo vacío lo quita.</p>
 <h3>Perfiles</h3>
 <p>Un perfil cambia la verbosidad, la velocidad o la puntuación al entrar en una app (por ejemplo, más rápido en el correo y toda la puntuación en un editor de código). Si el perfil pone otra voz con otra velocidad, al aplicarlo la voz de antes guarda la suya: la velocidad del perfil no estropea la de la otra voz.</p>
@@ -410,11 +426,11 @@
 <h2 id="problemas">19. Problemas frecuentes</h2>
 <dl>
 	<dt>Una app se lee mal y quiero contarlo</dt>
-	<dd>Pon la acción «Copiar la estructura de la pantalla, sin textos» en un gesto o en el menú de Tiresias y úsala con esa pantalla delante: copia cómo está hecha (los tipos de control, sus propiedades y dónde está el foco) sin ningún texto de la pantalla. Pégala en tu mensaje junto con lo que pasa.</dd>
+	<dd>Pon la acción «Copiar la estructura de la pantalla, sin textos» en un gesto o en el menú de Tiresias y úsala con esa pantalla delante: copia cómo está hecha (los tipos de control, sus propiedades y dónde está el foco) sin ningún texto de la pantalla. Pégala en tu mensaje junto con lo que pasa. Además se abre «Compartir»: elige Telegram, WhatsApp o el correo y se manda en un archivo, sin tener que pegar nada. Viene en el menú de Tiresias de fábrica.</dd>
 	<dt>Al grabar una nota de voz con Telegram se abre otro menú</dt>
 	<dd>Pon el foco en el botón de grabar, levanta el dedo y luego toca dos veces y mantén: graba mientras no lo levantes. Si lo haces nada más llegar al botón, Tiresias te pide que lo repitas.</dd>
 	<dt>Tiresias se calla o se desactiva solo</dt>
-	<dd>Quita el ahorro de batería a Tiresias (el asistente lo hace). Algunos fabricantes cierran las apps en segundo plano: busca en los ajustes de batería de tu móvil «sin restricciones» para Tiresias. En las marcas que más lo hacen, el asistente dice qué tocar, e Inicio avisa si el sistema ha cerrado Tiresias sin que lo apagaras. Si Tiresias vibra en vez de hablar, es que Android no ha dado el audio a la voz.</dd>
+	<dd>Quita el ahorro de batería a Tiresias (el asistente lo hace). Algunos fabricantes cierran las apps en segundo plano: busca en los ajustes de batería de tu móvil «sin restricciones» para Tiresias. En las marcas que más lo hacen, el asistente dice qué tocar, e Inicio avisa si el sistema ha cerrado Tiresias sin que lo apagaras. En los Infinix, Tecno e itel, limpiar las apps recientes cierra Tiresias y luego el móvil no deja que vuelva a arrancar: sigue activado en Ajustes pero no habla. Ponle el candado en Recientes y permite su inicio automático en Phone Master (el asistente lo abre, paso 5); al volver a activarlo, Tiresias te lo recuerda. Si Tiresias vibra en vez de hablar, es que Android no ha dado el audio a la voz.</dd>
 	<dt>En una llamada por Bluetooth, la voz se calla al subir el volumen</dt>
 	<dd>Pasa en los Samsung con One UI 8, que callan el volumen de accesibilidad. Usa la acción «Voz por el volumen multimedia o el de accesibilidad» (ponla en un gesto o en una tecla): cambia de volumen al momento, también en la llamada.</dd>
 	<dt>Eloquence va rapidísima</dt>

@@ -146,6 +146,9 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		Accion.ESTRUCTURA_PANTALLA -> copiarEstructura()
 		Accion.MODO_EDICION -> lector.modoEdicion.alternar()
 		Accion.EDICION_POR_PARTES -> edicionPorPartes()
+		Accion.EDITOR_TEXTO -> editorTexto()
+		Accion.REVISAR_PANTALLA -> lector.revisarPantalla(manual = true)
+		Accion.ACTUALIZAR_LISTA -> actualizarLista()
 		Accion.AYUDA_OTRA_PERSONA -> lector.gestos.alternarAyuda()
 		Accion.PANTALLA_VIRTUAL -> lector.vision.pantallaVirtual()
 		Accion.INICIO_SEGURO -> inicioSeguro()
@@ -333,6 +336,10 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 	}
 
 	private fun desplazar(vararg acciones: Int): Boolean {
+		// Lo desplaza el usuario: el siguiente deslizamiento sigue por lo que se vea (si lo enfocado se queda fuera)
+		nav.desplazamientoPedido = android.os.SystemClock.uptimeMillis()
+		if (acciones.firstOrNull() == android.R.id.accessibilityActionScrollLeft) return desplazarDeLado(derecha = false)
+		if (acciones.firstOrNull() == android.R.id.accessibilityActionScrollRight) return desplazarDeLado(derecha = true)
 		val f = lector.foco
 		val raiz = lector.raiz() ?: return false
 		// La lista más cercana que pueda ir hacia ahí (si la lista mide lo que su contenido, el contenedor que la envuelve)
@@ -350,6 +357,77 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		if (lector.ajustes.arrastreRespaldo && !Nodos.seDesplazaPorAccesibilidad(lista) && nav.arrastrar(lista, adelante, horizontal)) return true
 		lector.sonidos.tocar(Sonido.BORDE)
 		return false
+	}
+
+	/**
+	 * Desplazar a la izquierda o a la derecha: solo lo que se desplaza de lado (un paginador, un carrusel, unas
+	 * pestañas, lo que da la acción de desplazar o de pasar página a un lado). Antes valía cualquier lista que
+	 * fuera adelante o atrás, y en un paginador esa es la lista vertical de la página: bajaba la lista en vez de
+	 * pasar de página (SandFly 31346e980).
+	 */
+	private fun desplazarDeLado(derecha: Boolean): Boolean {
+		val propia = if (derecha) android.R.id.accessibilityActionScrollRight else android.R.id.accessibilityActionScrollLeft
+		val pagina = if (Build.VERSION.SDK_INT >= 29) (if (derecha) android.R.id.accessibilityActionPageRight else android.R.id.accessibilityActionPageLeft) else -1
+		val generica = if (derecha) AccessibilityNodeInfo.ACTION_SCROLL_FORWARD else AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD
+		fun acciones(p: AccessibilityNodeInfo): List<Int> = buildList {
+			val ids = p.actionList.map { it.id }
+			if (propia in ids) add(propia)
+			if (pagina != -1 && pagina in ids) add(pagina)
+			if (generica in ids && nav.esHorizontal(p)) add(generica)
+		}
+		var p: AccessibilityNodeInfo? = lector.foco
+		var nivel = 0
+		var lista: AccessibilityNodeInfo? = null
+		while (p != null && nivel < 20) {
+			if (acciones(p).isNotEmpty()) {
+				lista = p
+				break
+			}
+			p = runCatching { p!!.parent }.getOrNull()
+			nivel++
+		}
+		if (lista == null) lista = lector.raiz()?.let { r -> Nodos.desplazables(r).firstOrNull { acciones(it).isNotEmpty() } }
+		if (lista != null) {
+			for (a in acciones(lista)) if (runCatching { lista.performAction(a) }.getOrDefault(false)) return true
+		}
+		lector.sonidos.tocar(Sonido.BORDE)
+		return false
+	}
+
+	/**
+	 * Actualizar la lista (SandFly e70c163fe): la sube hasta arriba y tira de ella hacia abajo con dos dedos, como
+	 * se hace para recargar en tantas apps (correo, redes, YouTube). Si la app no recarga así, no pasa nada más.
+	 */
+	private fun actualizarLista(): Boolean {
+		val raiz = lector.raiz() ?: return false
+		val atras = AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD
+		val lista = lector.foco?.let { Nodos.desplazableHacia(it, atras) ?: Nodos.desplazable(it) }
+			?: Nodos.primerDesplazable(raiz, atras) ?: Nodos.primerDesplazable(raiz) ?: run {
+			lector.sonidos.tocar(Sonido.BORDE)
+			return false
+		}
+		val tocado = lector.toques
+		var paginas = 0
+		lector.sonidos.tocar(Sonido.CARGANDO)
+		val paso = object : Runnable {
+			override fun run() {
+				if (lector.toques != tocado) return
+				runCatching { lista.refresh() }
+				if (paginas < MAXIMO_PAGINAS_ACTUALIZAR && lista.actionList.any { it.id == atras } && runCatching { lista.performAction(atras) }.getOrDefault(false)) {
+					paginas++
+					lector.manejador.postDelayed(this, 120)
+					return
+				}
+				// Arriba del todo: tirar hacia abajo (los dedos bajan) y soltar
+				nav.cuandoQuieta(atras) {
+					if (lector.toques != tocado) return@cuandoQuieta
+					if (nav.arrastrar(lista, adelante = false, sonido = false)) lector.decir(R.string.lista_actualizando, modo = Modo.ENCOLAR)
+					else lector.sonidos.tocar(Sonido.BORDE)
+				}
+			}
+		}
+		lector.manejador.post(paso)
+		return true
 	}
 
 	@Volatile private var extremo: Runnable? = null
@@ -537,6 +615,20 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		val lista = ArrayList<Pair<String, () -> Boolean>>()
 		// Los enlaces de dentro del texto, primero (en un aviso, «Más información» o «Instalar de todas formas»)
 		for ((texto, enlace) in Nodos.enlacesEnTexto(n)) lista += t.getString(R.string.acc_enlace, texto) to { pulsarEnlace(enlace) }
+		// En el menú, lo que hay escrito y se puede usar aunque no sea un enlace: direcciones, correos, teléfonos y códigos
+		if (delMenu && lector.ajustes.accionesDelTexto && !Nodos.sensible(n)) {
+			val enlazados = Nodos.enlacesEnTexto(n).mapNotNull { (texto, enlace) -> (enlace as? android.text.style.URLSpan)?.url ?: texto }.toSet()
+			for (e in AccionesDelTexto.buscar(servicio, n, enlazados)) lista += when (e) {
+				is com.xebolax.tiresias.nucleo.EntidadTexto.Web -> t.getString(R.string.acc_texto_web, e.visto) to { abrirFuera(Intent(Intent.ACTION_VIEW, android.net.Uri.parse(e.url))) }
+				is com.xebolax.tiresias.nucleo.EntidadTexto.Correo -> t.getString(R.string.acc_texto_correo, e.visto) to { abrirFuera(Intent(Intent.ACTION_SENDTO, android.net.Uri.parse("mailto:" + e.direccion))) }
+				is com.xebolax.tiresias.nucleo.EntidadTexto.Telefono -> t.getString(R.string.acc_texto_telefono, e.visto) to { abrirFuera(Intent(Intent.ACTION_DIAL, android.net.Uri.parse("tel:" + android.net.Uri.encode(e.numero)))) }
+				is com.xebolax.tiresias.nucleo.EntidadTexto.Codigo -> t.getString(R.string.acc_texto_codigo, e.visto) to {
+					lector.edicion.portapapeles(e.visto, sensible = true)
+					lector.decir(t.getString(R.string.acc_texto_copiado, e.visto))
+					true
+				}
+			}
+		}
 		// En un campo, las faltas que marca el corrector: cambiarlas por lo que propone, o ir a ellas
 		for (f in Nodos.faltas(n).take(5)) {
 			for (s in f.sugerencias) lista += t.getString(R.string.acc_corregir, f.palabra, s) to { corregir(n, f, s) }
@@ -589,6 +681,16 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		}.getOrDefault(false)
 		if (ok) lector.decir(f.palabra) else lector.sonidos.tocar(Sonido.ERROR)
 		return ok
+	}
+
+	/** Abre otra app (el navegador, el correo, el marcador) desde el servicio. */
+	private fun abrirFuera(i: Intent): Boolean = runCatching {
+		servicio.startActivity(i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+		true
+	}.getOrElse {
+		com.xebolax.tiresias.base.Registro.w(ETIQUETA, "Ninguna app abre ${i.action}", it)
+		lector.sonidos.tocar(Sonido.ERROR)
+		false
 	}
 
 	/** Una vista cualquiera: el enlace de otra app la ignora, pero el método la pide. */
@@ -669,6 +771,7 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 	private val edicionOpciones = listOf(
 		R.string.accion_modo_edicion to Accion.MODO_EDICION,
 		R.string.accion_edicion_por_partes to Accion.EDICION_POR_PARTES,
+		R.string.accion_editor_texto to Accion.EDITOR_TEXTO,
 		R.string.acc_seleccionar_todo to Accion.SELECCIONAR_TODO,
 		R.string.acc_copiar to Accion.COPIAR,
 		R.string.acc_cortar to Accion.CORTAR,
@@ -790,6 +893,22 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 	 * texto no sale del campo. Lo que se guarda vuelve al campo cuando la app está otra vez delante.
 	 */
 	private fun edicionPorPartes(): Boolean {
+		if (!prepararTrabajo()) return false
+		return abrir(com.xebolax.tiresias.ui.ActividadEdicionPartes::class.java)
+	}
+
+	/**
+	 * Abre el editor de texto con lo enfocado (o con el campo en el que se escribe): el texto en una pantalla
+	 * entera para editarlo con el teclado, el modo edición y su menú, y devolverlo al campo al guardar. En una
+	 * contraseña no. Si lo enfocado no se edita (un mensaje), se abre igual para trabajar con una copia y copiarla.
+	 */
+	private fun editorTexto(): Boolean {
+		if (!prepararTrabajo()) return false
+		return abrir(com.xebolax.tiresias.ui.ActividadEditorTexto::class.java)
+	}
+
+	/** Prepara el texto de lo enfocado para la edición por partes o el editor ([com.xebolax.tiresias.lectura.EdicionPartes]). */
+	private fun prepararTrabajo(): Boolean {
 		val f = lector.foco?.takeIf { Nodos.vivo(it) }
 		val n = f?.takeIf { it.isEditable } ?: runCatching { lector.raiz()?.findFocus(AccessibilityNodeInfo.FOCUS_INPUT) }.getOrNull()?.takeIf { it.isEditable && (f == null || !Nodos.tieneTexto(f)) } ?: f
 		if (n == null) {
@@ -816,7 +935,7 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 			nodo = n, original = texto, editable = editable, maximo = n.maxTextLength.coerceAtLeast(0),
 			unaLinea = editable && !n.isMultiLine, guardar = { nuevo -> lector.manejador.post { devolverAlCampo(n, nuevo) } },
 		)
-		return abrir(com.xebolax.tiresias.ui.ActividadEdicionPartes::class.java)
+		return true
 	}
 
 	/**
@@ -849,7 +968,24 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		val cabecera = "Tiresias ${com.xebolax.tiresias.BuildConfig.VERSION_NAME}, Android ${Build.VERSION.RELEASE}, ${Build.MANUFACTURER} ${Build.MODEL}\n"
 		lector.edicion.portapapeles(cabecera + texto)
 		lector.decir(lector.textos.resources.getQuantityString(R.plurals.estructura_copiada, nodos, nodos))
+		// Y se ofrece mandarla (Telegram, WhatsApp, el correo...) en un archivo, para quien no sabe pegarla en un
+		// mensaje: así se puede mandar también desde Recientes o una pantalla de la que no se puede salir a escribir
+		lector.manejador.postDelayed({ compartirEstructura(cabecera + texto) }, ESPERA_COMPARTIR_MS)
 		return true
+	}
+
+	private fun compartirEstructura(texto: String) {
+		try {
+			val f = java.io.File(servicio.cacheDir, "compartir/estructura_pantalla.txt").apply { parentFile?.mkdirs(); writeText(texto) }
+			val uri = androidx.core.content.FileProvider.getUriForFile(servicio, servicio.packageName + ".archivos", f)
+			val enviar = Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_STREAM, uri)
+				.putExtra(Intent.EXTRA_SUBJECT, t.getString(R.string.estructura_asunto, com.xebolax.tiresias.BuildConfig.VERSION_NAME, Build.MODEL))
+				.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+			val elegir = Intent.createChooser(enviar, t.getString(R.string.estructura_compartir)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION)
+			servicio.startActivity(elegir)
+		} catch (e: Exception) {
+			com.xebolax.tiresias.base.Registro.w(ETIQUETA, "No se pudo ofrecer mandar la estructura", e)
+		}
 	}
 
 	private fun copiarLista(): Boolean {
@@ -2175,11 +2311,15 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		private const val DECIR_VOLUMEN_MS = 300L
 		/** El texto más largo que se abre en la edición por partes. */
 		private const val MAXIMO_PARTES = 50_000
+		/** Las páginas que se sube una lista como mucho antes de tirar de ella para actualizarla. */
+		private const val MAXIMO_PAGINAS_ACTUALIZAR = 40
 		/** Lo que se espera a que la app vuelva a estar delante para devolverle el texto, y cuántas veces. */
 		private const val ESPERA_DEVOLVER_MS = 500L
 		private const val INTENTOS_DEVOLVER = 8
 		/** Los nodos que como mucho se copian con la estructura de la pantalla. */
 		private const val MAXIMO_ESTRUCTURA = 1500
+		/** Lo que se espera a decir «copiada» antes de abrir «Compartir». */
+		private const val ESPERA_COMPARTIR_MS = 1_200L
 		/** Lo que en voz a demanda no habla: moverse (lo demás, que se pide, sí). */
 		private val NAVEGAR_CALLADO = setOf(
 			Accion.SIGUIENTE, Accion.ANTERIOR, Accion.PRIMERO, Accion.ULTIMO, Accion.DESPLAZAR_ARRIBA, Accion.DESPLAZAR_ABAJO,

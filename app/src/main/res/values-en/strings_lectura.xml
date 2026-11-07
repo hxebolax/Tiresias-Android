@@ -262,8 +262,8 @@
 	<string name="restablecido">Tiresias reset as if just installed</string>
 	<string name="mantener_grabar_repetir">Double-tap and keep your finger down to record: it records until you lift it</string>
 	<plurals name="estructura_copiada">
-		<item quantity="one">Screen structure copied: %1$d item, without any text. Paste it into your message</item>
-		<item quantity="other">Screen structure copied: %1$d items, without any text. Paste it into your message</item>
+		<item quantity="one">Screen structure copied: %1$d item, without any text. Paste it into your message or send it from Share</item>
+		<item quantity="other">Screen structure copied: %1$d items, without any text. Paste it into your message or send it from Share</item>
 	</plurals>
 	<string name="modo_edicion_entrar">Edit mode. %1$s</string>
 	<string name="modo_edicion_pista">Up and down, characters; back and forth sideways, words; left and right, sentences; up then right, select; left then down, exit.</string>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- El editor de texto (el campo en una pantalla entera, con el modo edición) y las acciones nuevas de la 1.0.11. -->
+<resources>
+	<string name="accion_editor_texto">Editor de texto (el campo en una pantalla entera para editarlo)</string>
+	<string name="accion_actualizar_lista">Actualizar la lista (tirar de ella hacia abajo)</string>
+	<string name="accion_revisar_pantalla">Revisar esta pantalla y repararla</string>
+
+	<string name="editor_titulo">Editor de texto</string>
+	<string name="editor_campo">Texto del campo</string>
+	<string name="editor_campo_copia">Copia del texto (no se guarda en ningún campo)</string>
+	<string name="editor_guardar">Guardar en el campo</string>
+	<string name="editor_menu">Menú del editor</string>
+	<string name="editor_donde">Dónde está el cursor</string>
+	<string name="editor_donde_res">Línea %1$d de %2$d, columna %3$d. Carácter %4$d de %5$d</string>
+	<plurals name="editor_seleccionados_plural">
+		<item quantity="one">%1$d carácter seleccionado</item>
+		<item quantity="other">%1$d caracteres seleccionados</item>
+	</plurals>
+	<string name="editor_seleccionar_todo">Seleccionar todo</string>
+	<string name="editor_todo_seleccionado">Todo seleccionado</string>
+	<string name="editor_seleccionar_linea">Seleccionar la línea</string>
+	<string name="editor_linea_seleccionada">Seleccionada la línea: %1$s</string>
+	<string name="editor_copiar">Copiar lo seleccionado</string>
+	<string name="editor_copiado">Copiado</string>
+	<string name="editor_cortar">Cortar lo seleccionado</string>
+	<string name="editor_cortado">Cortado</string>
+	<string name="editor_borrar_seleccion">Borrar lo seleccionado</string>
+	<string name="editor_borrado">Borrado</string>
+	<string name="editor_pegar">Pegar</string>
+	<string name="editor_pegado">Pegado</string>
+	<string name="editor_nada_pegar">No hay nada copiado</string>
+	<string name="editor_buscar">Buscar</string>
+	<string name="editor_buscar_siguiente">Buscar el siguiente</string>
+	<string name="editor_reemplazar">Reemplazar</string>
+	<string name="editor_ir_a_linea">Ir a la línea</string>
+	<string name="editor_ir_a_linea_pista">Número de línea, de 1 a %1$d</string>
+	<string name="editor_en_linea">Línea %1$d: %2$s</string>
+	<string name="editor_principio">Al principio del texto</string>
+	<string name="editor_final">Al final del texto</string>
+	<string name="editor_contar">Contar</string>
+	<string name="editor_contar_res">%1$d caracteres, %2$d palabras, %3$d líneas y %4$d párrafos.</string>
+	<string name="editor_fecha_hora">Escribir la fecha y la hora</string>
+	<string name="editor_insertado">Escrito: %1$s</string>
+	<string name="editor_borrar_linea">Borrar la línea</string>
+	<string name="editor_linea_borrada">Línea borrada</string>
+	<string name="editor_copiar_todo">Copiar todo el texto</string>
+	<string name="editor_todo_copiado">Copiado todo el texto</string>
+	<string name="editor_por_partes">Pasar a la edición por partes</string>
+	<string name="editor_salir">Salir</string>
+	<string name="editor_nada_deshacer">No hay nada que deshacer</string>
+	<string name="editor_nada_rehacer">No hay nada que rehacer</string>
+</resources>

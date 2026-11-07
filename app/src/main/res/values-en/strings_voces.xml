@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- System engine voices: choose the engine, the language and the voice for each language (like @Voice). -->
+<resources>
+	<string name="aj_voces_sistema">System engine voices</string>
+	<string name="aj_voces_sistema_res">Choose the engine, the language and the exact voice for each language, and hear a sample</string>
+	<string name="voces_titulo">Engine voices</string>
+	<string name="voces_motor">Engine: %1$s</string>
+	<string name="voces_idioma">Language: %1$s</string>
+	<string name="voces_todos_idiomas">All languages</string>
+	<string name="voces_elegir_motor">Choose the speech engine</string>
+	<string name="voces_elegir_idioma">Choose the language</string>
+	<string name="voces_cargando">Loading the voices of %1$s…</string>
+	<string name="voces_no_arranca">The engine %1$s did not start. Open it once from its app or choose another engine.</string>
+	<string name="voces_sin_lista">The engine %1$s does not give the list of its voices. You can choose the voice in its own settings.</string>
+	<string name="voces_sin_motores">There is no system speech engine installed. Install one (Google, Samsung, RHVoice, Vocalizer…) and come back here.</string>
+	<plurals name="voces_cuantas">
+		<item quantity="one">%1$d voice</item>
+		<item quantity="other">%1$d voices</item>
+	</plurals>
+	<string name="voces_en_uso">Voice for %1$s: %2$s</string>
+	<string name="voces_la_del_motor">the engine\'s own</string>
+	<string name="voces_otro_motor">Tiresias is speaking with another voice now. If you choose one here, Tiresias switches to %1$s.</string>
+	<string name="voces_calidad_muy_alta">very high quality</string>
+	<string name="voces_calidad_alta">high quality</string>
+	<string name="voces_calidad_normal">normal quality</string>
+	<string name="voces_calidad_baja">low quality</string>
+	<string name="voces_calidad_muy_baja">very low quality</string>
+	<string name="voces_sin_conexion">offline</string>
+	<string name="voces_internet">needs internet</string>
+	<string name="voces_sin_descargar">not downloaded</string>
+	<string name="voces_elegida">Chosen</string>
+	<string name="voces_usar">Use this voice for %1$s</string>
+	<string name="voces_escuchar">Hear a sample</string>
+	<string name="voces_frase_muestra">Hello, this is how this voice sounds. One, two, three.</string>
+	<string name="voces_usar_del_motor">For %1$s, use the engine\'s own voice</string>
+	<string name="voces_instalar">Install or download more voices</string>
+	<string name="voces_elegida_aviso">Voice for %1$s: %2$s</string>
+	<string name="voces_quitada_aviso">For %1$s, the engine\'s own voice</string>
+	<string name="voces_no_instalar">This engine has no screen to install voices. Look for it in its app.</string>
+	<string name="voces_del_idioma">the language default</string>
+</resources>

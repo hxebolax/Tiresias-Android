@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" app:title="@string/aj_seccion_voz">
 	<ListPreference app:key="motor" app:title="@string/aj_motor" app:useSimpleSummaryProvider="true" />
+	<Preference app:key="voces_sistema" app:title="@string/aj_voces_sistema" app:summary="@string/aj_voces_sistema_res" />
 	<Preference app:key="voces_control" app:title="@string/aj_voces_control" />
 	<ListPreference app:key="motor_avisos" app:title="@string/aj_motor_avisos" app:useSimpleSummaryProvider="true" />
 	<Preference app:key="eloquence_ajustes" app:title="@string/aj_eloquence_ajustes" app:summary="@string/aj_eloquence_ajustes_res" />
@@ -19,6 +20,7 @@
 	<SwitchPreferenceCompat app:key="trocear_largos" app:title="@string/aj_trocear_largos" app:summary="@string/aj_trocear_largos_res" app:defaultValue="true" />
 	<ListPreference app:key="salida_audio" app:title="@string/aj_salida_audio" app:entries="@array/salida_audio_nombres" app:entryValues="@array/salida_audio_valores" app:defaultValue="sistema" />
 	<SwitchPreferenceCompat app:key="voz_multimedia" app:title="@string/aj_voz_multimedia" app:summary="@string/aj_voz_multimedia_res" app:defaultValue="false" />
+	<SwitchPreferenceCompat app:key="voz_sin_captura" app:title="@string/aj_voz_sin_captura" app:summary="@string/aj_voz_sin_captura_res" app:defaultValue="false" />
 	<Preference app:key="reglas_bluetooth" app:title="@string/aj_reglas_bluetooth" app:summary="@string/aj_reglas_bluetooth_res" />
 	<SwitchPreferenceCompat app:key="voz_llamadas" app:title="@string/aj_voz_llamadas" app:summary="@string/aj_voz_llamadas_res" app:defaultValue="false" />
 	<com.xebolax.tiresias.accesibilidad.DeslizadorAjuste app:key="volumen_llamadas" app:title="@string/aj_volumen_llamadas" app:min="5" android:max="100" app:seekBarIncrement="5" app:defaultValue="50" />

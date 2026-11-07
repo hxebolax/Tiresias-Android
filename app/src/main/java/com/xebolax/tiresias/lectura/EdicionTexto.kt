@@ -381,7 +381,14 @@ class EdicionTexto(private val lector: Lector) {
 
 	fun cortar(): Boolean = campo()?.performAction(AccessibilityNodeInfo.ACTION_CUT)?.also { if (it) lector.decir(R.string.edicion_cortado) } ?: false
 
-	fun pegar(): Boolean = campo()?.performAction(AccessibilityNodeInfo.ACTION_PASTE)?.also { if (it) lector.decir(R.string.edicion_pegado) } ?: false
+	fun pegar(): Boolean {
+		val c = campo() ?: return false
+		// Algunas apps no pegan si el campo no tiene el foco de entrada (SandFly): se le da antes, si no lo tiene
+		if (!c.isFocused && c.isFocusable) runCatching { c.performAction(AccessibilityNodeInfo.ACTION_FOCUS) }
+		val ok = runCatching { c.performAction(AccessibilityNodeInfo.ACTION_PASTE) }.getOrDefault(false)
+		if (ok) lector.decir(R.string.edicion_pegado)
+		return ok
+	}
 
 	fun seleccionarTodo(): Boolean {
 		val c = campo() ?: return false

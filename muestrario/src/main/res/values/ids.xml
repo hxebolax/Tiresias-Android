@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<item name="boton_enviar" type="id" />
+	<item name="mal_lista" type="id" />
+	<item name="mal_seccion" type="id" />
+	<item name="mal_opcion" type="id" />
+	<item name="mal_fila" type="id" />
+	<item name="mal_titulo" type="id" />
+	<item name="mal_fecha" type="id" />
 </resources>

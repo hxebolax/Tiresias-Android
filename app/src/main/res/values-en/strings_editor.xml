@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The text editor (the field on a whole screen, with edit mode) and the new 1.0.11 actions. -->
+<resources>
+	<string name="accion_editor_texto">Text editor (the field on a whole screen to edit it)</string>
+	<string name="accion_actualizar_lista">Refresh the list (pull it down)</string>
+	<string name="accion_revisar_pantalla">Check this screen and repair it</string>
+
+	<string name="editor_titulo">Text editor</string>
+	<string name="editor_campo">Text of the field</string>
+	<string name="editor_campo_copia">Copy of the text (not saved to any field)</string>
+	<string name="editor_guardar">Save to the field</string>
+	<string name="editor_menu">Editor menu</string>
+	<string name="editor_donde">Where the cursor is</string>
+	<string name="editor_donde_res">Line %1$d of %2$d, column %3$d. Character %4$d of %5$d</string>
+	<plurals name="editor_seleccionados_plural">
+		<item quantity="one">%1$d character selected</item>
+		<item quantity="other">%1$d characters selected</item>
+	</plurals>
+	<string name="editor_seleccionar_todo">Select all</string>
+	<string name="editor_todo_seleccionado">All selected</string>
+	<string name="editor_seleccionar_linea">Select the line</string>
+	<string name="editor_linea_seleccionada">Selected the line: %1$s</string>
+	<string name="editor_copiar">Copy the selection</string>
+	<string name="editor_copiado">Copied</string>
+	<string name="editor_cortar">Cut the selection</string>
+	<string name="editor_cortado">Cut</string>
+	<string name="editor_borrar_seleccion">Delete the selection</string>
+	<string name="editor_borrado">Deleted</string>
+	<string name="editor_pegar">Paste</string>
+	<string name="editor_pegado">Pasted</string>
+	<string name="editor_nada_pegar">Nothing has been copied</string>
+	<string name="editor_buscar">Find</string>
+	<string name="editor_buscar_siguiente">Find next</string>
+	<string name="editor_reemplazar">Replace</string>
+	<string name="editor_ir_a_linea">Go to line</string>
+	<string name="editor_ir_a_linea_pista">Line number, from 1 to %1$d</string>
+	<string name="editor_en_linea">Line %1$d: %2$s</string>
+	<string name="editor_principio">To the start of the text</string>
+	<string name="editor_final">To the end of the text</string>
+	<string name="editor_contar">Count</string>
+	<string name="editor_contar_res">%1$d characters, %2$d words, %3$d lines and %4$d paragraphs.</string>
+	<string name="editor_fecha_hora">Type the date and time</string>
+	<string name="editor_insertado">Typed: %1$s</string>
+	<string name="editor_borrar_linea">Delete the line</string>
+	<string name="editor_linea_borrada">Line deleted</string>
+	<string name="editor_copiar_todo">Copy all the text</string>
+	<string name="editor_todo_copiado">All the text copied</string>
+	<string name="editor_por_partes">Switch to edit by parts</string>
+	<string name="editor_salir">Exit</string>
+	<string name="editor_nada_deshacer">Nothing to undo</string>
+	<string name="editor_nada_rehacer">Nothing to redo</string>
+</resources>

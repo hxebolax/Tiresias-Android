@@ -64,6 +64,7 @@ Tiresias dice en voz alta lo que hay en la pantalla y deja manejar el móvil con
 - **Eloquence**, la voz clásica de los lectores de pantalla: diez idiomas (inglés de EE. UU. y británico, español de España y de México, francés de Francia y de Canadá, alemán, italiano, polaco y japonés) y sus ocho voces, con todos sus ajustes como en NVDA. De fábrica suena como el driver IBMTTS de NVDA, y al 100 % habla a su velocidad normal (desde la 1.0.5; antes iba unas diez veces más deprisa). Se basa en [evvdroid](https://github.com/trypsynth/evvdroid) y en [openevv](https://github.com/Mudb0y/openevv).
 - Voces neuronales **Piper**, que se descargan aparte, y cualquier **voz del sistema**, también «la que use el sistema», que sigue al motor elegido en los ajustes del móvil. Si una falla, habla la integrada.
 - **Cada voz con su velocidad, su tono y su volumen**, como en NVDA: al cambiar de voz se pone la suya y Tiresias dice con qué velocidad queda; un perfil con otra voz no estropea la velocidad de la de antes. Eliges por qué voces pasa el control Voz.
+- **Las voces de cada motor**: se elige el motor del sistema, el idioma y la voz concreta, con una muestra de cada una, y se guarda una voz por idioma.
 - **Voz de las notificaciones**: pueden ir con otra de las voces incluidas, con su propia velocidad.
 - **Voz a demanda**, como en NVDA: al moverse no habla, solo cuando se le pide algo.
 - Tiresias es también un **motor de voz del sistema** que pueden usar otras apps.
@@ -82,6 +83,8 @@ Tiresias dice en voz alta lo que hay en la pantalla y deja manejar el móvil con
 ### Edición de texto
 
 - Eco por caracteres, palabras o los dos; menú de edición y modo selección.
+- Direcciones web, correos, teléfonos y códigos escritos en un texto, en el menú de acciones aunque no sean enlaces (abrir, escribir, llamar o copiar el código de un SMS).
+- **Modo edición**, **edición por partes** y **editor de texto**: recorrer el texto por letras, palabras, frases, líneas y párrafos con un dedo y seleccionar; editarlo partido en una lista; o abrirlo en una pantalla entera con deshacer de muchos pasos, buscar y reemplazar, ir a una línea y contar, y devolverlo al campo.
 - Faltas de ortografía: cuántas marca el corrector y cambiarlas por lo que propone.
 - **Lo copiado por Tiresias** (los últimos 20 textos, solo en la memoria del móvil), copiar la lista entera y copiar por trozos de un texto que no se puede editar.
 - **Elegir y copiar texto** de un mensaje o una web, que no es un campo: el texto pasa a una ventana donde se selecciona el trozo que se quiera.
@@ -140,6 +143,7 @@ Para personas mayores que empiezan o solo quieren lo básico, hecho a partir de 
 ### Perfiles y etiquetas
 
 - Etiquetas para los botones sin nombre, que se exportan e importan, y nombre propio para una pantalla, que se dice al abrirla en vez de su título.
+- **Reparación automática de las pantallas mal hechas**: Tiresias mira cómo está hecha cada pantalla nueva (sin leer sus textos) y arregla las filas que se leen a trozos, los títulos que no son encabezados, los adornos vacíos y los repetidos; todo se puede ver y deshacer.
 - Perfiles por app (gestos, verbosidad, velocidad, puntuación).
 - Copia de seguridad de toda la configuración en un archivo, para otro móvil (sin las claves de IA).
 - Cortina de pantalla, toque directo por app (en toda la pantalla, también la barra de navegación) y mosaico de ajustes rápidos.

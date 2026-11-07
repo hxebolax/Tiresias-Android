@@ -128,8 +128,9 @@ class MotorSistema(private val contexto: Context, override val id: String, priva
 	@Volatile private var fallido = false
 	private val contador = AtomicInteger()
 	@Volatile private var pendiente: Pendiente? = null
-	private var idiomaActual: Locale? = null
-	private var vozElegida = ""
+	@Volatile private var idiomaActual: Locale? = null
+	/** Las voces elegidas por idioma ([com.xebolax.tiresias.nucleo.VocesPorIdioma]); vacío, las del motor. */
+	@Volatile private var vozElegida = ""
 
 	private class Pendiente(val id: String) {
 		val empezado = CountDownLatch(1)
@@ -191,7 +192,10 @@ class MotorSistema(private val contexto: Context, override val id: String, priva
 	fun voces(): List<Voice> = runCatching { asegurar()?.voices?.toList().orEmpty() }.getOrDefault(emptyList())
 
 	fun elegirVoz(nombre: String) {
+		if (nombre == vozElegida) return
 		vozElegida = nombre
+		// La próxima frase vuelve a poner idioma y voz: si no, la voz nueva no sonaba hasta cambiar de idioma
+		idiomaActual = null
 	}
 
 	override fun hablar(texto: String, idioma: Locale, velocidad: Int, tono: Int, sigue: () -> Boolean, alEmpezar: () -> Unit): Resultado {
@@ -205,7 +209,13 @@ class MotorSistema(private val contexto: Context, override val id: String, priva
 					return Resultado.FALLO
 				}
 				idiomaActual = idioma
-				if (vozElegida.isNotEmpty()) t.voices?.firstOrNull { it.name == vozElegida && it.locale.language == idioma.language }?.let { t.voice = it }
+				val guardada = vozElegida
+				if (guardada.isNotEmpty()) {
+					val voces = t.voices.orEmpty()
+					val nombre = com.xebolax.tiresias.nucleo.VocesPorIdioma.para(guardada, idioma.language) { n -> voces.any { it.name == n && it.locale.language == idioma.language } }
+					// Solo una voz de ese idioma (la de otro idioma leería este con su pronunciación)
+					if (nombre != null) voces.firstOrNull { it.name == nombre && it.locale.language == idioma.language }?.let { t.voice = it }
+				}
 			}
 			t.setSpeechRate(velocidad / 100f)
 			t.setPitch(tono / 100f)

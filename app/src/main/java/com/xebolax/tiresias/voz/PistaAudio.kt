@@ -328,7 +328,18 @@ class PistaAudio(atributosIniciales: AudioAttributes) {
 		fun atributosVoz(): AudioAttributes = AudioAttributes.Builder()
 			.setUsage(if (Build.VERSION.SDK_INT >= 26 && !multimedia) AudioAttributes.USAGE_ASSISTANCE_ACCESSIBILITY else AudioAttributes.USAGE_MEDIA)
 			.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+			.sinCapturaSiSeQuiere()
 			.build()
+
+		/**
+		 * Que las apps que graban o emiten la pantalla (y las videollamadas que comparten el sonido) no recojan la voz ni
+		 * los sonidos de Tiresias (Ajustes, Voz). Con el volumen de accesibilidad Android ya no los deja recoger; con el
+		 * multimedia, sí, salvo con esto (Android 10+).
+		 */
+		@Volatile var sinCaptura = false
+
+		fun AudioAttributes.Builder.sinCapturaSiSeQuiere(): AudioAttributes.Builder =
+			if (Build.VERSION.SDK_INT >= 29 && sinCaptura) setAllowedCapturePolicy(AudioAttributes.ALLOW_CAPTURE_BY_NONE) else this
 
 		/** El flujo de volumen que corresponde a la voz. */
 		val flujo: Int get() = if (Build.VERSION.SDK_INT >= 26 && !multimedia) AudioManager.STREAM_ACCESSIBILITY else AudioManager.STREAM_MUSIC

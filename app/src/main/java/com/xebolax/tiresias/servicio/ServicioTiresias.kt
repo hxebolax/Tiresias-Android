@@ -76,6 +76,50 @@ class ServicioTiresias : AccessibilityService() {
 	}
 
 	/** Al encender la pantalla, Tiresias vuelve si estaba suspendido: nunca deja a nadie atrapado. */
+	/**
+	 * Avisos del cargador (Ajustes, Notificaciones, si se quieren): al enchufarlo y desenchufarlo, con el nivel de la
+	 * batería, y cuando está llena. Se callan como las notificaciones con el móvil bloqueado o en silencio.
+	 */
+	private val cargador = object : BroadcastReceiver() {
+		private var llenaDicha = false
+		override fun onReceive(c: Context?, i: Intent?) {
+			val l = lector ?: return
+			if (!l.ajustes.avisosCargador) return
+			val nivel = (i ?: registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED)))?.let { b ->
+				val n = b.getIntExtra(android.os.BatteryManager.EXTRA_LEVEL, -1)
+				val m = b.getIntExtra(android.os.BatteryManager.EXTRA_SCALE, 100)
+				if (n >= 0 && m > 0) n * 100 / m else -1
+			} ?: -1
+			val texto = when (i?.action) {
+				Intent.ACTION_POWER_CONNECTED -> {
+					llenaDicha = false
+					l.textos.getString(R.string.aviso_cargador_conectado, nivel)
+				}
+				Intent.ACTION_POWER_DISCONNECTED -> l.textos.getString(R.string.aviso_cargador_desconectado, nivel)
+				Intent.ACTION_BATTERY_CHANGED -> {
+					val estado = i.getIntExtra(android.os.BatteryManager.EXTRA_STATUS, -1)
+					// El que llega al registrarse es el estado de ahora, no un cambio: no se dice
+					if (isInitialStickyBroadcast) {
+						llenaDicha = estado == android.os.BatteryManager.BATTERY_STATUS_FULL
+						return
+					}
+					if (estado != android.os.BatteryManager.BATTERY_STATUS_FULL) {
+						if (estado == android.os.BatteryManager.BATTERY_STATUS_DISCHARGING) llenaDicha = false
+						return
+					}
+					if (llenaDicha) return
+					llenaDicha = true
+					l.textos.getString(R.string.aviso_bateria_llena)
+				}
+				else -> return
+			}
+			l.manejador.post {
+				if (l.motivoCallarSinPedir() != null) return@post
+				l.decir(texto, com.xebolax.tiresias.voz.Modo.ENCOLAR)
+			}
+		}
+	}
+
 	private val pantalla = object : BroadcastReceiver() {
 		override fun onReceive(c: Context?, i: Intent?) {
 			when (i?.action) {
@@ -122,6 +166,7 @@ class ServicioTiresias : AccessibilityService() {
 					com.xebolax.tiresias.remoto.Asistencia.alPantalla(false)
 					com.xebolax.tiresias.ui.ControlPc.alPantalla(this@ServicioTiresias, false)
 					lector?.continua?.parar()
+					teclado?.olvidarPulsadas()
 					lector?.superficie?.let { if (it.modo?.cerrarAlCambiarDeApp == true) it.cerrar() }
 					// Lo copiado por Tiresias solo vive mientras se usa el móvil
 					lector?.edicion?.olvidarCopiado()
@@ -158,6 +203,7 @@ class ServicioTiresias : AccessibilityService() {
 		Thread({ apuntarSalidas() }, "tiresias-salidas").start()
 		Guarda.iniciar(this)
 		com.xebolax.tiresias.voz.PistaAudio.multimedia = Ajustes(this).vozMultimedia
+		com.xebolax.tiresias.voz.PistaAudio.sinCaptura = Ajustes(this).vozSinCaptura
 		val v = Voz(this)
 		voz = v
 		val s = Sonidos(this)
@@ -184,7 +230,10 @@ class ServicioTiresias : AccessibilityService() {
 		l.vision = Vision(l, vent)
 		l.escucha = Escucha(l, alAccion) { texto -> l.manejador.post { ej.buscarTexto(texto) } }
 		l.braille = Braille(l, alAccion).also { b -> l.manejador.post { b.iniciar() } }
-		l.scripts = Scripts(l).also { it.ventanas = vent }
+		l.scripts = Scripts(l).also {
+			it.ventanas = vent
+			it.reparador = l.reparador
+		}
 		l.manejador.post { l.scripts.recargar() }
 		teclado = Teclado(l, alAccion)
 		// Tapar el sensor de proximidad calla la voz (solo se mira mientras habla)
@@ -217,6 +266,11 @@ class ServicioTiresias : AccessibilityService() {
 		}
 		// «Reanudar» de la notificación de pausa (solo la manda Tiresias: no se exporta)
 		androidx.core.content.ContextCompat.registerReceiver(this, reanudar, IntentFilter(AvisoPausa.REANUDAR), androidx.core.content.ContextCompat.RECEIVER_NOT_EXPORTED)
+		registerReceiver(cargador, IntentFilter().apply {
+			addAction(Intent.ACTION_POWER_CONNECTED)
+			addAction(Intent.ACTION_POWER_DISCONNECTED)
+			addAction(Intent.ACTION_BATTERY_CHANGED)
+		})
 		androidx.core.content.ContextCompat.registerReceiver(this, terminarAyuda, IntentFilter(com.xebolax.tiresias.remoto.Asistencia.TERMINAR), androidx.core.content.ContextCompat.RECEIVER_NOT_EXPORTED)
 		instancia = this
 		if (BuildConfig.PRUEBAS) {
@@ -308,6 +362,11 @@ class ServicioTiresias : AccessibilityService() {
 		configurar(suspendidoAhora)
 	}
 	@Volatile private var suspendidoAhora = false
+
+	/** Vuelve a poner la configuración del servicio (ha cambiado algo de lo que depende: el volumen de la voz). */
+	fun reconfigurar() {
+		android.os.Handler(mainLooper).post { configurar(suspendidoAhora) }
+	}
 	private val principal = android.os.Handler(android.os.Looper.getMainLooper())
 
 	/** Pone la configuración del servicio. Suspendido: sin exploración táctil ni gestos (solo las teclas de volumen). */
@@ -318,7 +377,9 @@ class ServicioTiresias : AccessibilityService() {
 			AccessibilityServiceInfo.FLAG_RETRIEVE_INTERACTIVE_WINDOWS or
 			AccessibilityServiceInfo.FLAG_REQUEST_FILTER_KEY_EVENTS or
 			AccessibilityServiceInfo.FLAG_REQUEST_ENHANCED_WEB_ACCESSIBILITY
-		if (Build.VERSION.SDK_INT >= 26) banderas = banderas or AccessibilityServiceInfo.FLAG_ENABLE_ACCESSIBILITY_VOLUME
+		// El volumen de accesibilidad, solo si la voz va por él (SandFly): con la voz por el multimedia, las teclas de
+		// volumen y el panel del sistema mandan el multimedia, que es el que suena
+		if (Build.VERSION.SDK_INT >= 26 && !com.xebolax.tiresias.voz.PistaAudio.multimedia) banderas = banderas or AccessibilityServiceInfo.FLAG_ENABLE_ACCESSIBILITY_VOLUME
 		if (!suspendido) {
 			banderas = banderas or AccessibilityServiceInfo.FLAG_REQUEST_TOUCH_EXPLORATION_MODE
 			if (Build.VERSION.SDK_INT >= 30) {
@@ -498,6 +559,11 @@ class ServicioTiresias : AccessibilityService() {
 			val salidas = am.getHistoricalProcessExitReasons(packageName, 0, 5).filter { it.timestamp > visto }
 			for (s in salidas) Registro.w(ETIQUETA, "Android cerró Tiresias: motivo ${s.reason}, importancia ${s.importance}, ${s.description.orEmpty()}")
 			salidas.maxOfOrNull { it.timestamp }?.let { prefs.edit().putLong(com.xebolax.tiresias.base.Claves.ULTIMA_SALIDA, it).apply() }
+			// Los Infinix, Tecno e itel (XOS, HiOS) matan las apps al limpiar Recientes («One-key clean», tranpm) y luego no
+			// dejan que Android vuelva a arrancar el servicio: sigue «activado» en Ajustes, pero mudo, hasta apagarlo y
+			// encenderlo (Déchaîner, issue 55, con su registro). Al volver, se dice cómo evitarlo
+			val limpiado = salidas.any { s -> s.description.orEmpty().let { d -> d.contains("onekey", true) || d.contains("one key", true) || d.contains("one-key", true) } }
+			if (limpiado) android.os.Handler(mainLooper).postDelayed({ lector?.decir(R.string.aviso_limpiar_recientes, modo = com.xebolax.tiresias.voz.Modo.ENCOLAR) }, AVISO_LIMPIAR_MS)
 		} catch (e: Exception) {
 			Registro.w(ETIQUETA, "No se pudo leer por qué cerró Android Tiresias", e)
 		}
@@ -530,6 +596,7 @@ class ServicioTiresias : AccessibilityService() {
 		vigilante?.cerrar()
 		Guarda.terminar(this)
 		runCatching { unregisterReceiver(pantalla) }
+		runCatching { unregisterReceiver(cargador) }
 		runCatching { unregisterReceiver(reanudar) }
 		runCatching { unregisterReceiver(terminarAyuda) }
 		// Sin lector no hay ayuda remota: se termina (y se quitan sus notificaciones)
@@ -648,6 +715,9 @@ class ServicioTiresias : AccessibilityService() {
 	fun decirDesdeApp(texto: String, interrumpir: Boolean) {
 		val l = lector ?: return
 		l.manejador.post {
+			// Lo que manda otra app no se dice con el móvil bloqueado y sin usar si así se ha pedido para las
+			// notificaciones (callar con el móvil bloqueado o en silencio): como los anuncios de las apps (SandFly 30ddb1f3e)
+			if (l.motivoCallarSinPedir() != null) return@post
 			l.voz.decir(Enunciado(texto, if (interrumpir) Modo.INTERRUMPIR else Modo.ENCOLAR, Tipo.ANUNCIO))
 			if (l.brailleListo) l.braille.mensaje(texto)
 		}
@@ -769,6 +839,8 @@ class ServicioTiresias : AccessibilityService() {
 
 	companion object {
 		private const val ETIQUETA = "ServicioTiresias"
+		/** Lo que se espera tras arrancar para avisar de que lo cerró la limpieza de Recientes (después del «Tiresias activado»). */
+		private const val AVISO_LIMPIAR_MS = 6_000L
 		/** Lo que se espera, al cambiar los servicios de accesibilidad, antes de mirar si otro explora por toque. */
 		private const val ESPERA_OTROS_MS = 500L
 		/** Cada cuánto se mira si ya se ha levantado el dedo para cambiar el doble toque. */

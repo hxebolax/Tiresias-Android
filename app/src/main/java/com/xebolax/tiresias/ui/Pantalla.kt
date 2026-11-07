@@ -56,6 +56,20 @@ abstract class ActividadBase : AppCompatActivity() {
 	override fun onCreate(savedInstanceState: android.os.Bundle?) {
 		codigoAceptado = savedInstanceState?.getBoolean(CODIGO_ACEPTADO) == true
 		super.onCreate(savedInstanceState)
+		fueraDeRecientesEnTranssion()
+	}
+
+	/**
+	 * En los Infinix, Tecno e itel, «limpiar todo» en Recientes mata las apps de la lista y luego su gestor de
+	 * energía no deja que Android vuelva a arrancar el servicio de Tiresias (queda «activado» pero mudo). Las
+	 * pantallas de Tiresias no se quedan en Recientes en esas marcas, para que limpiar la lista no se lo lleve por
+	 * tenerlas abiertas. (Deducido: no hay un Infinix a mano para comprobarlo.)
+	 */
+	private fun fueraDeRecientesEnTranssion() {
+		val marca = (android.os.Build.MANUFACTURER + " " + android.os.Build.BRAND).lowercase()
+		if (listOf("infinix", "tecno", "itel").none { it in marca }) return
+		runCatching { getSystemService(android.app.ActivityManager::class.java)?.appTasks?.forEach { it.setExcludeFromRecents(true) } }
+			.onFailure { com.xebolax.tiresias.base.Registro.w("ActividadBase", "No se pudo quitar de Recientes", it) }
 	}
 
 	override fun onSaveInstanceState(outState: android.os.Bundle) {

@@ -324,6 +324,14 @@ class ActividadAjustes : ActividadBase(), PreferenceFragmentCompat.OnPreferenceS
 				startActivity(android.content.Intent(c, ActividadModoSenior::class.java))
 				true
 			}
+			findPreference<Preference>("reparaciones")?.setOnPreferenceClickListener {
+				startActivity(android.content.Intent(c, ActividadReparaciones::class.java))
+				true
+			}
+			findPreference<Preference>("voces_sistema")?.setOnPreferenceClickListener {
+				startActivity(android.content.Intent(c, ActividadVocesSistema::class.java))
+				true
+			}
 			findPreference<Preference>("eloquence_ajustes")?.apply {
 				isVisible = com.xebolax.tiresias.voz.BibliotecaEloquence.disponible(c)
 				setOnPreferenceClickListener {

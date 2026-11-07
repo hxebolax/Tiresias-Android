@@ -77,6 +77,7 @@ class Sonidos(contexto: Context) {
 			AudioAttributes.Builder()
 				.setUsage(if (Build.VERSION.SDK_INT >= 26 && !PistaAudio.multimedia) AudioAttributes.USAGE_ASSISTANCE_ACCESSIBILITY else AudioAttributes.USAGE_MEDIA)
 				.setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+				.let { with(PistaAudio) { it.sinCapturaSiSeQuiere() } }
 				.build()
 		)
 		.build()
