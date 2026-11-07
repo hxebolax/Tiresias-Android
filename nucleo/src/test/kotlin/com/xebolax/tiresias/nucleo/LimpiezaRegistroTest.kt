@@ -7,10 +7,15 @@ import org.junit.Test
 
 /**
  * Lo que nunca puede llegar al registro que se comparte. Las claves de estas
- * pruebas son inventadas, con el mismo formato que las de verdad.
+ * pruebas son inventadas, con el mismo formato que las de verdad, y se montan
+ * a trozos al ejecutarlas ([falsa]): escritas enteras, el buscador de secretos
+ * de GitHub las toma por claves de verdad y avisa (le pasó a esta prueba).
  */
 class LimpiezaRegistroTest {
-	private val clave = "AQ.Ab8Zz9FAKEfakeFAKE0123456789abcdefGHIJklmnoPQRS"
+	/** Una clave inventada: el principio de su formato y un relleno que dice FAKE. */
+	private fun falsa(principio: String, relleno: String = "FAKEfake0123456789abcdefghijklmnop") = principio + relleno
+
+	private val clave = falsa("AQ" + ".", "Ab8Zz9FAKEfakeFAKE0123456789abcdefGHIJklmnoPQRS")
 	private val chat = "Enviado a las 12:18, No visto\nVisto 3 veces"
 
 	/** El caso real (07-11-2026): la clave pegada con un trozo del chat, en el mensaje de la excepción. */
@@ -56,12 +61,12 @@ class LimpiezaRegistroTest {
 	@Test
 	fun lasClavesDeCadaServicio() {
 		for (secreto in listOf(
-			"AIzaSyFAKE0123456789abcdefghijklmnopqrs",
+			falsa("AI" + "za" + "Sy", "FAKE0123456789abcdefghijklmnopqrs"),
 			clave,
-			"sk-ant-api03-FAKEfake0123456789abcdefghij",
-			"sk-proj-FAKEfake0123456789abcdefghijklmn",
-			"ghp_FAKEfake0123456789abcdefghijklmnop",
-			"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.FAKEfakeFAKE",
+			falsa("sk" + "-ant-api03-", "FAKEfake0123456789abcdefghij"),
+			falsa("sk" + "-proj-", "FAKEfake0123456789abcdefghijklmn"),
+			falsa("gh" + "p_"),
+			falsa("ey" + "JhbGciOiJIUzI1NiJ9.", "ey" + "JzdWIiOiJGQUtFIn0.FAKEfakeFAKE"),
 		)) {
 			val l = LimpiezaRegistro.linea("fallo con $secreto al pedir")
 			assertFalse("Se ve: $l", secreto.drop(4).take(10) in l)
