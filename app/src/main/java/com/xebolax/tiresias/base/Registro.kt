@@ -3,9 +3,8 @@ package com.xebolax.tiresias.base
 import android.content.Context
 import android.os.Build
 import android.util.Log
+import com.xebolax.tiresias.nucleo.LimpiezaRegistro
 import java.io.File
-import java.io.PrintWriter
-import java.io.StringWriter
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -15,7 +14,11 @@ import java.util.concurrent.Executors
  * Registro técnico local de fallos, para diagnosticar sin datos privados.
  *
  * Nunca se escribe aquí texto leído de otras aplicaciones ni lo que dice la voz:
- * solo qué componente falló, cómo y con qué excepción. Se guarda en el
+ * solo qué componente falló, cómo y con qué excepción. Y como la gente lo
+ * comparte en público, todo pasa por [LimpiezaRegistro] al escribir (en el
+ * archivo y en logcat) y otra vez al compartir: claves, texto entre comillas,
+ * correos, direcciones y las líneas de más de un mensaje de excepción nunca
+ * llegan (un usuario compartió así su clave de Gemini y un trozo de su chat). Se guarda en el
  * almacenamiento protegido del dispositivo (funciona antes de desbloquear tras
  * reiniciar) y se recorta solo para no crecer sin límite. El usuario lo puede
  * compartir desde Ajustes si quiere enviar un informe.
@@ -40,23 +43,25 @@ object Registro {
 	fun iniciar(contexto: Context) {
 		val dir = Almacen.protegido(contexto).filesDir
 		carpeta = dir
-		runCatching { hilo.execute { quitarDiagnostico(dir) } }.onFailure { Log.w("Registro", "No se pudo pasar al hilo del registro", it) }
+		runCatching { hilo.execute { limpiarGuardado(dir) } }.onFailure { Log.w("Registro", "No se pudo pasar al hilo del registro", it) }
 	}
 
 	/**
-	 * Quita las líneas de un diagnóstico de pruebas de la 1.0.6 (en un móvil de pruebas apuntaban los
-	 * identificadores de lo que se exploraba, también en la pantalla de bloqueo): no deben quedar ni
-	 * compartirse con un informe.
+	 * Limpia lo que ya está guardado de versiones anteriores, que no limpiaban al escribir: las claves y las
+	 * líneas de más de los mensajes de excepción (el trozo de chat de la 1.0.10), y las líneas de un diagnóstico
+	 * de pruebas de la 1.0.6 (apuntaban los identificadores de lo que se exploraba). Así no quedan ni en el
+	 * archivo. Solo se reescribe si cambia algo.
 	 */
 	@Synchronized
-	private fun quitarDiagnostico(dir: File) {
+	private fun limpiarGuardado(dir: File) {
 		for (nombre in listOf(ARCHIVO, ANTERIOR)) {
 			val f = File(dir, nombre)
 			try {
 				if (!f.exists()) continue
-				val lineas = f.readLines()
-				if (lineas.none { it.contains(" Diagnostico: ") }) continue
-				f.writeText(lineas.filterNot { it.contains(" Diagnostico: ") }.joinToString("\n", postfix = "\n"))
+				val antes = f.readText()
+				val sinDiagnostico = antes.lineSequence().filterNot { it.contains(" Diagnostico: ") }.joinToString("\n")
+				val limpio = LimpiezaRegistro.compartible(sinDiagnostico).trimEnd('\n') + "\n"
+				if (limpio != antes) f.writeText(limpio)
 			} catch (e: Exception) {
 				Log.w("Registro", "No se pudo limpiar el registro", e)
 			}
@@ -64,46 +69,50 @@ object Registro {
 	}
 
 	fun i(etiqueta: String, mensaje: String) {
-		Log.i(etiqueta, mensaje)
-		escribir("I", etiqueta, mensaje, null)
+		val limpio = LimpiezaRegistro.mensaje(mensaje)
+		Log.i(etiqueta, limpio)
+		escribir("I", etiqueta, limpio, null)
 	}
 
 	fun w(etiqueta: String, mensaje: String, error: Throwable? = null) {
-		Log.w(etiqueta, mensaje, error)
-		escribir("W", etiqueta, mensaje, error)
+		val limpio = LimpiezaRegistro.mensaje(mensaje)
+		val traza = error?.let { trazaLimpia(it) }
+		Log.w(etiqueta, if (traza == null) limpio else "$limpio\n$traza")
+		escribir("W", etiqueta, limpio, traza)
 	}
 
 	fun e(etiqueta: String, mensaje: String, error: Throwable? = null) {
-		Log.e(etiqueta, mensaje, error)
-		escribir("E", etiqueta, mensaje, error)
+		val limpio = LimpiezaRegistro.mensaje(mensaje)
+		val traza = error?.let { trazaLimpia(it) }
+		Log.e(etiqueta, if (traza == null) limpio else "$limpio\n$traza")
+		escribir("E", etiqueta, limpio, traza)
 	}
+
+	/** La pila de [error] sin datos: tipos, primeras líneas limpias de los mensajes y líneas de código. */
+	private fun trazaLimpia(error: Throwable): String = try {
+		LimpiezaRegistro.traza(error)
+	} catch (fallo: Exception) {
+		// (una excepción rara que no se deja recorrer: al menos su tipo)
+		Log.w("Registro", "No se pudo limpiar una traza", fallo)
+		error.javaClass.name
+	}
+
+	/** Un trozo de registro limpio para compartirlo (lo mismo que hace [texto] con el archivo entero). */
+	fun limpiar(t: String): String = LimpiezaRegistro.compartible(t)
 
 	/** El archivo del registro (para compartirlo), o null si aún no hay nada. */
 	fun archivo(): File? = carpeta?.let { File(it, ARCHIVO) }?.takeIf { it.exists() }
 
-	/** Todo el registro como texto, listo para compartirlo: la parte anterior y la actual, sin direcciones de red. */
+	/**
+	 * Todo el registro como texto, listo para compartirlo: la parte anterior y la actual, limpias otra vez línea a
+	 * línea y sin lo que no tiene forma de registro. Así también se limpia lo que escribieron las versiones de antes
+	 * (que guardaban enteros los mensajes de las excepciones, con sus líneas de más).
+	 */
 	fun texto(): String {
 		val dir = carpeta ?: return ""
-		return limpiar(listOf(ANTERIOR, ARCHIVO).map { File(dir, it) }.filter { it.exists() }
+		return LimpiezaRegistro.compartible(listOf(ANTERIOR, ARCHIVO).map { File(dir, it) }.filter { it.exists() }
 			.joinToString("") { runCatching { it.readText() }.getOrDefault("") })
 	}
-
-	/**
-	 * Quita las direcciones que traen las trazas de los errores de red (la del PC con NVDA, la del otro móvil en la
-	 * ayuda remota, un servidor propio): en un informe sobra saber que falló la conexión, y no salen del móvil.
-	 */
-	fun limpiar(t: String): String = DIRECCIONES.fold(t) { texto, r -> texto.replace(r) { m -> m.groupValues.getOrElse(1) { "" } + OCULTA } }
-
-	private const val OCULTA = "[dirección]"
-	private val DIRECCIONES = listOf(
-		Regex("(?i)(connect to )\\S+"),
-		Regex("(?i)(resolve host )\"[^\"]*\""),
-		Regex("(?i)(hostname )\\S+"),
-		Regex("(UnknownHostException: )\\S+"),
-		Regex("\\b\\d{1,3}(?:\\.\\d{1,3}){3}\\b"),
-		Regex("(?i)\\b[0-9a-f]{1,4}(?::[0-9a-f]{0,4}){3,7}\\b"),
-		Regex("(?i)\\b[a-z2-7]{16,56}\\.onion\\b"),
-	)
 
 	fun borrar() {
 		val dir = carpeta ?: return
@@ -117,15 +126,15 @@ object Registro {
 			.onFailure { Log.w("Registro", "No se pudo esperar al hilo del registro", it) }
 	}
 
-	private fun escribir(nivel: String, etiqueta: String, mensaje: String, error: Throwable?) {
+	private fun escribir(nivel: String, etiqueta: String, mensaje: String, traza: String?) {
 		val dir = carpeta ?: return
 		val momento = Date()
-		runCatching { hilo.execute { guardar(dir, momento, nivel, etiqueta, mensaje, error) } }
+		runCatching { hilo.execute { guardar(dir, momento, nivel, etiqueta, mensaje, traza) } }
 			.onFailure { Log.w("Registro", "No se pudo pasar al hilo del registro", it) }
 	}
 
 	@Synchronized
-	private fun guardar(dir: File, momento: Date, nivel: String, etiqueta: String, mensaje: String, error: Throwable?) {
+	private fun guardar(dir: File, momento: Date, nivel: String, etiqueta: String, mensaje: String, traza: String?) {
 		try {
 			val archivo = File(dir, ARCHIVO)
 			if (archivo.length() > MAXIMO) {
@@ -136,11 +145,7 @@ object Registro {
 			val linea = StringBuilder()
 				.append(formato.format(momento)).append(' ').append(nivel).append(' ')
 				.append(etiqueta).append(": ").append(mensaje).append('\n')
-			if (error != null) {
-				val traza = StringWriter()
-				error.printStackTrace(PrintWriter(traza))
-				linea.append(traza).append('\n')
-			}
+			if (traza != null) linea.append(traza).append('\n')
 			archivo.appendText(linea.toString())
 		} catch (fallo: Exception) {
 			// Sin registro en disco: queda al menos en logcat
