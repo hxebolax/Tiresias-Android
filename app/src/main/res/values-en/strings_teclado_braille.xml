@@ -25,6 +25,21 @@
 	<string name="braille_accion_sugerencias">Mention suggestions</string>
 	<string name="braille_accion_leer_campo">Read what is written</string>
 	<string name="braille_accion_calibrar">Calibrate the dots</string>
+	<string name="braille_accion_buscar_emoji">Search for an emoji</string>
+	<string name="braille_accion_edicion">Editing: copy, cut, paste, undo and more</string>
+	<string name="braille_accion_cursor_atras">Cursor back (through the text)</string>
+	<string name="braille_accion_cursor_adelante">Cursor forward (through the text)</string>
+	<string name="braille_accion_cambiar_unidad">Change the cursor unit (character, word, line)</string>
+	<string name="braille_accion_seleccionar">Start or stop selecting</string>
+	<string name="braille_accion_seleccionar_todo">Select all</string>
+	<string name="braille_accion_copiar">Copy</string>
+	<string name="braille_accion_cortar">Cut</string>
+	<string name="braille_accion_pegar">Paste</string>
+	<string name="braille_accion_deshacer">Undo</string>
+	<string name="braille_accion_rehacer">Redo</string>
+	<string name="braille_accion_ir_principio">Go to the start</string>
+	<string name="braille_accion_ir_final">Go to the end</string>
+	<string name="braille_accion_leer_seleccion">Read the selection</string>
 	<string name="braille_accion_quitar_calibracion">Remove the calibration</string>
 
 	<!-- Gesture names -->
@@ -110,4 +125,106 @@
 	<string name="gestos_braille_restablecer_pregunta">Go back to the factory braille keyboard gestures?</string>
 	<string name="gestos_braille_restablecidos">Factory gestures set</string>
 	<string name="gestos_braille_cambiado">%1$s: now %2$s</string>
+	<!-- Moving through and correcting the text (EdicionBraille) -->
+	<string name="braille_unidad_caracter">By characters</string>
+	<string name="braille_unidad_palabra">By words</string>
+	<string name="braille_unidad_linea">By lines</string>
+	<string name="braille_principio">Start</string>
+	<string name="braille_final">End</string>
+	<string name="braille_seleccionado">%1$s, selected</string>
+	<string name="braille_todo_seleccionado">All selected</string>
+	<string name="braille_nada_seleccionado">Nothing is selected</string>
+	<string name="braille_copiado">Copied: %1$s</string>
+	<string name="braille_cortado">Cut: %1$s</string>
+	<string name="braille_pegado_portapapeles">Pasted</string>
+	<string name="braille_deshecho">Undone</string>
+	<string name="braille_rehecho">Redone</string>
+	<string name="braille_seleccion_empieza">Selecting: move the cursor and what you pass over is selected</string>
+	<plurals name="braille_seleccion_termina">
+		<item quantity="one">Selection finished: one character</item>
+		<item quantity="other">Selection finished: %d characters</item>
+	</plurals>
+	<string name="braille_seleccion_empezar">Start selecting</string>
+	<string name="braille_seleccion_terminar">Stop selecting</string>
+
+	<!-- Emoji search -->
+	<string name="braille_busqueda_abierta">Search for an emoji: type words of its name in braille. One finger sideways goes through the results; two fingers down type it; two right, favourite; three right, save it in a category; two left delete a letter; one finger down separates words; two up, leave.</string>
+	<string name="braille_busqueda_sin">No emoji with «%1$s»</string>
+	<plurals name="braille_busqueda_hay">
+		<item quantity="one">One emoji: %2$s</item>
+		<item quantity="other">%1$d emoji. The first one: %2$s</item>
+	</plurals>
+	<plurals name="braille_busqueda_estado">
+		<item quantity="one">Searching «%1$s»: one emoji</item>
+		<item quantity="other">Searching «%1$s»: %2$d emoji</item>
+	</plurals>
+	<string name="braille_busqueda_escribe">First type a letter of the emoji name</string>
+	<string name="braille_busqueda_ayuda">One finger sideways, browse; two fingers down, type it; two right, favourite; three right, to a category; two left, delete a letter; one finger down, another word; one finger up, what you are searching; two up, leave</string>
+	<string name="braille_busqueda_cerrada">Emoji search closed</string>
+	<!-- The two braille keyboard menus -->
+	<string name="braille_accion_menu_lector">Screen reader menu</string>
+	<string name="braille_lector_sin_tiresias">The screen reader menu needs Tiresias turned on</string>
+	<string name="gestos_braille_del_lector">Screen reader: %1$s</string>
+	<string name="ordenar_teclado_titulo">Choose the braille keyboard menu</string>
+	<string name="ordenar_teclado_res">What one finger up shows on the braille keyboard, and in which order</string>
+	<string name="ordenar_teclado_explicacion">The checked options appear in the braille keyboard menu (one finger up), in this order. Uncheck the ones you do not want. Mention suggestions and remove calibration only appear when they make sense. To change the order of one, use Move up and Move down in its actions menu (or long press it).</string>
+	<string name="ordenar_lector_teclado_titulo">Choose the screen reader menu on the braille keyboard</string>
+	<string name="ordenar_lector_teclado_res">Tiresias actions at hand while you type, with three fingers up: the curtain, the time, the voice, the music…</string>
+	<string name="ordenar_lector_teclado_explicacion">The checked options appear in the screen reader menu of the braille keyboard (three fingers up), in this order. Only the Tiresias actions that work while you type are here: those that say something or change a setting, never those that open a window or move around the screen. Any of them can also be put directly on a keyboard gesture, in «Braille keyboard gestures».</string>
+	<!-- Own emoji categories -->
+	<string name="braille_sin_categorias">You have no categories of your own yet. Create them in Settings, Braille, My emoji.</string>
+	<string name="braille_categoria_titulo">Save %1$s in a category</string>
+	<string name="braille_categoria_ya_esta">%1$s, already there</string>
+	<string name="braille_categoria_puesto">Saved in %1$s</string>
+	<string name="braille_categoria_quitado">Removed from %1$s</string>
+	<string name="braille_vuelta_emojis">Back to the emoji</string>
+	<string name="braille_vuelta_busqueda">Back to the search</string>
+
+	<!-- My emoji (ActividadEmojisPropios) -->
+	<string name="aj_braille_emojis_propios">My emoji: favourites and categories</string>
+	<string name="aj_braille_emojis_propios_res">Create your own categories for your emoji, rename or delete them, and add, remove, move or order emoji</string>
+	<string name="ep_titulo">My emoji</string>
+	<string name="ep_explicacion">Your favourites come first when exploring emoji on the braille keyboard, followed by your categories. On the keyboard they are saved with two fingers right (favourite) or three fingers right (a category). Each emoji here has its menu: tap it or use the actions menu.</string>
+	<string name="ep_favoritos_cabecera">Favourites: %1$d</string>
+	<string name="ep_sin_favoritos">No favourites yet.</string>
+	<string name="ep_fila">%1$s, in %2$s</string>
+	<string name="ep_anadir_favorito">Add an emoji to favourites</string>
+	<string name="ep_categorias_cabecera">My categories</string>
+	<string name="ep_sin_categorias">No categories of your own yet.</string>
+	<plurals name="ep_categoria">
+		<item quantity="one">%1$s: one emoji</item>
+		<item quantity="other">%1$s: %2$d emoji</item>
+	</plurals>
+	<string name="ep_anadir_a">Add an emoji to %1$s</string>
+	<string name="ep_renombrar">Rename %1$s</string>
+	<string name="ep_borrar">Delete the category %1$s</string>
+	<plurals name="ep_borrar_pregunta">
+		<item quantity="one">Delete the category %1$s and its emoji? The emoji stays on the keyboard; only this list is removed.</item>
+		<item quantity="other">Delete the category %1$s and its %2$d emoji? The emoji stay on the keyboard; only this list is removed.</item>
+	</plurals>
+	<string name="ep_borrada">Category %1$s deleted</string>
+	<string name="ep_nueva">New category</string>
+	<string name="ep_nombre_pista">Category name</string>
+	<string name="ep_nombre_vacio">Type a name for the category</string>
+	<string name="ep_ya_existe">There is already a category with that name</string>
+	<string name="ep_creada">Category %1$s created</string>
+	<string name="ep_renombrada">%1$s is now called %2$s</string>
+	<string name="ep_quitar_favorito">Remove from favourites</string>
+	<string name="ep_poner_favorito">Add to favourites</string>
+	<string name="ep_guardar_en">Save in a category</string>
+	<string name="ep_quitar_de">Remove from %1$s</string>
+	<string name="ep_mover">Move to another category</string>
+	<string name="ep_elegir_categoria">%1$s: which category?</string>
+	<string name="ep_sin_otras">There is no other category: create one with «New category»</string>
+	<string name="ep_anadido">%1$s added to %2$s</string>
+	<string name="ep_quitado">%1$s removed from %2$s</string>
+	<string name="ep_movido">%1$s moved to %2$s</string>
+	<string name="ep_buscar_titulo">Search for an emoji</string>
+	<string name="ep_buscar_pista">Words of its name, like red heart</string>
+	<string name="ep_sin_resultados">No emoji with «%1$s»</string>
+	<plurals name="ep_resultados">
+		<item quantity="one">One emoji: choose it</item>
+		<item quantity="other">%d emoji: choose one</item>
+	</plurals>
+	<string name="ep_resultado">%1$s %2$s</string>
 </resources>

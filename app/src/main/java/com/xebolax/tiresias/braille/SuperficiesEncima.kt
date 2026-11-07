@@ -44,6 +44,21 @@ abstract class ModoSuperficie(protected val lector: Lector) {
 	 */
 	open fun crearVista(tocado: () -> Unit): android.view.View? = null
 
+	/**
+	 * Si vale también antes de Android 11, que no tiene zona de paso de toques: mientras está puesta, Tiresias
+	 * quita la exploración táctil (como hace TalkBack con su teclado braille) y la devuelve al quitarla.
+	 */
+	open val sinPasoDeToques: Boolean = false
+
+	/** Lo que se dice al quitarla; null, nada (el teclado braille: lo que dice es la app que queda delante). */
+	open fun avisoAlCerrar(): String? = lector.textos.getString(R.string.superficie_cerrada)
+
+	/** Sin tocarla tanto tiempo, se quita sola. */
+	open val sinUsoMs: Long = 5 * 60_000L
+
+	/** Que la pantalla no gire mientras está puesta: los puntos se ponen girando el móvil para sujetarlo. */
+	open val bloquearGiro: Boolean = false
+
 	/** Quién la tiene puesta (para cerrarla desde dentro). */
 	internal var encima: SuperficieEncima? = null
 
@@ -75,8 +90,11 @@ class SuperficieEncima(private val lector: Lector) {
 
 	val abierta: Boolean get() = modo != null
 
+	/** Si esta superficie ha quitado la exploración táctil (antes de Android 11). */
+	@Volatile private var sinExploracion = false
+
 	fun abrir(m: ModoSuperficie) {
-		if (Build.VERSION.SDK_INT < 30) {
+		if (Build.VERSION.SDK_INT < 30 && !m.sinPasoDeToques) {
 			lector.decir(R.string.superficie_no_disponible)
 			return
 		}
@@ -84,6 +102,8 @@ class SuperficieEncima(private val lector: Lector) {
 		modo = m
 		m.encima = this
 		principal.post {
+			// (si ya se ha quitado antes de llegar aquí, nada)
+			if (modo !== m) return@post
 			val wm = lector.servicio.getSystemService(WindowManager::class.java) ?: return@post
 			val oyente = object : OyenteSuperficie {
 				override fun alPuntos(puntos: Int) {
@@ -111,18 +131,35 @@ class SuperficieEncima(private val lector: Lector) {
 				WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
 				PixelFormat.OPAQUE,
 			)
+			if (m.bloquearGiro) params.screenOrientation = android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LOCKED
 			try {
 				// Primero el paso de los toques: si el dedo baja enseguida, ya llega a la superficie
-				lector.gestos.pasoParaSuperficie(true)
+				if (Build.VERSION.SDK_INT >= 30) lector.gestos.pasoParaSuperficie(true)
+				else {
+					sinExploracion = true
+					com.xebolax.tiresias.servicio.ServicioTiresias.instancia?.quitarExploracion(true)
+				}
 				wm.addView(v, params)
 				vista = v
 				tocado()
-				lector.manejador.post { lector.decir(m.aviso(), Modo.INTERRUMPIR, Tipo.SISTEMA) }
+				val aviso = m.aviso()
+				if (aviso.isNotEmpty()) lector.manejador.post { lector.decir(aviso, Modo.INTERRUMPIR, Tipo.SISTEMA) }
 			} catch (e: Exception) {
 				Registro.e(ETIQUETA, "No se pudo poner la superficie braille", e)
 				modo = null
-				lector.manejador.post { lector.gestos.pasoParaSuperficie(false) }
+				m.encima = null
+				devolverToques()
+				lector.manejador.post { m.alCerrar() }
 			}
+		}
+	}
+
+	/** Lo contrario de abrir: los toques vuelven a la exploración táctil. */
+	private fun devolverToques() {
+		if (Build.VERSION.SDK_INT >= 30) lector.manejador.post { lector.gestos.pasoParaSuperficie(false) }
+		if (sinExploracion) {
+			sinExploracion = false
+			com.xebolax.tiresias.servicio.ServicioTiresias.instancia?.quitarExploracion(false)
 		}
 	}
 
@@ -136,10 +173,10 @@ class SuperficieEncima(private val lector: Lector) {
 			vista = null
 			if (v != null) runCatching { lector.servicio.getSystemService(WindowManager::class.java)?.removeView(v) }
 				.onFailure { Registro.w(ETIQUETA, "No se pudo quitar la superficie braille", it) }
+			devolverToques()
 			lector.manejador.post {
-				lector.gestos.pasoParaSuperficie(false)
 				m.alCerrar()
-				lector.decir(R.string.superficie_cerrada)
+				m.avisoAlCerrar()?.let { lector.decir(it) }
 			}
 		}
 	}
@@ -153,13 +190,11 @@ class SuperficieEncima(private val lector: Lector) {
 
 	private fun tocado() {
 		principal.removeCallbacks(sinUso)
-		principal.postDelayed(sinUso, SIN_USO_MS)
+		principal.postDelayed(sinUso, modo?.sinUsoMs ?: return)
 	}
 
 	private companion object {
 		const val ETIQUETA = "SuperficieEncima"
-		/** Sin tocarla tanto tiempo, se quita sola. */
-		const val SIN_USO_MS = 5 * 60_000L
 	}
 }
 

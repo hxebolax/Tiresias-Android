@@ -19,7 +19,8 @@ import javax.crypto.spec.GCMParameterSpec
 class Secretos(contexto: Context) {
 	private val p = contexto.applicationContext.getSharedPreferences("secretos", Context.MODE_PRIVATE)
 
-	fun guardar(nombre: String, valor: String) {
+	fun guardar(nombre: String, valorPegado: String) {
+		val valor = limpiar(valorPegado)
 		if (valor.isBlank()) {
 			p.edit().remove(nombre).apply()
 			return
@@ -40,7 +41,8 @@ class Secretos(contexto: Context) {
 			val (iv, datos) = guardado.split(':').let { Base64.decode(it[0], Base64.NO_WRAP) to Base64.decode(it[1], Base64.NO_WRAP) }
 			val c = Cipher.getInstance(TRANSFORMACION)
 			c.init(Cipher.DECRYPT_MODE, clave(), GCMParameterSpec(128, iv))
-			String(c.doFinal(datos), Charsets.UTF_8)
+			// (las guardadas antes de limpiarlas al guardar: con lo pegado de más, la petición ni salía)
+			limpiar(String(c.doFinal(datos), Charsets.UTF_8))
 		} catch (e: Exception) {
 			Registro.e(ETIQUETA, "No se pudo leer la clave $nombre", e)
 			""
@@ -64,6 +66,15 @@ class Secretos(contexto: Context) {
 	}
 
 	companion object {
+		/**
+		 * La clave tal cual la quiere el servicio: lo pegado puede traer más líneas (un usuario pegó la clave con
+		 * «Enviado a las 12:18, No visto» de su chat) o espacios, y con un salto de línea Android rechaza la
+		 * cabecera con la clave dentro del mensaje de error. Se queda la primera palabra no vacía.
+		 */
+		fun limpiar(valor: String): String =
+			valor.split(Regex("\\s+")).map { t -> t.filterNot { it.isWhitespace() || it.isISOControl() || it == '\u200B' || it == '\uFEFF' } }
+				.firstOrNull { it.isNotEmpty() }.orEmpty()
+
 		private const val ETIQUETA = "Secretos"
 		private const val ALIAS = "tiresias_secretos"
 		private const val TRANSFORMACION = "AES/GCM/NoPadding"

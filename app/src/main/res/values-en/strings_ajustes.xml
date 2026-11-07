@@ -344,7 +344,7 @@
 	<string name="aj_toque_directo_teclado">Direct touch on the on-screen keyboard</string>
 	<string name="aj_toque_directo_teclado_res">You type by touching the keys, as without a screen reader (for fast typists or another app\'s braille keyboard)</string>
 	<string name="aj_braille_espejo">Mirrored dots</string>
-	<string name="aj_braille_espejo_res">For holding the phone with the screen towards you: dot 1 is on the right</string>
+	<string name="aj_braille_espejo_res">For typing with the phone lying on the table, screen up: the six fingers in a row, 3, 2, 1, 4, 5 and 6</string>
 	<string name="aj_braille_sensor">Dots according to how you hold the phone</string>
 	<string name="aj_braille_sensor_res">On the table (screen towards you), mirrored; upright with the screen facing away, normal. Overrides “Mirrored dots”</string>
 	<string name="aj_braille_eco">When typing in braille, say</string>

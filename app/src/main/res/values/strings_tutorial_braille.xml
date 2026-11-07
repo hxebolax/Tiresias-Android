@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tutorial y práctica del teclado braille en pantalla (ActividadTutorialBraille y ModoPracticaBraille). -->
+<resources>
+	<string name="tb_titulo">Tutorial del teclado braille</string>
+	<string name="aj_braille_tutorial">Tutorial y práctica del teclado braille</string>
+	<string name="aj_braille_tutorial_res">De cero a escribir con soltura: cómo sujetar el móvil, calibrar, todas las letras, números, signos y gestos, cada lección con su práctica, y un campo para probar el teclado de verdad</string>
+	<string name="braille_rotulo_teclado">⠿ Teclado braille de Tiresias</string>
+	<string name="braille_rotulo_practica">⠿ Práctica del teclado braille</string>
+
+	<string name="tb_practicar">Practicar esta lección</string>
+	<string name="tb_sin_tiresias">La práctica y el teclado braille necesitan Tiresias activo. Actívalo y vuelve aquí.</string>
+	<string name="tb_sin_ajustes_teclados">No se pudieron abrir los ajustes de teclados del sistema</string>
+	<string name="tb_estado_activado">el teclado braille de Tiresias está activado en el sistema</string>
+	<string name="tb_estado_sin_activar">activar el teclado braille de Tiresias en los ajustes de teclados del sistema</string>
+	<string name="tb_activar">Abrir los ajustes de teclados del sistema</string>
+	<string name="tb_campo">Escribe aquí para probar el teclado braille</string>
+	<string name="tb_cambiar">Cambiar al teclado braille y escribir en el campo</string>
+	<string name="tb_gestos">Cambiar los gestos del teclado braille</string>
+
+	<string name="tb_1_titulo">Qué es el teclado braille</string>
+	<string name="tb_1">El teclado braille de Tiresias te deja escribir en cualquier app tocando la pantalla con seis dedos, como en una máquina Perkins.\n\nCada letra es una celda braille de seis puntos en dos columnas de tres: a la izquierda, de arriba abajo, los puntos 1, 2 y 3; a la derecha, los puntos 4, 5 y 6. Para escribir una letra, apoyas a la vez los dedos de sus puntos y los levantas: al levantar el último dedo se escribe y Tiresias la dice. No hace falta que caigan exactamente a la vez; lo que cuenta es que estén todos apoyados antes de levantar ninguno.\n\nSe usa la signografía braille española de la ONCE, sin contracciones. Si nunca has escrito en braille, no te preocupes: este tutorial empieza desde cero y casi todas las lecciones tienen su práctica.\n\nMientras practicas o escribes, los gestos de Tiresias no funcionan en la pantalla: el teclado tiene los suyos, y se sale siempre con dos dedos hacia arriba. Si algo no responde, pulsa a la vez las dos teclas de volumen y todo vuelve a la normalidad.</string>
+
+	<string name="tb_2_titulo">Cómo sujetar el móvil y dónde están los puntos</string>
+	<string name="tb_2">Hay dos formas de sujetarlo.\n\nPantalla hacia fuera, la de fábrica: coge el móvil en horizontal con las dos manos, con la pantalla mirando hacia fuera, lejos de ti, y la parte de arriba del móvil, la del auricular y la cámara delantera, en tu mano izquierda. Los dedos rodean el móvil y tocan la pantalla; los pulgares quedan detrás, sujetando. Con la mano izquierda escribes los puntos 1, 2 y 3: el índice arriba es el punto 1, el corazón en medio el 2 y el anular abajo el 3. Con la mano derecha, igual: índice punto 4, corazón punto 5 y anular punto 6.\n\nSobre la mesa: el móvil tumbado en horizontal, con la pantalla hacia arriba y su parte de arriba a tu izquierda. Los seis dedos en fila, como en una Perkins: de izquierda a derecha, anular, corazón e índice de la mano izquierda (puntos 3, 2 y 1) e índice, corazón y anular de la derecha (puntos 4, 5 y 6). Para escribir así, activa «Puntos en espejo» en los ajustes de braille, o «Puntos según cómo sujetas el móvil» para que Tiresias lo note solo.\n\nLa pantalla no gira mientras escribes, para que los puntos no cambien de sitio.\n\nEn la práctica, toca con un solo dedo en distintos sitios y Tiresias te dirá qué punto es, hasta que encuentres los seis.</string>
+
+	<string name="tb_3_titulo">Calibrar: los puntos donde caen tus dedos</string>
+	<string name="tb_3">Cada mano es distinta. Calibrar le dice a Tiresias dónde apoyas cada dedo, y a partir de ahí cada toque cuenta como el punto más cercano. Es lo más recomendable antes de empezar a escribir.\n\nEn la práctica, sujeta el móvil como vayas a escribir y Tiresias te pedirá los puntos de uno en uno: toca el punto 1, toca el punto 2, y así hasta el 6. Toca cada uno con un solo dedo, donde te caiga natural. Si dos quedan demasiado juntos, te lo pide otra vez. Con dos dedos hacia arriba se cancela.\n\nLa calibración se guarda aparte para la pantalla hacia fuera y para sobre la mesa. Puedes repetirla cuando quieras, desde aquí o desde el menú del teclado, y quitarla en los ajustes de braille.</string>
+
+	<string name="tb_4_titulo">Las primeras letras: a, b, c, d y e</string>
+	<string name="tb_4">Las diez primeras letras usan solo los puntos de arriba y de en medio: 1, 2, 4 y 5. Empezamos por cinco, y todas llevan el punto 1:\n\na: punto 1.\nb: puntos 1 y 2.\nc: puntos 1 y 4.\nd: puntos 1, 4 y 5.\ne: puntos 1 y 5.\n\nEn la práctica, Tiresias te pide cada letra con sus puntos; después viene un repaso en desorden en el que ya no te los dice, salvo si te equivocas. Si fallas, te dice qué has escrito y qué tocaba. Cualquier gesto repite lo que toca, y dos dedos hacia arriba salen de la práctica.</string>
+
+	<string name="tb_5_titulo">Más letras: f, g, h, i y j</string>
+	<string name="tb_5">f: puntos 1, 2 y 4.\ng: puntos 1, 2, 4 y 5.\nh: puntos 1, 2 y 5.\ni: puntos 2 y 4.\nj: puntos 2, 4 y 5.\n\nLa i y la j son las únicas de esta serie sin el punto 1. Estas diez letras, de la a a la j, son la base de casi todo: las demás se forman añadiéndoles puntos, y también son los números.</string>
+
+	<string name="tb_6_titulo">De la k a la t: se añade el punto 3</string>
+	<string name="tb_6">La segunda serie es la primera con el punto 3 añadido:\n\nk: puntos 1 y 3 (la a más el 3).\nl: puntos 1, 2 y 3.\nm: puntos 1, 3 y 4.\nn: puntos 1, 3, 4 y 5.\no: puntos 1, 3 y 5.\np: puntos 1, 2, 3 y 4.\nq: puntos 1, 2, 3, 4 y 5.\nr: puntos 1, 2, 3 y 5.\ns: puntos 2, 3 y 4.\nt: puntos 2, 3, 4 y 5.\n\nSi recuerdas la letra de la primera serie, solo tienes que añadir el dedo del punto 3.</string>
+
+	<string name="tb_7_titulo">u, v, x, y, z, ñ y w</string>
+	<string name="tb_7">La tercera serie añade los puntos 3 y 6 a la primera:\n\nu: puntos 1, 3 y 6.\nv: puntos 1, 2, 3 y 6.\nx: puntos 1, 3, 4 y 6.\ny: puntos 1, 3, 4, 5 y 6.\nz: puntos 1, 3, 5 y 6.\n\nY dos letras que van aparte:\n\nñ: puntos 1, 2, 4, 5 y 6.\nw: puntos 2, 4, 5 y 6.</string>
+
+	<string name="tb_8_titulo">Vocales con tilde y la ü</string>
+	<string name="tb_8">á: puntos 1, 2, 3, 5 y 6.\né: puntos 2, 3, 4 y 6.\ní: puntos 3 y 4.\nó: puntos 3, 4 y 6.\nú: puntos 2, 3, 4, 5 y 6.\nü: puntos 1, 2, 5 y 6.\n\nNo se parecen a sus vocales sin tilde: hay que aprenderlas aparte. La í y la ó son las más cortas.</string>
+
+	<string name="tb_9_titulo">Mayúsculas y números</string>
+	<string name="tb_9">Para una mayúscula, escribe antes el signo de mayúscula, puntos 4 y 6, y después la letra: la B mayúscula son los puntos 4 y 6 y luego 1 y 2. Vale solo para la letra siguiente.\n\nPara un número, escribe antes el signo de número, puntos 3, 4, 5 y 6, y después las cifras con las letras de la a a la j: 1 es la a, 2 la b, 3 la c, 4 la d, 5 la e, 6 la f, 7 la g, 8 la h, 9 la i y 0 la j. El signo de número vale para todas las cifras seguidas, hasta un espacio o una letra que no sea de la a a la j. Así, 25 son el signo de número, la b y la e.\n\nCada cifra se dice al escribirla, y al poner el espacio detrás Tiresias dice el número entero: al escribir 2026 y un espacio oyes «dos mil veintiséis». La coma y el punto valen dentro de un número (3,5).\n\nEn los ajustes de braille puedes activar «Mayúscula automática», que pone sola la mayúscula al empezar una frase.</string>
+
+	<string name="tb_10_titulo">Signos de puntuación</string>
+	<string name="tb_10">Casi todos están en la parte de abajo de la celda:\n\nPunto: punto 3.\nComa: punto 2.\nPunto y coma: puntos 2 y 3.\nDos puntos: puntos 2 y 5.\nInterrogación: puntos 2 y 6 (el teclado escribe la de cerrar).\nExclamación: puntos 2, 3 y 5 (también la de cerrar).\nGuion: puntos 3 y 6.\nParéntesis de abrir: puntos 1, 2 y 6; de cerrar: puntos 3, 4 y 5.\nComillas: puntos 2, 3 y 6.\nApóstrofo: punto 5.\nIgual: puntos 2, 3, 5 y 6.\nAsterisco: puntos 3 y 5.\nBarra: puntos 2, 5 y 6.\nGuion bajo: puntos 4, 5 y 6.\n\nLa práctica pide los siete primeros y un repaso.</string>
+
+	<string name="tb_11_titulo">Los gestos: espacio, borrar, Intro y más</string>
+	<string name="tb_11">Además de los puntos, el teclado tiene gestos: deslizar uno, dos o tres dedos en un sentido. Los sentidos son los tuyos, con el móvil cogido para escribir: a la derecha es hacia tu derecha. Para que cuente como gesto, mueve el dedo al menos un centímetro; si lo mueves menos, es un punto.\n\nDe fábrica:\n\nUn dedo a la derecha: espacio.\nUn dedo a la izquierda: borrar la letra de antes.\nDos dedos a la izquierda: borrar la palabra.\nDos dedos hacia abajo: Intro, o lo que pida el campo (enviar, buscar, siguiente). En las apps de mensajes, pulsa Enviar.\nUn dedo hacia arriba: el menú del teclado.\nUn dedo hacia abajo: las sugerencias al mencionar a alguien con arroba.\nDos dedos a la derecha: dictar con la voz.\nTres dedos a la izquierda o a la derecha: mover el cursor por lo escrito, diciendo lo que pasa.\nTres dedos hacia abajo: cambiar lo que mueve el cursor (carácter, palabra o línea).\nDos dedos hacia arriba: volver al teclado que tenías antes (y salir de las prácticas).\nTres dedos hacia arriba: el menú del lector (la cortina, la hora, la voz…).\n\nTodos se pueden cambiar en «Gestos del teclado braille», en los ajustes de braille; la práctica usa los que tengas puestos.</string>
+
+	<string name="tb_12_titulo">El menú del teclado</string>
+	<string name="tb_12">Con un dedo hacia arriba se abre el menú del teclado: emojis, buscar un emoji, portapapeles, sugerencias (si estás mencionando a alguien), dictado, leer todo lo escrito, Edición, borrar la palabra, calibrar, quitar la calibración, bloquear la orientación y cambiar de teclado.\n\nEl menú y sus listas se recorren siempre igual: un dedo a la derecha o a la izquierda, el elemento siguiente o el anterior; un dedo hacia arriba o hacia abajo, el grupo (las categorías de los emojis); dos dedos hacia abajo, elegir; dos dedos hacia arriba, salir del menú; dos dedos a la derecha, poner o quitar de favoritos. Escribir una letra también cierra la lista.\n\nEl portapapeles recuerda lo que copias mientras el teclado braille es el elegido, solo en memoria. Bloquear la orientación fija los puntos como los ha detectado el sensor.\n\nEste menú se puede cambiar: en Ajustes, Braille, «Elegir el menú del teclado braille» quitas lo que no uses y ordenas el resto. El menú del lector, el dictado, Edición y los emojis tienen su propia lección a continuación.</string>
+
+	<string name="tb_13_titulo">Palabras enteras</string>
+	<string name="tb_13">Ya conoces todas las letras. Ahora, palabras: Tiresias te dice una y la escribes letra a letra; cada letra bien escrita se dice. No hace falta un espacio al final. Si te equivocas, te dice qué has escrito y la letra que toca con sus puntos, y sigues desde ahí. Cualquier gesto te recuerda la palabra y por dónde vas.\n\nHay una con eñe, una con tilde, una con mayúscula y un número: sol, casa, niño, café, Tiresias y 2026.</string>
+
+	<string name="tb_14_titulo">Práctica libre</string>
+	<string name="tb_14">Aquí escribes lo que quieras, sin que nadie te corrija: cada letra se dice al escribirla y el espacio dice la palabra terminada. Con el gesto de Intro (de fábrica, dos dedos hacia abajo) oyes todo lo escrito, y funcionan borrar y borrar la palabra.\n\nEs la mejor forma de soltarse antes de usarlo de verdad. Nada de lo que escribas aquí se guarda.</string>
+
+	<string name="tb_15_titulo">Usarlo de verdad</string>
+	<string name="tb_15">Para escribir con el teclado braille en cualquier app:\n\n1. Actívalo una vez en los ajustes de teclados del sistema: «Teclado braille de Tiresias». Android avisa de que un teclado puede ver lo que escribes; es el aviso de siempre para cualquier teclado.\n2. En un campo de texto, cambia a él. En Android 11 o posterior lo hace Tiresias con la acción «Teclado braille» (ponla en un gesto o búscala en el menú de acciones); en los anteriores, sale la lista de teclados del sistema.\n3. Escribe. Con Tiresias activo, el teclado ocupa toda la pantalla y los dedos le llegan directamente. Para terminar, dos dedos hacia arriba: vuelves al teclado de antes.\n\nSi algo no responde, las dos teclas de volumen a la vez quitan el teclado braille y devuelven los gestos de Tiresias.\n\nPruébalo aquí abajo: el botón cambia al teclado braille y lo abre en el campo.</string>
+
+	<!-- La práctica (lo dice la voz) -->
+	<string name="tb_punto">punto %1$s</string>
+	<string name="tb_puntos">puntos %1$s y %2$s</string>
+	<string name="tb_y_despues">"; y después, "</string>
+	<string name="tb_aviso_puntos">Práctica: dónde están los puntos. Toca con un solo dedo en distintos sitios y te digo qué punto es. Cuando encuentres los seis, terminamos. Dos dedos hacia arriba, salir.</string>
+	<string name="tb_puntos_un_dedo">Aquí, toca con un solo dedo</string>
+	<string name="tb_puntos_todos">¡Muy bien! Has encontrado los seis puntos.</string>
+	<plurals name="tb_puntos_faltan">
+		<item quantity="one">%1$s. Te falta uno.</item>
+		<item quantity="other">%1$s. Te faltan %2$d.</item>
+	</plurals>
+	<string name="tb_aviso_calibrar">Práctica: calibrar. Sujeta el móvil como vayas a escribir.</string>
+	<string name="tb_aviso_escribir">Práctica. Escribe lo que te pida: apoya a la vez los dedos de sus puntos y levántalos. Cualquier gesto repite lo que toca; dos dedos hacia arriba, salir.</string>
+	<string name="tb_aviso_gestos">Práctica: los gestos. Haz el gesto que te pida. Dos dedos hacia arriba, salir.</string>
+	<string name="tb_aviso_libre">Práctica libre. Escribe lo que quieras: cada letra se dice. %1$s Dos dedos hacia arriba, salir.</string>
+	<string name="tb_escribe">Escribe</string>
+	<string name="tb_escribe_palabra">Escribe la palabra %1$s</string>
+	<string name="tb_vas_por">Vas por %1$s</string>
+	<string name="tb_ahora">Ahora</string>
+	<string name="tb_bien">¡Bien!</string>
+	<string name="tb_leccion_terminada">Lección terminada.</string>
+	<string name="tb_has_escrito">Has escrito</string>
+	<string name="tb_no_es_letra">%1$s: no es ninguna letra.</string>
+	<string name="tb_prueba_otra">Prueba otra vez. Toca</string>
+	<string name="tb_gestos_no_puntos">Aquí van gestos: desliza los dedos</string>
+	<string name="tb_haz_gesto">%1$s: %2$s</string>
+	<string name="tb_gesto_bien">¡Bien! %1$s.</string>
+	<string name="tb_gestos_todos">¡Muy bien! Ya conoces los gestos.</string>
+	<string name="tb_gesto_nada">%1$s no hace nada en el teclado.</string>
+	<string name="tb_gesto_otro">%1$s es %2$s.</string>
+	<string name="tb_gesto_repite">Prueba otra vez: %1$s.</string>
+	<string name="tb_libre_gesto">%1$s: %2$s.</string>
+	<string name="tb_libre_leer">Oír todo lo escrito</string>
+	<string name="tb_libre_vacio">Aún no has escrito nada</string>
+	<string name="tb_libre_todo">Has escrito: %1$s</string>
+	<string name="tb_libre_otro">%1$s: en el teclado de verdad, sí</string>
+	<string name="tb_vuelta">Práctica quitada. Vuelves al tutorial.</string>
+	<string name="tb_vuelta_terminada">Vuelves al tutorial.</string>
+	<string name="tb_dictar_titulo">Dictar con la voz</string>
+	<string name="tb_dictar">A veces es más rápido decirlo que escribirlo. Sin salir del teclado braille, desliza dos dedos a la derecha (o elige «Dictar» en el menú del teclado) y habla: lo que dices se escribe en el cursor y Tiresias lo lee. Si el campo lo pide, la primera letra va en mayúscula, y si lo de antes no termina en espacio, se pone uno.\n\nPara pararlo antes de tiempo, repite el mismo gesto. Usa el reconocimiento de voz de Tiresias: el que no necesita Internet si te has descargado su modelo, o el del sistema. La primera vez Android pide permiso para el micrófono.\n\nDespués sigues escribiendo en braille como siempre: puedes mezclar las dos cosas en el mismo mensaje.</string>
+
+	<string name="tb_corregir_titulo">Recorrer y corregir lo escrito</string>
+	<string name="tb_corregir">No hace falta salir del teclado para revisar lo que has escrito.\n\nTres dedos a la izquierda o a la derecha mueven el cursor y dicen lo que pasa por encima. Tres dedos hacia abajo cambian lo que avanza: por caracteres, por palabras o por líneas. Al llegar al principio o al final, te lo dice. Lo que escribas va donde está el cursor, y borrar quita lo que tiene delante (a su izquierda): así corriges una letra en medio de una palabra.\n\nEn el menú del teclado, «Edición» tiene lo de un editor de texto:\n\nEmpezar a seleccionar: desde ahí, lo que recorras con el cursor queda seleccionado; «Terminar de seleccionar» dice cuántos caracteres llevas.\nSeleccionar todo.\nCopiar y cortar lo seleccionado; pegar lo copiado.\nDeshacer y rehacer.\nIr al principio y al final.\nLeer lo seleccionado.\n\n«Leer lo escrito», en el mismo menú, dice el campo entero. En una contraseña, si Android no muestra lo que escribes, Tiresias dice «punto» en vez de las letras. Todo esto se prueba en el campo de la última lección.</string>
+
+	<string name="tb_emojis_titulo">Emojis: explorar, buscar y favoritos</string>
+	<string name="tb_emojis">Hay dos formas de poner un emoji, las dos desde el menú del teclado.\n\nExplorar: «Emojis» abre la lista por grupos: primero tus favoritos, luego tus categorías propias y después las de siempre (caras, gestos, personas, corazones, animales, comida, actividades, viajes, objetos, símbolos y banderas). Un dedo hacia arriba o hacia abajo cambia de grupo; un dedo a los lados, de emoji; dos dedos hacia abajo lo escriben y la lista sigue abierta para poner más.\n\nBuscar: «Buscar un emoji» te deja escribir en braille palabras de su nombre, sin tildes si quieres: «cor» y luego «roj» encuentran el corazón rojo. Tras cada letra, Tiresias dice cuántos hay y el primero; una letra que no deja ninguno no se tiene en cuenta. Un dedo a los lados recorre lo encontrado; un dedo hacia abajo empieza otra palabra; dos dedos a la izquierda borran una letra; dos hacia abajo escriben el emoji; dos hacia arriba salen. Los nombres son los de la base de emojis de Tiresias, en tu idioma.\n\nFavoritos: en las dos, dos dedos a la derecha ponen el emoji en favoritos, y el mismo gesto lo quita.\n\nTus categorías: tres dedos a la derecha guardan el emoji en una de tus categorías (Familia, Trabajo, lo que quieras); si ya estaba, lo quitan. Las categorías se crean, se cambian de nombre y se borran en Ajustes, Braille, «Mis emojis: favoritos y categorías», donde también puedes añadir emojis buscándolos, quitarlos, moverlos de una categoría a otra y ordenarlos.\n\nEn la práctica buscas un emoji de verdad: prueba a ponerlo en favoritos y después elígelo con dos dedos hacia abajo.</string>
+
+	<string name="tb_cortina_titulo">Escribir sin que nadie lo vea</string>
+	<string name="tb_cortina">Con Tiresias activo, el teclado braille tapa toda la app mientras escribes: lo escrito no se ve en la pantalla, solo una superficie negra con su nombre arriba.\n\nSi además pones la cortina de pantalla de Tiresias, la pantalla se queda negra del todo, sin ese nombre, y el teclado funciona igual: la cortina deja pasar los dedos. Así nadie a tu alrededor ve lo que escribes ni que estás escribiendo.\n\nRecuerda que lo escrito sí se oye: con auriculares, solo lo oyes tú. En una contraseña, si Android no muestra lo que escribes, Tiresias dice «punto» en vez de cada letra.</string>
+
+	<string name="tb_aviso_emojis">Práctica: buscar un emoji. Escribe en braille letras de su nombre, por ejemplo cor, de corazón. Un dedo a los lados recorre lo encontrado; dos dedos a la derecha, favorito; dos a la izquierda borran una letra; dos hacia abajo lo eligen. Dos hacia arriba, salir.</string>
+	<string name="tb_emoji_elegido">¡Bien! Has elegido %1$s. En el teclado de verdad se escribiría en el campo.</string>
+	<string name="tb_emoji_favorito_pendiente">La próxima vez prueba también a ponerlo en favoritos con dos dedos a la derecha.</string>
+	<string name="tb_escribe_numero">Escribe el número %1$s</string>
+	<string name="tb_lector_titulo">El menú del lector: Tiresias sin salir del teclado</string>
+	<string name="tb_lector">Con tres dedos hacia arriba se abre el menú del lector: acciones de Tiresias que puedes usar mientras escribes, sin cerrar el teclado. De fábrica: la cortina de pantalla, la hora y la batería, el resumen de los avisos, repetir lo último, leer el portapapeles, la velocidad y el volumen de la voz, y la música (pausar y seguir). Se recorre igual que el menú del teclado.\n\nSolo hay acciones que dicen algo o cambian un ajuste: las que abren una ventana o recorren la pantalla no valen con el teclado puesto, porque la superficie las taparía.\n\nPara elegirlo a tu gusto, en Ajustes, Braille, «Elegir el menú del lector en el teclado braille»: marcas las que quieras (también el tono, la puntuación, cambiar de voz o de idioma, contestar o rechazar una llamada…) y las ordenas.\n\nY para tenerlas aún más a mano, cualquiera se puede poner directamente en un gesto del teclado, en «Gestos del teclado braille»: salen al final de la lista, con «Lector» delante. Por ejemplo, tres dedos hacia abajo para la cortina.</string>
+</resources>

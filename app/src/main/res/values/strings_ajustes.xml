@@ -441,7 +441,7 @@
 	<string name="aj_toque_directo_teclado">Toque directo en el teclado en pantalla</string>
 	<string name="aj_toque_directo_teclado_res">Se escribe tocando las teclas, como sin lector (para quien escribe rápido de memoria o con un teclado braille de otra app)</string>
 	<string name="aj_braille_espejo">Puntos en espejo</string>
-	<string name="aj_braille_espejo_res">Para sujetar el móvil con la pantalla hacia ti: el punto 1 queda a la derecha</string>
+	<string name="aj_braille_espejo_res">Para escribir con el móvil tumbado sobre la mesa y la pantalla hacia arriba: los seis dedos en fila, 3, 2, 1, 4, 5 y 6</string>
 	<string name="aj_braille_sensor">Puntos según cómo sujetas el móvil</string>
 	<string name="aj_braille_sensor_res">Sobre la mesa (pantalla hacia ti), en espejo; de pie con la pantalla hacia fuera, normales. Manda sobre «Puntos en espejo»</string>
 	<string name="aj_braille_eco">Al escribir en braille, decir</string>

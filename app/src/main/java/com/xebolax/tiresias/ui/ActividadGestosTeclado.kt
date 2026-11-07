@@ -9,6 +9,7 @@ import com.xebolax.tiresias.base.Ajustes
 import com.xebolax.tiresias.braille.AccionTeclado
 import com.xebolax.tiresias.braille.GestoBraille
 import com.xebolax.tiresias.braille.GestosTeclado
+import com.xebolax.tiresias.nucleo.Accion
 
 /**
  * Los gestos del teclado braille en pantalla, como la pantalla de Gestos: cada
@@ -29,17 +30,25 @@ class ActividadGestosTeclado : ActividadBase() {
 	}
 
 	private val mapa: Map<String, AccionTeclado> get() = GestosTeclado.leer(ajustes.gestosTecladoBraille)
+	private val mapaLector: Map<String, Accion> get() = GestosTeclado.leerLector(ajustes.gestosTecladoBraille)
 
-	private fun fila(g: GestoBraille, a: AccionTeclado): String = getString(R.string.gestos_braille_fila, GestosTeclado.nombre(this, g), a.nombre(this))
+	/** El nombre de una acción del lector, con «Lector» delante para no confundirla con las del teclado. */
+	private fun nombreLector(a: Accion): String {
+		val id = resources.getIdentifier("accion_" + a.name.lowercase(), "string", packageName)
+		return getString(R.string.gestos_braille_del_lector, if (id != 0) getString(id) else a.name.lowercase().replace('_', ' '))
+	}
+
+	private fun nombreDe(g: GestoBraille): String = mapaLector[g.clave]?.let { nombreLector(it) } ?: (mapa[g.clave] ?: AccionTeclado.NINGUNA).nombre(this)
+
+	private fun fila(g: GestoBraille): String = getString(R.string.gestos_braille_fila, GestosTeclado.nombre(this, g), nombreDe(g))
 
 	private fun construir() {
 		p.vaciar()
 		p.parrafo(getString(R.string.gestos_braille_explicacion))
-		val m = mapa
 		p.encabezado(getString(R.string.gestos_braille_cabecera_dedos))
-		for (g in GestosTeclado.TODOS.filter { it.punto == 0 }) p.botonSecundario(fila(g, m[g.clave] ?: AccionTeclado.NINGUNA)) { cambiar(g) }
+		for (g in GestosTeclado.TODOS.filter { it.punto == 0 }) p.botonSecundario(fila(g)) { cambiar(g) }
 		p.encabezado(getString(R.string.gestos_braille_cabecera_puntos))
-		for (g in GestosTeclado.TODOS.filter { it.punto > 0 }) p.botonSecundario(fila(g, m[g.clave] ?: AccionTeclado.NINGUNA)) { cambiar(g) }
+		for (g in GestosTeclado.TODOS.filter { it.punto > 0 }) p.botonSecundario(fila(g)) { cambiar(g) }
 		p.separador()
 		p.boton(getString(R.string.gestos_braille_restablecer)) {
 			confirmar(getString(R.string.gestos_braille_restablecer_pregunta), getString(R.string.gestos_braille_restablecer)) {
@@ -51,13 +60,21 @@ class ActividadGestosTeclado : ActividadBase() {
 	}
 
 	private fun cambiar(g: GestoBraille) {
-		// En un gesto de un punto, «Nada» es hacer lo del gesto de un dedo; en los demás, nada de verdad
-		val acciones = AccionTeclado.entries.toList()
-		val actual = acciones.indexOf(mapa[g.clave] ?: AccionTeclado.NINGUNA)
-		elegirUno(GestosTeclado.nombre(this, g), acciones.map { it.nombre(this) }, actual) { i ->
-			val nuevo = mapa + (g.clave to acciones[i])
-			ajustes.gestosTecladoBraille = GestosTeclado.escribir(nuevo)
-			avisar(getString(R.string.gestos_braille_cambiado, GestosTeclado.nombre(this, g), acciones[i].nombre(this)))
+		// En un gesto de un punto, «Nada» es hacer lo del gesto de un dedo; en los demás, nada de verdad. Detrás
+		// de las del teclado, las del lector que valen con el teclado puesto (para tenerlas a mano)
+		val propias = AccionTeclado.entries.toList()
+		val delLector = com.xebolax.tiresias.braille.MenusTeclado.LECTOR_PERMITIDAS
+		val nombres = propias.map { it.nombre(this) } + delLector.map { nombreLector(it) }
+		val actual = mapaLector[g.clave]?.let { propias.size + delLector.indexOf(it) } ?: propias.indexOf(mapa[g.clave] ?: AccionTeclado.NINGUNA)
+		elegirUno(GestosTeclado.nombre(this, g), nombres, actual) { i ->
+			val lector = mapaLector.toMutableMap()
+			val teclado = mapa.toMutableMap()
+			if (i < propias.size) {
+				lector.remove(g.clave)
+				teclado[g.clave] = propias[i]
+			} else lector[g.clave] = delLector[i - propias.size]
+			ajustes.gestosTecladoBraille = GestosTeclado.escribir(teclado, lector)
+			avisar(getString(R.string.gestos_braille_cambiado, GestosTeclado.nombre(this, g), nombres[i]))
 			construir()
 		}
 	}

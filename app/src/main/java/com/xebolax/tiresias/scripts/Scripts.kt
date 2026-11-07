@@ -46,7 +46,16 @@ import java.io.File
 class Scripts(private val lector: Lector?, contexto: Context = lector!!.servicio) {
 	private val app = contexto.applicationContext
 	private val carpeta = File(app.filesDir, "complementos")
-	private val prefs = app.getSharedPreferences("complementos", Context.MODE_PRIVATE)
+	/**
+	 * Los complementos y sus ajustes están en el almacenamiento que no existe hasta el primer desbloqueo tras
+	 * encender el móvil: antes, abrir estas preferencias lanza una excepción, y al reiniciar con Tiresias activo
+	 * el arranque se cortaba aquí, sin exploración táctil ni gestos para escribir el PIN (TCL con Android 12).
+	 * Por eso se abren cada vez (Android las guarda en memoria) y nunca antes de desbloquear.
+	 */
+	private val prefs: android.content.SharedPreferences get() = app.getSharedPreferences("complementos", Context.MODE_PRIVATE)
+	private val desbloqueado: Boolean get() = com.xebolax.tiresias.base.Almacen.desbloqueado(app)
+	/** La salida de emergencia usada antes de desbloquear: se guarda al poder. */
+	@Volatile private var apagadoSinGuardar = false
 	private val cargados = LinkedHashMap<String, Cargado>()
 
 	/** Un complemento instalado (cargado o no). */
@@ -134,7 +143,7 @@ class Scripts(private val lector: Lector?, contexto: Context = lector!!.servicio
 	/** Las ventanas de Tiresias, para las preguntas de los complementos (las pone el servicio). */
 	var ventanas: com.xebolax.tiresias.ventanas.Ventanas? = null
 
-	@Volatile var activos = prefs.getBoolean(CLAVE_ACTIVOS, true)
+	@Volatile var activos = !desbloqueado || prefs.getBoolean(CLAVE_ACTIVOS, true)
 		private set
 
 	/** Para las pruebas: ve cada cosa que pide un complemento (su id, el método y el valor). */
@@ -192,6 +201,16 @@ class Scripts(private val lector: Lector?, contexto: Context = lector!!.servicio
 	@Synchronized
 	fun recargar() {
 		cargados.keys.toList().forEach { descargar(it) }
+		// Antes del primer desbloqueo no hay complementos (se cargan al desbloquear, con ACTION_USER_UNLOCKED)
+		if (!desbloqueado) {
+			vigilarBateria()
+			return
+		}
+		if (apagadoSinGuardar) {
+			apagadoSinGuardar = false
+			prefs.edit().putBoolean(CLAVE_ACTIVOS, false).apply()
+		}
+		activos = prefs.getBoolean(CLAVE_ACTIVOS, true)
 		if (activos) for (d in carpeta.listFiles().orEmpty()) {
 			val f = File(d, ARCHIVO)
 			if (!f.isFile || !activado(d.name)) continue
@@ -262,14 +281,15 @@ class Scripts(private val lector: Lector?, contexto: Context = lector!!.servicio
 	@Synchronized
 	fun apagarTodos() {
 		activos = false
-		prefs.edit().putBoolean(CLAVE_ACTIVOS, false).apply()
+		if (desbloqueado) prefs.edit().putBoolean(CLAVE_ACTIVOS, false).apply() else apagadoSinGuardar = true
 		cargados.keys.toList().forEach { descargar(it) }
 	}
 
 	@Synchronized
 	fun encender() {
 		activos = true
-		prefs.edit().putBoolean(CLAVE_ACTIVOS, true).apply()
+		apagadoSinGuardar = false
+		if (desbloqueado) prefs.edit().putBoolean(CLAVE_ACTIVOS, true).apply()
 		recargar()
 	}
 

@@ -11,6 +11,7 @@
 	<Preference app:key="braille_acordes" app:title="@string/aj_braille_acordes" app:summary="@string/aj_braille_acordes_res" />
 	<ListPreference app:key="braille_cursor" app:title="@string/aj_braille_cursor" app:entries="@array/braille_cursor_nombres" app:entryValues="@array/braille_cursor_valores" app:defaultValue="78" app:useSimpleSummaryProvider="true" />
 	<com.xebolax.tiresias.accesibilidad.DeslizadorAjuste app:key="braille_mensajes" app:title="@string/aj_braille_mensajes" app:min="1000" android:max="20000" app:seekBarIncrement="500" app:defaultValue="4000" />
+	<Preference app:key="braille_tutorial" app:title="@string/aj_braille_tutorial" app:summary="@string/aj_braille_tutorial_res" />
 	<Preference app:key="braille_teclado" app:title="@string/aj_braille_teclado" app:summary="@string/aj_braille_teclado_res" />
 	<SwitchPreferenceCompat app:key="braille_espejo" app:title="@string/aj_braille_espejo" app:summary="@string/aj_braille_espejo_res" app:defaultValue="false" />
 	<SwitchPreferenceCompat app:key="braille_intro_envia" app:title="@string/aj_braille_intro_envia" app:summary="@string/aj_braille_intro_envia_res" app:defaultValue="true" />
@@ -21,6 +22,9 @@
 	<SwitchPreferenceCompat app:key="braille_mayuscula_auto" app:title="@string/aj_braille_mayuscula_auto" app:summary="@string/aj_braille_mayuscula_auto_res" app:defaultValue="false" />
 	<Preference app:key="braille_calibracion" app:title="@string/aj_braille_calibracion" />
 	<Preference app:key="braille_gestos" app:title="@string/aj_braille_gestos" app:summary="@string/aj_braille_gestos_res" />
+	<Preference app:key="braille_emojis_propios" app:title="@string/aj_braille_emojis_propios" app:summary="@string/aj_braille_emojis_propios_res" />
+	<Preference app:key="braille_menu_teclado" app:title="@string/ordenar_teclado_titulo" app:summary="@string/ordenar_teclado_res" />
+	<Preference app:key="braille_menu_lector" app:title="@string/ordenar_lector_teclado_titulo" app:summary="@string/ordenar_lector_teclado_res" />
 	<SwitchPreferenceCompat app:key="braille_sonar_teclas" app:title="@string/aj_braille_sonar_teclas" app:summary="@string/aj_braille_sonar_teclas_res" app:defaultValue="false" />
 	<ListPreference app:key="braille_estilo_sonidos" app:title="@string/aj_braille_estilo_sonidos" app:entries="@array/braille_estilo_nombres" app:entryValues="@array/braille_estilo_valores" app:defaultValue="android" app:useSimpleSummaryProvider="true" />
 	<ListPreference app:key="nvda_al_bloquear" app:title="@string/aj_nvda_al_bloquear" app:entries="@array/nvda_al_bloquear_nombres" app:entryValues="@array/nvda_al_bloquear_valores" app:defaultValue="desconectar" app:useSimpleSummaryProvider="true" />

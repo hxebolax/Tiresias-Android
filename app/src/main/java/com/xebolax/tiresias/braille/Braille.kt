@@ -363,11 +363,23 @@ class Braille(private val lector: Lector, private val alAccion: (Accion) -> Unit
 	// --- El teclado braille en pantalla ---------------------------------------------------
 
 	/** Si el usuario ha activado el teclado braille en los ajustes del sistema. */
-	fun tecladoActivado(): Boolean = runCatching {
-		estaEnLista(Settings.Secure.getString(servicio.contentResolver, Settings.Secure.ENABLED_INPUT_METHODS).orEmpty(), ComponentName(servicio, TecladoBraille::class.java))
-	}.getOrElse {
-		Registro.w(ETIQUETA, "No se pudo mirar si el teclado braille está activado", it)
-		false
+	fun tecladoActivado(): Boolean {
+		val propio = ComponentName(servicio, TecladoBraille::class.java)
+		// La lista oficial de teclados activados; el ajuste del sistema puede llegar vacío a las apps (en el
+		// emulador de Android 17, con el teclado activado, la pantalla del tutorial decía que faltaba activarlo)
+		val porSistema = try {
+			servicio.getSystemService(android.view.inputmethod.InputMethodManager::class.java)?.enabledInputMethodList?.any { it.component == propio }
+		} catch (e: Exception) {
+			Registro.w(ETIQUETA, "No se pudo pedir la lista de teclados activados", e)
+			null
+		}
+		if (porSistema == true) return true
+		return try {
+			estaEnLista(Settings.Secure.getString(servicio.contentResolver, Settings.Secure.ENABLED_INPUT_METHODS).orEmpty(), propio)
+		} catch (e: Exception) {
+			Registro.w(ETIQUETA, "No se pudo mirar si el teclado braille está activado", e)
+			false
+		}
 	}
 
 	/**

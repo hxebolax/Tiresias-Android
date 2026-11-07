@@ -192,7 +192,7 @@
 	</plurals>
 	<string name="braille_documento_cerrado">Documento cerrado</string>
 	<string name="braille_linea_virtual">Línea braille de %1$s, %2$d celdas</string>
-	<string name="braille_teclado_listo">Teclado braille. Puntos 1, 2 y 3 arriba; 4, 5 y 6 abajo. Levanta los dedos para escribir. Un dedo hacia arriba abre el menú del teclado.</string>
+	<string name="braille_teclado_listo">Teclado braille. Apoya los dedos y levántalos para escribir. Dos dedos hacia arriba, volver al teclado anterior; un dedo hacia arriba, el menú del teclado; tres dedos hacia arriba, el menú del lector.</string>
 	<string name="braille_superficie">Superficie del teclado braille</string>
 	<string name="braille_numero">número</string>
 	<string name="braille_mayuscula">mayúscula</string>

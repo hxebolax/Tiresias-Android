@@ -97,6 +97,8 @@ class EdicionTexto(private val lector: Lector) {
 		seleccionAnterior = fin
 		// Lo movió el modo edición, que ya ha dicho lo recorrido o lo seleccionado
 		if (lector.modoEdicion.esPropio(nodo)) return
+		// Lo movió el teclado braille de Tiresias (recorrer lo escrito, Edición), que ya lo ha dicho
+		if (tecladoPropio()) return
 		// El cursor se mueve solo al escribir: eso ya lo dijo el eco
 		if (SystemClock.uptimeMillis() - ultimoCambio < 150) return
 		if (inicio < 0 || fin < 0 || texto.isEmpty()) return
@@ -197,13 +199,20 @@ class EdicionTexto(private val lector: Lector) {
 	/** Cuenta las letras dichas: la palabra fonética de una se descarta si ya se ha ido a otra. */
 	@Volatile private var turnoLetra = 0
 
+	/** Si el teclado elegido es el braille de Tiresias y está a la vista (habla él solo de lo que hace en el campo). */
+	private fun tecladoPropio(): Boolean {
+		if (!lector.superficie.abierta) return false
+		val actual = runCatching { android.provider.Settings.Secure.getString(lector.servicio.contentResolver, android.provider.Settings.Secure.DEFAULT_INPUT_METHOD) }.getOrNull()
+		return actual?.substringBefore('/') == lector.servicio.packageName
+	}
+
 	/** Si el teclado elegido es de los que hablan solos (Ajustes, Teclado). */
 	fun tecladoHablaSolo(): Boolean {
-		val elegidos = lector.ajustes.tecladosQueHablan
-		if (elegidos.isEmpty()) return false
 		val actual = runCatching { android.provider.Settings.Secure.getString(lector.servicio.contentResolver, android.provider.Settings.Secure.DEFAULT_INPUT_METHOD) }.getOrNull()
 			?.substringBefore('/') ?: return false
-		return actual in elegidos
+		// El teclado braille de Tiresias dice él mismo cada letra (cortando la anterior): repetirla la pisaría
+		if (actual == lector.servicio.packageName) return true
+		return actual in lector.ajustes.tecladosQueHablan
 	}
 
 	fun decirSegmento(s: String, g: Granularidad) {

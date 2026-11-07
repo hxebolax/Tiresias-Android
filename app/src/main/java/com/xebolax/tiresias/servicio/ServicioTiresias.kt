@@ -195,6 +195,25 @@ class ServicioTiresias : AccessibilityService() {
 		} catch (e: Throwable) {
 			// (también lo que no es una excepción, como una biblioteca que no carga: si no, queda sin apuntar por qué no arranca)
 			Registro.e(ETIQUETA, "Fallo al iniciar Tiresias", e)
+			// Que al menos haya exploración táctil y gestos: sin ellos, tras reiniciar no se puede escribir el PIN
+			// (Tiresias hablaba, pero el arranque se cortaba antes de ponerlos)
+			try {
+				configurar(false)
+			} catch (e2: Throwable) {
+				Registro.e(ETIQUETA, "Tampoco se pudo poner la exploración táctil", e2)
+			}
+		}
+	}
+
+	/**
+	 * Una parte del arranque que puede fallar sin dejar al lector a medias: se apunta y se sigue sin ella. Lo
+	 * esencial (la voz, la exploración táctil y los gestos) no depende de ninguna de estas.
+	 */
+	private inline fun parte(nombre: String, bloque: () -> Unit) {
+		try {
+			bloque()
+		} catch (e: Throwable) {
+			Registro.e(ETIQUETA, "Fallo al iniciar $nombre: Tiresias sigue sin ello", e)
 		}
 	}
 
@@ -229,14 +248,25 @@ class ServicioTiresias : AccessibilityService() {
 		val alAccion: (Accion) -> Unit = { a -> l.manejador.post { ej.ejecutar(a) } }
 		l.vision = Vision(l, vent)
 		l.escucha = Escucha(l, alAccion) { texto -> l.manejador.post { ej.buscarTexto(texto) } }
-		l.braille = Braille(l, alAccion).also { b -> l.manejador.post { b.iniciar() } }
-		l.scripts = Scripts(l).also {
-			it.ventanas = vent
-			it.reparador = l.reparador
+		parte("el braille") { l.braille = Braille(l, alAccion).also { b -> l.manejador.post { b.iniciar() } } }
+		// Los complementos se cargan al primer desbloqueo si Tiresias arranca antes (su carpeta no existe hasta entonces)
+		parte("los complementos") {
+			l.scripts = Scripts(l).also {
+				it.ventanas = vent
+				it.reparador = l.reparador
+			}
+			l.manejador.post { if (l.scriptsListos) l.scripts.recargar() }
 		}
-		l.manejador.post { l.scripts.recargar() }
-		teclado = Teclado(l, alAccion)
+		parte("el teclado físico") { teclado = Teclado(l, alAccion) }
 		// Tapar el sensor de proximidad calla la voz (solo se mira mientras habla)
+		parte("el sensor de proximidad") { iniciarProximidad(l, v) }
+		configurar(false)
+		vigilarOtrosExploradores()
+		parte("el diccionario") { cargarDiccionario(v) }
+		registrarAvisos(l, alAccion, v, s)
+	}
+
+	private fun iniciarProximidad(l: Lector, v: Voz) {
 		val prox = CallarConProximidad(this, l.ajustes) {
 			l.manejador.post {
 				// Con un dedo en la pantalla (cambiando el volumen, explorando), la mano tapa el sensor sin querer
@@ -252,9 +282,10 @@ class ServicioTiresias : AccessibilityService() {
 		avisoVolumen = AvisoVolumen(this, l.ajustes) { nombre, porCiento ->
 			l.manejador.post { l.decir(l.textos.getString(R.string.volumen_cambiado, l.textos.getString(nombre), porCiento)) }
 		}.also { it.iniciar() }
-		configurar(false)
-		vigilarOtrosExploradores()
-		cargarDiccionario(v)
+	}
+
+	/** Los avisos del sistema que escucha Tiresias, el aviso de arranque y el vigilante. */
+	private fun registrarAvisos(l: Lector, alAccion: (Accion) -> Unit, v: Voz, s: Sonidos) {
 		registerReceiver(pantalla, IntentFilter().apply {
 			addAction(Intent.ACTION_SCREEN_ON)
 			addAction(Intent.ACTION_SCREEN_OFF)
@@ -363,6 +394,21 @@ class ServicioTiresias : AccessibilityService() {
 	}
 	@Volatile private var suspendidoAhora = false
 
+	/**
+	 * Sin exploración táctil mientras hay una superficie braille encima antes de Android 11 (no hay zona de paso
+	 * de toques): los dedos llegan tal cual a la superficie, que tapa la pantalla entera. Al quitarla, vuelve.
+	 */
+	@Volatile private var sinExploracion = false
+
+	fun quitarExploracion(quitar: Boolean) {
+		principal.post {
+			if (sinExploracion == quitar) return@post
+			sinExploracion = quitar
+			Registro.i(ETIQUETA, if (quitar) "Exploración táctil quitada por la superficie braille" else "Exploración táctil devuelta")
+			configurar(suspendidoAhora)
+		}
+	}
+
 	/** Vuelve a poner la configuración del servicio (ha cambiado algo de lo que depende: el volumen de la voz). */
 	fun reconfigurar() {
 		android.os.Handler(mainLooper).post { configurar(suspendidoAhora) }
@@ -380,7 +426,7 @@ class ServicioTiresias : AccessibilityService() {
 		// El volumen de accesibilidad, solo si la voz va por él (SandFly): con la voz por el multimedia, las teclas de
 		// volumen y el panel del sistema mandan el multimedia, que es el que suena
 		if (Build.VERSION.SDK_INT >= 26 && !com.xebolax.tiresias.voz.PistaAudio.multimedia) banderas = banderas or AccessibilityServiceInfo.FLAG_ENABLE_ACCESSIBILITY_VOLUME
-		if (!suspendido) {
+		if (!suspendido && !sinExploracion) {
 			banderas = banderas or AccessibilityServiceInfo.FLAG_REQUEST_TOUCH_EXPLORATION_MODE
 			if (Build.VERSION.SDK_INT >= 30) {
 				// El doble toque (y el doble toque mantenido) los hace Tiresias sobre lo que acaba de decir,
@@ -398,7 +444,7 @@ class ServicioTiresias : AccessibilityService() {
 		info.notificationTimeout = 0
 		if (BuildConfig.PRUEBAS) android.util.Log.d("TiresiasServicio", "configurar: suspendido=$suspendido dobleToqueDeAndroid=$dobleToqueDeAndroid otroExplora=$otroExplora")
 		serviceInfo = info
-		if (!suspendido && !otroExplora && Build.VERSION.SDK_INT >= 33) soltarDeteccionDeGestos()
+		if (!suspendido && !sinExploracion && !otroExplora && Build.VERSION.SDK_INT >= 33) soltarDeteccionDeGestos()
 	}
 
 	/**
@@ -557,7 +603,7 @@ class ServicioTiresias : AccessibilityService() {
 			val prefs = Ajustes(this).p
 			val visto = prefs.getLong(com.xebolax.tiresias.base.Claves.ULTIMA_SALIDA, 0L)
 			val salidas = am.getHistoricalProcessExitReasons(packageName, 0, 5).filter { it.timestamp > visto }
-			for (s in salidas) Registro.w(ETIQUETA, "Android cerró Tiresias: motivo ${s.reason}, importancia ${s.importance}, ${s.description.orEmpty()}")
+			for (s in salidas) Registro.w(ETIQUETA, "Android cerró Tiresias: motivo ${s.reason}, importancia ${s.importance}, proceso ${s.processName}, ${s.description.orEmpty()}${detalleSalida(s)}")
 			salidas.maxOfOrNull { it.timestamp }?.let { prefs.edit().putLong(com.xebolax.tiresias.base.Claves.ULTIMA_SALIDA, it).apply() }
 			// Los Infinix, Tecno e itel (XOS, HiOS) matan las apps al limpiar Recientes («One-key clean», tranpm) y luego no
 			// dejan que Android vuelva a arrancar el servicio: sigue «activado» en Ajustes, pero mudo, hasta apagarlo y
@@ -566,6 +612,32 @@ class ServicioTiresias : AccessibilityService() {
 			if (limpiado) android.os.Handler(mainLooper).postDelayed({ lector?.decir(R.string.aviso_limpiar_recientes, modo = com.xebolax.tiresias.voz.Modo.ENCOLAR) }, AVISO_LIMPIAR_MS)
 		} catch (e: Exception) {
 			Registro.w(ETIQUETA, "No se pudo leer por qué cerró Android Tiresias", e)
+		}
+	}
+
+	/**
+	 * Lo que se puede saber de un cierre sin datos privados: en un cierre nativo (motivo 5), las bibliotecas que
+	 * salen en el informe de Android (cuál de las voces, el intérprete de complementos...); en una app que no
+	 * responde (motivo 6), las primeras líneas del hilo principal. Solo nombres de bibliotecas y de funciones,
+	 * nunca la memoria que el informe nativo también lleva.
+	 */
+	private fun detalleSalida(s: android.app.ApplicationExitInfo): String {
+		if (Build.VERSION.SDK_INT < 31) return ""
+		if (s.reason != android.app.ApplicationExitInfo.REASON_CRASH_NATIVE && s.reason != android.app.ApplicationExitInfo.REASON_ANR) return ""
+		return try {
+			val datos = s.traceInputStream?.use { it.readBytes() } ?: return ""
+			if (s.reason == android.app.ApplicationExitInfo.REASON_CRASH_NATIVE) {
+				val texto = String(datos, Charsets.ISO_8859_1)
+				val bibliotecas = Regex("lib[A-Za-z0-9_+.-]{1,60}\\.so").findAll(texto).map { it.value }.distinct().take(8).toList()
+				if (bibliotecas.isEmpty()) "" else "; bibliotecas: " + bibliotecas.joinToString(", ")
+			} else {
+				val lineas = String(datos, Charsets.UTF_8).lineSequence()
+				val principal = lineas.dropWhile { !it.startsWith("\"main\"") }.drop(1).filter { it.trimStart().startsWith("at ") || it.trimStart().startsWith("- ") }.take(12).toList()
+				if (principal.isEmpty()) "" else "; hilo principal: " + principal.joinToString(" | ") { it.trim() }
+			}
+		} catch (e: Exception) {
+			Registro.w(ETIQUETA, "No se pudo leer el informe del cierre", e)
+			""
 		}
 	}
 
@@ -754,6 +826,12 @@ class ServicioTiresias : AccessibilityService() {
 	fun hacerYa(a: Accion): Boolean = ejecutor?.ejecutar(a) ?: false
 
 	/** Para las pruebas instrumentadas: hace [a] como si llegara de un gesto. */
+	/** Una acción del lector pedida desde el teclado braille (su menú del lector o un gesto), en el hilo del lector. */
+	fun ejecutarDesdeTeclado(a: Accion) {
+		val l = lector ?: return
+		l.manejador.post { ejecutor?.ejecutar(a) }
+	}
+
 	fun ejecutarPrueba(a: Accion) {
 		val l = lector ?: return
 		l.manejador.post { ejecutor?.ejecutar(a) }

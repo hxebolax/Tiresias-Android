@@ -20,8 +20,8 @@ import com.xebolax.tiresias.servicio.PuenteEscritorio
 import com.xebolax.tiresias.servicio.ServicioTiresias
 
 /**
- * Elegir y ordenar una lista del lector: el menú de Tiresias o los controles de
- * lectura. Cada opción es una casilla: marcada, está en la lista (en su orden);
+ * Elegir y ordenar una lista del lector: el menú de Tiresias, los controles de
+ * lectura o los dos menús del teclado braille. Cada opción es una casilla: marcada, está en la lista (en su orden);
  * desmarcada, no. Las marcadas tienen en el menú de acciones «Subir», «Bajar»,
  * «Al principio» y «Al final»; al moverlas, el foco se queda en ellas.
  */
@@ -38,6 +38,8 @@ class ActividadOrdenar : ActividadBase() {
 			LISTA_MENU, LISTA_CIRCULAR -> Accion.entries.filter { it !in Listas.FUERA_DEL_MENU && it != Accion.MENU_CIRCULAR && it !in PuenteEscritorio.ACCIONES_OCULTAS }.map { it.name }
 			LISTA_PARTES -> com.xebolax.tiresias.nucleo.Parte.entries.map { it.name }
 			LISTA_ESTADO -> com.xebolax.tiresias.nucleo.ParteEstado.entries.map { it.name }
+			LISTA_TECLADO -> com.xebolax.tiresias.braille.MenusTeclado.TECLADO_POSIBLES.map { it.name }
+			LISTA_LECTOR_TECLADO -> com.xebolax.tiresias.braille.MenusTeclado.LECTOR_PERMITIDAS.map { it.name }
 			else -> ControlLectura.entries.map { it.name }
 		}
 	}
@@ -51,6 +53,8 @@ class ActividadOrdenar : ActividadBase() {
 			LISTA_CIRCULAR -> ajustes.menuCircular.map { it.name }
 			LISTA_PARTES -> ajustes.ordenPartes.map { it.name }
 			LISTA_ESTADO -> ajustes.partesEstado.map { it.name }
+			LISTA_TECLADO -> ajustes.menuTecladoBraille.map { it.name }
+			LISTA_LECTOR_TECLADO -> ajustes.menuLectorTeclado.map { it.name }
 			else -> ajustes.controlesLectura.map { it.name }
 		}.toMutableList()
 		construir(null)
@@ -61,11 +65,19 @@ class ActividadOrdenar : ActividadBase() {
 		LISTA_CIRCULAR -> R.string.ordenar_circular_titulo
 		LISTA_PARTES -> R.string.ordenar_partes_titulo
 		LISTA_ESTADO -> R.string.ordenar_estado_titulo
+		LISTA_TECLADO -> R.string.ordenar_teclado_titulo
+		LISTA_LECTOR_TECLADO -> R.string.ordenar_lector_teclado_titulo
 		else -> R.string.ordenar_controles_titulo
 	}
 
 	private fun nombre(clave: String): String {
-		val prefijo = when (lista) { LISTA_MENU, LISTA_CIRCULAR -> "accion_"; LISTA_PARTES -> "parte_"; LISTA_ESTADO -> "estado_parte_"; else -> "control_" }
+		val prefijo = when (lista) {
+			LISTA_MENU, LISTA_CIRCULAR, LISTA_LECTOR_TECLADO -> "accion_"
+			LISTA_TECLADO -> "braille_accion_"
+			LISTA_PARTES -> "parte_"
+			LISTA_ESTADO -> "estado_parte_"
+			else -> "control_"
+		}
 		val id = resources.getIdentifier(prefijo + clave.lowercase(), "string", packageName)
 		return if (id != 0) getString(id) else clave.lowercase().replace('_', ' ')
 	}
@@ -75,6 +87,8 @@ class ActividadOrdenar : ActividadBase() {
 			LISTA_MENU -> ajustes.menuTiresias = elegidas.map { Accion.valueOf(it) }
 			LISTA_CIRCULAR -> ajustes.menuCircular = elegidas.map { Accion.valueOf(it) }
 			LISTA_ESTADO -> ajustes.partesEstado = elegidas.map { com.xebolax.tiresias.nucleo.ParteEstado.valueOf(it) }
+			LISTA_TECLADO -> ajustes.menuTecladoBraille = elegidas.map { com.xebolax.tiresias.braille.AccionTeclado.valueOf(it) }
+			LISTA_LECTOR_TECLADO -> ajustes.menuLectorTeclado = elegidas.map { Accion.valueOf(it) }
 			LISTA_PARTES -> {
 				ajustes.ordenPartes = elegidas.map { com.xebolax.tiresias.nucleo.Parte.valueOf(it) }
 				// Elegir las partes es el orden libre
@@ -93,6 +107,8 @@ class ActividadOrdenar : ActividadBase() {
 			LISTA_CIRCULAR -> R.string.ordenar_circular_explicacion
 			LISTA_PARTES -> R.string.ordenar_partes_explicacion
 			LISTA_ESTADO -> R.string.ordenar_estado_explicacion
+			LISTA_TECLADO -> R.string.ordenar_teclado_explicacion
+			LISTA_LECTOR_TECLADO -> R.string.ordenar_lector_teclado_explicacion
 			else -> R.string.ordenar_controles_explicacion
 		}))
 		var destino: View? = null
@@ -109,6 +125,8 @@ class ActividadOrdenar : ActividadBase() {
 					LISTA_MENU -> Listas.MENU_TIRESIAS.map { it.name }
 					LISTA_CIRCULAR -> Listas.MENU_CIRCULAR.map { it.name }
 					LISTA_ESTADO -> Listas.ESTADO.map { it.name }
+					LISTA_TECLADO -> com.xebolax.tiresias.braille.MenusTeclado.TECLADO_POR_DEFECTO.map { it.name }
+					LISTA_LECTOR_TECLADO -> com.xebolax.tiresias.braille.MenusTeclado.LECTOR_POR_DEFECTO.map { it.name }
 					LISTA_PARTES -> com.xebolax.tiresias.nucleo.Verbosidad.ORDEN_NORMAL.map { it.name }
 					else -> ControlLectura.POR_DEFECTO.map { it.name }
 				}.toMutableList()
@@ -177,5 +195,8 @@ class ActividadOrdenar : ActividadBase() {
 		const val LISTA_PARTES = "partes"
 		const val LISTA_CIRCULAR = "circular"
 		const val LISTA_ESTADO = "estado"
+		/** Los dos menús del teclado braille: el del teclado y el del lector. */
+		const val LISTA_TECLADO = "teclado_braille"
+		const val LISTA_LECTOR_TECLADO = "lector_teclado_braille"
 	}
 }

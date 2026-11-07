@@ -186,7 +186,7 @@
 	</plurals>
 	<string name="braille_documento_cerrado">Document closed</string>
 	<string name="braille_linea_virtual">Braille display from %1$s, %2$d cells</string>
-	<string name="braille_teclado_listo">Braille keyboard. Dots 1, 2 and 3 at the top; 4, 5 and 6 at the bottom. Lift your fingers to type. One finger up opens the keyboard menu.</string>
+	<string name="braille_teclado_listo">Braille keyboard. Rest your fingers and lift them to type. Two fingers up, back to the previous keyboard; one finger up, the keyboard menu; three fingers up, the screen reader menu.</string>
 	<string name="braille_superficie">Braille keyboard surface</string>
 	<string name="braille_numero">number</string>
 	<string name="braille_mayuscula">capital</string>

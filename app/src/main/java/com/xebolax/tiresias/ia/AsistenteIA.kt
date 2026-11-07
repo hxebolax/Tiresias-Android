@@ -46,7 +46,8 @@ object AsistenteIA {
 	 * clave estaba mal (Backtalk 298). Si el elegido falla, se prueban los de [GEMINI_RESERVA].
 	 */
 	const val MODELO_GEMINI = "gemini-2.5-flash"
-	private val GEMINI_RESERVA = listOf("gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-flash-latest")
+	// (gemini-2.5-flash-lite ya no se da a claves nuevas: Google contesta 404 y manda usar gemini-3.5-flash-lite)
+	private val GEMINI_RESERVA = listOf("gemini-2.5-flash", "gemini-3.5-flash-lite", "gemini-flash-latest")
 
 	/** El proveedor que se usará, o null si no hay ninguno. «Automático» elige el primero disponible. */
 	fun elegir(c: Context): Proveedor? {
@@ -235,7 +236,15 @@ object AsistenteIA {
 			conexion.readTimeout = 120_000
 			conexion.doOutput = true
 			conexion.setRequestProperty("Content-Type", "application/json; charset=utf-8")
-			cabeceras.forEach { (k, v) -> conexion.setRequestProperty(k, v) }
+			cabeceras.forEach { (k, v) ->
+				// Una cabecera que Android rechaza lleva la clave en el mensaje de la excepción: nunca al registro
+				try {
+					conexion.setRequestProperty(k, v)
+				} catch (e: IllegalArgumentException) {
+					Registro.w(ETIQUETA, "La clave de $servicio tiene caracteres que no valen (${e.javaClass.simpleName})")
+					throw ErrorIA(t.getString(R.string.ia_error_clave, servicio))
+				}
+			}
 			conexion.outputStream.use { it.write(cuerpo.toString().toByteArray()) }
 			val codigo = conexion.responseCode
 			val texto = (if (codigo in 200..299) conexion.inputStream else conexion.errorStream)?.bufferedReader()?.use { it.readText() }.orEmpty()

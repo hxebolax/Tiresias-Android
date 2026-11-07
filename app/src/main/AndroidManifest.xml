@@ -119,6 +119,8 @@
 		<activity android:name=".ui.ActividadReglasBluetooth" android:exported="false" />
 		<activity android:name=".ui.ActividadControlPc" android:exported="false" android:label="@string/accion_control_pc" />
 		<activity android:name=".ui.ActividadTutorialPc" android:exported="false" android:label="@string/pc_tutorial" />
+		<activity android:name=".ui.ActividadTutorialBraille" android:exported="false" android:label="@string/tb_titulo" />
+		<activity android:name=".ui.ActividadEmojisPropios" android:exported="false" android:label="@string/ep_titulo" />
 		<activity android:name=".ui.ActividadExperimentos" android:exported="false" android:label="@string/ui_experimentos" />
 		<activity android:name=".ui.ActividadAyudaRemota" android:exported="false" android:label="@string/accion_ayuda_remota" />
 		<!-- Ayudar a otra persona: también con la invitación compartida desde WhatsApp o Mensajes («Compartir», Tiresias) -->

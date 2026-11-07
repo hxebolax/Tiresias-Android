@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Braille keyboard tutorial and practice (ActividadTutorialBraille and ModoPracticaBraille). -->
+<resources>
+	<string name="tb_titulo">Braille keyboard tutorial</string>
+	<string name="aj_braille_tutorial">Braille keyboard tutorial and practice</string>
+	<string name="aj_braille_tutorial_res">From zero to typing with ease: how to hold the phone, calibrate, every letter, numbers, punctuation and gestures, each lesson with its practice, and a field to try the real keyboard</string>
+	<string name="braille_rotulo_teclado">⠿ Tiresias braille keyboard</string>
+	<string name="braille_rotulo_practica">⠿ Braille keyboard practice</string>
+
+	<string name="tb_practicar">Practise this lesson</string>
+	<string name="tb_sin_tiresias">The practice and the braille keyboard need Tiresias turned on. Turn it on and come back here.</string>
+	<string name="tb_sin_ajustes_teclados">The system keyboard settings could not be opened</string>
+	<string name="tb_estado_activado">the Tiresias braille keyboard is enabled in the system</string>
+	<string name="tb_estado_sin_activar">enable the Tiresias braille keyboard in the system keyboard settings</string>
+	<string name="tb_activar">Open the system keyboard settings</string>
+	<string name="tb_campo">Type here to try the braille keyboard</string>
+	<string name="tb_cambiar">Switch to the braille keyboard and type in the field</string>
+	<string name="tb_gestos">Change the braille keyboard gestures</string>
+
+	<string name="tb_1_titulo">What the braille keyboard is</string>
+	<string name="tb_1">The Tiresias braille keyboard lets you type in any app by touching the screen with six fingers, as on a Perkins brailler.\n\nEach letter is a six-dot braille cell in two columns of three: on the left, from top to bottom, dots 1, 2 and 3; on the right, dots 4, 5 and 6. To type a letter, rest the fingers of its dots at the same time and lift them: when the last finger is lifted, the letter is typed and Tiresias says it. They do not need to land at exactly the same time; what matters is that all of them are down before you lift any.\n\nThe keyboard uses Spanish uncontracted braille (ONCE). If you have never written braille, do not worry: this tutorial starts from zero and almost every lesson has its practice.\n\nWhile you practise or type, the Tiresias gestures do not work on the screen: the keyboard has its own, and two fingers up always gets you out. If something does not respond, press both volume keys together and everything goes back to normal.</string>
+
+	<string name="tb_2_titulo">How to hold the phone and where the dots are</string>
+	<string name="tb_2">There are two ways to hold it.\n\nScreen away, the default: hold the phone sideways with both hands, the screen facing away from you, and the top of the phone, where the earpiece and the front camera are, in your left hand. Your fingers wrap around the phone and touch the screen; your thumbs stay at the back, holding it. With your left hand you type dots 1, 2 and 3: the index finger at the top is dot 1, the middle finger dot 2 and the ring finger at the bottom dot 3. With your right hand, the same: index dot 4, middle dot 5 and ring dot 6.\n\nTabletop: the phone lying sideways, screen up, with its top to your left. The six fingers in a row, as on a Perkins: from left to right, the ring, middle and index fingers of your left hand (dots 3, 2 and 1) and the index, middle and ring fingers of your right hand (dots 4, 5 and 6). To type like this, turn on «Mirrored dots» in the braille settings, or «Dots according to how you hold the phone» so Tiresias notices by itself.\n\nThe screen does not rotate while you type, so the dots stay where they are.\n\nIn the practice, touch different places with a single finger and Tiresias tells you which dot it is, until you find all six.</string>
+
+	<string name="tb_3_titulo">Calibrate: the dots where your fingers fall</string>
+	<string name="tb_3">Every hand is different. Calibrating tells Tiresias where you rest each finger, and from then on each touch counts as the nearest dot. It is the best thing to do before you start typing.\n\nIn the practice, hold the phone the way you will type and Tiresias asks for the dots one by one: touch dot 1, touch dot 2, and so on up to 6. Touch each one with a single finger, where it falls naturally. If two are too close together, it asks again. Two fingers up cancel it.\n\nThe calibration is saved separately for screen away and for tabletop. You can repeat it whenever you like, from here or from the keyboard menu, and remove it in the braille settings.</string>
+
+	<string name="tb_4_titulo">The first letters: a, b, c, d and e</string>
+	<string name="tb_4">The first ten letters only use the top and middle dots: 1, 2, 4 and 5. We start with five, and all of them have dot 1:\n\na: dot 1.\nb: dots 1 and 2.\nc: dots 1 and 4.\nd: dots 1, 4 and 5.\ne: dots 1 and 5.\n\nIn the practice, Tiresias asks for each letter with its dots; then comes a review in random order where it no longer says them, unless you make a mistake. If you get it wrong, it tells you what you typed and what was expected. Any gesture repeats the current request, and two fingers up leave the practice.</string>
+
+	<string name="tb_5_titulo">More letters: f, g, h, i and j</string>
+	<string name="tb_5">f: dots 1, 2 and 4.\ng: dots 1, 2, 4 and 5.\nh: dots 1, 2 and 5.\ni: dots 2 and 4.\nj: dots 2, 4 and 5.\n\nI and j are the only ones in this series without dot 1. These ten letters, from a to j, are the basis of almost everything: the others are made by adding dots to them, and they are also the digits.</string>
+
+	<string name="tb_6_titulo">From k to t: add dot 3</string>
+	<string name="tb_6">The second series is the first one with dot 3 added:\n\nk: dots 1 and 3 (a plus 3).\nl: dots 1, 2 and 3.\nm: dots 1, 3 and 4.\nn: dots 1, 3, 4 and 5.\no: dots 1, 3 and 5.\np: dots 1, 2, 3 and 4.\nq: dots 1, 2, 3, 4 and 5.\nr: dots 1, 2, 3 and 5.\ns: dots 2, 3 and 4.\nt: dots 2, 3, 4 and 5.\n\nIf you remember the letter of the first series, you only need to add the finger of dot 3.</string>
+
+	<string name="tb_7_titulo">u, v, x, y, z, ñ and w</string>
+	<string name="tb_7">The third series adds dots 3 and 6 to the first one:\n\nu: dots 1, 3 and 6.\nv: dots 1, 2, 3 and 6.\nx: dots 1, 3, 4 and 6.\ny: dots 1, 3, 4, 5 and 6.\nz: dots 1, 3, 5 and 6.\n\nAnd two letters on their own:\n\nñ: dots 1, 2, 4, 5 and 6.\nw: dots 2, 4, 5 and 6.</string>
+
+	<string name="tb_8_titulo">Accented vowels and ü</string>
+	<string name="tb_8">á: dots 1, 2, 3, 5 and 6.\né: dots 2, 3, 4 and 6.\ní: dots 3 and 4.\nó: dots 3, 4 and 6.\nú: dots 2, 3, 4, 5 and 6.\nü: dots 1, 2, 5 and 6.\n\nThey do not look like their unaccented vowels: you have to learn them separately. Í and ó are the shortest.</string>
+
+	<string name="tb_9_titulo">Capitals and numbers</string>
+	<string name="tb_9">For a capital letter, first type the capital sign, dots 4 and 6, and then the letter: capital B is dots 4 and 6 and then 1 and 2. It only applies to the next letter.\n\nFor a number, first type the number sign, dots 3, 4, 5 and 6, and then the digits with the letters a to j: 1 is a, 2 b, 3 c, 4 d, 5 e, 6 f, 7 g, 8 h, 9 i and 0 j. The number sign applies to all the digits in a row, until a space or a letter outside a to j. So 25 is the number sign, b and e.\n\nEach digit is spoken as you type it, and when you add the space after it Tiresias says the whole number: typing 2026 and a space you hear «two thousand twenty-six». Comma and full stop work inside a number (3.5).\n\nIn the braille settings you can turn on «Automatic capitals», which adds the capital by itself at the start of a sentence.</string>
+
+	<string name="tb_10_titulo">Punctuation</string>
+	<string name="tb_10">Almost all of them are in the lower part of the cell:\n\nFull stop: dot 3.\nComma: dot 2.\nSemicolon: dots 2 and 3.\nColon: dots 2 and 5.\nQuestion mark: dots 2 and 6.\nExclamation mark: dots 2, 3 and 5.\nHyphen: dots 3 and 6.\nOpening parenthesis: dots 1, 2 and 6; closing: dots 3, 4 and 5.\nQuotation marks: dots 2, 3 and 6.\nApostrophe: dot 5.\nEquals: dots 2, 3, 5 and 6.\nAsterisk: dots 3 and 5.\nSlash: dots 2, 5 and 6.\nUnderscore: dots 4, 5 and 6.\n\nThe practice asks for the first seven and a review.</string>
+
+	<string name="tb_11_titulo">Gestures: space, delete, Enter and more</string>
+	<string name="tb_11">Besides the dots, the keyboard has gestures: sliding one, two or three fingers in a direction. Directions are yours, with the phone held for typing: right means towards your right. To count as a gesture, move your finger at least one centimetre; if you move it less, it is a dot.\n\nBy default:\n\nOne finger right: space.\nOne finger left: delete the previous letter.\nTwo fingers left: delete the word.\nTwo fingers down: Enter, or whatever the field asks for (send, search, next). In messaging apps, it presses Send.\nOne finger up: the keyboard menu.\nOne finger down: suggestions when mentioning someone with the at sign.\nTwo fingers right: dictate with your voice.\nThree fingers left or right: move the cursor through the text, saying what it passes.\nThree fingers down: change what the cursor moves by (character, word or line).\nTwo fingers up: back to the keyboard you had before (and out of the practices).\nThree fingers up: the screen reader menu (the curtain, the time, the voice…).\n\nAll of them can be changed in «Braille keyboard gestures», in the braille settings; the practice uses the ones you have set.</string>
+
+	<string name="tb_12_titulo">The keyboard menu</string>
+	<string name="tb_12">One finger up opens the keyboard menu: emoji, search for an emoji, clipboard, suggestions (if you are mentioning someone), dictation, read everything typed, Editing, delete the word, calibrate, remove the calibration, lock the orientation and switch keyboard.\n\nThe menu and its lists always work the same way: one finger right or left, next or previous item; one finger up or down, the group (the emoji categories); two fingers down, choose; two fingers up, leave the menu; two fingers right, add to or remove from favourites. Typing a letter also closes the list.\n\nThe clipboard remembers what you copy while the braille keyboard is the selected one, only in memory. Lock the orientation keeps the dots as the sensor detected them.\n\nThis menu can be changed: in Settings, Braille, «Choose the braille keyboard menu» you remove what you do not use and order the rest. The screen reader menu, dictation, Editing and emoji have their own lessons next.</string>
+
+	<string name="tb_13_titulo">Whole words</string>
+	<string name="tb_13">You now know every letter. Next, words: Tiresias says one and you type it letter by letter; each correct letter is spoken. No space is needed at the end. If you make a mistake, it tells you what you typed and the expected letter with its dots, and you carry on from there. Any gesture reminds you of the word and how far you are.\n\nThere is one with ñ, one with an accent, one with a capital and a number: sol, casa, niño, café, Tiresias and 2026.</string>
+
+	<string name="tb_14_titulo">Free practice</string>
+	<string name="tb_14">Here you type whatever you like, with nobody correcting you: each letter is spoken as you type it and space says the finished word. With the Enter gesture (by default, two fingers down) you hear everything typed, and delete and delete word work too.\n\nIt is the best way to get going before using it for real. Nothing you type here is saved.</string>
+
+	<string name="tb_15_titulo">Using it for real</string>
+	<string name="tb_15">To type with the braille keyboard in any app:\n\n1. Enable it once in the system keyboard settings: «Tiresias braille keyboard». Android warns that a keyboard can see what you type; it is the usual warning for any keyboard.\n2. In a text field, switch to it. On Android 11 or later Tiresias does it with the «Braille keyboard» action (put it on a gesture or find it in the actions menu); on earlier versions, the system keyboard list appears.\n3. Type. With Tiresias on, the keyboard takes up the whole screen and your fingers reach it directly. To finish, two fingers up: you go back to the previous keyboard.\n\nIf something does not respond, both volume keys together remove the braille keyboard and bring back the Tiresias gestures.\n\nTry it below: the button switches to the braille keyboard and opens it in the field.</string>
+
+	<string name="tb_punto">dot %1$s</string>
+	<string name="tb_puntos">dots %1$s and %2$s</string>
+	<string name="tb_y_despues">"; then, "</string>
+	<string name="tb_aviso_puntos">Practice: where the dots are. Touch different places with a single finger and I tell you which dot it is. When you find all six, we are done. Two fingers up, leave.</string>
+	<string name="tb_puntos_un_dedo">Here, touch with a single finger</string>
+	<string name="tb_puntos_todos">Very good! You have found all six dots.</string>
+	<plurals name="tb_puntos_faltan">
+		<item quantity="one">%1$s. One to go.</item>
+		<item quantity="other">%1$s. %2$d to go.</item>
+	</plurals>
+	<string name="tb_aviso_calibrar">Practice: calibrate. Hold the phone the way you will type.</string>
+	<string name="tb_aviso_escribir">Practice. Type what I ask for: rest the fingers of its dots at the same time and lift them. Any gesture repeats the request; two fingers up, leave.</string>
+	<string name="tb_aviso_gestos">Practice: gestures. Make the gesture I ask for. Two fingers up, leave.</string>
+	<string name="tb_aviso_libre">Free practice. Type whatever you like: each letter is spoken. %1$s Two fingers up, leave.</string>
+	<string name="tb_escribe">Type</string>
+	<string name="tb_escribe_palabra">Type the word %1$s</string>
+	<string name="tb_vas_por">So far: %1$s</string>
+	<string name="tb_ahora">Now</string>
+	<string name="tb_bien">Good!</string>
+	<string name="tb_leccion_terminada">Lesson finished.</string>
+	<string name="tb_has_escrito">You typed</string>
+	<string name="tb_no_es_letra">%1$s: that is not a letter.</string>
+	<string name="tb_prueba_otra">Try again. Touch</string>
+	<string name="tb_gestos_no_puntos">Gestures here: slide your fingers</string>
+	<string name="tb_haz_gesto">%1$s: %2$s</string>
+	<string name="tb_gesto_bien">Good! %1$s.</string>
+	<string name="tb_gestos_todos">Very good! You know the gestures.</string>
+	<string name="tb_gesto_nada">%1$s does nothing on the keyboard.</string>
+	<string name="tb_gesto_otro">%1$s is %2$s.</string>
+	<string name="tb_gesto_repite">Try again: %1$s.</string>
+	<string name="tb_libre_gesto">%1$s: %2$s.</string>
+	<string name="tb_libre_leer">Hear everything typed</string>
+	<string name="tb_libre_vacio">You have not typed anything yet</string>
+	<string name="tb_libre_todo">You typed: %1$s</string>
+	<string name="tb_libre_otro">%1$s: works on the real keyboard</string>
+	<string name="tb_vuelta">Practice removed. Back to the tutorial.</string>
+	<string name="tb_vuelta_terminada">Back to the tutorial.</string>
+	<string name="tb_dictar_titulo">Dictate with your voice</string>
+	<string name="tb_dictar">Sometimes saying it is faster than typing it. Without leaving the braille keyboard, slide two fingers right (or choose «Dictate» in the keyboard menu) and speak: what you say is typed at the cursor and Tiresias reads it. If the field asks for it, the first letter is a capital, and if the text before does not end in a space, one is added.\n\nTo stop it early, repeat the same gesture. It uses Tiresias speech recognition: the one that works without the Internet if you have downloaded its model, or the system one. The first time, Android asks for microphone permission.\n\nThen you carry on typing in braille as usual: you can mix both in the same message.</string>
+
+	<string name="tb_corregir_titulo">Move through and correct the text</string>
+	<string name="tb_corregir">You do not need to leave the keyboard to review what you have typed.\n\nThree fingers left or right move the cursor and say what it passes over. Three fingers down change what it moves by: characters, words or lines. At the start or the end, it tells you. What you type goes where the cursor is, and delete removes what is before it (to its left): that is how you fix a letter in the middle of a word.\n\nIn the keyboard menu, «Editing» has what a text editor has:\n\nStart selecting: from then on, what you move over with the cursor is selected; «Stop selecting» says how many characters you have.\nSelect all.\nCopy and cut the selection; paste what was copied.\nUndo and redo.\nGo to the start and to the end.\nRead the selection.\n\n«Read everything typed», in the same menu, says the whole field. In a password, if Android does not show what you type, Tiresias says «dot» instead of the letters. All of this can be tried in the field of the last lesson.</string>
+
+	<string name="tb_emojis_titulo">Emoji: explore, search and favourites</string>
+	<string name="tb_emojis">There are two ways to add an emoji, both from the keyboard menu.\n\nExplore: «Emoji» opens the list by group: first your favourites, then your own categories and then the usual ones (faces, gestures, people, hearts, animals, food, activities, travel, objects, symbols and flags). One finger up or down changes group; one finger sideways, emoji; two fingers down type it and the list stays open to add more.\n\nSearch: «Search for an emoji» lets you type words of its name in braille, without accents if you like. After each letter, Tiresias says how many there are and the first one; a letter that leaves none is ignored. One finger sideways goes through the results; one finger down starts another word; two fingers left delete a letter; two down type the emoji; two up leave. The names come from the Tiresias emoji base, in your language.\n\nFavourites: in both, two fingers right add the emoji to favourites, and the same gesture removes it.\n\nYour categories: three fingers right save the emoji in one of your categories (Family, Work, whatever you like); if it was already there, they remove it. Categories are created, renamed and deleted in Settings, Braille, «My emoji: favourites and categories», where you can also add emoji by searching for them, remove them, move them from one category to another and order them.\n\nIn the practice you search for a real emoji: try adding it to favourites and then choose it with two fingers down.</string>
+
+	<string name="tb_cortina_titulo">Type without anyone seeing it</string>
+	<string name="tb_cortina">With Tiresias on, the braille keyboard covers the whole app while you type: what you type is not shown on the screen, only a black surface with its name at the top.\n\nIf you also turn on the Tiresias screen curtain, the screen goes completely black, without that name, and the keyboard works just the same: the curtain lets your fingers through. That way nobody around you sees what you type or that you are typing.\n\nRemember that what you type is spoken: with headphones, only you hear it. In a password, if Android does not show what you type, Tiresias says «dot» instead of each letter.</string>
+
+	<string name="tb_aviso_emojis">Practice: search for an emoji. Type letters of its name in braille, for example hea, for heart. One finger sideways goes through the results; two fingers right, favourite; two left delete a letter; two down choose it. Two up, leave.</string>
+	<string name="tb_emoji_elegido">Good! You chose %1$s. On the real keyboard it would be typed in the field.</string>
+	<string name="tb_emoji_favorito_pendiente">Next time also try adding it to favourites with two fingers right.</string>
+	<string name="tb_escribe_numero">Type the number %1$s</string>
+	<string name="tb_lector_titulo">The screen reader menu: Tiresias without leaving the keyboard</string>
+	<string name="tb_lector">Three fingers up open the screen reader menu: Tiresias actions you can use while you type, without closing the keyboard. By default: the screen curtain, the time and battery, the notification summary, repeat the last thing, read the clipboard, voice speed and volume, and music (pause and resume). It works the same way as the keyboard menu.\n\nOnly actions that say something or change a setting are there: those that open a window or move around the screen do not work with the keyboard on, because the surface would cover them.\n\nTo choose it to your liking, in Settings, Braille, «Choose the screen reader menu on the braille keyboard»: check the ones you want (also pitch, punctuation, change voice or language, answer or reject a call…) and order them.\n\nAnd to have them even closer, any of them can be put directly on a keyboard gesture, in «Braille keyboard gestures»: they are at the end of the list, with «Screen reader» in front. For example, three fingers down for the curtain.</string>
+</resources>

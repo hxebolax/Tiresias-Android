@@ -12,7 +12,8 @@ import android.view.MotionEvent
 import android.view.View
 import com.xebolax.tiresias.R
 import com.xebolax.tiresias.base.Ajustes
-import kotlin.math.abs
+import com.xebolax.tiresias.nucleo.braille.PosturaBraille
+import com.xebolax.tiresias.nucleo.braille.Sentido
 import kotlin.math.hypot
 
 /** Hacia dónde va un deslizamiento sobre la superficie braille (ya girado si los puntos van en espejo). */
@@ -89,13 +90,13 @@ object CalibracionBraille {
 
 /**
  * La superficie donde se apoyan los dedos para escribir en braille: toda la
- * vista recibe los dedos. Sin calibrar, los puntos se reparten por posición (la
- * mitad de arriba son 1, 2 y 3 de izquierda a derecha y la de abajo 4, 5 y 6,
- * que es como quedan los dedos con el móvil en horizontal y la pantalla hacia
- * fuera); calibrada, cada dedo es el punto más cercano de los que tocó el
- * usuario. La usan el teclado braille (con el 60 % del alto de la pantalla) y
- * las superficies que se ponen encima de todo (la navegación web braille, la
- * búsqueda braille y el control de un PC), que ocupan la pantalla entera.
+ * vista recibe los dedos. Sin calibrar, los puntos y los deslizamientos se
+ * reparten según cómo se sujeta el móvil ([PosturaBraille]: en horizontal, con
+ * la pantalla hacia fuera o sobre la mesa); calibrada, cada dedo es el punto
+ * más cercano de los que tocó el usuario. La usan el teclado braille, el
+ * tutorial y las superficies que se ponen encima de todo (la navegación web
+ * braille, la búsqueda braille y el control de un PC), a pantalla completa; el
+ * teclado braille, en su propia ventana, solo sin Tiresias.
  */
 @SuppressLint("ViewConstructor", "ClickableViewAccessibility")
 class SuperficieBraille(
@@ -213,17 +214,20 @@ class SuperficieBraille(
 				val sy = inicioY[id] ?: e.y
 				val dx = e.x - sx
 				val dy = e.y - sy
-				val horizontal = abs(dx) > width * 0.25f && abs(dx) > abs(dy)
-				val vertical = abs(dy) > height * 0.2f && abs(dy) > abs(dx)
-				val gesto = when {
-					horizontal -> {
-						// Con los puntos en espejo, también giran izquierda y derecha (borrar y espacio)
-						val izquierda = (dx < 0) != oyente.espejo()
-						GestoBraille(dedosMax.coerceIn(1, 3), if (izquierda) DireccionBraille.IZQUIERDA else DireccionBraille.DERECHA)
-					}
-					vertical -> GestoBraille(dedosMax.coerceIn(1, 3), if (dy < 0) DireccionBraille.ARRIBA else DireccionBraille.ABAJO)
-					else -> null
-				}?.let { g -> if (g.dedos == 1) g.copy(punto = numeroDePunto(punto(sx, sy))) else g }
+				// Lo que hay que mover el dedo para que sea un gesto y no un punto: un centímetro (o algo más en una
+				// pantalla grande). Antes era una parte del ancho y del alto, y a pantalla completa hacía falta
+				// arrastrar casi cinco centímetros hacia arriba o hacia abajo
+				val umbral = maxOf(UMBRAL_GESTO_MM * resources.displayMetrics.xdpi / 25.4f, minOf(width, height) * 0.12f)
+				// El sentido como lo nota la persona, con el móvil en horizontal (pantalla hacia fuera o sobre la mesa)
+				val direccion = when (PosturaBraille.sentido(dx, dy, width.toFloat(), height.toFloat(), oyente.espejo(), umbral)) {
+					Sentido.IZQUIERDA -> DireccionBraille.IZQUIERDA
+					Sentido.DERECHA -> DireccionBraille.DERECHA
+					Sentido.ARRIBA -> DireccionBraille.ARRIBA
+					Sentido.ABAJO -> DireccionBraille.ABAJO
+					null -> null
+				}
+				val gesto = direccion?.let { GestoBraille(dedosMax.coerceIn(1, 3), it) }
+					?.let { g -> if (g.dedos == 1) g.copy(punto = numeroDePunto(punto(sx, sy))) else g }
 				val lista = calibrando
 				when {
 					lista != null && gesto != null && gesto.dedos == 2 && gesto.direccion == DireccionBraille.ARRIBA -> cancelarCalibracion()
@@ -247,8 +251,9 @@ class SuperficieBraille(
 
 	/**
 	 * El punto (bit) de una posición. Calibrada: el centro más cercano de los
-	 * que tocó el usuario. Sin calibrar: tres columnas por fila; fila de arriba
-	 * 1, 2, 3 y de abajo 4, 5, 6 (en espejo, el punto 1 a la derecha).
+	 * que tocó el usuario. Sin calibrar, según la postura ([PosturaBraille]): con
+	 * la pantalla hacia fuera, la mano izquierda 1, 2, 3 y la derecha 4, 5, 6, de
+	 * arriba abajo; sobre la mesa, en fila 3, 2, 1, 4, 5, 6.
 	 */
 	private fun punto(x: Float, y: Float): Int {
 		centros?.let { c ->
@@ -257,10 +262,7 @@ class SuperficieBraille(
 			val i = c.indices.minByOrNull { hypot((c[it].x - nx) * width, (c[it].y - ny) * height) } ?: 0
 			return 1 shl i
 		}
-		val leida = (x / (width / 3f)).toInt().coerceIn(0, 2)
-		val columna = if (oyente.espejo()) 2 - leida else leida
-		val abajo = y > height / 2f
-		return 1 shl (columna + if (abajo) 3 else 0)
+		return 1 shl (PosturaBraille.punto(x, y, width.toFloat().coerceAtLeast(1f), height.toFloat().coerceAtLeast(1f), oyente.espejo()) - 1)
 	}
 
 	private fun numeroDePunto(bit: Int): Int = Integer.numberOfTrailingZeros(bit) + 1
@@ -268,5 +270,7 @@ class SuperficieBraille(
 	private companion object {
 		/** Dos puntos calibrados tienen que estar al menos a esta parte del lado corto. */
 		const val DISTANCIA_MINIMA = 0.08f
+		/** Lo mínimo que se mueve un dedo en un gesto, en milímetros (TalkBack usa 9). */
+		const val UMBRAL_GESTO_MM = 10f
 	}
 }

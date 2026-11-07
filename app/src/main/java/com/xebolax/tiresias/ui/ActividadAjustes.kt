@@ -432,6 +432,7 @@ class ActividadAjustes : ActividadBase(), PreferenceFragmentCompat.OnPreferenceS
 				"ordenar_menu" to ActividadOrdenar.LISTA_MENU, "ordenar_controles" to ActividadOrdenar.LISTA_CONTROLES,
 				"ordenar_partes" to ActividadOrdenar.LISTA_PARTES, "ordenar_circular" to ActividadOrdenar.LISTA_CIRCULAR,
 				"ordenar_estado" to ActividadOrdenar.LISTA_ESTADO,
+				"braille_menu_teclado" to ActividadOrdenar.LISTA_TECLADO, "braille_menu_lector" to ActividadOrdenar.LISTA_LECTOR_TECLADO,
 			)) {
 				findPreference<Preference>(clave)?.setOnPreferenceClickListener {
 					startActivity(android.content.Intent(c, ActividadOrdenar::class.java).putExtra(ActividadOrdenar.EXTRA_LISTA, lista))
@@ -487,6 +488,14 @@ class ActividadAjustes : ActividadBase(), PreferenceFragmentCompat.OnPreferenceS
 					}
 					true
 				}
+			}
+			findPreference<Preference>("braille_emojis_propios")?.setOnPreferenceClickListener {
+				startActivity(android.content.Intent(c, ActividadEmojisPropios::class.java))
+				true
+			}
+			findPreference<Preference>("braille_tutorial")?.setOnPreferenceClickListener {
+				startActivity(android.content.Intent(c, ActividadTutorialBraille::class.java))
+				true
 			}
 			findPreference<Preference>("braille_teclado")?.setOnPreferenceClickListener {
 				runCatching { startActivity(android.content.Intent(android.provider.Settings.ACTION_INPUT_METHOD_SETTINGS)) }

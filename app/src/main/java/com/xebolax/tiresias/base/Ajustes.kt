@@ -646,6 +646,16 @@ class Ajustes(contexto: Context) {
 		get() = cadena(Claves.BRAILLE_GESTOS, "")
 		set(v) = poner(Claves.BRAILLE_GESTOS, v)
 
+	/** El menú del teclado braille (un dedo hacia arriba): cuáles y en qué orden. */
+	var menuTecladoBraille: List<com.xebolax.tiresias.braille.AccionTeclado>
+		get() = com.xebolax.tiresias.nucleo.Listas.leer(cadena(Claves.BRAILLE_MENU_TECLADO, ""), com.xebolax.tiresias.braille.MenusTeclado.TECLADO_POSIBLES.toTypedArray(), com.xebolax.tiresias.braille.MenusTeclado.TECLADO_POR_DEFECTO)
+		set(v) = poner(Claves.BRAILLE_MENU_TECLADO, com.xebolax.tiresias.nucleo.Listas.escribir(v))
+
+	/** El menú del lector en el teclado braille (tres dedos hacia arriba): cuáles y en qué orden. */
+	var menuLectorTeclado: List<com.xebolax.tiresias.nucleo.Accion>
+		get() = com.xebolax.tiresias.nucleo.Listas.leer(cadena(Claves.BRAILLE_MENU_LECTOR, ""), com.xebolax.tiresias.braille.MenusTeclado.LECTOR_PERMITIDAS.toTypedArray(), com.xebolax.tiresias.braille.MenusTeclado.LECTOR_POR_DEFECTO)
+		set(v) = poner(Claves.BRAILLE_MENU_LECTOR, com.xebolax.tiresias.nucleo.Listas.escribir(v))
+
 	/** Mayúscula automática al empezar una frase en el teclado braille, si el campo la pide. */
 	val brailleMayusculaAuto: Boolean get() = logico(Claves.BRAILLE_MAYUSCULA_AUTO, false)
 	/** Un sonido al escribir un espacio, borrar o Intro en el teclado braille. */
@@ -997,6 +1007,8 @@ object Claves {
 	const val BRAILLE_CALIBRACION = "braille_calibracion"
 	const val BRAILLE_CALIBRACION_ESPEJO = "braille_calibracion_espejo"
 	const val BRAILLE_GESTOS = "braille_gestos"
+	const val BRAILLE_MENU_TECLADO = "braille_menu_teclado"
+	const val BRAILLE_MENU_LECTOR = "braille_menu_lector"
 	const val BRAILLE_MAYUSCULA_AUTO = "braille_mayuscula_auto"
 	const val BRAILLE_SONAR_TECLAS = "braille_sonar_teclas"
 	const val BRAILLE_ESTILO_SONIDOS = "braille_estilo_sonidos"

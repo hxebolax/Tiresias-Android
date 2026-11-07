@@ -350,6 +350,13 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	}
 
 	private fun procesar(e: AccessibilityEvent) {
+		// Con una superficie braille encima (el teclado braille, su práctica, la navegación braille) solo se tocan
+		// ella y sus gestos: los cambios de ventana y de foco de debajo no se dicen. Al aparecer el teclado
+		// braille, «Superficie del teclado braille», «Teclado en pantalla» y la barra de navegación cortaban su aviso
+		if (superficie.abierta && e.eventType and CALLADOS_CON_SUPERFICIE != 0) {
+			if (e.eventType == AccessibilityEvent.TYPE_WINDOWS_CHANGED || e.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) olvidarCaches()
+			return
+		}
 		when (e.eventType) {
 			AccessibilityEvent.TYPE_VIEW_HOVER_ENTER -> {
 				pasoTardio(e)
@@ -1240,7 +1247,7 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		pistaPendiente?.let { manejador.removeCallbacks(it) }
 		val pista = compositor.pista(elemento, verbosidad) ?: return
 		val r = Runnable {
-			if (foco == n && !continua.activa) voz.decir(Enunciado(pista, modo = Modo.ENCOLAR, tipo = Tipo.PISTA))
+			if (foco == n && !continua.activa && !superficie.abierta) voz.decir(Enunciado(pista, modo = Modo.ENCOLAR, tipo = Tipo.PISTA))
 		}
 		pistaPendiente = r
 		manejador.postDelayed(r, ajustes.esperaPistas)
@@ -1892,6 +1899,11 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	private var ultimoExplorado: AccessibilityNodeInfo? = null
 
 	companion object {
+		/** Lo que no se dice con una superficie braille encima: cambios de ventana, de foco y de contenido de debajo. */
+		private const val CALLADOS_CON_SUPERFICIE = AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED or
+			AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED or AccessibilityEvent.TYPE_WINDOWS_CHANGED or
+			AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED or AccessibilityEvent.TYPE_VIEW_FOCUSED or
+			AccessibilityEvent.TYPE_VIEW_SELECTED or AccessibilityEvent.TYPE_VIEW_SCROLLED or AccessibilityEvent.TYPE_VIEW_HOVER_ENTER
 		/** Cada cuánto se mira el elemento vigilado, lo mínimo entre dos avisos y lo que se espera fuera de su app. */
 		private const val VIGILAR_CADA_MS = 1500L
 		private const val VIGILAR_ENTRE_AVISOS_MS = 2000L

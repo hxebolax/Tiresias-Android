@@ -16,4 +16,14 @@ object Almacen {
 		val app = contexto.applicationContext ?: contexto
 		return app.createDeviceProtectedStorageContext()
 	}
+
+	/**
+	 * Si ya se puede usar el almacenamiento normal (el de las credenciales): no
+	 * hasta el primer desbloqueo tras encender. Antes, abrir unas preferencias de
+	 * ahí lanza una excepción (Android 8 o posterior) y los archivos no se ven.
+	 */
+	fun desbloqueado(contexto: Context): Boolean {
+		if (android.os.Build.VERSION.SDK_INT < 24) return true
+		return runCatching { contexto.getSystemService(android.os.UserManager::class.java)?.isUserUnlocked }.getOrNull() ?: true
+	}
 }
