@@ -39,7 +39,7 @@
 	<string name="estructura_asunto">Estructura de una pantalla (Tiresias %1$s, %2$s)</string>
 	<string name="estructura_compartir">Mandar la estructura de la pantalla</string>
 	<string name="asis_5_boton_transsion">Abrir el inicio automático de Phone Master</string>
-	<string name="aviso_limpiar_recientes">Tiresias se cerró al limpiar las apps recientes. Para que no vuelva a pasar: en Recientes, ponle el candado a Tiresias; y en Phone Master o en Ajustes, Gestión de aplicaciones, permite su inicio automático. Lo tienes en el asistente de Tiresias, paso 5.</string>
+	<string name="aviso_limpiar_recientes">Tiresias se cerró al limpiar las apps recientes. Para que no vuelva a pasar: en Phone Master o en Ajustes, Gestión de aplicaciones, permite su inicio automático, y en la batería de Tiresias elige sin restricciones; lo tienes en el asistente de Tiresias, paso 5. Si en Recientes puedes bloquear Tiresias, hazlo: según el modelo, con el candado de su tarjeta, manteniéndola pulsada o deslizándola hacia abajo. Y para cerrar apps, mejor de una en una que con limpiar todo.</string>
 	<string name="acc_texto_web">Abrir %1$s</string>
 	<string name="acc_texto_correo">Escribir a %1$s</string>
 	<string name="acc_texto_telefono">Llamar al %1$s</string>

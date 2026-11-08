@@ -24,7 +24,12 @@ import com.xebolax.tiresias.lectura.Lector
  * teclado se esconde, para que nadie se quede con un teclado al que no le
  * llegan los dedos; al volver al campo de texto, sale otra vez.
  */
-class ModoTecladoBraille(lector: Lector, private val teclado: TecladoBraille) : ModoSuperficie(lector) {
+class ModoTecladoBraille(
+	lector: Lector,
+	private val teclado: TecladoBraille,
+	/** Sin aviso: la app lo vuelve a pedir justo después de esconderlo (Chrome al ir a una página) y lo esconde ella. */
+	private val callado: Boolean = false,
+) : ModoSuperficie(lector) {
 	private val principal = Handler(Looper.getMainLooper())
 
 	/** La superficie que recibe los dedos (la crea [crearVista]); null mientras no está puesta. */
@@ -34,7 +39,7 @@ class ModoTecladoBraille(lector: Lector, private val teclado: TecladoBraille) : 
 	/** Si la ha quitado el teclado (al esconderse): entonces no hay que esconderlo otra vez. */
 	@Volatile var quitadaPorElTeclado = false
 
-	override fun aviso(): String = teclado.avisoListo()
+	override fun aviso(): String = if (callado) "" else teclado.avisoListo()
 
 	override fun alPuntos(puntos: Int) = Unit
 

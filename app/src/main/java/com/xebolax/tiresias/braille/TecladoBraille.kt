@@ -137,7 +137,7 @@ class TecladoBraille : InputMethodService(), SensorEventListener, OyenteSuperfic
 	private fun ponerEncima(): Boolean {
 		val lector = ServicioTiresias.instancia?.lectorActual ?: return false
 		encima?.let { if (it.puesta) return true }
-		val m = ModoTecladoBraille(lector, this)
+		val m = ModoTecladoBraille(lector, this, callado = android.os.SystemClock.uptimeMillis() < escondidoHasta)
 		encima = m
 		lector.superficie.abrir(m)
 		return true
@@ -331,7 +331,8 @@ class TecladoBraille : InputMethodService(), SensorEventListener, OyenteSuperfic
 				return
 			}
 		}
-		val c: String? = if (numero) NUMEROS[puntos] ?: run { numero = false; LETRAS[puntos] } else LETRAS[puntos]
+		val c: String? = (if (numero) NUMEROS[puntos] ?: run { numero = false; LETRAS[puntos] } else LETRAS[puntos])
+			?.let { signoQueAbre(it, ic.getTextBeforeCursor(1, 0)?.toString().orEmpty()) }
 		if (c == null) {
 			anunciar(textos().getString(R.string.braille_desconocido, describir(puntos)))
 			return
@@ -373,6 +374,8 @@ class TecladoBraille : InputMethodService(), SensorEventListener, OyenteSuperfic
 			AccionTeclado.EMOJIS -> abrirEmojis()
 			AccionTeclado.PORTAPAPELES -> abrirPortapapeles()
 			AccionTeclado.SUGERENCIAS -> abrirSugerencias()
+			// Si Tiresias acaba de avisar de sugerencias de mención, el mismo gesto las abre (de fábrica, un dedo abajo)
+			AccionTeclado.ESCONDER_TECLADO -> if (consultaAvisada && sugerencias().isNotEmpty()) abrirSugerencias() else esconder()
 			AccionTeclado.LEER_CAMPO -> leerCampo()
 			AccionTeclado.CALIBRAR -> activa?.calibrar { } ?: Unit
 			AccionTeclado.QUITAR_CALIBRACION -> {
@@ -444,11 +447,32 @@ class TecladoBraille : InputMethodService(), SensorEventListener, OyenteSuperfic
 		val accion = (currentInputEditorInfo?.imeOptions ?: 0) and EditorInfo.IME_MASK_ACTION
 		if (accion != EditorInfo.IME_ACTION_NONE && accion != EditorInfo.IME_ACTION_UNSPECIFIED) {
 			ic.performEditorAction(accion)
+			// Enviado o buscado: el teclado sobra (pasar al campo siguiente, no)
+			if (accion in ACCIONES_QUE_TERMINAN && Ajustes(this).brailleEsconderAlEnviar) esconder()
 			return
 		}
 		// En una app de mensajes, su campo no tiene acción del editor: Intro pulsa su botón Enviar (SandFly)
-		if (Ajustes(this).brailleIntroEnvia && enviarConBoton()) return
+		if (Ajustes(this).brailleIntroEnvia && enviarConBoton()) {
+			if (Ajustes(this).brailleEsconderAlEnviar) esconder()
+			return
+		}
 		ic.commitText("\n", 1)
+	}
+
+	/**
+	 * Esconde el teclado (de fábrica, un dedo hacia abajo; y solo al enviar o buscar, si se quiere). Se quita la
+	 * superficie de encima y vuelven los gestos de Tiresias, en la misma app; al tocar otra vez el campo, vuelve.
+	 * Apagar la pantalla no servía: al encenderla, la app lo volvía a pedir.
+	 */
+	/** Hasta cuándo no se avisa al volver a aparecer el teclado (justo después de esconderlo). */
+	private var escondidoHasta = 0L
+
+	private fun esconder() {
+		escondidoHasta = android.os.SystemClock.uptimeMillis() + CALLADO_TRAS_ESCONDER_MS
+		lista = null
+		busqueda = null
+		anunciar(textos().getString(R.string.braille_teclado_escondido))
+		requestHideSelf(0)
 	}
 
 	/** Pulsa el botón Enviar junto al campo, si es de una app de mensajes y se encuentra. */
@@ -1036,6 +1060,24 @@ class TecladoBraille : InputMethodService(), SensorEventListener, OyenteSuperfic
 			p(1, 2, 6) to "(", p(3, 4, 5) to ")", p(2, 3, 6) to "\"", p(5) to "'", p(2, 3, 5, 6) to "=", p(3, 5) to "*",
 			p(2, 5, 6) to "/", p(4, 5, 6) to "_",
 		)
+
+		/** Tras esconder el teclado, lo que la app tarda en volver a pedirlo y esconderlo ella (sin volver a avisar). */
+		private const val CALLADO_TRAS_ESCONDER_MS = 1500L
+
+		/** Lo que da por terminado lo escrito: el teclado se esconde con «Esconder el teclado al enviar o buscar». */
+		private val ACCIONES_QUE_TERMINAN = setOf(EditorInfo.IME_ACTION_SEND, EditorInfo.IME_ACTION_SEARCH, EditorInfo.IME_ACTION_GO, EditorInfo.IME_ACTION_DONE)
+
+		/**
+		 * En braille español la interrogación y la exclamación son el mismo signo para abrir y para cerrar
+		 * (puntos 2 y 6, puntos 2, 3 y 5): al empezar (nada antes, un espacio, un salto o algo que abre) son ¿ y ¡;
+		 * detrás de una palabra, ? y !.
+		 */
+		fun signoQueAbre(c: String, antes: String): String {
+			if (c != "?" && c != "!") return c
+			val ultimo = antes.lastOrNull()
+			val abre = ultimo == null || ultimo.isWhitespace() || ultimo in "([{«“\"'¿¡-—"
+			return if (!abre) c else if (c == "?") "¿" else "¡"
+		}
 
 		/** Las letras braille (sin números) para quien escribe con una superficie braille: la navegación web y la búsqueda. */
 		fun letra(puntos: Int): String? = LETRAS[puntos]

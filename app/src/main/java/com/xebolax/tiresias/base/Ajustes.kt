@@ -444,6 +444,8 @@ class Ajustes(contexto: Context) {
 	val brailleEspejo: Boolean get() = logico(Claves.BRAILLE_ESPEJO, false)
 	/** En el teclado braille, Intro pulsa el botón Enviar de las apps de mensajes (SandFly). */
 	val brailleIntroEnvia: Boolean get() = logico(Claves.BRAILLE_INTRO_ENVIA, true)
+	/** Esconder el teclado braille al enviar, buscar, ir o terminar (Intro con esas acciones). */
+	val brailleEsconderAlEnviar: Boolean get() = logico(Claves.BRAILLE_ESCONDER_AL_ENVIAR, true)
 
 	/** El teclado braille pone los puntos según cómo se sujeta el móvil (sensor de gravedad); manda sobre [brailleEspejo]. */
 	val brailleSensor: Boolean get() = logico(Claves.BRAILLE_SENSOR, false)
@@ -1007,6 +1009,7 @@ object Claves {
 	const val BRAILLE_CALIBRACION = "braille_calibracion"
 	const val BRAILLE_CALIBRACION_ESPEJO = "braille_calibracion_espejo"
 	const val BRAILLE_GESTOS = "braille_gestos"
+	const val BRAILLE_ESCONDER_AL_ENVIAR = "braille_esconder_al_enviar"
 	const val BRAILLE_MENU_TECLADO = "braille_menu_teclado"
 	const val BRAILLE_MENU_LECTOR = "braille_menu_lector"
 	const val BRAILLE_MAYUSCULA_AUTO = "braille_mayuscula_auto"

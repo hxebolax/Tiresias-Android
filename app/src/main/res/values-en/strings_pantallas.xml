@@ -50,7 +50,7 @@
 	<string name="asis_5_huawei">On Huawei and Honor phones, open Settings, Battery, App launch, find Tiresias, turn off automatic management and leave auto-launch, secondary launch and run in background on.</string>
 	<string name="asis_5_motorola">On Motorola phones, if double tap fails or needs three taps, open the Moto app, Gestures, and turn off the gestures you do not use (the screen ones and the taps on the back). Also open the Tiresias app info and turn off battery saving for it.</string>
 	<string name="asis_5_vivo">On vivo and iQOO phones, open the Tiresias app info, Battery, and allow high background power use; also turn on autostart in Settings, Apps, Permissions.</string>
-	<string name="asis_5_transsion">On Infinix, Tecno and itel phones, open Tiresias app info, Battery, and choose Unrestricted. Open Phone Master or Settings, App management, and turn on auto-start for Tiresias. Then, in Recents, lock Tiresias so clearing the list does not close it. If it still stops speaking, turn it back on in Settings, Accessibility.</string>
+	<string name="asis_5_transsion">On Infinix, Tecno and itel phones, open Tiresias app info, Battery, and choose Unrestricted. Open Phone Master or Settings, App management, and turn on auto-start for Tiresias. Then, if apps can be locked in Recents, lock Tiresias (depending on the model, with the padlock on its card, by long pressing it or by swiping it down); if not, close apps one at a time instead of with clear all. If it still stops speaking, turn it back on in Settings, Accessibility.</string>
 	<string name="asis_5_boton">Open Tiresias app info</string>
 	<string name="asis_6_titulo">Learn the gestures</string>
 	<string name="asis_6">The tutorial explains the gestures in a few minutes and has a practice area.</string>
@@ -186,7 +186,7 @@
 	</plurals>
 	<string name="braille_documento_cerrado">Document closed</string>
 	<string name="braille_linea_virtual">Braille display from %1$s, %2$d cells</string>
-	<string name="braille_teclado_listo">Braille keyboard. Rest your fingers and lift them to type. Two fingers up, back to the previous keyboard; one finger up, the keyboard menu; three fingers up, the screen reader menu.</string>
+	<string name="braille_teclado_listo">Braille keyboard. Rest your fingers and lift them to type. One finger down, hide it; two fingers up, back to the previous keyboard; one finger up, the keyboard menu; three fingers up, the screen reader menu.</string>
 	<string name="braille_superficie">Braille keyboard surface</string>
 	<string name="braille_numero">number</string>
 	<string name="braille_mayuscula">capital</string>

@@ -360,7 +360,8 @@ class ModoPracticaBraille(lector: Lector, private val practica: Practica) : Modo
 				return
 			}
 		}
-		val c = (if (numero) TecladoBraille.numero(puntos) else null) ?: TecladoBraille.letra(puntos).also { numero = false }
+		val c = ((if (numero) TecladoBraille.numero(puntos) else null) ?: TecladoBraille.letra(puntos).also { numero = false })
+			?.let { TecladoBraille.signoQueAbre(it, escrito.toString()) }
 		if (c == null) {
 			lector.sonidos.tocar(Sonido.ERROR)
 			decir(t.getString(R.string.tb_no_es_letra, CeldasBraille.describir(t, puntos)))

@@ -48,7 +48,7 @@ class ActividadTutorialBraille : ActividadBase() {
 		Leccion(R.string.tb_10_titulo, R.string.tb_10) { letras(".,;:?!-", "?.!,") },
 		Leccion(R.string.tb_11_titulo, R.string.tb_11) {
 			Practica.Gestos(listOf(
-				AccionTeclado.ESPACIO, AccionTeclado.BORRAR, AccionTeclado.INTRO, AccionTeclado.BORRAR_PALABRA, AccionTeclado.MENU,
+				AccionTeclado.ESPACIO, AccionTeclado.BORRAR, AccionTeclado.INTRO, AccionTeclado.BORRAR_PALABRA, AccionTeclado.MENU, AccionTeclado.ESCONDER_TECLADO,
 				AccionTeclado.DICTADO, AccionTeclado.CURSOR_ATRAS, AccionTeclado.CURSOR_ADELANTE, AccionTeclado.CAMBIAR_UNIDAD, AccionTeclado.MENU_LECTOR,
 			))
 		},

@@ -231,4 +231,9 @@
 		<item quantity="other">%d emojis: elige uno</item>
 	</plurals>
 	<string name="ep_resultado">%1$s %2$s</string>
+	<!-- Esconder el teclado -->
+	<string name="braille_accion_esconder_teclado">Esconder el teclado</string>
+	<string name="braille_teclado_escondido">Teclado escondido</string>
+	<string name="aj_braille_esconder_al_enviar">Esconder el teclado al enviar o buscar</string>
+	<string name="aj_braille_esconder_al_enviar_res">Tras enviar, buscar o terminar con Intro, el teclado braille se esconde solo. Para esconderlo sin enviar, un dedo hacia abajo</string>
 </resources>

@@ -39,7 +39,7 @@
 	<string name="estructura_asunto">Screen structure (Tiresias %1$s, %2$s)</string>
 	<string name="estructura_compartir">Send the screen structure</string>
 	<string name="asis_5_boton_transsion">Open Phone Master auto-start</string>
-	<string name="aviso_limpiar_recientes">Tiresias was closed when the recent apps were cleared. To stop it happening again: in Recents, lock Tiresias; and in Phone Master or Settings, App management, allow it to auto-start. It is in the Tiresias setup assistant, step 5.</string>
+	<string name="aviso_limpiar_recientes">Tiresias was closed when the recent apps were cleared. To stop it happening again: in Phone Master or Settings, App management, allow it to auto-start, and set Tiresias battery use to unrestricted; it is in the Tiresias setup assistant, step 5. If you can lock Tiresias in Recents, do it: depending on the model, with the padlock on its card, by long pressing it or by swiping it down. And to close apps, better one at a time than with clear all.</string>
 	<string name="acc_texto_web">Open %1$s</string>
 	<string name="acc_texto_correo">Write to %1$s</string>
 	<string name="acc_texto_telefono">Call %1$s</string>

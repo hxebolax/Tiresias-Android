@@ -8,7 +8,7 @@ import com.xebolax.tiresias.nucleo.Accion
 enum class AccionTeclado {
 	NINGUNA, BORRAR, BORRAR_PALABRA, ESPACIO, INTRO, CAMBIAR_TECLADO, BLOQUEAR_ORIENTACION,
 	MENU, DICTADO, EMOJIS, PORTAPAPELES, SUGERENCIAS, LEER_CAMPO, CALIBRAR, QUITAR_CALIBRACION,
-	BUSCAR_EMOJI, EDICION, CURSOR_ATRAS, CURSOR_ADELANTE, CAMBIAR_UNIDAD, SELECCIONAR, SELECCIONAR_TODO, COPIAR, CORTAR, PEGAR, DESHACER, REHACER, IR_PRINCIPIO, IR_FINAL, LEER_SELECCION, MENU_LECTOR;
+	BUSCAR_EMOJI, EDICION, CURSOR_ATRAS, CURSOR_ADELANTE, CAMBIAR_UNIDAD, SELECCIONAR, SELECCIONAR_TODO, COPIAR, CORTAR, PEGAR, DESHACER, REHACER, IR_PRINCIPIO, IR_FINAL, LEER_SELECCION, MENU_LECTOR, ESCONDER_TECLADO;
 
 	fun nombre(c: Context): String = c.getString(when (this) {
 		NINGUNA -> R.string.braille_accion_ninguna
@@ -42,6 +42,7 @@ enum class AccionTeclado {
 		IR_FINAL -> R.string.braille_accion_ir_final
 		LEER_SELECCION -> R.string.braille_accion_leer_seleccion
 		MENU_LECTOR -> R.string.braille_accion_menu_lector
+		ESCONDER_TECLADO -> R.string.braille_accion_esconder_teclado
 	})
 }
 
@@ -61,7 +62,7 @@ object MenusTeclado {
 	val TECLADO_POR_DEFECTO: List<AccionTeclado> = listOf(
 		AccionTeclado.EMOJIS, AccionTeclado.BUSCAR_EMOJI, AccionTeclado.PORTAPAPELES, AccionTeclado.SUGERENCIAS, AccionTeclado.DICTADO,
 		AccionTeclado.LEER_CAMPO, AccionTeclado.EDICION, AccionTeclado.BORRAR_PALABRA, AccionTeclado.CALIBRAR, AccionTeclado.QUITAR_CALIBRACION,
-		AccionTeclado.BLOQUEAR_ORIENTACION, AccionTeclado.MENU_LECTOR, AccionTeclado.CAMBIAR_TECLADO,
+		AccionTeclado.BLOQUEAR_ORIENTACION, AccionTeclado.MENU_LECTOR, AccionTeclado.ESCONDER_TECLADO, AccionTeclado.CAMBIAR_TECLADO,
 	)
 
 	/** Lo que se puede poner en el menú del teclado: todo menos nada y el propio menú. */
@@ -88,7 +89,8 @@ object MenusTeclado {
  * (un dedo a la izquierda borra y a la derecha escribe un espacio; dos dedos
  * hacia abajo, Intro, y hacia arriba, cambiar de teclado; tres dedos hacia
  * arriba, bloquear la orientación) más el menú del teclado (un dedo hacia
- * arriba), las sugerencias de mención (un dedo hacia abajo), borrar la palabra
+ * arriba), esconder el teclado (un dedo hacia abajo; las sugerencias de mención si se acaba de avisar de
+ * ellas), borrar la palabra
  * (dos dedos a la izquierda), dictar (dos dedos a la derecha) y recorrer lo
  * escrito (tres dedos a los lados mueven el cursor; tres hacia abajo cambian la
  * unidad: carácter, palabra o línea). Los gestos de un punto (Can Talk) no hacen nada
@@ -99,7 +101,7 @@ object GestosTeclado {
 		"1_IZQUIERDA" to AccionTeclado.BORRAR,
 		"1_DERECHA" to AccionTeclado.ESPACIO,
 		"1_ARRIBA" to AccionTeclado.MENU,
-		"1_ABAJO" to AccionTeclado.SUGERENCIAS,
+		"1_ABAJO" to AccionTeclado.ESCONDER_TECLADO,
 		"2_ABAJO" to AccionTeclado.INTRO,
 		"2_ARRIBA" to AccionTeclado.CAMBIAR_TECLADO,
 		"2_IZQUIERDA" to AccionTeclado.BORRAR_PALABRA,

@@ -18,6 +18,10 @@ object Nodos {
 	private const val PROFUNDIDAD_MAXIMA = 60
 	/** Hasta cuántos niveles se mira dentro de un control para saber si agrupa a otros (página, contenedor, icono). */
 	private const val NIVELES_AGRUPAR = 4
+	/** Hasta dónde lee un control los textos de dentro ([textoHijos] baja nueve niveles): más hondo, cada texto es su parada. */
+	private const val NIVELES_LECTURA = 9
+	/** La parte de la pantalla que ocupa el marco de una página entera (de alto). */
+	private const val PARTE_PAGINA = 0.6f
 
 	/** El rol de [n] por su clase (como `Role.java` de TalkBack), su rol web y sus propiedades. */
 	fun rol(n: AccessibilityNodeInfo): Rol {
@@ -224,7 +228,14 @@ object Nodos {
 			// son casillas que no se pulsan solas, y se leía la lista entera de una vez, encabezados incluidos
 			if (esLista(p)) return false
 			if (Build.VERSION.SDK_INT >= 28 && p.isScreenReaderFocusable) return true
-			if (accionable(p) && p.isVisibleToUser) return true
+			// Un control lo lee solo si de verdad es una parada que llega hasta él: no si solo envuelve controles (lo
+			// que se decide mirando unos pocos niveles), ni si es el marco pulsable de una página entera, ni si [n]
+			// está más hondo de lo que lee. En una noticia (oem.com.mx, Chrome) toda la página iba dentro de un
+			// marco pulsable con los párrafos muy abajo: el marco no era parada, pero «leía» los párrafos, así que
+			// nadie los leía y al deslizar se saltaban hasta la barra de Chrome
+			if (accionable(p) && p.isVisibleToUser) {
+				if (nivel < NIVELES_LECTURA && !soloAgrupa(p) && !esMarcoDePagina(p, contenido(p))) return true
+			}
 			// Un encabezado sin texto propio (la fila de una categoría de ajustes) se lee con su texto dentro:
 			// una sola parada, no el encabezado y luego su texto otra vez
 			if (esEncabezado(p) && !tieneTexto(p) && p.isVisibleToUser) return true
@@ -248,7 +259,7 @@ object Nodos {
 		var nivel = 0
 		var candidato: AccessibilityNodeInfo? = null
 		while (actual != null && nivel < 15) {
-			if (!soloAgrupa(actual)) {
+			if (!soloAgrupa(actual) && !esMarcoDePagina(actual, contenido(actual))) {
 				if (accionable(actual) && actual.isVisibleToUser) return actual
 				if (candidato == null && recibeFoco(actual)) candidato = actual
 			}
@@ -304,6 +315,17 @@ object Nodos {
 	 * dentro: si no, eran dos paradas para lo mismo, una de ellas muda).
 	 */
 	private fun sinNadaQueDecir(n: AccessibilityNodeInfo, d: Dentro?): Boolean = d != null && d.controles >= 1 && d.textos == 0 && !tieneTexto(n)
+
+	/**
+	 * El marco pulsable de una página entera (una web que escucha los toques de toda la página): agrupa varios
+	 * controles y ocupa casi toda la pantalla. No es un botón: no es una parada ni lee lo de dentro; lo son sus
+	 * controles y sus textos, cada uno el suyo.
+	 */
+	private fun esMarcoDePagina(n: AccessibilityNodeInfo, d: Dentro?): Boolean {
+		if (d == null || !d.varios || tieneTexto(n)) return false
+		val alto = android.content.res.Resources.getSystem().displayMetrics.heightPixels
+		return alto > 0 && limites(n).height() >= alto * PARTE_PAGINA
+	}
 
 	/**
 	 * El texto de los hijos de un contenedor que se lee junto a él (filas de
@@ -429,7 +451,7 @@ object Nodos {
 		}
 		val foco = recibeFoco(n)
 		val dentro = if (foco) contenido(n) else null
-		val soloEnvuelve = foco && sinNadaQueDecir(n, dentro)
+		val soloEnvuelve = foco && (sinNadaQueDecir(n, dentro) || esMarcoDePagina(n, dentro))
 		if (foco && !soloEnvuelve) lista += n
 		// Un control con texto dentro: sus hijos se leen con él, no aparte (salvo controles propios dentro;
 		// y si agrupa varios controles, o solo los envuelve sin decir nada, cada uno es su propia parada)

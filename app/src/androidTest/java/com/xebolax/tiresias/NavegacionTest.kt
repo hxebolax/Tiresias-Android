@@ -22,7 +22,8 @@ class NavegacionTest : PruebaTiresias() {
 
 	private fun nombreAccion(a: Accion): String {
 		val id = app.resources.getIdentifier("accion_" + a.name.lowercase(), "string", app.packageName)
-		return app.getString(id)
+		// En el idioma de Tiresias (el de las pruebas, español), no en el del sistema del emulador
+		return com.xebolax.tiresias.base.Idioma.envolver(app).getString(id)
 	}
 
 	@Test

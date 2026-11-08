@@ -227,4 +227,9 @@
 		<item quantity="other">%d emoji: choose one</item>
 	</plurals>
 	<string name="ep_resultado">%1$s %2$s</string>
+	<!-- Hide the keyboard -->
+	<string name="braille_accion_esconder_teclado">Hide the keyboard</string>
+	<string name="braille_teclado_escondido">Keyboard hidden</string>
+	<string name="aj_braille_esconder_al_enviar">Hide the keyboard after sending or searching</string>
+	<string name="aj_braille_esconder_al_enviar_res">After sending, searching or finishing with Enter, the braille keyboard hides by itself. To hide it without sending, one finger down</string>
 </resources>
