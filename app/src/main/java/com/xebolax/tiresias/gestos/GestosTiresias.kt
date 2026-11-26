@@ -255,6 +255,8 @@ class GestosTiresias(private val lector: Lector) {
 		ayuda = false
 		toqueDirectoEn = null
 		pasoActivo = false
+		capaQuitada = !capaDelTecladoPuesta.isEmpty
+		capaDelTecladoPuesta = Region()
 		region(false)
 	}
 
@@ -318,11 +320,24 @@ class GestosTiresias(private val lector: Lector) {
 	@Volatile private var regionPuesta = Region()
 
 	/** Si hay alguna zona donde los toques pasan directos a la app (ahí no hay exploración táctil). */
-	val hayPasoDeToques: Boolean get() = !regionPuesta.isEmpty
+	val hayPasoDeToques: Boolean get() = !regionPuesta.isEmpty || !capaDelTecladoPuesta.isEmpty
+
+	@Volatile private var capaDelTecladoPuesta = Region()
+	@Volatile private var capaQuitada = false
+
+	fun capaDelTeclado(zona: Region) {
+		if (Build.VERSION.SDK_INT < 30) return
+		if (zona.isEmpty) capaQuitada = false
+		val capa = if (capaQuitada) Region() else zona
+		if (capa == capaDelTecladoPuesta) return
+		capaDelTecladoPuesta = Region(capa)
+		runCatching { fijarRegion(regionPuesta) }
+			.onFailure { Registro.w(ETIQUETA, "No se pudo poner la zona del teclado con capa propia", it) }
+	}
 
 	@androidx.annotation.RequiresApi(30)
 	private fun fijarRegion(r: Region) {
-		servicio.setTouchExplorationPassthroughRegion(Display.DEFAULT_DISPLAY, r)
+		servicio.setTouchExplorationPassthroughRegion(Display.DEFAULT_DISPLAY, Region(r).apply { op(capaDelTecladoPuesta, Region.Op.UNION) })
 		regionPuesta = Region(r)
 	}
 

@@ -1982,6 +1982,17 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		android.provider.Settings.Secure.getString(servicio.contentResolver, android.provider.Settings.Secure.DEFAULT_INPUT_METHOD)?.substringBefore('/')
 	}.getOrNull()?.takeIf { it.isNotBlank() }
 
+	private fun capaDelTeclado(ventanas: List<AccessibilityWindowInfo>): android.graphics.Region {
+		val zona = android.graphics.Region()
+		val capas = ventanas.filter { it.type == AccessibilityWindowInfo.TYPE_ACCESSIBILITY_OVERLAY }
+		if (Build.VERSION.SDK_INT < 30 || capas.isEmpty() || hayVentanaPropia()) return zona
+		val teclado = paqueteTeclado()?.takeIf { it != servicio.packageName } ?: return zona
+		for (v in capas) {
+			if (runCatching { v.root?.packageName?.toString() }.getOrNull() == teclado) zona.union(android.graphics.Rect().also { v.getBoundsInScreen(it) })
+		}
+		return zona
+	}
+
 	private fun alCambiarVentanas(e: AccessibilityEvent) {
 		olvidarCaches()
 		// Una ventana que se cierra (un diálogo de la app): el foco vuelve a la de debajo
@@ -2005,6 +2016,7 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		perfiles.alCambiarTeclado(if (teclado != null) paqueteTeclado() else null)
 		// Con «Toque directo en el teclado», los toques en el teclado en pantalla pasan directos a él
 		zonasDelTeclado(teclado)
+		gestos.capaDelTeclado(capaDelTeclado(ventanas))
 		// Una ventana emergente que se queda con el foco de la app: se entra en ella
 		if (Build.VERSION.SDK_INT >= 28 && e.windowChanges and AccessibilityEvent.WINDOWS_CHANGE_ADDED != 0) {
 			ventanas.firstOrNull { it.id == e.windowId }?.takeIf { esEmergenteConFoco(it) }?.let { entrarEnEmergente(it) }
