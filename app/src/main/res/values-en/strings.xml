@@ -113,6 +113,7 @@
 	<string name="valor_tono">Pitch %1$d percent</string>
 	<string name="valor_volumen">Volume %1$d percent</string>
 	<string name="valor_puntuacion">Punctuation: %1$s</string>
+	<string name="valor_eco">Echo: %1$s</string>
 	<string name="valor_verbosidad">Verbosity: %1$s</string>
 	<string name="valor_motor">Voice: %1$s</string>
 	<string name="valor_motor_velocidad">Voice: %1$s, rate %2$d percent</string>

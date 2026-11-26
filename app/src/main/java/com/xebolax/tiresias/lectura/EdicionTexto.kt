@@ -221,7 +221,7 @@ class EdicionTexto(private val lector: Lector) {
 		if (g != Granularidad.CARACTER) turnoLetra++
 		if (g == Granularidad.CARACTER) {
 			val modo = lector.ajustes.foneticas
-			val palabra = if (modo != FONETICAS_NO) com.xebolax.tiresias.textos.DatosIdioma.de(lector.servicio, com.xebolax.tiresias.base.Idioma.efectivo(lector.servicio)).fonetico.de(s.firstOrNull() ?: ' ')?.takeIf { s.length == 1 && s[0].isLetter() } else null
+			val palabra = if (modo != FONETICAS_NO) lector.ajustes.alfabeto(com.xebolax.tiresias.textos.DatosIdioma.de(lector.servicio, com.xebolax.tiresias.base.Idioma.efectivo(lector.servicio)).fonetico).de(s.firstOrNull() ?: ' ')?.takeIf { s.length == 1 && s[0].isLetter() } else null
 			when {
 				palabra != null && modo == FONETICAS_EN_VEZ -> lector.voz.decir(Enunciado(palabra, Modo.INTERRUMPIR, Tipo.NAVEGACION, tono = tonoMayuscula(s)))
 				palabra != null && modo == FONETICAS_PAUSA -> {
@@ -240,7 +240,7 @@ class EdicionTexto(private val lector: Lector) {
 	}
 
 	private fun tonoMayuscula(s: String): Int {
-		val modo = lector.ajustes.ajustesTexto.mayusculas
+		val modo = lector.voz.modoMayusculas()
 		val tonos = modo == com.xebolax.tiresias.nucleo.ModoMayusculas.TONO || modo == com.xebolax.tiresias.nucleo.ModoMayusculas.PALABRA_Y_TONO
 		if (s.isNotEmpty() && Character.isUpperCase(s.codePointAt(0))) {
 			if (modo == com.xebolax.tiresias.nucleo.ModoMayusculas.SONIDO) lector.sonidos.tocar(Sonido.EDICION, tono = 1.5f)

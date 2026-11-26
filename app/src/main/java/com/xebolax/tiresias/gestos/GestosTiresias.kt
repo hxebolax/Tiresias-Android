@@ -164,7 +164,8 @@ class GestosTiresias(private val lector: Lector) {
 	 * por vista y las reglas por actividad o estado no se usan (para eso está la interfaz de toque directo).
 	 */
 	private fun pantallaDeclarada(info: android.content.pm.ApplicationInfo): Boolean {
-		val id = info.metaData?.getInt("fyi.quin.backtalk.direct_touch", 0) ?: 0
+		// (con el nombre nuevo de SandFly o con el de Backtalk)
+		val id = info.metaData?.let { m -> m.getInt("io.github.aaron_gh.sandfly.direct_touch", 0).takeIf { it != 0 } ?: m.getInt("fyi.quin.backtalk.direct_touch", 0) } ?: 0
 		if (id == 0) return false
 		val recursos = servicio.packageManager.getResourcesForApplication(info)
 		val xml = recursos.getXml(id)
@@ -255,10 +256,15 @@ class GestosTiresias(private val lector: Lector) {
 		ayuda = false
 		toqueDirectoEn = null
 		pasoActivo = false
+		forzarRegion = true
 		capaQuitada = !capaDelTecladoPuesta.isEmpty
 		capaDelTecladoPuesta = Region()
 		region(false)
+		forzarRegion = false
 	}
+
+	/** Mientras se restablece (modo seguro, teclas de volumen): la zona se quita aunque la haya puesto un teclado. */
+	private var forzarRegion = false
 
 	/** Los toques en [zona] (el teclado en pantalla) pasan directos a la app; null: ninguna. */
 	fun zonaDirecta(zona: android.graphics.Rect?) {
@@ -335,8 +341,17 @@ class GestosTiresias(private val lector: Lector) {
 			.onFailure { Registro.w(ETIQUETA, "No se pudo poner la zona del teclado con capa propia", it) }
 	}
 
+	/**
+	 * Hay a la vista un teclado cuya app tiene su propio servicio de accesibilidad, en su ventana de teclado (sin capa
+	 * propia): ese servicio puede haber puesto la zona de paso para el teclado, y Android guarda una sola para todos.
+	 * Mientras se ve, Tiresias no la cambia salvo para lo suyo (el menú circular, la superficie braille, el modo seguro),
+	 * como SandFly (41d56c890, b0a0a20b4).
+	 */
+	@Volatile var tecladoConZonaPropia = false
+
 	@androidx.annotation.RequiresApi(30)
-	private fun fijarRegion(r: Region) {
+	private fun fijarRegion(r: Region, forzar: Boolean = false) {
+		if (!forzar && tecladoConZonaPropia && capaDelTecladoPuesta.isEmpty) return
 		servicio.setTouchExplorationPassthroughRegion(Display.DEFAULT_DISPLAY, Region(r).apply { op(capaDelTecladoPuesta, Region.Op.UNION) })
 		regionPuesta = Region(r)
 	}
@@ -371,7 +386,7 @@ class GestosTiresias(private val lector: Lector) {
 			val ancho = limites?.width() ?: servicio.resources.displayMetrics.widthPixels
 			val alto = limites?.height() ?: servicio.resources.displayMetrics.heightPixels
 			val r = if (toda) Region(0, 0, ancho, alto) else Region()
-			fijarRegion(r)
+			fijarRegion(r, forzar = toda || forzarRegion)
 		} catch (e: Exception) {
 			Registro.w(ETIQUETA, "No se pudo cambiar la región de paso de toques", e)
 		}

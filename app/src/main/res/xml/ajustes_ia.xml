@@ -5,6 +5,7 @@
 	<Preference app:key="personas" app:title="@string/personas_titulo" app:summary="@string/personas_res" />
 	<SwitchPreferenceCompat app:key="reconocer_personas" app:title="@string/aj_reconocer_personas" app:summary="@string/aj_reconocer_personas_res" app:defaultValue="true" />
 	<SwitchPreferenceCompat app:key="personas_nube" app:title="@string/aj_personas_nube" app:summary="@string/aj_personas_nube_res" app:defaultValue="false" app:dependency="reconocer_personas" />
+	<ListPreference app:key="traducir_a" app:title="@string/aj_traducir_a" app:entries="@array/traducir_a_nombres" app:entryValues="@array/traducir_a_valores" app:defaultValue="" app:useSimpleSummaryProvider="true" />
 	<ListPreference app:key="iconos" app:title="@string/aj_iconos" app:entries="@array/iconos_nombres" app:entryValues="@array/iconos_valores" app:defaultValue="ocr" app:useSimpleSummaryProvider="true" />
 	<SwitchPreferenceCompat app:key="ia_sin_filtros" app:title="@string/aj_ia_sin_filtros" app:summary="@string/aj_ia_sin_filtros_res" app:defaultValue="false" />
 	<EditTextPreference app:key="ia_instrucciones" app:title="@string/aj_ia_instrucciones" app:summary="@string/aj_ia_instrucciones_res" />

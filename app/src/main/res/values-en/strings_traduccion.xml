@@ -5,7 +5,17 @@
 	<string name="recurso_traductor">Offline translator</string>
 	<string name="recurso_traductor_desc">Translates the text of the element and the last thing Tiresias said without Internet, with \"Recognise text and translate\" and \"Translate the last thing said\". It translates in one direction only: to go both ways you need both. OPUS-MT models from the University of Helsinki.</string>
 	<string name="rec_cat_traduccion">Offline translation</string>
-	<string name="rec_traduccion_explicacion">Translators that work without Internet and without sending the text to anyone. Download the one for the language you want to understand; if there is no translator for a text, Tiresias uses the artificial intelligence, if you have one set up.</string>
+	<string name="rec_traduccion_explicacion">Translators that work without Internet and without sending the text to anyone. Download the one for the language you want to understand; if there is no translator for a text, Tiresias uses the artificial intelligence, if you have one set up. To translate, open the Tiresias menu and choose «Translate the item» (what has focus) or «Translate the last thing said». The language to translate into is chosen in Settings, Artificial intelligence, «Translate into».</string>
+	<string name="aj_traducir_a">Translate into</string>
+	<string-array name="traducir_a_nombres">
+		<item>The language of Tiresias</item>
+		<item>Spanish</item>
+		<item>English</item>
+		<item>French</item>
+		<item>German</item>
+		<item>Italian</item>
+		<item>Portuguese</item>
+	</string-array>
 	<string name="rec_traductor_nombre">%1$s to %2$s translator</string>
 
 	<!-- While translating -->

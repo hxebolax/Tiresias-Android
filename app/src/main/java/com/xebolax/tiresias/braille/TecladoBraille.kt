@@ -387,6 +387,7 @@ class TecladoBraille : InputMethodService(), SensorEventListener, OyenteSuperfic
 			// Si Tiresias acaba de avisar de sugerencias de mención, el mismo gesto las abre (de fábrica, un dedo abajo)
 			AccionTeclado.ESCONDER_TECLADO -> if (consultaAvisada && sugerencias().isNotEmpty()) abrirSugerencias() else esconder()
 			AccionTeclado.LEER_CAMPO -> leerCampo()
+			AccionTeclado.ECO_SIGUIENTE -> anunciar(textos().getString(R.string.valor_eco, Ajustes(this).ecoSiguiente(textos(), true)))
 			AccionTeclado.CALIBRAR -> activa?.calibrar { } ?: Unit
 			AccionTeclado.QUITAR_CALIBRACION -> {
 				CalibracionBraille.quitar(Ajustes(this))
@@ -540,7 +541,14 @@ class TecladoBraille : InputMethodService(), SensorEventListener, OyenteSuperfic
 			val raiz = servicio.rootInActiveWindow ?: return false
 			val campo = raiz.findFocus(android.view.accessibility.AccessibilityNodeInfo.FOCUS_INPUT) ?: return false
 			val boton = BuscarEnviar.buscar(raiz, campo) ?: return false
-			boton.performAction(android.view.accessibility.AccessibilityNodeInfo.ACTION_CLICK)
+			if (boton.isClickable && boton.performAction(android.view.accessibility.AccessibilityNodeInfo.ACTION_CLICK)) return true
+			// El clic de accesibilidad no vale (o no lo dice): un toque de verdad en el botón
+			val r = com.xebolax.tiresias.arbol.Nodos.visibleEnVentana(boton)
+			if (r.isEmpty) return false
+			val camino = android.graphics.Path().apply { moveTo(r.exactCenterX(), r.exactCenterY()) }
+			val gesto = android.accessibilityservice.GestureDescription.Builder()
+				.addStroke(android.accessibilityservice.GestureDescription.StrokeDescription(camino, 0, 60)).build()
+			servicio.lectorActual?.mandarGesto(gesto) ?: servicio.dispatchGesture(gesto, null, null)
 		} catch (e: Exception) {
 			Registro.w(ETIQUETA, "No se pudo pulsar Enviar", e)
 			false
@@ -1142,10 +1150,7 @@ class TecladoBraille : InputMethodService(), SensorEventListener, OyenteSuperfic
 		fun letra(puntos: Int): String? = LETRAS[puntos]
 
 		/** Las apps de mensajes en las que Intro pulsa Enviar. */
-		private val APPS_MENSAJES = setOf(
-			"com.whatsapp", "com.whatsapp.w4b", "org.telegram.messenger", "org.thoughtcrime.securesms", "com.google.android.apps.messaging",
-			"com.samsung.android.messaging", "com.facebook.orca", "com.instagram.android", "com.discord", "org.telegram.plus",
-		)
+		private val APPS_MENSAJES = BuscarEnviar.APPS_MENSAJES
 
 		private val NUMEROS: Map<Int, String> = mapOf(
 			p(1) to "1", p(1, 2) to "2", p(1, 4) to "3", p(1, 4, 5) to "4", p(1, 5) to "5",

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto" app:title="@string/aj_seccion_notificaciones">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" app:title="@string/aj_seccion_notificaciones">
 	<SwitchPreferenceCompat app:key="leer_notificaciones" app:title="@string/aj_leer_notificaciones" app:summary="@string/aj_leer_notificaciones_res" app:defaultValue="true" />
 	<SwitchPreferenceCompat app:key="notificaciones_no_molestar" app:title="@string/aj_notif_no_molestar" app:defaultValue="false" />
 	<SwitchPreferenceCompat app:key="notificaciones_en_llamada" app:title="@string/aj_notif_llamada" app:defaultValue="false" />
@@ -19,5 +19,10 @@
 	<SwitchPreferenceCompat app:key="avisos_pantalla_con_multimedia" app:title="@string/aj_pantalla_multimedia" app:summary="@string/aj_pantalla_multimedia_res" app:defaultValue="true" />
 	<ListPreference app:key="aviso_nivel_bateria" app:title="@string/aj_nivel_bateria" app:entries="@array/nivel_bateria_nombres" app:entryValues="@array/nivel_bateria_valores" app:defaultValue="no" app:useSimpleSummaryProvider="true" />
 	<ListPreference app:key="bateria_baja" app:title="@string/aj_bateria_baja" app:entries="@array/bateria_baja_nombres" app:entryValues="@array/bateria_baja_valores" app:defaultValue="15" app:useSimpleSummaryProvider="true" />
+	<PreferenceCategory app:title="@string/aj_cat_vigilar">
+		<SwitchPreferenceCompat app:key="vigilar_lista_nuevas" app:title="@string/aj_vigilar_lista_nuevas" app:summary="@string/aj_vigilar_lista_nuevas_res" app:defaultValue="true" />
+		<SwitchPreferenceCompat app:key="vigilar_sonido" app:title="@string/aj_vigilar_sonido" app:defaultValue="true" />
+		<com.xebolax.tiresias.accesibilidad.DeslizadorAjuste app:key="vigilar_maximo" app:title="@string/aj_vigilar_maximo" app:min="1" android:max="20" app:defaultValue="5" />
+	</PreferenceCategory>
 	<SwitchPreferenceCompat app:key="duracion_llamada" app:title="@string/aj_duracion_llamada" app:summary="@string/aj_duracion_llamada_res" app:defaultValue="false" app:isPreferenceVisible="@bool/sistema_android_12" />
 </PreferenceScreen>

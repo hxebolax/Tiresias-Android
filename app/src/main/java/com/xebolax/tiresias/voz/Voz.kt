@@ -405,12 +405,29 @@ class Voz(contexto: Context) {
 	}
 
 	/** Cómo se dice un carácter suelto en el idioma de Tiresias («mayúscula a», «arroba»). */
-	fun nombreCaracter(c: String): String =
-		normalizador(Idioma.efectivo(app)).caracter(c, ajustes.ajustesTexto.copy(mayusculas = ModoMayusculas.PALABRA)).texto
+	/**
+	 * El nombre de un carácter donde no se puede subir el tono (una tecla, lo borrado, el braille): dice «mayúscula»
+	 * salvo con «No avisar» o «Un sonido», que se respetan (Blue-Sky, foro 124).
+	 */
+	fun nombreCaracter(c: String): String {
+		val modo = when (modoMayusculas()) {
+			ModoMayusculas.NADA, ModoMayusculas.SONIDO -> ModoMayusculas.NADA
+			else -> ModoMayusculas.PALABRA
+		}
+		return normalizador(Idioma.efectivo(app)).caracter(c, ajustes.ajustesTexto.copy(mayusculas = modo)).texto
+	}
+
+	/**
+	 * El aviso de mayúsculas que se usa ahora: «Automático» sube el tono con las voces de Tiresias (que lo
+	 * respetan) y, con una voz del sistema (Vocalizer y otras no hacen caso del tono), dice «mayúscula» y lo sube.
+	 */
+	fun modoMayusculas(): ModoMayusculas = ajustes.ajustesTexto.mayusculas.let {
+		if (it != ModoMayusculas.AUTO) it else if (sistema != null) ModoMayusculas.PALABRA_Y_TONO else ModoMayusculas.TONO
+	}
 
 	private fun preparar(e: Enunciado, idioma: Locale): String {
 		val normalizador = normalizador(idioma)
-		val ajustesTexto = ajustes.ajustesTexto.let { a -> puntuacionPerfil?.let { a.copy(puntuacion = it) } ?: a }
+		val ajustesTexto = ajustes.ajustesTexto.let { a -> puntuacionPerfil?.let { a.copy(puntuacion = it) } ?: a }.copy(mayusculas = modoMayusculas())
 		if (e.deletrear) {
 			// Un carácter suelto (navegación, eco) sigue el ajuste de mayúsculas; deletrear una frase siempre dice «mayúscula»
 			val modo = if (e.texto.codePointCount(0, e.texto.length) == 1) ajustesTexto else ajustesTexto.copy(mayusculas = ModoMayusculas.PALABRA)

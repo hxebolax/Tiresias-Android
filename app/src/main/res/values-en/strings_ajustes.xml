@@ -62,6 +62,17 @@
 	<string name="aj_cat_texto">Text</string>
 	<string name="aj_puntuacion">Punctuation</string>
 	<string name="aj_numeros">Numbers</string>
+	<string name="aj_deslizar_teclado_app">Swiping from the keyboard</string>
+	<string-array name="deslizar_teclado_app_nombres">
+		<item>Automatic: back to the app when typing on lift</item>
+		<item>Back to the app, from the field you type in</item>
+		<item>Goes through the keys</item>
+	</string-array>
+	<string name="aj_alfabeto_fonetico">Spelling alphabet</string>
+	<string-array name="alfabeto_fonetico_nombres">
+		<item>The language’s own</item>
+		<item>The international one (Alfa, Bravo)</item>
+	</string-array>
 	<string name="aj_mayusculas">Capitals when reading by character</string>
 	<string name="aj_emojis">Emojis</string>
 	<string-array name="emojis_nombres">
@@ -155,6 +166,7 @@
 		<item>Digit by digit (1 2 3 4)</item>
 	</string-array>
 	<string-array name="mayusculas_nombres">
+		<item>Automatic: pitch with the Tiresias voices; “cap” and pitch with system voices</item>
 		<item>Don\'t announce</item>
 		<item>Say “cap”</item>
 		<item>Raise pitch</item>
@@ -549,6 +561,8 @@
 	<string name="aj_texto_dentro_aparte_res">Each text inside a button or a row is its own stop (for rows that hide their text). Double tap presses the button or the row</string>
 	<string name="aj_braille_ajustar_puntos">Adjust dot positions while typing</string>
 	<string name="aj_braille_ajustar_puntos_res">With calibrated dots, each typed letter moves them slightly towards where your fingers land, in case your hand drifts</string>
+	<string name="aj_voz_silencio_bluetooth">Silence before speaking over Bluetooth</string>
+	<string name="aj_voz_silencio_bluetooth_res">With Bluetooth headphones or speakers, the built-in voices start with a moment of silence, so the start of short phrases is not lost</string>
 	<string name="aj_voz_silencio_inicio">Silence before speaking</string>
 	<string name="aj_voz_silencio_inicio_res">For phones that cut the start of single letters when spelling: the built-in voices start with a moment of silence</string>
 </resources>

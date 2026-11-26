@@ -16,6 +16,16 @@ object BuscarEnviar {
 	private const val MAXIMO_NODOS = 3000
 	private const val MAXIMO_NOMBRE = 50
 
+	/** Las apps de mensajes, cuyos campos tienen un botón Enviar (las de SandFly, con las de Telegram hechas con su código). */
+	val APPS_MENSAJES = setOf(
+		"com.whatsapp", "com.whatsapp.w4b", "org.telegram.messenger", "org.telegram.messenger.web", "org.telegram.plus",
+		"org.thunderdog.challegram", "me.blindgram.messenger", "org.telegram.messenger.beta", "tw.nekomimi.nekogram",
+		"com.exteragram.messenger", "uz.unnarsx.cherrygram", "org.forkgram.messenger", "it.octogram.android",
+		"org.thoughtcrime.securesms", "com.google.android.apps.messaging", "com.samsung.android.messaging", "com.android.messaging",
+		"com.facebook.orca", "com.instagram.android", "com.discord", "im.vector.app", "io.element.android.x", "com.Slack",
+		"com.microsoft.teams", "com.viber.voip", "jp.naver.line.android", "ch.threema.app",
+	)
+
 	/** Las palabras de «enviar» en los idiomas que conoce Tiresias. */
 	private val PALABRAS = listOf("enviar", "mandar", "send", "envoyer", "senden", "invia", "inviare", "verzenden", "wyślij", "odeslat")
 
@@ -42,8 +52,10 @@ object BuscarEnviar {
 			val mismaFila = r.centerY() in rc.top..rc.bottom || rc.centerY() in r.top..r.bottom
 			// Antes los de la misma fila, luego los de nombre exacto, luego el más cercano
 			(if (mismaFila) 0L else 1_000_000L) + (if (fuerza == 2) 0L else 100_000L) + distancia(r, rc)
-		}?.first ?: return null
-		return pulsable(mejor)
+		} ?: return null
+		// Un Enviar dibujado por la app que no dice que se pulsa (el de blindGram y Telegram al grabar una nota de voz):
+		// si se llama exactamente así, él mismo; quien lo pulse tocará de verdad si el clic no vale (SandFly c6f432c26)
+		return pulsable(mejor.first) ?: mejor.first.takeIf { mejor.second == 2 }
 	}
 
 	/** 2: se llama «Enviar» o su identificador es de enviar; 1: empieza por «Enviar» («Enviar SMS»); 0: no es. */

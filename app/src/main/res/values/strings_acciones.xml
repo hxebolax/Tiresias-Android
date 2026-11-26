@@ -68,6 +68,7 @@
 	<string name="accion_tono_menos">Menos tono</string>
 	<string name="accion_puntuacion_siguiente">Cambiar la puntuación</string>
 	<string name="accion_verbosidad_siguiente">Cambiar la verbosidad</string>
+	<string name="accion_eco_siguiente">Cambiar el eco del teclado</string>
 	<string name="accion_voz_siguiente">Cambiar de voz</string>
 	<string name="accion_idioma_siguiente">Cambiar de idioma</string>
 	<string name="accion_copiar">Copiar</string>
@@ -219,7 +220,7 @@
 	<string name="accion_lista_final">Al final de la lista entera</string>
 	<string name="accion_valor_mas">Subir el valor del deslizador</string>
 	<string name="accion_valor_menos">Bajar el valor del deslizador</string>
-	<string name="accion_traducir_ia">Traducir el elemento con IA</string>
+	<string name="accion_traducir_ia">Traducir el elemento</string>
 	<string name="accion_salida_audio">Cambiar la salida del audio</string>
 	<string name="accion_encabezado_siguiente">Siguiente encabezado</string>
 	<string name="accion_encabezado_anterior">Encabezado anterior</string>

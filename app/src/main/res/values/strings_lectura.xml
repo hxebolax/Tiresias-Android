@@ -198,6 +198,17 @@
 	<string name="vigilar_quitado">Ya no se vigila</string>
 	<string name="vigilar_cambio">Ha cambiado: %1$s</string>
 	<string name="vigilar_fuera">Has salido de la app: ya no se vigila</string>
+	<string name="vigilar_la_lista">la lista. Te digo cada mensaje nuevo</string>
+	<plurals name="p_vigilar_mas">
+		<item quantity="one">y %1$d más</item>
+		<item quantity="many">y %1$d más</item>
+		<item quantity="other">y %1$d más</item>
+	</plurals>
+	<string name="aj_cat_vigilar">Vigilar un elemento</string>
+	<string name="aj_vigilar_lista_nuevas">En una lista, solo lo nuevo</string>
+	<string name="aj_vigilar_lista_nuevas_res">Al vigilar un chat o una lista (el chat de un directo), decir solo los mensajes que llegan, no la lista entera</string>
+	<string name="aj_vigilar_sonido">Sonido al cambiar</string>
+	<string name="aj_vigilar_maximo">Mensajes nuevos que decir cada vez</string>
 	<string name="vigilar_desaparecido">Lo que vigilabas ya no está en la pantalla</string>
 	<string name="posicion_titulo">Ir al elemento número</string>
 	<string name="posicion_pista">Número del elemento</string>

@@ -235,6 +235,7 @@
 	<string name="braille_accion_esconder_teclado">Esconder el teclado</string>
 	<string name="braille_accion_nueva_linea">Nueva línea (también en los chats)</string>
 	<string name="braille_accion_enviar">Enviar</string>
+	<string name="braille_accion_eco_siguiente">Cambiar el eco</string>
 	<string name="braille_sin_enviar">Aquí no hay nada que enviar</string>
 	<string name="braille_teclado_escondido">Teclado escondido</string>
 	<string name="aj_braille_esconder_al_enviar">Esconder el teclado al enviar o buscar</string>

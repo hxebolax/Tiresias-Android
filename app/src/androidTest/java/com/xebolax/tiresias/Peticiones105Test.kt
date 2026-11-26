@@ -201,7 +201,8 @@ class Peticiones105Test : PruebaTiresias() {
 		prefs.edit().putStringSet(Claves.TECLADOS_QUE_HABLAN, setOf(actual!!)).commit()
 		assertTrue(edicion.tecladoHablaSolo())
 		prefs.edit().putStringSet(Claves.TECLADOS_QUE_HABLAN, emptySet()).commit()
-		assertTrue(!edicion.tecladoHablaSolo())
+		// El teclado braille de Tiresias dice él cada letra siempre, esté o no en la lista (si es el que está puesto)
+		assertEquals(actual == app.packageName, edicion.tecladoHablaSolo())
 	}
 
 	@Test

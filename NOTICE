@@ -24,8 +24,9 @@ Este producto incluye software desarrollado por terceros:
   SpeakerphoneInCallService de Backtalk (Apache License 2.0), con cambios.
 
 * Las interfaces de voz y de toque directo compatibles con otros lectores
-  (app/src/main/aidl/fyi/quin/backtalk/), Copyright 2026 Backtalk contributors y
-  SandFly contributors, licencia Apache License 2.0, sin cambios.
+  (app/src/main/aidl/fyi/quin/backtalk/ y app/src/main/aidl/io/github/aaron_gh/sandfly/),
+  Copyright 2026 Backtalk contributors y SandFly contributors, licencia Apache License 2.0,
+  sin cambios.
 
 * El detector del gesto de agitar (gestos/Agitar.kt) se basa en ShakeDetector de
   SandFly, Copyright 2026 SandFly contributors, licencia Apache License 2.0, con

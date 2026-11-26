@@ -120,24 +120,39 @@ object VozDeApps {
 class ServicioVozCompatible : Service() {
 	private val principal = Handler(Looper.getMainLooper())
 
-	private val enlace = object : ISpeechControl.Stub() {
-		override fun speak(text: String?, interrupt: Boolean, rate: Float, pitch: Float, volume: Float) {
-			val apps = llamante()
-			principal.post { VozDeApps.hablar(applicationContext, apps, text, interrupt, rate, pitch, volume) }
-		}
-
-		override fun stop() {
-			val apps = llamante()
-			principal.post { VozDeApps.callar(applicationContext, apps) }
-		}
-
-		override fun setTypingSpoken(spoken: Boolean) {
-			val apps = llamante()
-			principal.post { VozDeApps.decirEscritura(applicationContext, apps, spoken) }
-		}
+	private fun hablar(text: String?, interrupt: Boolean, rate: Float, pitch: Float, volume: Float) {
+		val apps = llamante()
+		principal.post { VozDeApps.hablar(applicationContext, apps, text, interrupt, rate, pitch, volume) }
 	}
 
-	override fun onBind(intent: Intent?): IBinder = enlace
+	private fun callar() {
+		val apps = llamante()
+		principal.post { VozDeApps.callar(applicationContext, apps) }
+	}
+
+	private fun escritura(spoken: Boolean) {
+		val apps = llamante()
+		principal.post { VozDeApps.decirEscritura(applicationContext, apps, spoken) }
+	}
+
+	private val enlace = object : ISpeechControl.Stub() {
+		override fun speak(text: String?, interrupt: Boolean, rate: Float, pitch: Float, volume: Float) = hablar(text, interrupt, rate, pitch, volume)
+		override fun stop() = callar()
+		override fun setTypingSpoken(spoken: Boolean) = escritura(spoken)
+	}
+
+	/** La misma interfaz con los nombres nuevos de SandFly (`io.github.aaron_gh.sandfly`, fba3fbd66). */
+	private val enlaceSandFly = object : io.github.aaron_gh.sandfly.speech.ISpeechControl.Stub() {
+		override fun speak(text: String?, interrupt: Boolean, rate: Float, pitch: Float, volume: Float) = hablar(text, interrupt, rate, pitch, volume)
+		override fun stop() = callar()
+		override fun setTypingSpoken(spoken: Boolean) = escritura(spoken)
+	}
+
+	override fun onBind(intent: Intent?): IBinder = if (intent?.action == ACCION_SANDFLY) enlaceSandFly else enlace
+
+	companion object {
+		const val ACCION_SANDFLY = "io.github.aaron_gh.sandfly.action.SPEECH_CONTROL"
+	}
 
 	/** Los paquetes de la app que llama, leídos en el hilo de la llamada (antes de pasar al principal). */
 	private fun llamante(): List<String> = packageManager.getPackagesForUid(Binder.getCallingUid())?.toList().orEmpty()
@@ -152,15 +167,38 @@ class ServicioToqueCompatible : Service() {
 	private val principal = Handler(Looper.getMainLooper())
 
 	private val enlace = object : IDirectTouch.Stub() {
-		override fun requestScreen(client: IBinder?) {
-			val apps = llamante()
-			principal.post {
-				val m = resources.displayMetrics
-				VozDeApps.toqueDirecto(applicationContext, apps, Rect(0, 0, m.widthPixels, m.heightPixels))
-			}
-		}
+		override fun requestScreen(client: IBinder?) = pantalla()
+		override fun requestAreas(client: IBinder?, areas: Array<out Rect>?, viewIds: Array<out String>?) = zonas(areas, viewIds)
+		override fun stop(client: IBinder?) = parar()
+		override fun reset(client: IBinder?) = parar()
+		// (los estados de la declaración del manifiesto no se usan en Tiresias)
+		override fun setState(client: IBinder?, state: String?) {}
+	}
 
-		override fun requestAreas(client: IBinder?, areas: Array<out Rect>?, viewIds: Array<out String>?) {
+	/** La misma interfaz con los nombres nuevos de SandFly (`io.github.aaron_gh.sandfly`, fba3fbd66). */
+	private val enlaceSandFly = object : io.github.aaron_gh.sandfly.directtouch.IDirectTouch.Stub() {
+		override fun requestScreen(client: IBinder?) = pantalla()
+		override fun requestAreas(client: IBinder?, areas: Array<out Rect>?, viewIds: Array<out String>?) = zonas(areas, viewIds)
+		override fun stop(client: IBinder?) = parar()
+		override fun reset(client: IBinder?) = parar()
+		override fun setState(client: IBinder?, state: String?) {}
+	}
+
+	override fun onBind(intent: Intent?): IBinder = if (intent?.action == ACCION_SANDFLY) enlaceSandFly else enlace
+
+	companion object {
+		const val ACCION_SANDFLY = "io.github.aaron_gh.sandfly.action.DIRECT_TOUCH"
+	}
+
+	private fun pantalla() {
+		val apps = llamante()
+		principal.post {
+			val m = resources.displayMetrics
+			VozDeApps.toqueDirecto(applicationContext, apps, Rect(0, 0, m.widthPixels, m.heightPixels))
+		}
+	}
+
+	private fun zonas(areas: Array<out Rect>?, viewIds: Array<out String>?) {
 			val apps = llamante()
 			val zonas = areas?.filterNotNull()?.map { Rect(it) }.orEmpty()
 			val ids = viewIds?.filterNotNull().orEmpty()
@@ -176,20 +214,12 @@ class ServicioToqueCompatible : Service() {
 				}
 				VozDeApps.toqueDirecto(applicationContext, apps, total.takeIf { !it.isEmpty })
 			}
-		}
-
-		override fun stop(client: IBinder?) {
-			val apps = llamante()
-			principal.post { VozDeApps.toqueDirecto(applicationContext, apps, null) }
-		}
-
-		override fun reset(client: IBinder?) = stop(client)
-
-		// (los estados de la declaración del manifiesto no se usan en Tiresias)
-		override fun setState(client: IBinder?, state: String?) {}
 	}
 
-	override fun onBind(intent: Intent?): IBinder = enlace
+	private fun parar() {
+		val apps = llamante()
+		principal.post { VozDeApps.toqueDirecto(applicationContext, apps, null) }
+	}
 
 	private fun llamante(): List<String> = packageManager.getPackagesForUid(Binder.getCallingUid())?.toList().orEmpty()
 }
@@ -203,16 +233,18 @@ class ReceptorVozCompatible : BroadcastReceiver() {
 		if (Build.VERSION.SDK_INT < 34) return
 		val app = sentFromPackage ?: return
 		when (i.action) {
-			ACCION_HABLAR -> VozDeApps.hablar(
+			ACCION_HABLAR, ACCION_HABLAR_SANDFLY -> VozDeApps.hablar(
 				c, listOf(app), i.getStringExtra("text"), i.getBooleanExtra("interrupt", false),
 				i.getFloatExtra("rate", 1f), i.getFloatExtra("pitch", 1f), i.getFloatExtra("volume", 1f),
 			)
-			ACCION_CALLAR -> VozDeApps.callar(c, listOf(app))
+			ACCION_CALLAR, ACCION_CALLAR_SANDFLY -> VozDeApps.callar(c, listOf(app))
 		}
 	}
 
 	companion object {
 		const val ACCION_HABLAR = "fyi.quin.backtalk.action.SPEAK"
 		const val ACCION_CALLAR = "fyi.quin.backtalk.action.STOP_SPEECH"
+		const val ACCION_HABLAR_SANDFLY = "io.github.aaron_gh.sandfly.action.SPEAK"
+		const val ACCION_CALLAR_SANDFLY = "io.github.aaron_gh.sandfly.action.STOP_SPEECH"
 	}
 }

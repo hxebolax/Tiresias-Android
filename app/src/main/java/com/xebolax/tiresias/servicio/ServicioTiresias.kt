@@ -259,6 +259,7 @@ class ServicioTiresias : AccessibilityService() {
 		// Encendido: si luego desaparece sin pasar por onUnbind, lo ha cerrado el sistema (no el usuario)
 		Ajustes(this).p.edit().putBoolean(com.xebolax.tiresias.base.Claves.SERVICIO_ENCENDIDO, true).apply()
 		try {
+			Ajustes(this).migrar1021()
 			iniciar()
 			revisarAgitar()
 		} catch (e: Throwable) {
@@ -293,6 +294,7 @@ class ServicioTiresias : AccessibilityService() {
 		com.xebolax.tiresias.voz.PistaAudio.multimedia = Ajustes(this).vozMultimedia
 		com.xebolax.tiresias.voz.PistaAudio.sinCaptura = Ajustes(this).vozSinCaptura
 		com.xebolax.tiresias.voz.PistaAudio.silencioAlEmpezar = Ajustes(this).vozSilencioInicio
+		com.xebolax.tiresias.voz.PistaAudio.silencioConBluetooth = Ajustes(this).vozSilencioBluetooth
 		val v = Voz(this)
 		voz = v
 		val s = Sonidos(this)
@@ -672,7 +674,14 @@ class ServicioTiresias : AccessibilityService() {
 			}
 			return true
 		}
-		l.manejador.post { ej.ejecutar(accion) }
+		l.manejador.post {
+			ej.gestoEnCurso = gesto
+			try {
+				ej.ejecutar(accion)
+			} finally {
+				ej.gestoEnCurso = null
+			}
+		}
 		return true
 	}
 
@@ -690,6 +699,10 @@ class ServicioTiresias : AccessibilityService() {
 		// Para el aviso de volumen: lo que cambia justo después de una tecla lo ha cambiado el usuario
 		if (e.keyCode == KeyEvent.KEYCODE_VOLUME_UP || e.keyCode == KeyEvent.KEYCODE_VOLUME_DOWN || e.keyCode == KeyEvent.KEYCODE_VOLUME_MUTE) {
 			AvisoVolumen.teclaPulsada = android.os.SystemClock.uptimeMillis()
+		}
+		// Atrás con una tecla (la del móvil, un teclado físico, una línea braille): el foco vuelve a lo que se había abierto
+		if ((e.keyCode == KeyEvent.KEYCODE_BACK || e.keyCode == KeyEvent.KEYCODE_ESCAPE) && e.action == KeyEvent.ACTION_UP && !e.isCanceled) {
+			ejecutor?.let { ej -> lector?.manejador?.post { ej.volverAlActivado() } }
 		}
 		return try {
 			(teclado?.alPulsar(e) ?: false).also { Diagnostico.apuntarTecla(e, it) }

@@ -186,6 +186,15 @@ class Navegador(private val lector: Lector) {
 				return true
 			}
 		}
+		// Desde una tecla, deslizar sigue en la app: hacia atrás, al campo en que se escribe; hacia delante, lo que va
+		// detrás del campo (el botón Enviar), sin recorrer todas las teclas (SandFly textFieldForKeyAfterTyping)
+		if (filtro == null && intento == 0) lector.campoDesdeTeclado()?.let { campo ->
+			if (!adelante) {
+				lector.enfocar(campo)
+				return true
+			}
+			lector.partirDe(campo)
+		}
 		val raiz = lector.raiz() ?: return borde()
 		val lista = orden(raiz)
 		val candidatos = if (filtro != null) lista.filter(filtro) else lista
@@ -347,22 +356,34 @@ class Navegador(private val lector: Lector) {
 		val c = Nodos.desplazableHacia(f, accion, alSeguir = true) ?: return false
 		val clase = c.className?.toString().orEmpty()
 		if (c.collectionInfo != null || !clase.endsWith("ScrollView")) return false
-		val todas = Nodos.paradasDe(c)
-		val i = todas.indexOfFirst { it == f || Nodos.dentroDe(f, it) || Nodos.dentroDe(it, f) }
-		if (i < 0) return false
-		// (algo que diga algo: no las filas vacías que separan categorías, que tampoco son paradas cuando se ven)
-		fun vale(n: AccessibilityNodeInfo) = !n.isVisibleToUser && Nodos.habla(n)
-		val siguiente = (if (adelante) todas.drop(i + 1).firstOrNull { vale(it) } else todas.take(i).lastOrNull { vale(it) }) ?: return false
+		// Como SandFly (revealNextOffscreenItem): se trae a la vista una pantalla de golpe (y lo siguiente, si se ha
+		// pasado) y después se busca otra vez desde donde estaba el foco; así lo que asomaba cortado por el borde, que no
+		// era parada hasta verse, ya lo es y no se salta
+		val delante = FueraDeLaVista.delante(c, f, adelante) ?: return false
 		desplazamientoPropio()
-		if (!runCatching { siguiente.performAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SHOW_ON_SCREEN.id) }.getOrDefault(false)) return false
+		if (!mostrar(delante.finDePagina)) return false
+		val siguiente = delante.siguiente
+		if (delante.finDePagina != siguiente && !(runCatching { siguiente.refresh() }.getOrDefault(false) && siguiente.isVisibleToUser)) mostrar(siguiente)
 		invalidarTodo()
 		lector.manejador.postDelayed({
+			// (el usuario ya ha ido a otro sitio)
+			if (lector.foco?.let { it != f } == true) return@postDelayed
+			if (Build.VERSION.SDK_INT >= 33) runCatching { lector.servicio.clearCachedSubtree(c) }
+			invalidarTodo()
+			runCatching { c.refresh() }
+			val destino = lector.raiz()?.let { r -> FueraDeLaVista.primeraTras(c, f, orden(r), adelante) }
+			if (destino != null) {
+				lector.enfocar(destino)
+				return@postDelayed
+			}
 			runCatching { siguiente.refresh() }
-			val n = Nodos.enfocable(siguiente) ?: siguiente
-			lector.enfocar(n)
+			lector.enfocar(Nodos.enfocable(siguiente) ?: siguiente)
 		}, ESPERA_DESPLAZAR_MS)
 		return true
 	}
+
+	private fun mostrar(n: AccessibilityNodeInfo): Boolean =
+		runCatching { n.performAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SHOW_ON_SCREEN.id) }.getOrDefault(false)
 
 	/** Cuándo y hacia dónde se paró en el borde antes de dar la vuelta. */
 	@Volatile private var bordeEn: Pair<Long, Boolean>? = null
@@ -1205,15 +1226,28 @@ class Navegador(private val lector: Lector) {
 
 	/** Pasa a la ventana siguiente o anterior (barra de estado, app, teclado, diálogos...). */
 	fun ventana(adelante: Boolean): Boolean {
+		// En el orden de TalkBack (WindowTraversal): las de las apps y el teclado por su sitio (de arriba abajo y de
+		// izquierda a derecha) y las del sistema (las barras) al final; sin las capas de Tiresias ni el divisor
 		val ventanas = runCatching { lector.servicio.windows }.getOrNull().orEmpty()
 			.filter { it.type != AccessibilityWindowInfo.TYPE_ACCESSIBILITY_OVERLAY || it.root?.packageName != lector.servicio.packageName }
+			.filter { it.type != AccessibilityWindowInfo.TYPE_SPLIT_SCREEN_DIVIDER }
+			.sortedWith(compareBy<AccessibilityWindowInfo>({ if (it.type == AccessibilityWindowInfo.TYPE_SYSTEM) 1 else 0 },
+				{ android.graphics.Rect().also { r -> it.getBoundsInScreen(r) }.top }, { android.graphics.Rect().also { r -> it.getBoundsInScreen(r) }.left }))
 		if (ventanas.isEmpty()) return borde()
 		val actual = lector.foco?.windowId ?: ventanas.firstOrNull { it.isActive }?.id
 		val i = ventanas.indexOfFirst { it.id == actual }
-		val j = if (i < 0) 0 else (i + if (adelante) 1 else -1 + ventanas.size) % ventanas.size
-		val destino = ventanas[j]
-		val raiz = destino.root ?: return borde()
-		val n = orden(raiz).firstOrNull() ?: return borde()
+		// La primera que tenga algo que enfocar (una ventana vacía se salta, en vez de sonar el borde)
+		var destino: AccessibilityWindowInfo? = null
+		var n: AccessibilityNodeInfo? = null
+		for (paso in 1..ventanas.size) {
+			val j = if (i < 0) (paso - 1) % ventanas.size else Math.floorMod(i + if (adelante) paso else -paso, ventanas.size)
+			if (ventanas[j].id == actual) continue
+			val raiz = runCatching { ventanas[j].root }.getOrNull() ?: continue
+			n = orden(raiz).firstOrNull() ?: continue
+			destino = ventanas[j]
+			break
+		}
+		if (destino == null || n == null) return borde()
 		lector.sonidos.tocar(Sonido.VENTANA)
 		destino.title?.toString()?.takeIf { it.isNotBlank() }?.let { lector.decir(it, Modo.INTERRUMPIR) }
 		lector.enfocar(n, null, Modo.ENCOLAR)

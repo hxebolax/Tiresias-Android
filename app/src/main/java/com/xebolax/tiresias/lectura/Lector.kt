@@ -199,6 +199,7 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 
 	fun recargarAjustes() = manejador.post {
 		com.xebolax.tiresias.voz.PistaAudio.silencioAlEmpezar = ajustes.vozSilencioInicio
+		com.xebolax.tiresias.voz.PistaAudio.silencioConBluetooth = ajustes.vozSilencioBluetooth
 		// Otro volumen para la voz (Ajustes, Voz, o la acción): se aplica al momento
 		if (com.xebolax.tiresias.voz.PistaAudio.multimedia != ajustes.vozMultimedia || com.xebolax.tiresias.voz.PistaAudio.sinCaptura != ajustes.vozSinCaptura) {
 			com.xebolax.tiresias.voz.PistaAudio.sinCaptura = ajustes.vozSinCaptura
@@ -647,8 +648,12 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 			decir(R.string.vigilar_nada)
 			return false
 		}
-		vigilado = n
-		textoVigilado = textoFresco(n)
+		// Un mensaje de un chat (una fila de una lista): se vigila la lista entera, y se dicen solo las filas
+		// nuevas (el chat de un directo; Geralt_de_rivia, foro 120)
+		val lista = if (ajustes.vigilarListaNuevas) listaVigilable(n) else null
+		vigilado = lista ?: n
+		filasVigiladas = lista?.let { filasDe(it) }
+		textoVigilado = if (lista != null) (lista.contentDescription ?: lista.paneTitle ?: "").toString().ifBlank { textos.getString(R.string.vigilar_la_lista) } else textoFresco(n)
 		appVigilada = n.packageName?.toString()
 		avisoVigilado = 0L
 		vecesFuera = 0
@@ -663,6 +668,32 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		if (vigilado == null) return
 		vigilado = null
 		motivo?.let { decir(it) }
+	}
+
+	/** Las filas de la lista vigilada, contadas (dos «Hola» seguidos son dos), o null si no se vigila una lista. */
+	private var filasVigiladas: Map<String, Int>? = null
+
+	/** La lista que vigilar si [n] es una lista o está dentro de una (una fila, o algo de una fila). */
+	private fun listaVigilable(n: AccessibilityNodeInfo): AccessibilityNodeInfo? {
+		var actual: AccessibilityNodeInfo? = n
+		var niveles = 0
+		while (actual != null && niveles++ < 6) {
+			if (Nodos.esLista(actual) && actual.childCount > 0) return actual
+			actual = runCatching { actual.parent }.getOrNull()
+		}
+		return null
+	}
+
+	/** Lo que dice cada fila visible de [lista], con cuántas veces sale. */
+	private fun filasDe(lista: AccessibilityNodeInfo): Map<String, Int> {
+		val cuenta = LinkedHashMap<String, Int>()
+		for (i in 0 until minOf(lista.childCount, 80)) {
+			val hijo = runCatching { lista.getChild(i) }.getOrNull() ?: continue
+			// (sin la posición ni el rol: «6 de 10» cambia con cada mensaje que llega y todas parecerían nuevas)
+			val texto = runCatching { compositor.describir(conRegla(hijo, describir.elemento(hijo)), verbosidad.copy(decirPosicion = false, decirRol = false)) }.getOrDefault("").trim()
+			if (texto.isNotEmpty()) cuenta[texto] = (cuenta[texto] ?: 0) + 1
+		}
+		return cuenta
 	}
 
 	/** Lo que se dice del elemento, leído ahora (sin la copia de lo descrito, que sería la de antes del cambio). */
@@ -687,15 +718,44 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 			n = otro
 			vigilado = otro
 		}
+		filasVigiladas?.let { antes ->
+			revisarListaVigilada(n, antes)
+			return
+		}
 		val nuevo = textoFresco(n)
 		val ahora = SystemClock.uptimeMillis()
 		// Lo de antes solo se cambia al avisar: si cambia muy seguido, en el siguiente aviso va lo último
 		if (nuevo.isBlank() || nuevo == textoVigilado || ahora - avisoVigilado < VIGILAR_ENTRE_AVISOS_MS) return
 		textoVigilado = nuevo
 		avisoVigilado = ahora
-		sonidos.tocar(Sonido.NOTIFICACION)
+		if (ajustes.vigilarSonido) sonidos.tocar(Sonido.NOTIFICACION)
 		voz.decir(Enunciado(textos.getString(R.string.vigilar_cambio, nuevo), Modo.ENCOLAR, Tipo.NOTIFICACION))
 		if (brailleListo) braille.mensaje(nuevo)
+	}
+
+	/**
+	 * Una lista vigilada: dice en cola las filas que no estaban (por orden, de arriba abajo), como mucho las de
+	 * «Mensajes nuevos que decir cada vez»; si llegan más, «y 7 más». Las que se van por arriba no se dicen.
+	 */
+	private fun revisarListaVigilada(lista: AccessibilityNodeInfo, antes: Map<String, Int>) {
+		val ahora = filasDe(lista)
+		val quedan = HashMap(antes)
+		val nuevas = ArrayList<String>()
+		for ((texto, veces) in ahora) {
+			val habia = quedan[texto] ?: 0
+			repeat(veces - habia) { nuevas.add(texto) }
+			if (habia > 0) quedan[texto] = (habia - veces).coerceAtLeast(0)
+		}
+		filasVigiladas = ahora
+		if (nuevas.isEmpty()) return
+		val maximo = ajustes.vigilarMaximo
+		if (ajustes.vigilarSonido) sonidos.tocar(Sonido.NOTIFICACION)
+		for (texto in nuevas.takeLast(maximo)) voz.decir(Enunciado(texto, Modo.ENCOLAR, Tipo.NOTIFICACION))
+		if (nuevas.size > maximo) {
+			val resto = nuevas.size - maximo
+			voz.decir(Enunciado(textos.resources.getQuantityString(R.plurals.p_vigilar_mas, resto, resto), Modo.ENCOLAR, Tipo.NOTIFICACION))
+		}
+		if (brailleListo) braille.mensaje(nuevas.last())
 	}
 
 	/**
@@ -1290,6 +1350,57 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		}, ESPERA_LEER_MAS_MS)
 	}
 
+	private var ventanaAsegurar = -1
+	private val asegurar = Runnable { asegurarFoco(ventanaAsegurar) }
+	/** Cuántas veces seguidas se ha vuelto a poner el foco en lo mismo dibujado otra vez (como TalkBack, como mucho 3). */
+	private var recolocadosSeguidos = 0
+
+	/**
+	 * Si lo que tenía el foco en [ventana] ya no está (la app lo ha rehecho), el foco vuelve en silencio a lo mismo
+	 * dibujado otra vez: por su sitio entre sus hermanos o por su identificador y su texto. Así «Repetir», la línea
+	 * braille y el doble toque siguen valiendo y el siguiente deslizamiento sigue por ahí, no por la mitad.
+	 */
+	private fun asegurarFoco(ventana: Int) {
+		if (superficie.abierta || grabandoNota() || modoEdicion.activo || virtual != null) return
+		val ahora = SystemClock.uptimeMillis()
+		if (ahora - (cambiosPorVentana[ventana] ?: 0L) < ESTABLE_QUIETA_MS) {
+			manejador.removeCallbacks(asegurar)
+			manejador.postDelayed(asegurar, ESTABLE_QUIETA_MS)
+			return
+		}
+		val f = foco
+		if (f != null) {
+			if (f.windowId != ventana) return
+			if (Nodos.vivo(f) && f.isVisibleToUser) {
+				recolocadosSeguidos = 0
+				return
+			}
+		}
+		val viejo = f ?: perdido?.takeIf { it.nodo.windowId == ventana && ahora - it.momento < PERDIDO_VALE_MS }?.nodo ?: return
+		if (recolocadosSeguidos >= 3) return
+		val nuevo = (if (perdido?.nodo == viejo) recolocar(viejo) else null) ?: recuperarFoco(viejo) ?: return
+		recolocadosSeguidos++
+		perdido = null
+		enfocarSinHablar(nuevo)
+	}
+
+	/**
+	 * Si el foco está en una tecla del teclado en pantalla y se ha elegido seguir en la app: el campo de la app en
+	 * el que se escribe (con el foco de entrada), o null.
+	 */
+	fun campoDesdeTeclado(): AccessibilityNodeInfo? {
+		val f = foco ?: return null
+		if (!ajustes.deslizarDesdeTecladoEnApp) return null
+		val ventanas = runCatching { servicio.windows }.getOrNull() ?: return null
+		if (ventanas.firstOrNull { it.id == f.windowId }?.type != AccessibilityWindowInfo.TYPE_INPUT_METHOD) return null
+		return ventanas.asSequence().filter { it.type == AccessibilityWindowInfo.TYPE_APPLICATION }
+			.mapNotNull { runCatching { it.root?.findFocus(AccessibilityNodeInfo.FOCUS_INPUT) }.getOrNull() }
+			.firstOrNull { it.isEditable && it.isVisibleToUser }
+	}
+
+	/** Deja el foco de Tiresias en [n] sin decirlo ni moverlo en Android (para seguir deslizando desde ahí). */
+	fun partirDe(n: AccessibilityNodeInfo) = cambiarFoco(n)
+
 	/** Pone el foco en [n] sin decirlo (lo dice quien llama: la lectura continua). */
 	fun enfocarSinHablar(n: AccessibilityNodeInfo) {
 		momentoMovido = SystemClock.uptimeMillis()
@@ -1412,6 +1523,7 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		val normal = compositor.describir(elemento, verbosidad)
 		ponerAccionesSolas(elemento.tieneAcciones)
 		textoFocoDicho = normal
+		recolocadosSeguidos = 0
 		ventanaFocoDicho = n.windowId
 		// Un complemento de esta app puede cambiar lo que se dice (arreglar etiquetas, quitar ruido)
 		val texto = if (scriptsListos) scripts.alEnfocar(n.packageName?.toString().orEmpty(), elemento, normal) ?: normal else normal
@@ -1434,7 +1546,10 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		ultimoContenedor = contenedor
 		// Las teclas del teclado en pantalla, siempre en el idioma de Tiresias: la «u» con el idioma que marca el teclado sonaba «iu».
 		// Las de un solo carácter van por el mismo camino que el eco al escribir (deletrear), con el tono de mayúscula si se quiere
-		val vigente: (() -> Boolean)? = if (modo == Modo.ENCOLAR) ({ foco == n }) else null
+		// Lo encolado deja de valer si se ha dicho otra cosa enfocada; si el foco se movió en silencio (la app rehízo
+		// la lista, Tiresias lo recolocó), se dice: con auriculares Bluetooth todo tarda más y, en algunos menús, solo
+		// sonaba el sonido (Geralt_de_rivia, foro 126)
+		val vigente: (() -> Boolean)? = if (modo == Modo.ENCOLAR) ({ foco == n || textoFocoDicho == normal }) else null
 		if (caracterTecla != null) voz.decir(Enunciado(caracterTecla, modo = modo, tipo = Tipo.NAVEGACION, deletrear = true, vigente = vigente))
 		else voz.decir(Enunciado(dicho, modo = modo, tipo = Tipo.NAVEGACION, idioma = if (esTecla) null else idiomaDe(n), vigente = vigente))
 		if (brailleListo) braille.mostrarElemento(n, texto)
@@ -1641,7 +1756,7 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		if (e.packageName == servicio.packageName) e.source?.let { raizVentanaPropia = subirARaiz(it) }
 		// La pantalla de delante (no un diálogo ni un panel: esos no cambian de actividad)
 		e.className?.toString()?.takeIf { esPantalla(it) }?.let { actividadDelante = it }
-		val titulo = nombrePropio(e.packageName?.toString(), e.className?.toString()) ?: tituloDe(e)
+		val titulo = nombrePropio(e.packageName?.toString(), e.className?.toString()) ?: tituloDe(e).ifBlank { tituloDeVentana(e) }
 		val ahora = SystemClock.uptimeMillis()
 		if (com.xebolax.tiresias.BuildConfig.PRUEBAS) android.util.Log.d("TiresiasVentana", "ventana ${e.windowId} ${e.packageName} ${e.className} tipos=${e.contentChangeTypes} «$titulo»")
 		// Los cambios de panel (Android 9+) avisan con su propio tipo de cambio
@@ -1656,22 +1771,45 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		// El mismo título otra vez (o con el texto de un botón detrás: «Título» y luego «Título Cancelar»), no se repite
 		val repetido = tituloVentana.isNotEmpty() && (titulo == tituloVentana ||
 			(e.windowId == idVentanaTitulo && (titulo.startsWith(tituloVentana) || tituloVentana.startsWith(titulo))))
-		if (titulo.isBlank() || (repetido && ahora - momentoVentana < 1500)) return
+		val conTitulo = titulo.isNotBlank() && !(repetido && ahora - momentoVentana < 1500)
 		// Grabando una nota de voz: la ventana que pone la app al empezar («Grabadora de mensajes de voz» de WhatsApp)
 		// no se dice, que se oiría en la grabación, ni se lleva el foco a ella (como hacen Prudence y SandFly)
 		if (grabandoNota(e.packageName)) {
+			if (conTitulo) {
+				tituloVentana = titulo
+				idVentanaTitulo = e.windowId
+				momentoVentana = ahora
+			}
+			return
+		}
+		if (conTitulo && filtro.pasa("ventana", titulo, ahora)) {
 			tituloVentana = titulo
 			idVentanaTitulo = e.windowId
 			momentoVentana = ahora
-			return
+			sonidos.tocar(Sonido.VENTANA)
+			voz.decir(Enunciado(titulo, modo = Modo.INTERRUMPIR, tipo = Tipo.NAVEGACION))
+			if (brailleListo) braille.mensaje(titulo)
+		} else {
+			// Sin título que decir (Compose, Flutter, vistas propias, o el mismo título que la de antes), el foco se coloca
+			// igual, como TalkBack, que no lo hace depender del título (FocusProcessorForScreenStateChange). La lista de
+			// ventanas puede no tener aún la nueva: se mira otra vez un poco después
+			val colocar = colocarSinTitulo(e)
+			when (colocar) {
+				null -> {
+					val copia = copiar(e) ?: return
+					manejador.postDelayed({ if (colocarSinTitulo(copia) == true) colocarFoco(copia, titulo) }, ESPERA_VENTANA_NUEVA_MS)
+					return
+				}
+				false -> return
+				true -> Unit
+			}
 		}
-		if (!filtro.pasa("ventana", titulo, ahora)) return
-		tituloVentana = titulo
-		idVentanaTitulo = e.windowId
-		momentoVentana = ahora
-		sonidos.tocar(Sonido.VENTANA)
-		voz.decir(Enunciado(titulo, modo = Modo.INTERRUMPIR, tipo = Tipo.NAVEGACION))
-		if (brailleListo) braille.mensaje(titulo)
+		colocarFoco(e, titulo)
+	}
+
+	/** Tras una pantalla nueva: el foco viejo deja de valer y, cuando la ventana esté quieta, se pone donde toque. */
+	private fun colocarFoco(e: AccessibilityEvent, titulo: String) {
+		val ahora = SystemClock.uptimeMillis()
 		// El foco de otra ventana ya no vale: el siguiente deslizamiento empieza en la nueva (y por el principio)
 		if (foco?.let { it.windowId != e.windowId || !Nodos.vivo(it) } == true) perderFoco()
 		perdido = null
@@ -1691,6 +1829,12 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 			val raizDialogo = runCatching { servicio.windows.firstOrNull { it.id == e.windowId }?.root }.getOrNull() ?: raiz()?.takeIf { it.windowId == e.windowId }
 			// (si el foco sigue en otra ventana, también: se deslizó antes de que acabara de abrirse)
 			if ((dialogo || ajustes.focoVentanasNuevas) && foco?.windowId != e.windowId) raizDialogo?.let { r ->
+				// El campo en el que ya se escribe (una búsqueda que se abre con el teclado fuera), como TalkBack
+				val campo = runCatching { r.findFocus(AccessibilityNodeInfo.FOCUS_INPUT) }.getOrNull()?.takeIf { it.isEditable && it.isVisibleToUser }
+				if (campo != null) {
+					enfocar(campo, null, if (ajustes.focoSinEsperarTitulo) Modo.INTERRUMPIR else Modo.ENCOLAR)
+					return@let
+				}
 				val orden = navegador.orden(r)
 				val primero = orden.firstOrNull { n ->
 					val nombre = describir.elemento(n).nombre.trim()
@@ -1937,8 +2081,15 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		val delante = ventana ?: runCatching { servicio.windows.firstOrNull { it.isActive }?.id }.getOrNull() ?: return
 		while (focosAnteriores.isNotEmpty()) {
 			val previo = focosAnteriores.removeLast()
-			if (previo.windowId == delante && Nodos.vivo(previo) && previo.isVisibleToUser) {
+			if (previo.windowId != delante) continue
+			if (Nodos.vivo(previo) && previo.isVisibleToUser) {
 				enfocar(previo, null, Modo.ENCOLAR)
+				return
+			}
+			// La app rehízo lo de debajo al cerrarse el diálogo (una lista tras renombrar): el mismo elemento, por su
+			// identificador, su texto y su sitio (TalkBack lo busca por su camino en el árbol)
+			if (!Nodos.vivo(previo)) recuperarFoco(previo)?.let {
+				enfocar(it, null, Modo.ENCOLAR)
 				return
 			}
 		}
@@ -1956,12 +2107,55 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		return paquete == teclado
 	}
 
-	/** Si la ventana del evento es un diálogo o una ventana de Tiresias encima de la app. */
+	/**
+	 * Si la ventana del evento es un diálogo o una ventana de Tiresias encima de la app. También una ventana de app
+	 * que no ocupa la pantalla entera (el diálogo de los permisos, una actividad flotante, la hoja de abajo de
+	 * Compose, un diálogo de una app con su propia clase): ahí el foco entra solo, como en TalkBack.
+	 */
 	private fun esDialogo(e: AccessibilityEvent): Boolean {
 		if (e.className?.toString()?.contains("Dialog") == true) return true
 		if (e.packageName == servicio.packageName) return true
 		val v = runCatching { servicio.windows.firstOrNull { it.id == e.windowId } }.getOrNull() ?: return false
-		return v.type == AccessibilityWindowInfo.TYPE_ACCESSIBILITY_OVERLAY || v.type == AccessibilityWindowInfo.TYPE_SYSTEM
+		if (v.type == AccessibilityWindowInfo.TYPE_ACCESSIBILITY_OVERLAY || v.type == AccessibilityWindowInfo.TYPE_SYSTEM) return true
+		return v.type == AccessibilityWindowInfo.TYPE_APPLICATION && v.isActive && !ocupaLaPantalla(v)
+	}
+
+	/** Si la ventana [v] mide (casi) toda la pantalla. */
+	private fun ocupaLaPantalla(v: AccessibilityWindowInfo): Boolean {
+		val r = android.graphics.Rect().also { v.getBoundsInScreen(it) }
+		val (ancho, alto) = medidasPantalla()
+		return r.width() >= ancho * 95 / 100 && r.height() >= alto * 85 / 100
+	}
+
+	/** El título que Android da a la ventana del evento (el que usa TalkBack cuando el aviso no trae texto). */
+	private fun tituloDeVentana(e: AccessibilityEvent): String {
+		if (e.packageName == servicio.packageName || esDelSistema(e.packageName?.toString())) return ""
+		val v = runCatching { servicio.windows.firstOrNull { it.id == e.windowId } }.getOrNull() ?: return ""
+		if (v.type != AccessibilityWindowInfo.TYPE_APPLICATION) return ""
+		val t = v.title?.toString()?.trim().orEmpty()
+		// (las ventanas sin título de verdad lo llevan técnico: «PopupWindow:1a2b», el nombre de una clase; eso no se dice)
+		return if (!t.contains(' ') && (t.contains('.') || t.contains(':') || t.startsWith("PopupWindow"))) "" else t
+	}
+
+	/** El ancho y el alto de la pantalla entera, con las barras (displayMetrics las deja fuera en muchos móviles). */
+	private fun medidasPantalla(): Pair<Int, Int> {
+		if (Build.VERSION.SDK_INT >= 30) runCatching { servicio.getSystemService(android.view.WindowManager::class.java)?.maximumWindowMetrics?.bounds }.getOrNull()?.let { return it.width() to it.height() }
+		val m = servicio.resources.displayMetrics
+		return m.widthPixels to m.heightPixels
+	}
+
+	/**
+	 * Una pantalla nueva sin título que decir: si el foco de Tiresias está en otra ventana o ya no existe, se
+	 * coloca en esta (sigue lo de [alCambiarVentana]); si el foco sigue vivo en ella, no se toca nada. Solo
+	 * ventanas de apps que están delante.
+	 */
+	private fun colocarSinTitulo(e: AccessibilityEvent): Boolean? {
+		if (e.packageName == null || e.packageName == servicio.packageName) return false
+		// (null: la ventana aún no está en la lista de Android)
+		val v = runCatching { servicio.windows.firstOrNull { it.id == e.windowId } }.getOrNull() ?: return null
+		if (v.type != AccessibilityWindowInfo.TYPE_APPLICATION || !(v.isActive || v.isFocused)) return false
+		val f = foco ?: return true
+		return f.windowId != e.windowId || !Nodos.vivo(f) || !f.isVisibleToUser
 	}
 
 	private fun tituloDe(e: AccessibilityEvent): String {
@@ -1978,9 +2172,27 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 	}
 
 	/** El paquete del teclado elegido en el móvil (sin preguntar a ninguna app). */
+	/** Si el teclado puesto es el de Tiresias (el teclado braille). */
+	fun tecladoEsDeTiresias(): Boolean = hayTeclado && paqueteTeclado() == servicio.packageName
+
 	private fun paqueteTeclado(): String? = runCatching {
 		android.provider.Settings.Secure.getString(servicio.contentResolver, android.provider.Settings.Secure.DEFAULT_INPUT_METHOD)?.substringBefore('/')
 	}.getOrNull()?.takeIf { it.isNotBlank() }
+
+	/** Si [paquete] tiene un servicio de accesibilidad activado (recordado unos segundos: se pregunta en cada cambio de ventanas). */
+	private fun tieneServicioPropio(paquete: String): Boolean {
+		val ahora = SystemClock.uptimeMillis()
+		servicioPropioVisto?.let { (p, si, cuando) -> if (p == paquete && ahora - cuando < 10_000) return si }
+		val si = runCatching {
+			servicio.getSystemService(android.view.accessibility.AccessibilityManager::class.java)
+				?.getEnabledAccessibilityServiceList(android.accessibilityservice.AccessibilityServiceInfo.FEEDBACK_ALL_MASK)
+				?.any { it.resolveInfo?.serviceInfo?.packageName == paquete } == true
+		}.getOrDefault(false)
+		servicioPropioVisto = Triple(paquete, si, ahora)
+		return si
+	}
+
+	private var servicioPropioVisto: Triple<String, Boolean, Long>? = null
 
 	private fun capaDelTeclado(ventanas: List<AccessibilityWindowInfo>): android.graphics.Region {
 		val zona = android.graphics.Region()
@@ -2015,12 +2227,45 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		// El perfil del teclado que se ve, si tiene uno (lo que es del teclado manda sobre lo de la app)
 		perfiles.alCambiarTeclado(if (teclado != null) paqueteTeclado() else null)
 		// Con «Toque directo en el teclado», los toques en el teclado en pantalla pasan directos a él
+		gestos.tecladoConZonaPropia = teclado != null && paqueteTeclado()?.let { it != servicio.packageName && tieneServicioPropio(it) } == true
 		zonasDelTeclado(teclado)
 		gestos.capaDelTeclado(capaDelTeclado(ventanas))
 		// Una ventana emergente que se queda con el foco de la app: se entra en ella
 		if (Build.VERSION.SDK_INT >= 28 && e.windowChanges and AccessibilityEvent.WINDOWS_CHANGE_ADDED != 0) {
 			ventanas.firstOrNull { it.id == e.windowId }?.takeIf { esEmergenteConFoco(it) }?.let { entrarEnEmergente(it) }
 		}
+		// Una ventana de app que tapa la del foco sin avisar como pantalla nueva (la hoja de abajo de Compose, un
+		// diálogo a pantalla completa): el foco de debajo ya no vale, como en TalkBack, que solo lo da por bueno en la
+		// ventana activa. Si no, se seguía deslizando por lo que hay detrás
+		if (Build.VERSION.SDK_INT >= 28 && e.windowChanges and (AccessibilityEvent.WINDOWS_CHANGE_ADDED or AccessibilityEvent.WINDOWS_CHANGE_ACTIVE or AccessibilityEvent.WINDOWS_CHANGE_FOCUSED) != 0) {
+			manejador.postDelayed({ revisarVentanaTapada() }, ESPERA_TAPADA_MS)
+		}
+	}
+
+	/** Si la ventana activa de una app tapa la del foco de Tiresias: se deja el foco de debajo y se entra en ella. */
+	private fun revisarVentanaTapada() {
+		val f = foco ?: return
+		if (superficie.abierta || hayVentanaPropia() || grabandoNota()) return
+		val ventanas = runCatching { servicio.windows }.getOrNull() ?: return
+		val activa = ventanas.firstOrNull { it.isActive } ?: return
+		if (activa.id == f.windowId || activa.type != AccessibilityWindowInfo.TYPE_APPLICATION) return
+		val iFoco = ventanas.indexOfFirst { it.id == f.windowId }
+		val iActiva = ventanas.indexOf(activa)
+		// (encima en el orden de capas: la lista de Android va de arriba abajo)
+		if (iFoco < 0 || iActiva > iFoco) return
+		val ventanaFoco = ventanas[iFoco]
+		if (ventanaFoco.type != AccessibilityWindowInfo.TYPE_APPLICATION) return
+		val a = android.graphics.Rect().also { activa.getBoundsInScreen(it) }
+		val b = android.graphics.Rect().also { ventanaFoco.getBoundsInScreen(it) }
+		if (!android.graphics.Rect.intersects(a, b)) return
+		// (una emergente pegada que no se lleva el foco, como las sugerencias de un campo, no tapa nada)
+		if (activa.parent != null && !activa.isFocused) return
+		val raizActiva = runCatching { activa.root }.getOrNull() ?: return
+		if (raizActiva.packageName?.toString() == servicio.packageName) return
+		perderFoco()
+		perdido = null
+		if (esEmergenteConFoco(activa)) entrarEnEmergente(activa)
+		else if (ajustes.focoVentanasNuevas || !ocupaLaPantalla(activa)) navegador.orden(raizActiva).firstOrNull()?.let { enfocar(it, Sonido.VENTANA) }
 	}
 
 	/**
@@ -2158,6 +2403,14 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		cambiosPorVentana[e.windowId] = SystemClock.uptimeMillis()
 		if (cambiosPorVentana.size > 32) cambiosPorVentana.clear()
 		descritos.clear()
+		// Lo de la ventana del foco se ha rehecho (una lista que se recarga, un fragmento o una pantalla de Compose
+		// que cambia sin avisar): cuando se quede quieta, se mira si el foco sigue ahí (TalkBack ensureFocusOnScreen)
+		if (e.contentChangeTypes and AccessibilityEvent.CONTENT_CHANGE_TYPE_SUBTREE != 0 &&
+			(foco?.windowId ?: perdido?.nodo?.windowId) == e.windowId && e.windowId != -1) {
+			ventanaAsegurar = e.windowId
+			manejador.removeCallbacks(asegurar)
+			manejador.postDelayed(asegurar, ESPERA_ASEGURAR_MS)
+		}
 		val n = e.source ?: return
 		// Una regla de un complemento puede silenciar los cambios de este elemento (o de lo que hay dentro de otro)
 		if (scriptsListos && scripts.silenciado(n)) return
@@ -2576,6 +2829,12 @@ class Lector(val servicio: AccessibilityService, val voz: Voz, val sonidos: Soni
 		private const val PAQUETE_SISTEMA = "com.android.systemui"
 		/** Lo que se espera a su notificación antes de anunciar una ventana del sistema que nadie ha pedido. */
 		private const val ESPERA_EMERGENTE_MS = 500L
+		/** Lo que se espera tras un cambio de ventanas para ver si la activa tapa la del foco (tras el título y su foco). */
+		private const val ESPERA_TAPADA_MS = 900L
+		/** Lo que se espera a que la lista de ventanas tenga la de una pantalla nueva sin título. */
+		private const val ESPERA_VENTANA_NUEVA_MS = 400L
+		/** Lo que se espera tras rehacerse lo de la ventana del foco para ver si el foco sigue ahí. */
+		private const val ESPERA_ASEGURAR_MS = 400L
 		/** Lo que se espera a que una pantalla nueva se quede quieta antes de revisarla para repararla. */
 		private const val ESPERA_REVISAR_MS = 1_500L
 		private val BOTONES_BARRA = setOf("back", "home", "recent_apps", "menu", "ime_switcher", "accessibility_button")

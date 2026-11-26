@@ -348,7 +348,7 @@ class Avisos(private val lector: Lector) {
 		private val MENSAJERIA = setOf(
 			"com.whatsapp", "com.whatsapp.w4b", "org.telegram.messenger", "org.thoughtcrime.securesms", "com.google.android.apps.messaging",
 			"com.samsung.android.messaging", "com.google.android.dialer", "com.android.dialer", "com.samsung.android.dialer",
-		)
+		) + com.xebolax.tiresias.braille.BuscarEnviar.APPS_MENSAJES
 		private const val MAXIMO = 100
 		/** Lo que se espera al evento de accesibilidad de una notificación del oyente, y cuánto vale el evento. */
 		private const val ESPERA_EVENTO_MS = 1500L

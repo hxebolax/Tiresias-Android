@@ -18,10 +18,11 @@
 	<PreferenceCategory app:title="@string/aj_cat_texto">
 		<ListPreference app:key="puntuacion" app:title="@string/aj_puntuacion" app:entries="@array/puntuacion_nombres" app:entryValues="@array/puntuacion_valores" app:defaultValue="ALGUNAS" app:useSimpleSummaryProvider="true" />
 		<ListPreference app:key="numeros" app:title="@string/aj_numeros" app:entries="@array/numeros_nombres" app:entryValues="@array/numeros_valores" app:defaultValue="CIFRAS" app:useSimpleSummaryProvider="true" />
-		<ListPreference app:key="mayusculas" app:title="@string/aj_mayusculas" app:entries="@array/mayusculas_nombres" app:entryValues="@array/mayusculas_valores" app:defaultValue="TONO" app:useSimpleSummaryProvider="true" />
+		<ListPreference app:key="mayusculas" app:title="@string/aj_mayusculas" app:entries="@array/mayusculas_nombres" app:entryValues="@array/mayusculas_valores" app:defaultValue="AUTO" app:useSimpleSummaryProvider="true" />
 		<ListPreference app:key="modo_emojis" app:title="@string/aj_emojis" app:entries="@array/emojis_nombres" app:entryValues="@array/emojis_valores" app:useSimpleSummaryProvider="true" />
 		<ListPreference app:key="eco_teclado" app:title="@string/aj_eco" app:entries="@array/eco_nombres" app:entryValues="@array/eco_valores" app:defaultValue="caracteres" app:useSimpleSummaryProvider="true" />
 		<ListPreference app:key="foneticas" app:title="@string/aj_foneticas" app:entries="@array/foneticas_nombres" app:entryValues="@array/foneticas_valores" app:defaultValue="no" app:useSimpleSummaryProvider="true" />
+		<ListPreference app:key="alfabeto_fonetico" app:title="@string/aj_alfabeto_fonetico" app:entries="@array/alfabeto_fonetico_nombres" app:entryValues="@array/alfabeto_fonetico_valores" app:defaultValue="idioma" app:useSimpleSummaryProvider="true" />
 		<SwitchPreferenceCompat app:key="simbolos_sentido" app:title="@string/aj_simbolos_sentido" app:summary="@string/aj_simbolos_sentido_res" app:defaultValue="false" />
 	</PreferenceCategory>
 </PreferenceScreen>

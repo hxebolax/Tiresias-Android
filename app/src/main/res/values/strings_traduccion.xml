@@ -5,7 +5,26 @@
 	<string name="recurso_traductor">Traductor sin conexión</string>
 	<string name="recurso_traductor_desc">Traduce sin Internet el texto del elemento y lo último que ha dicho Tiresias, con «Reconocer texto y traducir» y «Traducir lo último dicho». Traduce en un solo sentido: para ir y volver hacen falta los dos. Modelos OPUS-MT de la Universidad de Helsinki.</string>
 	<string name="rec_cat_traduccion">Traducción sin conexión</string>
-	<string name="rec_traduccion_explicacion">Traductores que funcionan sin Internet y sin enviar el texto a nadie. Descarga el del idioma que quieras entender; si no hay traductor para un texto, Tiresias usa la inteligencia artificial, si tienes una preparada.</string>
+	<string name="rec_traduccion_explicacion">Traductores que funcionan sin Internet y sin enviar el texto a nadie. Descarga el del idioma que quieras entender; si no hay traductor para un texto, Tiresias usa la inteligencia artificial, si tienes una preparada. Para traducir, abre el menú de Tiresias y elige «Traducir el elemento» (lo enfocado) o «Traducir lo último dicho». El idioma al que se traduce se elige en Ajustes, Inteligencia artificial, «Traducir a».</string>
+	<string name="aj_traducir_a">Traducir a</string>
+	<string-array name="traducir_a_nombres">
+		<item>El idioma de Tiresias</item>
+		<item>Español</item>
+		<item>Inglés</item>
+		<item>Francés</item>
+		<item>Alemán</item>
+		<item>Italiano</item>
+		<item>Portugués</item>
+	</string-array>
+	<string-array name="traducir_a_valores" translatable="false">
+		<item></item>
+		<item>es</item>
+		<item>en</item>
+		<item>fr</item>
+		<item>de</item>
+		<item>it</item>
+		<item>pt</item>
+	</string-array>
 	<string name="rec_traductor_nombre">Traductor de %1$s a %2$s</string>
 
 	<!-- Al traducir -->

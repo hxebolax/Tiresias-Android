@@ -138,6 +138,7 @@
 	<string name="valor_tono">Tono %1$d por ciento</string>
 	<string name="valor_volumen">Volumen %1$d por ciento</string>
 	<string name="valor_puntuacion">Puntuación: %1$s</string>
+	<string name="valor_eco">Eco: %1$s</string>
 	<string name="valor_verbosidad">Verbosidad: %1$s</string>
 	<string name="valor_motor">Voz: %1$s</string>
 	<string name="valor_motor_velocidad">Voz: %1$s, velocidad %2$d por ciento</string>

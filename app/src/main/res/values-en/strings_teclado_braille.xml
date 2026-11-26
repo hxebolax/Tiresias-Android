@@ -231,6 +231,7 @@
 	<string name="braille_accion_esconder_teclado">Hide the keyboard</string>
 	<string name="braille_accion_nueva_linea">New line (also in chats)</string>
 	<string name="braille_accion_enviar">Send</string>
+	<string name="braille_accion_eco_siguiente">Change echo</string>
 	<string name="braille_sin_enviar">There is nothing to send here</string>
 	<string name="braille_teclado_escondido">Keyboard hidden</string>
 	<string name="aj_braille_esconder_al_enviar">Hide the keyboard after sending or searching</string>

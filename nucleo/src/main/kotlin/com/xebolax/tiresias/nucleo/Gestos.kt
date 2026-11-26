@@ -144,6 +144,8 @@ enum class Accion {
 	// con un dedo de verdad; decir dónde está en la pantalla; bloquear los toques (el móvil en el bolsillo)
 	BOTON_CONFIRMAR, BOTON_CANCELAR, COMPARTIR_IMAGEN, COMPARTIR_CAPTURA, PRIMER_CONTROL, TOCAR_ELEMENTO, DECIR_POSICION,
 	BLOQUEAR_TOQUES,
+	// 1.0.21 (foro 125, yanet): pasar al eco siguiente del teclado (el del braille con el teclado braille puesto)
+	ECO_SIGUIENTE,
 }
 
 /** Lo que puede decir el gesto de estado («Hora, fecha y batería»), en el orden que se elija. */
@@ -155,7 +157,7 @@ object Listas {
 	val MENU_TIRESIAS = listOf(
 		Accion.LEER_DESDE_ARRIBA, Accion.LEER_DESDE_AQUI, Accion.REPETIR, Accion.DELETREAR, Accion.COPIAR_ULTIMO,
 		Accion.LISTA_ELEMENTOS, Accion.BUSCAR, Accion.MENU_ACCIONES, Accion.MENU_EDICION, Accion.ETIQUETAR,
-		Accion.DESCRIBIR_IA, Accion.PANTALLA_IA, Accion.PREGUNTAR_IA, Accion.ACTUAR_IA, Accion.DESCRIPCION_CONTINUA, Accion.TRADUCIR_IA,
+		Accion.DESCRIBIR_IA, Accion.PANTALLA_IA, Accion.PREGUNTAR_IA, Accion.ACTUAR_IA, Accion.DESCRIPCION_CONTINUA, Accion.TRADUCIR_IA, Accion.TRADUCIR_ULTIMO,
 		Accion.OCR_ELEMENTO, Accion.OCR_PANTALLA, Accion.PANTALLA_VIRTUAL,
 		Accion.HISTORIAL_HABLA, Accion.HISTORIAL_NOTIFICACIONES, Accion.LEER_PORTAPAPELES, Accion.HISTORIAL_PORTAPAPELES,
 		Accion.COPIAR_LISTA, Accion.ESTADO_SISTEMA, Accion.REVISAR_PANTALLA, Accion.ESTRUCTURA_PANTALLA,

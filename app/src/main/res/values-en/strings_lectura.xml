@@ -183,6 +183,16 @@
 	<string name="senior_sos_sin_contacto">There is no help contact. Set it in Settings, Senior mode.</string>
 	<string name="senior_sos_sin_telefono">There is no phone app to call with.</string>
 	<string name="vigilar_puesto">Watching: %1$s. I will tell you when it changes.</string>
+	<string name="vigilar_la_lista">the list. I will say each new message</string>
+	<plurals name="p_vigilar_mas">
+		<item quantity="one">and %1$d more</item>
+		<item quantity="other">and %1$d more</item>
+	</plurals>
+	<string name="aj_cat_vigilar">Watch an item</string>
+	<string name="aj_vigilar_lista_nuevas">In a list, only what is new</string>
+	<string name="aj_vigilar_lista_nuevas_res">When watching a chat or a list (the chat of a live stream), say only the messages that arrive, not the whole list</string>
+	<string name="aj_vigilar_sonido">Sound on change</string>
+	<string name="aj_vigilar_maximo">New messages to say each time</string>
 	<string name="vigilar_nada">There is nothing to watch</string>
 	<string name="vigilar_quitado">No longer watching</string>
 	<string name="vigilar_cambio">Changed: %1$s</string>

@@ -66,6 +66,7 @@
 	<string name="accion_tono_menos">Decrease pitch</string>
 	<string name="accion_puntuacion_siguiente">Change punctuation</string>
 	<string name="accion_verbosidad_siguiente">Change verbosity</string>
+	<string name="accion_eco_siguiente">Change keyboard echo</string>
 	<string name="accion_voz_siguiente">Change voice</string>
 	<string name="accion_idioma_siguiente">Change language</string>
 	<string name="accion_copiar">Copy</string>
@@ -217,7 +218,7 @@
 	<string name="accion_lista_final">To the end of the whole list</string>
 	<string name="accion_valor_mas">Raise the slider value</string>
 	<string name="accion_valor_menos">Lower the slider value</string>
-	<string name="accion_traducir_ia">Translate the item with AI</string>
+	<string name="accion_traducir_ia">Translate the item</string>
 	<string name="accion_salida_audio">Change the audio output</string>
 	<string name="accion_encabezado_siguiente">Next heading</string>
 	<string name="accion_encabezado_anterior">Previous heading</string>

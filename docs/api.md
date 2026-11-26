@@ -89,6 +89,10 @@ La variante de pruebas de Tiresias (`com.xebolax.tiresias.pruebas`) tiene la mis
 
 Tiresias también entiende las interfaces de voz y de toque directo que usan otros lectores de Android. Así, un teclado, un juego o una herramienta hechos para ellos funcionan con Tiresias sin cambiar nada más que el paquete al que se enlazan (`com.xebolax.tiresias`). Hay que añadir el paquete a `<queries>`, como arriba. No hace falta declarar ningún permiso.
 
+Desde la 1.0.21, cada interfaz se sirve con los dos nombres: los de Backtalk (`fyi.quin.backtalk`) y los nuevos de SandFly (`io.github.aaron_gh.sandfly`: acciones `.action.SPEECH_CONTROL`, `.action.DIRECT_TOUCH`, `.action.SPEAK` y `.action.STOP_SPEECH`, interfaces `io.github.aaron_gh.sandfly.speech.ISpeechControl` y `io.github.aaron_gh.sandfly.directtouch.IDirectTouch`, en `app/src/main/aidl/io/github/aaron_gh/sandfly/`, y la declaración `io.github.aaron_gh.sandfly.direct_touch`). Los métodos son los mismos; enlázate con la acción del paquete de la interfaz que hayas copiado.
+
+**Teclados con su propia capa**: el servicio de toque directo declara `fyi.quin.backtalk.keeps_keyboard_region` y `io.github.aaron_gh.sandfly.keeps_keyboard_region`. Si tu teclado tiene su propio servicio de accesibilidad y se dibuja en una capa de accesibilidad (`TYPE_ACCESSIBILITY_OVERLAY`, como los teclados braille de pantalla completa), Tiresias suma esa capa a cada zona de paso de toques que pone; si se dibuja en su ventana de teclado, Tiresias no cambia la zona mientras se ve, salvo para el menú circular, la superficie braille y el modo seguro.
+
 ### Voz
 
 - **Servicio**: acción `fyi.quin.backtalk.action.SPEECH_CONTROL`, interfaz AIDL `fyi.quin.backtalk.speech.ISpeechControl`. Copia `app/src/main/aidl/fyi/quin/backtalk/speech/ISpeechControl.aidl` en tu app con el mismo paquete.

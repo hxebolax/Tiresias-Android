@@ -10,7 +10,9 @@ enum class AccionTeclado {
 	MENU, DICTADO, EMOJIS, PORTAPAPELES, SUGERENCIAS, LEER_CAMPO, CALIBRAR, QUITAR_CALIBRACION,
 	BUSCAR_EMOJI, EDICION, CURSOR_ATRAS, CURSOR_ADELANTE, CAMBIAR_UNIDAD, SELECCIONAR, SELECCIONAR_TODO, COPIAR, CORTAR, PEGAR, DESHACER, REHACER, IR_PRINCIPIO, IR_FINAL, LEER_SELECCION, MENU_LECTOR, ESCONDER_TECLADO,
 	// Un salto de línea siempre (también en las apps de mensajes) y enviar siempre: cada uno en su gesto (Cronopio)
-	NUEVA_LINEA, ENVIAR;
+	NUEVA_LINEA, ENVIAR,
+	// Pasar al eco siguiente: letras, palabras, las dos o nada (yanet, foro 125)
+	ECO_SIGUIENTE;
 
 	fun nombre(c: Context): String = c.getString(when (this) {
 		NINGUNA -> R.string.braille_accion_ninguna
@@ -47,6 +49,7 @@ enum class AccionTeclado {
 		ESCONDER_TECLADO -> R.string.braille_accion_esconder_teclado
 		NUEVA_LINEA -> R.string.braille_accion_nueva_linea
 		ENVIAR -> R.string.braille_accion_enviar
+		ECO_SIGUIENTE -> R.string.braille_accion_eco_siguiente
 	})
 }
 
@@ -65,7 +68,7 @@ object MenusTeclado {
 	/** El menú del teclado de fábrica (lo que no viene a cuento, como las sugerencias sin una mención, no sale). */
 	val TECLADO_POR_DEFECTO: List<AccionTeclado> = listOf(
 		AccionTeclado.EMOJIS, AccionTeclado.BUSCAR_EMOJI, AccionTeclado.PORTAPAPELES, AccionTeclado.SUGERENCIAS, AccionTeclado.DICTADO,
-		AccionTeclado.LEER_CAMPO, AccionTeclado.EDICION, AccionTeclado.BORRAR_PALABRA, AccionTeclado.CALIBRAR, AccionTeclado.QUITAR_CALIBRACION,
+		AccionTeclado.LEER_CAMPO, AccionTeclado.ECO_SIGUIENTE, AccionTeclado.EDICION, AccionTeclado.BORRAR_PALABRA, AccionTeclado.CALIBRAR, AccionTeclado.QUITAR_CALIBRACION,
 		AccionTeclado.BLOQUEAR_ORIENTACION, AccionTeclado.MENU_LECTOR, AccionTeclado.ESCONDER_TECLADO, AccionTeclado.CAMBIAR_TECLADO,
 	)
 
@@ -76,7 +79,7 @@ object MenusTeclado {
 	val LECTOR_PERMITIDAS: List<com.xebolax.tiresias.nucleo.Accion> = listOf(
 		Accion.CORTINA, Accion.ESTADO_SISTEMA, Accion.ESTADO_Y_AVISOS, Accion.RESUMEN_AVISOS, Accion.REPETIR, Accion.LEER_PORTAPAPELES,
 		Accion.COPIAR_ULTIMO, Accion.TRADUCIR_ULTIMO, Accion.PAUSAR_VOZ, Accion.VELOCIDAD_MAS, Accion.VELOCIDAD_MENOS, Accion.VOLUMEN_MAS,
-		Accion.VOLUMEN_MENOS, Accion.TONO_MAS, Accion.TONO_MENOS, Accion.PUNTUACION_SIGUIENTE, Accion.VOZ_SIGUIENTE, Accion.IDIOMA_SIGUIENTE,
+		Accion.VOLUMEN_MENOS, Accion.TONO_MAS, Accion.TONO_MENOS, Accion.PUNTUACION_SIGUIENTE, Accion.ECO_SIGUIENTE, Accion.VOZ_SIGUIENTE, Accion.IDIOMA_SIGUIENTE,
 		Accion.CANAL_VOZ, Accion.SALIDA_AUDIO, Accion.PERFIL_SIGUIENTE, Accion.MULTIMEDIA, Accion.PISTA_SIGUIENTE, Accion.PISTA_ANTERIOR,
 		Accion.LLAMADA_CONTESTAR, Accion.LLAMADA_RECHAZAR, Accion.PRIMERO_BRAILLE,
 	)

@@ -608,11 +608,16 @@ class Vision(private val lector: Lector, private val ventanas: Ventanas) {
 			lector.decir(R.string.traducir_nada)
 			return false
 		}
-		val idioma = com.xebolax.tiresias.base.Idioma.efectivo(servicio)
+		val idioma = idiomaDestino()
 		return traducirCon(texto.trim()) { respuesta ->
 			lector.voz.decir(com.xebolax.tiresias.voz.Enunciado(respuesta, Modo.INTERRUMPIR, com.xebolax.tiresias.voz.Tipo.IA, idioma = idioma))
 		}
 	}
+
+	/** El idioma al que se traduce: el de Ajustes, IA, «Traducir a», o el de Tiresias (rey_espada, foro 123). */
+	private fun idiomaDestino(): java.util.Locale =
+		lector.ajustes.traducirA.takeIf { it.isNotBlank() }?.let { java.util.Locale.forLanguageTag(it) }
+			?: com.xebolax.tiresias.base.Idioma.efectivo(servicio)
 
 	/**
 	 * Traduce [texto] al idioma de Tiresias y da la traducción a [alResponder]
@@ -620,7 +625,7 @@ class Vision(private val lector: Lector, private val ventanas: Ventanas) {
 	 * sirva ([Traduccion], nada sale del móvil); si no, con la IA elegida.
 	 */
 	private fun traducirCon(texto: String, alResponder: (String) -> Unit): Boolean {
-		val destino = com.xebolax.tiresias.base.Idioma.efectivo(servicio)
+		val destino = idiomaDestino()
 		val empezada = java.util.concurrent.atomic.AtomicBoolean(false)
 		trabajo.execute {
 			val resultado = try {

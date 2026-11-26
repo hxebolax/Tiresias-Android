@@ -61,5 +61,13 @@
 			android:name=".ActividadMalHecha"
 			android:exported="true"
 			android:label="Mal hecha" />
+		<activity
+			android:name=".ActividadSinTitulo"
+			android:exported="true"
+			android:label="" />
+		<activity
+			android:name=".ActividadDirecto"
+			android:exported="true"
+			android:label="Directo" />
 	</application>
 </manifest>

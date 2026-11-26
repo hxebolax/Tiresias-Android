@@ -4,7 +4,8 @@ package com.xebolax.tiresias.nucleo
 enum class ModoNumeros { CIFRAS, DIGITOS }
 
 /** Cómo se avisa de una mayúscula al leer por caracteres. */
-enum class ModoMayusculas { NADA, PALABRA, TONO, SONIDO, PALABRA_Y_TONO }
+/** AUTO: lo resuelve la app según la voz (tono con las voces que lo respetan; «mayúscula» y tono con las del sistema). */
+enum class ModoMayusculas { NADA, PALABRA, TONO, SONIDO, PALABRA_Y_TONO, AUTO }
 
 /** Qué se hace con los emojis (Backtalk 72). */
 enum class ModoEmojis {

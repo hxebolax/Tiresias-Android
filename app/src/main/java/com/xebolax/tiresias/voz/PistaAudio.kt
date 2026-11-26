@@ -63,8 +63,10 @@ open class PistaAudio(atributosIniciales: AudioAttributes) {
 					p.play()
 					// Algunos móviles (un Vivo) suben el sonido poco a poco al arrancar la salida y se comen las letras sueltas
 					// (Dharius): con el ajuste, un poco de silencio delante, que es lo que se pierde
-					if (silencioAlEmpezar && desde == 0) {
-						val silencio = ShortArray(hz * SILENCIO_INICIO_MS / 1000)
+					// Con auriculares Bluetooth la salida tarda más en arrancar: algo más de silencio (Geralt_de_rivia, foro 126)
+					val bluetooth = desde == 0 && silencioConBluetooth && porBluetooth(p)
+					if ((silencioAlEmpezar || bluetooth) && desde == 0) {
+						val silencio = ShortArray(hz * (if (bluetooth) SILENCIO_BLUETOOTH_MS else SILENCIO_INICIO_MS) / 1000)
 						var puesto = 0
 						val hasta = SystemClock.uptimeMillis() + PISTA_COLGADA_MS
 						while (puesto < silencio.size && !cortada && SystemClock.uptimeMillis() < hasta) {
@@ -354,7 +356,9 @@ open class PistaAudio(atributosIniciales: AudioAttributes) {
 
 		/** «Silencio al empezar a hablar» (Ajustes, Voz): unos milisegundos de silencio cuando la salida arranca. */
 		@Volatile var silencioAlEmpezar = false
+		@Volatile var silencioConBluetooth = true
 		private const val SILENCIO_INICIO_MS = 120
+		private const val SILENCIO_BLUETOOTH_MS = 200
 
 		fun AudioAttributes.Builder.sinCapturaSiSeQuiere(): AudioAttributes.Builder =
 			if (Build.VERSION.SDK_INT >= 29 && sinCaptura) setAllowedCapturePolicy(AudioAttributes.ALLOW_CAPTURE_BY_NONE) else this

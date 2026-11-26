@@ -198,6 +198,12 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		Accion.VOLUMEN_MENOS -> volumen(false)
 		Accion.PUNTUACION_SIGUIENTE -> cambiarPuntuacion(true)
 		Accion.VERBOSIDAD_SIGUIENTE -> cambiarVerbosidad(true)
+		Accion.ECO_SIGUIENTE -> {
+			// Con el teclado braille de Tiresias puesto, su eco; con cualquier otro teclado, el de siempre
+			val braille = lector.tecladoEsDeTiresias()
+			lector.decir(t.getString(R.string.valor_eco, lector.ajustes.ecoSiguiente(t, braille)))
+			true
+		}
 		Accion.VOZ_SIGUIENTE -> cambiarMotor(true)
 		Accion.VALOR_MAS -> ajustarDeslizador(true, siempre = true) ?: false
 		Accion.VALOR_MENOS -> ajustarDeslizador(false, siempre = true) ?: false
@@ -274,8 +280,9 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		Accion.AYUDA_REMOTA -> com.xebolax.tiresias.remoto.Asistencia.decirQuienAyuda(lector) || abrir(com.xebolax.tiresias.ui.ActividadAyudaRemota::class.java)
 		Accion.ESCRITORIO_SISTEMA -> escritorioSistema()
 		Accion.ESTADO_Y_AVISOS -> estadoYAvisos()
-		Accion.LLAMADA_CONTESTAR -> llamada(servicio.getSystemService(android.media.AudioManager::class.java))
-		Accion.LLAMADA_RECHAZAR -> rechazarLlamada()
+		// Primero la llamada de una app (WhatsApp, Telegram, Signal) por su notificación; si no hay, la del teléfono
+		Accion.LLAMADA_CONTESTAR -> servicio.getSystemService(android.media.AudioManager::class.java).let { a -> a != null && (llamadaInternet(a, soloContestar = true) || llamada(a)) }
+		Accion.LLAMADA_RECHAZAR -> servicio.getSystemService(android.media.AudioManager::class.java).let { a -> (a != null && llamadaInternet(a, soloColgar = true)) || rechazarLlamada() }
 		Accion.AYUDA_TERMINAR -> com.xebolax.tiresias.remoto.Asistencia.terminarPorUsuario().also { if (!it) lector.decir(R.string.ayuda_no_hay) }
 		Accion.AYUDA_CONTROLAR -> com.xebolax.tiresias.remoto.Asistencia.alternarControl()
 	}
@@ -311,6 +318,9 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 
 	private fun activar(): Boolean {
 		val f = objetivo() ?: return false
+		// El botón Atrás de la barra de navegación (o de la barra de tareas): como la acción Atrás, el foco vuelve a lo
+		// que se había abierto (SandFly 4d4c0816a)
+		if (esBotonAtras(f)) volverAlActivado()
 		// Con el control Edición, el doble toque hace la opción de edición elegida, pero solo en un campo de texto
 		// y si se ha elegido una: si no, activa como siempre (con el selector en Edición, el doble toque no
 		// abría nada: ni WhatsApp ni las opciones del menú de Tiresias)
@@ -615,10 +625,27 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		return true
 	}
 
+	/** El gesto que ha lanzado la acción que se hace ahora (null: una tecla, la línea braille, un menú). */
+	@Volatile var gestoEnCurso: com.xebolax.tiresias.nucleo.Gesto? = null
+
+	/**
+	 * Si un valor (un deslizador, la velocidad, el tono, el volumen) sube: hacia arriba o a la derecha sube, hacia abajo
+	 * o a la izquierda baja, se haya puesto la acción en el gesto que se haya puesto (SandFly 143d602d5). Sin gesto
+	 * (teclas, línea braille), lo de la acción: «siguiente» baja, como siempre.
+	 */
+	private fun sube(abajo: Boolean): Boolean {
+		val nombre = gestoEnCurso?.name ?: return !abajo
+		return when {
+			Regex("""^(ARRIBA|DERECHA)(_\d)?$""").matches(nombre) -> true
+			Regex("""^(ABAJO|IZQUIERDA)(_\d)?$""").matches(nombre) -> false
+			else -> !abajo
+		}
+	}
+
 	private fun selector(abajo: Boolean): Boolean = when (val c = lector.control) {
 		// En un deslizador, arriba sube el valor y abajo lo baja (como TalkBack); se puede quitar en Ajustes
 		// En un elemento con acciones propias, arriba y abajo las eligen (como el control Acciones); también se puede quitar
-		ControlLectura.PREDETERMINADO -> ajustarDeslizador(!abajo) ?: elegirAccionSiHay(abajo) ?: if (abajo) nav.siguiente() else nav.anterior()
+		ControlLectura.PREDETERMINADO -> ajustarDeslizador(sube(abajo)) ?: elegirAccionSiHay(abajo) ?: if (abajo) nav.siguiente() else nav.anterior()
 		ControlLectura.CARACTERES -> nav.porTexto(Granularidad.CARACTER, abajo, modoSeleccion)
 		ControlLectura.PALABRAS -> nav.porTexto(Granularidad.PALABRA, abajo, modoSeleccion)
 		ControlLectura.LINEAS -> nav.porTexto(Granularidad.LINEA, abajo, modoSeleccion)
@@ -628,9 +655,9 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		ControlLectura.ACCIONES -> elegirAccion(abajo)
 		ControlLectura.EDICION -> elegirEdicion(abajo)
 		ControlLectura.PORTAPAPELES -> elegirCopiado(abajo)
-		ControlLectura.VELOCIDAD -> cambiarVelocidad(if (abajo) -10 else 10)
-		ControlLectura.TONO -> cambiarTono(if (abajo) -10 else 10)
-		ControlLectura.VOLUMEN -> volumen(!abajo)
+		ControlLectura.VELOCIDAD -> cambiarVelocidad(if (sube(abajo)) 10 else -10)
+		ControlLectura.TONO -> cambiarTono(if (sube(abajo)) 10 else -10)
+		ControlLectura.VOLUMEN -> volumen(sube(abajo))
 		ControlLectura.PUNTUACION -> cambiarPuntuacion(abajo)
 		ControlLectura.IDIOMA -> cambiarIdioma()
 		ControlLectura.VERBOSIDAD -> cambiarVerbosidad(abajo)
@@ -2206,14 +2233,14 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 	fun fonetica(c: String): String? {
 		if (c.length != 1 || !c[0].isLetter()) return null
 		val datos = com.xebolax.tiresias.textos.DatosIdioma.de(servicio, com.xebolax.tiresias.base.Idioma.efectivo(servicio))
-		return datos.fonetico.de(c[0])
+		return lector.ajustes.alfabeto(datos.fonetico).de(c[0])
 	}
 
 	private fun deletreoFonetico(): Boolean {
 		val texto = lector.voz.ultimo ?: return false
 		val datos = com.xebolax.tiresias.textos.DatosIdioma.de(servicio, com.xebolax.tiresias.base.Idioma.efectivo(servicio))
 		val palabra = texto.trim().split(Regex("\\s+")).firstOrNull().orEmpty()
-		val dicho = palabra.map { c -> datos.fonetico.de(c) ?: c.toString() }.joinToString(", ")
+		val dicho = palabra.map { c -> lector.ajustes.alfabeto(datos.fonetico).de(c) ?: c.toString() }.joinToString(", ")
 		lector.decir(dicho)
 		return true
 	}
@@ -2310,21 +2337,24 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 	 * tiene, «Rechazar». Sin llamada de verdad no hace nada: el gesto sigue
 	 * siendo el de la música.
 	 */
-	private fun llamadaInternet(audio: android.media.AudioManager): Boolean {
+	private fun llamadaInternet(audio: android.media.AudioManager, soloContestar: Boolean = false, soloColgar: Boolean = false): Boolean {
 		val l = lector.avisos.llamadaInternet ?: return false
 		val modo = audio.mode
 		val enCurso = modo == android.media.AudioManager.MODE_IN_COMMUNICATION || modo == android.media.AudioManager.MODE_IN_CALL
 		val sonando = modo == android.media.AudioManager.MODE_RINGTONE || System.currentTimeMillis() - l.momento < Avisos.SONANDO_MS
 		val n = l.notificacion
-		val contestar = lector.avisos.accionDe(n, Avisos.CONTESTAR)
-		val colgar = lector.avisos.accionDe(n, Avisos.COLGAR) ?: lector.avisos.accionDe(n, Avisos.RECHAZAR)
+		// Las llamadas con el estilo de llamada de Android 12 traen sus botones aparte, sin depender del idioma de su
+		// título (SandFly b21963941); si no, por el título del botón
+		val contestar = intentoLlamada(n, "android.answerIntent") ?: lector.avisos.accionDe(n, Avisos.CONTESTAR)?.actionIntent
+		val colgar = intentoLlamada(n, "android.hangUpIntent") ?: intentoLlamada(n, "android.declineIntent")
+			?: (lector.avisos.accionDe(n, Avisos.COLGAR) ?: lector.avisos.accionDe(n, Avisos.RECHAZAR))?.actionIntent
 		val (accion, contesta) = when {
-			contestar != null && !l.contestada && sonando -> contestar to true
-			colgar != null && (enCurso || (l.contestada && sonando)) -> colgar to false
+			!soloColgar && contestar != null && !l.contestada && sonando -> contestar to true
+			!soloContestar && colgar != null && (enCurso || sonando || soloColgar) -> colgar to false
 			else -> return false
 		}
 		try {
-			accion.actionIntent.send()
+			accion.send()
 		} catch (e: android.app.PendingIntent.CanceledException) {
 			// La llamada ya no está (la notificación se quitó): el gesto vuelve a ser el de la música
 			com.xebolax.tiresias.base.Registro.w(ETIQUETA, "El botón de la llamada ya no vale", e)
@@ -2342,6 +2372,12 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 		}
 		return true
 	}
+
+	/** Un botón de una notificación de llamada con el estilo de llamada (Android 12+), por su clave en los extras. */
+	private fun intentoLlamada(n: android.app.Notification, clave: String): android.app.PendingIntent? = runCatching {
+		if (Build.VERSION.SDK_INT >= 33) n.extras.getParcelable(clave, android.app.PendingIntent::class.java)
+		else @Suppress("DEPRECATION") (n.extras.getParcelable(clave) as? android.app.PendingIntent)
+	}.getOrNull()
 
 	@android.annotation.SuppressLint("MissingPermission")
 	private fun llamada(audio: android.media.AudioManager): Boolean {
@@ -2627,6 +2663,12 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 
 	private fun firmaActivado(n: AccessibilityNodeInfo): String = "${n.className}|${n.viewIdResourceName}|${n.contentDescription ?: n.text ?: Nodos.textoHijos(n, 120)}"
 
+	/** Si [n] es el botón Atrás de la barra de navegación del sistema o de la barra de tareas del escritorio. */
+	private fun esBotonAtras(n: AccessibilityNodeInfo): Boolean {
+		val id = n.viewIdResourceName ?: return false
+		return id == "com.android.systemui:id/back" || (id.endsWith(":id/back") && n.packageName?.toString()?.contains("launcher", ignoreCase = true) == true)
+	}
+
 	/** Apunta [n] si está dentro de una lista (SandFly cc103e005): los 16 últimos. */
 	private fun recordarActivado(n: AccessibilityNodeInfo) {
 		if (Nodos.desplazable(n) == null) return
@@ -2641,12 +2683,12 @@ class Ejecutor(private val lector: Lector, private val ventanas: Ventanas, priva
 	 * a lo que se había abierto, como en TalkBack, en vez de quedarse en lo primero de la lista. Dos Atrás en menos de
 	 * 300 ms cuentan como uno.
 	 */
-	private fun volverAlActivado() {
+	fun volverAlActivado() {
 		val ahora = SystemClock.uptimeMillis()
 		if (ahora - atrasEn < 300) return
 		atrasEn = ahora
 		val ultimo = activados.removeLastOrNull() ?: return
-		for (espera in longArrayOf(450, 1000)) lector.manejador.postDelayed({
+		for (espera in longArrayOf(450, 1000, 2000)) lector.manejador.postDelayed({
 			if (atrasEn != ahora || lector.momentoUsuario > ahora) return@postDelayed
 			val raiz = lector.raiz() ?: return@postDelayed
 			if (raiz.windowId != ultimo.ventana) return@postDelayed

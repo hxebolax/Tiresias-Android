@@ -208,7 +208,7 @@ class Ajustes(contexto: Context) {
 		get() = AjustesTexto(
 			puntuacion = enumDe(cadena(Claves.PUNTUACION, NivelPuntuacion.ALGUNAS.name), NivelPuntuacion.ALGUNAS),
 			numeros = enumDe(cadena(Claves.NUMEROS, ModoNumeros.CIFRAS.name), ModoNumeros.CIFRAS),
-			mayusculas = enumDe(cadena(Claves.MAYUSCULAS, ModoMayusculas.TONO.name), ModoMayusculas.TONO),
+			mayusculas = enumDe(cadena(Claves.MAYUSCULAS, ModoMayusculas.AUTO.name), ModoMayusculas.AUTO),
 			repetidos = entero(Claves.REPETIDOS, 4),
 			emojis = modoEmojis,
 			simbolosSentido = logico(Claves.SIMBOLOS_SENTIDO, false),
@@ -355,8 +355,23 @@ class Ajustes(contexto: Context) {
 	/** En el teclado en pantalla, la tecla se escribe al levantar el dedo (sin doble toque). */
 	val escribirAlLevantar: Boolean get() = logico(Claves.ESCRIBIR_AL_LEVANTAR, false)
 
+	/**
+	 * Deslizar desde una tecla sigue en la app, desde el campo en que se escribe (SandFly): «auto», sí al escribir al
+	 * levantar el dedo o con la escritura rápida (con el doble toque se recorren las teclas); «si»; «no».
+	 */
+	val deslizarDesdeTecladoEnApp: Boolean get() = when (cadena("deslizar_teclado_app", "auto")) {
+		"si" -> true
+		"no" -> false
+		else -> escribirAlLevantar || escrituraRapida
+	}
+
 	/** El teclado numérico de Teléfono y del PIN de la pantalla de bloqueo marca al levantar el dedo (si no, con doble toque). */
 	val numerosAlLevantar: Boolean get() = logico("numeros_al_levantar", true)
+
+	/** «Vigilar» una lista (un chat): solo las filas nuevas; con sonido; y cuántas decir cada vez (foro 120). */
+	val vigilarListaNuevas: Boolean get() = logico("vigilar_lista_nuevas", true)
+	val vigilarSonido: Boolean get() = logico("vigilar_sonido", true)
+	val vigilarMaximo: Int get() = entero("vigilar_maximo", 5).coerceIn(1, 20)
 
 	/** Un sonido cada pocos segundos mientras la IA piensa o se reconoce el texto. */
 	val sonidoEspera: Boolean get() = logico(Claves.SONIDO_ESPERA, true)
@@ -365,7 +380,8 @@ class Ajustes(contexto: Context) {
 	val avisoEspera: Boolean get() = logico(Claves.AVISO_ESPERA, true)
 
 	/** En cada pantalla nueva, el foco va a su primer elemento (como en los diálogos). */
-	val focoVentanasNuevas: Boolean get() = logico(Claves.FOCO_VENTANAS_NUEVAS, false)
+	/** Al abrir una pantalla, el foco va a lo primero (o al campo en que se escribe); de fábrica sí, como TalkBack y SandFly (1.0.21). */
+	val focoVentanasNuevas: Boolean get() = logico(Claves.FOCO_VENTANAS_NUEVAS, true)
 
 	/** Los emojis: por su nombre, al motor o quitados (antes, el interruptor «emojis»: sí o quitarlos). */
 	val modoEmojis: ModoEmojis
@@ -429,6 +445,7 @@ class Ajustes(contexto: Context) {
 
 	/** Un poco de silencio cuando la salida de las voces incluidas arranca (móviles que suben el sonido poco a poco). */
 	val vozSilencioInicio: Boolean get() = logico(Claves.VOZ_SILENCIO_INICIO, false)
+	val vozSilencioBluetooth: Boolean get() = logico("voz_silencio_bluetooth", true)
 	/** Decir al enchufar y desenchufar el cargador y cuando la batería está llena. */
 	val avisosCargador: Boolean get() = logico(Claves.AVISOS_CARGADOR, false)
 	/** El nivel de la batería con la pantalla encendida: "no", cada "5" o "10" por ciento, o cada "15min", "30min" o "60min" (SandFly). */
@@ -495,7 +512,29 @@ class Ajustes(contexto: Context) {
 
 	/** El teclado braille pone los puntos según cómo se sujeta el móvil (sensor de gravedad); manda sobre [brailleEspejo]. */
 	val brailleSensor: Boolean get() = logico(Claves.BRAILLE_SENSOR, false)
-	val brailleEco: String get() = cadena(Claves.BRAILLE_ECO, "letras")
+	/** El alfabeto para deletrear: el del idioma ([delIdioma]) o el internacional (Alfa, Bravo; Blue-Sky, foro 124). */
+	fun alfabeto(delIdioma: com.xebolax.tiresias.nucleo.Fonetico): com.xebolax.tiresias.nucleo.Fonetico =
+		if (cadena(Claves.ALFABETO_FONETICO, "idioma") == "otan") com.xebolax.tiresias.nucleo.Fonetico.OTAN else delIdioma
+
+	/** El idioma al que se traduce («es», «en»...); vacío: el de Tiresias. */
+	val traducirA: String get() = cadena(Claves.TRADUCIR_A, "")
+
+	var brailleEco: String
+		get() = cadena(Claves.BRAILLE_ECO, "letras")
+		set(v) = poner(Claves.BRAILLE_ECO, v)
+
+	/**
+	 * Pasa al eco siguiente (yanet, foro 125): el del teclado braille si [braille], o el de los demás teclados.
+	 * Devuelve el nombre del nuevo, para decirlo.
+	 */
+	fun ecoSiguiente(c: Context, braille: Boolean): String {
+		val valores = c.resources.getStringArray(if (braille) com.xebolax.tiresias.R.array.braille_eco_valores else com.xebolax.tiresias.R.array.eco_valores)
+		val nombres = c.resources.getStringArray(if (braille) com.xebolax.tiresias.R.array.braille_eco_nombres else com.xebolax.tiresias.R.array.eco_nombres)
+		val i = valores.indexOf(if (braille) brailleEco else ecoTeclado).coerceAtLeast(0)
+		val nuevo = (i + 1) % valores.size
+		if (braille) brailleEco = valores[nuevo] else ecoTeclado = valores[nuevo]
+		return nombres[nuevo]
+	}
 
 	/** Lo que se añade a lo que se pide a la IA al describir un elemento o la pantalla (Dharius): vacío, nada. */
 	val iaInstrucciones: String get() = cadena(Claves.IA_INSTRUCCIONES, "").trim()
@@ -594,6 +633,18 @@ class Ajustes(contexto: Context) {
 		p.getString(Claves.VOZ_DE + MOTOR_ELOQUENCE, null)?.let { guardada ->
 			e.putString(Claves.VOZ_DE + MOTOR_ELOQUENCE, "100;" + guardada.substringAfter(';', "100;100"))
 		}
+		e.apply()
+	}
+
+	/**
+	 * Una vez, al llegar a la 1.0.21: las pantallas de ajustes guardan el valor de fábrica al abrirse, así que casi
+	 * todo el mundo tenía guardados «Foco en lo primero de cada pantalla nueva» en no y las mayúsculas en «Subir el
+	 * tono» sin haberlos elegido. Pasan a lo nuevo de fábrica (como TalkBack; «Automático»); se puede volver atrás.
+	 */
+	fun migrar1021(): Unit = synchronized(CERROJO_VOZ) {
+		if (p.getBoolean("migrado_1021", false)) return
+		val e = p.edit().putBoolean("migrado_1021", true).putBoolean(Claves.FOCO_VENTANAS_NUEVAS, true)
+		if (p.getString(Claves.MAYUSCULAS, null) == ModoMayusculas.TONO.name) e.putString(Claves.MAYUSCULAS, ModoMayusculas.AUTO.name)
 		e.apply()
 	}
 
@@ -1026,6 +1077,8 @@ object Claves {
 	const val BRAILLE_ESPEJO = "braille_espejo"
 	const val BRAILLE_SENSOR = "braille_sensor"
 	const val BRAILLE_ECO = "braille_eco"
+	const val TRADUCIR_A = "traducir_a"
+	const val ALFABETO_FONETICO = "alfabeto_fonetico"
 	const val IA_INSTRUCCIONES = "ia_instrucciones"
 	const val BRAILLE_ACORDES = "braille_acordes"
 	const val BRAILLE_CURSOR = "braille_cursor"

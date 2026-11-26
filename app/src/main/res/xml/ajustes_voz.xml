@@ -24,6 +24,7 @@
 	<SwitchPreferenceCompat app:key="voz_multimedia" app:title="@string/aj_voz_multimedia" app:summary="@string/aj_voz_multimedia_res" app:defaultValue="false" />
 	<SwitchPreferenceCompat app:key="voz_sin_captura" app:title="@string/aj_voz_sin_captura" app:summary="@string/aj_voz_sin_captura_res" app:defaultValue="false" />
 	<SwitchPreferenceCompat app:key="voz_silencio_inicio" app:title="@string/aj_voz_silencio_inicio" app:summary="@string/aj_voz_silencio_inicio_res" app:defaultValue="false" />
+	<SwitchPreferenceCompat app:key="voz_silencio_bluetooth" app:title="@string/aj_voz_silencio_bluetooth" app:summary="@string/aj_voz_silencio_bluetooth_res" app:defaultValue="true" />
 	<Preference app:key="reglas_bluetooth" app:title="@string/aj_reglas_bluetooth" app:summary="@string/aj_reglas_bluetooth_res" />
 	<SwitchPreferenceCompat app:key="voz_llamadas" app:title="@string/aj_voz_llamadas" app:summary="@string/aj_voz_llamadas_res" app:defaultValue="false" />
 	<com.xebolax.tiresias.accesibilidad.DeslizadorAjuste app:key="volumen_llamadas" app:title="@string/aj_volumen_llamadas" app:min="5" android:max="100" app:seekBarIncrement="5" app:defaultValue="50" />

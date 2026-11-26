@@ -25,7 +25,7 @@
 	<SwitchPreferenceCompat app:key="cortar_al_tocar" app:title="@string/aj_cortar_al_tocar" app:summary="@string/aj_cortar_al_tocar_res" app:defaultValue="true" />
 	<SwitchPreferenceCompat app:key="arrastre_respaldo" app:title="@string/aj_arrastre_respaldo" app:summary="@string/aj_arrastre_respaldo_res" app:defaultValue="true" />
 	<SwitchPreferenceCompat app:key="volumen_deslizadores" app:title="@string/aj_volumen_deslizadores" app:summary="@string/aj_volumen_deslizadores_res" app:defaultValue="false" />
-	<SwitchPreferenceCompat app:key="foco_ventanas_nuevas" app:title="@string/aj_foco_ventanas_nuevas" app:summary="@string/aj_foco_ventanas_nuevas_res" app:defaultValue="false" />
+	<SwitchPreferenceCompat app:key="foco_ventanas_nuevas" app:title="@string/aj_foco_ventanas_nuevas" app:summary="@string/aj_foco_ventanas_nuevas_res" app:defaultValue="true" />
 	<SwitchPreferenceCompat app:key="foco_sin_esperar_titulo" app:title="@string/aj_foco_sin_esperar_titulo" app:summary="@string/aj_foco_sin_esperar_titulo_res" app:defaultValue="false" />
 	<SwitchPreferenceCompat app:key="controles_solo_web" app:title="@string/aj_controles_solo_web" app:summary="@string/aj_controles_solo_web_res" app:defaultValue="true" />
 	<ListPreference app:key="activar_al_levantar" app:title="@string/aj_activar_al_levantar" app:entries="@array/activar_al_levantar_nombres" app:entryValues="@array/activar_al_levantar_valores" app:defaultValue="no" app:useSimpleSummaryProvider="true" />

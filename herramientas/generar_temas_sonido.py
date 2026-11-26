@@ -3,7 +3,7 @@
 Son sonidos sintetizados aquí mismo, sin archivos de terceros. Cada tema lleva
 tema.json (nombre y descripción en español y en inglés) y un WAV por sonido,
 con su nombre en minúsculas, como los que lee la app (voz/TemasSonido.kt):
-los 22 sonidos de Tiresias, todos.
+los 23 sonidos de Tiresias, todos.
 
 - «Suave»: tonos más graves y redondos, con menos brillo.
 - «Madera»: golpes cortos como de caja china.
@@ -49,6 +49,7 @@ NOTAS = {
 	'tecla_espacio': [(1976, 14)],
 	'tecla_borrar': [(1319, 12), (988, 16)],
 	'tecla_intro': [(1568, 18), (2093, 26)],
+	'carga_completa': [(659, 70), (784, 70), (988, 70), (1319, 220)],
 }
 
 

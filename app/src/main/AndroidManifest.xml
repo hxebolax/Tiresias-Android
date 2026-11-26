@@ -243,6 +243,7 @@
 			tools:ignore="ExportedService">
 			<intent-filter>
 				<action android:name="fyi.quin.backtalk.action.SPEECH_CONTROL" />
+				<action android:name="io.github.aaron_gh.sandfly.action.SPEECH_CONTROL" />
 			</intent-filter>
 		</service>
 		<service
@@ -251,9 +252,15 @@
 			tools:ignore="ExportedService">
 			<intent-filter>
 				<action android:name="fyi.quin.backtalk.action.DIRECT_TOUCH" />
+				<action android:name="io.github.aaron_gh.sandfly.action.DIRECT_TOUCH" />
 			</intent-filter>
+			<!-- Los teclados que se dibujan en su propia capa de accesibilidad conservan sus toques: Tiresias suma esa capa
+			     a cada zona de paso de toques que pone (con el nombre de Backtalk y con el de SandFly) -->
 			<meta-data
 				android:name="fyi.quin.backtalk.keeps_keyboard_region"
+				android:value="true" />
+			<meta-data
+				android:name="io.github.aaron_gh.sandfly.keeps_keyboard_region"
 				android:value="true" />
 		</service>
 		<receiver
@@ -263,6 +270,8 @@
 			<intent-filter>
 				<action android:name="fyi.quin.backtalk.action.SPEAK" />
 				<action android:name="fyi.quin.backtalk.action.STOP_SPEECH" />
+				<action android:name="io.github.aaron_gh.sandfly.action.SPEAK" />
+				<action android:name="io.github.aaron_gh.sandfly.action.STOP_SPEECH" />
 			</intent-filter>
 		</receiver>
 
